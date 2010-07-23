@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/plugins/test_assets_with_assets_directory/assets
+END
+file.txt
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/plugins/test_assets_with_assets_directory/assets/file.txt
+END

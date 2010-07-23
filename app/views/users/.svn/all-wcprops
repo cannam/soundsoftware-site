@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/3734/trunk/app/views/users
+END
+_general.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3037/trunk/app/views/users/_general.rhtml
+END
+_memberships.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3734/trunk/app/views/users/_memberships.rhtml
+END
+_groups.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/3160/trunk/app/views/users/_groups.rhtml
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3284/trunk/app/views/users/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3037/trunk/app/views/users/_form.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3495/trunk/app/views/users/edit.rhtml
+END
+index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3600/trunk/app/views/users/index.rhtml
+END
+add.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/3204/trunk/app/views/users/add.rhtml
+END

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/3694/trunk/app/views/workflows
+END
+copy.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3154/trunk/app/views/workflows/copy.rhtml
+END
+_action_menu.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3154/trunk/app/views/workflows/_action_menu.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3694/trunk/app/views/workflows/edit.rhtml
+END
+index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/3154/trunk/app/views/workflows/index.rhtml
+END

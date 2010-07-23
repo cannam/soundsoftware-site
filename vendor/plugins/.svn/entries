@@ -1,0 +1,82 @@
+10
+
+dir
+3859
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins
+http://redmine.rubyforge.org/svn
+
+
+
+2010-06-20T18:41:30.111362Z
+3803
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+e93f8b46-1217-0410-a6f0-8f06a7374b81
+
+ruby-net-ldap-0.0.4
+dir
+
+acts_as_attachable
+dir
+
+acts_as_searchable
+dir
+
+acts_as_watchable
+dir
+
+engines
+dir
+
+coderay-0.9.2
+dir
+
+classic_pagination
+dir
+
+acts_as_versioned
+dir
+
+acts_as_tree
+dir
+
+acts_as_customizable
+dir
+
+prepend_engine_views
+dir
+
+rfpdf
+dir
+
+acts_as_activity_provider
+dir
+
+gravatar
+dir
+
+acts_as_list
+dir
+
+open_id_authentication
+dir
+
+awesome_nested_set
+dir
+
+acts_as_event
+dir
+

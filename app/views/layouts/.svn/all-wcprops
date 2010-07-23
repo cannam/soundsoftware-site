@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/3539/trunk/app/views/layouts
+END
+base.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3539/trunk/app/views/layouts/base.rhtml
+END
+mailer.text.plain.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2887/trunk/app/views/layouts/mailer.text.plain.erb
+END
+mailer.text.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/2887/trunk/app/views/layouts/mailer.text.html.erb
+END
+admin.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/3176/trunk/app/views/layouts/admin.rhtml
+END

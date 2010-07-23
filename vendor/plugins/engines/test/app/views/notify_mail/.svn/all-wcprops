@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/app/views/notify_mail
+END
+multipart_html.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/app/views/notify_mail/multipart_html.html.erb
+END
+signup.text.plain.erb
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/app/views/notify_mail/signup.text.plain.erb
+END
+implicit_multipart.text.plain.erb
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/app/views/notify_mail/implicit_multipart.text.plain.erb
+END
+implicit_multipart.text.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/app/views/notify_mail/implicit_multipart.text.html.erb
+END
+multipart_plain.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/app/views/notify_mail/multipart_plain.html.erb
+END

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/plugins/alpha_plugin/app/controllers/namespace
+END
+app_and_plugin_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/plugins/alpha_plugin/app/controllers/namespace/app_and_plugin_controller.rb
+END
+alpha_plugin_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/plugins/alpha_plugin/app/controllers/namespace/alpha_plugin_controller.rb
+END
+shared_plugin_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/!svn/ver/2887/trunk/vendor/plugins/engines/test/plugins/alpha_plugin/app/controllers/namespace/shared_plugin_controller.rb
+END

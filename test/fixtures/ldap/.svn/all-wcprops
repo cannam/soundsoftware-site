@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/!svn/ver/3489/trunk/test/fixtures/ldap
+END
+slapd.conf
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/3489/trunk/test/fixtures/ldap/slapd.conf
+END
+test-ldap.ldif
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/3489/trunk/test/fixtures/ldap/test-ldap.ldif
+END

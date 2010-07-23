@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/3785/trunk/lib/tasks
+END
+deprecated.rake
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/691/trunk/lib/tasks/deprecated.rake
+END
+jdbc.rake
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/3721/trunk/lib/tasks/jdbc.rake
+END
+extract_fixtures.rake
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/67/trunk/lib/tasks/extract_fixtures.rake
+END
+reminder.rake
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/1459/trunk/lib/tasks/reminder.rake
+END
+metrics.rake
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2825/trunk/lib/tasks/metrics.rake
+END
+initializers.rake
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3785/trunk/lib/tasks/initializers.rake
+END
+load_default_data.rake
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/2592/trunk/lib/tasks/load_default_data.rake
+END
+testing.rake
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/3060/trunk/lib/tasks/testing.rake
+END
+watchers.rake
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/3167/trunk/lib/tasks/watchers.rake
+END
+plugins.rake
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/1786/trunk/lib/tasks/plugins.rake
+END
+yardoc.rake
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/3630/trunk/lib/tasks/yardoc.rake
+END
+locales.rake
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2502/trunk/lib/tasks/locales.rake
+END
+migrate_from_trac.rake
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3517/trunk/lib/tasks/migrate_from_trac.rake
+END
+migrate_from_mantis.rake
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3328/trunk/lib/tasks/migrate_from_mantis.rake
+END
+email.rake
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/svn/!svn/ver/3330/trunk/lib/tasks/email.rake
+END
+migrate_plugins.rake
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/752/trunk/lib/tasks/migrate_plugins.rake
+END
+fetch_changesets.rake
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1155/trunk/lib/tasks/fetch_changesets.rake
+END

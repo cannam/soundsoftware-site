@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/2895/trunk/test/mocks
+END
+open_id_authentication_mock.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2895/trunk/test/mocks/open_id_authentication_mock.rb
+END

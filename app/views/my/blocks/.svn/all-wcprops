@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/3734/trunk/app/views/my/blocks
+END
+_issueswatched.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3557/trunk/app/views/my/blocks/_issueswatched.rhtml
+END
+_news.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/449/trunk/app/views/my/blocks/_news.rhtml
+END
+_issuesreportedbyme.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2598/trunk/app/views/my/blocks/_issuesreportedbyme.rhtml
+END
+_issuesassignedtome.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/2777/trunk/app/views/my/blocks/_issuesassignedtome.rhtml
+END
+_timelog.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3734/trunk/app/views/my/blocks/_timelog.rhtml
+END
+_documents.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/1766/trunk/app/views/my/blocks/_documents.rhtml
+END
+_calendar.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3351/trunk/app/views/my/blocks/_calendar.rhtml
+END

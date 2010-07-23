@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/test/fixtures
+END
+category.rb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/test/fixtures/category.rb
+END
+categories.yml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/test/fixtures/categories.yml
+END
+departments.yml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/test/fixtures/departments.yml
+END
+notes.yml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/test/fixtures/notes.yml
+END

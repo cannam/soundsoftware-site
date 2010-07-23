@@ -1,0 +1,287 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/3828/trunk/test/functional
+END
+issues_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3732/trunk/test/functional/issues_controller_test.rb
+END
+news_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3687/trunk/test/functional/news_controller_test.rb
+END
+queries_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2887/trunk/test/functional/queries_controller_test.rb
+END
+trackers_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3437/trunk/test/functional/trackers_controller_test.rb
+END
+mail_handler_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2887/trunk/test/functional/mail_handler_controller_test.rb
+END
+roles_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3435/trunk/test/functional/roles_controller_test.rb
+END
+my_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/3217/trunk/test/functional/my_controller_test.rb
+END
+wikis_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3687/trunk/test/functional/wikis_controller_test.rb
+END
+admin_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3799/trunk/test/functional/admin_controller_test.rb
+END
+welcome_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3719/trunk/test/functional/welcome_controller_test.rb
+END
+account_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2988/trunk/test/functional/account_controller_test.rb
+END
+calendars_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3790/trunk/test/functional/calendars_controller_test.rb
+END
+journals_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2887/trunk/test/functional/journals_controller_test.rb
+END
+workflows_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3188/trunk/test/functional/workflows_controller_test.rb
+END
+gantts_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3695/trunk/test/functional/gantts_controller_test.rb
+END
+users_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3686/trunk/test/functional/users_controller_test.rb
+END
+repositories_cvs_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/2887/trunk/test/functional/repositories_cvs_controller_test.rb
+END
+application_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/2895/trunk/test/functional/application_controller_test.rb
+END
+ldap_auth_sources_controller.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3744/trunk/test/functional/ldap_auth_sources_controller.rb
+END
+search_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3806/trunk/test/functional/search_controller_test.rb
+END
+repositories_bazaar_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/2887/trunk/test/functional/repositories_bazaar_controller_test.rb
+END
+messages_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3687/trunk/test/functional/messages_controller_test.rb
+END
+attachments_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/3687/trunk/test/functional/attachments_controller_test.rb
+END
+sys_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/3201/trunk/test/functional/sys_controller_test.rb
+END
+groups_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/2989/trunk/test/functional/groups_controller_test.rb
+END
+issues_controller_transaction_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/3701/trunk/test/functional/issues_controller_transaction_test.rb
+END
+watchers_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3170/trunk/test/functional/watchers_controller_test.rb
+END
+issue_statuses_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/3415/trunk/test/functional/issue_statuses_controller_test.rb
+END
+repositories_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3687/trunk/test/functional/repositories_controller_test.rb
+END
+projects_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3802/trunk/test/functional/projects_controller_test.rb
+END
+repositories_git_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3828/trunk/test/functional/repositories_git_controller_test.rb
+END
+members_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3749/trunk/test/functional/members_controller_test.rb
+END
+repositories_mercurial_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/2887/trunk/test/functional/repositories_mercurial_controller_test.rb
+END
+issue_categories_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3687/trunk/test/functional/issue_categories_controller_test.rb
+END
+reports_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3396/trunk/test/functional/reports_controller_test.rb
+END
+custom_fields_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/2895/trunk/test/functional/custom_fields_controller_test.rb
+END
+settings_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3013/trunk/test/functional/settings_controller_test.rb
+END
+timelog_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/3805/trunk/test/functional/timelog_controller_test.rb
+END
+documents_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/3788/trunk/test/functional/documents_controller_test.rb
+END
+repositories_darcs_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/2887/trunk/test/functional/repositories_darcs_controller_test.rb
+END
+wiki_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3686/trunk/test/functional/wiki_controller_test.rb
+END
+auth_sources_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3744/trunk/test/functional/auth_sources_controller_test.rb
+END
+repositories_subversion_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3800/trunk/test/functional/repositories_subversion_controller_test.rb
+END
+issue_relations_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/3687/trunk/test/functional/issue_relations_controller_test.rb
+END
+versions_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/3686/trunk/test/functional/versions_controller_test.rb
+END
+enumerations_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2887/trunk/test/functional/enumerations_controller_test.rb
+END
+boards_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3687/trunk/test/functional/boards_controller_test.rb
+END

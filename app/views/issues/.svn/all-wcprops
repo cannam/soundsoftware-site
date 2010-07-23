@@ -1,0 +1,155 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/3842/trunk/app/views/issues
+END
+_relations.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/3577/trunk/app/views/issues/_relations.rhtml
+END
+_history.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/3666/trunk/app/views/issues/_history.rhtml
+END
+_action_menu.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3127/trunk/app/views/issues/_action_menu.rhtml
+END
+bulk_edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/3479/trunk/app/views/issues/bulk_edit.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3750/trunk/app/views/issues/_form.rhtml
+END
+changes.rxml
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/2768/trunk/app/views/issues/changes.rxml
+END
+_form_update.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3151/trunk/app/views/issues/_form_update.rhtml
+END
+index.xml.builder
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3671/trunk/app/views/issues/index.xml.builder
+END
+move.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3476/trunk/app/views/issues/move.rhtml
+END
+preview.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/3623/trunk/app/views/issues/preview.html.erb
+END
+index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3842/trunk/app/views/issues/index.rhtml
+END
+context_menu.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3521/trunk/app/views/issues/context_menu.rhtml
+END
+_sidebar.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/3695/trunk/app/views/issues/_sidebar.rhtml
+END
+_list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3625/trunk/app/views/issues/_list.rhtml
+END
+show.xml.builder
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/3729/trunk/app/views/issues/show.xml.builder
+END
+show.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3736/trunk/app/views/issues/show.rhtml
+END
+_form_custom_fields.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/2827/trunk/app/views/issues/_form_custom_fields.rhtml
+END
+_list_simple.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2712/trunk/app/views/issues/_list_simple.rhtml
+END
+_changesets.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/2760/trunk/app/views/issues/_changesets.rhtml
+END
+_edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/3665/trunk/app/views/issues/_edit.rhtml
+END
+auto_complete.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/3573/trunk/app/views/issues/auto_complete.html.erb
+END
+_attributes.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3573/trunk/app/views/issues/_attributes.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/1129/trunk/app/views/issues/edit.rhtml
+END
+destroy.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/2685/trunk/app/views/issues/destroy.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3688/trunk/app/views/issues/new.rhtml
+END

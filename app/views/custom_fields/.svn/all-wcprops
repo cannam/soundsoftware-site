@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/3672/trunk/app/views/custom_fields
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3510/trunk/app/views/custom_fields/_form.rhtml
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3144/trunk/app/views/custom_fields/edit.rhtml
+END
+_index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/3672/trunk/app/views/custom_fields/_index.rhtml
+END
+index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/2871/trunk/app/views/custom_fields/index.rhtml
+END
+new.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/3144/trunk/app/views/custom_fields/new.rhtml
+END

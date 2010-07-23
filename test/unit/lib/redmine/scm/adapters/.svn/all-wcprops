@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3828/trunk/test/unit/lib/redmine/scm/adapters
+END
+subversion_adapter_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3720/trunk/test/unit/lib/redmine/scm/adapters/subversion_adapter_test.rb
+END
+git_adapter_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/3828/trunk/test/unit/lib/redmine/scm/adapters/git_adapter_test.rb
+END
+mercurial_adapter_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3551/trunk/test/unit/lib/redmine/scm/adapters/mercurial_adapter_test.rb
+END
+filesystem_adapter_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3551/trunk/test/unit/lib/redmine/scm/adapters/filesystem_adapter_test.rb
+END
