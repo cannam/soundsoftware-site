@@ -4,6 +4,7 @@ en:
   authors: "Authors"
   author: "Author"
   name: "Name"
+  publications_box: "My Publications"
   
   label_add_me_as_author: "Add me as an author"
   label_add_another_author: "Add another author"

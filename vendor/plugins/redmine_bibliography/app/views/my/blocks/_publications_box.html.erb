@@ -1,0 +1,8 @@
+<h2><%= l('publications_box')%></h2>
+<% Publication.find(:all).each do |pub|%>
+<div class="wiki">
+  <h3><%= pub.title %>	</h3>
+</div>
+<% end %>
+
+
