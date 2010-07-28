@@ -141,7 +141,7 @@ module Redmine
           hg_args << '-r' << "#{hgrev(identifier_from)}:#{hgrev(identifier_to)}"
           hg_args << '--limit' << options[:limit] if options[:limit]
           hg_args << without_leading_slash(path) unless path.blank?
-          doc = hg(*hg_args) { |io| REXML::Document.new(io.read) }
+          doc = hg(*hg_args) { |io| REXML::Document.new(io.read.concat('</log>')) }
           # TODO: ??? HG doesn't close the XML Document...
 
           doc.each_element('log/logentry') do |le|
