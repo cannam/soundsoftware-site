@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/3842/trunk/app/views/issues
+/svn/!svn/ver/3887/trunk/app/views/issues
 END
 _relations.rhtml
 K 25
@@ -9,23 +9,17 @@ svn:wc:ra_dav:version-url
 V 58
 /svn/!svn/ver/3577/trunk/app/views/issues/_relations.rhtml
 END
-_history.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/3666/trunk/app/views/issues/_history.rhtml
-END
 _action_menu.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/3127/trunk/app/views/issues/_action_menu.rhtml
 END
-bulk_edit.rhtml
+_history.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 57
-/svn/!svn/ver/3479/trunk/app/views/issues/bulk_edit.rhtml
+V 56
+/svn/!svn/ver/3666/trunk/app/views/issues/_history.rhtml
 END
 _form.rhtml
 K 25
@@ -33,11 +27,11 @@ svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/3750/trunk/app/views/issues/_form.rhtml
 END
-changes.rxml
+bulk_edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/2768/trunk/app/views/issues/changes.rxml
+V 57
+/svn/!svn/ver/3479/trunk/app/views/issues/bulk_edit.rhtml
 END
 _form_update.rhtml
 K 25
@@ -45,17 +39,11 @@ svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/3151/trunk/app/views/issues/_form_update.rhtml
 END
-index.xml.builder
+changes.rxml
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/3671/trunk/app/views/issues/index.xml.builder
-END
-move.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/3476/trunk/app/views/issues/move.rhtml
+V 54
+/svn/!svn/ver/2768/trunk/app/views/issues/changes.rxml
 END
 preview.html.erb
 K 25
@@ -63,23 +51,35 @@ svn:wc:ra_dav:version-url
 V 58
 /svn/!svn/ver/3623/trunk/app/views/issues/preview.html.erb
 END
+move.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3476/trunk/app/views/issues/move.rhtml
+END
+index.xml.builder
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/3671/trunk/app/views/issues/index.xml.builder
+END
 index.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/3842/trunk/app/views/issues/index.rhtml
 END
-context_menu.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/3521/trunk/app/views/issues/context_menu.rhtml
-END
 _sidebar.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 56
 /svn/!svn/ver/3695/trunk/app/views/issues/_sidebar.rhtml
+END
+context_menu.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3887/trunk/app/views/issues/context_menu.rhtml
 END
 _list.rhtml
 K 25

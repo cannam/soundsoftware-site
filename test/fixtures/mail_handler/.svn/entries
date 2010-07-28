@@ -1,7 +1,7 @@
 10
 
 dir
-3859
+3892
 http://redmine.rubyforge.org/svn/trunk/test/fixtures/mail_handler
 http://redmine.rubyforge.org/svn
 
@@ -25,40 +25,6 @@ edavis10
 
 
 e93f8b46-1217-0410-a6f0-8f06a7374b81
-
-ticket_html_only.eml
-file
-
-
-
-
-2010-07-23T14:49:43.988124Z
-5e24af78a4534798611158a3d81efb34
-2008-12-14T17:10:16.292262Z
-2136
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-691
 
 message_reply_by_subject.eml
 file
@@ -93,6 +59,40 @@ has-props
 
 
 410
+
+ticket_html_only.eml
+file
+
+
+
+
+2010-07-23T14:49:43.988124Z
+5e24af78a4534798611158a3d81efb34
+2008-12-14T17:10:16.292262Z
+2136
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+691
 
 ticket_with_spaces_between_attribute_and_separator.eml
 file
@@ -468,40 +468,6 @@ edavis10
 
 2195
 
-ticket_with_custom_fields.eml
-file
-
-
-
-
-2010-07-23T14:49:43.992098Z
-4ef77e6337f95c7a8362c4a51c09d0af
-2008-12-30T14:57:33.008940Z
-2211
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1887
-
 ticket_reply.eml
 file
 
@@ -535,6 +501,40 @@ jplang
 
 
 2012
+
+ticket_with_custom_fields.eml
+file
+
+
+
+
+2010-07-23T14:49:43.992098Z
+4ef77e6337f95c7a8362c4a51c09d0af
+2008-12-30T14:57:33.008940Z
+2211
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1887
 
 message_reply.eml
 file

@@ -1,15 +1,15 @@
 10
 
 dir
-3859
+3892
 http://redmine.rubyforge.org/svn/trunk/app/views/issues
 http://redmine.rubyforge.org/svn
 
 
 
-2010-07-16T03:16:29.364437Z
-3842
-edavis10
+2010-07-25T11:55:57.048318Z
+3887
+jplang
 
 
 
@@ -60,40 +60,6 @@ has-props
 
 1704
 
-_history.rhtml
-file
-
-
-
-
-2010-07-23T14:49:45.572128Z
-7ff965e60db212dcb568d076eb553676
-2010-04-11T17:10:26.893560Z
-3666
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-840
-
 _action_menu.rhtml
 file
 
@@ -128,16 +94,16 @@ jplang
 
 1225
 
-bulk_edit.rhtml
+_history.rhtml
 file
 
 
 
 
 2010-07-23T14:49:45.572128Z
-eee160eda9713c2339debfc2ac9dd5c4
-2010-02-23T21:44:28.999460Z
-3479
+7ff965e60db212dcb568d076eb553676
+2010-04-11T17:10:26.893560Z
+3666
 jplang
 has-props
 
@@ -160,7 +126,7 @@ has-props
 
 
 
-3320
+840
 
 _form.rhtml
 file
@@ -196,16 +162,16 @@ has-props
 
 2150
 
-changes.rxml
+bulk_edit.rhtml
 file
 
 
 
 
 2010-07-23T14:49:45.572128Z
-ef7f777c9318cee52e909377c4f96e8b
-2009-05-26T08:28:36.964305Z
-2768
+eee160eda9713c2339debfc2ac9dd5c4
+2010-02-23T21:44:28.999460Z
+3479
 jplang
 has-props
 
@@ -228,7 +194,7 @@ has-props
 
 
 
-1485
+3320
 
 _form_update.rhtml
 file
@@ -264,16 +230,16 @@ has-props
 
 649
 
-index.xml.builder
+changes.rxml
 file
 
 
 
 
 2010-07-23T14:49:45.572128Z
-ed6c218138334e3950cb971252374472
-2010-04-13T17:51:06.988056Z
-3671
+ef7f777c9318cee52e909377c4f96e8b
+2009-05-26T08:28:36.964305Z
+2768
 jplang
 has-props
 
@@ -296,41 +262,7 @@ has-props
 
 
 
-1559
-
-move.rhtml
-file
-
-
-
-
-2010-07-23T14:49:45.572128Z
-f46181787ba26b8798b01c82777a0a3e
-2010-02-23T21:04:12.801819Z
-3476
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2286
+1485
 
 preview.html.erb
 file
@@ -366,6 +298,74 @@ has-props
 
 389
 
+move.rhtml
+file
+
+
+
+
+2010-07-23T14:49:45.572128Z
+f46181787ba26b8798b01c82777a0a3e
+2010-02-23T21:04:12.801819Z
+3476
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2286
+
+index.xml.builder
+file
+
+
+
+
+2010-07-23T14:49:45.572128Z
+ed6c218138334e3950cb971252374472
+2010-04-13T17:51:06.988056Z
+3671
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1559
+
 index.rhtml
 file
 
@@ -400,40 +400,6 @@ has-props
 
 4032
 
-context_menu.rhtml
-file
-
-
-
-
-2010-07-23T14:49:45.572128Z
-400af844f36cdf783fd35439766cbdce
-2010-03-01T20:54:55.453785Z
-3521
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-6535
-
 _sidebar.rhtml
 file
 
@@ -467,6 +433,40 @@ has-props
 
 
 1136
+
+context_menu.rhtml
+file
+
+
+
+
+2010-07-28T11:07:47.260180Z
+b1851405254cb168e5927196188996d2
+2010-07-25T11:55:57.048318Z
+3887
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6606
 
 _list.rhtml
 file

@@ -1,7 +1,7 @@
 10
 
 dir
-3859
+3892
 http://redmine.rubyforge.org/svn/trunk/public/javascripts/jstoolbar/lang
 http://redmine.rubyforge.org/svn
 
@@ -536,17 +536,17 @@ has-props
 
 753
 
-jstoolbar-nl.js
+jstoolbar-zh-tw.js
 file
 
 
 
 
 2010-07-23T14:49:47.676097Z
-b1bc7a04b7b466073845dd2c81bbbf23
-2009-01-20T15:53:09.750096Z
-2291
-winterheart
+be45a6e710f3a07e9fab41d795a64030
+2008-06-07T09:03:20.687527Z
+1498
+jplang
 has-props
 
 
@@ -568,7 +568,7 @@ has-props
 
 
 
-753
+716
 
 jstoolbar-hr.js
 file
@@ -604,17 +604,17 @@ has-props
 
 721
 
-jstoolbar-zh-tw.js
+jstoolbar-nl.js
 file
 
 
 
 
 2010-07-23T14:49:47.676097Z
-be45a6e710f3a07e9fab41d795a64030
-2008-06-07T09:03:20.687527Z
-1498
-jplang
+b1bc7a04b7b466073845dd2c81bbbf23
+2009-01-20T15:53:09.750096Z
+2291
+winterheart
 has-props
 
 
@@ -636,7 +636,7 @@ has-props
 
 
 
-716
+753
 
 jstoolbar-mn.js
 file
@@ -672,40 +672,6 @@ winterheart
 
 916
 
-jstoolbar-pl.js
-file
-
-
-
-
-2010-07-23T14:49:47.676097Z
-1d2b7d7c66953806ca428f91a95d2eaa
-2008-10-07T17:41:16.515762Z
-1928
-winterheart
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-851
-
 jstoolbar-th.js
 file
 
@@ -739,6 +705,40 @@ has-props
 
 
 931
+
+jstoolbar-pl.js
+file
+
+
+
+
+2010-07-23T14:49:47.676097Z
+1d2b7d7c66953806ca428f91a95d2eaa
+2008-10-07T17:41:16.515762Z
+1928
+winterheart
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+851
 
 jstoolbar-it.js
 file
@@ -842,40 +842,6 @@ has-props
 
 754
 
-jstoolbar-lv.js
-file
-
-
-
-
-2010-07-23T14:49:47.676097Z
-5a44b7a9bd5b7db86d0a7398ee5bc779
-2010-05-14T18:15:41.754813Z
-3737
-winterheart
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-836
-
 jstoolbar-zh.js
 file
 
@@ -910,18 +876,17 @@ has-props
 
 722
 
-jstoolbar-pt.js
+jstoolbar-lv.js
 file
 
 
 
 
 2010-07-23T14:49:47.676097Z
-2479961837e503c00632ff7e6997b10d
-2008-10-06T15:00:56.914741Z
-1927
+5a44b7a9bd5b7db86d0a7398ee5bc779
+2010-05-14T18:15:41.754813Z
+3737
 winterheart
-has-props
 
 
 
@@ -942,7 +907,8 @@ has-props
 
 
 
-823
+
+836
 
 jstoolbar-ca.js
 file
@@ -978,17 +944,17 @@ winterheart
 
 763
 
-jstoolbar-pt-br.js
+jstoolbar-pt.js
 file
 
 
 
 
-2010-07-23T14:49:47.680127Z
-37aed8a5fce8e7f2030ac37e3d635068
-2008-05-30T16:35:36.510811Z
-1479
-jplang
+2010-07-23T14:49:47.676097Z
+2479961837e503c00632ff7e6997b10d
+2008-10-06T15:00:56.914741Z
+1927
+winterheart
 has-props
 
 
@@ -1010,7 +976,41 @@ has-props
 
 
 
-819
+823
+
+jstoolbar-sr.js
+file
+
+
+
+
+2010-07-23T14:49:47.676097Z
+bf8f49f26dc22319ff3da721c261c593
+2010-05-15T13:11:26.066671Z
+3738
+winterheart
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+761
 
 jstoolbar-da.js
 file
@@ -1046,17 +1046,17 @@ has-props
 
 746
 
-jstoolbar-sr.js
+jstoolbar-pt-br.js
 file
 
 
 
 
-2010-07-23T14:49:47.676097Z
-bf8f49f26dc22319ff3da721c261c593
-2010-05-15T13:11:26.066671Z
-3738
-winterheart
+2010-07-23T14:49:47.680127Z
+37aed8a5fce8e7f2030ac37e3d635068
+2008-05-30T16:35:36.510811Z
+1479
+jplang
 has-props
 
 
@@ -1078,7 +1078,7 @@ has-props
 
 
 
-761
+819
 
 jstoolbar-tr.js
 file

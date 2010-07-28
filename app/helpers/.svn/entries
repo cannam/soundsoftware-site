@@ -1,7 +1,7 @@
 10
 
 dir
-3859
+3892
 http://redmine.rubyforge.org/svn/trunk/app/helpers
 http://redmine.rubyforge.org/svn
 
@@ -706,40 +706,6 @@ has-props
 
 817
 
-journals_helper.rb
-file
-
-
-
-
-2010-07-23T14:49:44.284157Z
-82a2cae51bde677e659b2951289bc851
-2010-03-16T21:37:05.357843Z
-3594
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2266
-
 workflows_helper.rb
 file
 
@@ -773,6 +739,40 @@ has-props
 
 
 824
+
+journals_helper.rb
+file
+
+
+
+
+2010-07-23T14:49:44.284157Z
+82a2cae51bde677e659b2951289bc851
+2010-03-16T21:37:05.357843Z
+3594
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2266
 
 reports_helper.rb
 file
@@ -808,17 +808,17 @@ has-props
 
 1265
 
-timelog_helper.rb
+custom_fields_helper.rb
 file
 
 
 
 
 2010-07-23T14:49:44.284157Z
-1888fd2d4a1be5fa0d6ad8a63238e2b4
-2010-04-30T12:18:11.536180Z
-3708
-jplang
+97753365c8eb76a948d7417d5db31079
+2010-04-16T15:34:05.970144Z
+3675
+edavis10
 has-props
 
 
@@ -840,7 +840,7 @@ has-props
 
 
 
-6636
+5322
 
 settings_helper.rb
 file
@@ -876,17 +876,17 @@ has-props
 
 3350
 
-custom_fields_helper.rb
+timelog_helper.rb
 file
 
 
 
 
 2010-07-23T14:49:44.284157Z
-97753365c8eb76a948d7417d5db31079
-2010-04-16T15:34:05.970144Z
-3675
-edavis10
+1888fd2d4a1be5fa0d6ad8a63238e2b4
+2010-04-30T12:18:11.536180Z
+3708
+jplang
 has-props
 
 
@@ -908,7 +908,7 @@ has-props
 
 
 
-5322
+6636
 
 users_helper.rb
 file

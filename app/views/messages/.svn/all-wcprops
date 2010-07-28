@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/3377/trunk/app/views/messages
+/svn/!svn/ver/3877/trunk/app/views/messages
 END
 show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/3377/trunk/app/views/messages/show.rhtml
+/svn/!svn/ver/3877/trunk/app/views/messages/show.rhtml
 END
 _form.rhtml
 K 25

@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/!svn/ver/3847/trunk/config/locales
+/svn/!svn/ver/3875/trunk/config/locales
 END
 lt.yml
 K 25
@@ -25,7 +25,7 @@ zh.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3847/trunk/config/locales/zh.yml
+/svn/!svn/ver/3863/trunk/config/locales/zh.yml
 END
 pt.yml
 K 25
@@ -55,13 +55,13 @@ ru.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3847/trunk/config/locales/ru.yml
+/svn/!svn/ver/3863/trunk/config/locales/ru.yml
 END
 en-GB.yml
 K 25
 svn:wc:ra_dav:version-url
 V 49
-/svn/!svn/ver/3820/trunk/config/locales/en-GB.yml
+/svn/!svn/ver/3864/trunk/config/locales/en-GB.yml
 END
 id.yml
 K 25
@@ -79,7 +79,7 @@ en.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3820/trunk/config/locales/en.yml
+/svn/!svn/ver/3864/trunk/config/locales/en.yml
 END
 gl.yml
 K 25
@@ -99,11 +99,11 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/3820/trunk/config/locales/es.yml
 END
-ko.yml
+zh-TW.yml
 K 25
 svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/3820/trunk/config/locales/ko.yml
+V 49
+/svn/!svn/ver/3847/trunk/config/locales/zh-TW.yml
 END
 eu.yml
 K 25
@@ -111,11 +111,11 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/3820/trunk/config/locales/eu.yml
 END
-zh-TW.yml
+ko.yml
 K 25
 svn:wc:ra_dav:version-url
-V 49
-/svn/!svn/ver/3847/trunk/config/locales/zh-TW.yml
+V 46
+/svn/!svn/ver/3820/trunk/config/locales/ko.yml
 END
 mn.yml
 K 25
@@ -147,23 +147,23 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/3820/trunk/config/locales/uk.yml
 END
-da.yml
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/3820/trunk/config/locales/da.yml
-END
 sr.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/3820/trunk/config/locales/sr.yml
 END
-bg.yml
+da.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3820/trunk/config/locales/bg.yml
+/svn/!svn/ver/3820/trunk/config/locales/da.yml
+END
+sv.yml
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/3847/trunk/config/locales/sv.yml
 END
 de.yml
 K 25
@@ -171,11 +171,11 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/3820/trunk/config/locales/de.yml
 END
-sv.yml
+bg.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3847/trunk/config/locales/sv.yml
+/svn/!svn/ver/3820/trunk/config/locales/bg.yml
 END
 ja.yml
 K 25
@@ -211,7 +211,7 @@ fr.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3820/trunk/config/locales/fr.yml
+/svn/!svn/ver/3875/trunk/config/locales/fr.yml
 END
 nl.yml
 K 25

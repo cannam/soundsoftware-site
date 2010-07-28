@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/3548/trunk/app/views/versions
+/svn/!svn/ver/3865/trunk/app/views/versions
 END
 new.html.erb
 K 25
@@ -13,7 +13,7 @@ show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/3066/trunk/app/views/versions/show.rhtml
+/svn/!svn/ver/3865/trunk/app/views/versions/show.rhtml
 END
 _form.rhtml
 K 25

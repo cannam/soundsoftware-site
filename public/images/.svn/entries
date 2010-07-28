@@ -1,7 +1,7 @@
 10
 
 dir
-3859
+3892
 http://redmine.rubyforge.org/svn/trunk/public/images
 http://redmine.rubyforge.org/svn
 
@@ -162,40 +162,6 @@ has-props
 
 218
 
-folder_open_add.png
-file
-
-
-
-
-2010-07-23T14:49:47.604116Z
-8ae3a2d9ef884ed73a4157cd9c0465b8
-2010-02-13T09:08:12.698526Z
-3419
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-375
-
 2downarrow.png
 file
 
@@ -229,6 +195,40 @@ has-props
 
 
 282
+
+folder_open_add.png
+file
+
+
+
+
+2010-07-23T14:49:47.604116Z
+8ae3a2d9ef884ed73a4157cd9c0465b8
+2010-02-13T09:08:12.698526Z
+3419
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+375
 
 warning.png
 file
@@ -264,16 +264,16 @@ has-props
 
 613
 
-reload.png
+fav_off.png
 file
 
 
 
 
 2010-07-23T14:49:47.604116Z
-a20844852ce8909ed4a19ccb0f6c6518
-2010-02-14T13:13:16.743297Z
-3430
+ff96c02d8f18116bb3f005f2c8b86e91
+2010-02-13T09:08:12.698526Z
+3419
 jplang
 has-props
 
@@ -296,7 +296,7 @@ has-props
 
 
 
-549
+211
 
 move.png
 file
@@ -332,16 +332,16 @@ has-props
 
 321
 
-fav_off.png
+reload.png
 file
 
 
 
 
 2010-07-23T14:49:47.604116Z
-ff96c02d8f18116bb3f005f2c8b86e91
-2010-02-13T09:08:12.698526Z
-3419
+a20844852ce8909ed4a19ccb0f6c6518
+2010-02-14T13:13:16.743297Z
+3430
 jplang
 has-props
 
@@ -364,7 +364,7 @@ has-props
 
 
 
-211
+549
 
 ticket_note.png
 file
@@ -400,40 +400,6 @@ has-props
 
 641
 
-copy.png
-file
-
-
-
-
-2010-07-23T14:49:47.608094Z
-acd6a5a422b44466803829ce8a12fd9a
-2010-02-13T09:08:12.698526Z
-3419
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-925
-
 zoom_in.png
 file
 
@@ -467,6 +433,40 @@ has-props
 
 
 461
+
+copy.png
+file
+
+
+
+
+2010-07-23T14:49:47.608094Z
+acd6a5a422b44466803829ce8a12fd9a
+2010-02-13T09:08:12.698526Z
+3419
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+925
 
 news.png
 file
@@ -1321,40 +1321,6 @@ has-props
 
 403
 
-attachment.png
-file
-
-
-
-
-2010-07-23T14:49:47.612156Z
-0a35d4eaddb2292fed7062295ee0dcd8
-2010-02-13T09:08:12.698526Z
-3419
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-939
-
 textfield.png
 file
 
@@ -1388,6 +1354,40 @@ has-props
 
 
 100
+
+attachment.png
+file
+
+
+
+
+2010-07-23T14:49:47.612156Z
+0a35d4eaddb2292fed7062295ee0dcd8
+2010-02-13T09:08:12.698526Z
+3419
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+939
 
 false.png
 file
@@ -1423,40 +1423,6 @@ has-props
 
 459
 
-bullet_toggle_plus.png
-file
-
-
-
-
-2010-07-23T14:49:47.612156Z
-06cbf5da7daca348a87a6299a4112d71
-2010-02-13T09:08:12.698526Z
-3419
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-217
-
 unlock.png
 file
 
@@ -1490,6 +1456,40 @@ has-props
 
 
 448
+
+bullet_toggle_plus.png
+file
+
+
+
+
+2010-07-23T14:49:47.612156Z
+06cbf5da7daca348a87a6299a4112d71
+2010-02-13T09:08:12.698526Z
+3419
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+217
 
 group.png
 file
@@ -1525,14 +1525,14 @@ has-props
 
 700
 
-plugin.png
+save.png
 file
 
 
 
 
 2010-07-23T14:49:47.612156Z
-e019855b07d30f1ce1baf59b9df27125
+9e64db8f4905a17e3a6f68792cd5e199
 2010-02-13T09:08:12.698526Z
 3419
 jplang
@@ -1557,41 +1557,7 @@ has-props
 
 
 
-538
-
-loading.gif
-file
-
-
-
-
-2010-07-23T14:49:47.612156Z
-03ce3dcc84af110e9da8699a841e5200
-2006-12-03T19:55:45.161980Z
-62
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1553
+440
 
 bullet_blue.png
 file
@@ -1627,16 +1593,16 @@ has-props
 
 241
 
-save.png
+loading.gif
 file
 
 
 
 
 2010-07-23T14:49:47.612156Z
-9e64db8f4905a17e3a6f68792cd5e199
-2010-02-13T09:08:12.698526Z
-3419
+03ce3dcc84af110e9da8699a841e5200
+2006-12-03T19:55:45.161980Z
+62
 jplang
 has-props
 
@@ -1659,16 +1625,16 @@ has-props
 
 
 
-440
+1553
 
-milestone.png
+plugin.png
 file
 
 
 
 
-2010-07-23T14:49:47.616101Z
-c9d132ff06712e3ffd794dc734dc3ef5
+2010-07-23T14:49:47.612156Z
+e019855b07d30f1ce1baf59b9df27125
 2010-02-13T09:08:12.698526Z
 3419
 jplang
@@ -1693,7 +1659,7 @@ has-props
 
 
 
-122
+538
 
 bullet_add.png
 file
@@ -1728,6 +1694,40 @@ has-props
 
 
 233
+
+milestone.png
+file
+
+
+
+
+2010-07-23T14:49:47.616101Z
+c9d132ff06712e3ffd794dc734dc3ef5
+2010-02-13T09:08:12.698526Z
+3419
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+122
 
 draft.png
 file
@@ -1831,14 +1831,14 @@ has-props
 
 608
 
-folder.png
+zoom_out.png
 file
 
 
 
 
 2010-07-23T14:49:47.616101Z
-59f2dc025632f00403490176e7f42bfc
+42b319d6ad0249fb20833a17d5f373a4
 2010-02-13T09:08:12.698526Z
 3419
 jplang
@@ -1863,7 +1863,7 @@ has-props
 
 
 
-970
+461
 
 report.png
 file
@@ -1899,14 +1899,14 @@ has-props
 
 1014
 
-zoom_out.png
+folder.png
 file
 
 
 
 
 2010-07-23T14:49:47.616101Z
-42b319d6ad0249fb20833a17d5f373a4
+59f2dc025632f00403490176e7f42bfc
 2010-02-13T09:08:12.698526Z
 3419
 jplang
@@ -1931,7 +1931,7 @@ has-props
 
 
 
-461
+970
 
 fav.png
 file
@@ -1967,40 +1967,6 @@ has-props
 
 378
 
-document.png
-file
-
-
-
-
-2010-07-23T14:49:47.616101Z
-97c12039afee2ea9c5a13e74f6fa5c0c
-2010-02-13T09:08:12.698526Z
-3419
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-333
-
 bullet_purple.png
 file
 
@@ -2034,6 +2000,40 @@ has-props
 
 
 244
+
+document.png
+file
+
+
+
+
+2010-07-23T14:49:47.616101Z
+97c12039afee2ea9c5a13e74f6fa5c0c
+2010-02-13T09:08:12.698526Z
+3419
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+333
 
 true.png
 file
@@ -2069,40 +2069,6 @@ has-props
 
 248
 
-2uparrow.png
-file
-
-
-
-
-2010-07-23T14:49:47.616101Z
-afef823014efb32adcd9606b69119562
-2010-02-13T09:08:12.698526Z
-3419
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-292
-
 arrow_down.png
 file
 
@@ -2136,6 +2102,40 @@ has-props
 
 
 115
+
+2uparrow.png
+file
+
+
+
+
+2010-07-23T14:49:47.616101Z
+afef823014efb32adcd9606b69119562
+2010-02-13T09:08:12.698526Z
+3419
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+292
 
 cancel.png
 file
