@@ -23,10 +23,10 @@ class Changeset < ActiveRecord::Base
   has_many :changes, :dependent => :delete_all
   has_and_belongs_to_many :issues
 
-  acts_as_event :title => Proc.new {|o| "#{l(:label_revision)} #{o.revision}" + (o.short_comments.blank? ? '' : (': ' + o.short_comments))},
+  acts_as_event :title => Proc.new {|o| "#{l(:label_revision)} #{RepositoriesHelper.format_revision(o)}" + (o.short_comments.blank? ? '' : (': ' + o.short_comments))},
                 :description => :long_comments,
                 :datetime => :committed_on,
-                :url => Proc.new {|o| {:controller => 'repositories', :action => 'revision', :id => o.repository.project, :rev => o.revision}}
+                :url => Proc.new {|o| {:controller => 'repositories', :action => 'revision', :id => o.repository.project, :rev => o.identifier}}
                 
   acts_as_searchable :columns => 'comments',
                      :include => {:repository => :project},
@@ -47,6 +47,22 @@ class Changeset < ActiveRecord::Base
   def revision=(r)
     write_attribute :revision, (r.nil? ? nil : r.to_s)
   end
+
+  # Returns the identifier of this changeset.
+  # e.g. revision number for centralized system; hash id for DVCS
+  def identifier
+    scmid || revision
+  end
+
+  # Returns the wiki identifier, "rN" or "commit:ABCDEF"
+  def wiki_identifier
+    if scmid  # hash-like
+      "commit:#{scmid}"
+    else  # numeric
+      "r#{revision}"
+    end
+  end
+  private :wiki_identifier
   
   def comments=(comment)
     write_attribute(:comments, Changeset.normalize_comments(comment))
@@ -109,11 +125,7 @@ class Changeset < ActiveRecord::Base
           issue.reload
           # don't change the status is the issue is closed
           next if issue.status.is_closed?
-          csettext = "r#{self.revision}"
-          if self.scmid && (! (csettext =~ /^r[0-9]+$/))
-            csettext = "commit:\"#{self.scmid}\""
-          end
-          journal = issue.init_journal(user || User.anonymous, ll(Setting.default_language, :text_status_changed_by_changeset, csettext))
+          journal = issue.init_journal(user || User.anonymous, ll(Setting.default_language, :text_status_changed_by_changeset, wiki_identifier))
           issue.status = fix_status
           unless Setting.commit_fix_done_ratio.blank?
             issue.done_ratio = Setting.commit_fix_done_ratio.to_i

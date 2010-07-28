@@ -17,7 +17,7 @@
 
 class Repository < ActiveRecord::Base
   belongs_to :project
-  has_many :changesets, :order => "#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC"
+  has_many :changesets, :order => "#{Changeset.table_name}.id DESC"
   has_many :changes, :through => :changesets
   
   # Raw SQL to delete changesets and changes in the database
@@ -94,7 +94,10 @@ class Repository < ActiveRecord::Base
   
   # Finds and returns a revision with a number or the beginning of a hash
   def find_changeset_by_name(name)
-    changesets.find(:first, :conditions => (name.match(/^\d*$/) ? ["revision = ?", name.to_s] : ["revision LIKE ?", name + '%']))
+    # TODO: is this query efficient enough? can we write as single query?
+    e = changesets.find(:first, :conditions => ['revision = ? OR scmid = ?', name.to_s, name.to_s])
+    return e if e
+    changesets.find(:first, :conditions => ['scmid LIKE ?', "#{name}%"])
   end
   
   def latest_changeset
@@ -106,12 +109,11 @@ class Repository < ActiveRecord::Base
   def latest_changesets(path, rev, limit=10)
     if path.blank?
       changesets.find(:all, :include => :user,
-                            :order => "#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC",
                             :limit => limit)
     else
       changes.find(:all, :include => {:changeset => :user}, 
                          :conditions => ["path = ?", path.with_leading_slash],
-                         :order => "#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC",
+                         :order => "#{Changeset.table_name}.id DESC",
                          :limit => limit).collect(&:changeset)
     end
   end
@@ -172,7 +174,11 @@ class Repository < ActiveRecord::Base
   def self.fetch_changesets
     Project.active.has_module(:repository).find(:all, :include => :repository).each do |project|
       if project.repository
-        project.repository.fetch_changesets
+        begin
+          project.repository.fetch_changesets
+        rescue Redmine::Scm::Adapters::CommandFailed => e
+          logger.error "Repository: error during fetching changesets: #{e.message}"
+        end
       end
     end
   end

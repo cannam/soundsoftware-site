@@ -18,9 +18,24 @@
 require 'iconv'
 
 module RepositoriesHelper
-  def format_revision(txt)
-    txt.to_s[0,8]
+  # truncate rev to 8 chars if it's quite long
+  def truncate_long_revision_name(rev)
+    rev.to_s.size <= 12 ? rev.to_s : rev.to_s[0, 8]
   end
+  private :truncate_long_revision_name
+
+  def format_revision(revision)
+    if [:identifier, :revision, :scmid].all? { |e| revision.respond_to? e }
+      if revision.scmid and revision.revision != revision.scmid and /[^\d]/ !~ revision.revision
+        "#{revision.revision}:#{revision.scmid}"  # number:hashid
+      else
+        truncate_long_revision_name(revision.identifier)
+      end
+    else
+      truncate_long_revision_name(revision)
+    end
+  end
+  module_function :format_revision  # callable as RepositoriesHelper.format_revision
   
   def truncate_at_line_break(text, length = 255)
     if text
@@ -87,7 +102,7 @@ module RepositoriesHelper
                              :action => 'show',
                              :id => @project,
                              :path => path_param,
-                             :rev => @changeset.revision)
+                             :rev => @changeset.identifier)
         output << "<li class='#{style}'>#{text}</li>"
         output << render_changes_tree(s)
       elsif c = tree[file][:c]
@@ -97,13 +112,13 @@ module RepositoriesHelper
                              :action => 'entry',
                              :id => @project,
                              :path => path_param,
-                             :rev => @changeset.revision) unless c.action == 'D'
+                             :rev => @changeset.identifier) unless c.action == 'D'
         text << " - #{c.revision}" unless c.revision.blank?
         text << ' (' + link_to('diff', :controller => 'repositories',
                                        :action => 'diff',
                                        :id => @project,
                                        :path => path_param,
-                                       :rev => @changeset.revision) + ') ' if c.action == 'M'
+                                       :rev => @changeset.identifier) + ') ' if c.action == 'M'
         text << ' ' + content_tag('span', c.from_path, :class => 'copied-from') unless c.from_path.blank?
         output << "<li class='#{style}'>#{text}</li>"
       end

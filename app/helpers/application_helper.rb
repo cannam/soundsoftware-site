@@ -99,8 +99,10 @@ module ApplicationHelper
   # * :text - Link text (default to the formatted revision)
   def link_to_revision(revision, project, options={})
     text = options.delete(:text) || format_revision(revision)
+    rev = revision.respond_to?(:identifier) ? revision.identifier : revision
 
-    link_to(text, {:controller => 'repositories', :action => 'revision', :id => project, :rev => revision}, :title => l(:label_revision_id, revision))
+    link_to(text, {:controller => 'repositories', :action => 'revision', :id => project, :rev => rev},
+            :title => l(:label_revision_id, format_revision(revision)))
   end
 
   def toggle_link(name, id, options={})
@@ -612,7 +614,7 @@ module ApplicationHelper
             end
           when 'commit'
             if project && (changeset = project.changesets.find(:first, :conditions => ["scmid LIKE ?", "#{name}%"]))
-              link = link_to h("#{name}"), {:only_path => only_path, :controller => 'repositories', :action => 'revision', :id => project, :rev => changeset.revision},
+              link = link_to h("#{name}"), {:only_path => only_path, :controller => 'repositories', :action => 'revision', :id => project, :rev => changeset.identifier},
                                            :class => 'changeset',
                                            :title => truncate_single_line(changeset.comments, :length => 100)
             end
