@@ -1,0 +1,84 @@
+@import url(../../../stylesheets/application.css);
+
+@font-face
+{
+  /* A font by Jos Buivenga (exljbris) -> www.exljbris.com */
+  font-family: Tallys;
+  src: url('Tallys_15.otf');
+}
+
+@font-face
+{
+  font-family: Droid;
+  src: url('DroidSans.ttf');
+}
+
+@font-face
+{
+  font-family: Droid;
+  font-weight: bold;
+  src: url('DroidSans-Bold.ttf');
+}
+
+body {
+  background: #ffffff;
+  color: #404040;
+  margin: 0;
+  margin-bottom: 40px;
+/*  font-size: 95%; */
+}
+
+body,p,h2,h3,h4,li,table { 
+  font-family: Droid, tahoma, verdana, sans-serif;
+}
+
+h1 {
+  font-family: Tallys, Cambria, Georgia, "Times New Roman", Times, serif;
+  font-weight: normal;
+}    
+
+h2,h3,h4 {
+  color: #000000;
+}
+
+h2 { font-size: 2em; }
+
+#top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 80%; height: 2em; padding-top: 0.5em; background-color: #000000; }
+#top-menu a { font-weight: bold; }
+#header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #ffffff; border-bottom: 2px solid #000; height:80px; padding: 10px 0 0 0; margin-bottom: 0; }
+#header a { color: #000; }
+#header h1 { color: #000; text-shadow: #ccc 1px 1px; margin-top: 30px; font-size: 3em; font-weight: normal; margin-left: 0.3em; }
+#quick-search { margin-right: 6px; margin-top: 2em; color: #000; }
+#main-menu { position: absolute; top: 90px; background-color: #000000; left: 0; border-top: 0; width: 100%; height: 2em; }
+#main-menu li { margin: 0; padding: 0; padding-top: 1px; }
+#main-menu li a { background-color: #000; border-right: 1px solid #fff; font-size: 90%; padding: 4px 8px 4px 8px; font-weight: bold; }
+#main-menu li a:hover { background-color: #80b0da; color: #ffffff; }
+#main-menu li a.selected, #main-menu li a.selected:hover { background-color: #80b0da; color: #ffffff; }
+
+#footer { background-color: #000; border: 0; color: #fff;}
+#footer a { color: #fff; font-weight: bold; }
+
+#main { margin-top: 135px; font:95%; background: #e8eaec; }
+#main a { font-weight: medium; color: #800;}
+#main a:hover { color: #800; text-decoration: underline; }
+#content { background: #fff; }
+/*#content .tabs ul { bottom:-1px; }
+*/
+h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 { border-bottom: 0px; }
+/*h2, .wiki h1 { letter-spacing:-1px; }
+*/
+h4 { border-bottom: dotted 1px #c0c0c0; }
+
+#top-menu a.home, #top-menu a.my-page, #top-menu a.projects, #top-menu a.administration, #top-menu a.help { 
+    background-position: 0% 40%;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
+
+#top-menu a.home { background-image: url(../images/home.png); }
+#top-menu a.my-page { background-image: url(../../../images/user.png); }
+#top-menu a.projects { background-image: url(../../../images/projects.png); }
+#top-menu a.administration { background-image: url(../images/wrench.png); }
+#top-menu a.help { background-image: url(../../../images/help.png); }
