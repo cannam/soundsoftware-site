@@ -58,8 +58,8 @@ optional in the original Redmine.pm).
        ## Optional where clause (fulltext search would be slow and
        ## database dependant).
        # SoundSoftwareDbWhereClause "and members.role_id IN (1,2)"
-       ## Optional credentials cache size
-       # SoundSoftwareCacheCredsMax 50
+       ## Optional prefix for local repository URLs
+       # SoundSoftwareRepoPrefix "/var/hg/"
   </Location>
 
 See the original Redmine.pm for further configuration notes.
@@ -80,8 +80,6 @@ use Apache2::RequestUtil qw();
 use Apache2::Const qw(:common :override :cmd_how);
 use APR::Pool ();
 use APR::Table ();
-
-# use Apache2::Directive qw();
 
 my @directives = (
   {
@@ -106,17 +104,16 @@ my @directives = (
     args_how => TAKE1,
   },
   {
-    name => 'SoundSoftwareCacheCredsMax',
+    name => 'SoundSoftwareRepoPrefix',
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
-    errmsg => 'SoundSoftwareCacheCredsMax must be decimal number',
   },
 );
 
 sub SoundSoftwareDSN { 
-  my ($self, $parms, $arg) = @_;
-  $self->{SoundSoftwareDSN} = $arg;
-  my $query = "SELECT 
+    my ($self, $parms, $arg) = @_;
+    $self->{SoundSoftwareDSN} = $arg;
+    my $query = "SELECT 
                  hashed_password, auth_source_id, permissions
               FROM members, projects, users, roles, member_roles
               WHERE 
@@ -127,35 +124,32 @@ sub SoundSoftwareDSN {
                 AND users.status=1 
                 AND login=? 
                 AND identifier=? ";
-  $self->{SoundSoftwareQuery} = trim($query);
+    $self->{SoundSoftwareQuery} = trim($query);
 }
 
 sub SoundSoftwareDbUser { set_val('SoundSoftwareDbUser', @_); }
 sub SoundSoftwareDbPass { set_val('SoundSoftwareDbPass', @_); }
 sub SoundSoftwareDbWhereClause { 
-  my ($self, $parms, $arg) = @_;
-  $self->{SoundSoftwareQuery} = trim($self->{SoundSoftwareQuery}.($arg ? $arg : "")." ");
+    my ($self, $parms, $arg) = @_;
+    $self->{SoundSoftwareQuery} = trim($self->{SoundSoftwareQuery}.($arg ? $arg : "")." ");
 }
 
-sub SoundSoftwareCacheCredsMax { 
-  my ($self, $parms, $arg) = @_;
-  if ($arg) {
-    $self->{SoundSoftwareCachePool} = APR::Pool->new;
-    $self->{SoundSoftwareCacheCreds} = APR::Table::make($self->{SoundSoftwareCachePool}, $arg);
-    $self->{SoundSoftwareCacheCredsCount} = 0;
-    $self->{SoundSoftwareCacheCredsMax} = $arg;
-  }
+sub SoundSoftwareRepoPrefix { 
+    my ($self, $parms, $arg) = @_;
+    if ($arg) {
+	$self->{SoundSoftwareRepoPrefix} = $arg;
+    }
 }
 
 sub trim {
-  my $string = shift;
-  $string =~ s/\s{2,}/ /g;
-  return $string;
+    my $string = shift;
+    $string =~ s/\s{2,}/ /g;
+    return $string;
 }
 
 sub set_val {
-  my ($key, $self, $parms, $arg) = @_;
-  $self->{$key} = $arg;
+    my ($key, $self, $parms, $arg) = @_;
+    $self->{$key} = $arg;
 }
 
 Apache2::Module::add(__PACKAGE__, \@directives);
@@ -164,200 +158,262 @@ Apache2::Module::add(__PACKAGE__, \@directives);
 my %read_only_methods = map { $_ => 1 } qw/GET PROPFIND REPORT OPTIONS/;
 
 sub access_handler {
-  my $r = shift;
+    my $r = shift;
 
-  print STDERR "SoundSoftware.pm: In access handler\n";
+    print STDERR "SoundSoftware.pm: In access handler\n";
 
-  unless ($r->some_auth_required) {
-      $r->log_reason("No authentication has been configured");
-      return FORBIDDEN;
-  }
+    unless ($r->some_auth_required) {
+	$r->log_reason("No authentication has been configured");
+	return FORBIDDEN;
+    }
 
-  my $method = $r->method;
+    my $method = $r->method;
 
-  print STDERR "SoundSoftware.pm: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
+    print STDERR "SoundSoftware.pm: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
+    print STDERR "SoundSoftware.pm: Accept: " . $r->headers_in->{Accept} . "\n";
 
-  if (!defined $read_only_methods{$method}) {
-      print STDERR "SoundSoftware.pm: Method is not read-only, authentication handler required\n";
-      return OK;
-  }
+    if (!defined $read_only_methods{$method}) {
+	print STDERR "SoundSoftware.pm: Method is not read-only, authentication handler required\n";
+	return OK;
+    }
 
-  my $project_id = get_project_identifier($r);
+    my $dbh = connect_database($r);
 
-  if (defined $project_id) {
-      print STDERR "SoundSoftware.pm: Project: $project_id\n";
-  } else {
-      print STDERR "SoundSoftware.pm: No project identifier available, refusing access\n";
-      return FORBIDDEN;
-  }
+    my $project_id = get_project_identifier($dbh, $r);
+    my $status = get_project_status($dbh, $project_id, $r);
 
-  my $status = get_project_status($project_id, $r);
+    $dbh->disconnect();
+    undef $dbh;
 
-  if ($status == 0) { # nonexistent
-      print STDERR "SoundSoftware.pm: Project does not exist, refusing access\n";
-      return FORBIDDEN;
-  } elsif ($status == 1) { # public
-      print STDERR "SoundSoftware.pm: Project is public, no restriction here\n";
-      $r->set_handlers(PerlAuthenHandler => [\&OK])
-  } else { # private
-      print STDERR "SoundSoftware.pm: Project is not public, authentication handler required\n";
-  }
+    if ($status == 0) { # nonexistent
+	print STDERR "SoundSoftware.pm: Project does not exist, refusing access\n";
+	return FORBIDDEN;
+    } elsif ($status == 1) { # public
+	print STDERR "SoundSoftware.pm: Project is public, no restriction here\n";
+	$r->set_handlers(PerlAuthenHandler => [\&OK])
+    } else { # private
+	print STDERR "SoundSoftware.pm: Project is private, authentication handler required\n";
+    }
 
-  return OK
+    return OK
 }
 
 sub authen_handler {
-  my $r = shift;
- 
-  print STDERR "SoundSoftware.pm: In authentication handler\n";
- 
-  my ($res, $redmine_pass) =  $r->get_basic_auth_pw();
-  return $res unless $res == OK;
-  
-  print STDERR "SoundSoftware.pm: User is " . $r->user . ", got password\n";
+    my $r = shift;
+    
+    print STDERR "SoundSoftware.pm: In authentication handler\n";
 
-  if (is_member($r->user, $redmine_pass, $r)) {
-      return OK;
-  } else {
-      print STDERR "SoundSoftware.pm: Failed to validate project membership\n";
-      $r->note_auth_failure();
-      return AUTH_REQUIRED;
-  }
+    my $dbh = connect_database($r);
+    
+    my $project_id = get_project_identifier($dbh, $r);
+    my $realm = get_realm($dbh, $project_id, $r);
+    $r->auth_name($realm);
+
+    my ($res, $redmine_pass) =  $r->get_basic_auth_pw();
+    unless ($res == OK) {
+	$dbh->disconnect();
+	undef $dbh;
+	return $res;
+    }
+    
+    print STDERR "SoundSoftware.pm: User is " . $r->user . ", got password\n";
+
+    my $permitted = is_permitted($dbh, $project_id, $r->user, $redmine_pass, $r);
+    
+    $dbh->disconnect();
+    undef $dbh;
+
+    if ($permitted) {
+	return OK;
+    } else {
+	print STDERR "SoundSoftware.pm: Not permitted\n";
+	$r->note_auth_failure();
+	return AUTH_REQUIRED;
+    }
 }
 
 sub get_project_status {
+    my $dbh = shift;
     my $project_id = shift;
     my $r = shift;
+
+    if (!defined $project_id or $project_id eq '') {
+	return 0; # nonexistent
+    }
     
-    my $dbh = connect_database($r);
     my $sth = $dbh->prepare(
         "SELECT is_public FROM projects WHERE projects.identifier = ?;"
     );
 
     $sth->execute($project_id);
-    my $ret = 0;
+    my $ret = 0; # nonexistent
     if (my @row = $sth->fetchrow_array) {
     	if ($row[0] eq "1" || $row[0] eq "t") {
 	    $ret = 1; # public
     	} else {
-	    $ret = 2; # private (0 means nonexistent)
+	    $ret = 2; # private
 	}
     }
     $sth->finish();
     undef $sth;
-    $dbh->disconnect();
-    undef $dbh;
 
     $ret;
 }
 
-sub is_member {
-  my $redmine_user = shift;
-  my $redmine_pass = shift;
-  my $r = shift;
+sub is_permitted {
+    my $dbh = shift;
+    my $project_id = shift;
+    my $redmine_user = shift;
+    my $redmine_pass = shift;
+    my $r = shift;
 
-  my $dbh         = connect_database($r);
-  my $project_id  = get_project_identifier($r);
+    my $pass_digest = Digest::SHA1::sha1_hex($redmine_pass);
 
-  my $pass_digest = Digest::SHA1::sha1_hex($redmine_pass);
+    my $cfg = Apache2::Module::get_config
+	(__PACKAGE__, $r->server, $r->per_dir_config);
 
-  my $cfg = Apache2::Module::get_config(__PACKAGE__, $r->server, $r->per_dir_config);
-  my $usrprojpass;
-  if ($cfg->{SoundSoftwareCacheCredsMax}) {
-    $usrprojpass = $cfg->{SoundSoftwareCacheCreds}->get($redmine_user.":".$project_id);
-    return 1 if (defined $usrprojpass and ($usrprojpass eq $pass_digest));
-  }
-  my $query = $cfg->{SoundSoftwareQuery};
-  my $sth = $dbh->prepare($query);
-  $sth->execute($redmine_user, $project_id);
+    my $query = $cfg->{SoundSoftwareQuery};
+    my $sth = $dbh->prepare($query);
+    $sth->execute($redmine_user, $project_id);
 
-  my $ret;
-  while (my ($hashed_password, $auth_source_id, $permissions) = $sth->fetchrow_array) {
+    my $ret;
+    while (my ($hashed_password, $auth_source_id, $permissions) = $sth->fetchrow_array) {
 
-      unless ($auth_source_id) {
-	  my $method = $r->method;
-          if ($hashed_password eq $pass_digest && ((defined $read_only_methods{$method} && $permissions =~ /:browse_repository/) || $permissions =~ /:commit_access/) ) {
-              $ret = 1;
-              last;
-          }
-      } else {
-          my $sthldap = $dbh->prepare(
-              "SELECT host,port,tls,account,account_password,base_dn,attr_login from auth_sources WHERE id = ?;"
-          );
-          $sthldap->execute($auth_source_id);
-          while (my @rowldap = $sthldap->fetchrow_array) {
-            my $ldap = Authen::Simple::LDAP->new(
-                host    =>      ($rowldap[2] eq "1" || $rowldap[2] eq "t") ? "ldaps://$rowldap[0]" : $rowldap[0],
-                port    =>      $rowldap[1],
-                basedn  =>      $rowldap[5],
-                binddn  =>      $rowldap[3] ? $rowldap[3] : "",
-                bindpw  =>      $rowldap[4] ? $rowldap[4] : "",
-                filter  =>      "(".$rowldap[6]."=%s)"
-            );
-            my $method = $r->method;
-            $ret = 1 if ($ldap->authenticate($redmine_user, $redmine_pass) && ((defined $read_only_methods{$method} && $permissions =~ /:browse_repository/) || $permissions =~ /:commit_access/));
+	# Test permissions for this user before we verify credentials
+	# -- if the user is not permitted this action anyway, there's
+	# not much point in e.g. contacting the LDAP
 
-          }
-          $sthldap->finish();
-          undef $sthldap;
-      }
-  }
-  $sth->finish();
-  undef $sth;
-  $dbh->disconnect();
-  undef $dbh;
+	my $method = $r->method;
 
-  if ($cfg->{SoundSoftwareCacheCredsMax} and $ret) {
-    if (defined $usrprojpass) {
-      $cfg->{SoundSoftwareCacheCreds}->set($redmine_user.":".$project_id, $pass_digest);
-    } else {
-      if ($cfg->{SoundSoftwareCacheCredsCount} < $cfg->{SoundSoftwareCacheCredsMax}) {
-        $cfg->{SoundSoftwareCacheCreds}->set($redmine_user.":".$project_id, $pass_digest);
-        $cfg->{SoundSoftwareCacheCredsCount}++;
-      } else {
-        $cfg->{SoundSoftwareCacheCreds}->clear();
-        $cfg->{SoundSoftwareCacheCredsCount} = 0;
-      }
+	if ((defined $read_only_methods{$method} && $permissions =~ /:browse_repository/)
+	    || $permissions =~ /:commit_access/) {
+
+	    # User would be permitted this action, if their
+	    # credentials checked out -- test those now
+
+	    print STDERR "SoundSoftware.pm: User $redmine_user has required role, checking credentials\n";
+
+	    unless ($auth_source_id) {
+		if ($hashed_password eq $pass_digest) {
+		    print STDERR "SoundSoftware.pm: User $redmine_user authenticated via password\n";
+		    $ret = 1;
+		    last;
+		}
+	    } else {
+		my $sthldap = $dbh->prepare(
+		    "SELECT host,port,tls,account,account_password,base_dn,attr_login FROM auth_sources WHERE id = ?;"
+		    );
+		$sthldap->execute($auth_source_id);
+		while (my @rowldap = $sthldap->fetchrow_array) {
+		    my $ldap = Authen::Simple::LDAP->new(
+			host    => ($rowldap[2] eq "1" || $rowldap[2] eq "t") ? "ldaps://$rowldap[0]" : $rowldap[0],
+			port    => $rowldap[1],
+			basedn  => $rowldap[5],
+			binddn  => $rowldap[3] ? $rowldap[3] : "",
+			bindpw  => $rowldap[4] ? $rowldap[4] : "",
+			filter  => "(".$rowldap[6]."=%s)"
+			);
+		    if ($ldap->authenticate($redmine_user, $redmine_pass)) {
+			print STDERR "SoundSoftware.pm: User $redmine_user authenticated via LDAP\n";
+			$ret = 1;
+		    }
+		}
+		$sthldap->finish();
+		undef $sthldap;
+	    }
+	} else {
+	    print STDERR "SoundSoftware.pm: User $redmine_user lacks required role for this project\n";
+	}
     }
-  }
 
-  $ret;
+    $sth->finish();
+    undef $sth;
+
+    $ret;
 }
 
 sub get_project_identifier {
+    my $dbh = shift;
     my $r = shift;
 
     my $location = $r->location;
     my ($repo) = $r->uri =~ m{$location/*([^/]+)};
     $repo =~ s/[^a-zA-Z0-9\._-]//g;
 
-    my $dbh = connect_database($r);
+    # The original Redmine.pm returns the string just calculated as
+    # the project identifier.  That won't do for us -- we may have
+    # (and in fact already do have, in our test instance) projects
+    # whose repository names differ from the project identifiers.
+
+    # This is a rather fundamental change because it means that almost
+    # every request needs more than one database query -- which
+    # prompts us to start passing around $dbh instead of connecting
+    # locally within each function as is done in Redmine.pm.
+
     my $sth = $dbh->prepare(
         "SELECT projects.identifier FROM projects, repositories WHERE repositories.project_id = projects.id AND repositories.url LIKE ?;"
     );
 
+    my $cfg = Apache2::Module::get_config
+	(__PACKAGE__, $r->server, $r->per_dir_config);
+
+    my $prefix = $cfg->{SoundSoftwareRepoPrefix};
+    if (!defined $prefix) { $prefix = '%/'; }
+
     my $identifier = '';
 
-    $sth->execute('%/' . $repo);
+    $sth->execute($prefix . $repo);
     my $ret = 0;
     if (my @row = $sth->fetchrow_array) {
 	$identifier = $row[0];
     }
     $sth->finish();
     undef $sth;
-    $dbh->disconnect();
-    undef $dbh;
 
-    print STDERR "SoundSoftware.pm: Repository $repo belongs to project $identifier\n";
+    print STDERR "SoundSoftware.pm: Repository '$repo' belongs to project '$identifier'\n";
 
     $identifier;
+}
+
+sub get_realm {
+    my $dbh = shift;
+    my $project_id = shift;
+    my $r = shift;
+
+    my $sth = $dbh->prepare(
+        "SELECT projects.name FROM projects WHERE projects.identifier = ?;"
+    );
+
+    my $name = $project_id;
+
+    $sth->execute($project_id);
+    my $ret = 0;
+    if (my @row = $sth->fetchrow_array) {
+	$name = $row[0];
+    }
+    $sth->finish();
+    undef $sth;
+
+    # be timid about characters not permitted in auth realm and revert
+    # to project identifier if any are found
+    if ($name =~ m/[^\w\d\s\._-]/) {
+	$name = $project_id;
+    }
+
+    my $realm = '"Mercurial repository for ' . "'$name'" . '"';
+
+    $realm;
 }
 
 sub connect_database {
     my $r = shift;
     
-    my $cfg = Apache2::Module::get_config(__PACKAGE__, $r->server, $r->per_dir_config);
-    return DBI->connect($cfg->{SoundSoftwareDSN}, $cfg->{SoundSoftwareDbUser}, $cfg->{SoundSoftwareDbPass});
+    my $cfg = Apache2::Module::get_config
+	(__PACKAGE__, $r->server, $r->per_dir_config);
+
+    return DBI->connect($cfg->{SoundSoftwareDSN},
+			$cfg->{SoundSoftwareDbUser},
+			$cfg->{SoundSoftwareDbPass});
 }
 
 1;
