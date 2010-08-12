@@ -20,10 +20,10 @@ authentication required
 2. Clone/pull from repo for private project: Project members only
 
 3. Push to repo for public project: "Permitted" users only (this
-probably means project members who are also identified in the hgrc web
-section for the repository and so will be approved by hgwebdir?)
+means project members with the commit role, although hgwebdir may
+impose its own restrictions afterwards) 
 
-4. Push to repo for private project: "Permitted" users only (as above)
+4. Push to repo for private project: "Permitted" users only
 
 =head1 INSTALLATION
 
