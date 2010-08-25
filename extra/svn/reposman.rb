@@ -48,6 +48,8 @@
 #                             kind.
 #                             This command override the default creation for git
 #                             and subversion.
+#   --http-user=USER          User for HTTP Basic authentication with Redmine WS
+#   --http-pass=PASSWORD      Password for Basic authentication with Redmine WS
 #   -f, --force               force repository creation even if the project
 #                             repository is already declared in Redmine
 #   -t, --test                only show what should be done
@@ -78,6 +80,8 @@ opts = GetoptLong.new(
                       ['--url',          '-u', GetoptLong::REQUIRED_ARGUMENT],
                       ['--command' ,     '-c', GetoptLong::REQUIRED_ARGUMENT],
                       ['--scm',                GetoptLong::REQUIRED_ARGUMENT],
+                      ['--http-user',          GetoptLong::REQUIRED_ARGUMENT],
+                      ['--http-pass',          GetoptLong::REQUIRED_ARGUMENT],
                       ['--test',         '-t', GetoptLong::NO_ARGUMENT],
                       ['--force',        '-f', GetoptLong::NO_ARGUMENT],
                       ['--verbose',      '-v', GetoptLong::NO_ARGUMENT],
@@ -90,6 +94,8 @@ $verbose      = 0
 $quiet        = false
 $redmine_host = ''
 $repos_base   = ''
+$http_user    = ''
+$http_pass    = ''
 $svn_owner    = 'root'
 $svn_group    = 'root'
 $use_groupid  = true
@@ -138,6 +144,8 @@ begin
     when '--group';          $svn_group    = arg.dup; $use_groupid = false;
     when '--url';            $svn_url      = arg.dup
     when '--scm';            $scm          = arg.dup.capitalize; log("Invalid SCM: #{$scm}", :exit => true) unless SUPPORTED_SCM.include?($scm)
+    when '--http-user';      $http_user    = arg.dup
+    when '--http-pass';      $http_pass    = arg.dup
     when '--command';        $command =      arg.dup
     when '--verbose';        $verbose += 1
     when '--test';           $test = true
@@ -188,6 +196,8 @@ $redmine_host.gsub!(/^/, "http://") unless $redmine_host.match("^https?://")
 $redmine_host.gsub!(/\/$/, '')
 
 Project.site = "#{$redmine_host}/sys";
+Project.user = $http_user;
+Project.password = $http_pass;
 
 begin
   # Get all active projects that have the Repository module enabled
