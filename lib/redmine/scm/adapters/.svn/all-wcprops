@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 49
-/svn/!svn/ver/3800/trunk/lib/redmine/scm/adapters
+/svn/!svn/ver/3925/trunk/lib/redmine/scm/adapters
 END
 subversion_adapter.rb
 K 25
@@ -25,7 +25,7 @@ git_adapter.rb
 K 25
 svn:wc:ra_dav:version-url
 V 64
-/svn/!svn/ver/3531/trunk/lib/redmine/scm/adapters/git_adapter.rb
+/svn/!svn/ver/3925/trunk/lib/redmine/scm/adapters/git_adapter.rb
 END
 mercurial_adapter.rb
 K 25

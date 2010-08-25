@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 40
-/svn/!svn/ver/3889/trunk/app/views/admin
+/svn/!svn/ver/3924/trunk/app/views/admin
 END
 info.rhtml
 K 25
@@ -19,7 +19,7 @@ _menu.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/3889/trunk/app/views/admin/_menu.rhtml
+/svn/!svn/ver/3909/trunk/app/views/admin/_menu.rhtml
 END
 _no_data.rhtml
 K 25
@@ -37,5 +37,5 @@ projects.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/3621/trunk/app/views/admin/projects.rhtml
+/svn/!svn/ver/3924/trunk/app/views/admin/projects.rhtml
 END

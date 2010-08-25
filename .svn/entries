@@ -1,15 +1,15 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk
 http://redmine.rubyforge.org/svn
 
 
 
-2010-07-25T12:56:57.556116Z
-3891
-jplang
+2010-08-25T14:59:16.537407Z
+4040
+edavis10
 has-props
 
 
@@ -69,9 +69,6 @@ jplang
 
 307
 
-extra
-dir
-
 README.rdoc
 file
 
@@ -106,6 +103,9 @@ edavis10
 
 208
 
+extra
+dir
+
 db
 dir
 
@@ -119,6 +119,12 @@ files
 dir
 
 script
+dir
+
+doc
+dir
+
+config
 dir
 
 .gitignore
@@ -154,12 +160,6 @@ edavis10
 
 
 322
-
-config
-dir
-
-doc
-dir
 
 lib
 dir

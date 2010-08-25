@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/3809/trunk/public/javascripts/jstoolbar/lang
+/svn/!svn/ver/4003/trunk/public/javascripts/jstoolbar/lang
 END
 jstoolbar-mk.js
 K 25
@@ -57,6 +57,12 @@ svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/1479/trunk/public/javascripts/jstoolbar/lang/jstoolbar-uk.js
 END
+jstoolbar-sr-yu.js
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/!svn/ver/4003/trunk/public/javascripts/jstoolbar/lang/jstoolbar-sr-yu.js
+END
 jstoolbar-ro.js
 K 25
 svn:wc:ra_dav:version-url
@@ -93,11 +99,11 @@ svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/1479/trunk/public/javascripts/jstoolbar/lang/jstoolbar-fr.js
 END
-jstoolbar-nl.js
+jstoolbar-zh-tw.js
 K 25
 svn:wc:ra_dav:version-url
-V 74
-/svn/!svn/ver/2291/trunk/public/javascripts/jstoolbar/lang/jstoolbar-nl.js
+V 77
+/svn/!svn/ver/1498/trunk/public/javascripts/jstoolbar/lang/jstoolbar-zh-tw.js
 END
 jstoolbar-hr.js
 K 25
@@ -105,11 +111,11 @@ svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/3320/trunk/public/javascripts/jstoolbar/lang/jstoolbar-hr.js
 END
-jstoolbar-zh-tw.js
+jstoolbar-nl.js
 K 25
 svn:wc:ra_dav:version-url
-V 77
-/svn/!svn/ver/1498/trunk/public/javascripts/jstoolbar/lang/jstoolbar-zh-tw.js
+V 74
+/svn/!svn/ver/2291/trunk/public/javascripts/jstoolbar/lang/jstoolbar-nl.js
 END
 jstoolbar-mn.js
 K 25
@@ -117,23 +123,23 @@ svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/3626/trunk/public/javascripts/jstoolbar/lang/jstoolbar-mn.js
 END
-jstoolbar-pl.js
-K 25
-svn:wc:ra_dav:version-url
-V 74
-/svn/!svn/ver/1928/trunk/public/javascripts/jstoolbar/lang/jstoolbar-pl.js
-END
 jstoolbar-th.js
 K 25
 svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/1479/trunk/public/javascripts/jstoolbar/lang/jstoolbar-th.js
 END
+jstoolbar-pl.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/1928/trunk/public/javascripts/jstoolbar/lang/jstoolbar-pl.js
+END
 jstoolbar-it.js
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/!svn/ver/2063/trunk/public/javascripts/jstoolbar/lang/jstoolbar-it.js
+/svn/!svn/ver/4003/trunk/public/javascripts/jstoolbar/lang/jstoolbar-it.js
 END
 jstoolbar-sl.js
 K 25
@@ -147,23 +153,17 @@ svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/1479/trunk/public/javascripts/jstoolbar/lang/jstoolbar-lt.js
 END
-jstoolbar-lv.js
-K 25
-svn:wc:ra_dav:version-url
-V 74
-/svn/!svn/ver/3737/trunk/public/javascripts/jstoolbar/lang/jstoolbar-lv.js
-END
 jstoolbar-zh.js
 K 25
 svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/1498/trunk/public/javascripts/jstoolbar/lang/jstoolbar-zh.js
 END
-jstoolbar-pt.js
+jstoolbar-lv.js
 K 25
 svn:wc:ra_dav:version-url
 V 74
-/svn/!svn/ver/1927/trunk/public/javascripts/jstoolbar/lang/jstoolbar-pt.js
+/svn/!svn/ver/3737/trunk/public/javascripts/jstoolbar/lang/jstoolbar-lv.js
 END
 jstoolbar-ca.js
 K 25
@@ -171,11 +171,17 @@ svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/1865/trunk/public/javascripts/jstoolbar/lang/jstoolbar-ca.js
 END
-jstoolbar-pt-br.js
+jstoolbar-pt.js
 K 25
 svn:wc:ra_dav:version-url
-V 77
-/svn/!svn/ver/1479/trunk/public/javascripts/jstoolbar/lang/jstoolbar-pt-br.js
+V 74
+/svn/!svn/ver/1927/trunk/public/javascripts/jstoolbar/lang/jstoolbar-pt.js
+END
+jstoolbar-sr.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/4003/trunk/public/javascripts/jstoolbar/lang/jstoolbar-sr.js
 END
 jstoolbar-da.js
 K 25
@@ -183,11 +189,11 @@ svn:wc:ra_dav:version-url
 V 74
 /svn/!svn/ver/2921/trunk/public/javascripts/jstoolbar/lang/jstoolbar-da.js
 END
-jstoolbar-sr.js
+jstoolbar-pt-br.js
 K 25
 svn:wc:ra_dav:version-url
-V 74
-/svn/!svn/ver/3738/trunk/public/javascripts/jstoolbar/lang/jstoolbar-sr.js
+V 77
+/svn/!svn/ver/1479/trunk/public/javascripts/jstoolbar/lang/jstoolbar-pt-br.js
 END
 jstoolbar-tr.js
 K 25

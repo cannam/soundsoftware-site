@@ -1,15 +1,15 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine/scm/adapters
 http://redmine.rubyforge.org/svn
 
 
 
-2010-07-06T02:07:46.557097Z
-3828
-edavis10
+2010-08-08T07:07:30.284069Z
+3925
+jbbarth
 
 
 
@@ -66,11 +66,11 @@ file
 
 
 
-2010-07-23T14:49:43.454496Z
-5a0a5706ffc5950bbec41f5bd65c0475
-2010-07-06T02:07:46.557097Z
-3828
-edavis10
+2010-08-25T15:27:52.338587Z
+2a16f983128223e9db99adc3f1fffa75
+2010-08-08T07:07:30.284069Z
+3925
+jbbarth
 has-props
 
 
@@ -92,7 +92,7 @@ has-props
 
 
 
-1347
+1472
 
 mercurial_adapter_test.rb
 file

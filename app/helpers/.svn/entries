@@ -1,14 +1,14 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/app/helpers
 http://redmine.rubyforge.org/svn
 
 
 
-2010-06-30T03:32:18.366274Z
-3824
+2010-08-22T19:12:21.015911Z
+4014
 edavis10
 
 
@@ -270,11 +270,11 @@ file
 
 
 
-2010-07-23T14:49:44.280140Z
-9608643e867e9efd13e8cbe7176c11fc
-2010-06-30T03:32:18.366274Z
-3824
-edavis10
+2010-08-25T15:27:52.882610Z
+19efbd2b30f44f233d5140437e2707a0
+2010-08-08T07:07:20.961363Z
+3924
+jbbarth
 has-props
 
 
@@ -296,7 +296,7 @@ has-props
 
 
 
-5259
+5204
 
 account_helper.rb
 file
@@ -474,10 +474,10 @@ file
 
 
 
-2010-07-23T14:49:44.284157Z
-f455841740387236808e8d7dac18fa5a
-2010-05-26T22:48:35.495227Z
-3757
+2010-08-25T15:27:52.886524Z
+cee3b3c259a71a111285bdf4e756af29
+2010-08-19T03:43:33.818285Z
+3952
 edavis10
 has-props
 
@@ -500,7 +500,7 @@ has-props
 
 
 
-10621
+10746
 
 queries_helper.rb
 file
@@ -508,11 +508,11 @@ file
 
 
 
-2010-07-23T14:49:44.284157Z
-c2a3a5fb10d8ac25ead2f2b3024e60cb
-2010-04-27T15:28:52.371582Z
-3691
-edavis10
+2010-08-25T15:27:52.886524Z
+403463e02373d20faf0ed8988cfae033
+2010-08-08T07:07:20.961363Z
+3924
+jbbarth
 has-props
 
 
@@ -534,7 +534,7 @@ has-props
 
 
 
-3841
+3785
 
 mail_handler_helper.rb
 file
@@ -706,6 +706,40 @@ has-props
 
 817
 
+journals_helper.rb
+file
+
+
+
+
+2010-08-25T15:27:52.886524Z
+b64edde44bceed7fb0911f87dba971aa
+2010-08-16T16:25:04.741303Z
+3941
+edavis10
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2266
+
 workflows_helper.rb
 file
 
@@ -739,40 +773,6 @@ has-props
 
 
 824
-
-journals_helper.rb
-file
-
-
-
-
-2010-07-23T14:49:44.284157Z
-82a2cae51bde677e659b2951289bc851
-2010-03-16T21:37:05.357843Z
-3594
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2266
 
 reports_helper.rb
 file
@@ -808,17 +808,17 @@ has-props
 
 1265
 
-custom_fields_helper.rb
+timelog_helper.rb
 file
 
 
 
 
 2010-07-23T14:49:44.284157Z
-97753365c8eb76a948d7417d5db31079
-2010-04-16T15:34:05.970144Z
-3675
-edavis10
+1888fd2d4a1be5fa0d6ad8a63238e2b4
+2010-04-30T12:18:11.536180Z
+3708
+jplang
 has-props
 
 
@@ -840,7 +840,7 @@ has-props
 
 
 
-5322
+6636
 
 settings_helper.rb
 file
@@ -876,17 +876,17 @@ has-props
 
 3350
 
-timelog_helper.rb
+custom_fields_helper.rb
 file
 
 
 
 
 2010-07-23T14:49:44.284157Z
-1888fd2d4a1be5fa0d6ad8a63238e2b4
-2010-04-30T12:18:11.536180Z
-3708
-jplang
+97753365c8eb76a948d7417d5db31079
+2010-04-16T15:34:05.970144Z
+3675
+edavis10
 has-props
 
 
@@ -908,7 +908,7 @@ has-props
 
 
 
-6636
+5322
 
 users_helper.rb
 file
@@ -944,17 +944,51 @@ has-props
 
 2645
 
+issue_moves_helper.rb
+file
+
+
+
+
+2010-08-25T15:27:52.886524Z
+66e99bd3af036c92a773a91e92a725f9
+2010-08-11T14:42:10.119704Z
+3936
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+28
+
 application_helper.rb
 file
 
 
 
 
-2010-07-23T14:49:44.288130Z
-9c99e579991377ee9facd9ca51b7bc14
-2010-03-18T20:02:17.358992Z
-3602
-jplang
+2010-08-25T15:27:52.886524Z
+93af3e244c658ab28a4da65322eba7ac
+2010-08-22T19:12:21.015911Z
+4014
+edavis10
 has-props
 
 
@@ -976,7 +1010,7 @@ has-props
 
 
 
-31219
+32211
 
 auth_sources_helper.rb
 file

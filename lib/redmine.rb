@@ -58,25 +58,25 @@ Redmine::AccessControl.map do |map|
     map.permission :manage_categories, {:projects => :settings, :issue_categories => [:new, :edit, :destroy]}, :require => :member
     # Issues
     map.permission :view_issues, {:projects => :roadmap, 
-                                  :issues => [:index, :changes, :show, :context_menu, :auto_complete],
+                                  :issues => [:index, :show],
+                                  :auto_complete => [:issues],
+                                  :context_menus => [:issues],
                                   :versions => [:show, :status_by],
+                                  :journals => :index,
                                   :queries => :index,
                                   :reports => [:issue_report, :issue_report_details]}
     map.permission :add_issues, {:issues => [:new, :create, :update_form]}
-    map.permission :edit_issues, {:issues => [:edit, :update, :reply, :bulk_edit, :update_form]}
+    map.permission :edit_issues, {:issues => [:edit, :update, :bulk_edit, :bulk_update, :update_form], :journals => [:new]}
     map.permission :manage_issue_relations, {:issue_relations => [:new, :destroy]}
     map.permission :manage_subtasks, {}
-    map.permission :add_issue_notes, {:issues => [:edit, :update, :reply]}
+    map.permission :add_issue_notes, {:issues => [:edit, :update], :journals => [:new]}
     map.permission :edit_issue_notes, {:journals => :edit}, :require => :loggedin
     map.permission :edit_own_issue_notes, {:journals => :edit}, :require => :loggedin
-    map.permission :move_issues, {:issues => :move}, :require => :loggedin
+    map.permission :move_issues, {:issue_moves => [:new, :create]}, :require => :loggedin
     map.permission :delete_issues, {:issues => :destroy}, :require => :member
     # Queries
     map.permission :manage_public_queries, {:queries => [:new, :edit, :destroy]}, :require => :member
     map.permission :save_queries, {:queries => [:new, :edit, :destroy]}, :require => :loggedin
-    # Gantt & calendar
-    map.permission :view_gantt, :gantts => :show
-    map.permission :view_calendar, :calendars => :show
     # Watchers
     map.permission :view_issue_watchers, {}
     map.permission :add_issue_watchers, {:watchers => :new}
@@ -135,6 +135,14 @@ Redmine::AccessControl.map do |map|
     map.permission :delete_messages, {:messages => :destroy}, :require => :member
     map.permission :delete_own_messages, {:messages => :destroy}, :require => :loggedin
   end
+
+  map.project_module :calendar do |map|
+    map.permission :view_calendar, :calendars => :show
+  end
+
+  map.project_module :gantt do |map|
+    map.permission :view_gantt, :gantts => :show
+  end
 end
 
 Redmine::MenuManager.map :top_menu do |menu|
@@ -157,7 +165,22 @@ Redmine::MenuManager.map :application_menu do |menu|
 end
 
 Redmine::MenuManager.map :admin_menu do |menu|
-  # Empty
+  menu.push :projects, {:controller => 'admin', :action => 'projects'}, :caption => :label_project_plural
+  menu.push :users, {:controller => 'users'}, :caption => :label_user_plural
+  menu.push :groups, {:controller => 'groups'}, :caption => :label_group_plural
+  menu.push :roles, {:controller => 'roles'}, :caption => :label_role_and_permissions
+  menu.push :trackers, {:controller => 'trackers'}, :caption => :label_tracker_plural
+  menu.push :issue_statuses, {:controller => 'issue_statuses'}, :caption => :label_issue_status_plural,
+            :html => {:class => 'issue_statuses'}
+  menu.push :workflows, {:controller => 'workflows', :action => 'edit'}, :caption => :label_workflow
+  menu.push :custom_fields, {:controller => 'custom_fields'},  :caption => :label_custom_field_plural,
+            :html => {:class => 'custom_fields'}
+  menu.push :enumerations, {:controller => 'enumerations'}
+  menu.push :settings, {:controller => 'settings'}
+  menu.push :ldap_authentication, {:controller => 'ldap_auth_sources', :action => 'index'},
+            :html => {:class => 'server_authentication'}
+  menu.push :plugins, {:controller => 'admin', :action => 'plugins'}, :last => true
+  menu.push :info, {:controller => 'admin', :action => 'info'}, :caption => :label_information_plural, :last => true
 end
 
 Redmine::MenuManager.map :project_menu do |menu|
@@ -168,6 +191,8 @@ Redmine::MenuManager.map :project_menu do |menu|
   menu.push :issues, { :controller => 'issues', :action => 'index' }, :param => :project_id, :caption => :label_issue_plural
   menu.push :new_issue, { :controller => 'issues', :action => 'new' }, :param => :project_id, :caption => :label_issue_new,
               :html => { :accesskey => Redmine::AccessKeys.key_for(:new_issue) }
+  menu.push :gantt, { :controller => 'gantts', :action => 'show' }, :param => :project_id, :caption => :label_gantt
+  menu.push :calendar, { :controller => 'calendars', :action => 'show' }, :param => :project_id, :caption => :label_calendar
   menu.push :news, { :controller => 'news', :action => 'index' }, :param => :project_id, :caption => :label_news_plural
   menu.push :documents, { :controller => 'documents', :action => 'index' }, :param => :project_id, :caption => :label_document_plural
   menu.push :wiki, { :controller => 'wiki', :action => 'index', :page => nil }, 

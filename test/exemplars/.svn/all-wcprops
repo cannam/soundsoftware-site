@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/!svn/ver/3773/trunk/test/exemplars
+/svn/!svn/ver/4010/trunk/test/exemplars
 END
 message_exemplar.rb
 K 25
@@ -31,7 +31,7 @@ attachment_exemplar.rb
 K 25
 svn:wc:ra_dav:version-url
 V 62
-/svn/!svn/ver/3773/trunk/test/exemplars/attachment_exemplar.rb
+/svn/!svn/ver/4010/trunk/test/exemplars/attachment_exemplar.rb
 END
 issue_priority_exemplar.rb
 K 25
@@ -135,23 +135,17 @@ svn:wc:ra_dav:version-url
 V 57
 /svn/!svn/ver/3340/trunk/test/exemplars/board_exemplar.rb
 END
-member_role_exemplar.rb
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/!svn/ver/3340/trunk/test/exemplars/member_role_exemplar.rb
-END
 issue_exemplar.rb
 K 25
 svn:wc:ra_dav:version-url
 V 57
 /svn/!svn/ver/3398/trunk/test/exemplars/issue_exemplar.rb
 END
-tracker_exemplar.rb
+member_role_exemplar.rb
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/2930/trunk/test/exemplars/tracker_exemplar.rb
+V 63
+/svn/!svn/ver/3340/trunk/test/exemplars/member_role_exemplar.rb
 END
 issue_status_exemplar.rb
 K 25
@@ -159,11 +153,11 @@ svn:wc:ra_dav:version-url
 V 64
 /svn/!svn/ver/2930/trunk/test/exemplars/issue_status_exemplar.rb
 END
-time_entry_activity.rb
+tracker_exemplar.rb
 K 25
 svn:wc:ra_dav:version-url
-V 62
-/svn/!svn/ver/2930/trunk/test/exemplars/time_entry_activity.rb
+V 59
+/svn/!svn/ver/2930/trunk/test/exemplars/tracker_exemplar.rb
 END
 subversion_repository_exemplar.rb
 K 25
@@ -171,17 +165,23 @@ svn:wc:ra_dav:version-url
 V 73
 /svn/!svn/ver/3340/trunk/test/exemplars/subversion_repository_exemplar.rb
 END
-role_exemplar.rb
+time_entry_activity.rb
 K 25
 svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/2930/trunk/test/exemplars/role_exemplar.rb
+V 62
+/svn/!svn/ver/2930/trunk/test/exemplars/time_entry_activity.rb
 END
 changeset_exemplar.rb
 K 25
 svn:wc:ra_dav:version-url
 V 61
 /svn/!svn/ver/3340/trunk/test/exemplars/changeset_exemplar.rb
+END
+role_exemplar.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/2930/trunk/test/exemplars/role_exemplar.rb
 END
 comment_exemplar.rb
 K 25

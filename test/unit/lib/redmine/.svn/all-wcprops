@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3828/trunk/test/unit/lib/redmine
+/svn/!svn/ver/3926/trunk/test/unit/lib/redmine
 END
 menu_manager_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 67
-/svn/!svn/ver/3091/trunk/test/unit/lib/redmine/menu_manager_test.rb
+/svn/!svn/ver/3926/trunk/test/unit/lib/redmine/menu_manager_test.rb
 END
 plugin_test.rb
 K 25

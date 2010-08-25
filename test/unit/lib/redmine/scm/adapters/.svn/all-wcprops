@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/3828/trunk/test/unit/lib/redmine/scm/adapters
+/svn/!svn/ver/3925/trunk/test/unit/lib/redmine/scm/adapters
 END
 subversion_adapter_test.rb
 K 25
@@ -13,7 +13,7 @@ git_adapter_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/!svn/ver/3828/trunk/test/unit/lib/redmine/scm/adapters/git_adapter_test.rb
+/svn/!svn/ver/3925/trunk/test/unit/lib/redmine/scm/adapters/git_adapter_test.rb
 END
 mercurial_adapter_test.rb
 K 25
