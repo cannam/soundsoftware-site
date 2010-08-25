@@ -1,15 +1,15 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/open_id_authentication/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2009-03-04T17:37:28.669176Z
-2551
-jplang
+2010-08-10T21:12:32.103531Z
+3933
+jbbarth
 
 
 
@@ -35,11 +35,11 @@ file
 
 
 
-2010-07-23T14:49:46.964096Z
-16be8a96eebaa10d90dc12e73f8f8724
-2009-03-04T17:37:28.669176Z
-2551
-jplang
+2010-08-25T15:27:56.758589Z
+c72f1bd48e8c2dfe4e84ba232fc40030
+2010-08-10T21:12:32.103531Z
+3933
+jbbarth
 
 
 
@@ -61,5 +61,5 @@ jplang
 
 
 
-8106
+8119
 

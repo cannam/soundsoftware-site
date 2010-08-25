@@ -1,15 +1,15 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/app/views/news
 http://redmine.rubyforge.org/svn
 
 
 
-2010-02-14T11:49:29.679515Z
-3425
-jplang
+2010-08-08T07:07:20.961363Z
+3924
+jbbarth
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-07-23T14:49:45.180146Z
-ea22f8d55d287a3fce8ebead283b1842
-2009-02-21T11:04:50.579477Z
-2493
-jplang
+2010-08-25T15:27:56.353675Z
+8a95983c16121228642f685334a98b43
+2010-08-08T07:07:20.961363Z
+3924
+jbbarth
 has-props
 
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-489
+422
 
 show.rhtml
 file
@@ -168,11 +168,11 @@ file
 
 
 
-2010-07-23T14:49:45.180146Z
-4eb392b9371641ffbb78ce62154dc9d2
-2009-02-21T11:04:50.579477Z
-2493
-jplang
+2010-08-25T15:27:56.353675Z
+dc12388537796be5d0dc19bf9b68b28b
+2010-08-08T07:07:20.961363Z
+3924
+jbbarth
 has-props
 
 
@@ -194,7 +194,7 @@ has-props
 
 
 
-2289
+2222
 
 new.rhtml
 file

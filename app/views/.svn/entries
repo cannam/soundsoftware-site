@@ -1,15 +1,15 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/app/views
 http://redmine.rubyforge.org/svn
 
 
 
-2010-07-25T12:48:28.979207Z
-3889
-jplang
+2010-08-24T15:27:12.793586Z
+4037
+edavis10
 
 
 
@@ -29,6 +29,9 @@ e93f8b46-1217-0410-a6f0-8f06a7374b81
 watchers
 dir
 
+auto_completes
+dir
+
 my
 dir
 
@@ -36,6 +39,9 @@ members
 dir
 
 welcome
+dir
+
+context_menus
 dir
 
 journals
@@ -62,10 +68,16 @@ dir
 users
 dir
 
+issue_moves
+dir
+
 ldap_auth_sources
 dir
 
 auth_sources
+dir
+
+previews
 dir
 
 search
@@ -74,10 +86,10 @@ dir
 messages
 dir
 
-versions
+issue_relations
 dir
 
-issue_relations
+versions
 dir
 
 mailer
@@ -110,10 +122,10 @@ dir
 repositories
 dir
 
-common
+admin
 dir
 
-admin
+common
 dir
 
 projects

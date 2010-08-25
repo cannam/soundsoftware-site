@@ -1,14 +1,14 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/doc
 http://redmine.rubyforge.org/svn
 
 
 
-2010-07-18T16:35:37.186825Z
-3853
+2010-08-22T21:17:44.394587Z
+4029
 edavis10
 
 
@@ -168,10 +168,10 @@ file
 
 
 
-2010-07-23T14:49:47.348092Z
-6089ca70b6a9ffa9efd05b1997c4d772
-2010-07-18T16:35:37.186825Z
-3853
+2010-08-25T15:27:58.014444Z
+0310fe2cda3332d05e3275320e73407f
+2010-08-22T21:17:44.394587Z
+4029
 edavis10
 has-props
 
@@ -194,7 +194,7 @@ has-props
 
 
 
-69337
+73025
 
 COPYING
 file

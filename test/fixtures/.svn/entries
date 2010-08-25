@@ -1,14 +1,14 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/test/fixtures
 http://redmine.rubyforge.org/svn
 
 
 
-2010-07-06T02:07:46.557097Z
-3828
+2010-08-22T18:42:00.112555Z
+4013
 edavis10
 
 
@@ -616,8 +616,39 @@ has-props
 
 377
 
-mailer
-dir
+custom_fields_projects.yml
+file
+
+
+
+
+2010-07-23T14:49:44.212098Z
+c6789a99aba9f28cf1d31a36b36224c8
+2010-01-03T11:18:09.741250Z
+3278
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+71
 
 enumerations.yml
 file
@@ -653,73 +684,8 @@ has-props
 
 1391
 
-custom_fields_projects.yml
-file
-
-
-
-
-2010-07-23T14:49:44.212098Z
-c6789a99aba9f28cf1d31a36b36224c8
-2010-01-03T11:18:09.741250Z
-3278
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-71
-
-issues.yml
-file
-
-
-
-
-2010-07-23T14:49:44.212098Z
-5c4431f5ee0ecd68c45712b87da9ca3e
-2010-04-11T16:27:37.584909Z
-3663
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5644
+mailer
+dir
 
 member_roles.yml
 file
@@ -755,6 +721,40 @@ has-props
 
 692
 
+issues.yml
+file
+
+
+
+
+2010-07-23T14:49:44.212098Z
+5c4431f5ee0ecd68c45712b87da9ca3e
+2010-04-11T16:27:37.584909Z
+3663
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5644
+
 queries.yml
 file
 
@@ -788,40 +788,6 @@ has-props
 
 
 2345
-
-wiki_contents.yml
-file
-
-
-
-
-2010-07-23T14:49:44.212098Z
-8e7549cddb3ed2eb4c5778e3506e3e0c
-2010-02-11T19:30:53.136370Z
-3412
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1795
 
 watchers.yml
 file
@@ -857,16 +823,16 @@ has-props
 
 219
 
-enabled_modules.yml
+wiki_contents.yml
 file
 
 
 
 
-2010-07-23T14:49:44.216162Z
-166f11232c08407ea2ff03a80f3c16bb
-2009-12-13T12:39:22.716082Z
-3167
+2010-07-23T14:49:44.212098Z
+8e7549cddb3ed2eb4c5778e3506e3e0c
+2010-02-11T19:30:53.136370Z
+3412
 jplang
 has-props
 
@@ -889,7 +855,7 @@ has-props
 
 
 
-1036
+1795
 
 wiki_pages.yml
 file
@@ -924,6 +890,40 @@ has-props
 
 
 1227
+
+enabled_modules.yml
+file
+
+
+
+
+2010-08-25T15:27:52.806619Z
+8a815e166641ad170ffddcf33646ca04
+2010-08-22T18:42:00.112555Z
+4013
+edavis10
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1539
 
 comments.yml
 file

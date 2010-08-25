@@ -1,15 +1,15 @@
 10
 
 dir
-3892
+4040
 http://redmine.rubyforge.org/svn/trunk/config
 http://redmine.rubyforge.org/svn
 
 
 
-2010-07-25T09:54:59.897294Z
-3875
-jplang
+2010-08-24T16:15:14.958943Z
+4039
+winterheart
 has-props
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-07-23T14:49:47.340126Z
-ad994913160a0e984ef664152afaf160
-2010-02-06T10:40:21.867545Z
-3372
-jplang
+2010-08-25T15:27:57.822497Z
+a95b266d8b929a282cfb7bcc8441227b
+2010-08-22T18:42:00.112555Z
+4013
+edavis10
 has-props
 
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-3997
+4020
 
 email.yml.example
 file
@@ -103,10 +103,10 @@ file
 
 
 
-2010-07-23T14:49:47.340126Z
-2dd218bee5cc964759dc57c013122f82
-2010-05-03T16:02:37.599964Z
-3732
+2010-08-25T15:27:57.822497Z
+fa4caa1d35eca98d10e2937f11ec677b
+2010-08-24T15:27:12.793586Z
+4037
 edavis10
 has-props
 
@@ -129,7 +129,7 @@ has-props
 
 
 
-17394
+17937
 
 boot.rb
 file

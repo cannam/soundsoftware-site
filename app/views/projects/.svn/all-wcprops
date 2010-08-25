@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/3802/trunk/app/views/projects
+/svn/!svn/ver/4009/trunk/app/views/projects
 END
 activity.rhtml
 K 25
@@ -25,7 +25,7 @@ _form.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/3336/trunk/app/views/projects/_form.rhtml
+/svn/!svn/ver/3910/trunk/app/views/projects/_form.rhtml
 END
 index.xml.builder
 K 25
@@ -55,7 +55,7 @@ show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/3732/trunk/app/views/projects/show.rhtml
+/svn/!svn/ver/4009/trunk/app/views/projects/show.rhtml
 END
 roadmap.rhtml
 K 25
@@ -74,6 +74,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 62
 /svn/!svn/ver/2990/trunk/app/views/projects/list_members.rhtml
+END
+_members_box.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4009/trunk/app/views/projects/_members_box.html.erb
 END
 add_file.rhtml
 K 25
