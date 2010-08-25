@@ -338,6 +338,9 @@ sub get_project_identifier {
 
     my $location = $r->location;
     my ($repo) = $r->uri =~ m{$location/*([^/]+)};
+
+    return $repo if (!$repo);
+
     $repo =~ s/[^a-zA-Z0-9\._-]//g;
 
     # The original Redmine.pm returns the string just calculated as
