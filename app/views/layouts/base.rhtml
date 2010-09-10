@@ -31,7 +31,7 @@
     <%= render_menu :top_menu -%>
 </div>
       
-<div id="header">
+<%= tag('div', {:id => 'header', :class => (display_main_menu?(@project) ? 'header-project' : 'header-general')}, true) %>
     <div id="quick-search">
         <% form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
         <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
@@ -42,7 +42,7 @@
     </div>
     
     <h1><%= page_header_title %></h1>
-    
+
     <% if display_main_menu?(@project) %>
     <div id="main-menu">
         <%= render_main_menu(@project) %>
