@@ -1,9 +1,28 @@
 @import url(../../../stylesheets/application.css);
 @import url(fonts.css);
 
+/* Colours:
+
+   #be5700 link (orange)
+
+   #3e442c text (dark green)
+   (OK for headings, but small text is easier to read in black)
+
+   #ffa801 logo (yellow)
+
+   #525a38 logotype (olive)
+
+   #fdfaf0 background (cream)
+
+   #fdfbf5 alternate background (lighter cream)
+
+   #ffe69b highlight (light yellow)
+
+   #a9b680 detail (light green)
+*/
+
 body {
-  background: #fdfaf0;
-/*  color: #3e442c; */
+  background: #fdfbf5;
   color: #000;
   margin: 0;
   margin-bottom: 40px;
@@ -11,11 +30,11 @@ body {
 }
 
 body,p,h2,h3,h4,li,table { 
-  font-family: LiberationSans, Droid, tahoma, verdana, sans-serif;
-/*  line-height: 1.2em; */
+  font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; */
 }
 
 h1 {
+  color: #3e442c;
   font-family: GilliusADFNo2, 'Gill Sans', Tahoma, sans-serif;
   font-weight: normal;
 }    
@@ -24,55 +43,59 @@ h2,h3,h4 {
   color: #3e442c;
 }
 
-h2 { font-size: 2em; }
+h2 { font-size: 1.8em; }
 
 .box{
-padding: 6px;
-margin-bottom: 10px;
-background-color: #fdfbf5;
-color: #3e442c;
-line-height: 1.5em;
-border: 1px solid #be5700;
+    padding: 6px;
+    margin-bottom: 10px;
+    background-color: #fdfaf0;
+    color: #3e442c;
+    line-height: 1.5em;
+    border: 1px solid #a9b680;
 }
 
 .odd {background-color:#fdf7e4;}
-.even {background-color: #fdfbf5;}
+.even {background-color: #fdfaf0;}
 
 #content .tabs { margin-bottom: 0; }
 
-table.list th {  background-color: #fdfbf5; }
+table.list th {  background-color: #fdfaf0; }
 
-#top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 90%; /* height: 2em; */ margin: 0; padding: 0; padding-top: 0.5em; background-color: #be5700; }
+#top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 90%; /* height: 2em; */ margin: 0; padding: 0; padding-top: 0.5em; background-color: #3e442c; }
+#top-menu ul { margin-left: 10px; }
 #top-menu a { font-weight: bold; }
-#header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #fdfaf0; /* border-bottom: 2px solid #be5700; height:80px; */ padding: 10px 0 0 0; margin-bottom: 0; }
+#header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #fdfbf5; border-bottom: 2px solid #a9b680; /* height:80px; */ padding: 20px 0 0.5em 0; margin-bottom: 0; }
 #header a { color: #be5700; }
-#header h1 { color: #525a38; margin-top: 30px; font-size: 3em; font-weight: normal; margin-left: 0.3em; }
+#header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
 .header-general h1 {
   background: url('soundsoftware-logo-title-only.png') no-repeat 0 0;
   text-indent: -9999px;
   width: 446px;
   height: 34px;
  }
-#quick-search { margin-right: 6px; margin-top: 2em; color: #000; }
-#main-menu { position: absolute; top: 90px; background-color: #be5700; left: 0; border-top: 0; width: 100%; height: 1.82em; padding: 0; margin: 0; border: 0; }
+#quick-search { margin-right: 6px; margin-top: 1em; color: #000; }
+#main-menu { position: absolute; top: 100px; /* background-color: #be5700; */ left: 0; border-top: 0; width: 100%;/* height: 1.82em; */ padding: 0; margin: 0; border: 0; }
 #main-menu li { margin: 0; padding: 0; padding-top: 1px; }
-#main-menu li a { background-color: #be5700; border-right: 1px solid #fff; font-size: 90%; padding: 0.4em 8px 0.4em 8px; font-weight: bold; }
-#main-menu li a:hover { background-color: #3e442c; color: #ffffff; }
-#main-menu li a.selected, #main-menu li a.selected:hover { background-color: #3e442c; color: #ffffff; }
+#main-menu li a { background-color: #fdfbf5; color: #be5700; border-right: 1px solid #a9b680; font-size: 97%; padding: 0.2em 8px 0.2em 10px; font-weight: normal; }
+#main-menu li:last-child a { border-right: 0; }
+#main-menu li a:hover { background-color: #fdfbf5; color: #be5700; text-decoration: underline; }
+#main-menu li a.selected, #main-menu li a.selected:hover { background-color: #fdfbf5; color: #3e442c; }
 
-#footer { background-color: #be5700; border: 0; color: #fff;}
-#footer a { color: #fff; font-weight: bold; }
+#footer { background-color: #fdfbf5; border: 0; border-top: 2px solid #a9b680; color: #3e442c; text-align: right; }
+#footer a { color: #be5700; font-weight: bold; }
 
-#main { margin-top: 135px; font:95%; background: #fdfbf5; }
+#main { margin-top: 135px; font:95%; background: #fdfaf0; }
 #main a { font-weight: medium; color: #be5700;}
 #main a:hover { color: #be5700; text-decoration: underline; }
-#content { background: #fdfaf0; }
+#content { background: #fdfbf5; }
 /*#content .tabs ul { bottom:-1px; }
 */
 h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 { border-bottom: 0px; }
 /*h2, .wiki h1 { letter-spacing:-1px; }
 */
 h4 { border-bottom: dotted 1px #c0c0c0; }
+
+div.issue {background:#fdfaf0;}
 
 #top-menu a.home, #top-menu a.my-page, #top-menu a.projects, #top-menu a.administration, #top-menu a.help { 
     background-position: 0% 40%;
