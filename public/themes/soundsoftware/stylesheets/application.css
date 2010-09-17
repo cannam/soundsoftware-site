@@ -29,29 +29,32 @@ body {
 /*  font-size: 95%;  */
 }
 
-body,p,h2,h3,h4,li,table { 
-  font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; */
-}
-
 h1 {
   color: #3e442c;
   font-family: GilliusADFNo2, 'Gill Sans', Tahoma, sans-serif;
   font-weight: normal;
 }    
 
-h2,h3,h4 {
+body,p,h2,h3,h4,li,table,.wiki h1 { 
+  font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; */
+}
+
+h2,h3,h4,.wiki h1 {
   color: #3e442c;
 }
 
-h2 { font-size: 1.8em; }
+h2,.wiki h1 {
+    font-size: 1.8em;
+}
 
-.box{
+.box {
     padding: 6px;
     margin-bottom: 10px;
     background-color: #fdfaf0;
     color: #3e442c;
     line-height: 1.5em;
     border: 1px solid #a9b680;
+    border-left: 4px solid #a9b680;
 }
 
 .odd {background-color:#fdf7e4;}
@@ -59,7 +62,10 @@ h2 { font-size: 1.8em; }
 
 #content .tabs { margin-bottom: 0; }
 
-table.list th {  background-color: #fdfaf0; }
+table.list th {  background-color: #fdfaf0; border-bottom: 1px solid #a9b680; }
+table.list { border: 1px solid #a9b680; /* border-left: 4px solid #a9b680; */ }
+tr.entry { border-left: 1px solid #a9b680; border-right: 1px solid #a9b680; }
+tr.entry:last-child { border-bottom: 1px solid #a9b680; }
 
 #top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 90%; /* height: 2em; */ margin: 0; padding: 0; padding-top: 0.5em; background-color: #3e442c; }
 #top-menu ul { margin-left: 10px; }
@@ -68,15 +74,15 @@ table.list th {  background-color: #fdfaf0; }
 #header a { color: #be5700; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
 .header-general h1 {
-  background: url('soundsoftware-logo-title-only.png') no-repeat 0 0;
+  background: url('soundsoftware-logo-title-only-transparent.png') no-repeat 0 0;
   text-indent: -9999px;
   width: 446px;
   height: 34px;
  }
 #quick-search { margin-right: 6px; margin-top: 1em; color: #000; }
 #main-menu { position: absolute; top: 100px; /* background-color: #be5700; */ left: 0; border-top: 0; width: 100%;/* height: 1.82em; */ padding: 0; margin: 0; border: 0; }
-#main-menu li { margin: 0; padding: 0; padding-top: 1px; }
-#main-menu li a { background-color: #fdfbf5; color: #be5700; border-right: 1px solid #a9b680; font-size: 97%; padding: 0.2em 8px 0.2em 10px; font-weight: normal; }
+#main-menu li { margin: 0; padding: 0; }
+#main-menu li a { background-color: #fdfbf5; color: #be5700; border-right: 1px solid #a9b680; font-size: 97%; padding: 0em 8px 0.2em 10px; font-weight: normal; }
 #main-menu li:last-child a { border-right: 0; }
 #main-menu li a:hover { background-color: #fdfbf5; color: #be5700; text-decoration: underline; }
 #main-menu li a.selected, #main-menu li a.selected:hover { background-color: #fdfbf5; color: #3e442c; }
@@ -95,7 +101,7 @@ h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 { border-bottom: 0px; }
 */
 h4 { border-bottom: dotted 1px #c0c0c0; }
 
-div.issue {background:#fdfaf0;}
+div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px solid #a9b680; }
 
 #top-menu a.home, #top-menu a.my-page, #top-menu a.projects, #top-menu a.administration, #top-menu a.help { 
     background-position: 0% 40%;
