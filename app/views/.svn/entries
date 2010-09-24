@@ -1,14 +1,14 @@
 10
 
 dir
-4040
+4173
 http://redmine.rubyforge.org/svn/trunk/app/views
 http://redmine.rubyforge.org/svn
 
 
 
-2010-08-24T15:27:12.793586Z
-4037
+2010-09-23T15:20:19.085385Z
+4172
 edavis10
 
 
@@ -71,13 +71,16 @@ dir
 issue_moves
 dir
 
-ldap_auth_sources
+files
+dir
+
+previews
 dir
 
 auth_sources
 dir
 
-previews
+ldap_auth_sources
 dir
 
 search
@@ -86,10 +89,10 @@ dir
 messages
 dir
 
-issue_relations
+versions
 dir
 
-versions
+issue_relations
 dir
 
 mailer
@@ -147,6 +150,9 @@ documents
 dir
 
 wiki
+dir
+
+activities
 dir
 
 enumerations

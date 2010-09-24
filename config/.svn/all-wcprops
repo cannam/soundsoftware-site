@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 31
-/svn/!svn/ver/4039/trunk/config
+/svn/!svn/ver/4173/trunk/config
 END
 settings.yml
 K 25
@@ -19,7 +19,7 @@ routes.rb
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/4037/trunk/config/routes.rb
+/svn/!svn/ver/4172/trunk/config/routes.rb
 END
 boot.rb
 K 25
