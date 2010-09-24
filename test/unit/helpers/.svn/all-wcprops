@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 42
-/svn/!svn/ver/3936/trunk/test/unit/helpers
+/svn/!svn/ver/4072/trunk/test/unit/helpers
 END
 custom_fields_helper_test.rb
 K 25
@@ -25,7 +25,7 @@ application_helper_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 69
-/svn/!svn/ver/3924/trunk/test/unit/helpers/application_helper_test.rb
+/svn/!svn/ver/4072/trunk/test/unit/helpers/application_helper_test.rb
 END
 search_helper_test.rb
 K 25

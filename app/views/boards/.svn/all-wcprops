@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/3426/trunk/app/views/boards
+/svn/!svn/ver/4047/trunk/app/views/boards
 END
 show.rhtml
 K 25
@@ -25,7 +25,7 @@ index.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/3179/trunk/app/views/boards/index.rhtml
+/svn/!svn/ver/4047/trunk/app/views/boards/index.rhtml
 END
 new.rhtml
 K 25
