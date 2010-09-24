@@ -1,7 +1,7 @@
 10
 
 dir
-4040
+4173
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_searchable/lib
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-07-23T14:49:46.372155Z
+2010-09-23T14:37:45.551763Z
 f282f30a34a9560d7ef3d5883aba5fe9
 2010-02-17T20:20:51.097274Z
 3445

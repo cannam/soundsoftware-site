@@ -1,7 +1,7 @@
 10
 
 dir
-4040
+4173
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_versioned/lib
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-07-23T14:49:46.864095Z
+2010-09-23T14:37:45.571763Z
 474fc02132fce15712540924bb7b22cf
 2008-07-04T17:58:14.743502Z
 1623

@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 34
-/svn/!svn/ver/3948/trunk/lib/tasks
+/svn/!svn/ver/4167/trunk/lib/tasks
 END
 deprecated.rake
 K 25
@@ -25,19 +25,19 @@ reminder.rake
 K 25
 svn:wc:ra_dav:version-url
 V 48
-/svn/!svn/ver/1459/trunk/lib/tasks/reminder.rake
-END
-initializers.rake
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/3785/trunk/lib/tasks/initializers.rake
+/svn/!svn/ver/4167/trunk/lib/tasks/reminder.rake
 END
 metrics.rake
 K 25
 svn:wc:ra_dav:version-url
 V 47
 /svn/!svn/ver/2825/trunk/lib/tasks/metrics.rake
+END
+initializers.rake
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3785/trunk/lib/tasks/initializers.rake
 END
 permissions.rake
 K 25
@@ -63,17 +63,17 @@ svn:wc:ra_dav:version-url
 V 48
 /svn/!svn/ver/3167/trunk/lib/tasks/watchers.rake
 END
-yardoc.rake
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/3922/trunk/lib/tasks/yardoc.rake
-END
 plugins.rake
 K 25
 svn:wc:ra_dav:version-url
 V 47
 /svn/!svn/ver/1786/trunk/lib/tasks/plugins.rake
+END
+yardoc.rake
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/3922/trunk/lib/tasks/yardoc.rake
 END
 locales.rake
 K 25

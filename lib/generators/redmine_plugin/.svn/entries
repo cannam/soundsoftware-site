@@ -1,7 +1,7 @@
 10
 
 dir
-4040
+4173
 http://redmine.rubyforge.org/svn/trunk/lib/generators/redmine_plugin
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-07-23T14:49:47.484131Z
+2010-09-23T14:37:44.987751Z
 334056a407de9091bb8774ba986c53f9
 2009-06-10T03:39:02.884087Z
 2785
@@ -66,7 +66,7 @@ file
 
 
 
-2010-07-23T14:49:47.484131Z
+2010-09-23T14:37:44.987751Z
 be5d60ef31ac822cd5650ab976dcc543
 2009-06-10T03:39:02.884087Z
 2785

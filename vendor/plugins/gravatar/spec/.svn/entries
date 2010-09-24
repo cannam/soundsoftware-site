@@ -1,14 +1,14 @@
 10
 
 dir
-4040
+4173
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/gravatar/spec
 http://redmine.rubyforge.org/svn
 
 
 
-2008-10-30T02:58:04.259131Z
-1962
+2010-09-10T03:09:02.311267Z
+4072
 edavis10
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2010-07-23T14:49:46.928151Z
-2aaebfd60071b5f1889e3875086cbdbb
-2008-10-30T02:58:04.259131Z
-1962
+2010-09-24T12:48:29.643852Z
+26b23e5e988b11435e121bf53624d934
+2010-09-10T03:09:02.311267Z
+4072
 edavis10
 
 
@@ -58,5 +58,5 @@ edavis10
 
 
 
-942
+1177
 

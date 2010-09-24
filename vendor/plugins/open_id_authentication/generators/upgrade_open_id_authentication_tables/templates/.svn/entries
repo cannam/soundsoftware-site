@@ -1,7 +1,7 @@
 10
 
 dir
-4040
+4173
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/open_id_authentication/generators/upgrade_open_id_authentication_tables/templates
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-07-23T14:49:46.972128Z
+2010-09-23T14:37:45.831824Z
 512b6bc6321e15e12a9eb5ef10317b73
 2009-02-11T19:06:45.087605Z
 2438

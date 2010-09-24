@@ -1,7 +1,7 @@
 10
 
 dir
-4040
+4173
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_attachable
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-07-23T14:49:46.367755Z
+2010-09-23T14:37:45.535765Z
 b215588c95e69b4bb8f91ad91606bfbe
 2008-12-09T16:54:46.963649Z
 2116

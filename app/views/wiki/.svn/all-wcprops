@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/!svn/ver/3632/trunk/app/views/wiki
+/svn/!svn/ver/4092/trunk/app/views/wiki
 END
 export_multiple.rhtml
 K 25
@@ -31,13 +31,13 @@ special_page_index.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 64
-/svn/!svn/ver/3371/trunk/app/views/wiki/special_page_index.rhtml
+/svn/!svn/ver/4092/trunk/app/views/wiki/special_page_index.rhtml
 END
 special_date_index.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 64
-/svn/!svn/ver/3371/trunk/app/views/wiki/special_date_index.rhtml
+/svn/!svn/ver/4047/trunk/app/views/wiki/special_date_index.rhtml
 END
 edit.rhtml
 K 25
