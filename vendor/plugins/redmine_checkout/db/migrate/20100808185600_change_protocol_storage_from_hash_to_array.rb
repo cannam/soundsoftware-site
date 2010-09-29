@@ -15,6 +15,7 @@ class ChangeProtocolStorageFromHashToArray < ActiveRecord::Migration
   def self.up
     ## First migrate the individual repositories
     Repository.all.each do |r|
+      next unless r.checkout_settings
       next unless r.checkout_settings['checkout_protocols'].is_a? Hash
       r.checkout_settings['checkout_protocols'] = r.checkout_settings['checkout_protocols'].sort{|(ak,av),(bk,bv)|ak<=>bk}.collect{|id,protocol| protocol}
       r.save!
