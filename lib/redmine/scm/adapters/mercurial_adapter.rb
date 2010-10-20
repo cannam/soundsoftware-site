@@ -156,12 +156,16 @@ module Redmine
                 :from_revision => (cpmap.member?(e.text) ? le.attributes['revision'] : nil)}
             end.sort { |a, b| a[:path] <=> b[:path] }
 
+            branch = le.elements['branch'].text;
+            logger.debug("Branch is #{branch}");
+
             yield Revision.new(:identifier => le.attributes['revision'],
                                :revision => le.attributes['revision'],
                                :scmid => le.attributes['node'],
                                :author => (le.elements['author'].text rescue ''),
                                :time => Time.parse(le.elements['date'].text).localtime,
                                :message => le.elements['msg'].text,
+                               :branch => le.elements['branch'].text,
                                :paths => paths)
           end
           self
@@ -169,6 +173,7 @@ module Redmine
 
         # Returns list of nodes in the specified branch
         def nodes_in_branch(branch, path=nil, identifier_from=nil, identifier_to=nil, options={})
+          logger.debug("nodes_in_branch: Branch is #{branch}");
           hg_args = ['log', '--template', '{node|short}\n', '-b', branch]
           hg_args << '-r' << "#{hgrev(identifier_from)}:#{hgrev(identifier_to)}"
           hg_args << '--limit' << options[:limit] if options[:limit]

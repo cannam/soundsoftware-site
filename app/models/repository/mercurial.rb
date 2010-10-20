@@ -85,6 +85,7 @@ class Repository::Mercurial < Repository
                                 :scmid => re.scmid,
                                 :committer => re.author,
                                 :committed_on => re.time,
+                                :branch => re.branch,
                                 :comments => re.message)
           re.paths.each { |e| cs.create_change(e) }
         end

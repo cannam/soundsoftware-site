@@ -84,6 +84,10 @@ class Changeset < ActiveRecord::Base
   def author
     user || committer.to_s.split('<').first
   end
+
+  def branch
+    "unknown"
+  end
   
   def before_create
     self.user = repository.find_committer_user(committer)
