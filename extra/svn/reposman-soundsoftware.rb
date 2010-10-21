@@ -212,7 +212,7 @@ def set_owner_and_rights(project, repos_path, &block)
     yield if block_given?
   else
     uid, gid = Etc.getpwnam($svn_owner).uid, ($use_groupid ? Etc.getgrnam(project.identifier).gid : Etc.getgrnam($svn_group).gid)
-    right = project.is_public ? 2775 : 2770
+    right = project.is_public ? 02775 : 02770
     yield if block_given?
     Find.find(repos_path) do |f|
       File.chmod right, f
