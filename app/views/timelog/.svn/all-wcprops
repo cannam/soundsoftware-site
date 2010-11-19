@@ -1,41 +1,29 @@
 K 25
 svn:wc:ra_dav:version-url
 V 42
-/svn/!svn/ver/3043/trunk/app/views/timelog
+/svn/!svn/ver/4250/trunk/app/views/timelog
 END
 _list.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/3043/trunk/app/views/timelog/_list.rhtml
+/svn/!svn/ver/4250/trunk/app/views/timelog/_list.rhtml
 END
-report.rhtml
+index.html.erb
 K 25
 svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/2893/trunk/app/views/timelog/report.rhtml
-END
-_report_criteria.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 65
-/svn/!svn/ver/1503/trunk/app/views/timelog/_report_criteria.rhtml
-END
-details.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/2895/trunk/app/views/timelog/details.rhtml
+V 57
+/svn/!svn/ver/4239/trunk/app/views/timelog/index.html.erb
 END
 edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/2946/trunk/app/views/timelog/edit.rhtml
+/svn/!svn/ver/4248/trunk/app/views/timelog/edit.rhtml
 END
 _date_range.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/!svn/ver/2902/trunk/app/views/timelog/_date_range.rhtml
+/svn/!svn/ver/4235/trunk/app/views/timelog/_date_range.rhtml
 END

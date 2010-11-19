@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/lib/tasks
 http://redmine.rubyforge.org/svn
 
 
 
-2010-09-20T23:17:51.402972Z
-4167
-edavis10
+2010-11-14T15:14:19.280754Z
+4405
+jplang
 
 
 
@@ -162,6 +162,40 @@ has-props
 
 1606
 
+initializers.rake
+file
+
+
+
+
+2010-11-19T13:04:51.424933Z
+c25b466de7654465538a91e5f5ab32b9
+2010-11-14T15:14:19.280754Z
+4405
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1343
+
 metrics.rake
 file
 
@@ -195,40 +229,6 @@ edavis10
 
 
 113
-
-initializers.rake
-file
-
-
-
-
-2010-09-23T14:37:45.063748Z
-561f310a7d3a42b31ab7271aec396633
-2010-06-19T20:04:47.615499Z
-3785
-edavis10
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1351
 
 permissions.rake
 file
@@ -366,40 +366,6 @@ has-props
 
 180
 
-plugins.rake
-file
-
-
-
-
-2010-09-23T14:37:45.067787Z
-f27a83cf3f04d7906ac2f3ca40d01a20
-2008-09-05T10:31:06.632668Z
-1786
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1256
-
 yardoc.rake
 file
 
@@ -434,17 +400,51 @@ edavis10
 
 578
 
+plugins.rake
+file
+
+
+
+
+2010-09-23T14:37:45.067787Z
+f27a83cf3f04d7906ac2f3ca40d01a20
+2008-09-05T10:31:06.632668Z
+1786
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1256
+
 locales.rake
 file
 
 
 
 
-2010-09-23T14:37:45.063748Z
-4b8985b7b23bbc48dc414dbd1999ca1b
-2009-02-21T15:21:31.040851Z
-2502
-jplang
+2010-11-19T13:04:51.424933Z
+8cb19171aae8528b3149b7efa211fc50
+2010-10-15T22:41:47.658318Z
+4254
+edavis10
 has-props
 
 
@@ -466,7 +466,7 @@ has-props
 
 
 
-961
+3360
 
 migrate_from_trac.rake
 file
@@ -508,10 +508,10 @@ file
 
 
 
-2010-09-23T14:37:45.063748Z
-da88af55c1e96cf9caca3be6a29b3259
-2010-01-17T12:00:45.233005Z
-3328
+2010-11-19T13:04:51.424933Z
+d58affc991ec64b615bcbf3f9a1bb176
+2010-11-14T13:16:39.968867Z
+4403
 jplang
 
 
@@ -534,7 +534,7 @@ jplang
 
 
 
-19302
+19253
 
 email.rake
 file
@@ -542,11 +542,11 @@ file
 
 
 
-2010-09-23T14:37:45.063748Z
-09d22d744d29edd8922bc899e4ec8be2
-2010-01-17T13:53:13.544777Z
-3330
-jplang
+2010-11-19T13:04:51.424933Z
+7875b7a15307c626a93c284f33757320
+2010-10-15T22:50:33.240825Z
+4256
+edavis10
 
 
 
@@ -568,7 +568,7 @@ jplang
 
 
 
-7537
+8244
 
 migrate_plugins.rake
 file

@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/generators/plugin_migration
 http://redmine.rubyforge.org/svn
 
 
 
-2009-10-07T16:43:50.656336Z
-2904
-edavis10
+2010-11-14T16:24:21.989522Z
+4406
+jplang
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-09-23T14:37:45.691758Z
-e7efe6b1595915b993b92a7804dd810b
-2009-10-07T16:43:50.656336Z
-2904
-edavis10
+2010-11-19T13:04:50.916901Z
+3f4805cb1e4a8b8a3ed180f22d81c285
+2010-11-14T16:24:21.989522Z
+4406
+jplang
 has-props
 
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-3571
+3565
 
 USAGE
 file

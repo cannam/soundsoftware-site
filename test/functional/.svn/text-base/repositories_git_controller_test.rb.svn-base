@@ -50,7 +50,7 @@ class RepositoriesGitControllerTest < ActionController::TestCase
       assert_response :success
       assert_template 'show'
       assert_not_nil assigns(:entries)
-      assert_equal 7, assigns(:entries).size
+      assert_equal 9, assigns(:entries).size
       assert assigns(:entries).detect {|e| e.name == 'images' && e.kind == 'dir'}
       assert assigns(:entries).detect {|e| e.name == 'this_is_a_really_long_and_verbose_directory_name' && e.kind == 'dir'}
       assert assigns(:entries).detect {|e| e.name == 'sources' && e.kind == 'dir'}
@@ -58,6 +58,8 @@ class RepositoriesGitControllerTest < ActionController::TestCase
       assert assigns(:entries).detect {|e| e.name == 'copied_README' && e.kind == 'file'}
       assert assigns(:entries).detect {|e| e.name == 'new_file.txt' && e.kind == 'file'}
       assert assigns(:entries).detect {|e| e.name == 'renamed_test.txt' && e.kind == 'file'}
+      assert assigns(:entries).detect {|e| e.name == 'filemane with spaces.txt' && e.kind == 'file'}
+      assert assigns(:entries).detect {|e| e.name == ' filename with a leading space.txt ' && e.kind == 'file'}
     end
 
     def test_browse_branch
@@ -152,7 +154,7 @@ class RepositoriesGitControllerTest < ActionController::TestCase
     def test_annotate_binary_file
       get :annotate, :id => 3, :path => ['images', 'edit.png']
       assert_response 500
-      assert_tag :tag => 'div', :attributes => { :class => /error/ },
+      assert_tag :tag => 'p', :attributes => { :id => /errorExplanation/ },
                                 :content => /can not be annotated/
     end
   else

@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/test/exemplars
 http://redmine.rubyforge.org/svn
 
 
 
-2010-08-19T22:24:42.251508Z
-4010
-edavis10
+2010-11-14T16:24:21.989522Z
+4406
+jplang
 
 
 
@@ -440,11 +440,11 @@ file
 
 
 
-2010-09-23T14:37:45.291809Z
-0b0e9ab56f34b8d5f3fd7265d2dd4ffe
-2010-05-27T17:16:05.103190Z
-3759
-edavis10
+2010-11-19T13:04:41.365641Z
+9be3a10325013fa24b00903db30d1ca3
+2010-11-14T16:24:21.989522Z
+4406
+jplang
 
 
 
@@ -466,7 +466,7 @@ edavis10
 
 
 
-816
+810
 
 custom_value_exemplar.rb
 file
@@ -774,40 +774,6 @@ edavis10
 
 481
 
-member_role_exemplar.rb
-file
-
-
-
-
-2010-09-23T14:37:45.291809Z
-d1bdf1810c216ecde56d0750f78bea10
-2010-01-27T18:29:03.119133Z
-3340
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-250
-
 issue_exemplar.rb
 file
 
@@ -842,16 +808,16 @@ edavis10
 
 449
 
-tracker_exemplar.rb
+member_role_exemplar.rb
 file
 
 
 
 
 2010-09-23T14:37:45.291809Z
-94aed9cd40bd95ab8d8c2f51bfc097cf
-2009-10-18T22:25:00.956502Z
-2930
+d1bdf1810c216ecde56d0750f78bea10
+2010-01-27T18:29:03.119133Z
+3340
 edavis10
 
 
@@ -874,7 +840,7 @@ edavis10
 
 
 
-179
+250
 
 issue_status_exemplar.rb
 file
@@ -910,14 +876,14 @@ edavis10
 
 182
 
-time_entry_activity.rb
+tracker_exemplar.rb
 file
 
 
 
 
 2010-09-23T14:37:45.291809Z
-74f5207a054732dd9be1b3184340ca77
+94aed9cd40bd95ab8d8c2f51bfc097cf
 2009-10-18T22:25:00.956502Z
 2930
 edavis10
@@ -942,7 +908,7 @@ edavis10
 
 
 
-236
+179
 
 subversion_repository_exemplar.rb
 file
@@ -978,14 +944,14 @@ edavis10
 
 235
 
-role_exemplar.rb
+time_entry_activity.rb
 file
 
 
 
 
 2010-09-23T14:37:45.291809Z
-9c97ca570fa9b00ab1ecebd226f52f66
+74f5207a054732dd9be1b3184340ca77
 2009-10-18T22:25:00.956502Z
 2930
 edavis10
@@ -1010,7 +976,7 @@ edavis10
 
 
 
-157
+236
 
 changeset_exemplar.rb
 file
@@ -1045,6 +1011,40 @@ edavis10
 
 
 377
+
+role_exemplar.rb
+file
+
+
+
+
+2010-09-23T14:37:45.291809Z
+9c97ca570fa9b00ab1ecebd226f52f66
+2009-10-18T22:25:00.956502Z
+2930
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+157
 
 comment_exemplar.rb
 file
@@ -1188,10 +1188,10 @@ file
 
 
 
-2010-09-23T14:37:45.291809Z
-c4ea7f6c706d04e3ef3f809e37867766
-2009-11-05T21:32:26.784578Z
-3010
+2010-11-19T13:04:41.365641Z
+44278bb3b28eed2566aab063777becf7
+2010-09-28T18:22:10.512346Z
+4218
 edavis10
 
 
@@ -1214,7 +1214,7 @@ edavis10
 
 
 
-648
+650
 
 time_entry_exemplar.rb
 file

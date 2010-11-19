@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/app/helpers
 http://redmine.rubyforge.org/svn
 
 
 
-2010-09-20T18:50:14.663319Z
-4166
-edavis10
+2010-11-11T13:39:14.764400Z
+4391
+jplang
 
 
 
@@ -440,10 +440,10 @@ file
 
 
 
-2010-09-23T14:37:44.431779Z
-aee0a578b4bbfe95d2ede93a418824a6
-2009-06-28T11:55:49.957729Z
-2794
+2010-11-19T13:04:46.900732Z
+3e6762604b5e9a201b7a7bb2edc1f78f
+2010-11-06T14:30:32.528294Z
+4375
 jplang
 has-props
 
@@ -466,7 +466,7 @@ has-props
 
 
 
-2307
+2297
 
 enumerations_helper.rb
 file
@@ -508,11 +508,11 @@ file
 
 
 
-2010-09-24T12:48:25.903794Z
-f45b693d0286eacc66fde223d7306002
-2010-09-20T18:50:14.663319Z
-4166
-edavis10
+2010-11-19T13:04:46.900732Z
+b5569bf5b4ba507a522f4e371505ae0c
+2010-10-22T22:29:32.969473Z
+4281
+jplang
 has-props
 
 
@@ -534,41 +534,7 @@ has-props
 
 
 
-11249
-
-queries_helper.rb
-file
-
-
-
-
-2010-09-23T14:37:44.427784Z
-403463e02373d20faf0ed8988cfae033
-2010-08-08T07:07:20.961363Z
-3924
-jbbarth
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3785
+10075
 
 gantt_helper.rb
 file
@@ -576,11 +542,11 @@ file
 
 
 
-2010-09-24T12:48:25.903794Z
-bed98c36b12ec59c120d8da45f1511e0
-2010-09-10T03:09:02.311267Z
-4072
-edavis10
+2010-11-19T13:04:46.900732Z
+dfac5226f31c3c232d7dcc9416172071
+2010-10-23T09:08:55.877887Z
+4283
+jplang
 
 
 
@@ -602,7 +568,41 @@ edavis10
 
 
 
-1027
+1988
+
+queries_helper.rb
+file
+
+
+
+
+2010-11-19T13:04:46.900732Z
+6b997d023cc081b101be1949eb18f893
+2010-11-07T15:38:51.908839Z
+4387
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3722
 
 mail_handler_helper.rb
 file
@@ -774,40 +774,6 @@ has-props
 
 817
 
-journals_helper.rb
-file
-
-
-
-
-2010-09-24T12:48:25.903794Z
-b64edde44bceed7fb0911f87dba971aa
-2010-09-05T22:57:20.669640Z
-4062
-edavis10
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2266
-
 workflows_helper.rb
 file
 
@@ -841,6 +807,40 @@ has-props
 
 
 824
+
+journals_helper.rb
+file
+
+
+
+
+2010-09-24T12:48:25.903794Z
+b64edde44bceed7fb0911f87dba971aa
+2010-09-05T22:57:20.669640Z
+4062
+edavis10
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2266
 
 reports_helper.rb
 file
@@ -876,74 +876,6 @@ has-props
 
 1265
 
-timelog_helper.rb
-file
-
-
-
-
-2010-09-23T14:37:44.431779Z
-1888fd2d4a1be5fa0d6ad8a63238e2b4
-2010-04-30T12:18:11.536180Z
-3708
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-6636
-
-settings_helper.rb
-file
-
-
-
-
-2010-09-23T14:37:44.431779Z
-72a1f70b395a94a9efae4d1046d5df2b
-2009-12-23T17:56:39.685148Z
-3222
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3350
-
 custom_fields_helper.rb
 file
 
@@ -978,16 +910,50 @@ has-props
 
 5322
 
-users_helper.rb
+settings_helper.rb
+file
+
+
+
+
+2010-11-19T13:04:46.900732Z
+868d0dc19e332ae2c817321637a8e31f
+2010-09-28T21:09:06.467392Z
+4222
+edavis10
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3858
+
+timelog_helper.rb
 file
 
 
 
 
 2010-09-23T14:37:44.431779Z
-051113e44a01776675b1a38144a5fb8c
-2009-12-24T16:14:15.868995Z
-3237
+1888fd2d4a1be5fa0d6ad8a63238e2b4
+2010-04-30T12:18:11.536180Z
+3708
 jplang
 has-props
 
@@ -1010,7 +976,7 @@ has-props
 
 
 
-2645
+6636
 
 issue_moves_helper.rb
 file
@@ -1046,16 +1012,16 @@ edavis10
 
 28
 
-application_helper.rb
+users_helper.rb
 file
 
 
 
 
-2010-09-24T12:48:25.903794Z
-fed6be9c1540dab50fb9e194984395b3
-2010-09-20T02:55:14.397976Z
-4103
+2010-11-19T13:04:46.900732Z
+01b097606863e1e2938e7222d07fc2b7
+2010-09-30T18:22:46.611444Z
+4230
 edavis10
 has-props
 
@@ -1078,7 +1044,41 @@ has-props
 
 
 
-33297
+2644
+
+application_helper.rb
+file
+
+
+
+
+2010-11-19T13:04:46.900732Z
+a9ac6edf6104b93a669ba1b0705f4fc6
+2010-11-11T13:39:14.764400Z
+4391
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+34105
 
 auth_sources_helper.rb
 file
@@ -1120,10 +1120,10 @@ file
 
 
 
-2010-09-23T14:37:44.431779Z
-da0566fb2a355566f38723e4a11d1aab
-2009-07-18T09:46:20.387008Z
-2822
+2010-11-19T13:04:46.900732Z
+dedb3c62af67e076703aa2f60c97fb2b
+2010-11-01T12:55:15.292443Z
+4353
 jplang
 has-props
 
@@ -1146,7 +1146,7 @@ has-props
 
 
 
-2639
+2668
 
 messages_helper.rb
 file
