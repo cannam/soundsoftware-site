@@ -1,31 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4097/trunk/app/views/projects
-END
-settings.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/2871/trunk/app/views/projects/settings.rhtml
-END
-_form.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/3910/trunk/app/views/projects/_form.rhtml
-END
-index.xml.builder
-K 25
-svn:wc:ra_dav:version-url
-V 61
-/svn/!svn/ver/3731/trunk/app/views/projects/index.xml.builder
-END
-index.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/4069/trunk/app/views/projects/index.rhtml
+/svn/!svn/ver/4402/trunk/app/views/projects
 END
 copy.rhtml
 K 25
@@ -43,13 +19,25 @@ show.xml.builder
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/!svn/ver/3730/trunk/app/views/projects/show.xml.builder
+/svn/!svn/ver/4382/trunk/app/views/projects/show.xml.builder
+END
+settings.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/2871/trunk/app/views/projects/settings.rhtml
 END
 show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/4095/trunk/app/views/projects/show.rhtml
+/svn/!svn/ver/4382/trunk/app/views/projects/show.rhtml
+END
+_form.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/4402/trunk/app/views/projects/_form.rhtml
 END
 _edit.rhtml
 K 25
@@ -63,11 +51,23 @@ svn:wc:ra_dav:version-url
 V 62
 /svn/!svn/ver/2990/trunk/app/views/projects/list_members.rhtml
 END
+index.xml.builder
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/4382/trunk/app/views/projects/index.xml.builder
+END
 _members_box.html.erb
 K 25
 svn:wc:ra_dav:version-url
 V 65
 /svn/!svn/ver/4009/trunk/app/views/projects/_members_box.html.erb
+END
+index.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/4069/trunk/app/views/projects/index.rhtml
 END
 destroy.rhtml
 K 25

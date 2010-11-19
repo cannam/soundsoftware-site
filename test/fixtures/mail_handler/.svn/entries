@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/test/fixtures/mail_handler
 http://redmine.rubyforge.org/svn
 
 
 
-2010-06-20T16:22:36.211973Z
-3801
-edavis10
+2010-11-14T13:48:01.671461Z
+4404
+jplang
 
 
 
@@ -25,40 +25,6 @@ edavis10
 
 
 e93f8b46-1217-0410-a6f0-8f06a7374b81
-
-ticket_html_only.eml
-file
-
-
-
-
-2010-09-23T14:37:45.339796Z
-5e24af78a4534798611158a3d81efb34
-2008-12-14T17:10:16.292262Z
-2136
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-691
 
 message_reply_by_subject.eml
 file
@@ -94,6 +60,74 @@ has-props
 
 410
 
+ticket_html_only.eml
+file
+
+
+
+
+2010-09-23T14:37:45.339796Z
+5e24af78a4534798611158a3d81efb34
+2008-12-14T17:10:16.292262Z
+2136
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+691
+
+issue_update_with_multiple_quoted_reply_above.eml
+file
+
+
+
+
+2010-11-19T13:04:46.204713Z
+ef4c0db9f76d81792292785d2ae9cb6a
+2010-11-02T19:00:31.177706Z
+4361
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2018
+
 ticket_with_spaces_between_attribute_and_separator.eml
 file
 
@@ -127,6 +161,40 @@ edavis10
 
 
 1903
+
+ticket_with_localized_attributes.eml
+file
+
+
+
+
+2010-11-19T13:04:46.204713Z
+8ac895d880e6f19fc21333c4003babaf
+2010-11-12T12:29:35.878777Z
+4395
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1944
 
 ticket_with_long_subject.eml
 file
@@ -400,17 +468,51 @@ jplang
 
 526
 
+ticket_with_invalid_attributes.eml
+file
+
+
+
+
+2010-11-19T13:04:46.204713Z
+605f28e31469b6897f33cf34bbc1ad0a
+2010-11-14T13:48:01.671461Z
+4404
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2028
+
 ticket_reply_with_status.eml
 file
 
 
 
 
-2010-09-23T14:37:45.339796Z
-2a98751dfc76fcc9eefa7eaf2a8098e4
-2010-05-29T00:05:24.040852Z
-3764
-edavis10
+2010-11-19T13:04:46.204713Z
+88a90b088de41d263e9135d1810cf58c
+2010-11-12T11:34:53.754717Z
+4394
+jplang
 
 
 
@@ -432,7 +534,7 @@ edavis10
 
 
 
-2026
+2065
 
 ticket_on_given_project.eml
 file
@@ -440,10 +542,44 @@ file
 
 
 
-2010-09-23T14:37:45.339796Z
-6cd634ffcd88be96cbe8789ae9545c5f
-2010-05-29T00:05:24.040852Z
-3764
+2010-11-19T13:04:46.204713Z
+af7f3e5f9caddc2cad5fba0ba9d73882
+2010-11-12T11:34:53.754717Z
+4394
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2255
+
+issue_update_with_quoted_reply_above.eml
+file
+
+
+
+
+2010-11-19T13:04:46.204713Z
+977375e727ce2d63ce878f877d692c62
+2010-11-02T19:00:31.177706Z
+4361
 edavis10
 
 
@@ -466,41 +602,7 @@ edavis10
 
 
 
-2195
-
-ticket_with_custom_fields.eml
-file
-
-
-
-
-2010-09-23T14:37:45.339796Z
-4ef77e6337f95c7a8362c4a51c09d0af
-2008-12-30T14:57:33.008940Z
-2211
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1887
+1979
 
 ticket_reply.eml
 file
@@ -535,6 +637,40 @@ jplang
 
 
 2012
+
+ticket_with_custom_fields.eml
+file
+
+
+
+
+2010-09-23T14:37:45.339796Z
+4ef77e6337f95c7a8362c4a51c09d0af
+2008-12-30T14:57:33.008940Z
+2211
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1887
 
 message_reply.eml
 file

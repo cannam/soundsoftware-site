@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk
 http://redmine.rubyforge.org/svn
 
 
 
-2010-09-23T16:23:39.070168Z
-4173
-winterheart
+2010-11-17T18:27:38.712585Z
+4411
+jplang
 has-props
 
 
@@ -69,6 +69,9 @@ jplang
 
 307
 
+extra
+dir
+
 README.rdoc
 file
 
@@ -103,9 +106,6 @@ edavis10
 
 208
 
-extra
-dir
-
 db
 dir
 
@@ -119,12 +119,6 @@ files
 dir
 
 script
-dir
-
-doc
-dir
-
-config
 dir
 
 .gitignore
@@ -160,6 +154,12 @@ edavis10
 
 
 322
+
+config
+dir
+
+doc
+dir
 
 lib
 dir

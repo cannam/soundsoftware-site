@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/app/views/groups
 http://redmine.rubyforge.org/svn
 
 
 
-2010-05-09T11:19:15.980195Z
-3734
-jplang
+2010-10-30T16:47:33.260585Z
+4312
+jbbarth
 
 
 
@@ -236,11 +236,11 @@ file
 
 
 
-2010-09-23T14:37:44.547775Z
-eff82d54d4b9afef8e057bce83a79055
-2010-05-09T11:19:15.980195Z
-3734
-jplang
+2010-11-19T13:04:49.444940Z
+7738dc0db4c4ad48e82613829c1e991a
+2010-10-30T16:47:33.260585Z
+4312
+jbbarth
 has-props
 
 
@@ -262,7 +262,7 @@ has-props
 
 
 
-1572
+1625
 
 show.html.erb
 file

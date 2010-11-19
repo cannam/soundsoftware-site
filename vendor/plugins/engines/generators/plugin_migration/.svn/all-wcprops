@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 75
-/svn/!svn/ver/2904/trunk/vendor/plugins/engines/generators/plugin_migration
+/svn/!svn/ver/4406/trunk/vendor/plugins/engines/generators/plugin_migration
 END
 plugin_migration_generator.rb
 K 25
 svn:wc:ra_dav:version-url
 V 105
-/svn/!svn/ver/2904/trunk/vendor/plugins/engines/generators/plugin_migration/plugin_migration_generator.rb
+/svn/!svn/ver/4406/trunk/vendor/plugins/engines/generators/plugin_migration/plugin_migration_generator.rb
 END
 USAGE
 K 25

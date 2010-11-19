@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4060/trunk/public/javascripts
+/svn/!svn/ver/4222/trunk/public/javascripts
 END
 prototype.js
 K 25
@@ -43,7 +43,7 @@ application.js
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/3879/trunk/public/javascripts/application.js
+/svn/!svn/ver/4222/trunk/public/javascripts/application.js
 END
 controls.js
 K 25
