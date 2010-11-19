@@ -69,9 +69,6 @@ jplang
 
 307
 
-extra
-dir
-
 README.rdoc
 file
 
@@ -106,6 +103,9 @@ edavis10
 
 208
 
+extra
+dir
+
 db
 dir
 
@@ -119,6 +119,12 @@ files
 dir
 
 script
+dir
+
+doc
+dir
+
+config
 dir
 
 .gitignore
@@ -154,12 +160,6 @@ edavis10
 
 
 322
-
-config
-dir
-
-doc
-dir
 
 lib
 dir
