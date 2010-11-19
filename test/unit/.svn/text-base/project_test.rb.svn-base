@@ -29,7 +29,6 @@ class ProjectTest < ActiveSupport::TestCase
   should_validate_presence_of :name
   should_validate_presence_of :identifier
 
-  should_validate_uniqueness_of :name
   should_validate_uniqueness_of :identifier
 
   context "associations" do
@@ -102,6 +101,7 @@ class ProjectTest < ActiveSupport::TestCase
     @ecookbook.reload
     
     assert !@ecookbook.active?
+    assert @ecookbook.archived?
     assert !user.projects.include?(@ecookbook)
     # Subproject are also archived
     assert !@ecookbook.children.empty?
@@ -129,6 +129,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert @ecookbook.unarchive
     @ecookbook.reload
     assert @ecookbook.active?
+    assert !@ecookbook.archived?
     assert user.projects.include?(@ecookbook)
     # Subproject can now be unarchived
     @ecookbook_sub1.reload
@@ -860,6 +861,8 @@ class ProjectTest < ActiveSupport::TestCase
       
       assert_nil @project.start_date
     end
+    
+    should "be tested when issues have no start date"
 
     should "be the earliest start date of it's issues" do
       early = 7.days.ago.to_date
@@ -889,6 +892,8 @@ class ProjectTest < ActiveSupport::TestCase
       
       assert_nil @project.due_date
     end
+    
+    should "be tested when issues have no due date"
 
     should "be the latest due date of it's issues" do
       future = 7.days.from_now.to_date
@@ -960,4 +965,54 @@ class ProjectTest < ActiveSupport::TestCase
 
     end
   end
+
+  context "#notified_users" do
+    setup do
+      @project = Project.generate!
+      @role = Role.generate!
+      
+      @user_with_membership_notification = User.generate!(:mail_notification => 'selected')
+      Member.generate!(:project => @project, :roles => [@role], :principal => @user_with_membership_notification, :mail_notification => true)
+
+      @all_events_user = User.generate!(:mail_notification => 'all')
+      Member.generate!(:project => @project, :roles => [@role], :principal => @all_events_user)
+
+      @no_events_user = User.generate!(:mail_notification => 'none')
+      Member.generate!(:project => @project, :roles => [@role], :principal => @no_events_user)
+
+      @only_my_events_user = User.generate!(:mail_notification => 'only_my_events')
+      Member.generate!(:project => @project, :roles => [@role], :principal => @only_my_events_user)
+
+      @only_assigned_user = User.generate!(:mail_notification => 'only_assigned')
+      Member.generate!(:project => @project, :roles => [@role], :principal => @only_assigned_user)
+
+      @only_owned_user = User.generate!(:mail_notification => 'only_owner')
+      Member.generate!(:project => @project, :roles => [@role], :principal => @only_owned_user)
+    end
+    
+    should "include members with a mail notification" do
+      assert @project.notified_users.include?(@user_with_membership_notification)
+    end
+    
+    should "include users with the 'all' notification option" do
+      assert @project.notified_users.include?(@all_events_user)
+    end
+    
+    should "not include users with the 'none' notification option" do
+      assert !@project.notified_users.include?(@no_events_user)
+    end
+    
+    should "not include users with the 'only_my_events' notification option" do
+      assert !@project.notified_users.include?(@only_my_events_user)
+    end
+    
+    should "not include users with the 'only_assigned' notification option" do
+      assert !@project.notified_users.include?(@only_assigned_user)
+    end
+    
+    should "not include users with the 'only_owner' notification option" do
+      assert !@project.notified_users.include?(@only_owned_user)
+    end
+  end
+  
 end

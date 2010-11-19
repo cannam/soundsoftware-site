@@ -1,14 +1,14 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_customizable/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2010-03-13T14:56:49.379682Z
-3573
+2010-11-07T14:15:01.891476Z
+4382
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2010-09-23T14:37:45.539808Z
-9d2f2e3d8ac21a68cbaafca4788c2f1d
-2010-03-13T14:56:49.379682Z
-3573
+2010-11-19T13:04:50.920916Z
+1b80419ad25063ffc8725be3174c8fb8
+2010-11-07T14:15:01.891476Z
+4382
 jplang
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-3715
+3825
 

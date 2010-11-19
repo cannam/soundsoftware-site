@@ -86,8 +86,8 @@ class Issue < ActiveRecord::Base
   }
 
   before_create :default_assign
-  before_save :reschedule_following_issues, :close_duplicates, :update_done_ratio_from_issue_status
-  after_save :update_nested_set_attributes, :update_parent_attributes, :create_journal
+  before_save :close_duplicates, :update_done_ratio_from_issue_status
+  after_save :reschedule_following_issues, :update_nested_set_attributes, :update_parent_attributes, :create_journal
   after_destroy :destroy_children
   after_destroy :update_parent_attributes
   
@@ -233,14 +233,35 @@ class Issue < ActiveRecord::Base
     lock_version
   ) unless const_defined?(:SAFE_ATTRIBUTES)
   
+  SAFE_ATTRIBUTES_ON_TRANSITION = %w(
+    status_id
+    assigned_to_id
+    fixed_version_id
+    done_ratio
+  ) unless const_defined?(:SAFE_ATTRIBUTES_ON_TRANSITION)
+
   # Safely sets attributes
   # Should be called from controllers instead of #attributes=
   # attr_accessible is too rough because we still want things like
   # Issue.new(:project => foo) to work
   # TODO: move workflow/permission checks from controllers to here
   def safe_attributes=(attrs, user=User.current)
-    return if attrs.nil?
-    attrs = attrs.reject {|k,v| !SAFE_ATTRIBUTES.include?(k)}
+    return unless attrs.is_a?(Hash)
+    
+    # User can change issue attributes only if he has :edit permission or if a workflow transition is allowed
+    if new_record? || user.allowed_to?(:edit_issues, project)
+      attrs = attrs.reject {|k,v| !SAFE_ATTRIBUTES.include?(k)}
+    elsif new_statuses_allowed_to(user).any?
+      attrs = attrs.reject {|k,v| !SAFE_ATTRIBUTES_ON_TRANSITION.include?(k)}
+    else
+      return
+    end
+    
+    # Tracker must be set before since new_statuses_allowed_to depends on it.
+    if t = attrs.delete('tracker_id')
+      self.tracker_id = t
+    end
+    
     if attrs['status_id']
       unless new_statuses_allowed_to(user).collect(&:id).include?(attrs['status_id'].to_i)
         attrs.delete('status_id')
@@ -263,7 +284,7 @@ class Issue < ActiveRecord::Base
   end
   
   def done_ratio
-    if Issue.use_status_for_done_ratio? && status && status.default_done_ratio?
+    if Issue.use_status_for_done_ratio? && status && status.default_done_ratio
       status.default_done_ratio
     else
       read_attribute(:done_ratio)
@@ -326,7 +347,7 @@ class Issue < ActiveRecord::Base
   # Set the done_ratio using the status if that setting is set.  This will keep the done_ratios
   # even if the user turns off the setting later
   def update_done_ratio_from_issue_status
-    if Issue.use_status_for_done_ratio? && status && status.default_done_ratio?
+    if Issue.use_status_for_done_ratio? && status && status.default_done_ratio
       self.done_ratio = status.default_done_ratio
     end
   end
@@ -390,7 +411,9 @@ class Issue < ActiveRecord::Base
   
   # Users the issue can be assigned to
   def assignable_users
-    project.assignable_users
+    users = project.assignable_users
+    users << author if author
+    users.uniq.sort
   end
   
   # Versions that the issue can be assigned to
@@ -415,9 +438,10 @@ class Issue < ActiveRecord::Base
   # Returns the mail adresses of users that should be notified
   def recipients
     notified = project.notified_users
-    # Author and assignee are always notified unless they have been locked
-    notified << author if author && author.active?
-    notified << assigned_to if assigned_to && assigned_to.active?
+    # Author and assignee are always notified unless they have been
+    # locked or don't want to be notified
+    notified << author if author && author.active? && author.notify_about?(self)
+    notified << assigned_to if assigned_to && assigned_to.active? && assigned_to.notify_about?(self)
     notified.uniq!
     # Remove users that can not view the issue
     notified.reject! {|user| !visible?(user)}
@@ -714,7 +738,7 @@ class Issue < ActiveRecord::Base
       end
       
       # done ratio = weighted average ratio of leaves
-      unless Issue.use_status_for_done_ratio? && p.status && p.status.default_done_ratio?
+      unless Issue.use_status_for_done_ratio? && p.status && p.status.default_done_ratio
         leaves_count = p.leaves.count
         if leaves_count > 0
           average = p.leaves.average(:estimated_hours).to_f

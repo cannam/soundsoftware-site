@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 42
-/svn/!svn/ver/4093/trunk/app/views/queries
+/svn/!svn/ver/4387/trunk/app/views/queries
 END
 _columns.rhtml
 K 25
@@ -25,7 +25,7 @@ _filters.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/svn/!svn/ver/4093/trunk/app/views/queries/_filters.rhtml
+/svn/!svn/ver/4387/trunk/app/views/queries/_filters.rhtml
 END
 index.rhtml
 K 25

@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 37
-/svn/!svn/ver/3775/trunk/app/views/my
+/svn/!svn/ver/4380/trunk/app/views/my
 END
 account.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/3745/trunk/app/views/my/account.rhtml
+/svn/!svn/ver/4223/trunk/app/views/my/account.rhtml
 END
 page.rhtml
 K 25
@@ -37,5 +37,5 @@ page_layout.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/3755/trunk/app/views/my/page_layout.rhtml
+/svn/!svn/ver/4380/trunk/app/views/my/page_layout.rhtml
 END

@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4072/trunk/test/unit/lib/redmine
+/svn/!svn/ver/4376/trunk/test/unit/lib/redmine
 END
 menu_manager_test.rb
 K 25
@@ -25,7 +25,7 @@ i18n_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/3034/trunk/test/unit/lib/redmine/i18n_test.rb
+/svn/!svn/ver/4183/trunk/test/unit/lib/redmine/i18n_test.rb
 END
 hook_test.rb
 K 25
@@ -50,4 +50,10 @@ K 25
 svn:wc:ra_dav:version-url
 V 67
 /svn/!svn/ver/3028/trunk/test/unit/lib/redmine/unified_diff_test.rb
+END
+notifiable_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4222/trunk/test/unit/lib/redmine/notifiable_test.rb
 END

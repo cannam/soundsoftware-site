@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 40
-/svn/!svn/ver/4047/trunk/app/views/users
+/svn/!svn/ver/4382/trunk/app/views/users
 END
 _general.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/3037/trunk/app/views/users/_general.rhtml
+/svn/!svn/ver/4249/trunk/app/views/users/_general.rhtml
 END
 _memberships.rhtml
 K 25
@@ -19,35 +19,47 @@ _groups.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/3160/trunk/app/views/users/_groups.rhtml
+/svn/!svn/ver/4230/trunk/app/views/users/_groups.rhtml
+END
+new.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4229/trunk/app/views/users/new.html.erb
+END
+_mail_notifications.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4223/trunk/app/views/users/_mail_notifications.html.erb
 END
 show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/4047/trunk/app/views/users/show.rhtml
+/svn/!svn/ver/4382/trunk/app/views/users/show.rhtml
 END
 _form.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/3037/trunk/app/views/users/_form.rhtml
+/svn/!svn/ver/4223/trunk/app/views/users/_form.rhtml
 END
 edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/3495/trunk/app/views/users/edit.rhtml
+/svn/!svn/ver/4231/trunk/app/views/users/edit.rhtml
+END
+_preferences.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/4223/trunk/app/views/users/_preferences.html.erb
 END
 index.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/3600/trunk/app/views/users/index.rhtml
-END
-add.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 50
-/svn/!svn/ver/3204/trunk/app/views/users/add.rhtml
+/svn/!svn/ver/4231/trunk/app/views/users/index.rhtml
 END

@@ -10,7 +10,7 @@
   </div>
 </fieldset>
 
-<p style="float:right;">
+<p class="contextual">
   <%= gantt_zoom_link(@gantt, :in) %>
   <%= gantt_zoom_link(@gantt, :out) %>
 </p>
@@ -29,7 +29,8 @@
                    }, :class => 'icon icon-checked' %>
                    
 <%= link_to_remote l(:button_clear),
-                   { :url => { :set_filter => (@query.new_record? ? 1 : nil) }, 
+                   { :url => { :project_id => @project, :set_filter => (@query.new_record? ? 1 : nil) }, 
+                   	 :method => :put,
                      :update => "content",
                    }, :class => 'icon icon-reload' if @query.new_record? %>
 </p>

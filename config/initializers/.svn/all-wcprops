@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/!svn/ver/3235/trunk/config/initializers
+/svn/!svn/ver/4389/trunk/config/initializers
 END
 inflections.rb
 K 25
@@ -19,7 +19,7 @@ END
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/3235/trunk/config/initializers/10-patches.rb
+/svn/!svn/ver/4389/trunk/config/initializers/10-patches.rb
 END
 backtrace_silencers.rb
 K 25

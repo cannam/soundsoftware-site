@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine
 http://redmine.rubyforge.org/svn
 
 
 
-2010-09-10T03:09:02.311267Z
-4072
-edavis10
+2010-11-06T17:47:27.890964Z
+4376
+jplang
 
 
 
@@ -134,11 +134,11 @@ file
 
 
 
-2010-09-23T14:37:45.491768Z
-f6356bf322f1fd30abbdaedc92e615f6
-2009-11-12T22:00:29.290944Z
-3034
-jplang
+2010-11-19T13:04:41.309564Z
+a134c7beb75336db19db53dcfdb95250
+2010-09-26T17:13:52.794850Z
+4183
+edavis10
 has-props
 
 
@@ -160,7 +160,7 @@ has-props
 
 
 
-3669
+3798
 
 hook_test.rb
 file
@@ -306,6 +306,40 @@ has-props
 
 wiki_formatting
 dir
+
+notifiable_test.rb
+file
+
+
+
+
+2010-11-19T13:04:41.309564Z
+5bcb90581762b7478b6fd175746846e7
+2010-09-28T21:09:06.467392Z
+4222
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1323
 
 menu_manager
 dir
