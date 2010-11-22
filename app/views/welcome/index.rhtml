@@ -4,7 +4,9 @@
   <%= textilizable Setting.welcome_text %>
   
   <!-- luisf. Tip of the day placeholder -->
-  <h2>.</h2>
+  
+  <h2>Tip of The Day</h2>
+  <%= textilizable Setting.tipoftheday_text %>
 
   <% if @news.any? %>
   <div class="news box">
