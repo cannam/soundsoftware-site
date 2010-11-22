@@ -1,9 +1,11 @@
 <h2><%= l(:label_home) %></h2>
 
-<h2>.</h2>
-
 <div class="splitcontentleft">
   <%= textilizable Setting.welcome_text %>
+  
+  <!-- luisf. Tip of the day placeholder -->
+  <h2>.</h2>
+
   <% if @news.any? %>
   <div class="news box">
 	<h3><%=l(:label_news_latest)%></h3>
