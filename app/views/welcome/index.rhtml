@@ -1,11 +1,14 @@
+<div class="notifications flash error">
+    <%= textilizable Setting.notifications_text %>
+</div>
+
 <h2><%= l(:label_home) %></h2>
 
 <div class="splitcontentleft">
   <%= textilizable Setting.welcome_text %>
   
-  <!-- luisf. Tip of the day placeholder -->
   <div class="newsoftheday box">
-    <h2><%=l(:label_tipoftheday)%></h2>
+    <h3><%=l(:label_tipoftheday)%></h3>
     <%= textilizable Setting.tipoftheday_text %>
   </div>
 
