@@ -9,12 +9,13 @@
 <div class="splitcontentleft">
   <%= textilizable Setting.welcome_text %>
   
-<% if not Setting.tipoftheday_text.empty? %>
-  <div class="newsoftheday box">
-    <h3><%=l(:label_tipoftheday)%></h3>
-    <%= textilizable Setting.tipoftheday_text %>
-  </div>
-<% end %>
+  <% if not @tipsoftheday.empty? %>
+    <div class="newsoftheday box">
+	  <h3><%=l(:label_tipoftheday)%></h3>
+	  <%= textilizable @tipsoftheday %>
+    </div>
+  <% end %>
+
 
   <% if @news.any? %>
   <div class="news box">
