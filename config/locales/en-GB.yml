@@ -291,6 +291,8 @@ en-GB:
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
   setting_welcome_text: Welcome text
+  setting_tipoftheday_text: Tip of the Day
+  setting_notifications_text: Notifications
   setting_default_language: Default language
   setting_login_required: Authentication required
   setting_self_registration: Self-registration
@@ -406,6 +408,8 @@ en-GB:
   project_module_repository: Repository
   project_module_boards: Boards
   
+  label_tipoftheday: Tip of the day
+  label_notifications: Important Message
   label_user: User
   label_user_plural: Users
   label_user_new: New user

@@ -21,6 +21,14 @@ class WelcomeController < ApplicationController
   def index
     @news = News.latest User.current
     @projects = Project.latest User.current
+    
+    # tests if user is logged in to gfenerate the tips of the day list
+    if User.current.logged?
+      @tipsoftheday = Setting.tipoftheday_text
+    else
+      @tipsoftheday = ''
+    end
+    
   end
   
   def robots
