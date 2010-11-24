@@ -313,7 +313,11 @@ projects.each do |project|
       next
     end
 
-    project.is_public ? File.umask(0002) : File.umask(0007)
+# No -- we need "other" users to be able to read it.  Access control
+# is not handled through Unix user id anyway
+#    project.is_public ? File.umask(0002) : File.umask(0007)
+    File.umask(0002)
+
     log("\taction: create repository #{repos_path}")
 
     begin
