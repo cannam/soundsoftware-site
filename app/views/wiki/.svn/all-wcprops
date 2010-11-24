@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/!svn/ver/4092/trunk/app/views/wiki
+/svn/!svn/ver/4375/trunk/app/views/wiki
 END
 export_multiple.rhtml
 K 25
@@ -9,11 +9,17 @@ svn:wc:ra_dav:version-url
 V 61
 /svn/!svn/ver/3026/trunk/app/views/wiki/export_multiple.rhtml
 END
+index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/4290/trunk/app/views/wiki/index.html.erb
+END
 show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/3371/trunk/app/views/wiki/show.rhtml
+/svn/!svn/ver/4303/trunk/app/views/wiki/show.rhtml
 END
 export.rhtml
 K 25
@@ -25,43 +31,31 @@ history.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/3559/trunk/app/views/wiki/history.rhtml
-END
-special_page_index.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 64
-/svn/!svn/ver/4092/trunk/app/views/wiki/special_page_index.rhtml
-END
-special_date_index.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 64
-/svn/!svn/ver/4047/trunk/app/views/wiki/special_date_index.rhtml
+/svn/!svn/ver/4303/trunk/app/views/wiki/history.rhtml
 END
 edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/3500/trunk/app/views/wiki/edit.rhtml
+/svn/!svn/ver/4303/trunk/app/views/wiki/edit.rhtml
 END
 rename.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/1698/trunk/app/views/wiki/rename.rhtml
+/svn/!svn/ver/4375/trunk/app/views/wiki/rename.rhtml
 END
 _sidebar.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/3632/trunk/app/views/wiki/_sidebar.rhtml
+/svn/!svn/ver/4296/trunk/app/views/wiki/_sidebar.rhtml
 END
 diff.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/3128/trunk/app/views/wiki/diff.rhtml
+/svn/!svn/ver/4296/trunk/app/views/wiki/diff.rhtml
 END
 _content.rhtml
 K 25
@@ -73,11 +67,17 @@ annotate.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/3585/trunk/app/views/wiki/annotate.rhtml
+/svn/!svn/ver/4296/trunk/app/views/wiki/annotate.rhtml
 END
 destroy.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/2676/trunk/app/views/wiki/destroy.rhtml
+/svn/!svn/ver/4296/trunk/app/views/wiki/destroy.rhtml
+END
+date_index.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/4303/trunk/app/views/wiki/date_index.html.erb
 END

@@ -1,15 +1,15 @@
 10
 
 dir
-4173
+4411
 http://redmine.rubyforge.org/svn/trunk/app/views/files
 http://redmine.rubyforge.org/svn
 
 
 
-2010-09-14T16:24:07.840869Z
-4085
-edavis10
+2010-10-22T14:45:02.987126Z
+4268
+jplang
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-09-24T12:48:27.722352Z
-178f4ae5a5527ba5ab517e9e5685d670
-2010-09-14T16:24:07.840869Z
-4085
-edavis10
+2010-11-19T13:04:49.392852Z
+05986f09d13424caeb68601c7c9ff16b
+2010-10-22T14:45:02.987126Z
+4268
+jplang
 has-props
 
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-1838
+1878
 
 new.html.erb
 file

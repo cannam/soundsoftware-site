@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/3549/trunk/app/views/issue_categories
+/svn/!svn/ver/4385/trunk/app/views/issue_categories
 END
 new.html.erb
 K 25
@@ -12,8 +12,8 @@ END
 _form.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 62
-/svn/!svn/ver/577/trunk/app/views/issue_categories/_form.rhtml
+V 63
+/svn/!svn/ver/4385/trunk/app/views/issue_categories/_form.rhtml
 END
 edit.rhtml
 K 25

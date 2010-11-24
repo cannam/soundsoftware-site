@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 28
-/svn/!svn/ver/4029/trunk/doc
+/svn/!svn/ver/4348/trunk/doc
 END
 UPGRADING
 K 25
@@ -31,11 +31,17 @@ CHANGELOG
 K 25
 svn:wc:ra_dav:version-url
 V 38
-/svn/!svn/ver/4029/trunk/doc/CHANGELOG
+/svn/!svn/ver/4348/trunk/doc/CHANGELOG
 END
 COPYING
 K 25
 svn:wc:ra_dav:version-url
 V 35
 /svn/!svn/ver/883/trunk/doc/COPYING
+END
+git.rdoc
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/4273/trunk/doc/git.rdoc
 END

@@ -1,7 +1,22 @@
+<% if not Setting.notifications_text.empty? %>
+  <div class="notifications flash error">
+    <%= textilizable Setting.notifications_text %>
+  </div>
+<% end %>
+
 <h2><%= l(:label_home) %></h2>
 
 <div class="splitcontentleft">
   <%= textilizable Setting.welcome_text %>
+  
+  <% if not @tipsoftheday.empty? %>
+    <div class="newsoftheday box">
+	  <h3><%=l(:label_tipoftheday)%></h3>
+	  <%= textilizable @tipsoftheday %>
+    </div>
+  <% end %>
+
+
   <% if @news.any? %>
   <div class="news box">
 	<h3><%=l(:label_news_latest)%></h3>

@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/!svn/ver/3734/trunk/app/views/my/blocks
+/svn/!svn/ver/4259/trunk/app/views/my/blocks
 END
 _issueswatched.rhtml
 K 25
@@ -31,7 +31,7 @@ _timelog.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/3734/trunk/app/views/my/blocks/_timelog.rhtml
+/svn/!svn/ver/4259/trunk/app/views/my/blocks/_timelog.rhtml
 END
 _documents.rhtml
 K 25

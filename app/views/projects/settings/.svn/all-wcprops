@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/4097/trunk/app/views/projects/settings
+/svn/!svn/ver/4371/trunk/app/views/projects/settings
 END
 _issue_categories.rhtml
 K 25
@@ -37,7 +37,7 @@ _versions.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 68
-/svn/!svn/ver/4097/trunk/app/views/projects/settings/_versions.rhtml
+/svn/!svn/ver/4307/trunk/app/views/projects/settings/_versions.rhtml
 END
 _boards.rhtml
 K 25
@@ -49,5 +49,5 @@ _members.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 67
-/svn/!svn/ver/3748/trunk/app/views/projects/settings/_members.rhtml
+/svn/!svn/ver/4371/trunk/app/views/projects/settings/_members.rhtml
 END
