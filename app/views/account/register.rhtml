@@ -26,8 +26,13 @@
 <p><label for="user_mail"><%=l(:field_mail)%> <span class="required">*</span></label>
 <%= text_field 'user', 'mail'  %></p>
 
+<p><label for="ssamr_user_description"><%=l(:field_ssamr_description)%><span class="required">*</span></label>
+<%= text_field 'user.ssamr_user_detail', 'description'  %></p>
+
+
 <p><label for="user_language"><%=l(:field_language)%></label>
 <%= select("user", "language", lang_options_for_select) %></p>
+
 
 <% if Setting.openid? %>
 <p><label for="user_identity_url"><%=l(:field_identity_url)%></label>

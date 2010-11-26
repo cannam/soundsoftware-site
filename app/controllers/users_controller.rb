@@ -52,6 +52,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     
+    print @user.ssamr_user_detail.description
+    
+  #  @description = @user.ssamr_user_detail.description
+        
     # show projects based on current user visibility
     @memberships = @user.memberships.all(:conditions => Project.visible_by(User.current))
     
@@ -88,6 +92,10 @@ class UsersController < ApplicationController
     @user.login = params[:user][:login]
     @user.password, @user.password_confirmation = params[:password], params[:password_confirmation] unless @user.auth_source_id
 
+    @user.ssamr_user_detail.description = params[:user.ssamr_user_detail][:description]
+    
+    @ssamr_description = params[:user.ssamr_user_detail][:description]
+
     # TODO: Similar to My#account
     @user.mail_notification = params[:notification_option] || 'only_my_events'
     @user.pref.attributes = params[:pref]
@@ -114,6 +122,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @notification_options = @user.valid_notification_options
     @notification_option = @user.mail_notification
+    
+#    @ssamr_description = @user.ssamr_user_detail
 
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
@@ -122,6 +132,7 @@ class UsersController < ApplicationController
   verify :method => :put, :only => :update, :render => {:nothing => true, :status => :method_not_allowed }
   def update
     @user = User.find(params[:id])
+        
     @notification_options = @user.valid_notification_options
     @notification_option = @user.mail_notification
 

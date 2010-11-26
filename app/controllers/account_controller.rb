@@ -83,6 +83,11 @@ class AccountController < ApplicationController
     else
       @user = User.new(params[:user])
       @user.admin = false
+      
+      
+      @user.ssamr_user_detail.description = params[:user.ssamr_user_detail][:description]
+      
+      
       @user.register
       if session[:auth_source_registration]
         @user.activate
