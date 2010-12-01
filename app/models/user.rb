@@ -94,6 +94,10 @@ class User < Principal
     write_attribute(:mail, arg.to_s.strip)
   end
   
+  def description=(arg)
+    write_attribute(:description, arg.to_s.strip)
+  end
+    
   def identity_url=(url)
     if url.blank?
       write_attribute(:identity_url, '')

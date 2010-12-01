@@ -85,7 +85,7 @@ class AccountController < ApplicationController
       @user.admin = false
       
       
-      @user.ssamr_user_detail.description = params[:user.ssamr_user_detail][:description]
+      @user.description = params[:description]
       
       
       @user.register
