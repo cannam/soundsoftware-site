@@ -410,6 +410,9 @@ en-GB:
   
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
+  label_ssamr_description: Description
+  label_ssamr_details: Other Details
+  
   label_user: User
   label_user_plural: Users
   label_user_new: New user

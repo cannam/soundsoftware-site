@@ -26,12 +26,17 @@
 <p><label for="user_mail"><%=l(:field_mail)%> <span class="required">*</span></label>
 <%= text_field 'user', 'mail'  %></p>
 
-<p><label for="ssamr_user_description"><%=l(:field_ssamr_description)%><span class="required">*</span></label>
-<%= text_field 'user.ssamr_user_detail', 'description'  %></p>
-
-
 <p><label for="user_language"><%=l(:field_language)%></label>
 <%= select("user", "language", lang_options_for_select) %></p>
+
+
+<h3><%=l(:label_ssamr_details)%></h3>
+	<%= error_messages_for :ssamr_user_details %>
+		<% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>	
+			<p><%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true  %></p>
+		<% end %>
+
+
 
 
 <% if Setting.openid? %>

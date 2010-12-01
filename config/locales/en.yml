@@ -299,11 +299,12 @@ en:
   field_text: Text field
   field_visible: Visible
   
+  setting_tipoftheday_text: Tip of the Day
+  setting_notifications_text: Notifications
+  label_ssamr_description: Description
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
   setting_welcome_text: Welcome text
-  setting_tipoftheday_text: Tip of the Day
-  setting_notifications_text: Notifications
   setting_default_language: Default language
   setting_login_required: Authentication required
   setting_self_registration: Self-registration
@@ -425,6 +426,7 @@ en:
   project_module_gantt: Gantt
   
   label_tipoftheday: Tip of the day
+  label_ssamr_details: Other Details
   label_user: User
   label_user_plural: Users
   label_user_new: New user

@@ -20,8 +20,11 @@
 </div>
 
 <div class="box tabular">
-	<h3><%=l(:label_ssamr_detail)%></h3>
-	<p><%= f.text_field User.description, :size => 25  %></p>
+	<h3><%=l(:label_ssamr_details)%></h3>
+		<%= error_messages_for :ssamr_user_details %>
+			<% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>	
+				<p><%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true  %></p>
+			<% end %>
 </div>
 
 <div class="box tabular">
