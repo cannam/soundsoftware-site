@@ -72,7 +72,7 @@ class UsersController < ApplicationController
     render_404
   end
 
-  def new    
+  def new      
     @notification_options = User::MAIL_NOTIFICATION_OPTIONS
     @notification_option = Setting.default_notification_option
 
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
     @auth_sources = AuthSource.find(:all)
 
     @ssamr_user_details = SsamrUserDetail.new
-
+    
   end
   
   verify :method => :post, :only => :create, :render => {:nothing => true, :status => :method_not_allowed }
@@ -98,12 +98,14 @@ class UsersController < ApplicationController
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
 
-    @ssamr_user_details = @user.ssamr_user_detail
-    @ssamr_user_details.description = params[:ssamr_user_details][:description]
-    
+    @ssamr_user_details = SsamrUserDetail.new(params[:ssamr_user_details])
+
+    # associates the 2 objects
+    @user.ssamr_user_detail = @ssamr_user_details
+
     if @user.save
       @user.pref.save
-      
+                 
       @ssamr_user_details.save!
           
       @user.notified_project_ids = (params[:notification_option] == 'selected' ? params[:notified_project_ids] : [])
@@ -158,12 +160,11 @@ class UsersController < ApplicationController
     
     @ssamr_user_details.save!
     
-
     if @user.save
       @user.pref.save
       @user.notified_project_ids = (params[:notification_option] == 'selected' ? params[:notified_project_ids] : [])
 
-      if was_activatedd
+      if was_activated
         Mailer.deliver_account_activated(@user)
       elsif @user.active? && params[:send_information] && !params[:password].blank? && @user.auth_source_id.nil?
         Mailer.deliver_account_information(@user, params[:password])
