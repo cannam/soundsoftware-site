@@ -156,10 +156,13 @@ class UsersController < ApplicationController
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
 
     @ssamr_user_details = @user.ssamr_user_detail
-    @ssamr_user_details.description = params[:ssamr_user_details][:description]
-    
-    @ssamr_user_details.save!
-    
+    if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
+      @ssamr_user_details.description = @user.ssamr_user_detail.description
+    else
+      @ssamr_user_details.description = params[:ssamr_user_details][:description]
+      @ssamr_user_details.save!
+    end
+
     if @user.save
       @user.pref.save
       @user.notified_project_ids = (params[:notification_option] == 'selected' ? params[:notified_project_ids] : [])
