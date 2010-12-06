@@ -9,15 +9,25 @@
     <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }%>
 </div>
 
-<h2><%=l(:label_project_plural)%></h2>
+<h2><%=l(:label_my_project_plural)%></h2>
+<%= render_my_project_hierarchy(@projects)%>
 
-<%= render_project_hierarchy(@projects)%>
+
+<h2><%=l(:label_other_project_plural)%></h2>
+<%= render_other_project_hierarchy(@projects)%>
 
 <% if User.current.logged? %>
 <p style="text-align:right;">
 <span class="my-project"><%= l(:label_my_projects) %></span>
 </p>
 <% end %>
+
+
+
+
+
+
+
 
 <% other_formats_links do |f| %>
 	<%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>
