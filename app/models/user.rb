@@ -52,7 +52,7 @@ class User < Principal
   belongs_to :auth_source
   
   has_one :ssamr_user_detail, :dependent => :destroy, :class_name => 'SsamrUserDetail'
-  
+
   # Active non-anonymous users scope
   named_scope :active, :conditions => "#{User.table_name}.status = #{STATUS_ACTIVE}"
   

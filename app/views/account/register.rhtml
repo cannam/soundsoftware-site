@@ -3,6 +3,12 @@
 <% form_tag({:action => 'register'}, :class => "tabular") do %>
 <%= error_messages_for 'user' %>
 
+<ul>
+  <% for message in @ssamr_user_details.errors.full_messages %>
+  <li><%= message %></li>
+<% end %>
+</ul>
+
 <div class="box">
 <!--[form:user]-->
 <% if @user.auth_source_id.nil? %>
