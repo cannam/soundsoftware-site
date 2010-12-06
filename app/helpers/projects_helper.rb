@@ -90,6 +90,11 @@ module ProjectsHelper
   # (eg. some intermediate nodes are private and can not be seen)
   def render_my_project_hierarchy(projects)
     s = ''
+
+    a = ''
+
+    # Flag to tell if user has any projects
+    t = FALSE
     
     if projects.any?
       ancestors = []
@@ -100,6 +105,8 @@ module ProjectsHelper
         @project = project
 
         if User.current.member_of?(project):
+
+          t = TRUE
 
           if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
             s << "<ul class='projects #{ ancestors.empty? ? 'root' : nil}'>\n"
@@ -123,7 +130,17 @@ module ProjectsHelper
         s << ("</li></ul>\n" * ancestors.size)
         @project = original_project
     end
-    s
+
+    if t == TRUE
+      a << "<h2>"
+      a <<  l("label_my_project_plural")
+      a << "</h2>"
+      a << s
+    else
+      a = s
+    end
+    
+    a
   end
 
   # Renders a tree of projects where the current DOES NOT belong
@@ -166,6 +183,8 @@ module ProjectsHelper
       s << ("</li></ul>\n" * ancestors.size)
       @project = original_project
     end
+
+
     s
   end
 
