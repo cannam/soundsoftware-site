@@ -2,12 +2,7 @@
 
 <% form_tag({:action => 'register'}, :class => "tabular") do %>
 <%= error_messages_for 'user' %>
-
-<ul>
-  <% for message in @ssamr_user_details.errors.full_messages %>
-  <li><%= message %></li>
-<% end %>
-</ul>
+<%= error_messages_for 'ssamr_user_details' %>
 
 <div class="box">
 <!--[form:user]-->
@@ -37,7 +32,7 @@
 
 
 <h3><%=l(:label_ssamr_details)%></h3>
-	<%= error_messages_for :ssamr_user_details %>
+	
 		<% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>	
 			<p><%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true  %></p>
 		<% end %>
