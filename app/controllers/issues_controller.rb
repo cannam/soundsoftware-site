@@ -132,7 +132,12 @@ class IssuesController < ApplicationController
       attachments = Attachment.attach_files(@issue, params[:attachments])
       render_attachment_warning_if_needed(@issue)
       flash[:notice] = l(:notice_successful_create)
+      
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
+
+      # Adds user to watcher's list
+      @issue.add_watcher(User.current)
+
       respond_to do |format|
         format.html {
           redirect_to(params[:continue] ?  { :action => 'new', :project_id => @project, :issue => {:tracker_id => @issue.tracker, :parent_issue_id => @issue.parent_issue_id}.reject {|k,v| v.nil?} } :
