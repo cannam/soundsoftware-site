@@ -865,7 +865,10 @@ en:
   text_tip_issue_begin_day: issue beginning this day
   text_tip_issue_end_day: issue ending this day
   text_tip_issue_begin_end_day: issue beginning and ending this day
-  text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br />Once saved, the identifier can not be changed.'
+  text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br /> This will be used in all project-related URLs, such as the repository name. Once saved, the identifier <b>can not</b> be changed.'
+  text_project_name_info: "This name of your project throughout this site.<br /> You can change your project's name at any time in the project's settings."
+  text_project_visibility_info: "If your project is not public, it will only be visible to this site's users you add as project members."
+  :text_project_homepage_info: 'Link to an external project page.'
   text_caracters_maximum: "{{count}} characters maximum."
   text_caracters_minimum: "Must be at least {{count}} characters long."
   text_length_between: "Length between {{min}} and {{max}} characters."
