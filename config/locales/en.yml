@@ -870,6 +870,7 @@ en:
   text_project_visibility_info: "If your project is not public, it will only be visible to this site's users you add as project members."
   text_project_homepage_info: 'Link to an external project page.'
   text_user_ssamr_description_info: 'Description of you interests and experience as a Researcher/Developer in the field of Audio and Music.'
+  text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_caracters_maximum: "{{count}} characters maximum."
   text_caracters_minimum: "Must be at least {{count}} characters long."
   text_length_between: "Length between {{min}} and {{max}} characters."
