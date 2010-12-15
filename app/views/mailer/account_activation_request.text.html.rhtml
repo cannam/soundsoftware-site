@@ -1,6 +1,10 @@
 <p><%= l(:mail_body_account_activation_request, h(@user.login)) %></p>
 <p><%= link_to @url, @url %></p>
 
-<h4><%= l(:label_ssamr_details) %></h4>
-<p><%= textilizable @user.ssamr_user_detail['description'] %></p>
+<h3><%= l(:label_ssamr_details) %></h3>
+<p><%=l(:field_name)%>: <%= h @user.name %></p>
+<p><%=l(:field_mail)%>: <%= h @user.mail %></p>
+
+<h4><%= l(:label_ssamr_description ) %></h4>
+<%= textilizable @user.ssamr_user_detail['description'] %>
 
