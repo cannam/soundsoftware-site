@@ -314,7 +314,7 @@ class ApplicationController < ActionController::Base
     if api_request?
       logger.error "Form authenticity token is missing or is invalid. API calls must include a proper Content-type header (text/xml or text/json)."
     end
-    render_error "Invalid form authenticity token."
+    render_error "Invalid form authenticity token.  Perhaps your session has timed out; try reloading the form and entering your details again."
   end
   
   def render_feed(items, options={})    
