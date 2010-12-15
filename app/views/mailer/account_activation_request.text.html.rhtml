@@ -2,8 +2,10 @@
 <p><%= link_to @url, @url %></p>
 
 <h3><%= l(:label_ssamr_details) %></h3>
-<p><%=l(:field_name)%>: <%= h @user.name %></p>
-<p><%=l(:field_mail)%>: <%= h @user.mail %></p>
+<p>
+  <%=l(:field_name)%>: <%= h @user.name %><br />
+  <%=l(:field_mail)%>: <%= h @user.mail %>
+</p>
 
 <h4><%= l(:label_ssamr_description ) %></h4>
 <%= textilizable @user.ssamr_user_detail['description'] %>
