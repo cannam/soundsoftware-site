@@ -1,2 +1,6 @@
 <p><%= l(:mail_body_account_activation_request, h(@user.login)) %></p>
+
+<h4><%= l(:label_ssamr_details) %></h4>
+<p><%= textilizable @user.ssamr_user_detail['description'] %></p>
+
 <p><%= link_to @url, @url %></p>
