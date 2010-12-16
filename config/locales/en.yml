@@ -200,7 +200,9 @@ en:
   
   gui_validation_error: 1 error
   gui_validation_error_plural: "{{count}} errors"
-  
+
+  field_ssamr_user_detail:
+    description: User Description
   field_name: Name
   field_description: Description
   field_summary: Summary
@@ -299,11 +301,12 @@ en:
   field_text: Text field
   field_visible: Visible
   
+  setting_tipoftheday_text: Tip of the Day
+  setting_notifications_text: Notifications
+  label_ssamr_description: Description
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
   setting_welcome_text: Welcome text
-  setting_tipoftheday_text: Tip of the Day
-  setting_notifications_text: Notifications
   setting_default_language: Default language
   setting_login_required: Authentication required
   setting_self_registration: Self-registration
@@ -425,6 +428,7 @@ en:
   project_module_gantt: Gantt
   
   label_tipoftheday: Tip of the day
+  label_ssamr_details: Other Details
   label_user: User
   label_user_plural: Users
   label_user_new: New user
@@ -432,6 +436,8 @@ en:
   label_project: Project
   label_project_new: New project
   label_project_plural: Projects
+  label_my_project_plural: My Projects
+  label_other_project_plural: Other Projects
   label_x_projects:
     zero:  no projects
     one:   1 project
@@ -859,7 +865,12 @@ en:
   text_tip_issue_begin_day: issue beginning this day
   text_tip_issue_end_day: issue ending this day
   text_tip_issue_begin_end_day: issue beginning and ending this day
-  text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br />Once saved, the identifier can not be changed.'
+  text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br /> This will be used in all project-related URLs, and as the repository name. Once saved, the identifier <b>can not</b> be changed.'
+  text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
+  text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
+  text_project_homepage_info: 'Link to an external project page.'
+  text_user_ssamr_description_info: 'Description of your interests and experience as a Researcher/Developer in the field of Audio and Music.'
+  text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_caracters_maximum: "{{count}} characters maximum."
   text_caracters_minimum: "Must be at least {{count}} characters long."
   text_length_between: "Length between {{min}} and {{max}} characters."

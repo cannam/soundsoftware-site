@@ -52,6 +52,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     
+    @description = @user.ssamr_user_detail.description
+            
     # show projects based on current user visibility
     @memberships = @user.memberships.all(:conditions => Project.visible_by(User.current))
     
@@ -70,12 +72,15 @@ class UsersController < ApplicationController
     render_404
   end
 
-  def new
+  def new      
     @notification_options = User::MAIL_NOTIFICATION_OPTIONS
     @notification_option = Setting.default_notification_option
 
     @user = User.new(:language => Setting.default_language)
     @auth_sources = AuthSource.find(:all)
+
+    @ssamr_user_details = SsamrUserDetail.new
+    
   end
   
   verify :method => :post, :only => :create, :render => {:nothing => true, :status => :method_not_allowed }
@@ -83,7 +88,7 @@ class UsersController < ApplicationController
     @notification_options = User::MAIL_NOTIFICATION_OPTIONS
     @notification_option = Setting.default_notification_option
 
-    @user = User.new(params[:user])
+    @user = User.new(params[:user])    
     @user.admin = params[:user][:admin] || false
     @user.login = params[:user][:login]
     @user.password, @user.password_confirmation = params[:password], params[:password_confirmation] unless @user.auth_source_id
@@ -93,8 +98,16 @@ class UsersController < ApplicationController
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
 
+    @ssamr_user_details = SsamrUserDetail.new(params[:ssamr_user_details])
+
+    # associates the 2 objects
+    @user.ssamr_user_detail = @ssamr_user_details
+
     if @user.save
       @user.pref.save
+                 
+      @ssamr_user_details.save!
+          
       @user.notified_project_ids = (params[:notification_option] == 'selected' ? params[:notified_project_ids] : [])
 
       Mailer.deliver_account_information(@user, params[:password]) if params[:send_information]
@@ -114,7 +127,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @notification_options = @user.valid_notification_options
     @notification_option = @user.mail_notification
-
+    
+    @ssamr_user_details = @user.ssamr_user_detail
+    
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
   end
@@ -122,6 +137,7 @@ class UsersController < ApplicationController
   verify :method => :put, :only => :update, :render => {:nothing => true, :status => :method_not_allowed }
   def update
     @user = User.find(params[:id])
+
     @notification_options = @user.valid_notification_options
     @notification_option = @user.mail_notification
 
@@ -138,6 +154,14 @@ class UsersController < ApplicationController
     @user.mail_notification = params[:notification_option] || 'only_my_events'
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
+
+    @ssamr_user_details = @user.ssamr_user_detail
+    if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
+      @ssamr_user_details.description = @user.ssamr_user_detail.description
+    else
+      @ssamr_user_details.description = params[:ssamr_user_details][:description]
+      @ssamr_user_details.save!
+    end
 
     if @user.save
       @user.pref.save

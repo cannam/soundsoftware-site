@@ -51,6 +51,9 @@ class User < Principal
   has_one :api_token, :dependent => :destroy, :class_name => 'Token', :conditions => "action='api'"
   belongs_to :auth_source
   
+  has_one :ssamr_user_detail, :dependent => :destroy, :class_name => 'SsamrUserDetail'
+  accepts_nested_attributes_for :ssamr_user_detail
+
   # Active non-anonymous users scope
   named_scope :active, :conditions => "#{User.table_name}.status = #{STATUS_ACTIVE}"
   
@@ -62,6 +65,9 @@ class User < Principal
   attr_protected :login, :admin, :password, :password_confirmation, :hashed_password, :group_ids
 	
   validates_presence_of :login, :firstname, :lastname, :mail, :if => Proc.new { |user| !user.is_a?(AnonymousUser) }
+  
+  # TODO: is this validation correct validates_presence_of :ssamr_user_detail
+  
   validates_uniqueness_of :login, :if => Proc.new { |user| !user.login.blank? }, :case_sensitive => false
   validates_uniqueness_of :mail, :if => Proc.new { |user| !user.mail.blank? }, :case_sensitive => false
   # Login must contain lettres, numbers, underscores only
@@ -92,6 +98,10 @@ class User < Principal
     write_attribute(:mail, arg.to_s.strip)
   end
   
+  def description=(arg)
+    write_attribute(:description, arg.to_s.strip)
+  end
+    
   def identity_url=(url)
     if url.blank?
       write_attribute(:identity_url, '')

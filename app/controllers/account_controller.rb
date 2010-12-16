@@ -77,13 +77,19 @@ class AccountController < ApplicationController
   # User self-registration
   def register
     redirect_to(home_url) && return unless Setting.self_registration? || session[:auth_source_registration]
+
     if request.get?
       session[:auth_source_registration] = nil
       @user = User.new(:language => Setting.default_language)
+
+      @ssamr_user_details = SsamrUserDetail.new
+
     else
       @user = User.new(params[:user])
       @user.admin = false
+                  
       @user.register
+      
       if session[:auth_source_registration]
         @user.activate
         @user.login = session[:auth_source_registration][:login]
@@ -97,6 +103,11 @@ class AccountController < ApplicationController
       else
         @user.login = params[:user][:login]
         @user.password, @user.password_confirmation = params[:password], params[:password_confirmation]
+
+        @ssamr_user_details = SsamrUserDetail.new(params[:ssamr_user_details])
+
+        # associates the 2 objects
+        @user.ssamr_user_detail = @ssamr_user_details
 
         case Setting.self_registration
         when '1'
@@ -257,6 +268,9 @@ class AccountController < ApplicationController
   # Pass a block for behavior when a user fails to save
   def register_manually_by_administrator(user, &block)
     if user.save
+
+       @ssamr_user_details.save!
+
       # Sends an email to the administrators
       Mailer.deliver_account_activation_request(user)
       account_pending

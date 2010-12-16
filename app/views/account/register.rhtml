@@ -29,6 +29,23 @@
 <p><label for="user_language"><%=l(:field_language)%></label>
 <%= select("user", "language", lang_options_for_select) %></p>
 
+
+<h3><%=l(:label_ssamr_details)%></h3>
+	
+		<% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>	
+			<p>
+
+                          <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit' %>
+                          <%= wikitoolbar_for 'ssamr_user_details_description' %>
+
+                          <br />
+                          <em> <%=l(:text_user_ssamr_description_info)%></em>
+                        </p>
+                <% end %>
+          
+
+
+
 <% if Setting.openid? %>
 <p><label for="user_identity_url"><%=l(:field_identity_url)%></label>
 <%= text_field 'user', 'identity_url'  %></p>
