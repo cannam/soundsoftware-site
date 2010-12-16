@@ -207,8 +207,8 @@ en:
   field_description: Description
   field_summary: Summary
   field_is_required: Required
-  field_firstname: Firstname
-  field_lastname: Lastname
+  field_firstname: First name
+  field_lastname: Last name
   field_mail: Email
   field_filename: File
   field_filesize: Size
@@ -303,7 +303,7 @@ en:
   
   setting_tipoftheday_text: Tip of the Day
   setting_notifications_text: Notifications
-  label_ssamr_description: Description
+  label_ssamr_description: Research description
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
   setting_welcome_text: Welcome text
