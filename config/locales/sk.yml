@@ -346,6 +346,7 @@ sk:
   label_register: Registrovať
   label_password_lost: Zabudnuté heslo
   label_home: Domovská stránka
+  label_home_heading: Domovská stránka
   label_my_page: Moja stránka
   label_my_account: Môj účet
   label_my_projects: Moje projekty

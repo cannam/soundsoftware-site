@@ -352,6 +352,7 @@ cs:
   label_register: Registrovat
   label_password_lost: Zapomenuté heslo
   label_home: Úvodní
+  label_home_heading: Úvodní
   label_my_page: Moje stránka
   label_my_account: Můj účet
   label_my_projects: Moje projekty

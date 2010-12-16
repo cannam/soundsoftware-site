@@ -464,6 +464,7 @@ sr-YU:
   label_login_with_open_id_option: ili prijava sa OpenID
   label_password_lost: Izgubljena lozinka
   label_home: Početak
+  label_home_heading: Početak
   label_my_page: Moja stranica
   label_my_account: Moj nalog
   label_my_projects: Moji projekti

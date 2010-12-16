@@ -203,8 +203,8 @@ en-GB:
   field_description: Description
   field_summary: Summary
   field_is_required: Required
-  field_firstname: Firstname
-  field_lastname: Lastname
+  field_firstname: First name
+  field_lastname: Last name
   field_mail: Email
   field_filename: File
   field_filesize: Size
@@ -412,7 +412,7 @@ en-GB:
   
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
-  label_ssamr_description: Description
+  label_ssamr_description: Research description
   label_ssamr_details: Other Details
   
   label_user: User
@@ -468,6 +468,7 @@ en-GB:
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
+  label_home_heading: Welcome!
   label_my_page: My page
   label_my_account: My account
   label_my_projects: My projects
@@ -840,6 +841,8 @@ en-GB:
   text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br /> This will be used in all project-related URLs, and as the repository name. Once saved, the identifier <b>can not</b> be changed.'
   text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
   text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
+  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
+  text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_caracters_maximum: "{{count}} characters maximum."
   text_caracters_minimum: "Must be at least {{count}} characters long."
   text_length_between: "Length between {{min}} and {{max}} characters."

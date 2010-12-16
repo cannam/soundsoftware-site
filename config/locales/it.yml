@@ -319,6 +319,7 @@ it:
   label_register: Registrati
   label_password_lost: Password dimenticata
   label_home: Home
+  label_home_heading: Home
   label_my_page: Pagina personale
   label_my_account: Il mio utente
   label_my_projects: I miei progetti
