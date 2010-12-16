@@ -148,7 +148,11 @@ module ProjectsHelper
   # The given collection may be a subset of the whole project tree
   # (eg. some intermediate nodes are private and can not be seen)
   def render_other_project_hierarchy(projects)
+    a = ''
     s = ''
+
+    # True if user has any projects (affects the heading used)
+    t = FALSE
 
     if projects.any?
       ancestors = []
@@ -177,6 +181,8 @@ module ProjectsHelper
           s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
           s << "</div>\n"
           ancestors << project          
+        else
+          t = TRUE
         end
        end
 
@@ -184,8 +190,19 @@ module ProjectsHelper
       @project = original_project
     end
 
+    if t == TRUE
+      a << "<h2>"
+      a <<  l("label_other_project_plural")
+      a << "</h2>"
+      a << s
+    else
+      a << "<h2>"
+      a << l("label_project_all")
+      a << "</h2>"
+      a << s
+    end
 
-    s
+    a
   end
 
 
