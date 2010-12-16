@@ -426,9 +426,9 @@ en:
   project_module_boards: Boards
   project_module_calendar: Calendar
   project_module_gantt: Gantt
-  
   label_tipoftheday: Tip of the day
   label_ssamr_details: Other Details
+  label_ssamr_institution: Institution
   label_user: User
   label_user_plural: Users
   label_user_new: New user

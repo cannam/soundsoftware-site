@@ -414,7 +414,7 @@ en-GB:
   label_notifications: Important Message
   label_ssamr_description: Research description
   label_ssamr_details: Other Details
-  
+  label_ssamr_institution: Institution
   label_user: User
   label_user_plural: Users
   label_user_new: New user
