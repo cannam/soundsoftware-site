@@ -3,17 +3,15 @@
 <% end %>
 
 <div class="contextual">
-    <%= link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') + ' |' if User.current.allowed_to?(:add_project, nil, :global => true) %>
-    <%= link_to(l(:label_issue_view_all), { :controller => 'issues' }) + ' |' if User.current.allowed_to?(:view_issues, nil, :global => true) %>
-    <%= link_to(l(:label_overall_spent_time), { :controller => 'time_entries' }) + ' |' if User.current.allowed_to?(:view_time_entries, nil, :global => true) %>
     <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }%>
+    <%= '| ' + link_to(l(:label_issue_view_all), { :controller => 'issues' }) if User.current.allowed_to?(:view_issues, nil, :global => true) %>
+    <%= '| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true) %>
 </div>
 
 <% if User.current.logged? %>
   
   <%= render_my_project_hierarchy(@projects)%>
 
-  <h2><%=l(:label_other_project_plural)%></h2>
   <%= render_other_project_hierarchy(@projects)%>
 
 <% else %>
@@ -22,13 +20,6 @@
   <%= render_project_hierarchy(@projects)%>
 <% end %>
 
-
-
-<% if User.current.logged? %>
-<p style="text-align:right;">
-<span class="my-project"><%= l(:label_my_projects) %></span>
-</p>
-<% end %>
 
 
 <% other_formats_links do |f| %>
