@@ -214,7 +214,7 @@ def set_owner_and_rights(project, repos_path, &block)
     yield if block_given?
   else
     uid, gid = Etc.getpwnam($svn_owner).uid, ($use_groupid ? Etc.getgrnam(project.identifier).gid : Etc.getgrnam($svn_group).gid)
-    right = project.is_public ? 0775 : 0770
+    right = project.is_public ? 02775 : 02770
     yield if block_given?
     Find.find(repos_path) do |f|
       File.chmod right, f
@@ -313,7 +313,11 @@ projects.each do |project|
       next
     end
 
-    project.is_public ? File.umask(0002) : File.umask(0007)
+# No -- we need "other" users to be able to read it.  Access control
+# is not handled through Unix user id anyway
+#    project.is_public ? File.umask(0002) : File.umask(0007)
+    File.umask(0002)
+
     log("\taction: create repository #{repos_path}")
 
     begin
