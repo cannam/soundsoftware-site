@@ -132,7 +132,19 @@ class IssuesController < ApplicationController
       attachments = Attachment.attach_files(@issue, params[:attachments])
       render_attachment_warning_if_needed(@issue)
       flash[:notice] = l(:notice_successful_create)
+      
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
+
+      # Adds user to watcher's list
+      @issue.add_watcher(User.current)
+
+      # Also adds the assignee to the watcher's list
+       if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
+        unless @issue.watcher_ids.include?(params[:issue][:assigned_to_id]):
+          @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
+        end
+       end
+
       respond_to do |format|
         format.html {
           redirect_to(params[:continue] ?  { :action => 'new', :project_id => @project, :issue => {:tracker_id => @issue.tracker, :parent_issue_id => @issue.parent_issue_id}.reject {|k,v| v.nil?} } :
@@ -274,6 +286,18 @@ private
     @notes = params[:notes] || (params[:issue].present? ? params[:issue][:notes] : nil)
     @issue.init_journal(User.current, @notes)
     @issue.safe_attributes = params[:issue]
+
+    # tests if the the user assigned_to_id
+    # is in this issues watcher's list
+    # if not, adds it.
+
+    if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
+      unless @issue.watcher_ids.include?(params[:issue][:assigned_to_id]):
+        @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
+      end
+    end
+
+
   end
 
   # TODO: Refactor, lots of extra code in here

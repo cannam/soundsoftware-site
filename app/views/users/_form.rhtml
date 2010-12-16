@@ -20,6 +20,20 @@
 </div>
 
 <div class="box tabular">
+	<h3><%=l(:label_ssamr_details)%></h3>
+          <% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>
+            <p>
+              <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit'  %>
+              <%= wikitoolbar_for 'ssamr_user_details_description' %>
+              <br />
+              <em> <%=l(:text_user_ssamr_description_info)%></em>
+            </p>
+          <% end %>          
+</div>
+
+
+
+<div class="box tabular">
 <h3><%=l(:label_authentication)%></h3>
 <% unless @auth_sources.empty? %>
 <p><%= f.select :auth_source_id, ([[l(:label_internal), ""]] + @auth_sources.collect { |a| [a.name, a.id] }), {}, :onchange => "if (this.value=='') {Element.show('password_fields');} else {Element.hide('password_fields');}" %></p>

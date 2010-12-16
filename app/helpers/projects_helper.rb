@@ -83,6 +83,113 @@ module ProjectsHelper
     s
   end
 
+
+  # Renders a tree of projects where the current user belongs
+  # as a nested set of unordered lists
+  # The given collection may be a subset of the whole project tree
+  # (eg. some intermediate nodes are private and can not be seen)
+  def render_my_project_hierarchy(projects)
+    s = ''
+
+    a = ''
+
+    # Flag to tell if user has any projects
+    t = FALSE
+    
+    if projects.any?
+      ancestors = []
+      original_project = @project
+      projects.each do |project|
+        # set the project environment to please macros.
+
+        @project = project
+
+        if User.current.member_of?(project):
+
+          t = TRUE
+
+          if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
+            s << "<ul class='projects #{ ancestors.empty? ? 'root' : nil}'>\n"
+          else
+            ancestors.pop
+            s << "</li>"
+            while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
+              ancestors.pop
+              s << "</ul></li>\n"
+            end
+          end
+
+          classes = (ancestors.empty? ? 'root' : 'child')
+          s << "<li class='#{classes}'><div class='#{classes}'>" +
+                 link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
+          s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
+          s << "</div>\n"
+          ancestors << project
+        end
+       end
+        s << ("</li></ul>\n" * ancestors.size)
+        @project = original_project
+    end
+
+    if t == TRUE
+      a << "<h2>"
+      a <<  l("label_my_project_plural")
+      a << "</h2>"
+      a << s
+    else
+      a = s
+    end
+    
+    a
+  end
+
+  # Renders a tree of projects where the current DOES NOT belong
+  # as a nested set of unordered lists
+  # The given collection may be a subset of the whole project tree
+  # (eg. some intermediate nodes are private and can not be seen)
+  def render_other_project_hierarchy(projects)
+    s = ''
+
+    if projects.any?
+      ancestors = []
+      original_project = @project
+      projects.each do |project|
+        # set the project environment to please macros.
+
+        @project = project
+
+        if not User.current.member_of?(project):
+
+          if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
+            s << "<ul class='projects #{ ancestors.empty? ? 'root' : nil}'>\n"
+          else
+            ancestors.pop
+            s << "</li>"
+            while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
+              ancestors.pop
+              s << "</ul></li>\n"
+            end
+          end
+
+          classes = (ancestors.empty? ? 'root' : 'child')
+          s << "<li class='#{classes}'><div class='#{classes}'>" +
+                 link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
+          s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
+          s << "</div>\n"
+          ancestors << project          
+        end
+       end
+
+      s << ("</li></ul>\n" * ancestors.size)
+      @project = original_project
+    end
+
+
+    s
+  end
+
+
+
   # Returns a set of options for a select field, grouped by project.
   def version_options_for_select(versions, selected=nil)
     grouped = Hash.new {|h,k| h[k] = []}
