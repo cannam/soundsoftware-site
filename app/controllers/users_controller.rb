@@ -51,9 +51,11 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+
+    if @user.ssamr_user_detail != nil
+      @description = @user.ssamr_user_detail.description
+    end
     
-    @description = @user.ssamr_user_detail.description
-            
     # show projects based on current user visibility
     @memberships = @user.memberships.all(:conditions => Project.visible_by(User.current))
     
@@ -155,7 +157,14 @@ class UsersController < ApplicationController
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
 
-    @ssamr_user_details = @user.ssamr_user_detail
+    if @user.ssamr_user_detail == nil
+      @ssamr_user_details = SsamrUserDetail.new()
+      @user.ssamr_user_detail = @ssamr_user_details
+    else
+      @ssamr_user_details = @user.ssamr_user_detail
+    end
+
+
     if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
       @ssamr_user_details.description = @user.ssamr_user_detail.description
     else
