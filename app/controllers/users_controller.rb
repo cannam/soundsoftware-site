@@ -54,6 +54,9 @@ class UsersController < ApplicationController
 
     if @user.ssamr_user_detail != nil
       @description = @user.ssamr_user_detail.description
+      if @user.ssamr_user_detail.institution_id != nil
+        @institution = @institution.find(@user.ssamr_user_detail.institution_id)
+      end
     end
     
     # show projects based on current user visibility
