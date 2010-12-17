@@ -42,7 +42,7 @@
 
                         <p>
                           <label for="ssamr_user_institution"><%=l(:label_ssamr_institution)%></label>
-                            <%= ssamr_user_detail.collection_select(:university, Institution.all, :id, :name, {:prompt => true}) %>
+                            <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:prompt => true}) %>
                         </p>
                 <% end %>
           

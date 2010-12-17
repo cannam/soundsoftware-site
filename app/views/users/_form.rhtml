@@ -23,10 +23,11 @@
 	<h3><%=l(:label_ssamr_details)%></h3>
           <% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>
             <p>
-              <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit'  %>
-              <%= wikitoolbar_for 'ssamr_user_details_description' %>
-              <br />
-              <em> <%=l(:text_user_ssamr_description_info)%></em>
+              <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit'  %>                            
+            </p>
+            <p>
+              <label for="ssamr_user_institution"><%=l(:label_ssamr_institution)%></label>
+              <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:selected => @user.ssamr_user_detail.institution_id.to_i} ) %>                         
             </p>
           <% end %>          
 </div>
