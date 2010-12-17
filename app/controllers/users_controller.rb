@@ -166,12 +166,13 @@ class UsersController < ApplicationController
     else
       @ssamr_user_details = @user.ssamr_user_detail
     end
-
-
+    
     if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
       @ssamr_user_details.description = @user.ssamr_user_detail.description
+      @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
     else
       @ssamr_user_details.description = params[:ssamr_user_details][:description]
+      @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
       @ssamr_user_details.save!
     end
 

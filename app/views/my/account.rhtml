@@ -9,6 +9,8 @@
                           :builder => TabularFormBuilder, 
                           :lang => current_language,
                           :html => { :id => 'my_account_form' } do |f| %>
+
+
 <div class="splitcontentleft">
 <h3><%=l(:label_information_plural)%></h3>
 <div class="box tabular">
@@ -23,8 +25,23 @@
 <% @user.custom_field_values.select(&:editable?).each do |value| %>
 	<p><%= custom_field_tag_with_label :user, value %></p>
 <% end %>
+
 <%= call_hook(:view_my_account, :user => @user, :form => f) %>
 </div>
+
+<h3><%=l(:label_ssamr_details)%></h3>
+<div class="box tabular">
+    <% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>
+       <p>
+         <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 25, :required => true, :class => 'wiki-edit' %>
+       </p>
+       <p>
+         <label for="ssamr_user_institution"><%=l(:label_ssamr_institution)%></label>
+         <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:selected => @user.ssamr_user_detail.institution_id.to_i} ) %>
+       </p>
+    <% end %>
+</div>
+
 
 <%= submit_tag l(:button_save) %>
 </div>
@@ -42,6 +59,14 @@
 
 </div>
 <% end %>
+
+
+
+
+
+
+
+
 
 <% content_for :sidebar do %>
 <%= render :partial => 'sidebar' %>
