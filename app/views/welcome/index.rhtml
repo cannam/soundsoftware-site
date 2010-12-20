@@ -9,14 +9,6 @@
 <div class="splitcontentleft">
   <%= textilizable Setting.welcome_text %>
   
-  <% if not @tipsoftheday.empty? %>
-    <div class="newsoftheday box">
-	  <h3><%=l(:label_tipoftheday)%></h3>
-	  <%= textilizable @tipsoftheday %>
-    </div>
-  <% end %>
-
-
   <% if @news.any? %>
   <div class="news box">
 	<h3><%=l(:label_news_latest)%></h3>
@@ -28,6 +20,13 @@
 </div>
 
 <div class="splitcontentright">
+  <% if not @tipsoftheday.empty? %>
+    <div class="newsoftheday box">
+          <h3><%=l(:label_tipoftheday)%></h3>
+          <%= textilizable @tipsoftheday %>
+    </div>
+  <% end %>
+
     <% if @projects.any? %>
 	<div class="projects box">
 	<h3><%=l(:label_project_latest)%></h3>
