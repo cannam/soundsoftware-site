@@ -74,9 +74,9 @@ tr.entry:last-child { border-bottom: 1px solid #a9b680; }
 #header a { color: #be5700; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
 .header-general h1 {
-  background: url('soundsoftware-logo-title-only-transparent.png') no-repeat 0 0;
+  background: url('soundsoftware-logo-title-only-transparent-beta.png') no-repeat 0 0;
   text-indent: -9999px;
-  width: 446px;
+  width: 500px;
   height: 34px;
  }
 #quick-search { margin-right: 6px; margin-top: 1em; color: #000; }
