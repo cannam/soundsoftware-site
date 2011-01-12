@@ -136,14 +136,14 @@ class IssuesController < ApplicationController
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
 
       # Adds user to watcher's list
-      @issue.add_watcher(User.current)
+      # @issue.add_watcher(User.current)
 
       # Also adds the assignee to the watcher's list
-       if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
-        unless @issue.watcher_ids.include?(params[:issue][:assigned_to_id]):
-          @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
-        end
-       end
+      # if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
+      #  unless @issue.watcher_ids.include?(params[:issue][:assigned_to_id]):
+      #    @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
+      #  end
+      # end
 
       respond_to do |format|
         format.html {
@@ -291,11 +291,11 @@ private
     # is in this issues watcher's list
     # if not, adds it.
 
-    if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
-      unless @issue.watcher_ids.include?(params[:issue][:assigned_to_id]):
-        @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
-      end
-    end
+    # if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
+    #  unless @issue.watcher_ids.include?(params[:issue][:assigned_to_id]):
+    #    @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
+    #  end
+    # end
 
 
   end
