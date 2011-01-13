@@ -2,13 +2,13 @@
 
 dir
 4707
-http://redmine.rubyforge.org/svn/branches/1.1-stable/test/unit/lib/redmine/scm/adapters
+http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine/scm/adapters
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-05T15:10:38.377434Z
-4638
+2011-01-13T12:05:11.734883Z
+4705
 tmaruyama
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-01-13T12:50:17.000000Z
+2011-01-13T14:08:13.000000Z
 765ef194c70144742d0b8bfcb99f6627
 2010-12-12T23:24:34.194336Z
 4509
@@ -66,7 +66,7 @@ file
 
 
 
-2011-01-13T12:50:17.000000Z
+2011-01-13T14:08:13.000000Z
 2e3d6f99dd454ee396770a707ea169db
 2010-12-12T23:24:45.195624Z
 4510
@@ -100,10 +100,10 @@ file
 
 
 
-2011-01-13T12:50:17.000000Z
-f65e712851ab55cfd66aa7ccf8d5d5e5
-2011-01-05T15:10:38.377434Z
-4638
+2011-01-13T14:08:13.000000Z
+7af2ec05aa23ebf083f7aa58bca43f95
+2011-01-13T12:05:11.734883Z
+4705
 tmaruyama
 has-props
 
@@ -126,7 +126,7 @@ has-props
 
 
 
-2698
+6096
 
 filesystem_adapter_test.rb
 file
@@ -134,7 +134,7 @@ file
 
 
 
-2011-01-13T12:50:17.000000Z
+2011-01-13T14:08:13.000000Z
 61cf9f9a3628f6766845641d99adaa83
 2010-12-12T23:24:34.194336Z
 4509

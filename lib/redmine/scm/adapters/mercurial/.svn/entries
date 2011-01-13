@@ -2,13 +2,13 @@
 
 dir
 4707
-http://redmine.rubyforge.org/svn/branches/1.1-stable/lib/redmine/scm/adapters/mercurial
+http://redmine.rubyforge.org/svn/trunk/lib/redmine/scm/adapters/mercurial
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-05T15:10:58.556249Z
-4639
+2011-01-05T15:02:24.961855Z
+4633
 tmaruyama
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-01-13T12:50:18.000000Z
+2011-01-13T14:09:38.000000Z
 961af0eb6ab17203d985cdeac685937e
-2011-01-05T15:10:58.556249Z
-4639
+2011-01-05T15:02:24.961855Z
+4633
 tmaruyama
 has-props
 
@@ -66,10 +66,10 @@ file
 
 
 
-2011-01-13T12:50:18.000000Z
+2011-01-13T14:09:38.000000Z
 9d5de62ae8cdc141d3f8b970dbba07a0
-2011-01-05T15:10:58.556249Z
-4639
+2011-01-05T15:02:24.961855Z
+4633
 tmaruyama
 has-props
 

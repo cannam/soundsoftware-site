@@ -1,11 +1,23 @@
 K 25
 svn:wc:ra_dav:version-url
-V 43
-/svn/!svn/ver/4707/branches/1.1-stable/test
+V 29
+/svn/!svn/ver/4705/trunk/test
+END
+object_daddy_helpers.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4078/trunk/test/object_daddy_helpers.rb
 END
 test_helper.rb
 K 25
 svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4585/branches/1.1-stable/test/test_helper.rb
+V 44
+/svn/!svn/ver/4603/trunk/test/test_helper.rb
+END
+helper_testcase.rb
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/2887/trunk/test/helper_testcase.rb
 END

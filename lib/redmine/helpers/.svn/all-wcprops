@@ -1,11 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4585/branches/1.1-stable/lib/redmine/helpers
+V 44
+/svn/!svn/ver/4584/trunk/lib/redmine/helpers
 END
 gantt.rb
 K 25
 svn:wc:ra_dav:version-url
-V 67
-/svn/!svn/ver/4585/branches/1.1-stable/lib/redmine/helpers/gantt.rb
+V 53
+/svn/!svn/ver/4584/trunk/lib/redmine/helpers/gantt.rb
+END
+calendar.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/3166/trunk/lib/redmine/helpers/calendar.rb
 END

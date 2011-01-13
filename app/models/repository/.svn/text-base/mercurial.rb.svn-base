@@ -27,11 +27,25 @@ class Repository::Mercurial < Repository
   def scm_adapter
     Redmine::Scm::Adapters::MercurialAdapter
   end
-  
+
   def self.scm_name
     'Mercurial'
   end
-  
+
+  # Returns the readable identifier for the given mercurial changeset
+  def self.format_changeset_identifier(changeset)
+    "#{changeset.revision}:#{changeset.scmid}"
+  end
+
+  # Returns the identifier for the given Mercurial changeset
+  def self.changeset_identifier(changeset)
+    changeset.scmid
+  end
+
+  def diff_format_revisions(cs, cs_to, sep=':')
+    super(cs, cs_to, ' ')
+  end
+
   def entries(path=nil, identifier=nil)
     entries=scm.entries(path, identifier)
     if entries
@@ -53,6 +67,18 @@ class Repository::Mercurial < Repository
       end
     end
     entries
+  end
+
+  # Finds and returns a revision with a number or the beginning of a hash
+  def find_changeset_by_name(name)
+    return nil if name.nil? || name.empty?
+    if /[^\d]/ =~ name or name.to_s.size > 8
+      e = changesets.find(:first, :conditions => ['scmid = ?', name.to_s])
+    else
+      e = changesets.find(:first, :conditions => ['revision = ?', name.to_s])
+    end
+    return e if e
+    changesets.find(:first, :conditions => ['scmid LIKE ?', "#{name}%"])  # last ditch
   end
 
   # Returns the latest changesets for +path+; sorted by revision number

@@ -1,7 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 38
-/svn/!svn/ver/4707/branches/1.1-stable
+/svn/!svn/ver/4705/trunk
+END
+.hgignore
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/4606/trunk/.hgignore
 END
 .hgignore
 K 25

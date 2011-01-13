@@ -2,7 +2,7 @@
 
 dir
 4707
-http://redmine.rubyforge.org/svn/branches/1.1-stable/test/unit/lib/redmine/helpers
+http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine/helpers
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-01-13T12:50:17.000000Z
+2011-01-13T14:09:08.000000Z
 1d6b4373836fef676ab3a28235c140b8
 2010-12-29T20:29:42.467534Z
 4582

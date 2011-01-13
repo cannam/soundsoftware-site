@@ -62,7 +62,6 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
 
     if @user.ssamr_user_detail != nil
       @description = @user.ssamr_user_detail.description
@@ -153,7 +152,6 @@ class UsersController < ApplicationController
   
   verify :method => :put, :only => :update, :render => {:nothing => true, :status => :method_not_allowed }
   def update
-
     @user.admin = params[:user][:admin] if params[:user][:admin]
     @user.login = params[:user][:login] if params[:user][:login]
     if params[:user][:password].present? && (@user.auth_source_id.nil? || params[:user][:auth_source_id].blank?)

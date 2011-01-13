@@ -2,7 +2,7 @@
 
 dir
 4707
-http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views/issue_relations
+http://redmine.rubyforge.org/svn/trunk/app/views/issue_relations
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-01-13T12:50:17.000000Z
+2011-01-13T14:09:24.000000Z
 7024ae266ddb4d218d7c24c3b17fa790
 2010-12-12T16:04:28.950669Z
 4502

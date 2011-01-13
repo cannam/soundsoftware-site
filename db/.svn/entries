@@ -2,14 +2,14 @@
 
 dir
 4707
-http://redmine.rubyforge.org/svn/branches/1.1-stable/db
+http://redmine.rubyforge.org/svn/trunk/db
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-06T21:04:24.349452Z
-4649
-jplang
+2011-01-01T23:08:49.766359Z
+4610
+jbbarth
 has-props
 
 

@@ -35,7 +35,8 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
       
       assert_equal 17, @repository.changesets.count
       assert_equal 25, @repository.changes.count
-      assert_equal "Initial import.\nThe repository contains 3 files.", @repository.changesets.find_by_revision('0').comments
+      assert_equal "Initial import.\nThe repository contains 3 files.",
+                   @repository.changesets.find_by_revision('0').comments
     end
     
     def test_fetch_changesets_incremental
@@ -51,7 +52,9 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
     
     def test_entries
       assert_equal 2, @repository.entries("sources", 2).size
+      assert_equal 2, @repository.entries("sources", '400bb8672109').size
       assert_equal 1, @repository.entries("sources", 3).size
+      assert_equal 1, @repository.entries("sources", 'b3a615152df8').size
     end
 
     def test_locate_on_outdated_repository
@@ -121,6 +124,52 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
       assert_equal 'A', c2[0].action
       assert_equal '/README (1)[2]&,%.-3_4', c2[0].path
       assert_equal '/README', c2[0].from_path
+    end
+
+    def test_find_changeset_by_name
+      @repository.fetch_changesets
+      @repository.reload
+      %w|2 400bb8672109 400|.each do |r|
+        assert_equal '2', @repository.find_changeset_by_name(r).revision
+      end
+    end
+
+    def test_find_changeset_by_invalid_name
+      @repository.fetch_changesets
+      @repository.reload
+      assert_nil @repository.find_changeset_by_name('100000')
+    end
+
+    def test_identifier
+      @repository.fetch_changesets
+      @repository.reload
+      c = @repository.changesets.find_by_revision('2')
+      assert_equal c.scmid, c.identifier
+    end
+
+    def test_format_identifier
+      @repository.fetch_changesets
+      @repository.reload
+      c = @repository.changesets.find_by_revision('2')
+      assert_equal '2:400bb8672109', c.format_identifier
+    end
+
+    def test_find_changeset_by_empty_name
+      @repository.fetch_changesets
+      @repository.reload
+      ['', ' ', nil].each do |r|
+        assert_nil @repository.find_changeset_by_name(r)
+      end
+    end
+
+    def test_activities
+      c = Changeset.new(:repository   => @repository,
+                        :committed_on => Time.now,
+                        :revision     => '123',
+                        :scmid        => 'abc400bb8672',
+                        :comments     => 'test')
+      assert c.event_title.include?('123:abc400bb8672:')
+      assert_equal 'abc400bb8672', c.event_url[:rev]
     end
   else
     puts "Mercurial test repository NOT FOUND. Skipping unit tests !!!"

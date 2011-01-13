@@ -32,9 +32,10 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
     User.current = nil
-    Repository::Mercurial.create(:project => Project.find(3), :url => REPOSITORY_PATH)
+    @repository = Repository::Mercurial.create(:project => Project.find(3), :url => REPOSITORY_PATH)
+    assert @repository
   end
-  
+
   if File.directory?(REPOSITORY_PATH)
     def test_show
       get :show, :id => 3
@@ -66,27 +67,31 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
       assert_equal 'file', entry.kind
       assert_equal 'images/edit.png', entry.path
     end
-    
+
     def test_show_at_given_revision
-      get :show, :id => 3, :path => ['images'], :rev => 0
-      assert_response :success
-      assert_template 'show'
-      assert_not_nil assigns(:entries)
-      assert_equal ['delete.png'], assigns(:entries).collect(&:name)
+      [0, '0', '0885933ad4f6'].each do |r1|
+        get :show, :id => 3, :path => ['images'], :rev => r1
+        assert_response :success
+        assert_template 'show'
+        assert_not_nil assigns(:entries)
+        assert_equal ['delete.png'], assigns(:entries).collect(&:name)
+      end
     end
 
     def test_show_directory_sql_escape_percent
-      get :show, :id => 3, :path => ['sql_escape', 'percent%dir'], :rev => 13
-      assert_response :success
-      assert_template 'show'
+      [13, '13', '3a330eb32958'].each do |r1|
+        get :show, :id => 3, :path => ['sql_escape', 'percent%dir'], :rev => r1
+        assert_response :success
+        assert_template 'show'
 
-      assert_not_nil assigns(:entries)
-      assert_equal ['percent%file1.txt', 'percentfile1.txt'], assigns(:entries).collect(&:name)
-      changesets = assigns(:changesets)
+        assert_not_nil assigns(:entries)
+        assert_equal ['percent%file1.txt', 'percentfile1.txt'], assigns(:entries).collect(&:name)
+        changesets = assigns(:changesets)
 
-      ## This is not yet implemented.
-      # assert_not_nil changesets
-      # assert_equal %w(13 11 10 9), changesets.collect(&:revision)
+        ## This is not yet implemented.
+        # assert_not_nil changesets
+        # assert_equal %w(13 11 10 9), changesets.collect(&:revision)
+      end
     end
 
     def test_changes
@@ -123,18 +128,45 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
     end
     
     def test_diff
-      # Full diff of changeset 4
-      get :diff, :id => 3, :rev => 4
-      assert_response :success
-      assert_template 'diff'
-      # Line 22 removed
-      assert_tag :tag => 'th',
-                 :content => '22',
-                 :sibling => { :tag => 'td', 
-                               :attributes => { :class => /diff_out/ },
-                               :content => /def remove/ }
+      @repository.fetch_changesets
+      @repository.reload
+
+      [4, '4', 'def6d2f1254a'].each do |r1|
+        # Full diff of changeset 4
+        get :diff, :id => 3, :rev => 4
+        assert_response :success
+        assert_template 'diff'
+
+        if @repository.scm.class.client_version_above?([1, 2])
+          # Line 22 removed
+          assert_tag :tag => 'th',
+                     :content => '22',
+                     :sibling => { :tag => 'td', 
+                                   :attributes => { :class => /diff_out/ },
+                                   :content => /def remove/ }
+          assert_tag :tag => 'h2', :content => /4:def6d2f1254a/
+        end
+      end
     end
-    
+
+    def test_diff_two_revs
+      @repository.fetch_changesets
+      @repository.reload
+
+      [2, '400bb8672109', '400', 400].each do |r1|
+        [4, 'def6d2f1254a'].each do |r2|
+          get :diff, :id => 3, :rev    => r1,
+                               :rev_to => r2
+          assert_response :success
+          assert_template 'diff'
+
+          diff = assigns(:diff)
+          assert_not_nil diff
+          assert_tag :tag => 'h2', :content => /4:def6d2f1254a 2:400bb8672109/
+        end
+      end
+    end
+
     def test_annotate
       get :annotate, :id => 3, :path => ['sources', 'watchers_controller.rb']
       assert_response :success
@@ -147,8 +179,7 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
                        {
                          :tag => 'td',
                          :attributes => { :class => 'revision' },
-                         :child => { :tag => 'a', :content => '4' }
-                         # :child => { :tag => 'a', :content => /4:def6d2f1/ }
+                         :child => { :tag => 'a', :content => '4:def6d2f1254a' }
                        }
       assert_tag :tag => 'th',
                  :content => '23',
@@ -163,6 +194,16 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
                  :content => '23',
                  :attributes => { :class => 'line-num' },
                  :sibling => { :tag => 'td', :content => /watcher =/ }
+    end
+
+    def test_empty_revision
+      @repository.fetch_changesets
+      @repository.reload
+      ['', ' ', nil].each do |r|
+        get :revision, :id => 1, :rev => r
+        assert_response 500
+        assert_error_tag :content => /was not found/
+      end
     end
   else
     puts "Mercurial test repository NOT FOUND. Skipping functional tests !!!"

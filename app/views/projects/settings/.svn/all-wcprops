@@ -1,11 +1,53 @@
 K 25
 svn:wc:ra_dav:version-url
-V 66
-/svn/!svn/ver/4660/branches/1.1-stable/app/views/projects/settings
+V 52
+/svn/!svn/ver/4647/trunk/app/views/projects/settings
+END
+_issue_categories.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/3734/trunk/app/views/projects/settings/_issue_categories.rhtml
+END
+_repository.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/3336/trunk/app/views/projects/settings/_repository.rhtml
+END
+_wiki.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/1143/trunk/app/views/projects/settings/_wiki.rhtml
+END
+_activities.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/4075/trunk/app/views/projects/settings/_activities.rhtml
 END
 _modules.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 81
-/svn/!svn/ver/4660/branches/1.1-stable/app/views/projects/settings/_modules.rhtml
+V 67
+/svn/!svn/ver/4647/trunk/app/views/projects/settings/_modules.rhtml
+END
+_versions.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4307/trunk/app/views/projects/settings/_versions.rhtml
+END
+_boards.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/3734/trunk/app/views/projects/settings/_boards.rhtml
+END
+_members.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4371/trunk/app/views/projects/settings/_members.rhtml
 END

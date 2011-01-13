@@ -2,7 +2,7 @@
 
 dir
 4707
-http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views/gantts
+http://redmine.rubyforge.org/svn/trunk/app/views/gantts
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-01-13T12:50:18.000000Z
+2011-01-13T14:09:29.000000Z
 85e8095f9a3c80cf6a53b73c6b694323
 2010-12-17T15:25:07.681776Z
 4528

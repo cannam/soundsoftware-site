@@ -1,17 +1,47 @@
 K 25
 svn:wc:ra_dav:version-url
-V 45
-/svn/!svn/ver/4658/branches/1.1-stable/config
+V 31
+/svn/!svn/ver/4701/trunk/config
 END
 settings.yml
 K 25
 svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4585/branches/1.1-stable/config/settings.yml
+V 44
+/svn/!svn/ver/4513/trunk/config/settings.yml
+END
+email.yml.example
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3448/trunk/config/email.yml.example
+END
+routes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/4372/trunk/config/routes.rb
 END
 boot.rb
 K 25
 svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/4585/branches/1.1-stable/config/boot.rb
+V 39
+/svn/!svn/ver/4516/trunk/config/boot.rb
+END
+environment.rb
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/3372/trunk/config/environment.rb
+END
+additional_environment.rb.example
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/3018/trunk/config/additional_environment.rb.example
+END
+database.yml.example
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/3564/trunk/config/database.yml.example
 END

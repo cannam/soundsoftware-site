@@ -878,6 +878,9 @@ en:
   text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
   text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
   text_project_homepage_info: 'Link to an external project page.'
+  text_caracters_maximum: "%{count} characters maximum."
+  text_caracters_minimum: "Must be at least %{count} characters long."
+  text_length_between: "Length between %{min} and %{max} characters."
   text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.<br/>It may also be used to establish eligibility for your initial registration.'
   text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_tracker_no_workflow: No workflow defined for this tracker
