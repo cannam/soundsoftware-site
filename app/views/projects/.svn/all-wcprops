@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4402/trunk/app/views/projects
+/svn/!svn/ver/4648/trunk/app/views/projects
 END
 copy.rhtml
 K 25
@@ -13,13 +13,13 @@ new.html.erb
 K 25
 svn:wc:ra_dav:version-url
 V 56
-/svn/!svn/ver/4069/trunk/app/views/projects/new.html.erb
+/svn/!svn/ver/4648/trunk/app/views/projects/new.html.erb
 END
-show.xml.builder
+index.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/4382/trunk/app/views/projects/show.xml.builder
+V 57
+/svn/!svn/ver/4572/trunk/app/views/projects/index.api.rsb
 END
 settings.rhtml
 K 25
@@ -37,7 +37,7 @@ _form.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/4402/trunk/app/views/projects/_form.rhtml
+/svn/!svn/ver/4648/trunk/app/views/projects/_form.rhtml
 END
 _edit.rhtml
 K 25
@@ -51,12 +51,6 @@ svn:wc:ra_dav:version-url
 V 62
 /svn/!svn/ver/2990/trunk/app/views/projects/list_members.rhtml
 END
-index.xml.builder
-K 25
-svn:wc:ra_dav:version-url
-V 61
-/svn/!svn/ver/4382/trunk/app/views/projects/index.xml.builder
-END
 _members_box.html.erb
 K 25
 svn:wc:ra_dav:version-url
@@ -68,6 +62,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/4069/trunk/app/views/projects/index.rhtml
+END
+show.api.rsb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/4486/trunk/app/views/projects/show.api.rsb
 END
 destroy.rhtml
 K 25

@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/4404/trunk/test/fixtures/mail_handler
+/svn/!svn/ver/4575/trunk/test/fixtures/mail_handler
 END
 message_reply_by_subject.eml
 K 25
@@ -91,7 +91,7 @@ ticket_reply_with_status.eml
 K 25
 svn:wc:ra_dav:version-url
 V 80
-/svn/!svn/ver/4394/trunk/test/fixtures/mail_handler/ticket_reply_with_status.eml
+/svn/!svn/ver/4575/trunk/test/fixtures/mail_handler/ticket_reply_with_status.eml
 END
 ticket_on_given_project.eml
 K 25

@@ -1,19 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4362/trunk/app/views/settings
+/svn/!svn/ver/4513/trunk/app/views/settings
 END
 _issues.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/svn/!svn/ver/3198/trunk/app/views/settings/_issues.rhtml
+/svn/!svn/ver/4513/trunk/app/views/settings/_issues.rhtml
 END
 _general.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/3372/trunk/app/views/settings/_general.rhtml
+/svn/!svn/ver/4426/trunk/app/views/settings/_general.rhtml
 END
 _authentication.rhtml
 K 25
@@ -49,7 +49,7 @@ _repositories.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/!svn/ver/3440/trunk/app/views/settings/_repositories.rhtml
+/svn/!svn/ver/4470/trunk/app/views/settings/_repositories.rhtml
 END
 _notifications.rhtml
 K 25

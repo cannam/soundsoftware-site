@@ -104,8 +104,10 @@ module ApplicationHelper
   # * :text - Link text (default to the formatted revision)
   def link_to_revision(revision, project, options={})
     text = options.delete(:text) || format_revision(revision)
+    rev = revision.respond_to?(:identifier) ? revision.identifier : revision
 
-    link_to(text, {:controller => 'repositories', :action => 'revision', :id => project, :rev => revision}, :title => l(:label_revision_id, revision))
+    link_to(text, {:controller => 'repositories', :action => 'revision', :id => project, :rev => rev},
+            :title => l(:label_revision_id, format_revision(revision)))
   end
 
   # Generates a link to a project if active
@@ -449,12 +451,19 @@ module ApplicationHelper
     only_path = options.delete(:only_path) == false ? false : true
 
     text = Redmine::WikiFormatting.to_html(Setting.text_formatting, text, :object => obj, :attribute => attr) { |macro, args| exec_macro(macro, obj, args) }
-      
-    parse_non_pre_blocks(text) do |text|
+    
+    @parsed_headings = []
+    text = parse_non_pre_blocks(text) do |text|
       [:parse_inline_attachments, :parse_wiki_links, :parse_redmine_links, :parse_headings].each do |method_name|
         send method_name, text, project, obj, attr, only_path, options
       end
     end
+    
+    if @parsed_headings.any?
+      replace_toc(text, @parsed_headings)
+    end
+    
+    text
   end
   
   def parse_non_pre_blocks(text)
@@ -642,7 +651,7 @@ module ApplicationHelper
             end
           when 'commit'
             if project && (changeset = project.changesets.find(:first, :conditions => ["scmid LIKE ?", "#{name}%"]))
-              link = link_to h("#{name}"), {:only_path => only_path, :controller => 'repositories', :action => 'revision', :id => project, :rev => changeset.revision},
+              link = link_to h("#{name}"), {:only_path => only_path, :controller => 'repositories', :action => 'revision', :id => project, :rev => changeset.identifier},
                                            :class => 'changeset',
                                            :title => truncate_single_line(changeset.comments, :length => 100)
             end
@@ -674,21 +683,26 @@ module ApplicationHelper
     end
   end
   
-  TOC_RE = /<p>\{\{([<>]?)toc\}\}<\/p>/i unless const_defined?(:TOC_RE)
   HEADING_RE = /<h(1|2|3|4)( [^>]+)?>(.+?)<\/h(1|2|3|4)>/i unless const_defined?(:HEADING_RE)
   
   # Headings and TOC
-  # Adds ids and links to headings and renders the TOC if needed unless options[:headings] is set to false
+  # Adds ids and links to headings unless options[:headings] is set to false
   def parse_headings(text, project, obj, attr, only_path, options)
-    headings = []
+    return if options[:headings] == false
+    
     text.gsub!(HEADING_RE) do
       level, attrs, content = $1.to_i, $2, $3
       item = strip_tags(content).strip
       anchor = item.gsub(%r{[^\w\s\-]}, '').gsub(%r{\s+(\-+\s*)?}, '-')
-      headings << [level, anchor, item]
+      @parsed_headings << [level, anchor, item]
       "<h#{level} #{attrs} id=\"#{anchor}\">#{content}<a href=\"##{anchor}\" class=\"wiki-anchor\">&para;</a></h#{level}>"
-    end unless options[:headings] == false
-    
+    end
+  end
+          
+  TOC_RE = /<p>\{\{([<>]?)toc\}\}<\/p>/i unless const_defined?(:TOC_RE)
+  
+  # Renders the TOC with given headings
+  def replace_toc(text, headings)
     text.gsub!(TOC_RE) do
       if headings.empty?
         ''
@@ -866,7 +880,29 @@ module ApplicationHelper
   def favicon
     "<link rel='shortcut icon' href='#{image_path('/favicon.ico')}' />"
   end
+  
+  # Returns true if arg is expected in the API response
+  def include_in_api_response?(arg)
+    unless @included_in_api_response
+      param = params[:include]
+      @included_in_api_response = param.is_a?(Array) ? param.collect(&:to_s) : param.to_s.split(',')
+      @included_in_api_response.collect!(&:strip)
+    end
+    @included_in_api_response.include?(arg.to_s)
+  end
 
+  # Returns options or nil if nometa param or X-Redmine-Nometa header
+  # was set in the request
+  def api_meta(options)
+    if params[:nometa].present? || request.headers['X-Redmine-Nometa']
+      # compatibility mode for activeresource clients that raise
+      # an error when unserializing an array with attributes
+      nil
+    else
+      options
+    end
+  end
+  
   private
 
   def wiki_helper

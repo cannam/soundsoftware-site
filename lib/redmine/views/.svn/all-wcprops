@@ -1,11 +1,23 @@
 K 25
 svn:wc:ra_dav:version-url
 V 42
-/svn/!svn/ver/2659/trunk/lib/redmine/views
+/svn/!svn/ver/4489/trunk/lib/redmine/views
+END
+api_template_handler.rb
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/4452/trunk/lib/redmine/views/api_template_handler.rb
 END
 other_formats_builder.rb
 K 25
 svn:wc:ra_dav:version-url
 V 67
 /svn/!svn/ver/2334/trunk/lib/redmine/views/other_formats_builder.rb
+END
+builders.rb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/4452/trunk/lib/redmine/views/builders.rb
 END

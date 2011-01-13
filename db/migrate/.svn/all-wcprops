@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 35
-/svn/!svn/ver/4402/trunk/db/migrate
+/svn/!svn/ver/4610/trunk/db/migrate
 END
 20101107130441_add_custom_fields_visible.rb
 K 25
@@ -97,7 +97,7 @@ END
 K 25
 svn:wc:ra_dav:version-url
 V 94
-/svn/!svn/ver/4216/trunk/db/migrate/20100129193402_change_users_mail_notification_to_string.rb
+/svn/!svn/ver/4413/trunk/db/migrate/20100129193402_change_users_mail_notification_to_string.rb
 END
 008_create_user_preferences.rb
 K 25
@@ -421,7 +421,7 @@ END
 K 25
 svn:wc:ra_dav:version-url
 V 85
-/svn/!svn/ver/4368/trunk/db/migrate/20100129193813_update_mail_notification_values.rb
+/svn/!svn/ver/4413/trunk/db/migrate/20100129193813_update_mail_notification_values.rb
 END
 20091017214611_add_missing_indexes_to_journals.rb
 K 25
@@ -511,7 +511,7 @@ END
 K 25
 svn:wc:ra_dav:version-url
 V 81
-/svn/!svn/ver/4370/trunk/db/migrate/20101104182107_add_unique_index_on_members.rb
+/svn/!svn/ver/4610/trunk/db/migrate/20101104182107_add_unique_index_on_members.rb
 END
 20100313132032_add_issues_nested_sets_columns.rb
 K 25

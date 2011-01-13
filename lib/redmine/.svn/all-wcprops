@@ -1,19 +1,25 @@
 K 25
 svn:wc:ra_dav:version-url
 V 36
-/svn/!svn/ver/4406/trunk/lib/redmine
+/svn/!svn/ver/4688/trunk/lib/redmine
 END
 i18n.rb
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/!svn/ver/4183/trunk/lib/redmine/i18n.rb
+/svn/!svn/ver/4516/trunk/lib/redmine/i18n.rb
 END
 pop3.rb
 K 25
 svn:wc:ra_dav:version-url
 V 44
 /svn/!svn/ver/3330/trunk/lib/redmine/pop3.rb
+END
+safe_attributes.rb
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/4491/trunk/lib/redmine/safe_attributes.rb
 END
 platform.rb
 K 25
@@ -31,13 +37,13 @@ themes.rb
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3710/trunk/lib/redmine/themes.rb
+/svn/!svn/ver/4559/trunk/lib/redmine/themes.rb
 END
 version.rb
 K 25
 svn:wc:ra_dav:version-url
 V 47
-/svn/!svn/ver/4349/trunk/lib/redmine/version.rb
+/svn/!svn/ver/4619/trunk/lib/redmine/version.rb
 END
 imap.rb
 K 25

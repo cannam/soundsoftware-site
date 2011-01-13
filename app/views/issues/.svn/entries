@@ -1,15 +1,15 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/app/views/issues
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-30T16:15:31.867344Z
-4311
-jbbarth
+2011-01-08T00:19:51.192586Z
+4652
+tmaruyama
 
 
 
@@ -168,11 +168,11 @@ file
 
 
 
-2010-11-19T13:04:50.824922Z
-b60c0aee0477249fc72d3206e30a8a07
-2010-10-08T03:09:51.863032Z
-4242
-jbbarth
+2011-01-13T14:09:38.000000Z
+f3bdc270087564333ffdacd38f1d363c
+2010-12-18T14:14:04.023240Z
+4533
+jplang
 has-props
 
 
@@ -194,7 +194,7 @@ has-props
 
 
 
-3438
+3443
 
 _form_update.rhtml
 file
@@ -229,40 +229,6 @@ has-props
 
 
 649
-
-index.xml.builder
-file
-
-
-
-
-2010-09-23T14:37:44.575742Z
-ed6c218138334e3950cb971252374472
-2010-04-13T17:51:06.988056Z
-3671
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1559
 
 index.rhtml
 file
@@ -366,16 +332,16 @@ has-props
 
 1772
 
-show.xml.builder
+index.api.rsb
 file
 
 
 
 
-2010-09-23T14:37:44.575742Z
-1a197244651b647927c95d8bcbb2b46d
-2010-05-01T14:07:36.553776Z
-3729
+2011-01-13T14:09:38.000000Z
+db6f5533a330ebdcd1dd5e4c47098024
+2010-12-11T13:13:49.013705Z
+4489
 jplang
 has-props
 
@@ -398,7 +364,7 @@ has-props
 
 
 
-2726
+1467
 
 show.rhtml
 file
@@ -406,10 +372,10 @@ file
 
 
 
-2010-11-19T13:04:50.824922Z
-1f2adc49d35b7299cebfc9aff8152908
-2010-10-19T19:26:07.436051Z
-4264
+2011-01-13T14:09:38.000000Z
+f147a1cbca0263a122d10bf674d6dcbf
+2010-12-18T13:40:50.641112Z
+4530
 jplang
 has-props
 
@@ -432,7 +398,7 @@ has-props
 
 
 
-5399
+5468
 
 _form_custom_fields.rhtml
 file
@@ -474,11 +440,11 @@ file
 
 
 
-2010-09-23T14:37:44.571741Z
-4c03735a361a24cc60a70975502bace7
-2010-07-29T15:48:53.812065Z
-3898
-winterheart
+2011-01-13T14:09:38.000000Z
+eca2b7cfea14ef6185c358e55f1b8b48
+2011-01-08T00:19:51.192586Z
+4652
+tmaruyama
 has-props
 
 
@@ -500,7 +466,7 @@ has-props
 
 
 
-509
+470
 
 _list_simple.rhtml
 file
@@ -637,6 +603,40 @@ has-props
 
 
 90
+
+show.api.rsb
+file
+
+
+
+
+2011-01-13T14:09:38.000000Z
+47d5c2be3301716cd4351c51904801a3
+2010-12-14T19:03:17.057916Z
+4512
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2836
 
 destroy.rhtml
 file

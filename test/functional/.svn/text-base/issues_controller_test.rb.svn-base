@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 require 'issues_controller'
 
 # Re-raise errors caught by the controller.
@@ -281,6 +281,9 @@ class IssuesControllerTest < ActionController::TestCase
     get :show, :id => 1
     assert_response :success
     
+    assert_tag :tag => 'a',
+      :content => /Quote/
+    
     assert_tag :tag => 'form',
                :descendant => { :tag => 'fieldset',
                                 :child => { :tag => 'legend', 
@@ -524,6 +527,20 @@ class IssuesControllerTest < ActionController::TestCase
     issue = Issue.find_by_subject('This is a child issue')
     assert_not_nil issue
     assert_equal Issue.find(2), issue.parent
+  end
+
+  def test_post_create_subissue_with_non_numeric_parent_id
+    @request.session[:user_id] = 2
+    
+    assert_difference 'Issue.count' do
+      post :create, :project_id => 1, 
+                 :issue => {:tracker_id => 1,
+                            :subject => 'This is a child issue',
+                            :parent_issue_id => 'ABC'}
+    end
+    issue = Issue.find_by_subject('This is a child issue')
+    assert_not_nil issue
+    assert_nil issue.parent
   end
   
   def test_post_create_should_send_a_notification

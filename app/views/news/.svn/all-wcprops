@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/!svn/ver/4267/trunk/app/views/news
+/svn/!svn/ver/4505/trunk/app/views/news
 END
 _news.rhtml
 K 25
@@ -9,11 +9,17 @@ svn:wc:ra_dav:version-url
 V 51
 /svn/!svn/ver/4214/trunk/app/views/news/_news.rhtml
 END
+index.api.rsb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4505/trunk/app/views/news/index.api.rsb
+END
 show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/4214/trunk/app/views/news/show.rhtml
+/svn/!svn/ver/4412/trunk/app/views/news/show.rhtml
 END
 _form.rhtml
 K 25

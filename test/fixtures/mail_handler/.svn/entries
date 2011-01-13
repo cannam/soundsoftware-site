@@ -1,14 +1,14 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/test/fixtures/mail_handler
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-14T13:48:01.671461Z
-4404
+2010-12-29T17:36:01.998670Z
+4575
 jplang
 
 
@@ -508,10 +508,10 @@ file
 
 
 
-2010-11-19T13:04:46.204713Z
-88a90b088de41d263e9135d1810cf58c
-2010-11-12T11:34:53.754717Z
-4394
+2011-01-13T14:09:08.000000Z
+f1b76e664d73fd54d9e346c2329d94a9
+2010-12-29T17:36:01.998670Z
+4575
 jplang
 
 
@@ -534,7 +534,7 @@ jplang
 
 
 
-2065
+2044
 
 ticket_on_given_project.eml
 file

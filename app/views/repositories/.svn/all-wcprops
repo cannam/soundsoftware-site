@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 47
-/svn/!svn/ver/4100/trunk/app/views/repositories
+/svn/!svn/ver/4698/trunk/app/views/repositories
 END
 stats.rhtml
 K 25
@@ -13,7 +13,7 @@ revision.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 62
-/svn/!svn/ver/3216/trunk/app/views/repositories/revision.rhtml
+/svn/!svn/ver/4613/trunk/app/views/repositories/revision.rhtml
 END
 _navigation.rhtml
 K 25
@@ -31,13 +31,13 @@ _dir_list_content.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 71
-/svn/!svn/ver/3309/trunk/app/views/repositories/_dir_list_content.rhtml
+/svn/!svn/ver/4613/trunk/app/views/repositories/_dir_list_content.rhtml
 END
 diff.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/4100/trunk/app/views/repositories/diff.rhtml
+/svn/!svn/ver/4698/trunk/app/views/repositories/diff.rhtml
 END
 changes.rhtml
 K 25
@@ -55,7 +55,7 @@ annotate.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 62
-/svn/!svn/ver/3585/trunk/app/views/repositories/annotate.rhtml
+/svn/!svn/ver/4613/trunk/app/views/repositories/annotate.rhtml
 END
 show.rhtml
 K 25
@@ -67,7 +67,7 @@ _revisions.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 64
-/svn/!svn/ver/3216/trunk/app/views/repositories/_revisions.rhtml
+/svn/!svn/ver/4613/trunk/app/views/repositories/_revisions.rhtml
 END
 revisions.rhtml
 K 25

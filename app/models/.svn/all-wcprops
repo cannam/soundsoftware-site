@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 35
-/svn/!svn/ver/4404/trunk/app/models
+/svn/!svn/ver/4704/trunk/app/models
 END
 document.rb
 K 25
@@ -13,13 +13,13 @@ mail_handler.rb
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/4404/trunk/app/models/mail_handler.rb
+/svn/!svn/ver/4682/trunk/app/models/mail_handler.rb
 END
 repository.rb
 K 25
 svn:wc:ra_dav:version-url
 V 49
-/svn/!svn/ver/3472/trunk/app/models/repository.rb
+/svn/!svn/ver/4703/trunk/app/models/repository.rb
 END
 time_entry.rb
 K 25
@@ -81,12 +81,6 @@ svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3240/trunk/app/models/enumeration.rb
 END
-issue.rb
-K 25
-svn:wc:ra_dav:version-url
-V 44
-/svn/!svn/ver/4394/trunk/app/models/issue.rb
-END
 time_entry_activity_custom_field.rb
 K 25
 svn:wc:ra_dav:version-url
@@ -98,6 +92,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3250/trunk/app/models/member_role.rb
+END
+issue.rb
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/4491/trunk/app/models/issue.rb
 END
 issue_priority.rb
 K 25
@@ -151,7 +151,7 @@ query.rb
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/!svn/ver/4387/trunk/app/models/query.rb
+/svn/!svn/ver/4553/trunk/app/models/query.rb
 END
 member.rb
 K 25
@@ -199,7 +199,7 @@ custom_field.rb
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/3672/trunk/app/models/custom_field.rb
+/svn/!svn/ver/4599/trunk/app/models/custom_field.rb
 END
 setting.rb
 K 25
@@ -211,7 +211,7 @@ user.rb
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4234/trunk/app/models/user.rb
+/svn/!svn/ver/4599/trunk/app/models/user.rb
 END
 auth_source.rb
 K 25
@@ -241,7 +241,7 @@ issue_relation.rb
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/3729/trunk/app/models/issue_relation.rb
+/svn/!svn/ver/4467/trunk/app/models/issue_relation.rb
 END
 document_observer.rb
 K 25
@@ -253,7 +253,7 @@ version.rb
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4073/trunk/app/models/version.rb
+/svn/!svn/ver/4574/trunk/app/models/version.rb
 END
 issue_priority_custom_field.rb
 K 25
@@ -265,7 +265,7 @@ board.rb
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/!svn/ver/3167/trunk/app/models/board.rb
+/svn/!svn/ver/4431/trunk/app/models/board.rb
 END
 attachment.rb
 K 25
@@ -283,7 +283,7 @@ issue_status.rb
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/3881/trunk/app/models/issue_status.rb
+/svn/!svn/ver/4599/trunk/app/models/issue_status.rb
 END
 time_entry_activity.rb
 K 25
@@ -295,7 +295,7 @@ tracker.rb
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3188/trunk/app/models/tracker.rb
+/svn/!svn/ver/4599/trunk/app/models/tracker.rb
 END
 journal_detail.rb
 K 25
@@ -307,7 +307,7 @@ group.rb
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/!svn/ver/2869/trunk/app/models/group.rb
+/svn/!svn/ver/4437/trunk/app/models/group.rb
 END
 issue_observer.rb
 K 25
@@ -319,13 +319,13 @@ changeset.rb
 K 25
 svn:wc:ra_dav:version-url
 V 48
-/svn/!svn/ver/3928/trunk/app/models/changeset.rb
+/svn/!svn/ver/4613/trunk/app/models/changeset.rb
 END
 role.rb
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/3363/trunk/app/models/role.rb
+/svn/!svn/ver/4599/trunk/app/models/role.rb
 END
 project_custom_field.rb
 K 25
@@ -337,7 +337,7 @@ wiki.rb
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/3632/trunk/app/models/wiki.rb
+/svn/!svn/ver/4680/trunk/app/models/wiki.rb
 END
 custom_value.rb
 K 25
@@ -349,7 +349,7 @@ project.rb
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4402/trunk/app/models/project.rb
+/svn/!svn/ver/4645/trunk/app/models/project.rb
 END
 document_category.rb
 K 25
@@ -361,7 +361,7 @@ news.rb
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/3358/trunk/app/models/news.rb
+/svn/!svn/ver/4505/trunk/app/models/news.rb
 END
 user_preference.rb
 K 25

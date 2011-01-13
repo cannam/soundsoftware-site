@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/4311/trunk/app/views/issues
+/svn/!svn/ver/4652/trunk/app/views/issues
 END
 _relations.rhtml
 K 25
@@ -25,7 +25,7 @@ bulk_edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/svn/!svn/ver/4242/trunk/app/views/issues/bulk_edit.rhtml
+/svn/!svn/ver/4533/trunk/app/views/issues/bulk_edit.rhtml
 END
 _form.rhtml
 K 25
@@ -38,12 +38,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/3151/trunk/app/views/issues/_form_update.rhtml
-END
-index.xml.builder
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/3671/trunk/app/views/issues/index.xml.builder
 END
 index.rhtml
 K 25
@@ -63,17 +57,17 @@ svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/4056/trunk/app/views/issues/_list.rhtml
 END
-show.xml.builder
+index.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/3729/trunk/app/views/issues/show.xml.builder
+V 55
+/svn/!svn/ver/4489/trunk/app/views/issues/index.api.rsb
 END
 show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/4264/trunk/app/views/issues/show.rhtml
+/svn/!svn/ver/4530/trunk/app/views/issues/show.rhtml
 END
 _form_custom_fields.rhtml
 K 25
@@ -91,7 +85,7 @@ _changesets.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/3898/trunk/app/views/issues/_changesets.rhtml
+/svn/!svn/ver/4652/trunk/app/views/issues/_changesets.rhtml
 END
 _edit.rhtml
 K 25
@@ -110,6 +104,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 52
 /svn/!svn/ver/1129/trunk/app/views/issues/edit.rhtml
+END
+show.api.rsb
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/4512/trunk/app/views/issues/show.api.rsb
 END
 destroy.rhtml
 K 25

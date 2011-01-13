@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 40
-/svn/!svn/ver/4411/trunk/app/controllers
+/svn/!svn/ver/4703/trunk/app/controllers
 END
 issues_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 61
-/svn/!svn/ver/4411/trunk/app/controllers/issues_controller.rb
+/svn/!svn/ver/4652/trunk/app/controllers/issues_controller.rb
 END
 queries_controller.rb
 K 25
@@ -37,13 +37,13 @@ auto_completes_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 69
-/svn/!svn/ver/3945/trunk/app/controllers/auto_completes_controller.rb
+/svn/!svn/ver/4503/trunk/app/controllers/auto_completes_controller.rb
 END
 my_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/svn/!svn/ver/4224/trunk/app/controllers/my_controller.rb
+/svn/!svn/ver/4497/trunk/app/controllers/my_controller.rb
 END
 comments_controller.rb
 K 25
@@ -67,13 +67,13 @@ context_menus_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 68
-/svn/!svn/ver/4242/trunk/app/controllers/context_menus_controller.rb
+/svn/!svn/ver/4580/trunk/app/controllers/context_menus_controller.rb
 END
 journals_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/!svn/ver/4034/trunk/app/controllers/journals_controller.rb
+/svn/!svn/ver/4535/trunk/app/controllers/journals_controller.rb
 END
 workflows_controller.rb
 K 25
@@ -103,13 +103,13 @@ settings_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/!svn/ver/4220/trunk/app/controllers/settings_controller.rb
+/svn/!svn/ver/4432/trunk/app/controllers/settings_controller.rb
 END
 timelog_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 62
-/svn/!svn/ver/4410/trunk/app/controllers/timelog_controller.rb
+/svn/!svn/ver/4511/trunk/app/controllers/timelog_controller.rb
 END
 custom_fields_controller.rb
 K 25
@@ -121,7 +121,7 @@ users_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/!svn/ver/4382/trunk/app/controllers/users_controller.rb
+/svn/!svn/ver/4544/trunk/app/controllers/users_controller.rb
 END
 issue_moves_controller.rb
 K 25
@@ -139,7 +139,7 @@ application_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 66
-/svn/!svn/ver/4286/trunk/app/controllers/application_controller.rb
+/svn/!svn/ver/4573/trunk/app/controllers/application_controller.rb
 END
 ldap_auth_sources_controller.rb
 K 25
@@ -199,7 +199,7 @@ news_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/4174/trunk/app/controllers/news_controller.rb
+/svn/!svn/ver/4505/trunk/app/controllers/news_controller.rb
 END
 trackers_controller.rb
 K 25
@@ -235,7 +235,7 @@ repositories_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 67
-/svn/!svn/ver/3680/trunk/app/controllers/repositories_controller.rb
+/svn/!svn/ver/4703/trunk/app/controllers/repositories_controller.rb
 END
 admin_controller.rb
 K 25
@@ -247,7 +247,7 @@ projects_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/!svn/ver/4397/trunk/app/controllers/projects_controller.rb
+/svn/!svn/ver/4647/trunk/app/controllers/projects_controller.rb
 END
 account_controller.rb
 K 25
@@ -283,13 +283,13 @@ wiki_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/4303/trunk/app/controllers/wiki_controller.rb
+/svn/!svn/ver/4429/trunk/app/controllers/wiki_controller.rb
 END
 activities_controller.rb
 K 25
 svn:wc:ra_dav:version-url
 V 65
-/svn/!svn/ver/4047/trunk/app/controllers/activities_controller.rb
+/svn/!svn/ver/4579/trunk/app/controllers/activities_controller.rb
 END
 enumerations_controller.rb
 K 25

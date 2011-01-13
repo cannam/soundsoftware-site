@@ -1,15 +1,15 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/test/fixtures/repositories
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-29T23:21:57.240368Z
-4310
-jbbarth
+2011-01-10T17:43:01.353336Z
+4676
+jplang
 
 
 
@@ -59,6 +59,40 @@ has-props
 
 
 8075
+
+mercurial_repository.hg
+file
+
+
+
+
+2011-01-13T14:09:10.000000Z
+2436fc3d3aefeb07b291d5660396ca8d
+2011-01-10T17:43:01.353336Z
+4676
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7104
 
 subversion_repository.dump.gz
 file
@@ -161,40 +195,6 @@ has-props
 
 
 20730
-
-mercurial_repository.tar.gz
-file
-
-
-
-
-2010-09-23T14:37:45.351765Z
-48c6f19f8c3123c7e143e4516669f700
-2007-12-14T17:46:45.448946Z
-991
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7827
 
 filesystem_repository.tar.gz
 file

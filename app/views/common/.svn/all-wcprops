@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/4286/trunk/app/views/common
+/svn/!svn/ver/4604/trunk/app/views/common
 END
 _file.rhtml
 K 25
@@ -31,7 +31,7 @@ _diff.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/3585/trunk/app/views/common/_diff.rhtml
+/svn/!svn/ver/4604/trunk/app/views/common/_diff.rhtml
 END
 _calendar.rhtml
 K 25

@@ -1,7 +1,7 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/app/views/mailer
 http://redmine.rubyforge.org/svn
 
@@ -672,40 +672,6 @@ has-props
 
 629
 
-attachments_added.text.html.rhtml
-file
-
-
-
-
-2010-09-23T14:37:44.603754Z
-db9ef17343824d59b7a19db7036ee2f1
-2010-02-18T19:13:38.135448Z
-3452
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-144
-
 news_added.text.plain.rhtml
 file
 
@@ -739,6 +705,40 @@ has-props
 
 
 87
+
+attachments_added.text.html.rhtml
+file
+
+
+
+
+2010-09-23T14:37:44.603754Z
+db9ef17343824d59b7a19db7036ee2f1
+2010-02-18T19:13:38.135448Z
+3452
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+144
 
 news_added.text.html.rhtml
 file
@@ -808,40 +808,6 @@ has-props
 
 107
 
-issue_add.text.plain.rhtml
-file
-
-
-
-
-2010-09-23T14:37:44.603754Z
-52a0f774acd5b7aeeb3768de943af901
-2009-02-21T11:04:50.579477Z
-2493
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-224
-
 document_added.text.html.rhtml
 file
 
@@ -875,6 +841,40 @@ has-props
 
 
 163
+
+issue_add.text.plain.rhtml
+file
+
+
+
+
+2010-09-23T14:37:44.603754Z
+52a0f774acd5b7aeeb3768de943af901
+2009-02-21T11:04:50.579477Z
+2493
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+224
 
 account_information.text.plain.rhtml
 file
@@ -910,40 +910,6 @@ has-props
 
 295
 
-account_information.text.html.rhtml
-file
-
-
-
-
-2010-09-23T14:37:44.603754Z
-e7e91d7f18dd1547cfebafdf4822a18f
-2010-02-18T19:13:38.135448Z
-3452
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-368
-
 message_posted.text.plain.rhtml
 file
 
@@ -978,16 +944,16 @@ has-props
 
 68
 
-lost_password.text.plain.rhtml
+account_information.text.html.rhtml
 file
 
 
 
 
 2010-09-23T14:37:44.603754Z
-44018a44ceaecb5c9be3fed66e759064
-2008-07-21T19:13:46.546624Z
-1683
+e7e91d7f18dd1547cfebafdf4822a18f
+2010-02-18T19:13:38.135448Z
+3452
 jplang
 has-props
 
@@ -1010,7 +976,7 @@ has-props
 
 
 
-97
+368
 
 wiki_content_updated.text.plain.rhtml
 file
@@ -1045,6 +1011,40 @@ has-props
 
 
 288
+
+lost_password.text.plain.rhtml
+file
+
+
+
+
+2010-09-23T14:37:44.603754Z
+44018a44ceaecb5c9be3fed66e759064
+2008-07-21T19:13:46.546624Z
+1683
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+97
 
 lost_password.text.html.rhtml
 file

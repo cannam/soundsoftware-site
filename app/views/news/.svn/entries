@@ -1,14 +1,14 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/app/views/news
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-22T14:42:38.351679Z
-4267
+2010-12-12T17:00:52.100205Z
+4505
 jplang
 
 
@@ -60,17 +60,17 @@ has-props
 
 384
 
-show.rhtml
+index.api.rsb
 file
 
 
 
 
-2010-11-19T13:04:49.428894Z
-c21730c749ee8533fadff9abbea6ffd8
-2010-09-27T16:51:12.033537Z
-4214
-edavis10
+2011-01-13T14:09:24.000000Z
+194919e4bc598629f690752af5340b5b
+2010-12-12T17:00:52.100205Z
+4505
+jplang
 has-props
 
 
@@ -92,7 +92,41 @@ has-props
 
 
 
-2897
+506
+
+show.rhtml
+file
+
+
+
+
+2011-01-13T14:09:24.000000Z
+969b4f69a93036097550cd14be8023bc
+2010-11-20T09:38:54.291843Z
+4412
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2920
 
 _form.rhtml
 file

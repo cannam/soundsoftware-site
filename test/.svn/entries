@@ -1,15 +1,15 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/test
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-17T18:27:38.712585Z
-4411
-jplang
+2011-01-13T12:05:11.734883Z
+4705
+tmaruyama
 
 
 
@@ -72,11 +72,11 @@ file
 
 
 
-2010-11-19T13:04:46.868876Z
-cc87df32bc2794f57f75ec6b0ed7e373
-2010-11-05T17:49:20.446583Z
-4366
-edavis10
+2011-01-13T14:09:10.000000Z
+07898564890be4ff9e6c039fa6aa9d41
+2011-01-01T12:24:18.924489Z
+4603
+jplang
 has-props
 
 
@@ -98,7 +98,7 @@ has-props
 
 
 
-16405
+16997
 
 functional
 dir

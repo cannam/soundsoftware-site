@@ -1,15 +1,15 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/doc
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-01T00:37:14.867836Z
-4348
-edavis10
+2011-01-09T15:57:44.051951Z
+4670
+jplang
 
 
 
@@ -134,11 +134,11 @@ file
 
 
 
-2010-09-23T14:37:44.939791Z
-cc24a3b3e2deae6410de710cd2eed893
-2010-07-18T15:19:04.080578Z
-3848
-edavis10
+2011-01-13T14:09:38.000000Z
+1e44cb9fd6df3d50661a812598996dcb
+2010-12-23T10:03:32.666117Z
+4567
+jplang
 has-props
 
 
@@ -160,7 +160,7 @@ has-props
 
 
 
-2961
+2987
 
 CHANGELOG
 file
@@ -168,11 +168,11 @@ file
 
 
 
-2010-11-19T13:04:51.228963Z
-c17df05456a8e8f311c61ea7825fe2aa
-2010-11-01T00:37:14.867836Z
-4348
-edavis10
+2011-01-13T14:09:38.000000Z
+dd376ebfe28816365c8c71db0212c730
+2011-01-09T15:57:44.051951Z
+4670
+jplang
 has-props
 
 
@@ -194,7 +194,7 @@ has-props
 
 
 
-77969
+84248
 
 COPYING
 file

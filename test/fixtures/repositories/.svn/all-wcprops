@@ -1,13 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/4310/trunk/test/fixtures/repositories
+/svn/!svn/ver/4676/trunk/test/fixtures/repositories
 END
 darcs_repository.tar.gz
 K 25
 svn:wc:ra_dav:version-url
 V 75
 /svn/!svn/ver/1236/trunk/test/fixtures/repositories/darcs_repository.tar.gz
+END
+mercurial_repository.hg
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/4676/trunk/test/fixtures/repositories/mercurial_repository.hg
 END
 subversion_repository.dump.gz
 K 25
@@ -26,12 +32,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 73
 /svn/!svn/ver/4310/trunk/test/fixtures/repositories/git_repository.tar.gz
-END
-mercurial_repository.tar.gz
-K 25
-svn:wc:ra_dav:version-url
-V 78
-/svn/!svn/ver/991/trunk/test/fixtures/repositories/mercurial_repository.tar.gz
 END
 filesystem_repository.tar.gz
 K 25

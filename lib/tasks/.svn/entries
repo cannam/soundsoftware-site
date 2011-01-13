@@ -1,15 +1,15 @@
 10
 
 dir
-4411
+4707
 http://redmine.rubyforge.org/svn/trunk/lib/tasks
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-14T15:14:19.280754Z
-4405
-jplang
+2011-01-11T08:41:11.973101Z
+4687
+tmaruyama
 
 
 
@@ -162,40 +162,6 @@ has-props
 
 1606
 
-initializers.rake
-file
-
-
-
-
-2010-11-19T13:04:51.424933Z
-c25b466de7654465538a91e5f5ab32b9
-2010-11-14T15:14:19.280754Z
-4405
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1343
-
 metrics.rake
 file
 
@@ -229,6 +195,40 @@ edavis10
 
 
 113
+
+initializers.rake
+file
+
+
+
+
+2010-11-19T13:04:51.424933Z
+c25b466de7654465538a91e5f5ab32b9
+2010-11-14T15:14:19.280754Z
+4405
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1343
 
 permissions.rake
 file
@@ -304,11 +304,11 @@ file
 
 
 
-2010-09-23T14:37:45.067787Z
-5d4cbb1125484cf9c8f3f693c53f8fd1
-2009-11-15T13:43:31.750664Z
-3060
-jplang
+2011-01-13T14:11:09.000000Z
+62ce14359d5062666d86230adc5ba695
+2011-01-11T08:41:11.973101Z
+4687
+tmaruyama
 
 
 
@@ -330,7 +330,7 @@ jplang
 
 
 
-1419
+3280
 
 watchers.rake
 file
@@ -366,40 +366,6 @@ has-props
 
 180
 
-yardoc.rake
-file
-
-
-
-
-2010-09-23T14:37:45.067787Z
-5c9889bed6f4a4d18dbeb3d904855bb6
-2010-08-07T15:11:26.667915Z
-3922
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-578
-
 plugins.rake
 file
 
@@ -433,6 +399,40 @@ jplang
 
 
 1256
+
+yardoc.rake
+file
+
+
+
+
+2010-09-23T14:37:45.067787Z
+5c9889bed6f4a4d18dbeb3d904855bb6
+2010-08-07T15:11:26.667915Z
+3922
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+578
 
 locales.rake
 file
@@ -474,10 +474,10 @@ file
 
 
 
-2010-09-23T14:37:45.063748Z
-6e8b343999b28febc71dd621a519ce9d
-2010-02-28T16:51:36.195546Z
-3517
+2011-01-13T14:11:09.000000Z
+db60f05f7cd325cbdd984f0b6d7b42ea
+2010-12-31T15:30:50.544770Z
+4599
 jplang
 has-props
 
@@ -500,7 +500,7 @@ has-props
 
 
 
-30294
+30358
 
 migrate_from_mantis.rake
 file
@@ -508,10 +508,10 @@ file
 
 
 
-2010-11-19T13:04:51.424933Z
-d58affc991ec64b615bcbf3f9a1bb176
-2010-11-14T13:16:39.968867Z
-4403
+2011-01-13T14:11:09.000000Z
+3155277c35e0978585a77b55a40901fb
+2010-12-31T15:30:50.544770Z
+4599
 jplang
 
 
@@ -534,7 +534,7 @@ jplang
 
 
 
-19253
+19137
 
 email.rake
 file
@@ -610,11 +610,11 @@ file
 
 
 
-2010-09-23T14:37:45.063748Z
-ad1435c02c82525ceb302114492c28f8
-2010-08-06T20:46:44.980912Z
-3919
-edavis10
+2011-01-13T14:11:09.000000Z
+93f8964aea856c06fb2eaa62ca2023c2
+2011-01-06T18:52:37.169690Z
+4643
+jplang
 
 
 
@@ -636,7 +636,7 @@ edavis10
 
 
 
-1077
+1118
 
 fetch_changesets.rake
 file
