@@ -29,6 +29,16 @@ class Repository::Git < Repository
     'Git'
   end
 
+  # Returns the identifier for the given git changeset
+  def self.changeset_identifier(changeset)
+    changeset.scmid
+  end
+
+  # Returns the readable identifier for the given git changeset
+  def self.format_changeset_identifier(changeset)
+    changeset.revision[0, 8]
+  end
+
   def branches
     scm.branches
   end
@@ -49,7 +59,7 @@ class Repository::Git < Repository
     c = changesets.find(:first, :order => 'committed_on DESC')
     since = (c ? c.committed_on - 7.days : nil)
 
-    revisions = scm.revisions('', nil, nil, :all => true, :since => since, :reverse => true)
+    revisions = scm.revisions('', nil, nil, :all => true, :since => since)
     return if revisions.nil? || revisions.empty?
 
     recent_changesets = changesets.find(:all, :conditions => ['committed_on >= ?', since])
@@ -75,7 +85,7 @@ class Repository::Git < Repository
         "scmid IN (?)", 
         revisions.map!{|c| c.scmid}
       ],
-      :order => 'id DESC'
+      :order => 'committed_on DESC'
     )
   end
 end

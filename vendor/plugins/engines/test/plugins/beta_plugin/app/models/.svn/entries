@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/plugins/beta_plugin/app/models
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/engines/test/plugins/beta_plugin/app/models
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.759798Z
+2010-08-12T15:03:28.000000Z
 c9a469b003eca7ac6627c41deeda1b4c
 2009-09-13T17:14:35.707881Z
 2887

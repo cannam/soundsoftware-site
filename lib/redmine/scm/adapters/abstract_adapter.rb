@@ -286,10 +286,14 @@ module Redmine
           self.branch = attributes[:branch]
         end
 
-        # Returns the identifier of this revision.
-        # e.g. revision number for centralized system; hash id for DVCS
+        # Returns the identifier of this revision; see also Changeset model
         def identifier
-          @identifier || scmid || revision
+          (@identifier || revision).to_s
+        end
+
+        # Returns the readable identifier.
+        def format_identifier
+          identifier
         end
 
         def save(repo)

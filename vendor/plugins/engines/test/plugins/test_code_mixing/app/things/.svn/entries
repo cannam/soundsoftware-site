@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/plugins/test_code_mixing/app/things
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/engines/test/plugins/test_code_mixing/app/things
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.783782Z
+2010-08-12T15:03:29.000000Z
 3b8cfcd53b03ccc6db1aac5b542abaa4
 2009-09-13T17:14:35.707881Z
 2887

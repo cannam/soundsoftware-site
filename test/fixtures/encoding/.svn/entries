@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/test/fixtures/encoding
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/test/fixtures/encoding
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.323763Z
+2010-08-12T15:03:25.000000Z
 eee83cf374737071543358b83f85f75b
 2010-02-20T11:24:41.988635Z
 3466

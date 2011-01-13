@@ -18,24 +18,13 @@
 require 'iconv'
 
 module RepositoriesHelper
-  # truncate rev to 8 chars if it's quite long
-  def truncate_long_revision_name(rev)
-    rev.to_s.size <= 12 ? rev.to_s : rev.to_s[0, 8]
-  end
-  private :truncate_long_revision_name
-
   def format_revision(revision)
-    if [:identifier, :revision, :scmid].all? { |e| revision.respond_to? e }
-      if revision.scmid and revision.revision != revision.scmid and /[^\d]/ !~ revision.revision
-        "#{revision.revision}:#{revision.scmid}"  # number:hashid
-      else
-        truncate_long_revision_name(revision.identifier)
-      end
+    if revision.respond_to? :format_identifier
+      revision.format_identifier
     else
-      truncate_long_revision_name(revision)
+      revision.to_s
     end
   end
-  module_function :format_revision  # callable as RepositoriesHelper.format_revision
   
   def truncate_at_line_break(text, length = 255)
     if text
@@ -181,8 +170,7 @@ module RepositoriesHelper
   end
   
   def mercurial_field_tags(form, repository)
-      content_tag('p', form.text_field(:url, :label => 'Root directory', :size => 60, :required => true, :disabled => true))
-# (repository && !repository.root_url.blank?)))
+      content_tag('p', form.text_field(:url, :label => 'Root directory', :size => 60, :required => true, :disabled => (repository && !repository.root_url.blank?)))
   end
 
   def git_field_tags(form, repository)

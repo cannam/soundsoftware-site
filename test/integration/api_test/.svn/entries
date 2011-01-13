@@ -1,14 +1,14 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/test/integration/api_test
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/test/integration/api_test
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-13T10:05:43.644565Z
-4397
+2011-01-08T10:14:00.269730Z
+4660
 jplang
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-11-19T13:04:46.164708Z
-65fbddeb3566ca683746b74e4cbbcedd
-2010-11-01T15:45:03.207475Z
-4358
-edavis10
+2011-01-13T12:50:17.000000Z
+7d38bb393dfe949c081c7e9ee2ea0caa
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 
 
 
@@ -58,7 +58,75 @@ edavis10
 
 
 
-606
+611
+
+users_test.rb
+file
+
+
+
+
+2011-01-13T12:50:17.000000Z
+6905251b1347f6f64707d32fa6c69fdb
+2010-12-20T17:45:09.037597Z
+4544
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9430
+
+time_entries_test.rb
+file
+
+
+
+
+2011-01-13T12:50:17.000000Z
+1704d0f93701094c0ebf95183e078b5f
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5254
 
 http_basic_login_test.rb
 file
@@ -66,11 +134,11 @@ file
 
 
 
-2010-11-19T13:04:46.164708Z
-c8145f134a31604365baa69990b0233f
-2010-11-02T15:52:06.649052Z
-4360
-edavis10
+2011-01-13T12:50:17.000000Z
+92abe10e190b64c60afc90866336aa7c
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 
 
 
@@ -92,7 +160,7 @@ edavis10
 
 
 
-830
+835
 
 projects_test.rb
 file
@@ -100,10 +168,10 @@ file
 
 
 
-2010-11-19T13:04:46.164708Z
-925aa948a6a6bcf558ea5270731a93e5
-2010-11-13T10:05:43.644565Z
-4397
+2011-01-13T12:50:17.000000Z
+31d08ba85b57fcdb41e06c1f367de87e
+2011-01-08T10:14:00.269730Z
+4660
 jplang
 has-props
 
@@ -126,7 +194,7 @@ has-props
 
 
 
-4223
+9611
 
 issues_test.rb
 file
@@ -134,11 +202,11 @@ file
 
 
 
-2010-11-19T13:04:46.164708Z
-4d1156dc608214ea129768309dd61963
-2010-11-13T10:05:43.644565Z
-4397
-jplang
+2011-01-13T12:50:17.000000Z
+a4c38f734c93d99d52de27d41a380756
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 has-props
 
 
@@ -160,7 +228,7 @@ has-props
 
 
 
-11171
+16817
 
 http_basic_login_with_api_token_test.rb
 file
@@ -168,11 +236,11 @@ file
 
 
 
-2010-11-19T13:04:46.164708Z
-48bd13d41a1e011f9bdde27bc8cf034c
-2010-11-03T16:48:23.980579Z
-4363
-edavis10
+2011-01-13T12:50:17.000000Z
+445e18c4a9d648b99d948eac4e750480
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 
 
 
@@ -194,7 +262,41 @@ edavis10
 
 
 
-634
+639
+
+news_test.rb
+file
+
+
+
+
+2011-01-13T12:50:17.000000Z
+bee85bcaab5d8fb5f90a64ad4ac32e3c
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2799
 
 disabled_rest_api_test.rb
 file
@@ -202,11 +304,11 @@ file
 
 
 
-2010-11-19T13:04:46.164708Z
-5294c8d805e67e246bb1535b4fe769d4
-2010-11-01T15:26:05.436106Z
-4357
-edavis10
+2011-01-13T12:50:17.000000Z
+24e8e5b1544016befedeea49b8fb5cb5
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 
 
 
@@ -228,5 +330,5 @@ edavis10
 
 
 
-3835
+3840
 

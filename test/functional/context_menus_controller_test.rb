@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class ContextMenusControllerTest < ActionController::TestCase
   fixtures :all
@@ -102,4 +102,10 @@ class ContextMenusControllerTest < ActionController::TestCase
                                              :class => 'icon-del' }
   end
   
+  def test_context_menu_issue_visibility
+    get :issues, :ids => [1, 4]
+    assert_response :success
+    assert_template 'context_menu'
+    assert_equal [1], assigns(:issues).collect(&:id)
+  end
 end

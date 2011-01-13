@@ -1,29 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 42
-/svn/!svn/ver/4250/trunk/app/views/timelog
+V 56
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/timelog
 END
-_list.rhtml
+index.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/4250/trunk/app/views/timelog/_list.rhtml
+V 70
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/timelog/index.api.rsb
 END
-index.html.erb
+show.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 57
-/svn/!svn/ver/4239/trunk/app/views/timelog/index.html.erb
-END
-edit.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/4248/trunk/app/views/timelog/edit.rhtml
-END
-_date_range.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/4235/trunk/app/views/timelog/_date_range.rhtml
+V 69
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/timelog/show.api.rsb
 END

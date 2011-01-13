@@ -1,11 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
-V 38
-/svn/!svn/ver/4388/trunk/test/unit/lib
+V 52
+/svn/!svn/ver/4638/branches/1.1-stable/test/unit/lib
 END
 redmine_test.rb
 K 25
 svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/4388/trunk/test/unit/lib/redmine_test.rb
+V 68
+/svn/!svn/ver/4585/branches/1.1-stable/test/unit/lib/redmine_test.rb
 END

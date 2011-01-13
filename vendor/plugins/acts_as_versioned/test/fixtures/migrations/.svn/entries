@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_versioned/test/fixtures/migrations
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/acts_as_versioned/test/fixtures/migrations
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.579760Z
+2010-08-12T15:03:26.000000Z
 8fca6192aeeba1c8456bd6ac6199839f
 2007-03-04T13:40:21.895320Z
 290

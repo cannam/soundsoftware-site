@@ -1,77 +1,29 @@
 K 25
 svn:wc:ra_dav:version-url
-V 43
-/svn/!svn/ver/4402/trunk/app/views/projects
-END
-copy.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/3608/trunk/app/views/projects/copy.rhtml
+V 57
+/svn/!svn/ver/4660/branches/1.1-stable/app/views/projects
 END
 new.html.erb
 K 25
 svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/4069/trunk/app/views/projects/new.html.erb
+V 70
+/svn/!svn/ver/4660/branches/1.1-stable/app/views/projects/new.html.erb
 END
-show.xml.builder
+index.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/4382/trunk/app/views/projects/show.xml.builder
-END
-settings.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/2871/trunk/app/views/projects/settings.rhtml
-END
-show.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/4382/trunk/app/views/projects/show.rhtml
+V 71
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/projects/index.api.rsb
 END
 _form.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/4402/trunk/app/views/projects/_form.rhtml
+V 69
+/svn/!svn/ver/4660/branches/1.1-stable/app/views/projects/_form.rhtml
 END
-_edit.rhtml
+show.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/4071/trunk/app/views/projects/_edit.rhtml
-END
-list_members.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 62
-/svn/!svn/ver/2990/trunk/app/views/projects/list_members.rhtml
-END
-index.xml.builder
-K 25
-svn:wc:ra_dav:version-url
-V 61
-/svn/!svn/ver/4382/trunk/app/views/projects/index.xml.builder
-END
-_members_box.html.erb
-K 25
-svn:wc:ra_dav:version-url
-V 65
-/svn/!svn/ver/4009/trunk/app/views/projects/_members_box.html.erb
-END
-index.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/4069/trunk/app/views/projects/index.rhtml
-END
-destroy.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 57
-/svn/!svn/ver/4071/trunk/app/views/projects/destroy.rhtml
+V 70
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/projects/show.api.rsb
 END

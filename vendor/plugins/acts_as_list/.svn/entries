@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_list
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/acts_as_list
 http://redmine.rubyforge.org/svn
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2010-09-23T14:37:45.543762Z
+2010-08-12T15:03:26.000000Z
 0bdbdc825f80fda1a94852a82b68ffd4
 2007-12-10T17:58:07.273873Z
 975
@@ -72,7 +72,7 @@ file
 
 
 
-2010-09-23T14:37:45.543762Z
+2010-08-12T15:03:26.000000Z
 42212b5cb681c9888d56f9c0f36e1e02
 2007-12-10T17:58:07.273873Z
 975

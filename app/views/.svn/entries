@@ -1,14 +1,14 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/app/views
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-16T19:49:08.085592Z
-4409
+2011-01-08T10:14:00.269730Z
+4660
 jplang
 
 
@@ -68,22 +68,22 @@ dir
 custom_fields
 dir
 
-users
+issue_moves
 dir
 
-issue_moves
+users
 dir
 
 files
 dir
 
-ldap_auth_sources
+previews
 dir
 
 auth_sources
 dir
 
-previews
+ldap_auth_sources
 dir
 
 search
@@ -92,10 +92,10 @@ dir
 messages
 dir
 
-issue_relations
+versions
 dir
 
-versions
+issue_relations
 dir
 
 mailer
