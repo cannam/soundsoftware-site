@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/export
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/lib/redmine/export
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-24T12:48:29.791863Z
+2010-10-01T15:15:02.000000Z
 aa6093490555bdd119ba8f1d34cab080
 2010-09-20T02:55:20.180218Z
 4104

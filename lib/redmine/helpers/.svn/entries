@@ -1,14 +1,14 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/helpers
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/lib/redmine/helpers
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-11T13:44:23.942520Z
-4392
+2010-12-30T15:04:08.033097Z
+4584
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2010-11-19T13:04:51.408930Z
-3c093f4a7147fe4ebdbaed2749d602f1
-2010-11-11T13:44:23.942520Z
-4392
+2011-01-13T12:50:18.000000Z
+2c61985f04e8f13965fd9880ff9ad5dc
+2010-12-30T15:04:08.033097Z
+4584
 jplang
 has-props
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-40744
+32266
 
 calendar.rb
 file
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:45.027790Z
+2010-08-12T15:03:25.000000Z
 0a7d81755cf7c1519d4b4c1d84712139
 2009-12-13T04:06:55.726600Z
 3166

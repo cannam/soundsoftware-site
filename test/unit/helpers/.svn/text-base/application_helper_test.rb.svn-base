@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../../test_helper'
+require File.expand_path('../../../test_helper', __FILE__)
 
 class ApplicationHelperTest < ActionView::TestCase
   
@@ -275,7 +275,13 @@ RAW
       "<!-- opening comment" => "<p>&lt;!-- opening comment</p>",
       # remove attributes except class
       "<pre class='foo'>some text</pre>" => "<pre class='foo'>some text</pre>",
+      '<pre class="foo">some text</pre>' => '<pre class="foo">some text</pre>',
+      "<pre class='foo bar'>some text</pre>" => "<pre class='foo bar'>some text</pre>",
+      '<pre class="foo bar">some text</pre>' => '<pre class="foo bar">some text</pre>',
       "<pre onmouseover='alert(1)'>some text</pre>" => "<pre>some text</pre>",
+      # xss
+      '<pre><code class=""onmouseover="alert(1)">text</code></pre>' => '<pre><code>text</code></pre>',
+      '<pre class=""onmouseover="alert(1)">text</pre>' => '<pre>text</pre>',
     }
     to_test.each { |text, result| assert_equal result, textilizable(text) }
   end
@@ -422,7 +428,11 @@ Nullam commodo metus accumsan nulla. Curabitur lobortis dui id dolor.
 h2. Subtitle with [[Wiki|another Wiki]] link
 
 h2. Subtitle with %{color:red}red text%
-    
+
+<pre>
+some code
+</pre>
+
 h3. Subtitle with *some* _modifiers_
 
 h1. Another title
@@ -458,7 +468,7 @@ RAW
                '</ul>'
 
     @project = Project.find(1)
-    assert textilizable(raw).gsub("\n", "").include?(expected)
+    assert textilizable(raw).gsub("\n", "").include?(expected), textilizable(raw)
   end
   
   def test_table_of_content_should_contain_included_page_headings

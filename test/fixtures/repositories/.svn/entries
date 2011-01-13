@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/test/fixtures/repositories
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/test/fixtures/repositories
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-29T23:21:57.240368Z
-4310
-jbbarth
+2011-01-11T04:22:31.643521Z
+4684
+tmaruyama
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.351765Z
+2010-08-12T15:03:25.000000Z
 0553391b55404e8ff509358b388f085b
 2008-03-12T20:28:49.748698Z
 1236
@@ -60,13 +60,47 @@ has-props
 
 8075
 
+mercurial_repository.hg
+file
+
+
+
+
+2011-01-13T12:50:17.000000Z
+2436fc3d3aefeb07b291d5660396ca8d
+2011-01-11T04:22:31.643521Z
+4684
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7104
+
 subversion_repository.dump.gz
 file
 
 
 
 
-2010-09-23T14:37:45.351765Z
+2010-08-12T15:03:25.000000Z
 bd13c11517bf083e83846aeccff745f1
 2010-06-20T16:08:26.745839Z
 3800
@@ -100,7 +134,7 @@ file
 
 
 
-2010-09-23T14:37:45.347765Z
+2010-08-12T15:03:25.000000Z
 fa70d4aeca5639d750d94281ad664957
 2007-12-03T19:19:36.156779Z
 951
@@ -134,7 +168,7 @@ file
 
 
 
-2010-11-19T13:04:46.860726Z
+2010-11-30T13:11:53.000000Z
 300e21b10239e2fa28df3111924b8328
 2010-10-29T23:21:57.240368Z
 4310
@@ -162,47 +196,13 @@ has-props
 
 20730
 
-mercurial_repository.tar.gz
-file
-
-
-
-
-2010-09-23T14:37:45.351765Z
-48c6f19f8c3123c7e143e4516669f700
-2007-12-14T17:46:45.448946Z
-991
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7827
-
 filesystem_repository.tar.gz
 file
 
 
 
 
-2010-09-23T14:37:45.351765Z
+2010-08-12T15:03:25.000000Z
 9fbee7c5669de84f0767597eb41af9f7
 2008-06-08T15:40:24.603157Z
 1508
@@ -236,7 +236,7 @@ file
 
 
 
-2010-09-23T14:37:45.351765Z
+2010-08-12T15:03:25.000000Z
 0c4730bd5eb192e094531f218b7a3119
 2007-12-13T18:52:09.073829Z
 987

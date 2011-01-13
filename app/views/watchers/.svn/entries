@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/app/views/watchers
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views/watchers
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:44.707788Z
+2010-08-12T15:03:25.000000Z
 7ece4fb161c765ac7e63c30883733d99
 2010-03-13T17:45:41.194736Z
 3579

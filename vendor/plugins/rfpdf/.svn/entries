@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/rfpdf
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/rfpdf
 http://redmine.rubyforge.org/svn
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2010-09-23T14:37:45.843778Z
+2010-08-12T15:03:29.000000Z
 1da9fbada6119233134b3aab6c7d0edf
 2008-07-04T17:58:14.743502Z
 1623
@@ -72,7 +72,7 @@ file
 
 
 
-2010-09-23T14:37:45.843778Z
+2010-08-12T15:03:29.000000Z
 275a3dc6407eaf7c40f1d8f4e6b08803
 2006-11-21T18:34:04.275680Z
 49
@@ -106,7 +106,7 @@ file
 
 
 
-2010-09-23T14:37:45.843778Z
+2010-08-12T15:03:29.000000Z
 40cf182dab06e3de067375de5bbab322
 2006-11-21T18:34:04.275680Z
 49
@@ -140,7 +140,7 @@ file
 
 
 
-2010-09-23T14:37:45.843778Z
+2010-08-12T15:03:29.000000Z
 d58199e83ebcaa5d234764407c238bb2
 2006-11-21T18:34:04.275680Z
 49

@@ -1,65 +1,35 @@
 K 25
 svn:wc:ra_dav:version-url
-V 40
-/svn/!svn/ver/4382/trunk/app/views/users
-END
-_general.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/4249/trunk/app/views/users/_general.rhtml
+V 54
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/users
 END
 _memberships.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/3924/trunk/app/views/users/_memberships.rhtml
-END
-_groups.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/4230/trunk/app/views/users/_groups.rhtml
-END
-new.html.erb
-K 25
-svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/4229/trunk/app/views/users/new.html.erb
+V 73
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/users/_memberships.rhtml
 END
 _mail_notifications.html.erb
 K 25
 svn:wc:ra_dav:version-url
-V 69
-/svn/!svn/ver/4223/trunk/app/views/users/_mail_notifications.html.erb
+V 83
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/users/_mail_notifications.html.erb
 END
-show.rhtml
+index.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 51
-/svn/!svn/ver/4382/trunk/app/views/users/show.rhtml
+V 68
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/users/index.api.rsb
 END
 _form.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/4223/trunk/app/views/users/_form.rhtml
+V 66
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/users/_form.rhtml
 END
-edit.rhtml
+show.api.rsb
 K 25
 svn:wc:ra_dav:version-url
-V 51
-/svn/!svn/ver/4231/trunk/app/views/users/edit.rhtml
-END
-_preferences.html.erb
-K 25
-svn:wc:ra_dav:version-url
-V 62
-/svn/!svn/ver/4223/trunk/app/views/users/_preferences.html.erb
-END
-index.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/4231/trunk/app/views/users/index.rhtml
+V 67
+/svn/!svn/ver/4585/branches/1.1-stable/app/views/users/show.api.rsb
 END

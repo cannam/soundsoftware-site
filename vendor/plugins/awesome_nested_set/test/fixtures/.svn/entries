@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/awesome_nested_set/test/fixtures
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/awesome_nested_set/test/fixtures
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.603759Z
+2010-08-12T15:03:26.000000Z
 460e90d6f219f339e8e4c64aaae0063c
 2008-12-20T12:22:38.158335Z
 2149
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:45.599759Z
+2010-08-12T15:03:26.000000Z
 4b6a06e11c21a3aadd09e60dee443110
 2008-12-20T12:22:38.158335Z
 2149
@@ -100,7 +100,7 @@ file
 
 
 
-2010-09-23T14:37:45.603759Z
+2010-08-12T15:03:26.000000Z
 e4eb5dbc7f2a2aa2fee79dba9210e769
 2008-12-20T12:22:38.158335Z
 2149
@@ -134,7 +134,7 @@ file
 
 
 
-2010-09-23T14:37:45.603759Z
+2010-08-12T15:03:26.000000Z
 e8b507fd94ed89b9997c3f9f137290cf
 2008-12-20T12:22:38.158335Z
 2149

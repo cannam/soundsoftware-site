@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/plugins/not_a_plugin/public
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/engines/test/plugins/not_a_plugin/public
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.767754Z
+2010-08-12T15:03:28.000000Z
 d41d8cd98f00b204e9800998ecf8427e
 2009-09-13T17:14:35.707881Z
 2887

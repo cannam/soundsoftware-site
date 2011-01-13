@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/app/views/welcome
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views/welcome
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-24T12:48:26.303754Z
+2011-01-13T12:46:09.000000Z
 df32441c6802182ffb9a205c97ec8f3b
 2010-08-27T14:05:54.014502Z
 4047
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:44.711779Z
+2010-08-12T15:03:25.000000Z
 dbe04ed0b787a5470a99a1f286c0685e
 2009-01-27T17:27:50.299725Z
 2319

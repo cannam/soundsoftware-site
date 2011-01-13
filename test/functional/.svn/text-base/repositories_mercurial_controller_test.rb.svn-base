@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 require 'repositories_controller'
 
 # Re-raise errors caught by the controller.
@@ -49,10 +49,10 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
       assert_response :success
       assert_template 'show'
       assert_not_nil assigns(:entries)
-      assert_equal 3, assigns(:entries).size
-      assert assigns(:entries).detect {|e| e.name == 'images' && e.kind == 'dir'}
+      assert_equal 4, assigns(:entries).size
+      assert assigns(:entries).detect {|e| e.name == 'images'  && e.kind == 'dir'}
       assert assigns(:entries).detect {|e| e.name == 'sources' && e.kind == 'dir'}
-      assert assigns(:entries).detect {|e| e.name == 'README' && e.kind == 'file'}
+      assert assigns(:entries).detect {|e| e.name == 'README'  && e.kind == 'file'}
     end
     
     def test_show_directory
@@ -74,7 +74,21 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
       assert_not_nil assigns(:entries)
       assert_equal ['delete.png'], assigns(:entries).collect(&:name)
     end
-    
+
+    def test_show_directory_sql_escape_percent
+      get :show, :id => 3, :path => ['sql_escape', 'percent%dir'], :rev => 13
+      assert_response :success
+      assert_template 'show'
+
+      assert_not_nil assigns(:entries)
+      assert_equal ['percent%file1.txt', 'percentfile1.txt'], assigns(:entries).collect(&:name)
+      changesets = assigns(:changesets)
+
+      ## This is not yet implemented.
+      # assert_not_nil changesets
+      # assert_equal %w(13 11 10 9), changesets.collect(&:revision)
+    end
+
     def test_changes
       get :changes, :id => 3, :path => ['images', 'edit.png']
       assert_response :success
@@ -86,10 +100,10 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
       get :entry, :id => 3, :path => ['sources', 'watchers_controller.rb']
       assert_response :success
       assert_template 'entry'
-      # Line 19
+      # Line 10
       assert_tag :tag => 'th',
-                 :content => /10/,
-                 :attributes => { :class => /line-num/ },
+                 :content => '10',
+                 :attributes => { :class => 'line-num' },
                  :sibling => { :tag => 'td', :content => /WITHOUT ANY WARRANTY/ }
     end
     
@@ -115,7 +129,7 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
       assert_template 'diff'
       # Line 22 removed
       assert_tag :tag => 'th',
-                 :content => /22/,
+                 :content => '22',
                  :sibling => { :tag => 'td', 
                                :attributes => { :class => /diff_out/ },
                                :content => /def remove/ }
@@ -125,10 +139,29 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
       get :annotate, :id => 3, :path => ['sources', 'watchers_controller.rb']
       assert_response :success
       assert_template 'annotate'
-      # Line 23, revision 4
-      assert_tag :tag => 'th', :content => /23/,
-                 :sibling => { :tag => 'td', :child => { :tag => 'a', :content => /4/ } },
-                 :sibling => { :tag => 'td', :content => /jsmith/ },
+      # Line 23, revision 4:def6d2f1254a
+      assert_tag :tag => 'th',
+                 :content => '23',
+                 :attributes => { :class => 'line-num' },
+                 :sibling =>
+                       {
+                         :tag => 'td',
+                         :attributes => { :class => 'revision' },
+                         :child => { :tag => 'a', :content => '4' }
+                         # :child => { :tag => 'a', :content => /4:def6d2f1/ }
+                       }
+      assert_tag :tag => 'th',
+                 :content => '23',
+                 :attributes => { :class => 'line-num' },
+                 :sibling =>
+                       {
+                          :tag     => 'td'    ,
+                          :content => 'jsmith' ,
+                          :attributes => { :class   => 'author' },
+                        }
+      assert_tag :tag => 'th',
+                 :content => '23',
+                 :attributes => { :class => 'line-num' },
                  :sibling => { :tag => 'td', :content => /watcher =/ }
     end
   else

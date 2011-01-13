@@ -1,143 +1,29 @@
 K 25
 svn:wc:ra_dav:version-url
-V 36
-/svn/!svn/ver/4406/trunk/lib/redmine
+V 50
+/svn/!svn/ver/4678/branches/1.1-stable/lib/redmine
 END
 i18n.rb
 K 25
 svn:wc:ra_dav:version-url
-V 44
-/svn/!svn/ver/4183/trunk/lib/redmine/i18n.rb
+V 58
+/svn/!svn/ver/4585/branches/1.1-stable/lib/redmine/i18n.rb
 END
-pop3.rb
+safe_attributes.rb
 K 25
 svn:wc:ra_dav:version-url
-V 44
-/svn/!svn/ver/3330/trunk/lib/redmine/pop3.rb
-END
-platform.rb
-K 25
-svn:wc:ra_dav:version-url
-V 48
-/svn/!svn/ver/1753/trunk/lib/redmine/platform.rb
-END
-custom_field_format.rb
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/3675/trunk/lib/redmine/custom_field_format.rb
-END
-themes.rb
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/3710/trunk/lib/redmine/themes.rb
+V 69
+/svn/!svn/ver/4585/branches/1.1-stable/lib/redmine/safe_attributes.rb
 END
 version.rb
 K 25
 svn:wc:ra_dav:version-url
-V 47
-/svn/!svn/ver/4349/trunk/lib/redmine/version.rb
+V 61
+/svn/!svn/ver/4678/branches/1.1-stable/lib/redmine/version.rb
 END
-imap.rb
+themes.rb
 K 25
 svn:wc:ra_dav:version-url
-V 44
-/svn/!svn/ver/2220/trunk/lib/redmine/imap.rb
-END
-mime_type.rb
-K 25
-svn:wc:ra_dav:version-url
-V 49
-/svn/!svn/ver/3258/trunk/lib/redmine/mime_type.rb
-END
-info.rb
-K 25
-svn:wc:ra_dav:version-url
-V 44
-/svn/!svn/ver/2776/trunk/lib/redmine/info.rb
-END
-activity.rb
-K 25
-svn:wc:ra_dav:version-url
-V 48
-/svn/!svn/ver/1702/trunk/lib/redmine/activity.rb
-END
-access_keys.rb
-K 25
-svn:wc:ra_dav:version-url
-V 51
-/svn/!svn/ver/1081/trunk/lib/redmine/access_keys.rb
-END
-wiki_formatting.rb
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/3446/trunk/lib/redmine/wiki_formatting.rb
-END
-plugin.rb
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/4293/trunk/lib/redmine/plugin.rb
-END
-menu_manager.rb
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/4406/trunk/lib/redmine/menu_manager.rb
-END
-utils.rb
-K 25
-svn:wc:ra_dav:version-url
-V 45
-/svn/!svn/ver/2234/trunk/lib/redmine/utils.rb
-END
-hook.rb
-K 25
-svn:wc:ra_dav:version-url
-V 44
-/svn/!svn/ver/4406/trunk/lib/redmine/hook.rb
-END
-access_control.rb
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/1907/trunk/lib/redmine/access_control.rb
-END
-search.rb
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/3444/trunk/lib/redmine/search.rb
-END
-core_ext.rb
-K 25
-svn:wc:ra_dav:version-url
-V 48
-/svn/!svn/ver/1361/trunk/lib/redmine/core_ext.rb
-END
-about.rb
-K 25
-svn:wc:ra_dav:version-url
-V 45
-/svn/!svn/ver/2766/trunk/lib/redmine/about.rb
-END
-syntax_highlighting.rb
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/3619/trunk/lib/redmine/syntax_highlighting.rb
-END
-unified_diff.rb
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/3028/trunk/lib/redmine/unified_diff.rb
-END
-notifiable.rb
-K 25
-svn:wc:ra_dav:version-url
-V 50
-/svn/!svn/ver/4222/trunk/lib/redmine/notifiable.rb
+V 60
+/svn/!svn/ver/4585/branches/1.1-stable/lib/redmine/themes.rb
 END

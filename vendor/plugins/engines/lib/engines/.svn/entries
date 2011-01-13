@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/lib/engines
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/engines/lib/engines
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.707755Z
+2010-08-12T15:03:27.000000Z
 f5e61f1312a19bdac20f06b7529eaa98
 2009-09-13T17:14:35.707881Z
 2887
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:45.699755Z
+2010-08-12T15:03:27.000000Z
 d084e8ccb3edfb9f481f2626ee9e57e1
 2009-09-13T17:14:35.707881Z
 2887
@@ -100,7 +100,7 @@ file
 
 
 
-2010-09-23T14:37:45.699755Z
+2010-08-12T15:03:27.000000Z
 a2cb2f3c517fbe62ab1277e44b0a05ed
 2009-02-21T11:04:50.579477Z
 2493

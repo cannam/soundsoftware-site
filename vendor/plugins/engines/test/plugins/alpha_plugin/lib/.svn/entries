@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/plugins/alpha_plugin/lib
+4707
+http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/engines/test/plugins/alpha_plugin/lib
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.751796Z
+2010-08-12T15:03:28.000000Z
 4799f34099980de6af0dc719c7f04845
 2009-09-13T17:14:35.707881Z
 2887
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:45.751796Z
+2010-08-12T15:03:28.000000Z
 e892323cf7ac415a30ca41b49ab96d1d
 2009-09-13T17:14:35.707881Z
 2887
