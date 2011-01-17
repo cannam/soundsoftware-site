@@ -8,18 +8,15 @@
     <%= '| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true) %>
 </div>
 
-<% if User.current.logged? %>
+<% if @user_projects %>
   
-  <%= render_my_project_hierarchy(@projects)%>
+  <%= render_my_project_hierarchy(@user_projects)%>
 
-  <%= render_other_project_hierarchy(@projects)%>
-
-<% else %>
-
-  <h2><%=l(:label_project_plural)%></h2>
-  <%= render_project_hierarchy(@projects)%>
 <% end %>
 
+<%= render_other_project_hierarchy(@projects)%>
+
+<p class="pagination"><%= pagination_links_full @project_pages, @project_count %></p>
 
 
 <% other_formats_links do |f| %>
