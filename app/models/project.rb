@@ -438,7 +438,14 @@ class Project < ActiveRecord::Base
   
   # Returns a short description of the projects (first lines)
   def short_description(length = 255)
-    description.gsub(/^(.{#{length}}[^\n\r]*).*$/m, '\1...').strip if description
+    ## Original Redmine code: this truncates to the CR that is more
+    ## than "length" characters from the start.
+    # description.gsub(/^(.{#{length}}[^\n\r]*).*$/m, '\1...').strip if description
+    ## That's too much for us, and also we want to omit images and the
+    ## like.  Truncate instead to the first CR that follows _any_
+    ## non-blank text, and to the next word break beyond "length"
+    ## characters if the result is still longer than that.
+    description.gsub(/![^\s]+!/, '').gsub(/^(\s*[^\n\r]*).*$/m, '\1').gsub(/^(.{#{length}}\b).*$/m, '\1 ...').strip if description
   end
 
   def css_classes
