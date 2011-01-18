@@ -76,6 +76,8 @@ table.projects .child .firstcol { padding-left: 1em }
 table.projects .level2 .firstcol { padding-left: 2em; }
 table.projects .level3 .firstcol { padding-left: 3em; }
 
+ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.95em }
+
 #top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 90%; /* height: 2em; */ margin: 0; padding: 0; padding-top: 0.5em; background-color: #3e442c; }
 #top-menu ul { margin-left: 10px; }
 #top-menu a { font-weight: bold; }

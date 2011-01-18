@@ -55,7 +55,7 @@ class ProjectsController < ApplicationController
         @offset ||= @project_pages.current.offset
         @projects = Project.visible.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
         if User.current.logged?
-          @user_projects = User.current.projects
+          @user_projects = User.current.projects.sort_by(&:lft)
         end
         render :template => 'projects/index.rhtml', :layout => !request.xhr?
       }
