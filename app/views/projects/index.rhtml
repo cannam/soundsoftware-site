@@ -14,7 +14,11 @@
 
 <% end %>
 
-<%= render_other_project_hierarchy(@projects)%>
+<h2>
+<%= l("label_project_all") %>
+</h2>
+
+<%= render_project_table(@projects) %>
 
 <p class="pagination"><%= pagination_links_full @project_pages, @project_count %></p>
 
