@@ -47,11 +47,13 @@ class ProjectsController < ApplicationController
   def index
     respond_to do |format|
       format.html { 
+        sort_init 'lft'
+        sort_update %w(lft title created_on updated_on)
         @limit = per_page_option
         @project_count = Project.visible.count
         @project_pages = Paginator.new self, @project_count, @limit, params['page']
         @offset ||= @project_pages.current.offset
-        @projects = Project.visible.all(:offset => @offset, :limit => @limit, :order => 'lft') 
+        @projects = Project.visible.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
         if User.current.logged?
           @user_projects = User.current.projects
         end
