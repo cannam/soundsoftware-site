@@ -121,7 +121,12 @@ module ProjectsHelper
 
           classes = (ancestors.empty? ? 'root' : 'child')
           s << "<li class='#{classes}'><div class='#{classes}'>" +
-                 link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
+                 link_to_project(project, {}, :class => "project my-project")
+          if project.is_public?
+            s << " <span class='public'>" << l("field_is_public") << "</span>"
+          else
+            s << " <span class='private'>" << l("field_is_private") << "</span>"
+          end
           s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
           s << "</div>\n"
           ancestors << project
