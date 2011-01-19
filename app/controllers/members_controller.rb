@@ -94,6 +94,7 @@ class MembersController < ApplicationController
   
   def autocomplete_for_member
     @principals = Principal.active.like(params[:q]).find(:all, :limit => 100) - @project.principals
+    logger.debug "Query for #{params[:q]} returned #{@principals.size} results"
     render :layout => false
   end
 

@@ -45,12 +45,22 @@ class ProjectsController < ApplicationController
   helper :repositories
   include RepositoriesHelper
   include ProjectsHelper
-  
+
   # Lists visible projects
   def index
     respond_to do |format|
       format.html { 
-        @projects = Project.visible.find(:all, :order => 'lft') 
+        sort_init 'lft'
+        sort_update %w(lft title created_on updated_on)
+        @limit = per_page_option
+        @project_count = Project.visible.count
+        @project_pages = Paginator.new self, @project_count, @limit, params['page']
+        @offset ||= @project_pages.current.offset
+        @projects = Project.visible.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
+        if User.current.logged?
+          @user_projects = User.current.projects.sort_by(&:lft)
+        end
+        render :template => 'projects/index.rhtml', :layout => !request.xhr?
       }
       format.xml  {
         @projects = Project.visible.find(:all, :order => 'lft')

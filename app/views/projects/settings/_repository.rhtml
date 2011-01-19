@@ -7,7 +7,7 @@
 
 <div class="box tabular">
 <% if !@repository || !@repository.url %>
-<ul><li>The repository for a project will normally be set up automatically within a few minutes of the project being created.</li></ul>
+<ul><li><%= l(:text_settings_repo_creation) %></li></ul>
 <% end %>
 <p><%= label_tag('repository_scm', l(:label_scm)) %><%= scm_select_tag(@repository) %></p>
 <%= repository_field_tags(f, @repository) if @repository %>
