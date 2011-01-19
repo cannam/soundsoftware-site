@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 40
-/svn/!svn/ver/4508/trunk/app/views/users
+/svn/!svn/ver/4729/trunk/app/views/users
 END
 _general.rhtml
 K 25
@@ -55,7 +55,7 @@ edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/4231/trunk/app/views/users/edit.rhtml
+/svn/!svn/ver/4729/trunk/app/views/users/edit.rhtml
 END
 _preferences.html.erb
 K 25
@@ -67,7 +67,7 @@ index.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/4231/trunk/app/views/users/index.rhtml
+/svn/!svn/ver/4729/trunk/app/views/users/index.rhtml
 END
 show.api.rsb
 K 25

@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/4645/trunk/test/integration/api_test
+/svn/!svn/ver/4729/trunk/test/integration/api_test
 END
 token_authentication_test.rb
 K 25
@@ -13,7 +13,7 @@ users_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 64
-/svn/!svn/ver/4544/trunk/test/integration/api_test/users_test.rb
+/svn/!svn/ver/4729/trunk/test/integration/api_test/users_test.rb
 END
 time_entries_test.rb
 K 25

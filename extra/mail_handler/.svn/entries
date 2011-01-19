@@ -1,14 +1,14 @@
 10
 
 dir
-4707
-http://redmine.rubyforge.org/svn/branches/1.1-stable/extra/mail_handler
+4732
+http://redmine.rubyforge.org/svn/trunk/extra/mail_handler
 http://redmine.rubyforge.org/svn
 
 
 
-2009-12-19T14:08:48.825882Z
-3195
+2011-01-15T14:48:33.715032Z
+4725
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
-4529fffb032835fb9b9411c58d1c7d6b
-2009-12-19T14:08:48.825882Z
-3195
+2011-01-19T15:03:32.000000Z
+f3a0f406bd2e6d3caacb7e7c22079df0
+2011-01-15T14:48:33.715032Z
+4725
 jplang
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-5778
+5915
 

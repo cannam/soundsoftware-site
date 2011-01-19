@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/4645/trunk/test/integration
+/svn/!svn/ver/4729/trunk/test/integration
 END
 application_test.rb
 K 25
@@ -13,7 +13,7 @@ routing_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/svn/!svn/ver/4545/trunk/test/integration/routing_test.rb
+/svn/!svn/ver/4729/trunk/test/integration/routing_test.rb
 END
 admin_test.rb
 K 25

@@ -1,7 +1,7 @@
 10
 
 dir
-4707
+4732
 http://redmine.rubyforge.org/svn/trunk/app/views/issues
 http://redmine.rubyforge.org/svn
 
@@ -60,40 +60,6 @@ has-props
 
 1816
 
-_action_menu.rhtml
-file
-
-
-
-
-2010-11-19T13:04:50.824922Z
-74c6e939ebb113c49a367fff0f463f63
-2010-10-15T23:11:05.712143Z
-4258
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1285
-
 _history.rhtml
 file
 
@@ -128,18 +94,17 @@ has-props
 
 859
 
-_form.rhtml
+_action_menu.rhtml
 file
 
 
 
 
 2010-11-19T13:04:50.824922Z
-7c3d2a41291eabbd1c7e28139be69e49
-2010-10-30T16:15:31.867344Z
-4311
-jbbarth
-has-props
+74c6e939ebb113c49a367fff0f463f63
+2010-10-15T23:11:05.712143Z
+4258
+edavis10
 
 
 
@@ -160,7 +125,8 @@ has-props
 
 
 
-2033
+
+1285
 
 bulk_edit.rhtml
 file
@@ -195,6 +161,40 @@ has-props
 
 
 3443
+
+_form.rhtml
+file
+
+
+
+
+2010-11-19T13:04:50.824922Z
+7c3d2a41291eabbd1c7e28139be69e49
+2010-10-30T16:15:31.867344Z
+4311
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2033
 
 _form_update.rhtml
 file
@@ -434,40 +434,6 @@ has-props
 
 353
 
-_changesets.rhtml
-file
-
-
-
-
-2011-01-13T14:09:38.000000Z
-eca2b7cfea14ef6185c358e55f1b8b48
-2011-01-08T00:19:51.192586Z
-4652
-tmaruyama
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-470
-
 _list_simple.rhtml
 file
 
@@ -501,6 +467,40 @@ has-props
 
 
 989
+
+_changesets.rhtml
+file
+
+
+
+
+2011-01-13T14:09:38.000000Z
+eca2b7cfea14ef6185c358e55f1b8b48
+2011-01-08T00:19:51.192586Z
+4652
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+470
 
 _edit.rhtml
 file

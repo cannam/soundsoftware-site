@@ -1,7 +1,7 @@
 10
 
 dir
-4707
+4732
 http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine
 http://redmine.rubyforge.org/svn
 
@@ -165,82 +165,14 @@ has-props
 
 2014
 
-wiki_formatting
+views
 dir
 
-views
+wiki_formatting
 dir
 
 menu_manager
 dir
-
-menu_manager_test.rb
-file
-
-
-
-
-2011-01-13T14:09:08.000000Z
-1a6043d0994b5fb4a09f3962ab5542ce
-2010-12-12T23:24:34.194336Z
-4509
-jbbarth
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1044
-
-plugin_test.rb
-file
-
-
-
-
-2011-01-13T14:09:08.000000Z
-d2f2e4457ed4eda1b5efb8a41a3de255
-2010-12-12T23:24:34.194336Z
-4509
-jbbarth
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4168
 
 wiki_formatting.rb
 file
@@ -276,6 +208,74 @@ has-props
 
 1966
 
+plugin_test.rb
+file
+
+
+
+
+2011-01-13T14:09:08.000000Z
+d2f2e4457ed4eda1b5efb8a41a3de255
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4168
+
+menu_manager_test.rb
+file
+
+
+
+
+2011-01-13T14:09:08.000000Z
+1a6043d0994b5fb4a09f3962ab5542ce
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1044
+
 hook_test.rb
 file
 
@@ -310,6 +310,9 @@ has-props
 
 5741
 
+helpers
+dir
+
 access_control_test.rb
 file
 
@@ -343,9 +346,6 @@ has-props
 
 
 1801
-
-helpers
-dir
 
 unified_diff_test.rb
 file
