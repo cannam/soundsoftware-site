@@ -925,6 +925,7 @@ en:
   text_own_membership_delete_confirmation: "You are about to remove some or all of your permissions and may no longer be able to edit this project after that.\nAre you sure you want to continue?"
   text_zoom_in: Zoom in
   text_zoom_out: Zoom out
+  text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here.<br>Please check again in ten minutes, and <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if there is any problem.
   
   default_role_manager: Manager
   default_role_developer: Developer
