@@ -888,6 +888,7 @@ en-GB:
   text_wiki_page_destroy_children: "Delete child pages and all their descendants"
   text_wiki_page_reassign_children: "Reassign child pages to this parent page"
   text_own_membership_delete_confirmation: "You are about to remove some or all of your permissions and may no longer be able to edit this project after that.\nAre you sure you want to continue?"
+  text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here; please check again in ten minutes.
   
   default_role_manager: Manager
   default_role_developer: Developer
