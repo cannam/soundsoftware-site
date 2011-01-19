@@ -1,7 +1,7 @@
 10
 
 dir
-4707
+4732
 http://redmine.rubyforge.org/svn/trunk/test/fixtures
 http://redmine.rubyforge.org/svn
 
@@ -616,8 +616,39 @@ has-props
 
 377
 
-mailer
-dir
+custom_fields_projects.yml
+file
+
+
+
+
+2010-09-23T14:37:45.319762Z
+c6789a99aba9f28cf1d31a36b36224c8
+2010-01-03T11:18:09.741250Z
+3278
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+71
 
 enumerations.yml
 file
@@ -653,73 +684,8 @@ has-props
 
 1391
 
-custom_fields_projects.yml
-file
-
-
-
-
-2010-09-23T14:37:45.319762Z
-c6789a99aba9f28cf1d31a36b36224c8
-2010-01-03T11:18:09.741250Z
-3278
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-71
-
-issues.yml
-file
-
-
-
-
-2011-01-13T14:09:10.000000Z
-a8c37ca171bb5f39ffbc6cd3ffcf0c52
-2010-12-10T11:06:21.419457Z
-4482
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5656
+mailer
+dir
 
 member_roles.yml
 file
@@ -755,6 +721,40 @@ has-props
 
 692
 
+issues.yml
+file
+
+
+
+
+2011-01-13T14:09:10.000000Z
+a8c37ca171bb5f39ffbc6cd3ffcf0c52
+2010-12-10T11:06:21.419457Z
+4482
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5656
+
 queries.yml
 file
 
@@ -788,40 +788,6 @@ has-props
 
 
 2345
-
-wiki_contents.yml
-file
-
-
-
-
-2011-01-13T14:09:10.000000Z
-595d0f0964e3c3f8ce7edb4b07941ffa
-2011-01-10T19:45:20.108166Z
-4681
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1953
 
 watchers.yml
 file
@@ -857,16 +823,16 @@ has-props
 
 219
 
-enabled_modules.yml
+wiki_contents.yml
 file
 
 
 
 
 2011-01-13T14:09:10.000000Z
-c1fe3d9f5bbcbf5cf73c684b744d0c7a
-2010-12-12T17:00:52.100205Z
-4505
+595d0f0964e3c3f8ce7edb4b07941ffa
+2011-01-10T19:45:20.108166Z
+4681
 jplang
 has-props
 
@@ -889,7 +855,7 @@ has-props
 
 
 
-1600
+1953
 
 wiki_pages.yml
 file
@@ -924,6 +890,40 @@ has-props
 
 
 1381
+
+enabled_modules.yml
+file
+
+
+
+
+2011-01-13T14:09:10.000000Z
+c1fe3d9f5bbcbf5cf73c684b744d0c7a
+2010-12-12T17:00:52.100205Z
+4505
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1600
 
 comments.yml
 file

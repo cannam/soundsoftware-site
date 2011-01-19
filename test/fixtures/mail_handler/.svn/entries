@@ -1,7 +1,7 @@
 10
 
 dir
-4707
+4732
 http://redmine.rubyforge.org/svn/trunk/test/fixtures/mail_handler
 http://redmine.rubyforge.org/svn
 
@@ -25,74 +25,6 @@ jplang
 
 
 e93f8b46-1217-0410-a6f0-8f06a7374b81
-
-message_reply_by_subject.eml
-file
-
-
-
-
-2010-09-23T14:37:45.339796Z
-09130a1100cb410ed07fdff5564b2993
-2009-01-21T18:22:30.765588Z
-2294
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-410
-
-ticket_html_only.eml
-file
-
-
-
-
-2010-09-23T14:37:45.339796Z
-5e24af78a4534798611158a3d81efb34
-2008-12-14T17:10:16.292262Z
-2136
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-691
 
 issue_update_with_multiple_quoted_reply_above.eml
 file
@@ -128,17 +60,18 @@ edavis10
 
 2018
 
-ticket_with_spaces_between_attribute_and_separator.eml
+ticket_html_only.eml
 file
 
 
 
 
 2010-09-23T14:37:45.339796Z
-4fbec91f5454b84077ae1290fba0bc8e
-2009-08-13T16:57:36.259313Z
-2838
-edavis10
+5e24af78a4534798611158a3d81efb34
+2008-12-14T17:10:16.292262Z
+2136
+jplang
+has-props
 
 
 
@@ -159,8 +92,41 @@ edavis10
 
 
 
+691
+
+message_reply_by_subject.eml
+file
 
-1903
+
+
+
+2010-09-23T14:37:45.339796Z
+09130a1100cb410ed07fdff5564b2993
+2009-01-21T18:22:30.765588Z
+2294
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+410
 
 ticket_with_localized_attributes.eml
 file
@@ -195,6 +161,40 @@ jplang
 
 
 1944
+
+ticket_with_spaces_between_attribute_and_separator.eml
+file
+
+
+
+
+2010-09-23T14:37:45.339796Z
+4fbec91f5454b84077ae1290fba0bc8e
+2009-08-13T16:57:36.259313Z
+2838
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1903
 
 ticket_with_long_subject.eml
 file
@@ -434,40 +434,6 @@ edavis10
 
 485
 
-ticket_by_unknown_user.eml
-file
-
-
-
-
-2010-09-23T14:37:45.339796Z
-0979c01baf02b924bd8a6db3980c59c9
-2009-06-14T14:48:34.287541Z
-2789
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-526
-
 ticket_with_invalid_attributes.eml
 file
 
@@ -501,6 +467,40 @@ jplang
 
 
 2028
+
+ticket_by_unknown_user.eml
+file
+
+
+
+
+2010-09-23T14:37:45.339796Z
+0979c01baf02b924bd8a6db3980c59c9
+2009-06-14T14:48:34.287541Z
+2789
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+526
 
 ticket_reply_with_status.eml
 file

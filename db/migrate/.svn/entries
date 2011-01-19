@@ -1,7 +1,7 @@
 10
 
 dir
-4707
+4732
 http://redmine.rubyforge.org/svn/trunk/db/migrate
 http://redmine.rubyforge.org/svn
 
@@ -604,40 +604,6 @@ jplang
 
 281
 
-025_add_search_permission.rb
-file
-
-
-
-
-2010-09-23T14:37:44.883725Z
-42937036f9c414f7d9b028f629b1ce20
-2007-08-29T16:52:35.680643Z
-674
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-412
-
 023_add_tracker_is_in_roadmap.rb
 file
 
@@ -671,6 +637,40 @@ jplang
 
 
 230
+
+025_add_search_permission.rb
+file
+
+
+
+
+2010-09-23T14:37:44.883725Z
+42937036f9c414f7d9b028f629b1ce20
+2007-08-29T16:52:35.680643Z
+674
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+412
 
 20091220183727_add_index_to_settings_name.rb
 file
@@ -876,17 +876,17 @@ has-props
 
 321
 
-024_add_roadmap_permission.rb
+20090401221305_update_enumerations_to_sti.rb
 file
 
 
 
 
-2010-09-23T14:37:44.883725Z
-f1b96e04888c0a48bf29dd0556ba8027
-2007-08-29T16:52:35.680643Z
-674
-jplang
+2010-09-23T14:37:44.915753Z
+d343c3ba8f04d1cc71f20c9860d5907b
+2009-05-30T23:30:36.923541Z
+2777
+edavis10
 
 
 
@@ -908,7 +908,7 @@ jplang
 
 
 
-445
+329
 
 091_change_changesets_revision_to_string.rb
 file
@@ -944,17 +944,17 @@ has-props
 
 245
 
-20090401221305_update_enumerations_to_sti.rb
+024_add_roadmap_permission.rb
 file
 
 
 
 
-2010-09-23T14:37:44.915753Z
-d343c3ba8f04d1cc71f20c9860d5907b
-2009-05-30T23:30:36.923541Z
-2777
-edavis10
+2010-09-23T14:37:44.883725Z
+f1b96e04888c0a48bf29dd0556ba8027
+2007-08-29T16:52:35.680643Z
+674
+jplang
 
 
 
@@ -976,7 +976,7 @@ edavis10
 
 
 
-329
+445
 
 20091017214720_add_missing_indexes_to_wiki_redirects.rb
 file
@@ -1012,40 +1012,6 @@ edavis10
 
 195
 
-034_create_changesets.rb
-file
-
-
-
-
-2010-09-23T14:37:44.883725Z
-82595f307b6fe5053151a681b737f063
-2007-04-25T15:06:20.062636Z
-479
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-515
-
 072_add_enumerations_position.rb
 file
 
@@ -1079,6 +1045,40 @@ has-props
 
 
 495
+
+034_create_changesets.rb
+file
+
+
+
+
+2010-09-23T14:37:44.883725Z
+82595f307b6fe5053151a681b737f063
+2007-04-25T15:06:20.062636Z
+479
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+515
 
 108_add_identity_url_to_users.rb
 file
@@ -2270,16 +2270,16 @@ jplang
 
 275
 
-016_add_repositories_permissions.rb
+20100129193813_update_mail_notification_values.rb
 file
 
 
 
 
-2010-09-23T14:37:44.879727Z
-e770aa6387bb4737804d5024e743cd25
-2007-08-29T16:52:35.680643Z
-674
+2011-01-13T14:09:38.000000Z
+d2251c92048ec4169e2c220f1510d803
+2010-11-20T09:55:06.580420Z
+4413
 jplang
 
 
@@ -2302,41 +2302,7 @@ jplang
 
 
 
-1658
-
-20091010093521_fix_users_custom_values.rb
-file
-
-
-
-
-2010-09-23T14:37:44.919754Z
-55350d451c622488f9358f7bbe12d4de
-2009-10-10T10:16:00.250819Z
-2905
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-276
+241
 
 001_setup.rb
 file
@@ -2372,16 +2338,50 @@ jplang
 
 18072
 
-20100129193813_update_mail_notification_values.rb
+20091010093521_fix_users_custom_values.rb
 file
 
 
 
 
-2011-01-13T14:09:38.000000Z
-d2251c92048ec4169e2c220f1510d803
-2010-11-20T09:55:06.580420Z
-4413
+2010-09-23T14:37:44.919754Z
+55350d451c622488f9358f7bbe12d4de
+2009-10-10T10:16:00.250819Z
+2905
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+276
+
+016_add_repositories_permissions.rb
+file
+
+
+
+
+2010-09-23T14:37:44.879727Z
+e770aa6387bb4737804d5024e743cd25
+2007-08-29T16:52:35.680643Z
+674
 jplang
 
 
@@ -2404,7 +2404,7 @@ jplang
 
 
 
-241
+1658
 
 20091017214611_add_missing_indexes_to_journals.rb
 file
@@ -2440,40 +2440,6 @@ edavis10
 
 263
 
-20091017214107_add_missing_indexes_to_custom_fields.rb
-file
-
-
-
-
-2010-09-23T14:37:44.923753Z
-0e1e45e51997617f8672e6d0d5ed8e51
-2009-10-17T22:23:29.892475Z
-2928
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-211
-
 041_rename_comment_to_comments.rb
 file
 
@@ -2508,14 +2474,14 @@ jplang
 
 896
 
-20091017214750_add_missing_indexes_to_custom_fields_trackers.rb
+20091017214107_add_missing_indexes_to_custom_fields.rb
 file
 
 
 
 
-2010-09-23T14:37:44.927757Z
-871a600c06a6965f52c63177a82fbe15
+2010-09-23T14:37:44.923753Z
+0e1e45e51997617f8672e6d0d5ed8e51
 2009-10-17T22:23:29.892475Z
 2928
 edavis10
@@ -2540,7 +2506,41 @@ edavis10
 
 
 
-275
+211
+
+089_add_attachments_description.rb
+file
+
+
+
+
+2010-09-23T14:37:44.899726Z
+f60a0c1f633a6ff65fb2734173b57fe4
+2008-02-29T19:46:58.834023Z
+1180
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+201
 
 067_create_wiki_redirects.rb
 file
@@ -2576,18 +2576,17 @@ has-props
 
 441
 
-089_add_attachments_description.rb
+20091017214750_add_missing_indexes_to_custom_fields_trackers.rb
 file
 
 
 
 
-2010-09-23T14:37:44.899726Z
-f60a0c1f633a6ff65fb2734173b57fe4
-2008-02-29T19:46:58.834023Z
-1180
-jplang
-has-props
+2010-09-23T14:37:44.927757Z
+871a600c06a6965f52c63177a82fbe15
+2009-10-17T22:23:29.892475Z
+2928
+edavis10
 
 
 
@@ -2608,7 +2607,8 @@ has-props
 
 
 
-201
+
+275
 
 103_set_custom_fields_editable.rb
 file
@@ -2678,40 +2678,6 @@ has-props
 
 264
 
-039_create_watchers.rb
-file
-
-
-
-
-2010-09-23T14:37:44.887754Z
-07bf6636d0acf3ec84b38648bbe2c07a
-2007-04-21T12:09:07.794422Z
-454
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-337
-
 093_add_wiki_pages_protected.rb
 file
 
@@ -2746,16 +2712,16 @@ has-props
 
 227
 
-060_change_changesets_committer_limit.rb
+039_create_watchers.rb
 file
 
 
 
 
-2010-09-23T14:37:44.891758Z
-0abbef63f1f391688df012906a94877b
-2008-03-09T18:25:37.323226Z
-1222
+2010-09-23T14:37:44.887754Z
+07bf6636d0acf3ec84b38648bbe2c07a
+2007-04-21T12:09:07.794422Z
+454
 jplang
 
 
@@ -2778,7 +2744,7 @@ jplang
 
 
 
-241
+337
 
 083_add_messages_sticky.rb
 file
@@ -2813,6 +2779,40 @@ has-props
 
 
 193
+
+060_change_changesets_committer_limit.rb
+file
+
+
+
+
+2010-09-23T14:37:44.891758Z
+0abbef63f1f391688df012906a94877b
+2008-03-09T18:25:37.323226Z
+1222
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+241
 
 069_add_issues_estimated_hours.rb
 file
@@ -3188,40 +3188,6 @@ has-props
 
 339
 
-059_add_roles_assignable.rb
-file
-
-
-
-
-2010-09-23T14:37:44.891758Z
-aa67262417630fc088eb57df8d2dd9d3
-2007-08-16T17:47:41.639068Z
-649
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-199
-
 098_set_topic_authors_as_watchers.rb
 file
 
@@ -3255,6 +3221,40 @@ has-props
 
 
 749
+
+059_add_roles_assignable.rb
+file
+
+
+
+
+2010-09-23T14:37:44.891758Z
+aa67262417630fc088eb57df8d2dd9d3
+2007-08-16T17:47:41.639068Z
+649
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+199
 
 013_create_queries.rb
 file
@@ -3324,40 +3324,6 @@ jplang
 
 418
 
-048_allow_null_version_effective_date.rb
-file
-
-
-
-
-2010-09-23T14:37:44.887754Z
-a7d8c7f023a76a8dbb0d0950797c08f8
-2008-02-12T21:11:16.312726Z
-1140
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-225
-
 040_create_changesets_issues.rb
 file
 
@@ -3391,6 +3357,40 @@ jplang
 
 
 418
+
+048_allow_null_version_effective_date.rb
+file
+
+
+
+
+2010-09-23T14:37:44.887754Z
+a7d8c7f023a76a8dbb0d0950797c08f8
+2008-02-12T21:11:16.312726Z
+1140
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+225
 
 085_add_role_tracker_old_status_index_to_workflows.rb
 file
@@ -3562,40 +3562,6 @@ has-props
 
 252
 
-054_add_changesets_scmid.rb
-file
-
-
-
-
-2010-09-23T14:37:44.891758Z
-b61285ac64245c1571e536a8c7e05a94
-2007-06-12T20:12:05.590809Z
-559
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-180
-
 20091017212457_add_missing_indexes_to_custom_fields_projects.rb
 file
 
@@ -3630,17 +3596,17 @@ edavis10
 
 275
 
-20091017213716_add_missing_indexes_to_member_roles.rb
+054_add_changesets_scmid.rb
 file
 
 
 
 
-2010-09-23T14:37:44.923753Z
-4bfd0623186217eee4346313f148ea7a
-2009-10-17T22:23:29.892475Z
-2928
-edavis10
+2010-09-23T14:37:44.891758Z
+b61285ac64245c1571e536a8c7e05a94
+2007-06-12T20:12:05.590809Z
+559
+jplang
 
 
 
@@ -3662,7 +3628,41 @@ edavis10
 
 
 
-272
+180
+
+097_add_view_wiki_edits_permission.rb
+file
+
+
+
+
+2010-09-23T14:37:44.911755Z
+e00f8e7739afbb2d07a21decd1422a0a
+2008-09-21T20:38:36.877257Z
+1896
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+298
 
 065_add_settings_updated_on.rb
 file
@@ -3698,18 +3698,17 @@ has-props
 
 248
 
-097_add_view_wiki_edits_permission.rb
+20091017213716_add_missing_indexes_to_member_roles.rb
 file
 
 
 
 
-2010-09-23T14:37:44.911755Z
-e00f8e7739afbb2d07a21decd1422a0a
-2008-09-21T20:38:36.877257Z
-1896
-jplang
-has-props
+2010-09-23T14:37:44.923753Z
+4bfd0623186217eee4346313f148ea7a
+2009-10-17T22:23:29.892475Z
+2928
+edavis10
 
 
 
@@ -3730,7 +3729,8 @@ has-props
 
 
 
-298
+
+272
 
 20091108092559_add_versions_status.rb
 file
@@ -3868,40 +3868,6 @@ has-props
 
 155
 
-052_add_changes_revision.rb
-file
-
-
-
-
-2010-09-23T14:37:44.887754Z
-3af07746c4eab3a1716744971ac26ffc
-2007-06-12T20:12:05.590809Z
-559
-jplang
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-180
-
 20090503121505_populate_member_roles.rb
 file
 
@@ -3936,18 +3902,17 @@ has-props
 
 276
 
-062_insert_builtin_roles.rb
+052_add_changes_revision.rb
 file
 
 
 
 
-2010-09-23T14:37:44.891758Z
-596f1acbdbc340c39d19f19f7b4cb6c6
-2007-08-29T16:52:35.680643Z
-674
+2010-09-23T14:37:44.887754Z
+3af07746c4eab3a1716744971ac26ffc
+2007-06-12T20:12:05.590809Z
+559
 jplang
-has-props
 
 
 
@@ -3968,7 +3933,8 @@ has-props
 
 
 
-403
+
+180
 
 050_add_wiki_attachments_permissions.rb
 file
@@ -4004,16 +3970,16 @@ jplang
 
 718
 
-074_add_auth_sources_tls.rb
+062_insert_builtin_roles.rb
 file
 
 
 
 
-2010-09-23T14:37:44.895727Z
-e7e163729c56cd9807450574d2beeda8
-2007-10-16T19:19:10.481742Z
-845
+2010-09-23T14:37:44.891758Z
+596f1acbdbc340c39d19f19f7b4cb6c6
+2007-08-29T16:52:35.680643Z
+674
 jplang
 has-props
 
@@ -4036,7 +4002,7 @@ has-props
 
 
 
-215
+403
 
 104_add_projects_lft_and_rgt.rb
 file
@@ -4072,16 +4038,16 @@ has-props
 
 250
 
-20091114105931_add_view_issues_permission.rb
+074_add_auth_sources_tls.rb
 file
 
 
 
 
-2010-09-23T14:37:44.927757Z
-886411cb32a18ec492acc798194210af
-2009-11-14T12:08:47.175978Z
-3039
+2010-09-23T14:37:44.895727Z
+e7e163729c56cd9807450574d2beeda8
+2007-10-16T19:19:10.481742Z
+845
 jplang
 has-props
 
@@ -4104,75 +4070,7 @@ has-props
 
 
 
-262
-
-20091017214336_add_missing_indexes_to_users.rb
-file
-
-
-
-
-2010-09-23T14:37:44.927757Z
-8251942eb30b7c709ac6e3dc1ab5eedb
-2009-10-17T22:23:29.892475Z
-2928
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-267
-
-20091017213113_add_missing_indexes_to_enumerations.rb
-file
-
-
-
-
-2010-09-23T14:37:44.919754Z
-22e6afc0519b7befbae2c4a4433c20f5
-2009-10-17T22:23:29.892475Z
-2928
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-209
+215
 
 082_add_messages_locked.rb
 file
@@ -4208,14 +4106,14 @@ has-props
 
 197
 
-20091017213444_add_missing_indexes_to_tokens.rb
+20091017213113_add_missing_indexes_to_enumerations.rb
 file
 
 
 
 
-2010-09-23T14:37:44.923753Z
-4c220f0316e1b04fa8350f0309698f24
+2010-09-23T14:37:44.919754Z
+22e6afc0519b7befbae2c4a4433c20f5
 2009-10-17T22:23:29.892475Z
 2928
 edavis10
@@ -4240,7 +4138,75 @@ edavis10
 
 
 
-172
+209
+
+20091017214336_add_missing_indexes_to_users.rb
+file
+
+
+
+
+2010-09-23T14:37:44.927757Z
+8251942eb30b7c709ac6e3dc1ab5eedb
+2009-10-17T22:23:29.892475Z
+2928
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+267
+
+20091114105931_add_view_issues_permission.rb
+file
+
+
+
+
+2010-09-23T14:37:44.927757Z
+886411cb32a18ec492acc798194210af
+2009-11-14T12:08:47.175978Z
+3039
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+262
 
 20090503121501_create_member_roles.rb
 file
@@ -4276,17 +4242,17 @@ has-props
 
 274
 
-057_add_versions_wiki_page_title.rb
+20091017213444_add_missing_indexes_to_tokens.rb
 file
 
 
 
 
-2010-09-23T14:37:44.891758Z
-6a4944f1162c00f2405200fb38773886
-2007-06-14T18:26:27.748707Z
-564
-jplang
+2010-09-23T14:37:44.923753Z
+4c220f0316e1b04fa8350f0309698f24
+2009-10-17T22:23:29.892475Z
+2928
+edavis10
 
 
 
@@ -4308,7 +4274,7 @@ jplang
 
 
 
-202
+172
 
 20090323224724_add_type_to_enumerations.rb
 file
@@ -4343,6 +4309,40 @@ edavis10
 
 
 185
+
+057_add_versions_wiki_page_title.rb
+file
+
+
+
+
+2010-09-23T14:37:44.891758Z
+6a4944f1162c00f2405200fb38773886
+2007-06-14T18:26:27.748707Z
+564
+jplang
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+202
 
 004_export_pdf.rb
 file

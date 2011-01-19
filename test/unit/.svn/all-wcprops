@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 34
-/svn/!svn/ver/4705/trunk/test/unit
+/svn/!svn/ver/4730/trunk/test/unit
 END
 document_test.rb
 K 25
@@ -31,7 +31,7 @@ issue_relation_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/svn/!svn/ver/4509/trunk/test/unit/issue_relation_test.rb
+/svn/!svn/ver/4721/trunk/test/unit/issue_relation_test.rb
 END
 version_test.rb
 K 25
@@ -55,7 +55,7 @@ issue_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 48
-/svn/!svn/ver/4509/trunk/test/unit/issue_test.rb
+/svn/!svn/ver/4723/trunk/test/unit/issue_test.rb
 END
 issue_status_test.rb
 K 25
@@ -87,17 +87,17 @@ svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/4613/trunk/test/unit/repository_bazaar_test.rb
 END
-changeset_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/4613/trunk/test/unit/changeset_test.rb
-END
 role_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 47
 /svn/!svn/ver/4509/trunk/test/unit/role_test.rb
+END
+changeset_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4613/trunk/test/unit/changeset_test.rb
 END
 comment_test.rb
 K 25
@@ -139,19 +139,7 @@ user_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 47
-/svn/!svn/ver/4509/trunk/test/unit/user_test.rb
-END
-time_entry_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/4509/trunk/test/unit/time_entry_test.rb
-END
-repository_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/4548/trunk/test/unit/repository_test.rb
+/svn/!svn/ver/4730/trunk/test/unit/user_test.rb
 END
 mail_handler_test.rb
 K 25
@@ -159,17 +147,17 @@ svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/4576/trunk/test/unit/mail_handler_test.rb
 END
-journal_observer_test.rb
+repository_test.rb
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/4509/trunk/test/unit/journal_observer_test.rb
+V 53
+/svn/!svn/ver/4726/trunk/test/unit/repository_test.rb
 END
-auth_source_ldap_test.rb
+time_entry_test.rb
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/4509/trunk/test/unit/auth_source_ldap_test.rb
+V 53
+/svn/!svn/ver/4709/trunk/test/unit/time_entry_test.rb
 END
 principal_test.rb
 K 25
@@ -177,17 +165,29 @@ svn:wc:ra_dav:version-url
 V 52
 /svn/!svn/ver/4509/trunk/test/unit/principal_test.rb
 END
-repository_filesystem_test.rb
+auth_source_ldap_test.rb
 K 25
 svn:wc:ra_dav:version-url
-V 64
-/svn/!svn/ver/4509/trunk/test/unit/repository_filesystem_test.rb
+V 59
+/svn/!svn/ver/4509/trunk/test/unit/auth_source_ldap_test.rb
+END
+journal_observer_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/4509/trunk/test/unit/journal_observer_test.rb
 END
 project_nested_set_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 61
 /svn/!svn/ver/4650/trunk/test/unit/project_nested_set_test.rb
+END
+repository_filesystem_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/4509/trunk/test/unit/repository_filesystem_test.rb
 END
 wiki_redirect_test.rb
 K 25

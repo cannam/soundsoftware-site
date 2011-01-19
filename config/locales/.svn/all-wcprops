@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/!svn/ver/4701/trunk/config/locales
+/svn/!svn/ver/4724/trunk/config/locales
 END
 lt.yml
 K 25
@@ -99,23 +99,23 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4554/trunk/config/locales/cs.yml
 END
-es.yml
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/4554/trunk/config/locales/es.yml
-END
 mk.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4554/trunk/config/locales/mk.yml
 END
-zh-TW.yml
+es.yml
 K 25
 svn:wc:ra_dav:version-url
-V 49
-/svn/!svn/ver/4593/trunk/config/locales/zh-TW.yml
+V 46
+/svn/!svn/ver/4554/trunk/config/locales/es.yml
+END
+ko.yml
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/4554/trunk/config/locales/ko.yml
 END
 eu.yml
 K 25
@@ -123,11 +123,11 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4554/trunk/config/locales/eu.yml
 END
-ko.yml
+zh-TW.yml
 K 25
 svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/4554/trunk/config/locales/ko.yml
+V 49
+/svn/!svn/ver/4593/trunk/config/locales/zh-TW.yml
 END
 mn.yml
 K 25
@@ -159,23 +159,23 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4554/trunk/config/locales/uk.yml
 END
-sr.yml
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/4554/trunk/config/locales/sr.yml
-END
 da.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4554/trunk/config/locales/da.yml
 END
-sv.yml
+sr.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4518/trunk/config/locales/sv.yml
+/svn/!svn/ver/4554/trunk/config/locales/sr.yml
+END
+bg.yml
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/4656/trunk/config/locales/bg.yml
 END
 de.yml
 K 25
@@ -183,11 +183,11 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4592/trunk/config/locales/de.yml
 END
-bg.yml
+sv.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4656/trunk/config/locales/bg.yml
+/svn/!svn/ver/4518/trunk/config/locales/sv.yml
 END
 ja.yml
 K 25
@@ -217,7 +217,7 @@ fr.yml
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4556/trunk/config/locales/fr.yml
+/svn/!svn/ver/4724/trunk/config/locales/fr.yml
 END
 nl.yml
 K 25

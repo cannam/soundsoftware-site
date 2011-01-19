@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 35
-/svn/!svn/ver/4704/trunk/app/models
+/svn/!svn/ver/4730/trunk/app/models
 END
 document.rb
 K 25
@@ -19,13 +19,13 @@ repository.rb
 K 25
 svn:wc:ra_dav:version-url
 V 49
-/svn/!svn/ver/4703/trunk/app/models/repository.rb
+/svn/!svn/ver/4712/trunk/app/models/repository.rb
 END
 time_entry.rb
 K 25
 svn:wc:ra_dav:version-url
 V 49
-/svn/!svn/ver/4277/trunk/app/models/time_entry.rb
+/svn/!svn/ver/4708/trunk/app/models/time_entry.rb
 END
 token.rb
 K 25
@@ -81,6 +81,12 @@ svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3240/trunk/app/models/enumeration.rb
 END
+issue.rb
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/4723/trunk/app/models/issue.rb
+END
 time_entry_activity_custom_field.rb
 K 25
 svn:wc:ra_dav:version-url
@@ -92,12 +98,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3250/trunk/app/models/member_role.rb
-END
-issue.rb
-K 25
-svn:wc:ra_dav:version-url
-V 44
-/svn/!svn/ver/4491/trunk/app/models/issue.rb
 END
 issue_priority.rb
 K 25
@@ -111,29 +111,29 @@ svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/3169/trunk/app/models/message_observer.rb
 END
-watcher.rb
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/3167/trunk/app/models/watcher.rb
-END
 wiki_content.rb
 K 25
 svn:wc:ra_dav:version-url
 V 51
 /svn/!svn/ver/4296/trunk/app/models/wiki_content.rb
 END
-enabled_module.rb
+watcher.rb
 K 25
 svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/2970/trunk/app/models/enabled_module.rb
+V 46
+/svn/!svn/ver/3167/trunk/app/models/watcher.rb
 END
 wiki_page.rb
 K 25
 svn:wc:ra_dav:version-url
 V 48
 /svn/!svn/ver/4296/trunk/app/models/wiki_page.rb
+END
+enabled_module.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2970/trunk/app/models/enabled_module.rb
 END
 comment.rb
 K 25
@@ -171,17 +171,17 @@ svn:wc:ra_dav:version-url
 V 45
 /svn/!svn/ver/4373/trunk/app/models/mailer.rb
 END
-journal.rb
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/4062/trunk/app/models/journal.rb
-END
 workflow.rb
 K 25
 svn:wc:ra_dav:version-url
 V 47
 /svn/!svn/ver/3709/trunk/app/models/workflow.rb
+END
+journal.rb
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/4062/trunk/app/models/journal.rb
 END
 user_custom_field.rb
 K 25
@@ -211,7 +211,7 @@ user.rb
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4599/trunk/app/models/user.rb
+/svn/!svn/ver/4730/trunk/app/models/user.rb
 END
 auth_source.rb
 K 25
