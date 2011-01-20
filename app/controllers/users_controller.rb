@@ -85,6 +85,10 @@ class UsersController < ApplicationController
     @auth_sources = AuthSource.find(:all)
 
     @ssamr_user_details = SsamrUserDetail.new
+
+    # default value
+    @selected_institution_id = 1
+
     
   end
   
@@ -134,6 +138,7 @@ class UsersController < ApplicationController
     @notification_option = @user.mail_notification
     
     @ssamr_user_details = @user.ssamr_user_detail
+    @selected_institution_id = @user.ssamr_user_detail.institution_id.to_i
     
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new

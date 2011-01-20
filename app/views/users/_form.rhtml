@@ -27,7 +27,7 @@
             </p>
             <p>
               <label for="ssamr_user_institution"><%=l(:label_ssamr_institution)%></label>
-              <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:selected => @user.ssamr_user_detail.institution_id.to_i} ) %>                         
+              <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:selected => @selected_institution_id} ) %>
             </p>
           <% end %>          
 </div>
