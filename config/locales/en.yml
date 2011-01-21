@@ -481,6 +481,8 @@ en:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
+  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
+  label_accept_terms_and_conditions: I have read the terms and conditions and fully accept them
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home

@@ -1,0 +1,17 @@
+<h2><%=l(:label_terms_and_conditions)%> <%=link_to l(:label_login_with_open_id_option), signin_url if Setting.openid? %></h2>
+
+<% form_tag({:action => 'register'}, :class => "tabular") do %>
+<%= error_messages_for 'user' %>
+
+
+  <textarea name="myTextArea" cols="100" rows="20" readonly=readonly>
+
+  </textarea>
+
+  <br />
+
+  
+  <%= label_tag(:label_accept_terms_and_conditions, l(:label_accept_terms_and_conditions)) %>
+  <%= check_box_tag(:pet_dog) %>
+
+  <% end %>
