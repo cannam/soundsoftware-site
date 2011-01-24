@@ -52,7 +52,7 @@ module ApplicationHelper
     if user.is_a?(User)
       name = h(user.name(options[:format]))
       if user.active?
-        link_to name, :controller => 'users', :action => 'show', :id => user
+        link_to(name, :controller => 'users', :action => 'show', :id => user)
       else
         name
       end
@@ -273,7 +273,7 @@ module ApplicationHelper
   def principals_check_box_tags(name, principals)
     s = ''
     principals.sort.each do |principal|
-      s << "<label>#{ check_box_tag name, principal.id, false } #{h principal}</label>\n"
+      s << "<label>#{ check_box_tag name, principal.id, false } #{link_to_user principal}</label>\n"
     end
     s 
   end

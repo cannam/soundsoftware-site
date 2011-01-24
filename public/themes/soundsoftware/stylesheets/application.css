@@ -67,6 +67,19 @@ table.list { border: 1px solid #a9b680; /* border-left: 4px solid #a9b680; */ }
 tr.entry { border-left: 1px solid #a9b680; border-right: 1px solid #a9b680; }
 tr.entry:last-child { border-bottom: 1px solid #a9b680; }
 
+table.projects th { text-align: left; }
+table.projects th.managers { color: #3e442c; }
+table.projects .root .name { font-size: 1.2em; }
+table.projects .root .description { padding-bottom: 0.5em; }
+table.projects .hosted_here { font-weight: bold; }
+table.projects .child .name { font-weight: normal; }
+table.projects .child .description { font-size: 0.95em; }
+table.projects .child .firstcol { padding-left: 1em }
+table.projects .level2 .firstcol { padding-left: 2em; }
+table.projects .level3 .firstcol { padding-left: 3em; }
+
+ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.95em }
+
 #top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 90%; /* height: 2em; */ margin: 0; padding: 0; padding-top: 0.5em; background-color: #3e442c; }
 #top-menu ul { margin-left: 10px; }
 #top-menu a { font-weight: bold; }
@@ -74,9 +87,9 @@ tr.entry:last-child { border-bottom: 1px solid #a9b680; }
 #header a { color: #be5700; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
 .header-general h1 {
-  background: url('soundsoftware-logo-title-only-transparent.png') no-repeat 0 0;
+  background: url('soundsoftware-logo-title-only-transparent-beta.png') no-repeat 0 0;
   text-indent: -9999px;
-  width: 446px;
+  width: 500px;
   height: 34px;
  }
  

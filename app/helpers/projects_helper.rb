@@ -121,7 +121,12 @@ module ProjectsHelper
 
           classes = (ancestors.empty? ? 'root' : 'child')
           s << "<li class='#{classes}'><div class='#{classes}'>" +
-                 link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
+                 link_to_project(project, {}, :class => "project my-project")
+          if project.is_public?
+            s << " <span class='public'>" << l("field_is_public") << "</span>"
+          else
+            s << " <span class='private'>" << l("field_is_private") << "</span>"
+          end
           s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
           s << "</div>\n"
           ancestors << project
@@ -143,66 +148,92 @@ module ProjectsHelper
     a
   end
 
-  # Renders a tree of projects where the current DOES NOT belong
-  # as a nested set of unordered lists
-  # The given collection may be a subset of the whole project tree
-  # (eg. some intermediate nodes are private and can not be seen)
-  def render_other_project_hierarchy(projects)
-    a = ''
-    s = ''
+  # Renders a tree of projects that the current user does not belong
+  # to, or of all projects if the current user is not logged in.  The
+  # given collection may be a subset of the whole project tree
+  # (eg. some intermediate nodes are private and can not be seen).  We
+  # are potentially interested in various things: the project name,
+  # description, manager(s), creation date, last activity date,
+  # general activity level, whether there is anything actually hosted
+  # here for the project, etc.
+  def render_project_table(projects)
 
-    # True if user has any projects (affects the heading used)
-    t = FALSE
+    s = ""
+    s << "<div class='autoscroll'>"
+    s << "<table class='list projects'>"
+    s << "<thead><tr>"
+    
+    s << sort_header_tag('lft', :caption => l("field_name"), :default_order => 'desc')
+    s << "<th class='managers'>" << l("label_managers") << "</th>"
+    s << sort_header_tag('created_on', :default_order => 'desc')
+    s << sort_header_tag('updated_on', :default_order => 'desc')
 
-    if projects.any?
-      ancestors = []
-      original_project = @project
-      projects.each do |project|
-        # set the project environment to please macros.
+    s << "</tr></thead><tbody>"
 
-        @project = project
+    ancestors = []
+    original_project = @project
+    oddeven = 'even'
+    level = 0
 
-        if not User.current.member_of?(project):
+    projects.each do |project|
 
-          if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
-            s << "<ul class='projects #{ ancestors.empty? ? 'root' : nil}'>\n"
-          else
-            ancestors.pop
-            s << "</li>"
-            while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
-              ancestors.pop
-              s << "</ul></li>\n"
+      # set the project environment to please macros.
+
+      @project = project
+
+      if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
+        level = level + 1
+      else
+        level = 0
+        oddeven = cycle('odd','even')
+        ancestors.pop
+        while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
+          ancestors.pop
+        end
+      end
+      
+      classes = (ancestors.empty? ? 'root' : 'child')
+
+      s << "<tr class='#{oddeven} #{classes} level#{level}'>"
+      s << "<td class='firstcol name hosted_here'>" << link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}") << "</td>"
+      s << "<td class='managers' rowspan=2 align=top>"
+
+      u = project.users_by_role
+      if u
+        u.keys.each do |r|
+          if r.allowed_to?(:edit_project)
+            mgrs = []
+            u[r].sort.each do |m|
+              mgrs << link_to_user(m)
+            end
+            if mgrs.size < 3
+              s << '<nobr>' << mgrs.join(', ') << '</nobr>'
+            else
+              s << mgrs.join(', ')
             end
           end
-
-          classes = (ancestors.empty? ? 'root' : 'child')
-          s << "<li class='#{classes}'><div class='#{classes}'>" +
-                 link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
-          s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
-          s << "</div>\n"
-          ancestors << project          
-        else
-          t = TRUE
         end
-       end
+      end
 
-      s << ("</li></ul>\n" * ancestors.size)
-      @project = original_project
+      s << "</td>"
+      s << "<td class='created_on' rowspan=2 align=top>" << format_date(project.created_on) << "</td>"
+      s << "<td class='updated_on' rowspan=2 align=top>" << format_date(project.updated_on) << "</td>"
+
+      s << "</tr>"
+      s << "<tr class='#{oddeven} #{classes}'>"
+      s << "<td class='firstcol wiki description'>"
+      s << textilizable(project.short_description, :project => project) unless project.description.blank?
+      s << "</td>"
+      s << "</tr>"
+
+      ancestors << project          
     end
 
-    if t == TRUE
-      a << "<h2>"
-      a <<  l("label_other_project_plural")
-      a << "</h2>"
-      a << s
-    else
-      a << "<h2>"
-      a << l("label_project_all")
-      a << "</h2>"
-      a << s
-    end
+    s << "</table>"
 
-    a
+    @project = original_project
+
+    s
   end
 
 

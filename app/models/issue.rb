@@ -527,7 +527,8 @@ class Issue < ActiveRecord::Base
   
   # Returns a string of css classes that apply to the issue
   def css_classes
-    s = "issue status-#{status.position} priority-#{priority.position}"
+    s = "issue status-#{status.position} "
+    s << "priority-#{priority.position}"
     s << ' closed' if closed?
     s << ' overdue' if overdue?
     s << ' created-by-me' if User.current.logged? && author_id == User.current.id

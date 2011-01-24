@@ -237,6 +237,7 @@ en-GB:
   field_role: Role
   field_homepage: Homepage
   field_is_public: Public
+  field_is_private: Private
   field_parent: Subproject of
   field_is_in_roadmap: Issues displayed in roadmap
   field_login: Login
@@ -428,6 +429,7 @@ en-GB:
     other: "{{count}} projects"
   label_project_all: All Projects
   label_project_latest: Latest projects
+  label_managers: Managed by
   label_issue: Issue
   label_issue_new: New issue
   label_issue_plural: Issues
@@ -840,6 +842,7 @@ en-GB:
   text_tip_issue_end_day: task ending this day
   text_tip_issue_begin_end_day: task beginning and ending this day
   text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br /> This will be used in all project-related URLs, and as the repository name. Once saved, the identifier <b>can not</b> be changed.'
+  text_project_homepage_info: 'Link to an external project page.'
   text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
   text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
   text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
@@ -884,6 +887,7 @@ en-GB:
   text_wiki_page_destroy_children: "Delete child pages and all their descendants"
   text_wiki_page_reassign_children: "Reassign child pages to this parent page"
   text_own_membership_delete_confirmation: "You are about to remove some or all of your permissions and may no longer be able to edit this project after that.\nAre you sure you want to continue?"
+  text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here; please check again in ten minutes.
   
   default_role_manager: Manager
   default_role_developer: Developer
@@ -942,7 +946,7 @@ en-GB:
   label_user_mail_option_only_my_events: Only for things I watch or I'm involved in
   label_user_mail_option_only_assigned: Only for things I am assigned to
   notice_not_authorized_archived_project: The project you're trying to access has been archived.
-  label_principal_search: "Search for user or group:"
+  label_principal_search: "Search by name:"
   label_user_search: "Search for user:"
   field_visible: Visible
   setting_emails_header: Emails header
