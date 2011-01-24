@@ -381,21 +381,28 @@ module ApplicationHelper
   
   def page_header_title
     if @project.nil? || @project.new_record?
-      h(Setting.app_title)
+      a = [h(Setting.app_title), '']
+
     else
+      pname = []
       b = []
       ancestors = (@project.root? ? [] : @project.ancestors.visible)
       if ancestors.any?
         root = ancestors.shift
         b << link_to_project(root, {:jump => current_menu_item}, :class => 'root')
         if ancestors.size > 2
-          b << '&#8230;'
+          b << '&#8230;' 
           ancestors = ancestors[-2, 2]
         end
         b += ancestors.collect {|p| link_to_project(p, {:jump => current_menu_item}, :class => 'ancestor') }
+        b = b.join(' &#187; ')
+        b << (' &#187;')
       end
-      b << h(@project)
-      b.join(' &#187; ')
+
+      pname << h(@project)
+
+      a = [pname, b]
+
     end
   end
 
