@@ -160,7 +160,7 @@ my %read_only_methods = map { $_ => 1 } qw/GET PROPFIND REPORT OPTIONS/;
 sub access_handler {
     my $r = shift;
 
-    print STDERR "SoundSoftware.pm: In access handler\n";
+    print STDERR "SoundSoftware.pm: In access handler at " . scalar localtime() . "\n";
 
     unless ($r->some_auth_required) {
 	$r->log_reason("No authentication has been configured");
@@ -178,6 +178,13 @@ sub access_handler {
     }
 
     my $dbh = connect_database($r);
+    unless ($dbh) {
+	print STDERR "SoundSoftware.pm: Database connection failed!: " . $DBI::errstr . "\n";
+	return FORBIDDEN;
+    }
+
+
+print STDERR "Connected to db, dbh is " . $dbh . "\n";
 
     my $project_id = get_project_identifier($dbh, $r);
     my $status = get_project_status($dbh, $project_id, $r);
@@ -201,9 +208,13 @@ sub access_handler {
 sub authen_handler {
     my $r = shift;
     
-    print STDERR "SoundSoftware.pm: In authentication handler\n";
+    print STDERR "SoundSoftware.pm: In authentication handler at " . scalar localtime() . "\n";
 
     my $dbh = connect_database($r);
+    unless ($dbh) {
+        print STDERR "SoundSoftware.pm: Database connection failed!: " . $DBI::errstr . "\n";
+        return AUTH_REQUIRED;
+    }
     
     my $project_id = get_project_identifier($dbh, $r);
     my $realm = get_realm($dbh, $project_id, $r);
@@ -415,8 +426,8 @@ sub connect_database {
 	(__PACKAGE__, $r->server, $r->per_dir_config);
 
     return DBI->connect($cfg->{SoundSoftwareDSN},
-			$cfg->{SoundSoftwareDbUser},
-			$cfg->{SoundSoftwareDbPass});
+	                $cfg->{SoundSoftwareDbUser},
+		        $cfg->{SoundSoftwareDbPass});
 }
 
 1;
