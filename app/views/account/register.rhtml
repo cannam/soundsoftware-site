@@ -47,23 +47,14 @@
                         </p>
 
                         <p>
-                          <%= radio_button_tag(:institution_type, "other", :onchange => "alert ('mau')") %>
-                          <%= label_tag(:institution_type, "Other institution: ") %>
+                          <%= radio_button_tag(:institution_type, "other", false) %>
+                          <%= label_tag("Other institution: ") %>
                           <%= ssamr_user_detail.text_field(:institution_id) %>
                         </p>
 
 
                 <% end %>
           
-<script language="javascript">
-
-if(document.getElementById('myText')==false)
-  alert("Falso");
-else
-  alert("True");
-
-</script>
-
 <% if Setting.openid? %>
 <p><label for="user_identity_url"><%=l(:field_identity_url)%></label>
 <%= text_field 'user', 'identity_url'  %></p>

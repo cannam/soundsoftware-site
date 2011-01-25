@@ -138,7 +138,12 @@ class UsersController < ApplicationController
     @notification_option = @user.mail_notification
     
     @ssamr_user_details = @user.ssamr_user_detail
+
     @selected_institution_id = @user.ssamr_user_detail.institution_id.to_i
+
+    if @institution_type == "other"
+      @selected_institution_id = 11
+    end
     
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
