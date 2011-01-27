@@ -26,17 +26,14 @@
               <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit'  %>                            
             </p>
 
-
              <p>
-                <%= radio_button_tag(:institution_type, "list", true) %>
-                <label for="ssamr_user_institution"><%=l(:label_ssamr_institution)%></label>
-                <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:selected => @selected_institution_id} ) %>
+               <%= ssamr_user_detail.radio_button :institution_type, true, :checked => true %>
+               <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:selected => @selected_institution_id} ) %>
              </p>
 
              <p>
-                <%= radio_button_tag(:institution_type, "other", false) %>
-                <%= label_tag("Other institution: ") %>
-                <%= ssamr_user_detail.text_field(:institution_id) %>
+                <%= ssamr_user_detail.radio_button :institution_type, false, :checked => false %> Other:
+                <%= ssamr_user_detail.text_field(:other_institution) %>
              </p>
 
           <% end %>
