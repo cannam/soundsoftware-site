@@ -402,14 +402,17 @@ en-GB:
   permission_delete_own_messages: Delete own messages
   permission_export_wiki_pages: Export wiki pages
   
-  project_module_issue_tracking: Issue tracking
+  project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
   project_module_news: News
   project_module_documents: Documents
-  project_module_files: Files
+  project_module_files: Files for download
   project_module_wiki: Wiki
-  project_module_repository: Repository
-  project_module_boards: Boards
+  project_module_repository: Source code repository
+  project_module_boards: Forums
+  project_module_gantt: Gantt chart
+  project_module_calendar: Calendar
+  project_module_embedded: Embedded documentation (Javadoc or Doxygen)
   
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
@@ -935,8 +938,6 @@ en-GB:
   notice_failed_to_save_members: "Failed to save member(s): {{errors}}."
   label_project_copy_notifications: Send email notifications during the project copy
   field_time_entries: Log time
-  project_module_gantt: Gantt
-  project_module_calendar: Calendar
   field_member_of_group: Member of Group
   field_assigned_to_role: Member of Role
   button_edit_associated_wikipage: "Edit associated Wiki page: {{page_title}}"
