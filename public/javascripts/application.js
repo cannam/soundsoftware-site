@@ -239,3 +239,30 @@ function hideOnLoad() {
 }
 
 Event.observe(window, 'load', hideOnLoad);
+
+
+/* SSAMR specific functions */
+
+/* institution related functions */
+Event.observe(window, 'load',
+  function() {
+    if($('ssamr_user_details_institution_type_true').checked)
+        $('ssamr_user_details_other_institution').disable();
+    else if($('ssamr_user_details_institution_type_false').checked)
+        $('ssamr_user_details_institution_id').disable();
+  }
+);
+
+
+function enable_disable_institution_field(field){
+
+    // if($(field).enabled)
+    // field.disable();
+    // else
+    field.enable();
+
+}
+
+
+
+

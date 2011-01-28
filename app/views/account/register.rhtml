@@ -34,25 +34,19 @@
 	
 		<% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>	
 			<p>
-
                           <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit' %>                          
-
                           <em> <%=l(:text_user_ssamr_description_info)%></em>
                         </p>
 
                         <p>
-                          <%= radio_button_tag(:institution_type, "list", true) %>
-                          <%= label_tag(:institution_type, "I am affiliated to this institution: ") %>
+                          <%= ssamr_user_detail.radio_button :institution_type, true %>
                           <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:prompt => true}) %>
                         </p>
 
                         <p>
-                          <%= radio_button_tag(:institution_type, "other", false) %>
-                          <%= label_tag("Other institution: ") %>
-                          <%= ssamr_user_detail.text_field(:institution_id) %>
+                          <%= ssamr_user_detail.radio_button :institution_type, false %> Other:
+                          <%= ssamr_user_detail.text_field(:other_institution) %>
                         </p>
-
-
                 <% end %>
           
 <% if Setting.openid? %>
