@@ -14,12 +14,12 @@ Event.observe(window, 'load',
 	    $('ssamr_user_details_other_institution').enable();
 		$('ssamr_user_details_institution_id').disable();
 	});
-
+        
     if($('ssamr_user_details_institution_type_true').checked)
         $('ssamr_user_details_other_institution').disable();
     else if($('ssamr_user_details_institution_type_false').checked)
         $('ssamr_user_details_institution_id').disable();
-  }
+}
 );
 
 
