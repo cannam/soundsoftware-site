@@ -199,6 +199,10 @@ en-GB:
 
   field_ssamr_user_detail:
     description: User Description
+    institution: Institution
+
+  field_other_institution: ''
+
   field_name: Name
   field_description: Description
   field_summary: Summary
