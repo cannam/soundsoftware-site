@@ -53,6 +53,12 @@ class MyController < ApplicationController
     @user = User.current
     @pref = @user.pref
     @ssamr_user_details = @user.ssamr_user_detail
+    
+    @selected_institution_id = @ssamr_user_details.institution_id.to_i
+    logger.info "Mercedes"
+    
+    logger.info @selected_institution_id 
+    
     if request.post?
       @user.attributes = params[:user]
       @user.mail_notification = params[:notification_option] || 'only_my_events'
@@ -69,12 +75,18 @@ class MyController < ApplicationController
       if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
         @ssamr_user_details.description = @user.ssamr_user_detail.description
         @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
+        @institution_type = @ssamr_user_details.institution_type
+        @other_institution = @ssamr_user_details.other_institution
       else
         @ssamr_user_details.description = params[:ssamr_user_details][:description]
         @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
+        @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
+        @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
         @ssamr_user_details.save!
       end
 
+      @selected_institution_id = @ssamr_user_details.institution_id.to_i
+                  
       if @user.save
         @user.pref.save
         @user.notified_project_ids = (params[:notification_option] == 'selected' ? params[:notified_project_ids] : [])
