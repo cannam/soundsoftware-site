@@ -55,9 +55,6 @@ class MyController < ApplicationController
     @ssamr_user_details = @user.ssamr_user_detail
     
     @selected_institution_id = @ssamr_user_details.institution_id.to_i
-    logger.info "Mercedes"
-    
-    logger.info @selected_institution_id 
     
     if request.post?
       @user.attributes = params[:user]
@@ -72,6 +69,7 @@ class MyController < ApplicationController
         @ssamr_user_details = @user.ssamr_user_detail
       end
 
+
       if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
         @ssamr_user_details.description = @user.ssamr_user_detail.description
         @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
@@ -82,7 +80,6 @@ class MyController < ApplicationController
         @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
         @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
         @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
-        @ssamr_user_details.save!
       end
 
       @selected_institution_id = @ssamr_user_details.institution_id.to_i
