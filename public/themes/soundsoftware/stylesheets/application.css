@@ -139,3 +139,10 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 #top-menu a.projects { background-image: url(../../../images/projects.png); }
 #top-menu a.administration { background-image: url(../images/wrench.png); }
 #top-menu a.help { background-image: url(../../../images/help.png); }
+
+/* for Javadoc in Embedded form: */
+
+.TableHeadingColor { background-color: #fdf7e4; color: #3e442c }
+.TableSubHeadingColor { background-color: #fdfaf0; color: #3e442c }
+.TableRowColor { background-color: #fdfbf5; color: #000000 }
+.NavBarCell1 { background-color:#ffe69b; color:#000000 }
