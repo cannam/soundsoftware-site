@@ -141,9 +141,22 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 #top-menu a.administration { background-image: url(../images/wrench.png); }
 #top-menu a.help { background-image: url(../../../images/help.png); }
 
-/* for Javadoc in Embedded form: */
+/* for Javadoc in Embedded context: */
 
-.TableHeadingColor { background-color: #fdf7e4; color: #3e442c }
-.TableSubHeadingColor { background-color: #fdfaf0; color: #3e442c }
-.TableRowColor { background-color: #fdfbf5; color: #000000 }
-.NavBarCell1 { background-color:#ffe69b; color:#000000 }
+.TableHeadingColor { background-color: #fdf7e4; color: #3e442c; border: 0px solid #fff; }
+.TableHeadingColor th { background-color: #fdf7e4; color: #3e442c; border: 1px solid #a9b680; }
+.TableHeadingColor th font { font-size: 1.4em; color: #3e442c; }
+.TableSubHeadingColor { background-color: #fdfaf0; color: #3e442c; border: 0px solid #fff; }
+.TableSubHeadingColor th { background-color: #fdfaf0; color: #3e442c; border: 1px solid #a9b680; }
+.TableRowColor { background-color: #fdfbf5; color: #000000; border: 0; }
+.TableRowColor td { background-color: #fdfbf5; color: #000000; border: 0; }
+.NavBarCell1 { background-color: #ffe69b; color:#000000 }
+.embedded table { border: 0px solid #fff; }
+.embedded h3 { margin-top: 0.5em; }
+.embedded hr { color: #a9b680; background-color: #a9b680 }
+.embedded center { text-align: left; } /* haha */
+
+/* Special hack to hide the FRAMES | NO FRAMES links -- they don't
+   work in this context -- and right-align the All Classes link */
+.embedded .NavBarCell2 a[target=_top] { width: 0px; visibility: hidden; }
+.embedded .NavBarCell2 + .NavBarCell2 { text-align: right; }
