@@ -31,15 +31,19 @@
             </p>
 
             <p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
+			 <nobr>
               <%= ssamr_user_detail.radio_button :institution_type, true %>
               <%= ssamr_user_detail.collection_select(:institution_id, Institution.all, :id, :name, {:selected => @selected_institution_id, :prompt => true} ).gsub('&amp;', '&')  %>
-            </p>
+             </nobr>
+			</p>
 
 
 
             <p>
+				<nobr>
                <%= ssamr_user_detail.radio_button :institution_type, false %> Other:
                <%= ssamr_user_detail.text_field :other_institution %>
+				</nobr>
             </p>
           <% end %>
 </div>
