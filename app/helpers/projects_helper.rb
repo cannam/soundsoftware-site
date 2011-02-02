@@ -195,8 +195,17 @@ module ProjectsHelper
       classes = (ancestors.empty? ? 'root' : 'child')
 
       s << "<tr class='#{oddeven} #{classes} level#{level}'>"
-      s << "<td class='firstcol name hosted_here'>" << link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}") << "</td>"
-      s << "<td class='managers' rowspan=2 align=top>"
+      s << "<td class='firstcol' align=top><div class='name hosted_here"
+      s << " no_description" if project.description.blank?
+      s << "'>" << link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}");
+      s << "</div>"
+      unless project.description.blank?
+        s << "<div class='wiki description'>"
+        s << textilizable(project.short_description, :project => project)
+        s << "</div>"
+      end
+      
+      s << "<td class='managers' align=top>"
 
       u = project.users_by_role
       if u
@@ -216,14 +225,9 @@ module ProjectsHelper
       end
 
       s << "</td>"
-      s << "<td class='created_on' rowspan=2 align=top>" << format_date(project.created_on) << "</td>"
-      s << "<td class='updated_on' rowspan=2 align=top>" << format_date(project.updated_on) << "</td>"
+      s << "<td class='created_on' align=top>" << format_date(project.created_on) << "</td>"
+      s << "<td class='updated_on' align=top>" << format_date(project.updated_on) << "</td>"
 
-      s << "</tr>"
-      s << "<tr class='#{oddeven} #{classes}'>"
-      s << "<td class='firstcol wiki description'>"
-      s << textilizable(project.short_description, :project => project) unless project.description.blank?
-      s << "</td>"
       s << "</tr>"
 
       ancestors << project          
