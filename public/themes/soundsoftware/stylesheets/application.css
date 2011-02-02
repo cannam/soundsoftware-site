@@ -152,11 +152,13 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 .TableRowColor td { background-color: #fdfbf5; color: #000000; border: 0; }
 .NavBarCell1 { background-color: #ffe69b; color:#000000 }
 .embedded table { border: 0px solid #fff; }
+.embedded h1 { font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; }
 .embedded h3 { margin-top: 0.5em; }
 .embedded hr { color: #a9b680; background-color: #a9b680 }
 .embedded center { text-align: left; } /* haha */
 
 /* Special hack to hide the FRAMES | NO FRAMES links -- they don't
-   work in this context -- and right-align the All Classes link */
+   work in this context -- and right-align the All Classes and Detail links */
 .embedded .NavBarCell2 a[target=_top] { width: 0px; visibility: hidden; }
 .embedded .NavBarCell2 + .NavBarCell2 { text-align: right; }
+.embedded .NavBarCell3 + .NavBarCell3 { text-align: right; }
