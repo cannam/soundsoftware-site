@@ -1,7 +1,4 @@
 <%= javascript_include_tag "ssamr_institutions" %>
-<%= javascript_include_tag "ssamr_registration" %>
-
-
 
 <div class="contextual">
 <%= link_to(l(:button_change_password), :action => 'password') if @user.change_password_allowed? %>

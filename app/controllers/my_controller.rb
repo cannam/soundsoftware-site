@@ -54,6 +54,13 @@ class MyController < ApplicationController
     @pref = @user.pref
     @ssamr_user_details = @user.ssamr_user_detail
     
+    
+    if @user.ssamr_user_detail == nil
+       @selected_institution_id = nil
+     else
+       @selected_institution_id = @ssamr_user_details.institution_id.to_i
+     end    
+    
     if request.post?
       @user.attributes = params[:user]
       @user.mail_notification = params[:notification_option] || 'only_my_events'
@@ -63,12 +70,9 @@ class MyController < ApplicationController
       if @user.ssamr_user_detail == nil
         @ssamr_user_details = SsamrUserDetail.new()
         @user.ssamr_user_detail = @ssamr_user_details
-        @selected_institution_id = NULL
       else
         @ssamr_user_details = @user.ssamr_user_detail
-        @selected_institution_id = @ssamr_user_details.institution_id.to_i
       end
-
 
       if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
         @ssamr_user_details.description = @user.ssamr_user_detail.description
@@ -81,8 +85,6 @@ class MyController < ApplicationController
         @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
         @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
       end
-
-      @selected_institution_id = @ssamr_user_details.institution_id.to_i
                   
       if @user.save
         @user.pref.save
