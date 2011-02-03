@@ -30,7 +30,7 @@ else
 # hmm. should be a whitelist
 
     ( cd "$hgdir" && grep -vi OUTPUT_DIRECTORY "$doxyfile" | grep -vi HTML_OUTPUT | grep -vi SEARCHENGINE | grep -vi HAVE_DOT | grep -vi DOT_FONTNAME | grep -vi DOT_FONTPATH | grep -vi DOT_TRANSPARENT | \
-	sed -e '$a OUTPUT_DIRECTORY='"$docdir" -e '$a HTML_OUTPUT = .' -e '$a SEARCHENGINE = NO' -e '$a HAVE_DOT = YES' -e '$a DOT_FONTNAME = FreeMono.ttf' -e '$a DOT_TRANSPARENT = YES' | doxygen - )
+	sed -e '$a OUTPUT_DIRECTORY='"$docdir" -e '$a HTML_OUTPUT = .' -e '$a SEARCHENGINE = NO' -e '$a HAVE_DOT = YES' -e '$a DOT_FONTNAME = FreeMono' -e '$a DOT_FONTPATH = /usr/share/fonts/truetype/freefont' -e '$a DOT_TRANSPARENT = YES' | doxygen - )
 
 fi
 
