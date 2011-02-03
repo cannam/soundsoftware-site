@@ -189,7 +189,6 @@ class UsersController < ApplicationController
       @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
       @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
       @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
-      @ssamr_user_details.save!
     end
 
     if @user.save
