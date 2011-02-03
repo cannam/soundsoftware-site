@@ -199,6 +199,10 @@ en-GB:
 
   field_ssamr_user_detail:
     description: User Description
+    institution: Institution
+
+  field_other_institution: ''
+
   field_name: Name
   field_description: Description
   field_summary: Summary
@@ -415,7 +419,7 @@ en-GB:
   label_notifications: Important Message
   label_ssamr_description: Research description
   label_ssamr_details: Other Details
-  
+  label_ssamr_institution: Institution
   label_user: User
   label_user_plural: Users
   label_user_new: New user
@@ -423,8 +427,6 @@ en-GB:
   label_project: Project
   label_project_new: New project
   label_project_plural: Projects
-  label_my_project_plural: My Projects
-  label_other_project_plural: "Everyone Else's Projects"
   label_x_projects:
     zero:  no projects
     one:   1 project
@@ -704,7 +706,7 @@ en-GB:
   label_week: Week
   label_date_from: From
   label_date_to: To
-  label_language_based: "Based on user's language"
+  label_language_based: Based on user's language
   label_sort_by: "Sort by {{value}}"
   label_send_test_email: Send a test email
   label_feeds_access_key: RSS access key
@@ -846,7 +848,7 @@ en-GB:
   text_project_homepage_info: 'Link to an external project page.'
   text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
   text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
-  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.<br/>It may also be used to establish eligibility for your initial registration.'
+  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
   text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_caracters_maximum: "{{count}} characters maximum."
   text_caracters_minimum: "Must be at least {{count}} characters long."

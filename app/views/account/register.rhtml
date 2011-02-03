@@ -1,3 +1,6 @@
+<%= javascript_include_tag "ssamr_institutions" %>
+<%= javascript_include_tag "ssamr_registration" %>
+
 <h2><%=l(:label_register)%> <%=link_to l(:label_login_with_open_id_option), signin_url if Setting.openid? %></h2>
 
 <% form_tag({:action => 'register'}, :class => "tabular") do %>
@@ -34,17 +37,21 @@
 	
 		<% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>	
 			<p>
-
-                          <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit' %>
-                          <%= wikitoolbar_for 'ssamr_user_details_description' %>
-
+                          <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit' %>                          
                           <em> <%=l(:text_user_ssamr_description_info)%></em>
+                        </p>
+
+                        <p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
+							<%= ssamr_user_detail.radio_button :institution_type, true %>
+                          	<%= ssamr_user_detail.collection_select(:institution_id, Institution.find(:all, :order => "institutions.order"), :id, :name, {:prompt => true}).gsub('&amp;', '&')  %>
+						</p>
+
+                        <p>
+                          <%= ssamr_user_detail.radio_button :institution_type, false %> Other:
+                          <%= ssamr_user_detail.text_field(:other_institution) %>
                         </p>
                 <% end %>
           
-
-
-
 <% if Setting.openid? %>
 <p><label for="user_identity_url"><%=l(:field_identity_url)%></label>
 <%= text_field 'user', 'identity_url'  %></p>
