@@ -123,6 +123,7 @@ en-GB:
         not_same_project: "doesn't belong to the same project"
         circular_dependency: "This relation would create a circular dependency"
         cant_link_an_issue_with_a_descendant: "An issue can not be linked to one of its subtasks"
+        must_accept_terms_and_conditions: "You must accept the Terms and Conditions"        
 
   actionview_instancetag_blank_option: Please select
   
@@ -416,6 +417,7 @@ en-GB:
   
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
+  field_terms_and_conditions: 'Terms and Conditions:'
   label_ssamr_description: Research description
   label_ssamr_details: Other Details
   label_ssamr_institution: Institution

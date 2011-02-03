@@ -86,7 +86,6 @@ en:
           gb: "GB"
           tb: "TB"
 
-        
 # Used in array.to_sentence.
   support:
     array:
@@ -120,6 +119,7 @@ en:
         not_same_project: "doesn't belong to the same project"
         circular_dependency: "This relation would create a circular dependency"
         cant_link_an_issue_with_a_descendant: "An issue can not be linked to one of its subtasks"
+        must_accept_terms_and_conditions: "You must accept the Terms and Conditions"
 
   actionview_instancetag_blank_option: Please select
   
@@ -307,6 +307,7 @@ en:
   
   setting_tipoftheday_text: Tip of the Day
   setting_notifications_text: Notifications
+  field_terms_and_conditions: 'Terms and Conditions:'
   label_ssamr_description: Research description
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle

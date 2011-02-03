@@ -79,6 +79,8 @@ class User < Principal
   validates_length_of :mail, :maximum => 60, :allow_nil => true
   validates_confirmation_of :password, :allow_nil => true
 
+  validates_acceptance_of :terms_and_conditions, :on => :create, :message => :must_accept_terms_and_conditions
+
   def before_create
     self.mail_notification = Setting.default_notification_option if self.mail_notification.blank?
     true
