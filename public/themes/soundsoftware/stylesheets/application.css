@@ -151,6 +151,7 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 .TableRowColor { background-color: #fdfbf5; color: #000000; border: 0; }
 .TableRowColor td { background-color: #fdfbf5; color: #000000; border: 0; }
 .NavBarCell1 { background-color: #ffe69b; color:#000000 }
+
 .embedded table { border: 0px solid #fff; }
 .embedded h1 { font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; }
 .embedded h3 { margin-top: 0.5em; }
@@ -162,3 +163,43 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 .embedded .NavBarCell2 a[target=_top] { width: 0px; visibility: hidden; }
 .embedded .NavBarCell2 + .NavBarCell2 { text-align: right; }
 .embedded .NavBarCell3 + .NavBarCell3 { text-align: right; }
+
+/* For Doxygen in Embedded context (though note some of the Javadoc
+   rules will also apply to Doxygen): */
+
+.memItemLeft,
+.memItemRight,
+.memTemplParams,
+.memTemplItemLeft,
+.memTemplItemRight,
+.indexkey,
+.indexvalue,
+.memproto,
+.memproto td,
+.memdoc a,
+.embedded li .el,
+.embedded a.el { font-family: monospace; }
+
+.embedded .memTemplParams { font-style: italic; }
+
+.embedded .memItemRight a:first-child,
+.embedded .memTemplItemRight a:first-child,
+.embedded .indexkey a:first-child,
+.embedded a.el,
+.embedded .memdoc a { font-weight: bold; } /* function names, etc */
+
+.embedded .memitem { border-bottom: 1px solid #a9b680; padding-top: 0.5em; } 
+.embedded .memitem:last-child { border-bottom: 0px; } 
+
+.embedded .contents { margin-top: 0.5em; }
+.embedded .contents td { padding: 0px; }
+
+.embedded .contents h1,
+.embedded .contents h2,
+.embedded .navigation h1,
+.embedded .navigation h2 { padding-top: 0.5em; padding-bottom: 0.25em; }
+
+.embedded .contents .center { text-align: center; } /* undo javadoc hack above */
+
+
+
