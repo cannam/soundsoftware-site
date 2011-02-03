@@ -1,141 +1,141 @@
-University of Aberdeen
-University of Abertay Dundee
-Aberystwyth University
-Anglia Ruskin University
-University of the Arts London
-Aston University
-Bangor University
-University of Bath
-Bath Spa University
-University of Bedfordshire
-Birkbeck, University of London
-University of Birmingham
-Birmingham City University
-Birmingham Conservatoire
-University Centre at Blackburn College
-University of Bolton
-Bournemouth University
-University of Bradford
-University of Brighton
-University of Bristol
-Brunel University
-University of Buckingham
-Buckinghamshire New University
-University of Cambridge
-Institute of Cancer Research, University of London
-Canterbury Christ Church University
-Cardiff University
-University of Central Lancashire
-Central School of Speech and Drama, University of London
-University of Chester
-University of Chichester
-City University London
-Courtauld Institute of Art
-Coventry University
-Cranfield University
-University for the Creative Arts
-University of Cumbria
-De Montfort University
-University of Derby
-University of Dundee
-Durham University
-University of East Anglia
-University of East London
-Edge Hill University
-University of Edinburgh
-Edinburgh Napier University
-Institute of Education, University of London
-University of Essex
-University of Exeter
-University of Glamorgan
-University of Glasgow
-Glasgow Caledonian University
-University of Gloucestershire
-Goldsmiths, University of London
-University of Greenwich
-Glynd&#373;r University
-Heriot-Watt University
-University of Hertfordshire
-Heythrop College
-University of Huddersfield
-University of Hull
-Hull York Medical School
-Imperial College London
-Keele University
-University of Kent
-King's College London
-Kingston University
-Lancaster University
-University of Leeds
-Leeds Metropolitan University
-University of Leicester
-University of Lincoln
-University of Liverpool
-Liverpool Hope University
-Liverpool John Moores University
-London Business School
-London College of Music
-London Metropolitan University
-London School of Economics and Political Science
-London School of Hygiene and Tropical Medicine
-London South Bank University
-Loughborough University
-University of Manchester
-Manchester Metropolitan University
-Middlesex University
-Newcastle University
-University of Northampton
-Northumbria University
-University of Nottingham
-Nottingham Trent University
-The Open University
-University of Oxford
-Oxford Brookes University
-Peninsula College of Medicine and Dentistry
-University of Plymouth
-University of Portsmouth
-Queen's University Belfast
-Queen Margaret University
-Queen Mary, University of London
-University of Reading
-The Robert Gordon University, Aberdeen
-Roehampton University
-Royal Academy of Music
-Royal College of Art
-Royal Holloway, University of London
-Royal Veterinary College
-University of St Andrews
-St George's, University of London
-University of Salford
-School of Advanced Study, University of London
-School of Oriental and African Studies
-School of Pharmacy, University of London
-University of Sheffield
-Sheffield Hallam University
-University of Southampton
-Southampton Solent University
-Staffordshire University
-University of Stirling
-University of Strathclyde
-University of Sunderland
-University of Surrey
-University of Sussex
-Swansea Metropolitan University
-Swansea University
-University of Teesside
-Thames Valley University
-University of Ulster
-University College London
-University of Wales
-University of Wales Institute, Cardiff
-University of Wales, Newport
-University of Wales, Trinity Saint David
-University of Warwick
-University of Westminster
-University of the West of England
-University of the West of Scotland
-University of Winchester
-University of Wolverhampton
-University of Worcester
-University of York
-York St John University
+University of Aberdeen|1
+University of Abertay Dundee |2
+Aberystwyth University|3
+Anglia Ruskin University|4
+University of the Arts London|5
+Aston University|6
+Bangor University|7
+University of Bath|8
+Bath Spa University|9
+University of Bedfordshire|10
+Birkbeck, University of London|11
+University of Birmingham|12
+Birmingham City University|13
+Birmingham Conservatoire|14
+University Centre at Blackburn College|15
+University of Bolton|16
+Bournemouth University|17
+University of Bradford|18
+University of Brighton|19
+University of Bristol|20
+Brunel University|21
+University of Buckingham|22
+Buckinghamshire New University|23
+University of Cambridge|24
+Institute of Cancer Research, University of London|25
+Canterbury Christ Church University|26
+Cardiff University|27
+University of Central Lancashire|28
+Central School of Speech and Drama, University of London|29
+University of Chester|30
+University of Chichester|31
+City University London|32
+Courtauld Institute of Art|33
+Coventry University|34
+Cranfield University|35
+University for the Creative Arts|36
+University of Cumbria|37
+De Montfort University|38
+University of Derby|39
+University of Dundee|40
+Durham University|41
+University of East Anglia|42
+University of East London|43
+Edge Hill University|44
+University of Edinburgh|45
+Edinburgh Napier University|46
+Institute of Education, University of London|47
+University of Essex|48
+University of Exeter|49
+University of Glamorgan|50
+University of Glasgow|51
+Glasgow Caledonian University|52
+University of Gloucestershire|53
+Goldsmiths, University of London|54
+University of Greenwich|55
+Glynd&#373;r University|56
+Heriot-Watt University|57
+University of Hertfordshire|58
+Heythrop College|59
+University of Huddersfield|60
+University of Hull|61
+Hull York Medical School|62
+Imperial College London|63
+Keele University|64
+University of Kent|65
+King's College London|66
+Kingston University|67
+Lancaster University|68
+University of Leeds|69
+Leeds Metropolitan University|70
+University of Leicester|71
+University of Lincoln|72
+University of Liverpool|73
+Liverpool Hope University|74
+Liverpool John Moores University|75
+London Business School|76
+London College of Music|77
+London Metropolitan University|78
+London School of Economics and Political Science|79
+London School of Hygiene and Tropical Medicine|80
+London South Bank University|81
+Loughborough University|82
+University of Manchester|83
+Manchester Metropolitan University|84
+Middlesex University|85
+Newcastle University|86
+University of Northampton|87
+Northumbria University|88
+University of Nottingham|89
+Nottingham Trent University|90
+The Open University|91
+University of Oxford|92
+Oxford Brookes University|93
+Peninsula College of Medicine and Dentistry|94
+University of Plymouth|95
+University of Portsmouth|96
+Queen's University Belfast|97
+Queen Margaret University|98
+Queen Mary, University of London|99
+University of Reading|100
+The Robert Gordon University, Aberdeen|101
+Roehampton University|102
+Royal Academy of Music|103
+Royal College of Art|104
+Royal Holloway, University of London|105
+Royal Veterinary College|106
+University of St Andrews|107
+St George's, University of London|108
+University of Salford|109
+School of Advanced Study, University of London|110
+School of Oriental and African Studies|111
+School of Pharmacy, University of London|112
+University of Sheffield|113
+Sheffield Hallam University|114
+University of Southampton|115
+Southampton Solent University|116
+Staffordshire University|117
+University of Stirling|118
+University of Strathclyde|119
+University of Sunderland|120
+University of Surrey|121
+University of Sussex|122
+Swansea Metropolitan University|123
+Swansea University|124
+University of Teesside|125
+Thames Valley University|126
+University of Ulster|127
+University College London|128
+University of Wales|129
+University of Wales Institute, Cardiff|130
+University of Wales, Newport|131
+University of Wales, Trinity Saint David|132
+University of Warwick|133
+University of Westminster|134
+University of the West of England|135
+University of the West of Scotland|136
+University of Winchester|137
+University of Wolverhampton|138
+University of Worcester|139
+University of York|140
+York St John University|141

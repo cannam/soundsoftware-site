@@ -17,11 +17,11 @@ end
 
 truncate_table('institutions')
 
-idx = 1
-
 open("db/seed_data/institutions.txt") do |institutions|
   institutions.read.each_line do |institution|
-    Institution.create(:name => institution.chomp, :order => idx)
-    idx = idx + 1
+    inst=institution.split('|')
+    
+    
+    Institution.create(:name => inst[0].chomp, :order => inst[1].chomp)
   end
 end
