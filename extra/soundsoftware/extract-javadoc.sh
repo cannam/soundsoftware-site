@@ -2,7 +2,10 @@
 
 # Run this script from /var/doc/<project-name>
 
-# Find Hg repo and update it
+# Find Hg repo and update it.  We should separate this process into
+# two, first the update (run as www-data) and then the extraction (run
+# as an otherwise totally unprivileged user without write permission
+# on www-data/code stuff)
 
 docdir=$(pwd)
 name=$(basename $(pwd))
@@ -20,12 +23,12 @@ fi
 
 doxyfile=`find "$hgdir" -type f -name Doxyfile -print | head -1`
 
-echo "This project contains a Doxyfile:"
-echo "$doxyfile"
-
 if [ -z "$doxyfile" ]; then
     echo "No Doxyfile: skipping"
 else
+    echo "This project contains a Doxyfile:"
+    echo "$doxyfile"
+
 
 # hmm. should be a whitelist
 
@@ -34,31 +37,72 @@ else
 
 fi
 
+# Identify Java files whose packages match the trailing parts of their
+# paths, and list the resulting packages and the path prefixes with
+# the packages removed (so as to find code in subdirs,
+# e.g. src/com/example/...)
+
+# Regexp match is very rough; check what is actually permitted for
+# package declarations
+
+find "$hgdir" -type f -name \*.java -exec grep '^ *package [a-zA-Z][a-zA-Z0-9\._-]*; *$' \{\} /dev/null \; |
+    sed -e 's/\/[^\/]*: *package */:/' -e 's/; *$//' |
+    sort | uniq | (
+	current_prefix=
+	current_packages=
+	while IFS=: read filepath package; do 
+	    echo "Looking at $package in $filepath"
+	    packagepath=${package//./\/}
+	    prefix=${filepath%$packagepath}
+	    prefix=${prefix:=$hgdir}
+	    if [ "$prefix" = "$filepath" ]; then
+		echo "Package $package does not match suffix of path $filepath, skipping"
+		continue
+	    fi
+	    if [ "$prefix" != "$current_prefix" ]; then
+		if [ -n "$current_packages" ]; then
+		    echo "Running Javadoc for packages $current_packages from prefix $current_prefix"
+		    javadoc -sourcepath "$current_prefix" -d . -subpackages $current_packages
+		fi
+		current_prefix="$prefix"
+		current_packages=
+	    else
+		current_packages="$current_packages $package"
+	    fi
+	done
+	prefix=${prefix:=$hgdir}
+	if [ -n "$current_packages" ]; then
+	    echo "Running Javadoc for packages $current_packages in prefix $current_prefix"
+	    javadoc -sourcepath "$current_prefix" -d . -subpackages $current_packages
+	fi
+    )
+
 # This is very rough; check what is actually permitted for package
 # declarations
 
-java_packages=`find "$hgdir" -type f -name \*.java -print | \
-    xargs grep -h '^ *package [a-zA-Z][a-zA-Z0-9\._-]* *; *' | \
-    sort | uniq | \
-    sed -e 's/^ *package //' -e 's/ *; *$//'`
+# java_packages=`find "$hgdir" -type f -name \*.java -print | \
+#     xargs grep -h '^ *package [a-zA-Z][a-zA-Z0-9\._-]* *; *' | \
+#     sort | uniq | \
+#     sed -e 's/^ *package //' -e 's/ *; *$//'`
 
-echo "This project contains Java packages:"
-echo "$java_packages"
+# echo "This project contains Java packages:"
+# echo "$java_packages"
 
-if [ -z "$java_packages" ]; then
-    echo "No Java packages: skipping"
-    exit 0
-fi
+# if [ -z "$java_packages" ]; then
+#     echo "No Java packages: skipping"
+#     exit 0
+# fi
 
-# This won't work if code is in a subdir,
-# e.g. src/com/example/project/Hello.java
 
-# We need to convert the package name back to a path, and check
-# whether that matches the tail of the path to a java file that
-# declares itself to be in that package... but we don't have that list
-# of java files to hand here... hm
+# # This won't work if code is in a subdir,
+# # e.g. src/com/example/project/Hello.java
 
-javadoc -sourcepath "$hgdir" -d . -subpackages $java_packages -verbose
+# # We need to convert the package name back to a path, and check
+# # whether that matches the tail of the path to a java file that
+# # declares itself to be in that package... but we don't have that list
+# # of java files to hand here... hm
 
-# If we have just written something to a doc directory that was
-# previously empty, we should switch on Embedded for this project
+# javadoc -sourcepath "$hgdir" -d . -subpackages $java_packages -verbose
+
+# # If we have just written something to a doc directory that was
+# # previously empty, we should switch on Embedded for this project
