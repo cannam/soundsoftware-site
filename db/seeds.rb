@@ -6,10 +6,22 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-Institution.delete_all
+def truncate_table(table_name)
+  quoted = connection.quote_table_name(table_name)
+  connection.execute("TRUNCATE #{quoted}")
+end
+
+def connection
+  ActiveRecord::Base.connection
+end
+
+truncate_table('institutions')
 
 open("db/seed_data/institutions.txt") do |institutions|
   institutions.read.each_line do |institution|
-    Institution.create(:name => institution.chomp)
+    inst=institution.split('|')
+    
+    
+    Institution.create(:name => inst[0].chomp, :order => inst[1].chomp)
   end
 end
