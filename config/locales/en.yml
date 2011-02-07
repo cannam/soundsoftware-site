@@ -308,6 +308,7 @@ en:
   setting_tipoftheday_text: Tip of the Day
   setting_notifications_text: Notifications
   field_terms_and_conditions: 'Terms and Conditions:'
+  accept_terms_and_conditions: 'I have read and agree with the '
   label_ssamr_description: Research description
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle

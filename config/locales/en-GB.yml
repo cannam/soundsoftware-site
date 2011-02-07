@@ -418,6 +418,7 @@ en-GB:
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
   field_terms_and_conditions: 'Terms and Conditions:'
+  accept_terms_and_conditions: 'I have read and agree with the '
   label_ssamr_description: Research description
   label_ssamr_details: Other Details
   label_ssamr_institution: Institution
