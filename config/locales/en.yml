@@ -305,7 +305,10 @@ en:
   field_assigned_to_role: "Assignee's role"
   field_text: Text field
   field_visible: Visible
-  
+ 
+  setting_external_repository: "In the case you wish to follow an external repository"
+  setting_external_repository_url: "The external repository URL"
+  label_repository_external_url: "External rep URL"
   setting_tipoftheday_text: Tip of the Day
   setting_notifications_text: Notifications
   field_terms_and_conditions: 'Terms and Conditions:'
