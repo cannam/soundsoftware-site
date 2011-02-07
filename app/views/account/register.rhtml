@@ -43,7 +43,7 @@
 
                         <p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
 							<%= ssamr_user_detail.radio_button :institution_type, true %>
-                          	<%= ssamr_user_detail.collection_select(:institution_id, Institution.find(:all, :order => "institutions.order"), :id, :name, {:prompt => true}).gsub('&amp;', '&')  %>
+                          	<%= ssamr_user_detail.collection_select(:institution_id, Institution.find(:all, :order => "institutions.order"), :id, :name,  {:selected => @selected_institution_id, :prompt => true}).gsub('&amp;', '&')  %>
 						</p>
 
                         <p>
@@ -62,6 +62,10 @@
 <% end %>
 <!--[eoform:user]-->
 </div>
+
+<%= check_box :user, :terms_and_conditions %> <%= l(:accept_terms_and_conditions) %> <%= link_to("Terms and Conditions", "https://code.soundsoftware.ac.uk/projects/soundsoftware-site/wiki/TandCs", {:target => "_blank"}) %>.
+<br />
+<br />
 
 <%= submit_tag l(:button_submit) %>
 <% end %>
