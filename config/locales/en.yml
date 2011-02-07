@@ -86,7 +86,6 @@ en:
           gb: "GB"
           tb: "TB"
 
-        
 # Used in array.to_sentence.
   support:
     array:
@@ -120,6 +119,7 @@ en:
         not_same_project: "doesn't belong to the same project"
         circular_dependency: "This relation would create a circular dependency"
         cant_link_an_issue_with_a_descendant: "An issue can not be linked to one of its subtasks"
+        must_accept_terms_and_conditions: "You must accept the Terms and Conditions"
 
   actionview_instancetag_blank_option: Please select
   
@@ -203,6 +203,10 @@ en:
 
   field_ssamr_user_detail:
     description: User Description
+    institution: Institution
+
+  field_other_institution: ''
+
   field_name: Name
   field_description: Description
   field_summary: Summary
@@ -304,6 +308,8 @@ en:
   
   setting_tipoftheday_text: Tip of the Day
   setting_notifications_text: Notifications
+  field_terms_and_conditions: 'Terms and Conditions:'
+  accept_terms_and_conditions: 'I have read and agree with the '
   label_ssamr_description: Research description
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
@@ -427,9 +433,9 @@ en:
   project_module_boards: Boards
   project_module_calendar: Calendar
   project_module_gantt: Gantt
-  
   label_tipoftheday: Tip of the day
   label_ssamr_details: Other Details
+  label_ssamr_institution: Institution
   label_user: User
   label_user_plural: Users
   label_user_new: New user
@@ -438,7 +444,7 @@ en:
   label_project_new: New project
   label_project_plural: Projects
   label_my_project_plural: My Projects
-  label_other_project_plural: "Everyone Else's Projects"
+  label_other_project_plural: Other Projects
   label_x_projects:
     zero:  no projects
     one:   1 project
@@ -872,7 +878,7 @@ en:
   text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
   text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
   text_project_homepage_info: 'Link to an external project page.'
-  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.<br/>It may also be used to establish eligibility for your initial registration.'
+  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
   text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_caracters_maximum: "{{count}} characters maximum."
   text_caracters_minimum: "Must be at least {{count}} characters long."
