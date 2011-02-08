@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4705/trunk/test/unit/lib/redmine
+/svn/!svn/ver/4794/trunk/test/unit/lib/redmine
 END
 menu_manager_test.rb
 K 25
@@ -50,6 +50,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 61
 /svn/!svn/ver/4509/trunk/test/unit/lib/redmine/themes_test.rb
+END
+configuration_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4752/trunk/test/unit/lib/redmine/configuration_test.rb
 END
 mime_type_test.rb
 K 25

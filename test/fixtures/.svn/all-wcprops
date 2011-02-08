@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 38
-/svn/!svn/ver/4681/trunk/test/fixtures
+/svn/!svn/ver/4752/trunk/test/fixtures
 END
 journal_details.yml
 K 25
@@ -105,23 +105,17 @@ svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/2895/trunk/test/fixtures/changes.yml
 END
-custom_fields_projects.yml
-K 25
-svn:wc:ra_dav:version-url
-V 65
-/svn/!svn/ver/3278/trunk/test/fixtures/custom_fields_projects.yml
-END
 enumerations.yml
 K 25
 svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/3573/trunk/test/fixtures/enumerations.yml
 END
-member_roles.yml
+custom_fields_projects.yml
 K 25
 svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/3250/trunk/test/fixtures/member_roles.yml
+V 65
+/svn/!svn/ver/3278/trunk/test/fixtures/custom_fields_projects.yml
 END
 issues.yml
 K 25
@@ -129,17 +123,17 @@ svn:wc:ra_dav:version-url
 V 49
 /svn/!svn/ver/4482/trunk/test/fixtures/issues.yml
 END
+member_roles.yml
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/3250/trunk/test/fixtures/member_roles.yml
+END
 queries.yml
 K 25
 svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3071/trunk/test/fixtures/queries.yml
-END
-watchers.yml
-K 25
-svn:wc:ra_dav:version-url
-V 51
-/svn/!svn/ver/2456/trunk/test/fixtures/watchers.yml
 END
 wiki_contents.yml
 K 25
@@ -147,11 +141,11 @@ svn:wc:ra_dav:version-url
 V 56
 /svn/!svn/ver/4681/trunk/test/fixtures/wiki_contents.yml
 END
-enabled_modules.yml
+watchers.yml
 K 25
 svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4505/trunk/test/fixtures/enabled_modules.yml
+V 51
+/svn/!svn/ver/2456/trunk/test/fixtures/watchers.yml
 END
 wiki_pages.yml
 K 25
@@ -159,11 +153,11 @@ svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/4680/trunk/test/fixtures/wiki_pages.yml
 END
-wiki_content_versions.yml
+enabled_modules.yml
 K 25
 svn:wc:ra_dav:version-url
-V 64
-/svn/!svn/ver/2895/trunk/test/fixtures/wiki_content_versions.yml
+V 58
+/svn/!svn/ver/4505/trunk/test/fixtures/enabled_modules.yml
 END
 comments.yml
 K 25
@@ -171,23 +165,29 @@ svn:wc:ra_dav:version-url
 V 51
 /svn/!svn/ver/2895/trunk/test/fixtures/comments.yml
 END
+wiki_content_versions.yml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/2895/trunk/test/fixtures/wiki_content_versions.yml
+END
 members.yml
 K 25
 svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3250/trunk/test/fixtures/members.yml
 END
-workflows.yml
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/2895/trunk/test/fixtures/workflows.yml
-END
 journals.yml
 K 25
 svn:wc:ra_dav:version-url
 V 51
 /svn/!svn/ver/3123/trunk/test/fixtures/journals.yml
+END
+workflows.yml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/2895/trunk/test/fixtures/workflows.yml
 END
 custom_fields.yml
 K 25

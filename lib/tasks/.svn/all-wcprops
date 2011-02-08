@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 34
-/svn/!svn/ver/4687/trunk/lib/tasks
+/svn/!svn/ver/4765/trunk/lib/tasks
 END
 deprecated.rake
 K 25
@@ -27,17 +27,17 @@ svn:wc:ra_dav:version-url
 V 48
 /svn/!svn/ver/4167/trunk/lib/tasks/reminder.rake
 END
-metrics.rake
-K 25
-svn:wc:ra_dav:version-url
-V 47
-/svn/!svn/ver/2825/trunk/lib/tasks/metrics.rake
-END
 initializers.rake
 K 25
 svn:wc:ra_dav:version-url
 V 52
 /svn/!svn/ver/4405/trunk/lib/tasks/initializers.rake
+END
+metrics.rake
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/2825/trunk/lib/tasks/metrics.rake
 END
 permissions.rake
 K 25
@@ -63,17 +63,17 @@ svn:wc:ra_dav:version-url
 V 48
 /svn/!svn/ver/3167/trunk/lib/tasks/watchers.rake
 END
-plugins.rake
-K 25
-svn:wc:ra_dav:version-url
-V 47
-/svn/!svn/ver/1786/trunk/lib/tasks/plugins.rake
-END
 yardoc.rake
 K 25
 svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/3922/trunk/lib/tasks/yardoc.rake
+END
+plugins.rake
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/1786/trunk/lib/tasks/plugins.rake
 END
 locales.rake
 K 25
@@ -91,7 +91,7 @@ migrate_from_mantis.rake
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/4599/trunk/lib/tasks/migrate_from_mantis.rake
+/svn/!svn/ver/4765/trunk/lib/tasks/migrate_from_mantis.rake
 END
 email.rake
 K 25

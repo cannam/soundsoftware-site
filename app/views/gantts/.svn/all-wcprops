@@ -1,11 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/4528/trunk/app/views/gantts
+/svn/!svn/ver/4782/trunk/app/views/gantts
 END
 show.html.erb
 K 25
 svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/4528/trunk/app/views/gantts/show.html.erb
+/svn/!svn/ver/4782/trunk/app/views/gantts/show.html.erb
 END

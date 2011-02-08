@@ -1,6 +1,7 @@
 syntax: glob
 
 config/additional_environment.rb
+config/configuration.yml
 config/database.yml
 config/email.yml
 config/initializers/session_store.rb
@@ -13,7 +14,6 @@ log/*.log*
 log/mongrel_debug
 public/dispatch.*
 public/plugin_assets
-tmp/*
 tmp/cache/*
 tmp/sessions/*
 tmp/sockets/*

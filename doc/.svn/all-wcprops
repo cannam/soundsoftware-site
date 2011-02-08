@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 28
-/svn/!svn/ver/4670/trunk/doc
+/svn/!svn/ver/4784/trunk/doc
 END
 UPGRADING
 K 25
 svn:wc:ra_dav:version-url
 V 38
-/svn/!svn/ver/3848/trunk/doc/UPGRADING
+/svn/!svn/ver/4752/trunk/doc/UPGRADING
 END
 RUNNING_TESTS
 K 25
@@ -25,13 +25,13 @@ INSTALL
 K 25
 svn:wc:ra_dav:version-url
 V 36
-/svn/!svn/ver/4567/trunk/doc/INSTALL
+/svn/!svn/ver/4752/trunk/doc/INSTALL
 END
 CHANGELOG
 K 25
 svn:wc:ra_dav:version-url
 V 38
-/svn/!svn/ver/4670/trunk/doc/CHANGELOG
+/svn/!svn/ver/4784/trunk/doc/CHANGELOG
 END
 COPYING
 K 25

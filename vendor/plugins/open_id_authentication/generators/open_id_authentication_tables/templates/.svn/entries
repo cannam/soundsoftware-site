@@ -1,7 +1,7 @@
 10
 
 dir
-4732
+4802
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins/open_id_authentication/generators/open_id_authentication_tables/templates
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.827780Z
+2011-02-08T13:45:47.000000Z
 352b0b17c079fdf355c028a9b990b3b7
 2009-02-11T19:06:45.087605Z
 2438

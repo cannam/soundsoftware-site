@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4704/trunk/app/models/repository
+/svn/!svn/ver/4802/trunk/app/models/repository
 END
 subversion.rb
 K 25
@@ -37,7 +37,7 @@ cvs.rb
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/1768/trunk/app/models/repository/cvs.rb
+/svn/!svn/ver/4802/trunk/app/models/repository/cvs.rb
 END
 darcs.rb
 K 25
