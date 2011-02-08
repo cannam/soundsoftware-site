@@ -305,7 +305,10 @@ en:
   field_assigned_to_role: "Assignee's role"
   field_text: Text field
   field_visible: Visible
-  
+ 
+  setting_external_repository: "In the case you wish to follow an external repository"
+  setting_external_repository_url: "The external repository URL"
+  label_repository_external_url: "External rep URL"
   setting_tipoftheday_text: Tip of the Day
   setting_notifications_text: Notifications
   field_terms_and_conditions: 'Terms and Conditions:'
@@ -489,6 +492,8 @@ en:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
+  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
+  label_accept_terms_and_conditions: I have read the terms and conditions and fully accept them
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
@@ -630,6 +635,7 @@ en:
   label_not_contains: doesn't contain
   label_day_plural: days
   label_repository: Repository
+  label_is_external_repository: External?
   label_repository_plural: Repositories
   label_browse: Browse
   label_modification: "{{count}} change"

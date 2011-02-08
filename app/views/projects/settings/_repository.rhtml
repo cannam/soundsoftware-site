@@ -11,6 +11,22 @@
 <% end %>
 <p><%= label_tag('repository_scm', l(:label_scm)) %><%= scm_select_tag(@repository) %></p>
 <%= repository_field_tags(f, @repository) if @repository %>
+
+
+<p>
+	<%= label_tag('repository_is_external', l(:label_is_external_repository)) %>
+	<%= check_box :repository, :is_external %> 
+	<%= l(:setting_external_repository) %>
+</p>
+
+
+<p>
+	<%= label_tag('repository_external_url', l(:label_repository_external_url)) %>
+	<%= text_field :repository, :external_url %> 
+	<%= l(:setting_external_repository_url) %>
+</p>
+
+
 </div>
 
 <div class="contextual">
