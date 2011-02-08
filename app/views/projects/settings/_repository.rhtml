@@ -1,3 +1,6 @@
+
+<%= javascript_include_tag 'repository' %>
+
 <% remote_form_for :repository, @repository, 
                    :url => { :controller => 'repositories', :action => 'edit', :id => @project },
                    :builder => TabularFormBuilder,
@@ -15,14 +18,14 @@
 
 <p>
 	<%= label_tag('repository_is_external', l(:label_is_external_repository)) %>
-	<%= check_box :repository, :is_external %> 
+	<%= check_box :repository, :is_external, :onclick => "toggle_ext_url()" %> 
 	<%= l(:setting_external_repository) %>
 </p>
 
 
 <p>
 	<%= label_tag('repository_external_url', l(:label_repository_external_url)) %>
-	<%= text_field :repository, :external_url %> 
+	<%= text_field :repository, :external_url, :disabled => true %> 
 	<%= l(:setting_external_repository_url) %>
 </p>
 
