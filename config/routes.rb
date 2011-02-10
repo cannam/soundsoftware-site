@@ -236,6 +236,7 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller => 'sys' do |sys|
     sys.connect 'sys/projects.:format', :action => 'projects', :conditions => {:method => :get}
     sys.connect 'sys/projects/:id/repository.:format', :action => 'create_project_repository', :conditions => {:method => :post}
+    sys.connect 'sys/projects/:id/external-repository.:format', :action => 'get_external_repo_url', :conditions => {:method => :get}
   end
  
   # Install the default route as the lowest priority.
