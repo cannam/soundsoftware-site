@@ -346,5 +346,14 @@ projects.each do |project|
     log("\trepository #{repos_path} created");
   end
 
+  if project.respond_to?(:repository) and project.repository.is_external?
+    external_url = project.repository.external_url;
+    log("\tproject #{project.identifier} has external repository url #{external_url}");
+    if !external_url.match(/^https?:/)
+      # wot about git, svn/svn+ssh, etc? should we just check for a scheme at all?
+      log("\tthis is not an http(s) url: ignoring");
+    end
+  end
+
 end
   
