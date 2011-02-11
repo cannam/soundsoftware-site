@@ -174,7 +174,7 @@ if ($redmine_host.empty? or $repos_base.empty?)
 end
 
 unless File.directory?($repos_base)
-  log("directory '#{$repos_base}' doesn't exists", :exit => true)
+  log("directory '#{$repos_base}' doesn't exist", :exit => true)
 end
 
 begin
@@ -184,7 +184,7 @@ rescue LoadError
 end
 
 class Project < ActiveResource::Base
-  self.headers["User-agent"] = "Redmine repository manager/#{Version}"
+  self.headers["User-agent"] = "SoundSoftware repository manager/#{Version}"
 end
 
 log("querying Redmine for projects...", :level => 1);
