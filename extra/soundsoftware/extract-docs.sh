@@ -8,6 +8,11 @@
 hgdir="/var/hg"
 docdir="/var/doc"
 
+apikey=""
+apihost=""
+apiuser=""
+apipass=""
+
 progdir=$(dirname $0)
 case "$progdir" in
     /*) ;;
@@ -22,6 +27,16 @@ for x in $types; do
 	exit 1
     fi
 done
+
+enable_embedded()
+{
+    p="$1"
+    if [ -n "$apiuser" ]; then
+	curl -u "$apiuser":"$apipass" "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
+    else
+	curl "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
+    fi
+}
 
 for projectdir in "$hgdir"/* ; do
 
@@ -59,6 +74,7 @@ for projectdir in "$hgdir"/* ; do
 # # If we have just written something to a doc directory that was
 # # previously empty, we should switch on Embedded for this project
 		echo "This project hasn't had doc extracted before -- I should switch on Embedded for it at this point"
+		enable_embedded "$project"
 	    fi
 
 	    if [ -d "$targetdir" ]; then
