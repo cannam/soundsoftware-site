@@ -36,8 +36,6 @@ class RepositoriesController < ApplicationController
   
   def edit
     @repository = @project.repository
-    
-    params[:repository_scm] = 'Mercurial'
 
     if !@repository
       @repository = Repository.factory(params[:repository_scm])
