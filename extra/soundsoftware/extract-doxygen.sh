@@ -1,20 +1,18 @@
 #!/bin/bash
 
-hgdir="/var/hg"
 docdir="/var/doc"
 
 project="$1"
-targetdir="$2"
+projectdir="$2"
+targetdir="$3"
 
-projectdir="$hgdir/$project"
-
-if [ -z "$project" ] || [ -z "$targetdir" ]; then
-    echo "Usage: $0 <project> <targetdir>"
+if [ -z "$project" ] || [ -z "$targetdir" ] || [ -z "$projectdir" ]; then
+    echo "Usage: $0 <project> <projectdir> <targetdir>"
     exit 2
 fi
 
-if [ ! -d "$projectdir" ] || [ ! -d "$projectdir/.hg" ]; then
-    echo "No hg repo found at $projectdir"
+if [ ! -d "$projectdir" ]; then
+    echo "Project directory $projectdir not found"
     exit 1
 fi
 
