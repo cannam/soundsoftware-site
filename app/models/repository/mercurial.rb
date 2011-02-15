@@ -19,7 +19,7 @@ require 'redmine/scm/adapters/mercurial_adapter'
 
 class Repository::Mercurial < Repository
   attr_protected :root_url
-  validates_presence_of :url
+  # validates_presence_of :url
 
   FETCH_AT_ONCE = 100  # number of changesets to fetch at once
 
