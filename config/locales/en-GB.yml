@@ -407,14 +407,17 @@ en-GB:
   permission_delete_own_messages: Delete own messages
   permission_export_wiki_pages: Export wiki pages
   
-  project_module_issue_tracking: Issue tracking
+  project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
   project_module_news: News
   project_module_documents: Documents
-  project_module_files: Downloads
+  project_module_files: Files for download
   project_module_wiki: Wiki
-  project_module_repository: Repository
-  project_module_boards: Boards
+  project_module_repository: Source code repository
+  project_module_boards: Forums
+  project_module_gantt: Gantt chart
+  project_module_calendar: Calendar
+  project_module_embedded: Embedded documentation (Javadoc or Doxygen)
   
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
@@ -430,6 +433,8 @@ en-GB:
   label_project: Project
   label_project_new: New project
   label_project_plural: Projects
+  label_my_project_plural: My Projects
+  label_other_project_plural: Other Projects
   label_x_projects:
     zero:  no projects
     one:   1 project
@@ -474,7 +479,6 @@ en-GB:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
-  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
@@ -710,7 +714,7 @@ en-GB:
   label_week: Week
   label_date_from: From
   label_date_to: To
-  label_language_based: Based on user's language
+  label_language_based: "Based on user's language"
   label_sort_by: "Sort by {{value}}"
   label_send_test_email: Send a test email
   label_feeds_access_key: RSS access key
@@ -941,8 +945,6 @@ en-GB:
   notice_failed_to_save_members: "Failed to save member(s): {{errors}}."
   label_project_copy_notifications: Send email notifications during the project copy
   field_time_entries: Log time
-  project_module_gantt: Gantt
-  project_module_calendar: Calendar
   field_member_of_group: Member of Group
   field_assigned_to_role: Member of Role
   button_edit_associated_wikipage: "Edit associated Wiki page: {{page_title}}"

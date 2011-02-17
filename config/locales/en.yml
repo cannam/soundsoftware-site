@@ -423,16 +423,17 @@ en:
   permission_export_wiki_pages: Export wiki pages
   permission_manage_subtasks: Manage subtasks
   
-  project_module_issue_tracking: Issue tracking
+  project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
   project_module_news: News
   project_module_documents: Documents
-  project_module_files: Downloads
+  project_module_files: Files for download
   project_module_wiki: Wiki
-  project_module_repository: Repository
-  project_module_boards: Boards
+  project_module_repository: Source code repository
+  project_module_boards: Forums
   project_module_calendar: Calendar
-  project_module_gantt: Gantt
+  project_module_gantt: Gantt chart
+  project_module_embedded: Embedded documentation (Javadoc or Doxygen)
   label_tipoftheday: Tip of the day
   label_ssamr_details: Other Details
   label_ssamr_institution: Institution
@@ -489,8 +490,6 @@ en:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
-  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
-  label_accept_terms_and_conditions: I have read the terms and conditions and fully accept them
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
