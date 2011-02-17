@@ -32,7 +32,17 @@ my %fixed = (
     DOT_TRANSPARENT => "YES",
 );
 
+# These are the keys that are safe to take from the output and include
+# in the output; they may still need to be checked for safe values (if
+# file paths).
 my @safe = qw(
+INPUT
+FILE_PATTERNS
+EXAMPLE_PATH
+EXAMPLE_PATTERNS
+IMAGE_PATH
+INCLUDE_PATH           
+INCLUDE_FILE_PATTERNS
 DOXYFILE_ENCODING      
 PROJECT_NAME           
 PROJECT_NUMBER         

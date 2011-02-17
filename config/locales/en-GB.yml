@@ -384,8 +384,8 @@ en-GB:
   permission_comment_news: Comment news
   permission_manage_documents: Manage documents
   permission_view_documents: View documents
-  permission_manage_files: Manage files
-  permission_view_files: View files
+  permission_manage_files: Manage downloads
+  permission_view_files: View downloads
   permission_manage_wiki: Manage wiki
   permission_rename_wiki_pages: Rename wiki pages
   permission_delete_wiki_pages: Delete wiki pages
@@ -433,6 +433,8 @@ en-GB:
   label_project: Project
   label_project_new: New project
   label_project_plural: Projects
+  label_my_project_plural: My Projects
+  label_other_project_plural: Other Projects
   label_x_projects:
     zero:  no projects
     one:   1 project
@@ -523,7 +525,7 @@ en-GB:
   label_attachment: File
   label_attachment_new: New file
   label_attachment_delete: Delete file
-  label_attachment_plural: Files
+  label_attachment_plural: Downloads
   label_file_added: File added
   label_report: Report
   label_report_plural: Reports
@@ -712,7 +714,7 @@ en-GB:
   label_week: Week
   label_date_from: From
   label_date_to: To
-  label_language_based: Based on user's language
+  label_language_based: "Based on user's language"
   label_sort_by: "Sort by {{value}}"
   label_send_test_email: Send a test email
   label_feeds_access_key: RSS access key
@@ -723,7 +725,7 @@ en-GB:
   label_updated_time_by: "Updated by {{author}} {{age}} ago"
   label_updated_time: "Updated {{value}} ago"
   label_jump_to_a_project: Jump to a project...
-  label_file_plural: Files
+  label_file_plural: Downloads
   label_changeset_plural: Changesets
   label_default_columns: Default columns
   label_no_change_option: (No change)
