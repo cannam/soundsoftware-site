@@ -22,7 +22,7 @@ case "$progdir" in
     *) progdir="$(pwd)/$progdir" ;;
 esac
 
-types="javadoc doxygen"
+types="doxygen javadoc" # Do Doxygen first (it can be used for Java too)
 
 for x in $types; do
     if [ ! -x "$progdir/extract-$x.sh" ]; then
@@ -89,8 +89,8 @@ for projectdir in "$hgdir"/* ; do
 
 	rm -rf "$tmptargetdir" "$snapshotdir"
 
-	mkdir -m 770 "$tmptargetdir" || fail "Snapshot directory creation failed"
-	chown docgen.www-data "$tmptargetdir" || fail "Snapshot directory ownership change failed"
+	mkdir -m 770 "$tmptargetdir" || fail "Temporary target directory creation failed"
+	chown docgen.www-data "$tmptargetdir" || fail "Temporary target directory ownership change failed"
 
 	mkdir -m 770 "$snapshotdir" || fail "Snapshot directory creation failed"
 	chown docgen.www-data "$snapshotdir" || fail "Snapshot directory ownership change failed"
@@ -113,7 +113,9 @@ for projectdir in "$hgdir"/* ; do
 	echo "Temporary dir is $tmpdir, temporary doc dir is $tmptargetdir, snapshot dir is $snapshotdir, eventual target is $targetdir"
 
 	for x in $types; do
-	    if ! sudo -u docgen "$progdir/extract-$x.sh" "$project" "$snapshotdir" "$tmptargetdir" >> "$logfile" 2>&1; then
+	    if sudo -u docgen "$progdir/extract-$x.sh" "$project" "$snapshotdir" "$tmptargetdir" >> "$logfile" 2>&1; then
+		break
+	    else
 		echo "Failed to extract via type $x"
 	    fi
 	done
