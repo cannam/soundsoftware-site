@@ -384,8 +384,8 @@ en-GB:
   permission_comment_news: Comment news
   permission_manage_documents: Manage documents
   permission_view_documents: View documents
-  permission_manage_files: Manage files
-  permission_view_files: View files
+  permission_manage_files: Manage downloads
+  permission_view_files: View downloads
   permission_manage_wiki: Manage wiki
   permission_rename_wiki_pages: Rename wiki pages
   permission_delete_wiki_pages: Delete wiki pages
@@ -411,7 +411,7 @@ en-GB:
   project_module_time_tracking: Time tracking
   project_module_news: News
   project_module_documents: Documents
-  project_module_files: Files
+  project_module_files: Downloads
   project_module_wiki: Wiki
   project_module_repository: Repository
   project_module_boards: Boards
@@ -476,6 +476,7 @@ en-GB:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
+  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
@@ -522,7 +523,7 @@ en-GB:
   label_attachment: File
   label_attachment_new: New file
   label_attachment_delete: Delete file
-  label_attachment_plural: Files
+  label_attachment_plural: Downloads
   label_file_added: File added
   label_report: Report
   label_report_plural: Reports
@@ -722,7 +723,7 @@ en-GB:
   label_updated_time_by: "Updated by {{author}} {{age}} ago"
   label_updated_time: "Updated {{value}} ago"
   label_jump_to_a_project: Jump to a project...
-  label_file_plural: Files
+  label_file_plural: Downloads
   label_changeset_plural: Changesets
   label_default_columns: Default columns
   label_no_change_option: (No change)
