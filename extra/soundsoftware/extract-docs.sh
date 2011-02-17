@@ -34,10 +34,14 @@ done
 enable_embedded()
 {
     p="$1"
-    if [ -n "$apiuser" ]; then
-	sudo -u docgen curl -u "$apiuser":"$apipass" "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
-    else
-	sudo -u docgen curl "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
+    if [ -n "$apikey" ]; then
+	if [ -n "$apiuser" ]; then
+	    sudo -u docgen curl -u "$apiuser":"$apipass" "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
+	else
+	    sudo -u docgen curl "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
+	fi
+    else 
+	echo "Can't enable Embedded, API not configured" 1>&2
     fi
 }
 
@@ -136,6 +140,8 @@ for projectdir in "$hgdir"/* ; do
 		mv "$tmptargetdir" "$targetdir"
 		chgrp -R "$redgrp" "$targetdir"
 	    fi
+	else
+	    echo "Processing did not result in an index.html being created"
 	fi
     fi
 done

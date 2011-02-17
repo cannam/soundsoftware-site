@@ -22,7 +22,7 @@ my %fixed = (
     PERL_PATH => "/usr/bin/perl",
     HAVE_DOT => "YES",
     HTML_OUTPUT => ".",
-    HTML_DYNAMIC_SECTIONS = "NO",
+    HTML_DYNAMIC_SECTIONS => "NO",
     SEARCHENGINE => "NO",
     DOT_FONTNAME => "FreeMono",
     DOT_FONTSIZE => 10,
@@ -197,6 +197,12 @@ foreach my $line (@lines) {
 	exit 1;
     }
 
+    $settings{$key} = $value;
+}
+
+foreach my $key (keys %fixed) {
+    my $value = $fixed{$key};
+    print STDERR "NOTE: Setting $key to fixed value $value\n";
     $settings{$key} = $value;
 }
 
