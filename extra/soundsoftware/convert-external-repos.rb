@@ -2,10 +2,8 @@
 
 # == Synopsis
 #
-# convert-external-repos: Update local Mercurial mirrors of external repos
-#
-# This command is specific to the SoundSoftware Redmine instance and
-# its use of Mercurial repositories.  It makes use of the hg convert extension.
+# convert-external-repos: Update local Mercurial mirrors of external repos,
+# by running an external command for each project requiring an update.
 #
 # == Usage
 #
@@ -13,12 +11,16 @@
 #     
 # == Arguments (mandatory)
 #
-#   -h, --hg-dir=DIR          use DIR as base directory for repositories
+#   -s, --scm-dir=DIR         use DIR as base directory for repositories
 #   -r, --redmine-host=HOST   assume Redmine is hosted on HOST. Examples:
 #                             -r redmine.example.net
 #                             -r http://redmine.example.net
 #                             -r https://example.net/redmine
 #   -k, --key=KEY             use KEY as the Redmine API key
+#   -c, --command=COMMAND     use this command to update each external
+#                             repository: command is called with the name
+#                             of the project, the path to its repo, and
+#                             its external repo url as its three args
 #
 # == Options
 #
@@ -39,11 +41,12 @@ require 'etc'
 Version = "1.0"
 
 opts = GetoptLong.new(
-                      ['--hg-dir',       '-h', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--scm-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
                       ['--redmine-host', '-r', GetoptLong::REQUIRED_ARGUMENT],
                       ['--key',          '-k', GetoptLong::REQUIRED_ARGUMENT],
                       ['--http-user',          GetoptLong::REQUIRED_ARGUMENT],
                       ['--http-pass',          GetoptLong::REQUIRED_ARGUMENT],
+                      ['--command' ,     '-c', GetoptLong::REQUIRED_ARGUMENT],
                       ['--test',         '-t', GetoptLong::NO_ARGUMENT],
                       ['--verbose',      '-v', GetoptLong::NO_ARGUMENT],
                       ['--version',      '-V', GetoptLong::NO_ARGUMENT],
@@ -72,11 +75,12 @@ end
 begin
   opts.each do |opt, arg|
     case opt
-    when '--hg-dir';         $repos_base   = arg.dup
+    when '--scm-dir';        $repos_base   = arg.dup
     when '--redmine-host';   $redmine_host = arg.dup
     when '--key';            $api_key      = arg.dup
     when '--http-user';      $http_user    = arg.dup
     when '--http-pass';      $http_pass    = arg.dup
+    when '--command';        $command      = arg.dup
     when '--verbose';        $verbose += 1
     when '--test';           $test = true
     when '--version';        puts Version; exit
@@ -92,7 +96,7 @@ if $test
   log("running in test mode")
 end
 
-if ($redmine_host.empty? or $repos_base.empty?)
+if ($redmine_host.empty? or $repos_base.empty? or $command.empty?)
   RDoc::usage
 end
 
@@ -158,26 +162,12 @@ projects.each do |project|
 
   repos_path = File.join($repos_base, project.identifier).gsub(File::SEPARATOR, File::ALT_SEPARATOR || File::SEPARATOR)
 
-  unless File.directory?($repos_path)
-    log("project repo directory '#{$repos_path}' doesn't exist")
+  unless File.directory?(repos_path)
+    log("\tproject repo directory '#{repos_path}' doesn't exist")
     next
   end
 
-  # We need to handle different source repository types separately.
-  # 
-  # The convert extension cannot convert directly from a remote git
-  # repo; we have to mirror to a local repo first.  Incremental
-  # conversions do work though.
-  # 
-  # We can of course convert directly from remote Subversion repos,
-  # but we need to keep track of that -- you can ask to convert into a
-  # repo that has already been used (for Mercurial) and it'll do so
-  # happily; we don't want that.
-  #
-  # Converting from a remote Hg repo should be fine!
-  #
-
-  
+  system($command, project.identifier, repos_path, external_url)
 
 end
   

@@ -9,12 +9,12 @@
 #    reposman [OPTIONS...] -s [DIR] -r [HOST]
 #     
 #  Examples:
-#    reposman --svn-dir=/var/svn --redmine-host=redmine.example.net --scm subversion
+#    reposman --scm-dir=/var/svn --redmine-host=redmine.example.net --scm subversion
 #    reposman -s /var/git -r redmine.example.net -u http://svn.example.net --scm git
 #
 # == Arguments (mandatory)
 #
-#   -s, --svn-dir=DIR         use DIR as base directory for svn repositories
+#   -s, --scm-dir=DIR         use DIR as base directory for repositories
 #   -r, --redmine-host=HOST   assume Redmine is hosted on HOST. Examples:
 #                             -r redmine.example.net
 #                             -r http://redmine.example.net
@@ -70,7 +70,7 @@ Version = "1.3"
 SUPPORTED_SCM = %w( Subversion Darcs Mercurial Bazaar Git Filesystem )
 
 opts = GetoptLong.new(
-                      ['--svn-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--scm-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
                       ['--redmine-host', '-r', GetoptLong::REQUIRED_ARGUMENT],
                       ['--key',          '-k', GetoptLong::REQUIRED_ARGUMENT],
                       ['--owner',        '-o', GetoptLong::REQUIRED_ARGUMENT],
@@ -133,7 +133,7 @@ end
 begin
   opts.each do |opt, arg|
     case opt
-    when '--svn-dir';        $repos_base   = arg.dup
+    when '--scm-dir';        $repos_base   = arg.dup
     when '--redmine-host';   $redmine_host = arg.dup
     when '--key';            $api_key      = arg.dup
     when '--owner';          $svn_owner    = arg.dup; $use_groupid = false;
