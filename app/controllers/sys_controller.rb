@@ -69,6 +69,31 @@ class SysController < ActionController::Base
     render :nothing => true, :status => 404
   end
 
+  def set_embedded_active
+    project = Project.find(params[:id])
+    mods = project.enabled_modules
+    enable = (params[:enable] == "1")
+    if mods.detect {|m| m.name == "embedded"}
+      logger.info "Project #{project.name} currently has Embedded enabled"
+      if !enable
+        logger.info "Disabling Embedded"
+        modnames = mods.all(:select => :name).collect{|m| m.name}.reject{|n| n == "embedded"}
+        project.enabled_module_names = modnames
+      end
+    else
+      logger.info "Project #{project.name} currently has Embedded disabled"
+      if enable
+        logger.info "Enabling Embedded"
+        modnames = mods.all(:select => :name).collect{|m| m.name}
+        modnames << "embedded"
+        project.enabled_module_names = modnames
+      end
+    end
+    render :nothing => true, :status => 200
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
+  end
+
   protected
 
   def check_enabled
