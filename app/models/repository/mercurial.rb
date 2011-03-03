@@ -56,7 +56,8 @@ class Repository::Mercurial < Repository
   end
 
   def branches
-    nil
+    bras = scm.branches
+    bras.sort unless bras == %w|default|
   end
 
   def tags
