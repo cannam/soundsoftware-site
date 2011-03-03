@@ -34,6 +34,7 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
     User.current = nil
     @repository = Repository::Mercurial.create(:project => Project.find(3), :url => REPOSITORY_PATH)
     assert @repository
+    @diff_c_support = true
   end
 
   if File.directory?(REPOSITORY_PATH)
@@ -137,7 +138,7 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
         assert_response :success
         assert_template 'diff'
 
-        if @repository.scm.class.client_version_above?([1, 2])
+        if @diff_c_support
           # Line 22 removed
           assert_tag :tag => 'th',
                      :content => '22',
@@ -194,6 +195,17 @@ class RepositoriesMercurialControllerTest < ActionController::TestCase
                  :content => '23',
                  :attributes => { :class => 'line-num' },
                  :sibling => { :tag => 'td', :content => /watcher =/ }
+    end
+
+    def test_annotate_at_given_revision
+      @repository.fetch_changesets
+      @repository.reload
+      [2, '400bb8672109', '400', 400].each do |r1|
+        get :annotate, :id => 3, :rev => r1, :path => ['sources', 'watchers_controller.rb']
+        assert_response :success
+        assert_template 'annotate'
+        assert_tag :tag => 'h2', :content => /@ 2:400bb8672109/
+      end
     end
 
     def test_empty_revision

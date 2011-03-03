@@ -1,15 +1,15 @@
 10
 
 dir
-4732
+4993
 http://redmine.rubyforge.org/svn/trunk/app/views
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-16T16:36:58.753919Z
-4731
-jplang
+2011-03-01T10:27:51.597350Z
+4983
+tmaruyama
 
 
 
@@ -38,28 +38,22 @@ dir
 members
 dir
 
-welcome
+context_menus
 dir
 
-context_menus
+welcome
 dir
 
 journals
 dir
 
-workflows
-dir
-
 time_entry_reports
 dir
 
+workflows
+dir
+
 reports
-dir
-
-timelog
-dir
-
-settings
 dir
 
 layouts
@@ -68,10 +62,16 @@ dir
 custom_fields
 dir
 
-issue_moves
+settings
+dir
+
+timelog
 dir
 
 users
+dir
+
+issue_moves
 dir
 
 files
@@ -80,10 +80,10 @@ dir
 previews
 dir
 
-auth_sources
+ldap_auth_sources
 dir
 
-ldap_auth_sources
+auth_sources
 dir
 
 search
@@ -92,10 +92,10 @@ dir
 messages
 dir
 
-versions
+issue_relations
 dir
 
-issue_relations
+versions
 dir
 
 mailer

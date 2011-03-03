@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/extra/sample_plugin/assets/stylesheets
+4993
+http://redmine.rubyforge.org/svn/trunk/extra/sample_plugin/assets/stylesheets
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:11.000000Z
 ced97da84497db69b30e6e17a55c3fb9
 2007-09-23T18:50:53.732551Z
 753

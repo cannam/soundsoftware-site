@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/4739/trunk/vendor/gems/coderay-0.9.7
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/4739/trunk/vendor/gems/coderay-0.9.7/LICENSE
+END
+Rakefile
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/4739/trunk/vendor/gems/coderay-0.9.7/Rakefile
+END
+.specification
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4739/trunk/vendor/gems/coderay-0.9.7/.specification
+END
+FOLDERS
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/4739/trunk/vendor/gems/coderay-0.9.7/FOLDERS
+END

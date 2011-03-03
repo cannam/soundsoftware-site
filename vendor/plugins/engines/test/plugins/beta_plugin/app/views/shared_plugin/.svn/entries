@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/engines/test/plugins/beta_plugin/app/views/shared_plugin
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/plugins/beta_plugin/app/views/shared_plugin
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:28.000000Z
+2011-03-03T11:05:12.000000Z
 78db1a7e1a9f6216dfa3671e5d42c81b
 2009-09-13T17:14:35.707881Z
 2887

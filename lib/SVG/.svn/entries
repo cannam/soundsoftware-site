@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/lib/SVG
+4993
+http://redmine.rubyforge.org/svn/trunk/lib/SVG
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:14.000000Z
 393a5ca445f6965873eca0259a17f833
 2007-03-25T17:11:46.804742Z
 380
@@ -66,7 +66,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:14.000000Z
 072cf60873854a186c6eba9b74dbe389
 2007-03-25T17:11:46.804742Z
 380

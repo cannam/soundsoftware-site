@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/gems/rubytree-0.5.2/lib/tree
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/gems/rubytree-0.5.2/lib/tree
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:13.000000Z
 54320f0ffbb41fa9d99ab2d617636ea1
 2009-11-25T05:36:44.792571Z
 3090

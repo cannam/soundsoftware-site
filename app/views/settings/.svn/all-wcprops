@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4730/trunk/app/views/settings
+/svn/!svn/ver/4983/trunk/app/views/settings
 END
 _issues.rhtml
 K 25
@@ -37,7 +37,7 @@ _display.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/3198/trunk/app/views/settings/_display.rhtml
+/svn/!svn/ver/4811/trunk/app/views/settings/_display.rhtml
 END
 edit.rhtml
 K 25
@@ -49,7 +49,7 @@ _repositories.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/!svn/ver/4470/trunk/app/views/settings/_repositories.rhtml
+/svn/!svn/ver/4983/trunk/app/views/settings/_repositories.rhtml
 END
 _notifications.rhtml
 K 25

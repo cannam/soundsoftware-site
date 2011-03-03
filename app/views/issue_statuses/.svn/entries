@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views/issue_statuses
+4993
+http://redmine.rubyforge.org/svn/trunk/app/views/issue_statuses
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:11.000000Z
 2d8b318bb1dbbe6dbb478716d52e65e9
 2010-03-17T20:46:22.413470Z
 3600
@@ -66,7 +66,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:11.000000Z
 e4ea04eeab7c1f7265858a9dd09f1b7b
 2009-12-12T10:33:12.138303Z
 3157
@@ -100,7 +100,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:11.000000Z
 21f8b2f134a83413d09ae7e4d004c642
 2009-07-05T12:22:02.133266Z
 2810
@@ -134,7 +134,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:11.000000Z
 af751ca552f43d9954a0cb1bbdb6e362
 2009-07-05T12:22:02.133266Z
 2810

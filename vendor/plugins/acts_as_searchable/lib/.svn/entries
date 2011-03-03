@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/acts_as_searchable/lib
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_searchable/lib
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:12.000000Z
 f282f30a34a9560d7ef3d5883aba5fe9
 2010-02-17T20:20:51.097274Z
 3445

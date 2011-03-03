@@ -22,23 +22,23 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
   
   # No '..' in the repository path
   REPOSITORY_PATH = RAILS_ROOT.gsub(%r{config\/\.\.}, '') + '/tmp/test/mercurial_repository'
-  
+
   def setup
-    @project = Project.find(1)
-    assert @repository = Repository::Mercurial.create(:project => @project, :url => REPOSITORY_PATH)
+    @project = Project.find(3)
+    @repository = Repository::Mercurial.create(:project => @project, :url => REPOSITORY_PATH)
+    assert @repository
   end
-  
+
   if File.directory?(REPOSITORY_PATH)  
     def test_fetch_changesets_from_scratch
       @repository.fetch_changesets
       @repository.reload
-      
       assert_equal 17, @repository.changesets.count
       assert_equal 25, @repository.changes.count
       assert_equal "Initial import.\nThe repository contains 3 files.",
                    @repository.changesets.find_by_revision('0').comments
     end
-    
+
     def test_fetch_changesets_incremental
       @repository.fetch_changesets
       # Remove changesets with revision > 2
@@ -48,19 +48,6 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
       
       @repository.fetch_changesets
       assert_equal 17, @repository.changesets.count
-    end
-    
-    def test_entries
-      assert_equal 2, @repository.entries("sources", 2).size
-      assert_equal 2, @repository.entries("sources", '400bb8672109').size
-      assert_equal 1, @repository.entries("sources", 3).size
-      assert_equal 1, @repository.entries("sources", 'b3a615152df8').size
-    end
-
-    def test_locate_on_outdated_repository
-      assert_equal 1, @repository.entries("images", 0).size
-      assert_equal 2, @repository.entries("images").size
-      assert_equal 2, @repository.entries("images", 2).size
     end
 
     def test_isodatesec
@@ -170,6 +157,43 @@ class RepositoryMercurialTest < ActiveSupport::TestCase
                         :comments     => 'test')
       assert c.event_title.include?('123:abc400bb8672:')
       assert_equal 'abc400bb8672', c.event_url[:rev]
+    end
+
+    def test_latest_changesets_with_limit
+      @repository.fetch_changesets
+      @repository.reload
+      changesets = @repository.latest_changesets('', nil, 2)
+      assert_equal @repository.latest_changesets('', nil)[0, 2], changesets
+    end
+
+    def test_latest_changesets_with_filepath
+      @repository.fetch_changesets
+      @repository.reload
+      changesets = @repository.latest_changesets('README', nil)
+      assert_equal %w|8 6 1 0|, changesets.collect(&:revision)
+
+      path = 'sql_escape/percent%dir/percent%file1.txt'
+      changesets = @repository.latest_changesets(path, nil)
+      assert_equal %w|11 10 9|, changesets.collect(&:revision)
+
+      path = 'sql_escape/underscore_dir/understrike_file.txt'
+      changesets = @repository.latest_changesets(path, nil)
+      assert_equal %w|12 9|, changesets.collect(&:revision)
+    end
+
+    def test_latest_changesets_with_dirpath
+      @repository.fetch_changesets
+      @repository.reload
+      changesets = @repository.latest_changesets('images', nil)
+      assert_equal %w|1 0|, changesets.collect(&:revision)
+
+      path = 'sql_escape/percent%dir'
+      changesets = @repository.latest_changesets(path, nil)
+      assert_equal %w|13 11 10 9|, changesets.collect(&:revision)
+
+      path = 'sql_escape/underscore_dir'
+      changesets = @repository.latest_changesets(path, nil)
+      assert_equal %w|13 12 9|, changesets.collect(&:revision)
     end
   else
     puts "Mercurial test repository NOT FOUND. Skipping unit tests !!!"

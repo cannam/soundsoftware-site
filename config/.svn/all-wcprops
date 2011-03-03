@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 31
-/svn/!svn/ver/4729/trunk/config
+/svn/!svn/ver/4955/trunk/config
 END
 settings.yml
 K 25
@@ -9,11 +9,11 @@ svn:wc:ra_dav:version-url
 V 44
 /svn/!svn/ver/4513/trunk/config/settings.yml
 END
-email.yml.example
+configuration.yml.example
 K 25
 svn:wc:ra_dav:version-url
-V 49
-/svn/!svn/ver/3448/trunk/config/email.yml.example
+V 57
+/svn/!svn/ver/4950/trunk/config/configuration.yml.example
 END
 routes.rb
 K 25
@@ -31,7 +31,7 @@ environment.rb
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/3372/trunk/config/environment.rb
+/svn/!svn/ver/4904/trunk/config/environment.rb
 END
 additional_environment.rb.example
 K 25
@@ -43,5 +43,5 @@ database.yml.example
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/3564/trunk/config/database.yml.example
+/svn/!svn/ver/4753/trunk/config/database.yml.example
 END

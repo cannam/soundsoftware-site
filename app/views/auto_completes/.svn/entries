@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views/auto_completes
+4993
+http://redmine.rubyforge.org/svn/trunk/app/views/auto_completes
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-10T14:59:24.000000Z
+2011-03-03T11:05:10.000000Z
 d325b0677890591680b96985e16a0139
 2010-08-17T15:03:58.074505Z
 3945

@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/app/views/previews
+4993
+http://redmine.rubyforge.org/svn/trunk/app/views/previews
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-10T14:59:24.000000Z
+2011-03-03T11:05:10.000000Z
 359c6608ef716c8b3b62fd96c241a680
 2010-08-18T15:01:35.032314Z
 3946

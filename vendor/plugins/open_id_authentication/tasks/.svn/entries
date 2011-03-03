@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/open_id_authentication/tasks
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/open_id_authentication/tasks
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:29.000000Z
+2011-03-03T11:05:12.000000Z
 54b595ee92e0adb364a9086340b2af51
 2009-02-11T19:06:45.087605Z
 2438

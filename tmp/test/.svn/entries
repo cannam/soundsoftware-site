@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/tmp/test
+4993
+http://redmine.rubyforge.org/svn/trunk/tmp/test
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:13.000000Z
 d41d8cd98f00b204e9800998ecf8427e
 2009-06-08T02:07:30.275769Z
 2784

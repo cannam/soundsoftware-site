@@ -1,13 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/!svn/ver/4584/trunk/lib/redmine/helpers
+/svn/!svn/ver/4968/trunk/lib/redmine/helpers
 END
 gantt.rb
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/4584/trunk/lib/redmine/helpers/gantt.rb
+/svn/!svn/ver/4968/trunk/lib/redmine/helpers/gantt.rb
+END
+diff.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4953/trunk/lib/redmine/helpers/diff.rb
 END
 calendar.rb
 K 25

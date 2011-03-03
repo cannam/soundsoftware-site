@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -208,6 +208,33 @@ class IssueTest < ActiveSupport::TestCase
   def test_category_based_assignment
     issue = Issue.create(:project_id => 1, :tracker_id => 1, :author_id => 3, :status_id => 1, :priority => IssuePriority.all.first, :subject => 'Assignment test', :description => 'Assignment test', :category_id => 1)
     assert_equal IssueCategory.find(1).assigned_to, issue.assigned_to
+  end
+  
+  
+  
+  def test_new_statuses_allowed_to
+    Workflow.delete_all
+    
+    Workflow.create!(:role_id => 1, :tracker_id => 1, :old_status_id => 1, :new_status_id => 2, :author => false, :assignee => false)
+    Workflow.create!(:role_id => 1, :tracker_id => 1, :old_status_id => 1, :new_status_id => 3, :author => true, :assignee => false)
+    Workflow.create!(:role_id => 1, :tracker_id => 1, :old_status_id => 1, :new_status_id => 4, :author => false, :assignee => true)
+    Workflow.create!(:role_id => 1, :tracker_id => 1, :old_status_id => 1, :new_status_id => 5, :author => true, :assignee => true)
+    status = IssueStatus.find(1)
+    role = Role.find(1)
+    tracker = Tracker.find(1)
+    user = User.find(2)
+    
+    issue = Issue.generate!(:tracker => tracker, :status => status, :project_id => 1)
+    assert_equal [1, 2], issue.new_statuses_allowed_to(user).map(&:id)
+    
+    issue = Issue.generate!(:tracker => tracker, :status => status, :project_id => 1, :author => user)
+    assert_equal [1, 2, 3], issue.new_statuses_allowed_to(user).map(&:id)
+    
+    issue = Issue.generate!(:tracker => tracker, :status => status, :project_id => 1, :assigned_to => user)
+    assert_equal [1, 2, 4], issue.new_statuses_allowed_to(user).map(&:id)
+    
+    issue = Issue.generate!(:tracker => tracker, :status => status, :project_id => 1, :author => user, :assigned_to => user)
+    assert_equal [1, 2, 3, 4, 5], issue.new_statuses_allowed_to(user).map(&:id)
   end
   
   def test_copy
@@ -592,6 +619,29 @@ class IssueTest < ActiveSupport::TestCase
       stale.save
     end
     assert ActionMailer::Base.deliveries.empty?
+  end
+  
+  def test_journalized_description
+    IssueCustomField.delete_all
+    
+    i = Issue.first
+    old_description = i.description
+    new_description = "This is the new description"
+    
+    i.init_journal(User.find(2))
+    i.description = new_description
+    assert_difference 'Journal.count', 1 do
+      assert_difference 'JournalDetail.count', 1 do
+        i.save!
+      end
+    end
+    
+    detail = JournalDetail.first(:order => 'id DESC')
+    assert_equal i, detail.journal.journalized
+    assert_equal 'attr', detail.property
+    assert_equal 'description', detail.prop_key
+    assert_equal old_description, detail.old_value
+    assert_equal new_description, detail.value
   end
   
   def test_saving_twice_should_not_duplicate_journal_details

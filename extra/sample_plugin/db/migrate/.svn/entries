@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/extra/sample_plugin/db/migrate
+4993
+http://redmine.rubyforge.org/svn/trunk/extra/sample_plugin/db/migrate
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:11.000000Z
 2316ab57f3d60b7f04b4bdfdebf6fd8e
 2008-07-27T19:10:56.352148Z
 1703

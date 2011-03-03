@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/engines/tasks
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/tasks
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:27.000000Z
+2011-03-03T11:05:12.000000Z
 10b9e5aacd9d0673e694f6ababd6ee3b
 2009-12-18T14:41:37.649419Z
 3186

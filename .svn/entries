@@ -1,15 +1,15 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable
+4993
+http://redmine.rubyforge.org/svn/trunk
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-16T16:36:58.753919Z
-4731
-jplang
+2011-03-03T05:51:46.224821Z
+4993
+tmaruyama
 has-props
 
 
@@ -35,33 +35,11 @@ file
 
 
 
-2011-01-13T14:11:09.000000Z
-0f5961e6af62737d2a1f5e3ad47f8c89
-2011-01-01T21:07:43.412022Z
-4606
+
+970b3ffe21e2c668737cf5abf0d0ac48
+2011-02-15T11:04:52.942730Z
+4834
 tmaruyama
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-317
 
 app
 dir
@@ -75,7 +53,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:14.000000Z
 bbf560d44f092d22a30d3a562436ad8c
 2006-12-05T20:45:04.842118Z
 67
@@ -103,13 +81,16 @@ jplang
 
 307
 
+extra
+dir
+
 README.rdoc
 file
 
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:14.000000Z
 67c937b1f1d0603e69f322de34bbfe04
 2010-07-18T15:49:24.341728Z
 3849
@@ -136,9 +117,6 @@ edavis10
 
 
 208
-
-extra
-dir
 
 db
 dir
@@ -167,11 +145,11 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
-201a803b90bbd2a1624c4ce1dd260098
-2010-06-09T22:01:21.132822Z
-3768
-edavis10
+2011-03-03T11:40:18.000000Z
+84dbba0b6ddcd80d28c62a3f8e344bc4
+2011-02-15T11:04:52.942730Z
+4834
+tmaruyama
 
 
 
@@ -193,7 +171,7 @@ edavis10
 
 
 
-322
+477
 
 lib
 dir

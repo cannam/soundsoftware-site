@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -34,7 +34,7 @@ class Issue < ActiveRecord::Base
   has_many :relations_from, :class_name => 'IssueRelation', :foreign_key => 'issue_from_id', :dependent => :delete_all
   has_many :relations_to, :class_name => 'IssueRelation', :foreign_key => 'issue_to_id', :dependent => :delete_all
   
-  acts_as_nested_set :scope => 'root_id'
+  acts_as_nested_set :scope => 'root_id', :dependent => :destroy
   acts_as_attachable :after_remove => :attachment_removed
   acts_as_customizable
   acts_as_watchable
@@ -89,7 +89,6 @@ class Issue < ActiveRecord::Base
   before_create :default_assign
   before_save :close_duplicates, :update_done_ratio_from_issue_status
   after_save :reschedule_following_issues, :update_nested_set_attributes, :update_parent_attributes, :create_journal
-  after_destroy :destroy_children
   after_destroy :update_parent_attributes
   
   # Returns true if usr or current user is allowed to view the issue
@@ -423,7 +422,12 @@ class Issue < ActiveRecord::Base
   
   # Returns an array of status that user is able to apply
   def new_statuses_allowed_to(user, include_default=false)
-    statuses = status.find_new_statuses_allowed_to(user.roles_for_project(project), tracker)
+    statuses = status.find_new_statuses_allowed_to(
+      user.roles_for_project(project),
+      tracker,
+      author == user,
+      assigned_to_id_changed? ? assigned_to_id_was == user.id : assigned_to_id == user.id
+      )
     statuses << status unless statuses.empty?
     statuses << IssueStatus.default if include_default
     statuses = statuses.uniq.sort
@@ -758,14 +762,6 @@ class Issue < ActiveRecord::Base
     end
   end
   
-  def destroy_children
-    unless leaf?
-      children.each do |child|
-        child.destroy
-      end
-    end
-  end
-  
   # Update issues so their versions are not pointing to a
   # fixed_version that is not shared with the issue's project
   def self.update_versions(conditions=nil)
@@ -833,7 +829,7 @@ class Issue < ActiveRecord::Base
   def create_journal
     if @current_journal
       # attributes changes
-      (Issue.column_names - %w(id description root_id lft rgt lock_version created_on updated_on)).each {|c|
+      (Issue.column_names - %w(id root_id lft rgt lock_version created_on updated_on)).each {|c|
         @current_journal.details << JournalDetail.new(:property => 'attr',
                                                       :prop_key => c,
                                                       :old_value => @issue_before_change.send(c),

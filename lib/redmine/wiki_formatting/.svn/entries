@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/lib/redmine/wiki_formatting
+4993
+http://redmine.rubyforge.org/svn/trunk/lib/redmine/wiki_formatting
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-11-30T13:11:53.000000Z
+2011-03-03T11:05:14.000000Z
 879f8ce24a6bb5e4f5ea3b6f798b7a63
 2010-11-06T17:47:27.890964Z
 4376

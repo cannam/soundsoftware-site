@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/acts_as_tree
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_tree
 http://redmine.rubyforge.org/svn
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:12.000000Z
 77667cb4c41516750075eefb98896a93
 2007-12-10T17:58:07.273873Z
 975
@@ -69,7 +69,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:12.000000Z
 581c104f87fe90cfe9a7d1d41d77c84f
 2007-12-10T17:58:07.273873Z
 975
@@ -106,7 +106,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:12.000000Z
 918c85e850eb84259c178529b9aafd62
 2007-12-10T17:58:07.273873Z
 975

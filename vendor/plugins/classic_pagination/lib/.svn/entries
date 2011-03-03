@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/classic_pagination/lib
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/classic_pagination/lib
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:12.000000Z
 535b7515c14fb3964e97be32c2d36415
 2007-12-10T17:58:07.273873Z
 975
@@ -66,7 +66,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:12.000000Z
 d770c57066726c423cc9de4ca5b552cd
 2008-12-14T15:36:59.418123Z
 2134

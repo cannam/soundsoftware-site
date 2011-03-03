@@ -1,15 +1,15 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/lib/redmine/export
+4993
+http://redmine.rubyforge.org/svn/trunk/lib/redmine/export
 http://redmine.rubyforge.org/svn
 
 
 
-2010-09-20T02:55:20.180218Z
-4104
-edavis10
+2011-01-22T11:57:02.732751Z
+4736
+jplang
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-10-01T15:15:02.000000Z
-aa6093490555bdd119ba8f1d34cab080
-2010-09-20T02:55:20.180218Z
-4104
-edavis10
+2011-03-03T11:05:14.000000Z
+b8bd24e9575d51f0c49f8245a5d593a2
+2011-01-22T11:57:02.732751Z
+4736
+jplang
 has-props
 
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-10771
+10786
 

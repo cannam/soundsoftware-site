@@ -1,14 +1,14 @@
 10
 
 dir
-4732
+4993
 http://redmine.rubyforge.org/svn/trunk/vendor/plugins
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-01T11:45:12.617336Z
-4602
+2011-02-20T14:26:23.957459Z
+4891
 jplang
 
 
@@ -42,9 +42,6 @@ engines
 dir
 
 classic_pagination
-dir
-
-coderay-0.9.2
 dir
 
 acts_as_versioned

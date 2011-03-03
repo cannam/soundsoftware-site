@@ -1,14 +1,14 @@
 10
 
 dir
-4732
+4993
 http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine/scm/adapters
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-13T12:05:11.734883Z
-4705
+2011-02-28T14:12:47.115180Z
+4964
 tmaruyama
 
 
@@ -32,78 +32,10 @@ file
 
 
 
-2011-01-13T14:08:13.000000Z
-765ef194c70144742d0b8bfcb99f6627
-2010-12-12T23:24:34.194336Z
-4509
-jbbarth
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1221
-
-git_adapter_test.rb
-file
-
-
-
-
-2011-01-13T14:08:13.000000Z
-2e3d6f99dd454ee396770a707ea169db
-2010-12-12T23:24:45.195624Z
-4510
-jbbarth
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3016
-
-mercurial_adapter_test.rb
-file
-
-
-
-
-2011-01-13T14:08:13.000000Z
-7af2ec05aa23ebf083f7aa58bca43f95
-2011-01-13T12:05:11.734883Z
-4705
+2011-03-03T11:40:17.000000Z
+f0de1284b35555e358dcb810fff1e7e5
+2011-02-15T02:12:39.628343Z
+4825
 tmaruyama
 has-props
 
@@ -126,7 +58,109 @@ has-props
 
 
 
-6096
+2221
+
+bazaar_adapter_test.rb
+file
+
+
+
+
+2011-03-03T11:40:17.000000Z
+2f30e1187cf8e155707fdf3ff7925f55
+2011-02-15T11:05:33.284244Z
+4836
+tmaruyama
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1755
+
+git_adapter_test.rb
+file
+
+
+
+
+2011-03-03T11:40:17.000000Z
+3d2db23c9a95bf5342365aa4580873c7
+2011-02-28T14:12:47.115180Z
+4964
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4592
+
+mercurial_adapter_test.rb
+file
+
+
+
+
+2011-03-03T11:40:17.000000Z
+20194ed3de36e9107b3279bb4ae596e9
+2011-02-18T07:15:58.762873Z
+4875
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10201
 
 filesystem_adapter_test.rb
 file
@@ -134,7 +168,7 @@ file
 
 
 
-2011-01-13T14:08:13.000000Z
+2011-03-03T11:05:08.000000Z
 61cf9f9a3628f6766845641d99adaa83
 2010-12-12T23:24:34.194336Z
 4509
@@ -161,4 +195,72 @@ has-props
 
 
 1449
+
+cvs_adapter_test.rb
+file
+
+
+
+
+2011-03-03T11:40:17.000000Z
+ddf3ab1a187f29d3e377f684c2c0f18c
+2011-02-15T08:04:11.026838Z
+4832
+tmaruyama
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1844
+
+darcs_adapter_test.rb
+file
+
+
+
+
+2011-03-03T11:05:08.000000Z
+3a836e9a54b113ed5fe6490ce88ebebe
+2011-01-23T04:17:03.473127Z
+4748
+tmaruyama
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1649
 

@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/rfpdf/test
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/rfpdf/test
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:30.000000Z
+2011-03-03T11:05:12.000000Z
 65b672e3025a6dc9ed22dc2cb1356061
 2006-11-21T18:34:04.275680Z
 49

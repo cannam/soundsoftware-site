@@ -855,7 +855,7 @@ lv:
   text_user_wrote: "%{value} rakstīja:"
   text_enumeration_destroy_question: "%{count} objekti ir piešķirti šai vērtībai."
   text_enumeration_category_reassign_to: 'Piešķirt tos šai vērtībai:'
-  text_email_delivery_not_configured: "E-pastu nosūtīšana nav konfigurēta, un ziņojumi ir izslēgti.\nKonfigurējiet savu SMTP serveri datnē config/email.yml un pārstartējiet lietotni."
+  text_email_delivery_not_configured: "E-pastu nosūtīšana nav konfigurēta, un ziņojumi ir izslēgti.\nKonfigurējiet savu SMTP serveri datnē config/configuration.yml un pārstartējiet lietotni."
   text_repository_usernames_mapping: "Izvēlieties vai atjaunojiet Redmine lietotāju, saistītu ar katru lietotājvārdu, kas atrodams repozitorija žurnālā.\nLietotāji ar to pašu Redmine un repozitorija lietotājvārdu būs saistīti automātiski."
   text_diff_truncated: '... Šis diff tika nošķelts, jo tas pārsniedz maksimālo izmēru, ko var parādīt.'
   text_custom_field_possible_values_info: 'Katra vērtības savā rindā'
@@ -932,3 +932,7 @@ lv:
   setting_commit_logtime_enabled: Enable time logging
   notice_gantt_chart_truncated: The chart was truncated because it exceeds the maximum number of items that can be displayed (%{max})
   setting_gantt_items_limit: Maximum number of items displayed on the gantt chart
+  field_warn_on_leaving_unsaved: Warn me when leaving a page with unsaved text
+  text_warn_on_leaving_unsaved: The current page contains unsaved text that will be lost if you leave this page.
+  label_my_queries: My custom queries
+  text_journal_changed_no_detail: "%{label} updated"

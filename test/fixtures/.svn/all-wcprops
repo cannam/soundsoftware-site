@@ -1,19 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 38
-/svn/!svn/ver/4681/trunk/test/fixtures
+/svn/!svn/ver/4964/trunk/test/fixtures
 END
 journal_details.yml
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/3123/trunk/test/fixtures/journal_details.yml
+/svn/!svn/ver/4954/trunk/test/fixtures/journal_details.yml
 END
 issue_statuses.yml
 K 25
 svn:wc:ra_dav:version-url
 V 57
-/svn/!svn/ver/2895/trunk/test/fixtures/issue_statuses.yml
+/svn/!svn/ver/4895/trunk/test/fixtures/issue_statuses.yml
 END
 changesets.yml
 K 25
@@ -199,7 +199,7 @@ users.yml
 K 25
 svn:wc:ra_dav:version-url
 V 48
-/svn/!svn/ver/4216/trunk/test/fixtures/users.yml
+/svn/!svn/ver/4936/trunk/test/fixtures/users.yml
 END
 auth_sources.yml
 K 25

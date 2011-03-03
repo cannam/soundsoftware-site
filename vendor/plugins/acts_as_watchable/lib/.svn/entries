@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/vendor/plugins/acts_as_watchable/lib
+4993
+http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_watchable/lib
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:26.000000Z
+2011-03-03T11:05:12.000000Z
 30f73616865f02dadce09f9511269b70
 2010-06-20T18:41:30.111362Z
 3803

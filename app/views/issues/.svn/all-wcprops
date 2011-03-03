@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/4652/trunk/app/views/issues
+/svn/!svn/ver/4908/trunk/app/views/issues
 END
 _relations.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/4065/trunk/app/views/issues/_relations.rhtml
+/svn/!svn/ver/4741/trunk/app/views/issues/_relations.rhtml
 END
 _history.rhtml
 K 25
@@ -49,7 +49,7 @@ _sidebar.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 56
-/svn/!svn/ver/4012/trunk/app/views/issues/_sidebar.rhtml
+/svn/!svn/ver/4908/trunk/app/views/issues/_sidebar.rhtml
 END
 _list.rhtml
 K 25
@@ -93,23 +93,23 @@ svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/3946/trunk/app/views/issues/_edit.rhtml
 END
-_attributes.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/4090/trunk/app/views/issues/_attributes.rhtml
-END
 edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
 /svn/!svn/ver/1129/trunk/app/views/issues/edit.rhtml
 END
+_attributes.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/4090/trunk/app/views/issues/_attributes.rhtml
+END
 show.api.rsb
 K 25
 svn:wc:ra_dav:version-url
 V 54
-/svn/!svn/ver/4512/trunk/app/views/issues/show.api.rsb
+/svn/!svn/ver/4741/trunk/app/views/issues/show.api.rsb
 END
 destroy.rhtml
 K 25

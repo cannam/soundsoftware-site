@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/test/fixtures/diffs
+4993
+http://redmine.rubyforge.org/svn/trunk/test/fixtures/diffs
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:09.000000Z
 64527b211202fbff696792d538e2b14e
 2008-12-07T15:21:40.165860Z
 2112

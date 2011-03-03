@@ -1,8 +1,8 @@
 10
 
 dir
-4732
-http://redmine.rubyforge.org/svn/branches/1.1-stable/lib/redmine/default_data
+4993
+http://redmine.rubyforge.org/svn/trunk/lib/redmine/default_data
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-08-12T15:03:25.000000Z
+2011-03-03T11:05:14.000000Z
 41958e843a8ba03548eed089e8002549
 2010-06-30T01:55:44.694582Z
 3820
