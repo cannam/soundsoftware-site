@@ -63,17 +63,17 @@ svn:wc:ra_dav:version-url
 V 44
 /svn/!svn/ver/2776/trunk/lib/redmine/info.rb
 END
-access_keys.rb
-K 25
-svn:wc:ra_dav:version-url
-V 51
-/svn/!svn/ver/1081/trunk/lib/redmine/access_keys.rb
-END
 activity.rb
 K 25
 svn:wc:ra_dav:version-url
 V 48
 /svn/!svn/ver/1702/trunk/lib/redmine/activity.rb
+END
+access_keys.rb
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/1081/trunk/lib/redmine/access_keys.rb
 END
 wiki_formatting.rb
 K 25
@@ -81,17 +81,17 @@ svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/3446/trunk/lib/redmine/wiki_formatting.rb
 END
-menu_manager.rb
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/4406/trunk/lib/redmine/menu_manager.rb
-END
 plugin.rb
 K 25
 svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4293/trunk/lib/redmine/plugin.rb
+END
+menu_manager.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4406/trunk/lib/redmine/menu_manager.rb
 END
 utils.rb
 K 25

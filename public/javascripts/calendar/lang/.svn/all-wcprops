@@ -69,17 +69,17 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/2493/trunk/public/javascripts/calendar/lang/calendar-vi.js
 END
-calendar-uk.js
-K 25
-svn:wc:ra_dav:version-url
-V 72
-/svn/!svn/ver/1149/trunk/public/javascripts/calendar/lang/calendar-uk.js
-END
 calendar-sr-yu.js
 K 25
 svn:wc:ra_dav:version-url
 V 75
 /svn/!svn/ver/4003/trunk/public/javascripts/calendar/lang/calendar-sr-yu.js
+END
+calendar-uk.js
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/1149/trunk/public/javascripts/calendar/lang/calendar-uk.js
 END
 calendar-ro.js
 K 25
@@ -99,17 +99,17 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/3227/trunk/public/javascripts/calendar/lang/calendar-id.js
 END
-calendar-en.js
-K 25
-svn:wc:ra_dav:version-url
-V 71
-/svn/!svn/ver/419/trunk/public/javascripts/calendar/lang/calendar-en.js
-END
 calendar-gl.js
 K 25
 svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/2296/trunk/public/javascripts/calendar/lang/calendar-gl.js
+END
+calendar-en.js
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/419/trunk/public/javascripts/calendar/lang/calendar-en.js
 END
 calendar-fr.js
 K 25
@@ -117,11 +117,11 @@ svn:wc:ra_dav:version-url
 V 71
 /svn/!svn/ver/748/trunk/public/javascripts/calendar/lang/calendar-fr.js
 END
-calendar-nl.js
+calendar-zh-tw.js
 K 25
 svn:wc:ra_dav:version-url
-V 71
-/svn/!svn/ver/539/trunk/public/javascripts/calendar/lang/calendar-nl.js
+V 75
+/svn/!svn/ver/1498/trunk/public/javascripts/calendar/lang/calendar-zh-tw.js
 END
 calendar-hr.js
 K 25
@@ -129,11 +129,11 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/3320/trunk/public/javascripts/calendar/lang/calendar-hr.js
 END
-calendar-zh-tw.js
+calendar-nl.js
 K 25
 svn:wc:ra_dav:version-url
-V 75
-/svn/!svn/ver/1498/trunk/public/javascripts/calendar/lang/calendar-zh-tw.js
+V 71
+/svn/!svn/ver/539/trunk/public/javascripts/calendar/lang/calendar-nl.js
 END
 calendar-mn.js
 K 25
@@ -141,17 +141,17 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/3626/trunk/public/javascripts/calendar/lang/calendar-mn.js
 END
-calendar-pl.js
-K 25
-svn:wc:ra_dav:version-url
-V 71
-/svn/!svn/ver/749/trunk/public/javascripts/calendar/lang/calendar-pl.js
-END
 calendar-th.js
 K 25
 svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/1383/trunk/public/javascripts/calendar/lang/calendar-th.js
+END
+calendar-pl.js
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/749/trunk/public/javascripts/calendar/lang/calendar-pl.js
 END
 calendar-it.js
 K 25
@@ -171,17 +171,17 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/1149/trunk/public/javascripts/calendar/lang/calendar-lt.js
 END
-calendar-lv.js
-K 25
-svn:wc:ra_dav:version-url
-V 72
-/svn/!svn/ver/3737/trunk/public/javascripts/calendar/lang/calendar-lv.js
-END
 calendar-zh.js
 K 25
 svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/1498/trunk/public/javascripts/calendar/lang/calendar-zh.js
+END
+calendar-lv.js
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/3737/trunk/public/javascripts/calendar/lang/calendar-lv.js
 END
 calendar-pt.js
 K 25

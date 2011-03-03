@@ -189,17 +189,17 @@ svn:wc:ra_dav:version-url
 V 68
 /svn/!svn/ver/1623/trunk/db/migrate/072_add_enumerations_position.rb
 END
-108_add_identity_url_to_users.rb
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/!svn/ver/2440/trunk/db/migrate/108_add_identity_url_to_users.rb
-END
 20090614091200_fix_messages_sticky_null.rb
 K 25
 svn:wc:ra_dav:version-url
 V 78
 /svn/!svn/ver/2787/trunk/db/migrate/20090614091200_fix_messages_sticky_null.rb
+END
+108_add_identity_url_to_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2440/trunk/db/migrate/108_add_identity_url_to_users.rb
 END
 20091220184736_add_indexes_to_issue_status.rb
 K 25
@@ -363,17 +363,17 @@ svn:wc:ra_dav:version-url
 V 64
 /svn/!svn/ver/674/trunk/db/migrate/047_add_boards_permissions.rb
 END
-073_add_enumerations_is_default.rb
-K 25
-svn:wc:ra_dav:version-url
-V 69
-/svn/!svn/ver/803/trunk/db/migrate/073_add_enumerations_is_default.rb
-END
 037_add_project_identifier.rb
 K 25
 svn:wc:ra_dav:version-url
 V 64
 /svn/!svn/ver/397/trunk/db/migrate/037_add_project_identifier.rb
+END
+073_add_enumerations_is_default.rb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/803/trunk/db/migrate/073_add_enumerations_is_default.rb
 END
 20100313171051_add_index_on_issues_nested_set.rb
 K 25
@@ -399,11 +399,11 @@ svn:wc:ra_dav:version-url
 V 59
 /svn/!svn/ver/864/trunk/db/migrate/020_add_role_position.rb
 END
-20091010093521_fix_users_custom_values.rb
+20100129193813_update_mail_notification_values.rb
 K 25
 svn:wc:ra_dav:version-url
-V 77
-/svn/!svn/ver/2905/trunk/db/migrate/20091010093521_fix_users_custom_values.rb
+V 85
+/svn/!svn/ver/4413/trunk/db/migrate/20100129193813_update_mail_notification_values.rb
 END
 016_add_repositories_permissions.rb
 K 25
@@ -417,11 +417,11 @@ svn:wc:ra_dav:version-url
 V 48
 /svn/!svn/ver/1764/trunk/db/migrate/001_setup.rb
 END
-20100129193813_update_mail_notification_values.rb
+20091010093521_fix_users_custom_values.rb
 K 25
 svn:wc:ra_dav:version-url
-V 85
-/svn/!svn/ver/4413/trunk/db/migrate/20100129193813_update_mail_notification_values.rb
+V 77
+/svn/!svn/ver/2905/trunk/db/migrate/20091010093521_fix_users_custom_values.rb
 END
 20091017214611_add_missing_indexes_to_journals.rb
 K 25
@@ -717,18 +717,6 @@ svn:wc:ra_dav:version-url
 V 67
 /svn/!svn/ver/2304/trunk/db/migrate/104_add_projects_lft_and_rgt.rb
 END
-20091114105931_add_view_issues_permission.rb
-K 25
-svn:wc:ra_dav:version-url
-V 80
-/svn/!svn/ver/3039/trunk/db/migrate/20091114105931_add_view_issues_permission.rb
-END
-20091017214336_add_missing_indexes_to_users.rb
-K 25
-svn:wc:ra_dav:version-url
-V 82
-/svn/!svn/ver/2928/trunk/db/migrate/20091017214336_add_missing_indexes_to_users.rb
-END
 20091017213113_add_missing_indexes_to_enumerations.rb
 K 25
 svn:wc:ra_dav:version-url
@@ -741,11 +729,17 @@ svn:wc:ra_dav:version-url
 V 61
 /svn/!svn/ver/926/trunk/db/migrate/082_add_messages_locked.rb
 END
-20091017213444_add_missing_indexes_to_tokens.rb
+20091017214336_add_missing_indexes_to_users.rb
 K 25
 svn:wc:ra_dav:version-url
-V 83
-/svn/!svn/ver/2928/trunk/db/migrate/20091017213444_add_missing_indexes_to_tokens.rb
+V 82
+/svn/!svn/ver/2928/trunk/db/migrate/20091017214336_add_missing_indexes_to_users.rb
+END
+20091114105931_add_view_issues_permission.rb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/3039/trunk/db/migrate/20091114105931_add_view_issues_permission.rb
 END
 20090503121501_create_member_roles.rb
 K 25
@@ -753,17 +747,23 @@ svn:wc:ra_dav:version-url
 V 73
 /svn/!svn/ver/2726/trunk/db/migrate/20090503121501_create_member_roles.rb
 END
-057_add_versions_wiki_page_title.rb
+20091017213444_add_missing_indexes_to_tokens.rb
 K 25
 svn:wc:ra_dav:version-url
-V 70
-/svn/!svn/ver/564/trunk/db/migrate/057_add_versions_wiki_page_title.rb
+V 83
+/svn/!svn/ver/2928/trunk/db/migrate/20091017213444_add_missing_indexes_to_tokens.rb
 END
 20090323224724_add_type_to_enumerations.rb
 K 25
 svn:wc:ra_dav:version-url
 V 78
 /svn/!svn/ver/2777/trunk/db/migrate/20090323224724_add_type_to_enumerations.rb
+END
+057_add_versions_wiki_page_title.rb
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/564/trunk/db/migrate/057_add_versions_wiki_page_title.rb
 END
 004_export_pdf.rb
 K 25

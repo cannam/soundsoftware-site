@@ -51,17 +51,17 @@ svn:wc:ra_dav:version-url
 V 52
 /svn/!svn/ver/4493/trunk/app/views/users/_form.rhtml
 END
-edit.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 51
-/svn/!svn/ver/4729/trunk/app/views/users/edit.rhtml
-END
 _preferences.html.erb
 K 25
 svn:wc:ra_dav:version-url
 V 62
 /svn/!svn/ver/4223/trunk/app/views/users/_preferences.html.erb
+END
+edit.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/4729/trunk/app/views/users/edit.rhtml
 END
 index.rhtml
 K 25

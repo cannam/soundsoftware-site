@@ -69,17 +69,17 @@ svn:wc:ra_dav:version-url
 V 65
 /svn/!svn/ver/4509/trunk/test/functional/admin_controller_test.rb
 END
-welcome_controller_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 67
-/svn/!svn/ver/4509/trunk/test/functional/welcome_controller_test.rb
-END
 context_menus_controller_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 73
 /svn/!svn/ver/4673/trunk/test/functional/context_menus_controller_test.rb
+END
+welcome_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/4509/trunk/test/functional/welcome_controller_test.rb
 END
 account_controller_test.rb
 K 25
@@ -93,12 +93,6 @@ svn:wc:ra_dav:version-url
 V 69
 /svn/!svn/ver/4509/trunk/test/functional/calendars_controller_test.rb
 END
-journals_controller_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/!svn/ver/4535/trunk/test/functional/journals_controller_test.rb
-END
 workflows_controller_test.rb
 K 25
 svn:wc:ra_dav:version-url
@@ -110,6 +104,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 78
 /svn/!svn/ver/4509/trunk/test/functional/time_entry_reports_controller_test.rb
+END
+journals_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4535/trunk/test/functional/journals_controller_test.rb
 END
 project_enumerations_controller_test.rb
 K 25
@@ -165,17 +165,17 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/3744/trunk/test/functional/ldap_auth_sources_controller.rb
 END
-messages_controller_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/!svn/ver/4509/trunk/test/functional/messages_controller_test.rb
-END
 repositories_bazaar_controller_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 79
 /svn/!svn/ver/4509/trunk/test/functional/repositories_bazaar_controller_test.rb
+END
+messages_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/4509/trunk/test/functional/messages_controller_test.rb
 END
 attachments_controller_test.rb
 K 25
@@ -225,17 +225,17 @@ svn:wc:ra_dav:version-url
 V 68
 /svn/!svn/ver/4647/trunk/test/functional/projects_controller_test.rb
 END
-repositories_git_controller_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 76
-/svn/!svn/ver/4734/trunk/test/functional/repositories_git_controller_test.rb
-END
 members_controller_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 67
 /svn/!svn/ver/4509/trunk/test/functional/members_controller_test.rb
+END
+repositories_git_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/4734/trunk/test/functional/repositories_git_controller_test.rb
 END
 repositories_mercurial_controller_test.rb
 K 25
@@ -297,17 +297,17 @@ svn:wc:ra_dav:version-url
 V 64
 /svn/!svn/ver/4509/trunk/test/functional/wiki_controller_test.rb
 END
-auth_sources_controller_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 72
-/svn/!svn/ver/4509/trunk/test/functional/auth_sources_controller_test.rb
-END
 previews_controller_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 68
 /svn/!svn/ver/4509/trunk/test/functional/previews_controller_test.rb
+END
+auth_sources_controller_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/4509/trunk/test/functional/auth_sources_controller_test.rb
 END
 repositories_subversion_controller_test.rb
 K 25

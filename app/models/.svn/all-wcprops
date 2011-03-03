@@ -81,12 +81,6 @@ svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3240/trunk/app/models/enumeration.rb
 END
-member_role.rb
-K 25
-svn:wc:ra_dav:version-url
-V 50
-/svn/!svn/ver/3250/trunk/app/models/member_role.rb
-END
 issue.rb
 K 25
 svn:wc:ra_dav:version-url
@@ -98,6 +92,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 71
 /svn/!svn/ver/2952/trunk/app/models/time_entry_activity_custom_field.rb
+END
+member_role.rb
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/3250/trunk/app/models/member_role.rb
 END
 issue_priority.rb
 K 25
@@ -111,29 +111,29 @@ svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/3169/trunk/app/models/message_observer.rb
 END
-watcher.rb
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/3167/trunk/app/models/watcher.rb
-END
 wiki_content.rb
 K 25
 svn:wc:ra_dav:version-url
 V 51
 /svn/!svn/ver/4296/trunk/app/models/wiki_content.rb
 END
-enabled_module.rb
+watcher.rb
 K 25
 svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/2970/trunk/app/models/enabled_module.rb
+V 46
+/svn/!svn/ver/3167/trunk/app/models/watcher.rb
 END
 wiki_page.rb
 K 25
 svn:wc:ra_dav:version-url
 V 48
 /svn/!svn/ver/4296/trunk/app/models/wiki_page.rb
+END
+enabled_module.rb
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/2970/trunk/app/models/enabled_module.rb
 END
 comment.rb
 K 25
@@ -171,17 +171,17 @@ svn:wc:ra_dav:version-url
 V 45
 /svn/!svn/ver/4752/trunk/app/models/mailer.rb
 END
-journal.rb
-K 25
-svn:wc:ra_dav:version-url
-V 46
-/svn/!svn/ver/4062/trunk/app/models/journal.rb
-END
 workflow.rb
 K 25
 svn:wc:ra_dav:version-url
 V 47
 /svn/!svn/ver/3709/trunk/app/models/workflow.rb
+END
+journal.rb
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/!svn/ver/4062/trunk/app/models/journal.rb
 END
 user_custom_field.rb
 K 25

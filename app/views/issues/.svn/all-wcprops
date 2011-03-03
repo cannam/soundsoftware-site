@@ -93,17 +93,17 @@ svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/3946/trunk/app/views/issues/_edit.rhtml
 END
-_attributes.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/4090/trunk/app/views/issues/_attributes.rhtml
-END
 edit.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
 /svn/!svn/ver/1129/trunk/app/views/issues/edit.rhtml
+END
+_attributes.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/4090/trunk/app/views/issues/_attributes.rhtml
 END
 show.api.rsb
 K 25

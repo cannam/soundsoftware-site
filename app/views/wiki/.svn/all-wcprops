@@ -69,15 +69,15 @@ svn:wc:ra_dav:version-url
 V 54
 /svn/!svn/ver/4296/trunk/app/views/wiki/annotate.rhtml
 END
-destroy.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/4296/trunk/app/views/wiki/destroy.rhtml
-END
 date_index.html.erb
 K 25
 svn:wc:ra_dav:version-url
 V 59
 /svn/!svn/ver/4303/trunk/app/views/wiki/date_index.html.erb
+END
+destroy.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/4296/trunk/app/views/wiki/destroy.rhtml
 END

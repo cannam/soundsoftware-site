@@ -51,12 +51,6 @@ svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3419/trunk/public/images/warning.png
 END
-reload.png
-K 25
-svn:wc:ra_dav:version-url
-V 49
-/svn/!svn/ver/3430/trunk/public/images/reload.png
-END
 move.png
 K 25
 svn:wc:ra_dav:version-url
@@ -68,6 +62,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 50
 /svn/!svn/ver/3419/trunk/public/images/fav_off.png
+END
+reload.png
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/3430/trunk/public/images/reload.png
 END
 project_marker.png
 K 25
@@ -189,17 +189,17 @@ svn:wc:ra_dav:version-url
 V 52
 /svn/!svn/ver/4072/trunk/public/images/task_done.png
 END
-text_list_bullets.png
-K 25
-svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/3419/trunk/public/images/text_list_bullets.png
-END
 bullet_delete.png
 K 25
 svn:wc:ra_dav:version-url
 V 56
 /svn/!svn/ver/3419/trunk/public/images/bullet_delete.png
+END
+text_list_bullets.png
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/3419/trunk/public/images/text_list_bullets.png
 END
 bullet_arrow_left.png
 K 25
@@ -381,17 +381,17 @@ svn:wc:ra_dav:version-url
 V 47
 /svn/!svn/ver/3419/trunk/public/images/true.png
 END
-2uparrow.png
-K 25
-svn:wc:ra_dav:version-url
-V 51
-/svn/!svn/ver/3419/trunk/public/images/2uparrow.png
-END
 arrow_down.png
 K 25
 svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/3419/trunk/public/images/arrow_down.png
+END
+2uparrow.png
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/3419/trunk/public/images/2uparrow.png
 END
 cancel.png
 K 25

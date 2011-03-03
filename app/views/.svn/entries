@@ -38,28 +38,22 @@ dir
 members
 dir
 
-welcome
+context_menus
 dir
 
-context_menus
+welcome
 dir
 
 journals
 dir
 
-workflows
-dir
-
 time_entry_reports
 dir
 
+workflows
+dir
+
 reports
-dir
-
-timelog
-dir
-
-settings
 dir
 
 layouts
@@ -68,19 +62,25 @@ dir
 custom_fields
 dir
 
-users
+settings
+dir
+
+timelog
 dir
 
 issue_moves
 dir
 
+users
+dir
+
 files
 dir
 
-ldap_auth_sources
+auth_sources
 dir
 
-auth_sources
+ldap_auth_sources
 dir
 
 previews
@@ -92,10 +92,10 @@ dir
 messages
 dir
 
-issue_relations
+versions
 dir
 
-versions
+issue_relations
 dir
 
 mailer

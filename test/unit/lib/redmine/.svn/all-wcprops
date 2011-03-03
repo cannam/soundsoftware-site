@@ -3,6 +3,12 @@ svn:wc:ra_dav:version-url
 V 46
 /svn/!svn/ver/4794/trunk/test/unit/lib/redmine
 END
+wiki_formatting.rb
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/4509/trunk/test/unit/lib/redmine/wiki_formatting.rb
+END
 menu_manager_test.rb
 K 25
 svn:wc:ra_dav:version-url
@@ -14,12 +20,6 @@ K 25
 svn:wc:ra_dav:version-url
 V 61
 /svn/!svn/ver/4509/trunk/test/unit/lib/redmine/plugin_test.rb
-END
-wiki_formatting.rb
-K 25
-svn:wc:ra_dav:version-url
-V 65
-/svn/!svn/ver/4509/trunk/test/unit/lib/redmine/wiki_formatting.rb
 END
 i18n_test.rb
 K 25
