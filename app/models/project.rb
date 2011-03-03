@@ -85,6 +85,7 @@ class Project < ActiveRecord::Base
   named_scope :active, { :conditions => "#{Project.table_name}.status = #{STATUS_ACTIVE}"}
   named_scope :all_public, { :conditions => { :is_public => true } }
   named_scope :visible, lambda { { :conditions => Project.visible_by(User.current) } }
+  named_scope :visible_roots, lambda { { :conditions => Project.root_visible_by(User.current) } }
   
   def initialize(attributes = nil)
     super
@@ -132,6 +133,10 @@ class Project < ActiveRecord::Base
     else
       return "#{Project.table_name}.status=#{Project::STATUS_ACTIVE} AND #{Project.table_name}.is_public = #{connection.quoted_true}"
     end
+  end
+  
+  def self.root_visible_by(user=nil)
+    return "#{Project.table_name}.parent_id IS NULL AND " + visible_by(user)
   end
   
   def self.allowed_to_condition(user, permission, options={})

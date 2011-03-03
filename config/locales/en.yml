@@ -86,7 +86,6 @@ en:
           gb: "GB"
           tb: "TB"
 
-        
 # Used in array.to_sentence.
   support:
     array:
@@ -124,6 +123,7 @@ en:
         not_same_project: "doesn't belong to the same project"
         circular_dependency: "This relation would create a circular dependency"
         cant_link_an_issue_with_a_descendant: "An issue can not be linked to one of its subtasks"
+        must_accept_terms_and_conditions: "You must accept the Terms and Conditions"
 
   actionview_instancetag_blank_option: Please select
   
@@ -206,6 +206,10 @@ en:
   gui_validation_error: 1 error
   gui_validation_error_plural: "%{count} errors"
   
+    institution: Institution
+
+  field_other_institution: ''
+
   field_name: Name
   field_description: Description
   field_summary: Summary
@@ -245,6 +249,7 @@ en:
   field_role: Role
   field_homepage: Homepage
   field_is_public: Public
+  field_is_private: Private
   field_parent: Subproject of
   field_is_in_roadmap: Issues displayed in roadmap
   field_login: Login
@@ -305,6 +310,8 @@ en:
   field_visible: Visible
   field_warn_on_leaving_unsaved: "Warn me when leaving a page with unsaved text"
   
+  field_terms_and_conditions: 'Terms and Conditions:'
+  accept_terms_and_conditions: 'I have read and agree with the '
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
   setting_welcome_text: Welcome text
@@ -396,8 +403,8 @@ en:
   permission_comment_news: Comment news
   permission_manage_documents: Manage documents
   permission_view_documents: View documents
-  permission_manage_files: Manage files
-  permission_view_files: View files
+  permission_manage_files: Manage Downloads
+  permission_view_files: View Downloads
   permission_manage_wiki: Manage wiki
   permission_rename_wiki_pages: Rename wiki pages
   permission_delete_wiki_pages: Delete wiki pages
@@ -420,17 +427,20 @@ en:
   permission_export_wiki_pages: Export wiki pages
   permission_manage_subtasks: Manage subtasks
   
-  project_module_issue_tracking: Issue tracking
+  project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
   project_module_news: News
   project_module_documents: Documents
-  project_module_files: Files
+  project_module_files: Files for download
   project_module_wiki: Wiki
-  project_module_repository: Repository
-  project_module_boards: Boards
+  project_module_repository: Source code repository
+  project_module_boards: Forums
   project_module_calendar: Calendar
-  project_module_gantt: Gantt
-  
+  project_module_gantt: Gantt chart
+  project_module_embedded: Embedded documentation (Javadoc or Doxygen)
+  label_tipoftheday: Tip of the day
+  label_ssamr_details: Other Details
+  label_ssamr_institution: Institution
   label_user: User
   label_user_plural: Users
   label_user_new: New user
@@ -438,12 +448,15 @@ en:
   label_project: Project
   label_project_new: New project
   label_project_plural: Projects
+  label_my_project_plural: My Projects
+  label_other_project_plural: Other Projects
   label_x_projects:
     zero:  no projects
     one:   1 project
     other: "%{count} projects"
   label_project_all: All Projects
   label_project_latest: Latest projects
+  label_managers: Managed by
   label_issue: Issue
   label_issue_new: New issue
   label_issue_plural: Issues
@@ -527,7 +540,7 @@ en:
   label_attachment: File
   label_attachment_new: New file
   label_attachment_delete: Delete file
-  label_attachment_plural: Files
+  label_attachment_plural: Downloads
   label_file_added: File added
   label_report: Report
   label_report_plural: Reports
@@ -729,7 +742,7 @@ en:
   label_updated_time_by: "Updated by %{author} %{age} ago"
   label_updated_time: "Updated %{value} ago"
   label_jump_to_a_project: Jump to a project...
-  label_file_plural: Files
+  label_file_plural: Downloads
   label_changeset_plural: Changesets
   label_default_columns: Default columns
   label_no_change_option: (No change)
@@ -793,7 +806,7 @@ en:
   label_profile: Profile
   label_subtask_plural: Subtasks
   label_project_copy_notifications: Send email notifications during the project copy
-  label_principal_search: "Search for user or group:"
+  label_principal_search: "Search by name:"
   label_user_search: "Search for user:"
   
   button_login: Login
@@ -871,6 +884,7 @@ en:
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
   text_length_between: "Length between %{min} and %{max} characters."
+  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
   text_tracker_no_workflow: No workflow defined for this tracker
   text_unallowed_characters: Unallowed characters
   text_comma_separated: Multiple values allowed (comma separated).
@@ -912,6 +926,7 @@ en:
   text_zoom_in: Zoom in
   text_zoom_out: Zoom out
   text_warn_on_leaving_unsaved: "The current page contains unsaved text that will be lost if you leave this page."
+  text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here.<br>Please check again in ten minutes, and <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if there is any problem.
   
   default_role_manager: Manager
   default_role_developer: Developer

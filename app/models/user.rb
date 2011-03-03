@@ -82,6 +82,8 @@ class User < Principal
 
   before_destroy :remove_references_before_destroy
   
+  validates_acceptance_of :terms_and_conditions, :on => :create, :message => :must_accept_terms_and_conditions
+
   def before_create
     self.mail_notification = Setting.default_notification_option if self.mail_notification.blank?
     true

@@ -127,6 +127,7 @@ en-GB:
         not_same_project: "doesn't belong to the same project"
         circular_dependency: "This relation would create a circular dependency"
         cant_link_an_issue_with_a_descendant: "An issue can not be linked to one of its subtasks"
+        must_accept_terms_and_conditions: "You must accept the Terms and Conditions"        
 
   actionview_instancetag_blank_option: Please select
   
@@ -201,6 +202,10 @@ en-GB:
   gui_validation_error: 1 error
   gui_validation_error_plural: "%{count} errors"
   
+    institution: Institution
+
+  field_other_institution: ''
+
   field_name: Name
   field_description: Description
   field_summary: Summary
@@ -239,6 +244,7 @@ en-GB:
   field_role: Role
   field_homepage: Homepage
   field_is_public: Public
+  field_is_private: Private
   field_parent: Subproject of
   field_is_in_roadmap: Issues displayed in roadmap
   field_login: Login
@@ -378,8 +384,8 @@ en-GB:
   permission_comment_news: Comment news
   permission_manage_documents: Manage documents
   permission_view_documents: View documents
-  permission_manage_files: Manage files
-  permission_view_files: View files
+  permission_manage_files: Manage downloads
+  permission_view_files: View downloads
   permission_manage_wiki: Manage wiki
   permission_rename_wiki_pages: Rename wiki pages
   permission_delete_wiki_pages: Delete wiki pages
@@ -401,15 +407,25 @@ en-GB:
   permission_delete_own_messages: Delete own messages
   permission_export_wiki_pages: Export wiki pages
   
-  project_module_issue_tracking: Issue tracking
+  project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
   project_module_news: News
   project_module_documents: Documents
-  project_module_files: Files
+  project_module_files: Files for download
   project_module_wiki: Wiki
-  project_module_repository: Repository
-  project_module_boards: Boards
+  project_module_repository: Source code repository
+  project_module_boards: Forums
+  project_module_gantt: Gantt chart
+  project_module_calendar: Calendar
+  project_module_embedded: Embedded documentation (Javadoc or Doxygen)
   
+  label_tipoftheday: Tip of the day
+  label_notifications: Important Message
+  field_terms_and_conditions: 'Terms and Conditions:'
+  accept_terms_and_conditions: 'I have read and agree with the '
+  label_ssamr_description: Research description
+  label_ssamr_details: Other Details
+  label_ssamr_institution: Institution
   label_user: User
   label_user_plural: Users
   label_user_new: New user
@@ -417,12 +433,15 @@ en-GB:
   label_project: Project
   label_project_new: New project
   label_project_plural: Projects
+  label_my_project_plural: My Projects
+  label_other_project_plural: Other Projects
   label_x_projects:
     zero:  no projects
     one:   1 project
     other: "%{count} projects"
   label_project_all: All Projects
   label_project_latest: Latest projects
+  label_managers: Managed by
   label_issue: Issue
   label_issue_new: New issue
   label_issue_plural: Issues
@@ -505,7 +524,7 @@ en-GB:
   label_attachment: File
   label_attachment_new: New file
   label_attachment_delete: Delete file
-  label_attachment_plural: Files
+  label_attachment_plural: Downloads
   label_file_added: File added
   label_report: Report
   label_report_plural: Reports
@@ -705,7 +724,7 @@ en-GB:
   label_updated_time_by: "Updated by %{author} %{age} ago"
   label_updated_time: "Updated %{value} ago"
   label_jump_to_a_project: Jump to a project...
-  label_file_plural: Files
+  label_file_plural: Downloads
   label_changeset_plural: Changesets
   label_default_columns: Default columns
   label_no_change_option: (No change)
@@ -836,6 +855,12 @@ en-GB:
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
   text_length_between: "Length between %{min} and %{max} characters."
+  text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br /> This will be used in all project-related URLs, and as the repository name. Once saved, the identifier <b>can not</b> be changed.'
+  text_project_homepage_info: 'Link to an external project page.'
+  text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
+  text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
+  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
+  text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_tracker_no_workflow: No workflow defined for this tracker
   text_unallowed_characters: Unallowed characters
   text_comma_separated: Multiple values allowed (comma separated).
@@ -873,6 +898,7 @@ en-GB:
   text_wiki_page_destroy_children: "Delete child pages and all their descendants"
   text_wiki_page_reassign_children: "Reassign child pages to this parent page"
   text_own_membership_delete_confirmation: "You are about to remove some or all of your permissions and may no longer be able to edit this project after that.\nAre you sure you want to continue?"
+  text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here; please check again in ten minutes.
   
   default_role_manager: Manager
   default_role_developer: Developer
@@ -919,8 +945,6 @@ en-GB:
   notice_failed_to_save_members: "Failed to save member(s): %{errors}."
   label_project_copy_notifications: Send email notifications during the project copy
   field_time_entries: Log time
-  project_module_gantt: Gantt
-  project_module_calendar: Calendar
   field_member_of_group: Member of Group
   field_assigned_to_role: Member of Role
   button_edit_associated_wikipage: "Edit associated Wiki page: %{page_title}"
@@ -931,7 +955,7 @@ en-GB:
   label_user_mail_option_only_my_events: Only for things I watch or I'm involved in
   label_user_mail_option_only_assigned: Only for things I am assigned to
   notice_not_authorized_archived_project: The project you're trying to access has been archived.
-  label_principal_search: "Search for user or group:"
+  label_principal_search: "Search by name:"
   label_user_search: "Search for user:"
   field_visible: Visible
   setting_emails_header: Emails header

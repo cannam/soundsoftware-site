@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title><%=h html_title %></title>
-<meta name="description" content="<%= Redmine::Info.app_name %>" />
-<meta name="keywords" content="issue,bug,tracker" />
+<meta name="description" content="A repository for software developed and published by audio and music researchers in the UK." />
+<meta name="keywords" content="audio,music,software,research,UK,sound,repository,code,redmine" />
 <%= favicon %>
 <%= stylesheet_link_tag 'application', :media => 'all' %>
 <%= stylesheet_link_tag 'rtl', :media => 'all' if l(:direction) == 'rtl' %>
@@ -33,17 +33,32 @@
 </div>
       
 <%= tag('div', {:id => 'header', :class => (display_main_menu?(@project) ? 'header-project' : 'header-general')}, true) %>
-    <div id="quick-search">
-        <% form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
-        <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
-        <%= link_to l(:label_search), {:controller => 'search', :action => 'index', :id => @project}, :accesskey => accesskey(:search) %>:
-        <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :accesskey => accesskey(:quick_search) %>
-        <% end %>
-        <%= render_project_jump_box %>
-    </div>
-    
-    <h1><%= page_header_title %></h1>
 
+
+    <div id="project-search-jump">
+      <div id="quick-search">
+          <% form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
+          <%= hidden_field_tag(controller.default_search_scope, 1, :id => nil) if controller.default_search_scope %>
+          <%= link_to l(:label_search), {:controller => 'search', :action => 'index', :id => @project}, :accesskey => accesskey(:search) %>:
+          <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :accesskey => accesskey(:quick_search) %>
+          <% end %>
+      </div>
+
+      <div id="project-jump-box">
+        <%= render_project_jump_box %>
+      </div>
+    </div>
+
+    <% unless page_header_title[1].empty? %>
+      <h3 id="project-ancestors-title"><%= page_header_title[1] %></h3>
+    <% end %>  
+
+    <h1  id="project-title"
+      <% unless page_header_title[1].empty? %>
+        style="margin-top: 0px; "
+      <% end %>  
+    ><%= page_header_title[0] %></h1>
+    
     <% if display_main_menu?(@project) %>
     <div id="main-menu">
         <%= render_main_menu(@project) %>

@@ -65,6 +65,15 @@ class UsersController < ApplicationController
 
     if @user.ssamr_user_detail != nil
       @description = @user.ssamr_user_detail.description
+      
+      if @user.ssamr_user_detail.institution_type != nil
+        # institution_type is true for listed institutions
+        if (@user.ssamr_user_detail.institution_type)
+          @institution_name = Institution.find(@user.ssamr_user_detail.institution_id).name
+        else
+          @institution_name = @user.ssamr_user_detail.other_institution
+        end
+      end
     end
     
     # show projects based on current user visibility
@@ -91,7 +100,6 @@ class UsersController < ApplicationController
     @auth_sources = AuthSource.find(:all)
 
     @ssamr_user_details = SsamrUserDetail.new
-    
   end
   
   verify :method => :post, :only => :create, :render => {:nothing => true, :status => :method_not_allowed }
@@ -146,6 +154,12 @@ class UsersController < ApplicationController
     
     @ssamr_user_details = @user.ssamr_user_detail
     
+    if @user.ssamr_user_detail == nil
+      @selected_institution_id = nil
+    else
+      @selected_institution_id = @user.ssamr_user_detail.institution_id.to_i    
+    end
+    
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
   end
@@ -170,13 +184,18 @@ class UsersController < ApplicationController
     else
       @ssamr_user_details = @user.ssamr_user_detail
     end
-
-
+    
     if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
       @ssamr_user_details.description = @user.ssamr_user_detail.description
+      @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
+      @ssamr_user_details.other_institution = @user.ssamr_user_detail.other_institution
+      @ssamr_user_details.institution_type = @user.ssamr_user_detail.institution_type
+
     else
       @ssamr_user_details.description = params[:ssamr_user_details][:description]
-      @ssamr_user_details.save!
+      @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
+      @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
+      @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
     end
 
     if @user.save

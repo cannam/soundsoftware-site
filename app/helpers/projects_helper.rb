@@ -163,80 +163,89 @@ module ProjectsHelper
     s << "<table class='list projects'>"
     s << "<thead><tr>"
     
-    s << sort_header_tag('lft', :caption => l("field_name"), :default_order => 'desc')
+    s << sort_header_tag('name', :caption => l("field_name"))
     s << "<th class='managers'>" << l("label_managers") << "</th>"
     s << sort_header_tag('created_on', :default_order => 'desc')
     s << sort_header_tag('updated_on', :default_order => 'desc')
 
     s << "</tr></thead><tbody>"
 
-    ancestors = []
     original_project = @project
-    oddeven = 'even'
+
     level = 0
 
     projects.each do |project|
-
-      # set the project environment to please macros.
-
-      @project = project
-
-      if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
-        level = level + 1
-      else
-        level = 0
-        oddeven = cycle('odd','even')
-        ancestors.pop
-        while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
-          ancestors.pop
-        end
-      end
-      
-      classes = (ancestors.empty? ? 'root' : 'child')
-
-      s << "<tr class='#{oddeven} #{classes} level#{level}'>"
-      s << "<td class='firstcol name hosted_here'>" << link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}") << "</td>"
-      s << "<td class='managers'>"
-
-      u = project.users_by_role
-      if u
-        u.keys.each do |r|
-          if r.allowed_to?(:edit_project)
-            mgrs = []
-            u[r].sort.each do |m|
-              mgrs << link_to_user(m)
-            end
-            if mgrs.size < 3
-              s << '<nobr>' << mgrs.join(', ') << '</nobr>'
-            else
-              s << mgrs.join(', ')
-            end
-          end
-        end
-      end
-
-      s << "</td>"
-      s << "<td class='created_on'>" << format_date(project.created_on) << "</td>"
-      s << "<td class='updated_on'>" << format_date(project.updated_on) << "</td>"
-
-      s << "</tr>"
-      s << "<tr class='#{oddeven} #{classes}'>"
-      s << "<td class='firstcol wiki description'>"
-      s << textilizable(project.short_description, :project => project) unless project.description.blank?
-      s << "</td>"
-      s << "<td colspan=3>&nbsp;</td>"
-      s << "</tr>"
-
-      ancestors << project          
+      s << render_project_in_table(project, cycle('odd', 'even'), 0)
     end
 
     s << "</table>"
 
     @project = original_project
-
     s
+        level = 0
+        oddeven = cycle('odd','even')
   end
 
+
+  def render_project_in_table(project, oddeven, level)
+
+    # set the project environment to please macros.
+    @project = project
+
+    classes = (level == 0 ? 'root' : 'child')
+
+    s = ""
+    
+    s << "<tr class='#{oddeven} #{classes} level#{level}'>"
+    s << "<td class='firstcol' align=top><div class='name hosted_here"
+    s << " no_description" if project.description.blank?
+    s << "'>" << link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}");
+    s << "</div>"
+    unless project.description.blank?
+      s << "<div class='wiki description'>"
+      s << textilizable(project.short_description, :project => project)
+      s << "</div>"
+    end
+      
+    s << "<td class='managers' align=top>"
+
+    u = project.users_by_role
+    if u
+      u.keys.each do |r|
+        if r.allowed_to?(:edit_project)
+          mgrs = []
+          u[r].sort.each do |m|
+            mgrs << link_to_user(m)
+          end
+          if mgrs.size < 3
+            s << '<nobr>' << mgrs.join(', ') << '</nobr>'
+              mgrs << link_to_user(m)
+            end
+            if mgrs.size < 3
+              s << '<nobr>' << mgrs.join(', ') << '</nobr>'
+          else
+            s << mgrs.join(', ')
+            end
+          end
+        end
+      end
+      s << "</tr>"
+
+      ancestors << project          
+    end
+
+    s << "</td>"
+    s << "<td class='created_on' align=top>" << format_date(project.created_on) << "</td>"
+    s << "<td class='updated_on' align=top>" << format_date(project.updated_on) << "</td>"
+    
+    s << "</tr>"
+
+    project.children.each do |child|
+      s << render_project_in_table(child, oddeven, level + 1)
+    end
+    
+    s
+  end
 
 
   # Returns a set of options for a select field, grouped by project.

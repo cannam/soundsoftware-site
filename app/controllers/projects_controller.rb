@@ -43,19 +43,20 @@ class ProjectsController < ApplicationController
   include RepositoriesHelper
   include ProjectsHelper
 
-  # Lists visible projects
+  # Lists visible projects. Paginator is for top-level projects only
+  # (subprojects belong to them)
   def index
     respond_to do |format|
       format.html { 
-        sort_init 'lft'
-        sort_update %w(lft title created_on updated_on)
+        sort_init 'name'
+        sort_update %w(name lft created_on updated_on)
         @limit = per_page_option
-        @project_count = Project.visible.count
+        @project_count = Project.visible_roots.count
         @project_pages = Paginator.new self, @project_count, @limit, params['page']
         @offset ||= @project_pages.current.offset
-        @projects = Project.visible.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
+        @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
         if User.current.logged?
-          @user_projects = User.current.projects.sort_by(&:lft)
+          @user_projects = User.current.projects.sort_by(&:name)
         end
         render :template => 'projects/index.rhtml', :layout => !request.xhr?
       }

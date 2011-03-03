@@ -90,7 +90,7 @@ class Issue < ActiveRecord::Base
   before_save :close_duplicates, :update_done_ratio_from_issue_status
   after_save :reschedule_following_issues, :update_nested_set_attributes, :update_parent_attributes, :create_journal
   after_destroy :update_parent_attributes
-  
+
   # Returns true if usr or current user is allowed to view the issue
   def visible?(usr=nil)
     (usr || User.current).allowed_to?(:view_issues, self.project)
@@ -529,7 +529,8 @@ class Issue < ActiveRecord::Base
   
   # Returns a string of css classes that apply to the issue
   def css_classes
-    s = "issue status-#{status.position} priority-#{priority.position}"
+    s = "issue status-#{status.position} "
+    s << "priority-#{priority.position}"
     s << ' closed' if closed?
     s << ' overdue' if overdue?
     s << ' created-by-me' if User.current.logged? && author_id == User.current.id

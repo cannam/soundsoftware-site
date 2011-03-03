@@ -108,7 +108,9 @@ class AccountController < ApplicationController
 
         # associates the 2 objects
         @user.ssamr_user_detail = @ssamr_user_details
+        @selected_institution_id = params[:ssamr_user_details][:institution_id].to_i
 
+        
         case Setting.self_registration
         when '1'
           register_by_email_activation(@user)
