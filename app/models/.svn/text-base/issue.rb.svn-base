@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -422,7 +422,12 @@ class Issue < ActiveRecord::Base
   
   # Returns an array of status that user is able to apply
   def new_statuses_allowed_to(user, include_default=false)
-    statuses = status.find_new_statuses_allowed_to(user.roles_for_project(project), tracker)
+    statuses = status.find_new_statuses_allowed_to(
+      user.roles_for_project(project),
+      tracker,
+      author == user,
+      assigned_to_id_changed? ? assigned_to_id_was == user.id : assigned_to_id == user.id
+      )
     statuses << status unless statuses.empty?
     statuses << IssueStatus.default if include_default
     statuses = statuses.uniq.sort
@@ -824,7 +829,7 @@ class Issue < ActiveRecord::Base
   def create_journal
     if @current_journal
       # attributes changes
-      (Issue.column_names - %w(id description root_id lft rgt lock_version created_on updated_on)).each {|c|
+      (Issue.column_names - %w(id root_id lft rgt lock_version created_on updated_on)).each {|c|
         @current_journal.details << JournalDetail.new(:property => 'attr',
                                                       :prop_key => c,
                                                       :old_value => @issue_before_change.send(c),

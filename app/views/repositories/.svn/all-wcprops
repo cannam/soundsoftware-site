@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 47
-/svn/!svn/ver/4733/trunk/app/views/repositories
+/svn/!svn/ver/4921/trunk/app/views/repositories
 END
-_navigation.rhtml
+stats.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 65
-/svn/!svn/ver/3086/trunk/app/views/repositories/_navigation.rhtml
+V 59
+/svn/!svn/ver/2895/trunk/app/views/repositories/stats.rhtml
 END
 revision.rhtml
 K 25
@@ -15,11 +15,11 @@ svn:wc:ra_dav:version-url
 V 62
 /svn/!svn/ver/4613/trunk/app/views/repositories/revision.rhtml
 END
-stats.rhtml
+_navigation.rhtml
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/2895/trunk/app/views/repositories/stats.rhtml
+V 65
+/svn/!svn/ver/3086/trunk/app/views/repositories/_navigation.rhtml
 END
 entry.rhtml
 K 25
@@ -31,19 +31,7 @@ _dir_list_content.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 71
-/svn/!svn/ver/4613/trunk/app/views/repositories/_dir_list_content.rhtml
-END
-_dir_list.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/!svn/ver/1032/trunk/app/views/repositories/_dir_list.rhtml
-END
-changes.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 61
-/svn/!svn/ver/2840/trunk/app/views/repositories/changes.rhtml
+/svn/!svn/ver/4921/trunk/app/views/repositories/_dir_list_content.rhtml
 END
 diff.rhtml
 K 25
@@ -51,17 +39,23 @@ svn:wc:ra_dav:version-url
 V 58
 /svn/!svn/ver/4698/trunk/app/views/repositories/diff.rhtml
 END
+changes.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/2840/trunk/app/views/repositories/changes.rhtml
+END
+_dir_list.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/1032/trunk/app/views/repositories/_dir_list.rhtml
+END
 annotate.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 62
 /svn/!svn/ver/4613/trunk/app/views/repositories/annotate.rhtml
-END
-_revisions.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 64
-/svn/!svn/ver/4613/trunk/app/views/repositories/_revisions.rhtml
 END
 show.rhtml
 K 25
@@ -69,23 +63,29 @@ svn:wc:ra_dav:version-url
 V 58
 /svn/!svn/ver/2849/trunk/app/views/repositories/show.rhtml
 END
+_revisions.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/4613/trunk/app/views/repositories/_revisions.rhtml
+END
 revisions.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 63
 /svn/!svn/ver/2840/trunk/app/views/repositories/revisions.rhtml
 END
-_link_to_functions.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 72
-/svn/!svn/ver/2849/trunk/app/views/repositories/_link_to_functions.rhtml
-END
 committers.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 64
 /svn/!svn/ver/2137/trunk/app/views/repositories/committers.rhtml
+END
+_link_to_functions.rhtml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/2849/trunk/app/views/repositories/_link_to_functions.rhtml
 END
 _breadcrumbs.rhtml
 K 25

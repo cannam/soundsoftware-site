@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 46
-/svn/!svn/ver/4794/trunk/test/unit/lib/redmine
+/svn/!svn/ver/4964/trunk/test/unit/lib/redmine
 END
 wiki_formatting.rb
 K 25
@@ -25,7 +25,7 @@ i18n_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/4679/trunk/test/unit/lib/redmine/i18n_test.rb
+/svn/!svn/ver/4894/trunk/test/unit/lib/redmine/i18n_test.rb
 END
 hook_test.rb
 K 25
@@ -55,7 +55,7 @@ configuration_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 68
-/svn/!svn/ver/4752/trunk/test/unit/lib/redmine/configuration_test.rb
+/svn/!svn/ver/4949/trunk/test/unit/lib/redmine/configuration_test.rb
 END
 mime_type_test.rb
 K 25
@@ -63,11 +63,17 @@ svn:wc:ra_dav:version-url
 V 64
 /svn/!svn/ver/4509/trunk/test/unit/lib/redmine/mime_type_test.rb
 END
+ciphering_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/4950/trunk/test/unit/lib/redmine/ciphering_test.rb
+END
 unified_diff_test.rb
 K 25
 svn:wc:ra_dav:version-url
 V 67
-/svn/!svn/ver/4509/trunk/test/unit/lib/redmine/unified_diff_test.rb
+/svn/!svn/ver/4929/trunk/test/unit/lib/redmine/unified_diff_test.rb
 END
 notifiable_test.rb
 K 25

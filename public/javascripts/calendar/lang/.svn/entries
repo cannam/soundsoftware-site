@@ -1,15 +1,15 @@
 10
 
 dir
-4802
+4993
 http://redmine.rubyforge.org/svn/trunk/public/javascripts/calendar/lang
 http://redmine.rubyforge.org/svn
 
 
 
-2010-09-05T11:33:08.614151Z
-4060
-winterheart
+2011-02-21T10:08:59.720731Z
+4903
+jplang
 
 
 
@@ -570,40 +570,6 @@ has-props
 
 3845
 
-calendar-gl.js
-file
-
-
-
-
-2011-03-03T11:05:14.000000Z
-c4f74e36f6a3debcf8ec065bc6886f04
-2009-01-23T15:37:59.406714Z
-2296
-winterheart
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3855
-
 calendar-en.js
 file
 
@@ -637,6 +603,40 @@ has-props
 
 
 3600
+
+calendar-gl.js
+file
+
+
+
+
+2011-03-03T11:05:14.000000Z
+c4f74e36f6a3debcf8ec065bc6886f04
+2009-01-23T15:37:59.406714Z
+2296
+winterheart
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3855
 
 calendar-fr.js
 file
@@ -672,16 +672,16 @@ has-props
 
 3870
 
-calendar-zh-tw.js
+calendar-nl.js
 file
 
 
 
 
 2011-03-03T11:05:14.000000Z
-0bed4c9c046772a12267b4118bf1504a
-2008-06-07T09:03:20.687527Z
-1498
+c029bd9c4867bb39e86d1d6efada6d58
+2007-05-24T17:29:11.682821Z
+539
 jplang
 has-props
 
@@ -704,7 +704,7 @@ has-props
 
 
 
-3841
+3701
 
 calendar-hr.js
 file
@@ -740,16 +740,16 @@ has-props
 
 3646
 
-calendar-nl.js
+calendar-zh-tw.js
 file
 
 
 
 
 2011-03-03T11:05:14.000000Z
-c029bd9c4867bb39e86d1d6efada6d58
-2007-05-24T17:29:11.682821Z
-539
+0bed4c9c046772a12267b4118bf1504a
+2008-06-07T09:03:20.687527Z
+1498
 jplang
 has-props
 
@@ -772,7 +772,7 @@ has-props
 
 
 
-3701
+3841
 
 calendar-mn.js
 file
@@ -808,40 +808,6 @@ winterheart
 
 3904
 
-calendar-th.js
-file
-
-
-
-
-2011-03-03T11:05:14.000000Z
-c8c19e66c3e1099c3e0ecae6462f68da
-2008-04-30T08:47:14.770680Z
-1383
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4417
-
 calendar-pl.js
 file
 
@@ -875,6 +841,40 @@ jplang
 
 
 3974
+
+calendar-th.js
+file
+
+
+
+
+2011-03-03T11:05:14.000000Z
+c8c19e66c3e1099c3e0ecae6462f68da
+2008-04-30T08:47:14.770680Z
+1383
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4417
 
 calendar-it.js
 file
@@ -978,40 +978,6 @@ has-props
 
 3909
 
-calendar-zh.js
-file
-
-
-
-
-2011-03-03T11:05:14.000000Z
-02222471f3e701ac1223096737fa5705
-2008-06-07T09:03:20.687527Z
-1498
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3600
-
 calendar-lv.js
 file
 
@@ -1045,6 +1011,40 @@ winterheart
 
 
 3803
+
+calendar-zh.js
+file
+
+
+
+
+2011-03-03T11:05:14.000000Z
+02222471f3e701ac1223096737fa5705
+2008-06-07T09:03:20.687527Z
+1498
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3600
 
 calendar-ca.js
 file
@@ -1249,6 +1249,40 @@ has-props
 
 
 3776
+
+calendar-fa.js
+file
+
+
+
+
+2011-03-03T11:40:18.000000Z
+79e745b797f9148ac63de8ce583e2282
+2011-02-21T10:08:59.720731Z
+4903
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3977
 
 calendar-bg.js
 file

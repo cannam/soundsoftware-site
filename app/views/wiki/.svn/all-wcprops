@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 39
-/svn/!svn/ver/4740/trunk/app/views/wiki
+/svn/!svn/ver/4953/trunk/app/views/wiki
 END
 export_multiple.rhtml
 K 25
@@ -55,7 +55,7 @@ diff.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/4551/trunk/app/views/wiki/diff.rhtml
+/svn/!svn/ver/4953/trunk/app/views/wiki/diff.rhtml
 END
 _content.rhtml
 K 25

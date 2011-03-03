@@ -1,15 +1,15 @@
 10
 
 dir
-4802
+4993
 http://redmine.rubyforge.org/svn/trunk/app/views/mailer
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-27T16:27:06.240747Z
-4296
-edavis10
+2011-02-20T14:27:34.168395Z
+4892
+jplang
 
 
 
@@ -610,10 +610,10 @@ file
 
 
 
-2011-03-03T11:05:22.000000Z
-1f73b58bdc0fd4474073437ce2e219bd
-2007-11-04T10:43:39.403792Z
-877
+2011-03-03T11:40:18.000000Z
+76a51edc640a60b59fca8e679d0161b6
+2011-02-20T14:27:34.168395Z
+4892
 jplang
 has-props
 
@@ -636,7 +636,7 @@ has-props
 
 
 
-492
+498
 
 _issue_text_html.rhtml
 file
@@ -644,10 +644,10 @@ file
 
 
 
-2011-03-03T11:05:22.000000Z
-871cf6abc13d895f9de91ef4ac36c2bd
-2010-02-18T19:13:38.135448Z
-3452
+2011-03-03T11:40:18.000000Z
+68467469e0b5a8d3dc67dba7ba7e42b0
+2011-02-20T14:27:34.168395Z
+4892
 jplang
 has-props
 
@@ -670,41 +670,7 @@ has-props
 
 
 
-629
-
-attachments_added.text.html.rhtml
-file
-
-
-
-
-2011-03-03T11:05:10.000000Z
-db9ef17343824d59b7a19db7036ee2f1
-2010-02-18T19:13:38.135448Z
-3452
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-144
+635
 
 news_added.text.plain.rhtml
 file
@@ -739,6 +705,40 @@ has-props
 
 
 87
+
+attachments_added.text.html.rhtml
+file
+
+
+
+
+2011-03-03T11:05:10.000000Z
+db9ef17343824d59b7a19db7036ee2f1
+2010-02-18T19:13:38.135448Z
+3452
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+144
 
 news_added.text.html.rhtml
 file
@@ -808,40 +808,6 @@ has-props
 
 107
 
-issue_add.text.plain.rhtml
-file
-
-
-
-
-2011-03-03T11:05:10.000000Z
-52a0f774acd5b7aeeb3768de943af901
-2009-02-21T11:04:50.579477Z
-2493
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-224
-
 document_added.text.html.rhtml
 file
 
@@ -875,6 +841,40 @@ has-props
 
 
 163
+
+issue_add.text.plain.rhtml
+file
+
+
+
+
+2011-03-03T11:05:10.000000Z
+52a0f774acd5b7aeeb3768de943af901
+2009-02-21T11:04:50.579477Z
+2493
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+224
 
 account_information.text.plain.rhtml
 file
@@ -910,40 +910,6 @@ has-props
 
 295
 
-account_information.text.html.rhtml
-file
-
-
-
-
-2011-03-03T11:05:10.000000Z
-e7e91d7f18dd1547cfebafdf4822a18f
-2010-02-18T19:13:38.135448Z
-3452
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-368
-
 message_posted.text.plain.rhtml
 file
 
@@ -978,16 +944,16 @@ has-props
 
 68
 
-lost_password.text.plain.rhtml
+account_information.text.html.rhtml
 file
 
 
 
 
 2011-03-03T11:05:10.000000Z
-44018a44ceaecb5c9be3fed66e759064
-2008-07-21T19:13:46.546624Z
-1683
+e7e91d7f18dd1547cfebafdf4822a18f
+2010-02-18T19:13:38.135448Z
+3452
 jplang
 has-props
 
@@ -1010,7 +976,7 @@ has-props
 
 
 
-97
+368
 
 wiki_content_updated.text.plain.rhtml
 file
@@ -1045,6 +1011,40 @@ has-props
 
 
 288
+
+lost_password.text.plain.rhtml
+file
+
+
+
+
+2011-03-03T11:05:10.000000Z
+44018a44ceaecb5c9be3fed66e759064
+2008-07-21T19:13:46.546624Z
+1683
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+97
 
 lost_password.text.html.rhtml
 file

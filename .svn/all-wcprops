@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 24
-/svn/!svn/ver/4802/trunk
+/svn/!svn/ver/4993/trunk
 END
 .hgignore
 K 25
 svn:wc:ra_dav:version-url
 V 34
-/svn/!svn/ver/4787/trunk/.hgignore
+/svn/!svn/ver/4834/trunk/.hgignore
 END
 Rakefile
 K 25
@@ -25,5 +25,5 @@ END
 K 25
 svn:wc:ra_dav:version-url
 V 35
-/svn/!svn/ver/4787/trunk/.gitignore
+/svn/!svn/ver/4834/trunk/.gitignore
 END

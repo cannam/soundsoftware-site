@@ -1,15 +1,15 @@
 10
 
 dir
-4802
+4993
 http://redmine.rubyforge.org/svn/trunk/test/fixtures
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-23T10:22:00.456857Z
-4752
-jplang
+2011-02-28T14:12:47.115180Z
+4964
+tmaruyama
 
 
 
@@ -35,10 +35,10 @@ file
 
 
 
-2011-03-03T11:05:22.000000Z
-7f7308fa24fe8015418b4bf81a265389
-2009-12-06T10:28:20.099964Z
-3123
+2011-03-03T11:40:18.000000Z
+c85ec633618360a62da10b17100bbf56
+2011-02-27T13:34:41.060565Z
+4954
 jplang
 has-props
 
@@ -61,7 +61,7 @@ has-props
 
 
 
-359
+547
 
 ldap
 dir
@@ -72,10 +72,10 @@ file
 
 
 
-2011-03-03T11:05:22.000000Z
-940bc0bea76bc76ba8ef1b224d744eee
-2009-09-20T14:06:57.257282Z
-2895
+2011-03-03T11:40:18.000000Z
+2d31c6b69ca13da5466d1600bae9a2fd
+2011-02-20T15:38:07.840581Z
+4895
 jplang
 has-props
 
@@ -98,7 +98,7 @@ has-props
 
 
 
-505
+589
 
 changesets.yml
 file
@@ -619,8 +619,39 @@ has-props
 
 377
 
-mailer
-dir
+custom_fields_projects.yml
+file
+
+
+
+
+2011-03-03T11:05:09.000000Z
+c6789a99aba9f28cf1d31a36b36224c8
+2010-01-03T11:18:09.741250Z
+3278
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+71
 
 enumerations.yml
 file
@@ -656,73 +687,8 @@ has-props
 
 1391
 
-custom_fields_projects.yml
-file
-
-
-
-
-2011-03-03T11:05:09.000000Z
-c6789a99aba9f28cf1d31a36b36224c8
-2010-01-03T11:18:09.741250Z
-3278
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-71
-
-issues.yml
-file
-
-
-
-
-2011-03-03T11:05:09.000000Z
-a8c37ca171bb5f39ffbc6cd3ffcf0c52
-2010-12-10T11:06:21.419457Z
-4482
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5656
+mailer
+dir
 
 member_roles.yml
 file
@@ -758,6 +724,40 @@ has-props
 
 692
 
+issues.yml
+file
+
+
+
+
+2011-03-03T11:05:09.000000Z
+a8c37ca171bb5f39ffbc6cd3ffcf0c52
+2010-12-10T11:06:21.419457Z
+4482
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5656
+
 queries.yml
 file
 
@@ -792,40 +792,6 @@ has-props
 
 2345
 
-watchers.yml
-file
-
-
-
-
-2011-03-03T11:05:09.000000Z
-9dbcd982c4227d919ea750ce4fde79a7
-2009-02-12T17:35:57.542817Z
-2456
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-219
-
 wiki_contents.yml
 file
 
@@ -859,6 +825,40 @@ has-props
 
 
 1953
+
+watchers.yml
+file
+
+
+
+
+2011-03-03T11:05:09.000000Z
+9dbcd982c4227d919ea750ce4fde79a7
+2009-02-12T17:35:57.542817Z
+2456
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+219
 
 wiki_pages.yml
 file
@@ -1144,11 +1144,11 @@ file
 
 
 
-2011-03-03T11:05:22.000000Z
-f590d477ec468a76d8d31d5ed99de0e6
-2010-09-28T18:22:00.231301Z
-4216
-edavis10
+2011-03-03T11:40:18.000000Z
+4bc8168f868eb01690365ddcb82e8841
+2011-02-23T17:27:31.762248Z
+4936
+jplang
 has-props
 
 
@@ -1170,7 +1170,7 @@ has-props
 
 
 
-3294
+3500
 
 auth_sources.yml
 file

@@ -307,6 +307,7 @@ fr:
   field_active: Actif
   field_parent_issue: Tâche parente
   field_visible: Visible
+  field_warn_on_leaving_unsaved: "M'avertir lorsque je quitte une page contenant du texte non sauvegardé"
   
   setting_app_title: Titre de l'application
   setting_app_subtitle: Sous-titre de l'application
@@ -596,6 +597,7 @@ fr:
   label_query: Rapport personnalisé
   label_query_plural: Rapports personnalisés
   label_query_new: Nouveau rapport
+  label_my_queries: Mes rapports personnalisés
   label_filter_add: "Ajouter le filtre "
   label_filter_plural: Filtres
   label_equals: égal
@@ -889,6 +891,7 @@ fr:
   text_wiki_page_destroy_children: "Supprimer les sous-pages et toutes leurs descedantes"
   text_wiki_page_reassign_children: "Réaffecter les sous-pages à cette page"
   text_own_membership_delete_confirmation: "Vous allez supprimer tout ou partie de vos permissions sur ce projet et ne serez peut-être plus autorisé à modifier ce projet.\nEtes-vous sûr de vouloir continuer ?"
+  text_warn_on_leaving_unsaved: "Cette page contient du texte non sauvegardé qui sera perdu si vous quittez la page."
   
   default_role_manager: "Manager "
   default_role_developer: "Développeur "
@@ -923,6 +926,7 @@ fr:
   error_no_tracker_in_project: "Aucun tracker n'est associé à ce projet. Vérifier la configuration du projet."
   error_no_default_issue_status: "Aucun statut de demande n'est défini par défaut. Vérifier votre configuration (Administration -> Statuts de demandes)."
   text_journal_changed: "%{label} changé de %{old} à %{new}"
+  text_journal_changed_no_detail: "%{label} mis à jour"
   text_journal_set_to: "%{label} mis à %{value}"
   text_journal_deleted: "%{label} %{old} supprimé"
   text_journal_added: "%{label} %{value} ajouté"

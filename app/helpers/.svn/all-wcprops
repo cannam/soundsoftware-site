@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 36
-/svn/!svn/ver/4760/trunk/app/helpers
+/svn/!svn/ver/4990/trunk/app/helpers
 END
 trackers_helper.rb
 K 25
@@ -37,7 +37,7 @@ repositories_helper.rb
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/4613/trunk/app/helpers/repositories_helper.rb
+/svn/!svn/ver/4990/trunk/app/helpers/repositories_helper.rb
 END
 admin_helper.rb
 K 25
@@ -79,7 +79,7 @@ wiki_helper.rb
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/4375/trunk/app/helpers/wiki_helper.rb
+/svn/!svn/ver/4952/trunk/app/helpers/wiki_helper.rb
 END
 enumerations_helper.rb
 K 25
@@ -91,19 +91,19 @@ issues_helper.rb
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/4465/trunk/app/helpers/issues_helper.rb
-END
-gantt_helper.rb
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/4283/trunk/app/helpers/gantt_helper.rb
+/svn/!svn/ver/4954/trunk/app/helpers/issues_helper.rb
 END
 queries_helper.rb
 K 25
 svn:wc:ra_dav:version-url
 V 54
 /svn/!svn/ver/4387/trunk/app/helpers/queries_helper.rb
+END
+gantt_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4283/trunk/app/helpers/gantt_helper.rb
 END
 mail_handler_helper.rb
 K 25
@@ -135,17 +135,17 @@ svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/333/trunk/app/helpers/welcome_helper.rb
 END
-workflows_helper.rb
-K 25
-svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/1914/trunk/app/helpers/workflows_helper.rb
-END
 journals_helper.rb
 K 25
 svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/4062/trunk/app/helpers/journals_helper.rb
+END
+workflows_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/1914/trunk/app/helpers/workflows_helper.rb
 END
 reports_helper.rb
 K 25
@@ -153,11 +153,11 @@ svn:wc:ra_dav:version-url
 V 53
 /svn/!svn/ver/629/trunk/app/helpers/reports_helper.rb
 END
-custom_fields_helper.rb
+timelog_helper.rb
 K 25
 svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/4480/trunk/app/helpers/custom_fields_helper.rb
+V 54
+/svn/!svn/ver/3708/trunk/app/helpers/timelog_helper.rb
 END
 settings_helper.rb
 K 25
@@ -165,17 +165,11 @@ svn:wc:ra_dav:version-url
 V 55
 /svn/!svn/ver/4222/trunk/app/helpers/settings_helper.rb
 END
-timelog_helper.rb
+custom_fields_helper.rb
 K 25
 svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/3708/trunk/app/helpers/timelog_helper.rb
-END
-users_helper.rb
-K 25
-svn:wc:ra_dav:version-url
-V 52
-/svn/!svn/ver/4497/trunk/app/helpers/users_helper.rb
+V 60
+/svn/!svn/ver/4480/trunk/app/helpers/custom_fields_helper.rb
 END
 issue_moves_helper.rb
 K 25
@@ -183,11 +177,17 @@ svn:wc:ra_dav:version-url
 V 58
 /svn/!svn/ver/3936/trunk/app/helpers/issue_moves_helper.rb
 END
+users_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/4497/trunk/app/helpers/users_helper.rb
+END
 application_helper.rb
 K 25
 svn:wc:ra_dav:version-url
 V 58
-/svn/!svn/ver/4760/trunk/app/helpers/application_helper.rb
+/svn/!svn/ver/4900/trunk/app/helpers/application_helper.rb
 END
 auth_sources_helper.rb
 K 25

@@ -19,10 +19,53 @@ require 'redmine/scm/adapters/abstract_adapter'
 
 module Redmine
   module Scm
-    module Adapters    
+    module Adapters
       class GitAdapter < AbstractAdapter
+
+        SCM_GIT_REPORT_LAST_COMMIT = true
+
         # Git executable name
         GIT_BIN = Redmine::Configuration['scm_git_command'] || "git"
+
+        # raised if scm command exited with error, e.g. unknown revision.
+        class ScmCommandAborted < CommandFailed; end
+
+        class << self
+          def client_command
+            @@bin    ||= GIT_BIN
+          end
+
+          def sq_bin
+            @@sq_bin ||= shell_quote(GIT_BIN)
+          end
+
+          def client_version
+            @@client_version ||= (scm_command_version || [])
+          end
+
+          def client_available
+            !client_version.empty?
+          end
+
+          def scm_command_version
+            scm_version = scm_version_from_command_line.dup
+            if scm_version.respond_to?(:force_encoding)
+              scm_version.force_encoding('ASCII-8BIT')
+            end
+            if m = scm_version.match(%r{\A(.*?)((\d+\.)+\d+)})
+              m[2].scan(%r{\d+}).collect(&:to_i)
+            end
+          end
+
+          def scm_version_from_command_line
+            shellout("#{sq_bin} --version --no-color") { |io| io.read }.to_s
+          end
+        end
+
+        def initialize(url, root_url=nil, login=nil, password=nil, path_encoding=nil)
+          super
+          @flag_report_last_commit = SCM_GIT_REPORT_LAST_COMMIT
+        end
 
         def info
           begin
@@ -35,7 +78,7 @@ module Redmine
         def branches
           return @branches if @branches
           @branches = []
-          cmd = "#{GIT_BIN} --git-dir #{target('')} branch --no-color"
+          cmd = "#{self.class.sq_bin} --git-dir #{target('')} branch --no-color"
           shellout(cmd) do |io|
             io.each_line do |line|
               @branches << line.match('\s*\*?\s*(.*)$')[1]
@@ -46,20 +89,20 @@ module Redmine
 
         def tags
           return @tags if @tags
-          cmd = "#{GIT_BIN} --git-dir #{target('')} tag"
+          cmd = "#{self.class.sq_bin} --git-dir #{target('')} tag"
           shellout(cmd) do |io|
             @tags = io.readlines.sort!.map{|t| t.strip}
           end
         end
 
         def default_branch
-          branches.include?('master') ? 'master' : branches.first 
+          branches.include?('master') ? 'master' : branches.first
         end
-        
+
         def entries(path=nil, identifier=nil)
           path ||= ''
           entries = Entries.new
-          cmd = "#{GIT_BIN} --git-dir #{target('')} ls-tree -l "
+          cmd = "#{self.class.sq_bin} --git-dir #{target('')} ls-tree -l "
           cmd << shell_quote("HEAD:" + path) if identifier.nil?
           cmd << shell_quote(identifier + ":" + path) if identifier
           shellout(cmd)  do |io|
@@ -75,7 +118,7 @@ module Redmine
                  :path => full_path,
                  :kind => (type == "tree") ? 'dir' : 'file',
                  :size => (type == "tree") ? nil : size,
-                 :lastrev => lastrev(full_path,identifier)
+                 :lastrev => @flag_report_last_commit ? lastrev(full_path,identifier) : Revision.new
                 }) unless entries.detect{|entry| entry.name == name}
               end
             end
@@ -84,18 +127,17 @@ module Redmine
           entries.sort_by_name
         end
 
-        def lastrev(path,rev)
+        def lastrev(path, rev)
           return nil if path.nil?
-          cmd = "#{GIT_BIN} --git-dir #{target('')} log --no-color --date=iso --pretty=fuller --no-merges -n 1 "
-          cmd << " #{shell_quote rev} " if rev 
-          cmd <<  "-- #{shell_quote path} " unless path.empty?
+          cmd_args = %w|log --no-color --encoding=UTF-8 --date=iso --pretty=fuller --no-merges -n 1|
+          cmd_args << rev if rev 
+          cmd_args << "--" << path unless path.empty?
           lines = []
-          shellout(cmd) { |io| lines = io.readlines }
-          return nil if $? && $?.exitstatus != 0
+          scm_cmd(*cmd_args) { |io| lines = io.readlines }
           begin
               id = lines[0].split[1]
               author = lines[1].match('Author:\s+(.*)$')[1]
-              time = Time.parse(lines[4].match('CommitDate:\s+(.*)$')[1]).localtime
+              time = Time.parse(lines[4].match('CommitDate:\s+(.*)$')[1])
 
               Revision.new({
                 :identifier => id,
@@ -104,26 +146,29 @@ module Redmine
                 :time => time,
                 :message => nil, 
                 :paths => nil 
-              })
+                })
           rescue NoMethodError => e
               logger.error("The revision '#{path}' has a wrong format")
               return nil
           end
+        rescue ScmCommandAborted
+          nil
         end
 
         def revisions(path, identifier_from, identifier_to, options={})
           revisions = Revisions.new
+          cmd_args = %w|log --no-color --encoding=UTF-8 --raw --date=iso --pretty=fuller|
+          cmd_args << "--reverse" if options[:reverse]
+          cmd_args << "--all" if options[:all]
+          cmd_args << "-n" << "#{options[:limit].to_i}" if options[:limit]
+          from_to = ""
+          from_to << "#{identifier_from}.." if identifier_from
+          from_to << "#{identifier_to}" if identifier_to
+          cmd_args << from_to if !from_to.empty?
+          cmd_args << "--since=#{options[:since].strftime("%Y-%m-%d %H:%M:%S")}" if options[:since]
+          cmd_args << "--" << path if path && !path.empty?
 
-          cmd = "#{GIT_BIN} --git-dir #{target('')} log --no-color --raw --date=iso --pretty=fuller "
-          cmd << " --reverse " if options[:reverse]
-          cmd << " --all " if options[:all]
-          cmd << " -n #{options[:limit].to_i} " if options[:limit]
-          cmd << "#{shell_quote(identifier_from + '..')}" if identifier_from
-          cmd << "#{shell_quote identifier_to}" if identifier_to
-          cmd << " --since=#{shell_quote(options[:since].strftime("%Y-%m-%d %H:%M:%S"))}" if options[:since]
-          cmd << " -- #{shell_quote path}" if path && !path.empty?
-
-          shellout(cmd) do |io|
+          scm_cmd *cmd_args do |io|
             files=[]
             changeset = {}
             parsing_descr = 0  #0: not parsing desc or files, 1: parsing desc, 2: parsing files
@@ -200,8 +245,8 @@ module Redmine
               end
             end
           end
-
-          return nil if $? && $?.exitstatus != 0
+          revisions
+        rescue ScmCommandAborted
           revisions
         end
 
@@ -209,9 +254,9 @@ module Redmine
           path ||= ''
 
           if identifier_to
-            cmd = "#{GIT_BIN} --git-dir #{target('')} diff --no-color #{shell_quote identifier_to} #{shell_quote identifier_from}" 
+            cmd = "#{self.class.sq_bin} --git-dir #{target('')} diff --no-color #{shell_quote identifier_to} #{shell_quote identifier_from}" 
           else
-            cmd = "#{GIT_BIN} --git-dir #{target('')} show --no-color #{shell_quote identifier_from}"
+            cmd = "#{self.class.sq_bin} --git-dir #{target('')} show --no-color #{shell_quote identifier_from}"
           end
 
           cmd << " -- #{shell_quote path}" unless path.empty?
@@ -227,7 +272,7 @@ module Redmine
         
         def annotate(path, identifier=nil)
           identifier = 'HEAD' if identifier.blank?
-          cmd = "#{GIT_BIN} --git-dir #{target('')} blame -p #{shell_quote identifier} -- #{shell_quote path}"
+          cmd = "#{self.class.sq_bin} --git-dir #{target('')} blame -p #{shell_quote identifier} -- #{shell_quote path}"
           blame = Annotate.new
           content = nil
           shellout(cmd) { |io| io.binmode; content = io.read }
@@ -250,12 +295,12 @@ module Redmine
           end
           blame
         end
-        
+
         def cat(path, identifier=nil)
           if identifier.nil?
             identifier = 'HEAD'
           end
-          cmd = "#{GIT_BIN} --git-dir #{target('')} show --no-color #{shell_quote(identifier + ':' + path)}"
+          cmd = "#{self.class.sq_bin} --git-dir #{target('')} show --no-color #{shell_quote(identifier + ':' + path)}"
           cat = nil
           shellout(cmd) do |io|
             io.binmode
@@ -271,6 +316,18 @@ module Redmine
             identifier[0,8]
           end
         end
+
+        def scm_cmd(*args, &block)
+          repo_path = root_url || url
+          full_args = [GIT_BIN, '--git-dir', repo_path]
+          full_args += args
+          ret = shellout(full_args.map { |e| shell_quote e.to_s }.join(' '), &block)
+          if $? && $?.exitstatus != 0
+            raise ScmCommandAborted, "git exited with non-zero status: #{$?.exitstatus}"
+          end
+          ret
+        end
+        private :scm_cmd
       end
     end
   end

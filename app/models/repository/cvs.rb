@@ -19,16 +19,25 @@ require 'redmine/scm/adapters/cvs_adapter'
 require 'digest/sha1'
 
 class Repository::Cvs < Repository
-  validates_presence_of :url, :root_url
+  validates_presence_of :url, :root_url, :log_encoding
 
-  def scm_adapter
+  ATTRIBUTE_KEY_NAMES = {
+      "url"          => "CVSROOT",
+      "root_url"     => "Module",
+      "log_encoding" => "Commit messages encoding",
+    }
+  def self.human_attribute_name(attribute_key_name)
+    ATTRIBUTE_KEY_NAMES[attribute_key_name] || super
+  end
+
+  def self.scm_adapter_class
     Redmine::Scm::Adapters::CvsAdapter
   end
-  
+
   def self.scm_name
     'CVS'
   end
-  
+
   def entry(path=nil, identifier=nil)
     rev = identifier.nil? ? nil : changesets.find_by_revision(identifier)
     scm.entry(path, rev.nil? ? nil : rev.committed_on)
@@ -107,10 +116,11 @@ class Repository::Cvs < Repository
         tmp_time = revision.time.clone
         unless changes.find_by_path_and_revision(
 	           scm.with_leading_slash(revision.paths[0][:path]), revision.paths[0][:revision])
+          cmt = Changeset.normalize_comments(revision.message, repo_log_encoding)
           cs = changesets.find(:first, :conditions=>{
             :committed_on=>tmp_time - time_delta .. tmp_time + time_delta,
             :committer=>revision.author,
-            :comments=>Changeset.normalize_comments(revision.message)
+            :comments=>cmt
           })
         
           # create a new changeset.... 

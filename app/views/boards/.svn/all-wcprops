@@ -1,13 +1,13 @@
 K 25
 svn:wc:ra_dav:version-url
 V 41
-/svn/!svn/ver/4047/trunk/app/views/boards
+/svn/!svn/ver/4889/trunk/app/views/boards
 END
 show.rhtml
 K 25
 svn:wc:ra_dav:version-url
 V 52
-/svn/!svn/ver/3426/trunk/app/views/boards/show.rhtml
+/svn/!svn/ver/4889/trunk/app/views/boards/show.rhtml
 END
 _form.rhtml
 K 25

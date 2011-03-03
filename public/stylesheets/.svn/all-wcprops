@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 43
-/svn/!svn/ver/4782/trunk/public/stylesheets
+/svn/!svn/ver/4954/trunk/public/stylesheets
 END
 context_menu.css
 K 25
@@ -49,5 +49,5 @@ application.css
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/4782/trunk/public/stylesheets/application.css
+/svn/!svn/ver/4954/trunk/public/stylesheets/application.css
 END

@@ -303,6 +303,7 @@ en:
   field_assigned_to_role: "Assignee's role"
   field_text: Text field
   field_visible: Visible
+  field_warn_on_leaving_unsaved: "Warn me when leaving a page with unsaved text"
   
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
@@ -594,6 +595,7 @@ en:
   label_query: Custom query
   label_query_plural: Custom queries
   label_query_new: New query
+  label_my_queries: My custom queries
   label_filter_add: Add filter
   label_filter_plural: Filters
   label_equals: is
@@ -858,6 +860,7 @@ en:
   text_are_you_sure: Are you sure ?
   text_are_you_sure_with_children: "Delete issue and all child issues?"
   text_journal_changed: "%{label} changed from %{old} to %{new}"
+  text_journal_changed_no_detail: "%{label} updated"
   text_journal_set_to: "%{label} set to %{value}"
   text_journal_deleted: "%{label} deleted (%{old})"
   text_journal_added: "%{label} %{value} added"
@@ -908,6 +911,7 @@ en:
   text_own_membership_delete_confirmation: "You are about to remove some or all of your permissions and may no longer be able to edit this project after that.\nAre you sure you want to continue?"
   text_zoom_in: Zoom in
   text_zoom_out: Zoom out
+  text_warn_on_leaving_unsaved: "The current page contains unsaved text that will be lost if you leave this page."
   
   default_role_manager: Manager
   default_role_developer: Developer

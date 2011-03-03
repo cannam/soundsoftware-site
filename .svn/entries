@@ -1,14 +1,14 @@
 10
 
 dir
-4802
+4993
 http://redmine.rubyforge.org/svn/trunk
 http://redmine.rubyforge.org/svn
 
 
 
-2011-02-07T10:26:15.436891Z
-4802
+2011-03-03T05:51:46.224821Z
+4993
 tmaruyama
 has-props
 
@@ -29,42 +29,20 @@ e93f8b46-1217-0410-a6f0-8f06a7374b81
 test
 dir
 
-app
-dir
-
 .hgignore
 file
 
 
 
 
-2011-03-03T11:05:23.000000Z
-f7e1eefb3dfe776e3db86602594d9397
-2011-02-01T13:48:56.769696Z
-4787
+
+970b3ffe21e2c668737cf5abf0d0ac48
+2011-02-15T11:04:52.942730Z
+4834
 tmaruyama
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-342
+
+app
+dir
 
 log
 dir
@@ -103,6 +81,9 @@ jplang
 
 307
 
+extra
+dir
+
 README.rdoc
 file
 
@@ -137,9 +118,6 @@ edavis10
 
 208
 
-extra
-dir
-
 db
 dir
 
@@ -155,16 +133,22 @@ dir
 script
 dir
 
+doc
+dir
+
+config
+dir
+
 .gitignore
 file
 
 
 
 
-2011-03-03T11:05:23.000000Z
-7dcc6fd20b6e4c018dea1a2b9253aa46
-2011-02-01T13:48:56.769696Z
-4787
+2011-03-03T11:40:18.000000Z
+84dbba0b6ddcd80d28c62a3f8e344bc4
+2011-02-15T11:04:52.942730Z
+4834
 tmaruyama
 
 
@@ -187,13 +171,7 @@ tmaruyama
 
 
 
-348
-
-config
-dir
-
-doc
-dir
+477
 
 lib
 dir

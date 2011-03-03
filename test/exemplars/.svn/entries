@@ -1,7 +1,7 @@
 10
 
 dir
-4802
+4993
 http://redmine.rubyforge.org/svn/trunk/test/exemplars
 http://redmine.rubyforge.org/svn
 
@@ -774,40 +774,6 @@ edavis10
 
 481
 
-issue_exemplar.rb
-file
-
-
-
-
-2011-03-03T11:05:08.000000Z
-92ac53d6b3a2e00ae1a9e0e4bc5d548b
-2010-02-08T18:53:12.750770Z
-3398
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-449
-
 member_role_exemplar.rb
 file
 
@@ -842,16 +808,16 @@ edavis10
 
 250
 
-issue_status_exemplar.rb
+issue_exemplar.rb
 file
 
 
 
 
 2011-03-03T11:05:08.000000Z
-d17dfd87c9c081965089712a4ce42a6d
-2009-10-18T22:25:00.956502Z
-2930
+92ac53d6b3a2e00ae1a9e0e4bc5d548b
+2010-02-08T18:53:12.750770Z
+3398
 edavis10
 
 
@@ -874,7 +840,7 @@ edavis10
 
 
 
-182
+449
 
 tracker_exemplar.rb
 file
@@ -910,16 +876,16 @@ edavis10
 
 179
 
-subversion_repository_exemplar.rb
+issue_status_exemplar.rb
 file
 
 
 
 
 2011-03-03T11:05:08.000000Z
-908d8689f3ff469978b8af8bb55084b4
-2010-01-27T18:29:03.119133Z
-3340
+d17dfd87c9c081965089712a4ce42a6d
+2009-10-18T22:25:00.956502Z
+2930
 edavis10
 
 
@@ -942,7 +908,7 @@ edavis10
 
 
 
-235
+182
 
 time_entry_activity.rb
 file
@@ -978,14 +944,14 @@ edavis10
 
 236
 
-changeset_exemplar.rb
+subversion_repository_exemplar.rb
 file
 
 
 
 
 2011-03-03T11:05:08.000000Z
-c01820cc719616bb5a0895cfddb40798
+908d8689f3ff469978b8af8bb55084b4
 2010-01-27T18:29:03.119133Z
 3340
 edavis10
@@ -1010,7 +976,7 @@ edavis10
 
 
 
-377
+235
 
 role_exemplar.rb
 file
@@ -1045,6 +1011,40 @@ edavis10
 
 
 157
+
+changeset_exemplar.rb
+file
+
+
+
+
+2011-03-03T11:05:08.000000Z
+c01820cc719616bb5a0895cfddb40798
+2010-01-27T18:29:03.119133Z
+3340
+edavis10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+377
 
 comment_exemplar.rb
 file
