@@ -205,7 +205,9 @@ en:
   
   gui_validation_error: 1 error
   gui_validation_error_plural: "%{count} errors"
-  
+
+  field_ssamr_user_detail:
+    description: User Description  
     institution: Institution
 
   field_other_institution: ''
@@ -214,8 +216,8 @@ en:
   field_description: Description
   field_summary: Summary
   field_is_required: Required
-  field_firstname: Firstname
-  field_lastname: Lastname
+  field_firstname: First name
+  field_lastname: Last name
   field_mail: Email
   field_filename: File
   field_filesize: Size
@@ -441,6 +443,7 @@ en:
   label_tipoftheday: Tip of the day
   label_ssamr_details: Other Details
   label_ssamr_institution: Institution
+  label_ssamr_description: Research description
   label_user: User
   label_user_plural: Users
   label_user_new: New user
@@ -497,6 +500,7 @@ en:
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
+  label_home_heading: Welcome!
   label_my_page: My page
   label_my_account: My account
   label_my_projects: My projects
@@ -884,6 +888,7 @@ en:
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
   text_length_between: "Length between %{min} and %{max} characters."
+  text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
   text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
   text_tracker_no_workflow: No workflow defined for this tracker
   text_unallowed_characters: Unallowed characters

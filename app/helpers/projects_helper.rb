@@ -172,8 +172,6 @@ module ProjectsHelper
 
     original_project = @project
 
-    level = 0
-
     projects.each do |project|
       s << render_project_in_table(project, cycle('odd', 'even'), 0)
     end
@@ -181,9 +179,8 @@ module ProjectsHelper
     s << "</table>"
 
     @project = original_project
+
     s
-        level = 0
-        oddeven = cycle('odd','even')
   end
 
 
@@ -219,19 +216,11 @@ module ProjectsHelper
           end
           if mgrs.size < 3
             s << '<nobr>' << mgrs.join(', ') << '</nobr>'
-              mgrs << link_to_user(m)
-            end
-            if mgrs.size < 3
-              s << '<nobr>' << mgrs.join(', ') << '</nobr>'
           else
             s << mgrs.join(', ')
-            end
           end
         end
       end
-      s << "</tr>"
-
-      ancestors << project          
     end
 
     s << "</td>"
