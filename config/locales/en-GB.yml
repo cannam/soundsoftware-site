@@ -202,6 +202,8 @@ en-GB:
   gui_validation_error: 1 error
   gui_validation_error_plural: "%{count} errors"
   
+  field_ssamr_user_detail:
+    description: User Description
     institution: Institution
 
   field_other_institution: ''
