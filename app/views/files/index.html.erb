@@ -29,13 +29,19 @@
 	<% end -%>
   <% container.attachments.each do |file| %>		
   <tr class="file <%= cycle("odd", "even") %>">
-    <td class="active"><%=
-       if active_change_allowed
-         check_box_tag 'active', file.id, file.active?
-       else
-         image_tag('fav.png') if file.active?
-       end
-    %></td>
+    <td class="active">
+      <% if active_change_allowed
+           active_id = "active-" + file.id.to_s -%>
+        <div id="<%= active_id %>">
+        <%= link_to_remote image_tag(file.active? ? 'true.png' : 'false.png'),
+              :url => {:controller => 'attachments', :action => 'toggle_active', :project_id => @project.id, :id => file},
+              :update => active_id
+        %>
+        </div>
+      <% else -%>
+        <%= image_tag('fav.png') if file.active? %>
+      <% end -%>
+    </td>
     <td class="filename <%= "active" if file.active? %>"><%= link_to_attachment file, :download => true, :title => file.description %></td>
     <td class="created_on"><%= format_time(file.created_on) %></td>
     <td class="filesize"><%= number_to_human_size(file.filesize) %></td>
@@ -51,5 +57,7 @@
 <% end %>
   </tbody>
 </table>
+
+<%= l(:text_files_active_change) if active_change_allowed %>
 
 <% html_title(l(:label_attachment_plural)) -%>

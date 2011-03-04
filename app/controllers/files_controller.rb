@@ -34,4 +34,5 @@ class FilesController < ApplicationController
     end
     redirect_to project_files_path(@project)
   end
+
 end
