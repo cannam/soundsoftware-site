@@ -141,6 +141,8 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 #top-menu a.administration { background-image: url(../images/wrench.png); }
 #top-menu a.help { background-image: url(../../../images/help.png); }
 
+.file .active { font-weight: bold; }
+
 /* for Javadoc in Embedded context: */
 
 .TableHeadingColor { background-color: #fdf7e4; color: #3e442c; border: 0px solid #fff; }
