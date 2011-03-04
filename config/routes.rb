@@ -165,8 +165,6 @@ ActionController::Routing::Routes.draw do |map|
 
   end
 
-#  map.connect 'projects/:id/files/toggle_active', :controller => 'files', :action => 'toggle_active', :conditions => {:method => :post}
-
   # Destroy uses a get request to prompt the user before the actual DELETE request
   map.project_destroy_confirm 'projects/:id/destroy', :controller => 'projects', :action => 'destroy', :conditions => {:method => :get}
 
