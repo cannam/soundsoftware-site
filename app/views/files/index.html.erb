@@ -18,6 +18,7 @@
     <th></th>
   </tr></thead>
   <tbody>
+<% have_file = false %>
 <% @containers.each do |container| %>	
   <% next if container.attachments.empty? -%>
 	<% if container.is_a?(Version) -%>
@@ -30,6 +31,7 @@
   <% container.attachments.each do |file| %>		
   <tr class="file <%= cycle("odd", "even") %>">
     <td class="active">
+      <% have_file = true %>
       <% if active_change_allowed
            active_id = "active-" + file.id.to_s -%>
         <div id="<%= active_id %>">
@@ -58,6 +60,6 @@
   </tbody>
 </table>
 
-<%= l(:text_files_active_change) if active_change_allowed %>
+<%= l(:text_files_active_change) if active_change_allowed and have_file %>
 
 <% html_title(l(:label_attachment_plural)) -%>
