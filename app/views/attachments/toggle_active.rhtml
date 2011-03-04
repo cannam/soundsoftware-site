@@ -1,7 +1,7 @@
 <%=
 file = Attachment.find(params[:id])
 active_id = "active-" + file.id.to_s
-link_to_remote image_tag(file.active? ? 'true.png' : 'false.png'),
+link_to_remote image_tag(file.active? ? 'fav.png' : 'fav_off.png'),
   :url => {:controller => 'attachments', :action => 'toggle_active', :project_id => @project.id, :id => file},
   :update => active_id
 %>
