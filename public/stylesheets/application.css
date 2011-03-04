@@ -157,7 +157,7 @@ tr.changeset td.author { text-align: center; width: 15%; }
 tr.changeset td.committed_on { text-align: center; width: 15%; }
 
 table.files tr.file td { text-align: center; }
-table.files tr.file td.filename { text-align: left; padding-left: 24px; }
+table.files tr.file td.filename { text-align: left; }
 table.files tr.file td.digest { font-size: 80%; }
 
 table.members td.roles, table.memberships td.roles { width: 45%; }
