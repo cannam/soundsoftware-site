@@ -106,6 +106,10 @@ table.projects .level3 .firstcol { padding-left: 3em; }
 
 ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.95em }
 
+table.files tr.active td { padding-top: 0.5em; padding-bottom: 0.5em; }
+table.files .file .active { font-weight: bold; }
+table.files .file .description { font-weight: normal; color: #3e442c; }
+
 #top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 90%; /* height: 2em; */ margin: 0; padding: 0; padding-top: 0.5em; background-color: #3e442c; }
 #top-menu ul { margin-left: 10px; }
 #top-menu a { font-weight: bold; }
@@ -165,8 +169,6 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 #top-menu a.projects { background-image: url(../../../images/projects.png); }
 #top-menu a.administration { background-image: url(../images/wrench.png); }
 #top-menu a.help { background-image: url(../../../images/help.png); }
-
-.file .active { font-weight: bold; }
 
 /* for Javadoc in Embedded context: */
 
