@@ -37,15 +37,40 @@ h1 {
 
 body,p,h2,h3,h4,li,table,.wiki h1 { 
   font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; 
+  line-height: 1.34;
 }
 
 h2,h3,h4,.wiki h1 {
   color: #3e442c;
+  font-weight: bold;
+}
+
+.wiki h2,.wiki h3,.wiki h4 {
+  color: #000;
 }
 
 h2,.wiki h1 {
-    font-size: 1.8em;
+  font-size: 1.8em;
 }
+
+.wiki h2 {
+  margin-top: 1em;
+}
+
+.splitcontentleft p:first-child {
+  margin-top: 0;
+}
+
+div.attachments {
+  margin-top: 2em;
+}
+#wiki_add_attachment {
+  margin-top: 1.5em;
+}
+
+/* Hide these (the paragraph markers that show anchors) -- they confuse more than they help */
+a.wiki-anchor:hover { display: none; }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: none; }
 
 .box {
     padding: 6px;
@@ -98,7 +123,7 @@ ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c;
 #project-jump-box { float: right;  margin-right: 6px; margin-top: 5px; color: #000; }
 #project-ancestors-title {
     margin-bottom: 0px;
-    margin-left: 10px;
+    margin-left: 12px;
     margin-top: 6px;
     font-family: GilliusADFNo2, 'Gill Sans', Tahoma, sans-serif;
     font-weight: normal;
