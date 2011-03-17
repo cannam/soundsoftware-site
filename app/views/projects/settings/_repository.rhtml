@@ -12,10 +12,9 @@
 <% if !@repository || !@repository.url %>
 <ul><li><%= l(:text_settings_repo_creation) %></li></ul>
 <% end %>
+
 <p><%= label_tag('repository_scm', l(:label_scm)) %>
 <%= scm_select_tag(@repository) %>
-<%= repository_field_tags(f, @repository) if @repository %>
-
 
 <p>
 	<%= label_tag('repository_is_external', l(:label_is_external_repository)) %>

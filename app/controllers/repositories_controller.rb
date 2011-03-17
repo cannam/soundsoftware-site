@@ -45,6 +45,7 @@ class RepositoriesController < ApplicationController
       @repository.attributes = params[:repository]
       @repository.save
     end
+
     render(:update) do |page|
       page.replace_html "tab-content-repository", :partial => 'projects/settings/repository'
       if @repository && !@project.repository
