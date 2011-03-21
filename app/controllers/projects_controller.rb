@@ -190,6 +190,13 @@ class ProjectsController < ApplicationController
     @trackers = Tracker.all
     @repository ||= @project.repository
     @wiki ||= @project.wiki
+    
+    # luisf. change
+    if !@repository
+      @repository = Repository.factory(params[:repository_scm])
+      @repository.project = @project if @repository
+    end  
+    
   end
   
   def edit
