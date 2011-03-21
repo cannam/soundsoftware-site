@@ -929,6 +929,10 @@ en:
   text_zoom_in: Zoom in
   text_zoom_out: Zoom out
   text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here.<br>Please check again in ten minutes, and <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if there is any problem.
+  text_settings_repo_is_internal: The repository for this project is an internal Mercurial Repository, hosted by SoundSoftware.ac.uk. 
+  text_settings_repo_is_external: You are tracking an external repository, with a mirror Mercurial repository hosted by SoundSoftware.ac.uk.
+
+
   
   default_role_manager: Manager
   default_role_developer: Developer

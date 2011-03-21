@@ -9,12 +9,21 @@
 <%= error_messages_for 'repository' %>
 
 <div class="box tabular">
-<% if !@repository %>
-<ul><li><%= l(:text_settings_repo_creation) %></li></ul>
 
 
-
+<% if @repository %>
+   <% if @repository.is_external %>
+   <%= l(:text_settings_repo_is_external) %></ br>
+   <% else %>
+   <%= l(:text_settings_repo_is_internal) %></ br>
 <% end %>
+   <% else %>
+	<%= l(:text_settings_repo_creation) %></ br>
+<% end %>
+  
+
+
+
 
 <p>
 	<%= label_tag('repository_is_external', l(:label_is_external_repository)) %>
@@ -38,5 +47,5 @@
 <% end %>
 </div>
 
-<%= submit_tag((@repository.nil? || @repository.new_record?) ? l(:button_create) : l(:button_save), :onclick => remote_function(:url => { :controller => 'repositories', :action => 'edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)")) %>
+<%= submit_tag(l(:button_save), :onclick => remote_function(:url => { :controller => 'repositories', :action => 'edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)")) %>
 <% end %>
