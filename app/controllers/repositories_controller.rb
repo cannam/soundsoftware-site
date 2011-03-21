@@ -34,25 +34,13 @@ class RepositoriesController < ApplicationController
   
   rescue_from Redmine::Scm::Adapters::CommandFailed, :with => :show_error_command_failed
   
-  def ssamr_edit
-    @repository = @project.repository
-
-    if !@repository
-      @repository = Repository.factory(params[:repository_scm])
-      @repository.project = @project if @repository
-    end
-    if request.post? && @repository
-      @repository.attributes = params[:repository]
-      @repository.save
-    end
-  end
-  
-  
-  
   def edit
     @repository = @project.repository
 
     if !@repository
+
+      params[:repository_scm]='Mercurial'
+
       @repository = Repository.factory(params[:repository_scm])
       @repository.project = @project if @repository
     end
