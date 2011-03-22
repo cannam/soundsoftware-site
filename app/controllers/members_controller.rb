@@ -54,8 +54,8 @@ class MembersController < ApplicationController
             errors = members.collect {|m|
               m.errors.full_messages
             }.flatten.uniq
-
-            page.alert(l(:notice_failed_to_save_members, :errors => errors.join(', ')))
+            
+            # page.alert(l(:notice_failed_to_save_members, :errors => errors.join(', ')))
           }
         }
         
