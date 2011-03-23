@@ -954,3 +954,9 @@ en:
   enumeration_activities: Activities (time tracking)
   enumeration_system_activity: System Activity
 
+  label_manager_description: All powers including adding and removing members and adjusting project settings
+  label_developer_description: Can commit to repository and carry out most project editing tasks
+  label_reporter_description: Can submit bug reports; has read access for private projects
+
+  label_set_role_plural: Choose roles for new member
+
