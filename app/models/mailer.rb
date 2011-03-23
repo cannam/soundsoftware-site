@@ -31,6 +31,27 @@ class Mailer < ActionMailer::Base
     h = h.to_s.gsub(%r{\/.*$}, '') unless Redmine::Utils.relative_url_root.blank?
     { :host => h, :protocol => Setting.protocol }
   end
+
+
+
+  # Builds a tmail object used to email the specified user that he was added to a project
+  #
+  # Example:
+  #   add_to_project(user) => tmail object
+  #   Mailer.deliver_add_to_project(user) => sends an email to the registered user
+  def add_to_project(member, project)
+
+    user = User.find(member.user_id)
+
+    set_language_if_valid user.language
+    recipients user.mail
+    subject l(:mail_subject_register, Setting.app_title)
+    body :user => user,
+    :login_url => url_for(:controller => 'account', :action => 'login')
+    render_multipart('account_activated', body)
+  end
+
+
   
   # Builds a tmail object used to email recipients of the added issue.
   #
@@ -440,3 +461,7 @@ module TMail
     end
   end
 end
+
+
+
+
