@@ -10,17 +10,19 @@
 
 <div class="box tabular">
 
-
+<p>
 <% if @repository %>
+   <%= l(:text_settings_repo_explanation) %></ br>
    <% if @repository.is_external %>
-   <%= l(:text_settings_repo_is_external) %></ br>
+   <p><%= l(:text_settings_repo_is_external) %></ br>
    <% else %>
-   <%= l(:text_settings_repo_is_internal) %></ br>
+   <p><%= l(:text_settings_repo_is_internal) %></ br>
 <% end %>
    <% else %>
 	<%= l(:text_settings_repo_creation) %></ br>
 <% end %>
-  
+</p>
+
 
 
 
@@ -28,16 +30,17 @@
 <p>
 	<%= label_tag('repository_is_external', l(:label_is_external_repository)) %>
 	<%= check_box :repository, :is_external, :onclick => "toggle_ext_url()" %> 
-	<%= l(:setting_external_repository) %>
+	<br/><em><%= l(:setting_external_repository) %></em>
 </p>
 
 
 <p>
 	<%= label_tag('repository_external_url', l(:label_repository_external_url)) %>
-	<%= text_field :repository, :external_url, :disabled => true %> 
-	<%= l(:setting_external_repository_url) %>
+	<%= text_field :repository, :external_url, :disabled => !@repository.is_external %> 
+	<br/><em><%= l(:setting_external_repository_url) %></em>
 </p>
 
+<p><%= l(:text_settings_repo_need_help) %></p>
 
 </div>
 
