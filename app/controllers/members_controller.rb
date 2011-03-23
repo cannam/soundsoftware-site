@@ -32,7 +32,7 @@ class MembersController < ApplicationController
           members << @new_member
 
           # send notification to member
-          Mailer.deliver_add_to_project(@new_member, @project)
+          Mailer.deliver_added_to_project(@new_member, @project)
 
         end
       else
@@ -40,7 +40,7 @@ class MembersController < ApplicationController
         members << @new_member
         
         # send notification to member
-        Mailer.deliver_add_to_project(@new_member, @project)
+        Mailer.deliver_added_to_project(@new_member, @project)
         
       end
 

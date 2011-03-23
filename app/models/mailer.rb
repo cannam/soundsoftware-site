@@ -39,16 +39,16 @@ class Mailer < ActionMailer::Base
   # Example:
   #   add_to_project(user) => tmail object
   #   Mailer.deliver_add_to_project(user) => sends an email to the registered user
-  def add_to_project(member, project)
+  def added_to_project(member, project)
 
     user = User.find(member.user_id)
 
     set_language_if_valid user.language
     recipients user.mail
     subject l(:mail_subject_register, Setting.app_title)
-    body :user => user,
-    :login_url => url_for(:controller => 'account', :action => 'login')
-    render_multipart('account_activated', body)
+    body :project_url => url_for(:controller => 'project', :action => 'view'),
+        :project_name => project.name
+    render_multipart('added_to_project', body)
   end
 
 
