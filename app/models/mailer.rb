@@ -43,10 +43,6 @@ class Mailer < ActionMailer::Base
 
     user = User.find(member.user_id)
 
-    logger.debug "ABRACADABRA"
-    logger.debug project.name
-
-
     set_language_if_valid user.language
     recipients user.mail
     subject l(:mail_subject_added_to_project, Setting.app_title)
