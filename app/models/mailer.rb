@@ -43,10 +43,14 @@ class Mailer < ActionMailer::Base
 
     user = User.find(member.user_id)
 
+    logger.debug "ABRACADABRA"
+    logger.debug project.name
+
+
     set_language_if_valid user.language
     recipients user.mail
-    subject l(:mail_subject_register, Setting.app_title)
-    body :project_url => url_for(:controller => 'project', :action => 'view'),
+    subject l(:mail_subject_added_to_project, Setting.app_title)
+    body :project_url => url_for(:controller => 'projects', :action => 'show', :id => project.id),
         :project_name => project.name
     render_multipart('added_to_project', body)
   end
