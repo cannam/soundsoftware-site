@@ -85,7 +85,8 @@ else
 	    ;;
 	*)
 	    hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" ||
-	    git clone "$remote_repo" "$project_repo_mirror"
+	    git clone "$remote_repo" "$project_repo_mirror" ||
+	    hg clone "$remote_repo" "$project_repo_mirror"
 	    ;;
     esac && success=true
 

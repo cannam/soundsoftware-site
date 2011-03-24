@@ -14,13 +14,10 @@
 <% if @repository %>
    <%= l(:text_settings_repo_explanation) %></ br>
    <% if @repository.is_external %>
-   <p><%= l(:text_settings_repo_is_external) %></ br>
+     <p><%= l(:text_settings_repo_is_external) %></ br>
    <% else %>
-   <p><%= l(:text_settings_repo_is_internal) %></ br>
-<% end %>
-   <% else %>
-	<%= l(:text_settings_repo_creation) %></ br>
-<% end %>
+     <p><%= l(:text_settings_repo_is_internal) %></ br>
+   <% end %>
 </p>
 
 
@@ -36,7 +33,7 @@
 
 <p>
 	<%= label_tag('repository_external_url', l(:label_repository_external_url)) %>
-	<%= text_field :repository, :external_url, :disabled => !@repository.is_external %> 
+	<%= text_field :repository, :external_url, :disabled => !(@repository and @repository.is_external) %> 
 	<br/><em><%= l(:setting_external_repository_url) %></em>
 </p>
 
@@ -51,4 +48,9 @@
 </div>
 
 <%= submit_tag(l(:button_save), :onclick => remote_function(:url => { :controller => 'repositories', :action => 'edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)")) %>
+
+<% else %>
+   <%= l(:text_settings_repo_creation) %></ br>
+<% end %>
+
 <% end %>
