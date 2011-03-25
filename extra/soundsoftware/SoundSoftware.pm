@@ -25,6 +25,8 @@ section for the repository and so will be approved by hgwebdir?)
 
 4. Push to repo for private project: "Permitted" users only (as above)
 
+5. Push to any repo that is tracking an external repo: Refused always
+
 =head1 INSTALLATION
 
 Debian/ubuntu:
@@ -172,21 +174,27 @@ sub access_handler {
     print STDERR "SoundSoftware.pm: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
     print STDERR "SoundSoftware.pm: Accept: " . $r->headers_in->{Accept} . "\n";
 
-    if (!defined $read_only_methods{$method}) {
-	print STDERR "SoundSoftware.pm: Method is not read-only, authentication handler required\n";
-	return OK;
-    }
-
     my $dbh = connect_database($r);
     unless ($dbh) {
 	print STDERR "SoundSoftware.pm: Database connection failed!: " . $DBI::errstr . "\n";
 	return FORBIDDEN;
     }
 
-
-print STDERR "Connected to db, dbh is " . $dbh . "\n";
+    print STDERR "Connected to db, dbh is " . $dbh . "\n";
 
     my $project_id = get_project_identifier($dbh, $r);
+
+    if (!defined $read_only_methods{$method}) {
+        print STDERR "SoundSoftware.pm: Method is not read-only\n";
+        if (project_repo_is_readonly($dbh, $project_id, $r)) {
+            print STDERR "SoundSoftware.pm: Project repo is read-only, refusing access\n";
+	    return FORBIDDEN;
+        } else {
+	    print STDERR "SoundSoftware.pm: Project repo is read-write, authentication handler required\n";
+            return OK;
+        }
+    }
+
     my $status = get_project_status($dbh, $project_id, $r);
 
     $dbh->disconnect();
@@ -264,6 +272,34 @@ sub get_project_status {
     	} else {
 	    $ret = 2; # private
 	}
+    }
+    $sth->finish();
+    undef $sth;
+
+    $ret;
+}
+
+sub project_repo_is_readonly {
+    my $dbh = shift;
+    my $project_id = shift;
+    my $r = shift;
+
+    if (!defined $project_id or $project_id eq '') {
+        return 0; # nonexistent
+    }
+
+    my $sth = $dbh->prepare(
+        "SELECT repositories.is_external FROM repositories, projects WHERE projects.identifier = ? AND repositories.project_id = projects.id;"
+    );
+
+    $sth->execute($project_id);
+    my $ret = 0; # nonexistent
+    if (my @row = $sth->fetchrow_array) {
+        if ($row[0] eq "1" || $row[0] eq "t") {
+            $ret = 1; # read-only (i.e. external)
+        } else {
+            $ret = 0; # read-write
+        }
     }
     $sth->finish();
     undef $sth;
