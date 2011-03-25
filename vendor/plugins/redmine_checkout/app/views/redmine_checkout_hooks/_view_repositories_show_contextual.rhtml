@@ -26,6 +26,10 @@
     <% end %>
   </div>
   <% end%>
+  <% if repository.is_external? %>
+    <div class="bottomline"></div>
+    <p><%= l(:text_repository_external, :location => repository.external_url) %></p>
+  <% end %>
 </div>
 <div style="clear: left"></div>
 
