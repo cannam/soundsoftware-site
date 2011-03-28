@@ -936,7 +936,7 @@ en:
   text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
   text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.
   text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
-
+  text_repository_external: "The primary repository for this project is hosted at <code>{{location}}</code><br>This repository is a read-only copy which is updated automatically."
 
  
   default_role_manager: Manager
