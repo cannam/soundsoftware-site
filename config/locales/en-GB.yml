@@ -482,7 +482,6 @@ en-GB:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
-  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
@@ -974,3 +973,7 @@ en-GB:
   label_reporter_description: Can submit bug reports; has read access for private projects
 
   label_set_role_plural: Choose roles for new member
+  notice_added_to_project: 'You have been added to the project "{{project_name}}".'
+  notice_project_homepage: "You can visit the project using the following link: {{project_url}}"
+  mail_subject_added_to_project: "You've been added to a project on {{value}}"
+  

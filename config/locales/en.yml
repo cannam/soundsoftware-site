@@ -493,8 +493,6 @@ en:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
-  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
-  label_accept_terms_and_conditions: I have read the terms and conditions and fully accept them
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
@@ -972,3 +970,11 @@ en:
 
   label_set_role_plural: Choose roles for new member
 
+  label_manager_description: All powers including adding and removing members and adjusting project settings
+  label_developer_description: Can commit to repository and carry out most project editing tasks
+  label_reporter_description: Can submit bug reports; has read access for private projects
+
+  label_set_role_plural: Choose roles for new member
+  notice_added_to_project: 'You have been added to the project "{{project_name}}".'
+  notice_project_homepage: "You can visit the project using the following link: {{project_url}}"
+  mail_subject_added_to_project: "You've been added to a project on {{value}}"
