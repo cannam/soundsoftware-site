@@ -8,8 +8,9 @@ class FilesController < ApplicationController
   include SortHelper
 
   def index
-    sort_init 'filename', 'asc'
+    sort_init 'active', 'asc'
     sort_update 'filename' => "#{Attachment.table_name}.filename",
+		'active' => "#{Attachment.table_name}.active",
                 'created_on' => "#{Attachment.table_name}.created_on",
                 'size' => "#{Attachment.table_name}.filesize",
                 'downloads' => "#{Attachment.table_name}.downloads"
@@ -33,4 +34,5 @@ class FilesController < ApplicationController
     end
     redirect_to project_files_path(@project)
   end
+
 end
