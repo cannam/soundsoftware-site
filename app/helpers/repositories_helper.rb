@@ -145,13 +145,19 @@ module RepositoriesHelper
     send(method, form, repository) if repository.is_a?(Repository) && respond_to?(method) && method != 'repository_field_tags'
   end
   
+  
+  def ssamr_scm_update(repository)
+    check_box_tag('repository_scm', value = "1", checked = false, onchange => remote_function(:url => { :controller => 'repositories', :action => 'ssamr_edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)"))
+  
+  end
+  
   def scm_select_tag(repository)
     scm_options = [["--- #{l(:actionview_instancetag_blank_option)} ---", '']]
     Redmine::Scm::Base.all.each do |scm|
       scm_options << ["Repository::#{scm}".constantize.scm_name, scm] if Setting.enabled_scm.include?(scm) || (repository && repository.class.name.demodulize == scm)
     end
     
-    select_tag('repository_scm', 
+    select_tag('repository_scm',
                options_for_select(scm_options, repository.class.name.demodulize),
                :disabled => (repository && !repository.new_record?),
                :onchange => remote_function(:url => { :controller => 'repositories', :action => 'edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)")

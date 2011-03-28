@@ -28,12 +28,24 @@ class MembersController < ApplicationController
       attrs = params[:member].dup
       if (user_ids = attrs.delete(:user_ids))
         user_ids.each do |user_id|
-          members << Member.new(attrs.merge(:user_id => user_id))
+          @new_member = Member.new(attrs.merge(:user_id => user_id))
+          members << @new_member
+
+          # send notification to member
+          Mailer.deliver_added_to_project(@new_member, @project)
+
         end
       else
-        members << Member.new(attrs)
+        @new_member = Member.new(attrs)
+        members << @new_member
+        
+        # send notification to member
+        Mailer.deliver_added_to_project(@new_member, @project)
+        
       end
+
       @project.members << members
+
     end
     respond_to do |format|
       if members.present? && members.all? {|m| m.valid? }
