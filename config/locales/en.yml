@@ -306,9 +306,9 @@ en:
   field_text: Text field
   field_visible: Visible
  
-  setting_external_repository: "In the case you wish to follow an external repository"
-  setting_external_repository_url: "The external repository URL"
-  label_repository_external_url: "External rep URL"
+  setting_external_repository: "Select this if the project's main repository is hosted somewhere else"
+  setting_external_repository_url: "The URL of the existing external repository. Must be publicly accessible without a password"
+  label_repository_external_url: "External repository URL"
   setting_tipoftheday_text: Tip of the Day
   setting_notifications_text: Notifications
   field_terms_and_conditions: 'Terms and Conditions:'
@@ -634,7 +634,7 @@ en:
   label_not_contains: doesn't contain
   label_day_plural: days
   label_repository: Repository
-  label_is_external_repository: External?
+  label_is_external_repository: Track an external repository
   label_repository_plural: Repositories
   label_browse: Browse
   label_modification: "{{count}} change"
@@ -918,7 +918,7 @@ en:
   text_enumeration_destroy_question: "{{count}} objects are assigned to this value."
   text_enumeration_category_reassign_to: 'Reassign them to this value:'
   text_email_delivery_not_configured: "Email delivery is not configured, and notifications are disabled.\nConfigure your SMTP server in config/email.yml and restart the application to enable them."
-  text_repository_usernames_mapping: "Select or update the Redmine user mapped to each username found in the repository log.\nUsers with the same Redmine and repository username or email are automatically mapped."
+  text_repository_usernames_mapping: "Select the project member associated with each username found in the repository log.\nUsers whose name or email matches that in the repository are mapped automatically."
   text_diff_truncated: '... This diff was truncated because it exceeds the maximum size that can be displayed.'
   text_custom_field_possible_values_info: 'One line for each value'
   text_wiki_page_destroy_question: "This page has {{descendants}} child page(s) and descendant(s). What do you want to do?"
@@ -929,9 +929,11 @@ en:
   text_zoom_in: Zoom in
   text_zoom_out: Zoom out
   text_files_active_change: <br>Click the star to switch active status for a download on or off.<br>Active files will be shown more prominently in the download page.
-  text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here.<br>Please check again in ten minutes, and <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if there is any problem.
-  text_settings_repo_is_internal: The repository for this project is an internal Mercurial Repository, hosted by SoundSoftware.ac.uk. 
-  text_settings_repo_is_external: You are tracking an external repository, with a mirror Mercurial repository hosted by SoundSoftware.ac.uk.
+  text_settings_repo_creation: <b>Creating repository...</b></p><p>The source code repository for a project will be set up automatically within a few minutes of the project being created.</p><p>Please check again in five minutes, and <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if there is any problem.</p><p>If you wish to use this project to track a repository that is already hosted somewhere else, please wait until the repository has been created here and then return to this settings page to configure it.</p><p>If you don't want a repository at all, go to the Modules tab and switch it off there.
+  text_settings_repo_explanation: <b>External repositories</b><p>Normally your project's primary repository will be the Mercurial repository hosted at this site.<p>However, if you already have your project hosted somewhere else, you can specify your existing external repository's URL here &ndash; then this site will track that repository in a read-only &ldquo;mirror&rdquo; copy.  External Mercurial, git and Subversion repositories can be tracked. Note that you cannot switch to an external repository if you have already made any commits to the repository hosted here.
+  text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
+  text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.
+  text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
 
 
  

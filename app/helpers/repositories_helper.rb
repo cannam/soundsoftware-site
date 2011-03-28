@@ -145,12 +145,6 @@ module RepositoriesHelper
     send(method, form, repository) if repository.is_a?(Repository) && respond_to?(method) && method != 'repository_field_tags'
   end
   
-  
-  def ssamr_scm_update(repository)
-    check_box_tag('repository_scm', value = "1", checked = false, onchange => remote_function(:url => { :controller => 'repositories', :action => 'ssamr_edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)"))
-  
-  end
-  
   def scm_select_tag(repository)
     scm_options = [["--- #{l(:actionview_instancetag_blank_option)} ---", '']]
     Redmine::Scm::Base.all.each do |scm|

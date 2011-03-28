@@ -9,12 +9,12 @@
 #    reposman [OPTIONS...] -s [DIR] -r [HOST]
 #     
 #  Examples:
-#    reposman --svn-dir=/var/svn --redmine-host=redmine.example.net --scm subversion
+#    reposman --scm-dir=/var/svn --redmine-host=redmine.example.net --scm subversion
 #    reposman -s /var/git -r redmine.example.net -u http://svn.example.net --scm git
 #
 # == Arguments (mandatory)
 #
-#   -s, --svn-dir=DIR         use DIR as base directory for svn repositories
+#   -s, --scm-dir=DIR         use DIR as base directory for repositories
 #   -r, --redmine-host=HOST   assume Redmine is hosted on HOST. Examples:
 #                             -r redmine.example.net
 #                             -r http://redmine.example.net
@@ -70,7 +70,7 @@ Version = "1.3"
 SUPPORTED_SCM = %w( Subversion Darcs Mercurial Bazaar Git Filesystem )
 
 opts = GetoptLong.new(
-                      ['--svn-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--scm-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
                       ['--redmine-host', '-r', GetoptLong::REQUIRED_ARGUMENT],
                       ['--key',          '-k', GetoptLong::REQUIRED_ARGUMENT],
                       ['--owner',        '-o', GetoptLong::REQUIRED_ARGUMENT],
@@ -133,7 +133,7 @@ end
 begin
   opts.each do |opt, arg|
     case opt
-    when '--svn-dir';        $repos_base   = arg.dup
+    when '--scm-dir';        $repos_base   = arg.dup
     when '--redmine-host';   $redmine_host = arg.dup
     when '--key';            $api_key      = arg.dup
     when '--owner';          $svn_owner    = arg.dup; $use_groupid = false;
@@ -174,7 +174,7 @@ if ($redmine_host.empty? or $repos_base.empty?)
 end
 
 unless File.directory?($repos_base)
-  log("directory '#{$repos_base}' doesn't exists", :exit => true)
+  log("directory '#{$repos_base}' doesn't exist", :exit => true)
 end
 
 begin
@@ -184,7 +184,7 @@ rescue LoadError
 end
 
 class Project < ActiveResource::Base
-  self.headers["User-agent"] = "Redmine repository manager/#{Version}"
+  self.headers["User-agent"] = "SoundSoftware repository manager/#{Version}"
 end
 
 log("querying Redmine for projects...", :level => 1);
@@ -344,6 +344,15 @@ projects.each do |project|
     end
 
     log("\trepository #{repos_path} created");
+  end
+
+  if project.respond_to?(:repository) and project.repository.is_external?
+    external_url = project.repository.external_url;
+    log("\tproject #{project.identifier} has external repository url #{external_url}");
+    if !external_url.match(/^https?:/)
+      # wot about git, svn/svn+ssh, etc? should we just check for a scheme at all?
+      log("\tthis is not an http(s) url: ignoring");
+    end
   end
 
 end
