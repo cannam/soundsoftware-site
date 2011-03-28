@@ -151,7 +151,7 @@ module RepositoriesHelper
       scm_options << ["Repository::#{scm}".constantize.scm_name, scm] if Setting.enabled_scm.include?(scm) || (repository && repository.class.name.demodulize == scm)
     end
     
-    select_tag('repository_scm', 
+    select_tag('repository_scm',
                options_for_select(scm_options, repository.class.name.demodulize),
                :disabled => (repository && !repository.new_record?),
                :onchange => remote_function(:url => { :controller => 'repositories', :action => 'edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)")

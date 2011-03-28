@@ -296,6 +296,9 @@ en-GB:
   field_group_by: Group results by
   field_sharing: Sharing
   
+  setting_external_repository: "In the case you wish to follow an external repository"
+  setting_external_repository_url: "The external repository URL"
+  label_repository_external_url: "External rep URL"
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
   setting_welcome_text: Welcome text
@@ -479,6 +482,7 @@ en-GB:
   label_information_plural: Information
   label_please_login: Please log in
   label_register: Register
+  label_terms_and_conditions: Terms & Conditions for use of code.soundsoftware.ac.uk
   label_login_with_open_id_option: or login with OpenID
   label_password_lost: Lost password
   label_home: Home
@@ -619,6 +623,7 @@ en-GB:
   label_not_contains: doesn't contain
   label_day_plural: days
   label_repository: Repository
+  label_is_external_repository: External?
   label_repository_plural: Repositories
   label_browse: Browse
   label_modification: "{{count}} change"
@@ -901,6 +906,9 @@ en-GB:
   text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here; please check again in ten minutes.
   text_files_active_change: <br>Click the star to switch active status for a download on or off.<br>Active files will be shown more prominently in the download page.
   
+  text_settings_repo_is_internal: The repository for this project is an internal Mercurial Repository, hosted by SoundSoftware.ac.uk. 
+  text_settings_repo_is_external: You are tracking an external repository, with a mirror Mercurial repository hosted by SoundSoftware.ac.uk.
+
   default_role_manager: Manager
   default_role_developer: Developer
   default_role_reporter: Reporter
