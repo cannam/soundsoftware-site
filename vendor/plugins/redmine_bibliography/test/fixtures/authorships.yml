@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  author_id: 
+  publication_id: 
+  name_on_paper: 
+  order: 
+  institution: 
+  email: MyString
+two:
+  id: 2
+  author_id: 
+  publication_id: 
+  name_on_paper: 
+  order: 
+  institution: 
+  email: MyString
