@@ -21,6 +21,8 @@
     <p>
     <% if User.current.logged? %>
       <% if default_protocol %><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %><% end %>
+    <% else %>
+      &nbsp;
     <% end %>
     </p>
 
