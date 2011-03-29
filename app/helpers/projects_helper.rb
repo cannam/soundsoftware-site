@@ -201,7 +201,7 @@ module ProjectsHelper
     s << "</div>"
     unless project.description.blank?
       s << "<div class='wiki description'>"
-      s << textilizable(project.short_description, :project => project)
+      s << textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
       s << "</div>"
     end
       
