@@ -127,7 +127,8 @@ module ProjectsHelper
           else
             s << " <span class='private'>" << l("field_is_private") << "</span>"
           end
-          s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
+          desc = textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
+          s << "<div class='wiki description'>#{desc}</div>" unless project.description.blank?
           s << "</div>\n"
           ancestors << project
         end
