@@ -1,5 +1,7 @@
 <h2>Publications#index</h2>
 
 <% @publications.each do |publication| %>
-	<%= publication.id %>
+	
+	<p><%= publication.id %>: <%=publication.title %></p>
+	
 <% end %>

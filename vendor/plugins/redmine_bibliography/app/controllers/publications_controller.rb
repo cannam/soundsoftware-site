@@ -1,11 +1,11 @@
 class PublicationsController < ApplicationController
 
   def new
-    @publication = Publication.new()
+    @publication = Publication.new(params[:publication])
   end
 
   def create
-    @publication.save!
+    @publication.save
   end
 
   def index
