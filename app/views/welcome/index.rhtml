@@ -33,9 +33,9 @@
 		<ul>
 		<% for project in @projects %>
 		  <% @project = project %>
-			<li>
+			<li class="latest">
 			<%= link_to_project project %> (<%= format_time(project.created_on) %>)
-			<%= textilizable project.short_description, :project => project %>
+			<%= render_project_short_description project %>
 			</li>
 		<% end %>
     <% @project = nil %>
