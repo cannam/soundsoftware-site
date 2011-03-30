@@ -20,7 +20,11 @@
 
     <p>
     <% if User.current.logged? %>
+      <% if repository.is_external? %>
+      <%=l :label_access_type_all, :type => l(:label_access_read_only) %>
+      <% else %>
       <% if default_protocol %><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %><% end %>
+      <% end %>
     <% else %>
       &nbsp;
     <% end %>
