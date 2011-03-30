@@ -48,6 +48,16 @@ module ProjectsHelper
     options << project_tree_options_for_select(project.allowed_parents.compact, :selected => selected)
     content_tag('select', options, :name => 'project[parent_id]', :id => 'project_parent_id')
   end
+
+  def render_project_short_description(project)
+    s = ''
+    if (project.short_description)
+      s << "<div class='description'>"
+      s << textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
+      s << "</div>"
+    end
+    s
+  end
   
   # Renders a tree of projects as a nested set of unordered lists
   # The given collection may be a subset of the whole project tree
@@ -73,7 +83,7 @@ module ProjectsHelper
         classes = (ancestors.empty? ? 'root' : 'child')
         s << "<li class='#{classes}'><div class='#{classes}'>" +
                link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
-        s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
+        s << render_project_short_description(project)
         s << "</div>\n"
         ancestors << project
       end
@@ -127,8 +137,7 @@ module ProjectsHelper
           else
             s << " <span class='private'>" << l("field_is_private") << "</span>"
           end
-          desc = textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
-          s << "<div class='wiki description'>#{desc}</div>" unless project.description.blank?
+          s << render_project_short_description(project)
           s << "</div>\n"
           ancestors << project
         end
@@ -199,11 +208,7 @@ module ProjectsHelper
     s << " no_description" if project.description.blank?
     s << "'>" << link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}");
     s << "</div>"
-    unless project.description.blank?
-      s << "<div class='wiki description'>"
-      s << textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
-      s << "</div>"
-    end
+    s << render_project_short_description(project)
       
     s << "<td class='managers' align=top>"
 
