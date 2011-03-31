@@ -819,6 +819,7 @@ en:
   label_project_copy_notifications: Send email notifications during the project copy
   label_principal_search: "Search by name:"
   label_user_search: "Search for user:"
+  label_has_welcome_page: "Use custom overview page"
   
   button_login: Login
   button_submit: Submit
@@ -864,6 +865,7 @@ en:
   button_quote: Quote
   button_duplicate: Duplicate
   button_show: Show
+  button_welcome_page_edit: Edit custom overview page
   
   status_active: active
   status_registered: registered
@@ -945,6 +947,7 @@ en:
   text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
   text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.
   text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
+  text_has_welcome_page_info: Select this to use your own wiki-editable information page instead of the standard project overview.<br>Please edit the page using the link below and put something in it, before you enable this setting!<br><b>Note:</b> You must enable the Wiki module for this link to work.<br>
 
  
   default_role_manager: Manager

@@ -4,7 +4,9 @@
 	<% end %>
 </div>
 
+<% if @project.has_welcome_page %>
 <% page = @project.wiki.find_page("Overview") %>
+<% end %>
 
 <% if page %>
 

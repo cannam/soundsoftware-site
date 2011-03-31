@@ -217,7 +217,15 @@ class ProjectsController < ApplicationController
       end
     end
   end
-  
+
+  def overview
+    @project.has_welcome_page = params[:has_welcome_page]
+    if @project.save
+      flash[:notice] = l(:notice_successful_update)
+    end
+    redirect_to :action => 'settings', :id => @project, :tab => 'overview'
+  end
+
   def modules
     @project.enabled_module_names = params[:enabled_modules]
     flash[:notice] = l(:notice_successful_update)
