@@ -24,14 +24,15 @@ class MyController < ApplicationController
   BLOCKS = { 'issuesassignedtome' => :label_assigned_to_me_issues,
              'issuesreportedbyme' => :label_reported_issues,
              'issueswatched' => :label_watched_issues,
+             'activitymyprojects' => :label_activity_my_recent,
              'news' => :label_news_latest,
              'calendar' => :label_calendar,
              'documents' => :label_document_plural,
              'timelog' => :label_spent_time
            }.merge(Redmine::Views::MyPage::Block.additional_blocks).freeze
 
-  DEFAULT_LAYOUT = {  'left' => ['issuesassignedtome'], 
-                      'right' => ['issuesreportedbyme'] 
+  DEFAULT_LAYOUT = {  'left' => ['activitymyprojects'], 
+                      'right' => ['issueswatched','calendar'] 
                    }.freeze
 
   verify :xhr => true,

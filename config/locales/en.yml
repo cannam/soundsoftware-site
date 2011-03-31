@@ -518,6 +518,9 @@ en:
   label_last_login: Last connection
   label_registered_on: Registered on
   label_activity: Activity
+  label_activity_recent: Recent activity
+  label_activity_my_recent: Recent activity in my projects
+  label_activity_my_recent_none: No recent activity
   label_overall_activity: Overall activity
   label_user_activity: "{{value}}'s activity"
   label_new: New
