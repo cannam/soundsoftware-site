@@ -12,6 +12,7 @@ logfile="/var/www/test-cannam/log/extract-docs.log"
 redgrp="redmine"
 
 apikey=""
+apischeme="https"
 apihost=""
 apiuser=""
 apipass=""
@@ -36,9 +37,9 @@ enable_embedded()
     p="$1"
     if [ -n "$apikey" ]; then
 	if [ -n "$apiuser" ]; then
-	    sudo -u docgen curl -u "$apiuser":"$apipass" "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
+	    sudo -u docgen curl -u "$apiuser":"$apipass" "$apischeme://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
 	else
-	    sudo -u docgen curl "http://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
+	    sudo -u docgen curl "$apischeme://$apihost/sys/projects/$p/embedded.xml?enable=1&key=$apikey" -d ""
 	fi
     else 
 	echo "Can't enable Embedded, API not configured" 1>&2
