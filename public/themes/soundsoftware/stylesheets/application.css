@@ -116,13 +116,14 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
 #header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #fdfbf5; border-bottom: 2px solid #a9b680; /* height:80px; */ padding: 20px 0 0.5em 0; margin-bottom: 0; }
 #header a { color: #be5700; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
+#header #project-title a, #header #project-title a:hover { color: #525a38; text-decoration: none; }
 .header-general h1 {
   background: url('soundsoftware-logo-title-only-transparent-beta.png') no-repeat 0 0;
   text-indent: -9999px;
   width: 500px;
   height: 34px;
  }
- 
+
 #quick-search { margin-right: 6px; margin-top: 1em; color: #000; }
 #project-jump-box { float: right;  margin-right: 6px; margin-top: 5px; color: #000; }
 #project-ancestors-title {
