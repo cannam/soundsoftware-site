@@ -216,6 +216,7 @@ td.center {text-align:center;}
 h3.version { background: url(../images/package.png) no-repeat 0% 50%; padding-left: 20px; }
 
 div.issues h3 { background: url(../images/ticket.png) no-repeat 0% 50%; padding-left: 20px; }
+div.activity h3 { background: url(../images/ticket.png) no-repeat 0% 50%; padding-left: 20px; }
 div.members h3 { background: url(../images/group.png) no-repeat 0% 50%; padding-left: 20px; }
 div.news h3 { background: url(../images/news.png) no-repeat 0% 50%; padding-left: 20px; }
 div.projects h3 { background: url(../images/projects.png) no-repeat 0% 50%; padding-left: 20px; }
@@ -294,6 +295,7 @@ div#issue-changesets div.changeset { border-bottom: 1px solid #ddd; }
 div#issue-changesets p { margin-top: 0; margin-bottom: 1em;}
 
 div#activity dl, #search-results { margin-left: 2em; }
+div#activity .box dl { margin-left: 0; }
 div#activity dd, #search-results dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
 div#activity dt, #search-results dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; background-position: 0 50%; background-repeat: no-repeat; }
 div#activity dt.me .time { border-bottom: 1px solid #999; }

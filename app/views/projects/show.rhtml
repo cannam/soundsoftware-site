@@ -46,7 +46,9 @@
 			<% end %>
 		</p>
   </div>
+
   <% end %>
+
   <%= call_hook(:view_projects_show_left, :project => @project) %>
 </div>
 
@@ -60,6 +62,9 @@
     <p><%= link_to l(:label_news_view_all), :controller => 'news', :action => 'index', :project_id => @project %></p>
   </div>  
   <% end %>
+
+  <%= render :partial => 'activities/recent' %>
+
   <%= call_hook(:view_projects_show_right, :project => @project) %>
 </div>
 
