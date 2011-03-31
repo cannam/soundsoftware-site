@@ -23,7 +23,8 @@
 	<% end %>
 	</ul>	
 
-  <% if User.current.allowed_to?(:view_issues, @project) %>
+  <% if User.current.allowed_to?(:view_issues, @project) and @open_issues_by_tracker.values.any? %>
+
   <div class="issues box">    
     <h3><%=l(:label_issue_tracking)%></h3>
     <ul>
@@ -46,6 +47,7 @@
 			<% end %>
 		</p>
   </div>
+
   <% end %>
   <%= call_hook(:view_projects_show_left, :project => @project) %>
 </div>
