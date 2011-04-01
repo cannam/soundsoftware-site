@@ -373,6 +373,7 @@ en:
   setting_rest_api_enabled: Enable REST web service
   setting_cache_formatted_text: Cache formatted text
   setting_default_notification_option: Default notification option
+  setting_has_welcome_page: Select this to replace the project overview page with your own welcome page
   
   permission_add_project: Create project
   permission_add_subprojects: Create subprojects
@@ -819,6 +820,8 @@ en:
   label_project_copy_notifications: Send email notifications during the project copy
   label_principal_search: "Search by name:"
   label_user_search: "Search for user:"
+  label_welcome_page: "Welcome page"
+  label_has_welcome_page: "Use your own welcome page"
   
   button_login: Login
   button_submit: Submit
@@ -864,6 +867,7 @@ en:
   button_quote: Quote
   button_duplicate: Duplicate
   button_show: Show
+  button_welcome_page_edit: Create or edit welcome page
   
   status_active: active
   status_registered: registered
@@ -945,6 +949,8 @@ en:
   text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
   text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.
   text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
+  text_has_welcome_page_info: <b>Welcome page</b><p>You can replace the standard {{overview_link}} page for this project with your own welcome page.<br>This page will be editable using the project Wiki.
+  text_has_welcome_page_wiki_disabled: <b>Note:</b> You must enable the Wiki module in the {{modules_link}} tab before you can create or edit this page.
 
  
   default_role_manager: Manager

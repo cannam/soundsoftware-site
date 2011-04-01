@@ -138,6 +138,7 @@ ActionController::Routing::Routes.draw do |map|
     :copy => [:get, :post],
     :settings => :get,
     :modules => :post,
+    :overview => :post,
     :archive => :post,
     :unarchive => :post
   } do |project|
