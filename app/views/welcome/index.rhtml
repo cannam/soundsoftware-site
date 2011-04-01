@@ -9,6 +9,10 @@
 <div class="splitcontentleft">
   <%= textilizable Setting.welcome_text %>
   
+  <%= call_hook(:view_welcome_index_left, :projects => @projects) %>
+</div>
+
+<div class="splitcontentright">
   <% if @news.any? %>
   <div class="news box">
 	<h3><%=l(:label_news_latest)%></h3>
@@ -16,17 +20,6 @@
 		<%= link_to l(:label_news_view_all), :controller => 'news' %>
   </div>
   <% end %>
-  <%= call_hook(:view_welcome_index_left, :projects => @projects) %>
-</div>
-
-<div class="splitcontentright">
-  <% if not @tipsoftheday.empty? %>
-    <div class="newsoftheday box">
-          <h3><%=l(:label_tipoftheday)%></h3>
-          <%= textilizable @tipsoftheday %>
-    </div>
-  <% end %>
-
     <% if @projects.any? %>
 	<div class="projects box">
 	<h3><%=l(:label_project_latest)%></h3>
