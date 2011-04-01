@@ -2,6 +2,12 @@
 <% max = 5 %>
 <% if (events.nil?) 
      activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
+     if @project
+        # Don't show news (duplicated with News box) or wiki edits (too
+	# tedious) in project front page
+        activity.scope = [ "changesets", "files", "issues", "documents" ]
+     end
+
      events = activity.events(Date.today - 28, Date.today + 1).first(max)
    end
 %>
