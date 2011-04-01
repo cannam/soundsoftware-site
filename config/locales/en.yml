@@ -753,6 +753,7 @@ en:
   label_added_time_by: "Added by {{author}} {{age}} ago"
   label_updated_time_by: "Updated by {{author}} {{age}} ago"
   label_updated_time: "Updated {{value}} ago"
+  label_time_ago: "{{age}} ago"
   label_jump_to_a_project: Jump to a project...
   label_file_plural: Downloads
   label_changeset_plural: Changesets
