@@ -263,12 +263,17 @@ class ApplicationController < ActionController::Base
         uri = URI.parse(back_url)
         # do not redirect user to another host or to the login or register page
         if (uri.relative? || (uri.host == request.host)) && !uri.path.match(%r{/(login|account/register)})
+          # soundsoftware: if back_url is the home page,
+          # change it to My Page (#125)
+          if (uri.path == home_path)
+            uri.path = uri.path + "/my"
+          end
           # soundsoftware: if login page is https but back_url http,
           # switch back_url to https to ensure cookie validity (#83)
           if (uri.scheme == "http") && (URI.parse(request.url).scheme == "https")
             uri.scheme = "https"
-            back_url = uri.to_s
           end
+          back_url = uri.to_s
           redirect_to(back_url)
           return
         end
