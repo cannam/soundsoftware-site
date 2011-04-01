@@ -13,11 +13,12 @@
 </div>
 
 <div class="splitcontentright">
-  <% if @news.any? %>
+  <% if @site_news.any? %>
   <div class="news box">
-	<h3><%=l(:label_news_latest)%></h3>
-		<%= render :partial => 'news/news', :collection => @news %>
-		<%= link_to l(:label_news_view_all), :controller => 'news' %>
+	<h3><%=l(:label_news_site_latest)%></h3>
+	<%= render :partial => 'news/news', :locals => { :project => @site_project }, :collection => @site_news %>
+	
+	<%= link_to l(:label_news_more), { :controller => 'projects', :action => @site_project.identifier, :id => 'news' } %>
   </div>
   <% end %>
     <% if @projects.any? %>
@@ -34,6 +35,7 @@
 		<% end %>
     <% @project = nil %>
 		</ul>
+	<%= link_to l(:label_projects_more), :controller => 'projects' %>
 	</div>
 	<% end %>
     <%= call_hook(:view_welcome_index_right, :projects => @projects) %>
