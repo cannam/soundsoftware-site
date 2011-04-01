@@ -5,10 +5,22 @@
 
 <div class="box tabular">
 
+<p><%= l(:text_has_welcome_page_info, { :overview_link => link_to(l(:label_overview), { :controller => 'projects', :action => 'show' } ) } ) %></p>
+
+<% if @project.module_enabled? :wiki %>
+
+<p><%= link_to(l(:button_welcome_page_edit), {:controller => 'wiki', :action => 'edit', :project_id => @project, :id => Wiki.titleize("Overview")}, :class => 'icon icon-edit') %>
+
+<% else %>
+
+<p><%= l(:text_has_welcome_page_wiki_disabled, { :modules_link => link_to(l(:label_module_plural), { :controller => 'projects', :action => 'settings', :tab => 'modules' } ) } ) %></p>
+
+<% end %>
+
 <p><label for="has_welcome_page"><%= l(:label_has_welcome_page) %></label>
 <%= check_box_tag 'has_welcome_page', 1, @project.has_welcome_page? -%>
-<br/><em><%= l(:text_has_welcome_page_info) %></em>
-<br/><%= link_to(l(:button_welcome_page_edit), {:controller => 'wiki', :action => 'edit', :project_id => @project, :id => Wiki.titleize("Overview")}, :class => 'icon icon-edit') %>
+<br/><em><%= l(:setting_has_welcome_page) %></em>
+
 </p>
 
 </div>
