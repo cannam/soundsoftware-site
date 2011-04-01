@@ -22,7 +22,9 @@ class WelcomeController < ApplicationController
   helper :projects
 
   def index
-    @news = News.latest User.current
+    @site_project = Project.find_by_identifier "soundsoftware-site"
+    @site_news = []
+    @site_news = News.latest_for @site_project if @site_project
     @projects = Project.latest User.current
     
     # tests if user is logged in to generate the tips of the day list

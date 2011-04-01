@@ -37,4 +37,9 @@ class News < ActiveRecord::Base
   def self.latest(user = User.current, count = 5)
     find(:all, :limit => count, :conditions => Project.allowed_to_condition(user, :view_news), :include => [ :author, :project ], :order => "#{News.table_name}.created_on DESC")	
   end
+
+  # returns latest news for a specific project
+  def self.latest_for(project, count = 5)
+    find(:all, :limit => count, :conditions => [ "#{News.table_name}.project_id = #{project.id}", Project.allowed_to_condition(User.current, :view_news) ], :include => [ :author, :project ], :order => "#{News.table_name}.created_on DESC") 
+  end
 end
