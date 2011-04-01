@@ -34,7 +34,8 @@
 		<% for project in @projects %>
 		  <% @project = project %>
 			<li class="latest">
-			<%= link_to_project project %> (<%= format_time(project.created_on) %>)
+			<span class="title"><%= link_to_project project %></span>
+			<span class="time"><%= format_time(project.created_on)%></span>
 			<%= render_project_short_description project %>
 			</li>
 		<% end %>
