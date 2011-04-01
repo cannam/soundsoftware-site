@@ -305,6 +305,7 @@ div#activity span.project:after, div#news span.project:after, #search-results sp
 div#activity dd span.description, #search-results dd span.description { display:block; color: #808080; }
 
 .projects .latest .title { margin-right: 0.5em; }
+.tipoftheday .tip { margin-left: 2em; margin-top: 0.5em; }
 
 #search-results dd { margin-bottom: 1em; padding-left: 20px; margin-left:0px; }
 
