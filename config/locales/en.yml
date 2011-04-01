@@ -373,7 +373,7 @@ en:
   setting_rest_api_enabled: Enable REST web service
   setting_cache_formatted_text: Cache formatted text
   setting_default_notification_option: Default notification option
-  setting_has_welcome_page: Select this to replace the project overview page with your own welcome page
+  setting_has_welcome_page: Select this to replace the project overview page with your welcome page
   
   permission_add_project: Create project
   permission_add_subprojects: Create subprojects
