@@ -71,8 +71,7 @@ goto endofperl
 #                      HTML4 compliance done (should be strict HTML4.0, quite near XHTML)
 #                      version 1.23
 #
-#	   29.03.2011  (Chris Cannam) add frames option
-#
+#	   29.03.2011  (Chris Cannam) add frames option.
 
 $VERSION  = '1.23';
 ($PROGRAM = $0) =~ s@.*/@@; $PROGRAM = "\U$PROGRAM\E";
@@ -103,7 +102,7 @@ $diract = ".";
    'codeheadmeta',              '<meta name="author of conversion perl script" content="Hartmut Pohlheim" />',
    'codehr',                    '<hr size="3" noshade="noshade" />',
    'codeheader',                '',
-   'configfile',                'mtree2html2001_rc.txt',
+   'configfile',                'matlab-docs.conf',
    'csslink',                   '',
    'dirmfiles',                 $diract,
    'dirhtml',                   $diract,
