@@ -2,7 +2,11 @@
 <% max = 5 %>
 <% if (events.nil?) 
      activity = Redmine::Activity::Fetcher.new(User.current, :project => @project)
-     events = activity.events(Date.today - 28, Date.today + 1).first(max)
+     events = activity.events(Date.today - 28, Date.today + 1)
+     if defined? user
+       events = events.select { |e| user.member_of? e.project }
+     end
+     events = events.first(max)
    end
 %>
 
