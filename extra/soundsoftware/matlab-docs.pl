@@ -5,7 +5,7 @@ perl -w -S %0.bat %1 %2 %3 %4 %5 %6 %7 %8 %9
 goto endofperl
 @rem ';
 # perl -w -S %0.bat "$@"
-#!/usr/pdsoft/bin/perl5
+#!/usr/bin/perl
 #
 # mtree2html_2000 - produce html files from Matlab m-files.
 #                   use configuration file for flexibility
@@ -71,8 +71,7 @@ goto endofperl
 #                      HTML4 compliance done (should be strict HTML4.0, quite near XHTML)
 #                      version 1.23
 #
-# Latest version is available as:
-#	
+#	   29.03.2011  (Chris Cannam) add frames option
 #
 
 $VERSION  = '1.23';
@@ -93,7 +92,7 @@ $dirsep = "/";
 $diract = ".";
 
 #------------------------------------------------------------------------
-#  Define all variables and there standard settings
+#  Define all variables and their standard settings
 #  documentation of variables is contained in accompanying rc file
 #------------------------------------------------------------------------
 %var =
@@ -109,6 +108,7 @@ $diract = ".";
    'dirmfiles',                 $diract,
    'dirhtml',                   $diract,
    'exthtml',                   '.html',
+   'frames',                    'yes',
    'filenametopframe',          'index',
    'filenameindexlongglobal',   'indexlg',
    'filenameindexlonglocal',    'indexll',
@@ -211,6 +211,7 @@ if ($var{'processtree'} ne 'no') { $var{'processtree'} = 'yes'; }
 $var{'producetree'} = $opt_producetree        if $opt_producetree;
 if ($var{'producetree'} ne 'no') { $var{'producetree'} = 'yes'; }
 if ($var{'processtree'} eq 'no') { $var{'producetree'} = 'no'; }
+if ($var{'frames'} ne 'no') { $var{'frames'} = 'yes'; }
 # if (($var{'processtree'} eq 'yes') && ($var{'producetree'} eq 'no')) { $var{'usecontentsm'} = 'no'; }
 
 $var{'writecontentsm'} = $opt_writecontentsm  if $opt_writecontentsm;
@@ -642,25 +643,29 @@ sub ConstructHighestIndexFile
    # Build the frame layout file name (highest one)
    $indexfile = $var{'dirhtml'}.$var{'filenametopframe'}.$var{'exthtml'};
 
-   open(IFILE,">$indexfile") || die("Cannot open frame layout file $indexfile\n");
-   # Write the header of frame file
-   print IFILE "$TextDocTypeFrame\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n";
-   print IFILE "   <title>$var{'texttitleframelayout'}</title>\n";
-   print IFILE "</head>\n";
+   if ($var{'frames'} eq 'yes') {
 
-   # definition of 2 frames, left the tree of directories,
-   # right the index of that directory or the docu of a file
-   print IFILE "<frameset  cols=\"25%,75%\">\n";
-   print IFILE "   <frame src=\"$var{'filenamedirshort'}$var{'exthtml'}\" name=\"$GlobalNameFrameMainLeft\" />\n";
-   print IFILE "   <frame src=\"$var{'filenameindexshortglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\" name=\"$GlobalNameFrameMainRight\" />\n";   print IFILE "</frameset>\n";
+       open(IFILE,">$indexfile") || die("Cannot open frame layout file $indexfile\n");
 
-   print IFILE "</html>\n";
+       # Write the header of frame file
+       print IFILE "$TextDocTypeFrame\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n";
+       print IFILE "   <title>$var{'texttitleframelayout'}</title>\n";
+       print IFILE "</head>\n";
 
-   close(IFILE);
+       # definition of 2 frames, left the tree of directories,
+       # right the index of that directory or the docu of a file
+       print IFILE "<frameset  cols=\"25%,75%\">\n";
+       print IFILE "   <frame src=\"$var{'filenamedirshort'}$var{'exthtml'}\" name=\"$GlobalNameFrameMainLeft\" />\n";
+       print IFILE "   <frame src=\"$var{'filenameindexshortglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\" name=\"$GlobalNameFrameMainRight\" />\n";   print IFILE "</frameset>\n";
 
-   if ($opt_silent) { print "\r"; }
-   print "   Frame layout file created: $indexfile\t";
-   if (!$opt_silent) { print "\n"; }
+       print IFILE "</html>\n";
+
+       close(IFILE);
+
+       if ($opt_silent) { print "\r"; }
+       print "   Frame layout file created: $indexfile\t";
+       if (!$opt_silent) { print "\n"; }
+   }
 
    for($irun=0; $irun <= 2; $irun++) {
       # Build the top directory index file, these files include the directory tree
@@ -685,8 +690,11 @@ sub ConstructHighestIndexFile
       } else {
          print IFILE "<title>$var{'texttitleindexalldirs'}</title>\n";
       }
-      print IFILE "<base target=\"$GlobalNameFrameMainRight\" />\n";
-   
+      
+      if ($var{'frames'} eq 'yes') {
+	  print IFILE "<base target=\"$GlobalNameFrameMainRight\" />\n";
+      }
+
       print IFILE "</head>\n";
       print IFILE "<body $var{'codebodyindex'}>\n";
       if ($var{'textheaderindexalldirs'} eq '') {
@@ -695,13 +703,25 @@ sub ConstructHighestIndexFile
          print IFILE "<h1 $var{'codeheader'}>$var{'textheaderindexalldirs'}</h1>\n";
       }
       print IFILE "<p align=\"center\">\n";
-      if ($irun == 0) { print IFILE "<strong>short</strong>\n"; }
-      else { print IFILE "<a href=\"$var{'filenamedirshort'}$var{'exthtml'}\" target=\"$GlobalNameFrameMainLeft\">short</a>\n"; }
-      if ($irun == 1) { print IFILE " | <strong>long</strong>\n"; }
-      else { print IFILE " | <a href=\"$var{'filenamedirlong'}$var{'exthtml'}\" target=\"$GlobalNameFrameMainLeft\">long</a>\n"; }
-      if ($var{'usecontentsm'} eq 'yes') {
-         if ($irun == 2) { print IFILE " | <strong>contents</strong>\n"; }
-         else { print IFILE " | <a href=\"$var{'filenamedircontents'}$var{'exthtml'}\" target=\"$GlobalNameFrameMainLeft\">contents</a>\n"; }
+
+      if ($var{'frames'} eq 'yes') {
+	  if ($irun == 0) { print IFILE "<strong>short</strong>\n"; }
+	  else { print IFILE "<a href=\"$var{'filenamedirshort'}$var{'exthtml'}\" target=\"$GlobalNameFrameMainLeft\">short</a>\n"; }
+	  if ($irun == 1) { print IFILE " | <strong>long</strong>\n"; }
+	  else { print IFILE " | <a href=\"$var{'filenamedirlong'}$var{'exthtml'}\" target=\"$GlobalNameFrameMainLeft\">long</a>\n"; }
+	  if ($var{'usecontentsm'} eq 'yes') {
+	      if ($irun == 2) { print IFILE " | <strong>contents</strong>\n"; }
+	      else { print IFILE " | <a href=\"$var{'filenamedircontents'}$var{'exthtml'}\" target=\"$GlobalNameFrameMainLeft\">contents</a>\n"; }
+	  }
+      } else {
+	  if ($irun == 0) { print IFILE "<strong>short</strong>\n"; }
+	  else { print IFILE "<a href=\"$var{'filenamedirshort'}$var{'exthtml'}\">short</a>\n"; }
+	  if ($irun == 1) { print IFILE " | <strong>long</strong>\n"; }
+	  else { print IFILE " | <a href=\"$var{'filenamedirlong'}$var{'exthtml'}\">long</a>\n"; }
+	  if ($var{'usecontentsm'} eq 'yes') {
+	      if ($irun == 2) { print IFILE " | <strong>contents</strong>\n"; }
+	      else { print IFILE " | <a href=\"$var{'filenamedircontents'}$var{'exthtml'}\">contents</a>\n"; }
+	  }
       }
    
       print IFILE "</p><br />\n\n";
@@ -781,6 +801,12 @@ sub ConstructAZIndexFile
    if ($LocalGlobalLocal eq 'global') { $extradirfilename = ''; }
    else { $extradirfilename = $dirnamesingle{$LocalActDir}; }
    $indexfile = $var{'dirhtml'}.$dirnamerelpath{$LocalActDir}.$indexfilename.$var{'filenameextensionindex'}.$extradirfilename.$var{'exthtml'};
+
+   if ($LocalShortLong eq 'short' and $var{'frames'} ne 'yes') {
+       # With no frames, this must go in the top-level index file instead
+       $indexfile = $var{'dirhtml'}.$var{'filenametopframe'}.$var{'exthtml'};
+   }
+
    if ($debug > 2) { print "   indexfilename (a-z small): $indexfile\n"; }
 
    open(IFILE,">$indexfile") || die("Cannot open index file $indexfile: $!\n");
@@ -794,8 +820,12 @@ sub ConstructAZIndexFile
       if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
       else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
    }
-   print IFILE "<base target=\"$GlobalNameFrameMainRight\" />\n";
+
+   if ($var{'frames'} eq 'yes') {
+       print IFILE "<base target=\"$GlobalNameFrameMainRight\" />\n";
+   }
    print IFILE "</head>\n";
+
    print IFILE "<body $var{'codebodyindex'}>\n";
    if ($var{'textheaderindex'} eq '') {
       print IFILE "<h1 $var{'codeheader'}>Index of Matlab Files in Directory $LocalActDir</h1>\n";
@@ -887,42 +917,49 @@ sub ConstructAZIndexFile
    # handle the global index file case separately (no extra directory name in file)
    if ($LocalGlobalLocal eq 'global') { $extradirfilename = ''; }
    else { $extradirfilename = $dirnamesingle{$LocalActDir}; }
-   $indexfile = $var{'dirhtml'}.$dirnamerelpath{$LocalActDir}.$indexfilename.$var{'filenameextensionjump'}.$extradirfilename.$var{'exthtml'};
-   if ($debug > 2) { print "   indexfilename (a-z jump): $indexfile\n"; }
-   open(IFILE,">$indexfile") || die("Cannot open jump index file $indexfile: $!\n");
 
-   # Write the header of HTML file
-   print IFILE "$TextDocTypeHTML\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n$var{'csslink'}\n";
-   
-   if ($var{'texttitleindex'} eq '') {
-      print IFILE "<title>A-Z jump index in directory $LocalActDir</title>\n";
-   } else {
-      if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
-      else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
+   if ($var{'frames'} eq 'yes') {
+
+       $indexfile = $var{'dirhtml'}.$dirnamerelpath{$LocalActDir}.$indexfilename.$var{'filenameextensionjump'}.$extradirfilename.$var{'exthtml'};
+       if ($debug > 2) { print "   indexfilename (a-z jump): $indexfile\n"; }
+       open(IFILE,">$indexfile") || die("Cannot open jump index file $indexfile: $!\n");
+
+       # Write the header of HTML file
+       print IFILE "$TextDocTypeHTML\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n$var{'csslink'}\n";
+       
+       if ($var{'texttitleindex'} eq '') {
+	   print IFILE "<title>A-Z jump index in directory $LocalActDir</title>\n";
+       } else {
+	   if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
+	   else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
+       }
+
+       if ($var{'frames'} eq 'yes') {
+	   print IFILE "<base target=\"$GlobalNameFrameAZIndexsmall\" />\n";
+       }
+       print IFILE "</head>\n";
+       print IFILE "<body $var{'codebodyindex'}>\n";
+
+       # Write the A-Z jump line, generate link for letters with files starting with this letter
+       # and only letters for no files starting with this letter
+       # use previously generated arrays with names of files sorted by starting letter
+       for('a'..'z') {
+	   $numberofletter = $#{$_}+1;
+	   if ($numberofletter > 0) {
+	       print IFILE "<strong><a href=\"$indexfilename$var{'filenameextensionindex'}$extradirfilename$var{'exthtml'}#\U$_\E$_\">\U$_\E</a> </strong>\n";
+	   } else {
+	       print IFILE "\U$_\E \n";
+	   }
+       }
+
+       print IFILE "</body>\n</html>\n";
+
+       close(IFILE);
+
+       if ($opt_silent) { print "\r"; }
+       print "   Indexfile small (A-Z jump) created: $indexfile\t";
+       if (!$opt_silent) { print "\n"; }
    }
-   print IFILE "<base target=\"$GlobalNameFrameAZIndexsmall\" />\n";
-   print IFILE "</head>\n";
-   print IFILE "<body $var{'codebodyindex'}>\n";
-
-   # Write the A-Z jump line, generate link for letters with files starting with this letter
-   # and only letters for no files starting with this letter
-   # use previously generated arrays with names of files sorted by starting letter
-   for('a'..'z') {
-      $numberofletter = $#{$_}+1;
-      if ($numberofletter > 0) {
-         print IFILE "<strong><a href=\"$indexfilename$var{'filenameextensionindex'}$extradirfilename$var{'exthtml'}#\U$_\E$_\">\U$_\E</a> </strong>\n";
-      } else {
-         print IFILE "\U$_\E \n";
-      }
-   }
-
-   print IFILE "</body>\n</html>\n";
-
-   close(IFILE);
-
-   if ($opt_silent) { print "\r"; }
-   print "   Indexfile small (A-Z jump) created: $indexfile\t";
-   if (!$opt_silent) { print "\n"; }
 
 
    # Build the frame layout file, this file includes the layout of the frames
@@ -930,37 +967,41 @@ sub ConstructAZIndexFile
    # handle the global index file case separately (no extra directory name in file)
    if ($LocalGlobalLocal eq 'global') { $extradirfilename = ''; }
    else { $extradirfilename = $dirnamesingle{$LocalActDir}; }
-   $indexfile = $var{'dirhtml'}.$dirnamerelpath{$LocalActDir}.$indexfilename.$var{'filenameextensionframe'}.$extradirfilename.$var{'exthtml'};
-   if ($debug > 2) { print "   indexfilename (a-z frame): $indexfile\n"; }
 
-   open(IFILE,">$indexfile") || die("Cannot open jump index frame file $indexfile: $!\n");
+   if ($var{'frames'} eq 'yes') {
 
-   # Write the header of Frame file
-   print IFILE "$TextDocTypeHTML\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n$var{'csslink'}\n";
+       $indexfile = $var{'dirhtml'}.$dirnamerelpath{$LocalActDir}.$indexfilename.$var{'filenameextensionframe'}.$extradirfilename.$var{'exthtml'};
+       if ($debug > 2) { print "   indexfilename (a-z frame): $indexfile\n"; }
 
-   if ($var{'texttitleindex'} eq '') {
-      print IFILE "<title>Index of Matlab Files in Directory $LocalActDir</title>\n";
-   } else {
-      if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
-      else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
+       open(IFILE,">$indexfile") || die("Cannot open jump index frame file $indexfile: $!\n");
+
+       # Write the header of Frame file
+       print IFILE "$TextDocTypeHTML\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n$var{'csslink'}\n";
+
+       if ($var{'texttitleindex'} eq '') {
+	   print IFILE "<title>Index of Matlab Files in Directory $LocalActDir</title>\n";
+       } else {
+	   if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
+	   else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
+       }
+       print IFILE "</head>\n";
+
+       # definition of 2 frames, top the A-Z index, below the jump letter line
+       print IFILE "<frameset  rows=\"90%,10%\">\n";
+       print IFILE "   <frame src=\"$indexfilename$var{'filenameextensionindex'}$extradirfilename$var{'exthtml'}\" name=\"$GlobalNameFrameAZIndexsmall\" />\n";
+       print IFILE "   <frame src=\"$indexfilename$var{'filenameextensionjump'}$extradirfilename$var{'exthtml'}\" name=\"$GlobalNameFrameAZIndexjump\" />\n";
+       print IFILE "</frameset>\n";
+
+       print IFILE "</html>\n";
+
+       close(IFILE);
+
+       if ($opt_silent) { print "\r"; }
+       print "   Frame layout file created: $indexfile\t";
+       if (!$opt_silent) { print "\n"; }
    }
-   print IFILE "</head>\n";
-
-   # definition of 2 frames, top the A-Z index, below the jump letter line
-   print IFILE "<frameset  rows=\"90%,10%\">\n";
-   print IFILE "   <frame src=\"$indexfilename$var{'filenameextensionindex'}$extradirfilename$var{'exthtml'}\" name=\"$GlobalNameFrameAZIndexsmall\" />\n";
-   print IFILE "   <frame src=\"$indexfilename$var{'filenameextensionjump'}$extradirfilename$var{'exthtml'}\" name=\"$GlobalNameFrameAZIndexjump\" />\n";
-   print IFILE "</frameset>\n";
-
-   print IFILE "</html>\n";
-
-   close(IFILE);
-
-   if ($opt_silent) { print "\r"; }
-   print "   Frame layout file created: $indexfile\t";
-   if (!$opt_silent) { print "\n"; }
 }
-
+   
 
 #========================================================================
 # Construct the links to all indexes
@@ -972,16 +1013,22 @@ sub ConstructLinks2Index
    # include links to short/long - local/global index and C|contents.m
    print WRITEFILE "\n<p align=\"center\">";
    print WRITEFILE "$var{'textjumpindexglobal'} (";
-   print WRITEFILE "<a href = \"$LocalPath2Index$var{'filenameindexshortglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">short</a> | ";
-   print WRITEFILE "<a href = \"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">long</a>)\n";
+
+   if ($var{'frames'} eq 'yes') {
+       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexshortglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">short</a> | ";
+   } else {
+       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenametopframe'}.$var{'exthtml'}\">short</a> | ";
+   }
+
+   print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">long</a>)\n";
    if ($LocalGlobalLocal eq 'local') {
       if ($var{'usecontentsm'} eq 'yes') {
          print WRITEFILE " | <a href=\"$contentsname{$PathContents}$dirnamesingle{$PathContents}$var{'exthtml'}\">Local contents</a>\n";
       }
       # if ($var{'producetree'} eq 'yes') {
          print WRITEFILE " | $var{'textjumpindexlocal'} (";
-         print WRITEFILE "<a href = \"$var{'filenameindexshortlocal'}$var{'filenameextensionframe'}$dirnamesingle{$PathContents}$var{'exthtml'}\">short</a> | ";
-         print WRITEFILE "<a href = \"$var{'filenameindexlonglocal'}$var{'filenameextensionframe'}$dirnamesingle{$PathContents}$var{'exthtml'}\">long</a>)\n";
+         print WRITEFILE "<a href=\"$var{'filenameindexshortlocal'}$var{'filenameextensionframe'}$dirnamesingle{$PathContents}$var{'exthtml'}\">short</a> | ";
+         print WRITEFILE "<a href=\"$var{'filenameindexlonglocal'}$var{'filenameextensionframe'}$dirnamesingle{$PathContents}$var{'exthtml'}\">long</a>)\n";
       # }
    }
    print WRITEFILE "</p>\n\n";
