@@ -1,14 +1,11 @@
 <h1>New Publication</h1>
 
-
-<% form_for @publication do |f| %>
+<% form_for :publication do |f| %>
   <% f.error_messages %>
 
-  <% render :partial  => "#{@publication.current_step}_bibtex_step", :f => f %>
+  <% render :partial  => "#{@publication.current_step}_bibtex_step", :locals => { :f => f }  %>
 
   <%= submit_tag l(:button_submit) %>
 
 <% end %>
-
-
 

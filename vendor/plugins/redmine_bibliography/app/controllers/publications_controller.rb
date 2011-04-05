@@ -34,6 +34,7 @@ class PublicationsController < ApplicationController
   def new 
     session[:publication_params] ||= {}
     @publication = Publication.new
+    @publication.current_step = session[:publication_step]
 
     if request.post?
       parse_bibtex_text
