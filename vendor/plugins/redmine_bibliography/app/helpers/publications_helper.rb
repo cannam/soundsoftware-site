@@ -1,5 +1,6 @@
-require 'rubygems'
+# require 'rubygems'
 require 'bibtex'
+
 
 module PublicationsHelper
 

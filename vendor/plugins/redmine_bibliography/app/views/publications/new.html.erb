@@ -1,22 +1,12 @@
 <h1>New Publication</h1>
 
-<% form_for(:publication) do |f| %>
+
+<% form_for @publication do |f| %>
   <% f.error_messages %>
-  
-  <p>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </p>
 
+  <% render :partial  => "#{@publication.current_step}_bibtex_step", :f => f %>
 
-  <p>
-  
-    <%=label_tag :bibtex_entry %>
-    <%=text_area_tag :bibtex_entry%>
-  
-  </p>
-
-<%= submit_tag l(:button_submit) %>
+  <%= submit_tag l(:button_submit) %>
 
 <% end %>
 

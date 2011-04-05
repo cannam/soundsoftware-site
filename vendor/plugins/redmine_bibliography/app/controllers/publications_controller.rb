@@ -1,33 +1,39 @@
+# vendor/plugins/redmine_bibliography/app/controllers/publications_controller.rb
+
 class PublicationsController < ApplicationController
 
+  # parse string with bibtex authors
+  # return an ordered array
+  def parse_authors
+    
+  end
+
+  def parse_bibtex_file
+  
+  end
+
   def parse_bibtex_text
-
-    logger.error "BBBBBBBB"
-
     bibtex_entry = params[:bibtex_entry]
 
-
-
-
-    #    logger.error bibtex_entry
-
     if bibtex_entry
-      Bibtex::Parser.parse_string(bibtex_entry).map do |entry|
-        logger.error entry[:title]
-        logger.error entry[:year]
-        logger.error entry.type  
+      bib = BibTeX.parse bibtex_entry
+      
+      # parses the bibtex entries
+      bib.data.map do |d|
+        result = ''
+        if d.class == BibTeX::Entry
+          #    d.replace!(bib.strings)
+          result = [d.author, '. ', d.title].join
+        end
+
+        logger.error result
       end
     end
-
-    logger.error "FIM"
-
   end 
 
-  def new
-
-    logger.error "AAAAAA"
-
-    logger.error request.request_method
+  def new 
+    session[:publication_params] ||= {}
+    @publication = Publication.new
 
     if request.post?
       parse_bibtex_text
