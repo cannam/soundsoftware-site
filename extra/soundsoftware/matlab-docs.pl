@@ -75,7 +75,7 @@ goto endofperl
 
 $VERSION  = '1.23';
 ($PROGRAM = $0) =~ s@.*/@@; $PROGRAM = "\U$PROGRAM\E";
-$debug = 0;
+$debug = 2;
 
 #------------------------------------------------------------------------
 # Define platform specific things
@@ -372,7 +372,7 @@ sub ParseTreeReadFiles
                # Contents file in unix must start with a capital letter (Contents.m)
                # ensure, that m-file name is lower case, except the contents file
                if (! ($filewosuffix =~ /^contents$/i)) {
-                  # if ($var{'links2filescase'}  eq 'low') { $filewosuffix = "\L$filewosuffix\E"; }
+		   # if ($var{'links2filescase'}  eq 'low') { $filewosuffix = "\L$filewosuffix\E"; }
                   $filewosuffixlow = "\L$filewosuffix\E";
                }
                else { $contentsname{$dirname} = $filewosuffix; }
@@ -1144,7 +1144,7 @@ sub SubstituteName2Link {
    # Look for something matching in the line
    if ( /(\W+)($funname)(\W+)/i ) {
       $reffound = $2;
-      $refstr1 = "<a class=\"mfun\" href=\"$hfileindexpath{$name}$hfilerelpath{$funname}$funname$var{'exthtml'}\">";
+      $refstr1 = "<a class=\"mfun\" href=\"$hfileindexpath{$name}$hfilerelpath{$funname}$mfilename{$funname}$var{'exthtml'}\">";
       $refstr2 = "<\/a>";
       # Do links only for exact case match
       if ( ($var{'links2filescase'}  eq 'exact') || ($var{'links2filescase'}  eq 'exactvery') ) {
