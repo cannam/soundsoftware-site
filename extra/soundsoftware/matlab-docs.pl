@@ -1015,11 +1015,12 @@ sub ConstructLinks2Index
 
    if ($var{'frames'} eq 'yes') {
        print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexshortglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">short</a> | ";
+       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">long</a>)\n";
    } else {
-       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenametopframe'}.$var{'exthtml'}\">short</a> | ";
+       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenametopframe'}$var{'exthtml'}\">short</a> | ";
+       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionindex'}$var{'exthtml'}\">long</a>)\n";
    }
 
-   print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">long</a>)\n";
    if ($LocalGlobalLocal eq 'local') {
       if ($var{'usecontentsm'} eq 'yes') {
          print WRITEFILE " | <a href=\"$contentsname{$PathContents}$dirnamesingle{$PathContents}$var{'exthtml'}\">Local contents</a>\n";
