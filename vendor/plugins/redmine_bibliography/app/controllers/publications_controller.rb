@@ -32,29 +32,32 @@ class PublicationsController < ApplicationController
   end 
 
   def new 
-    session[:publication_params] ||= {}
     @publication = Publication.new
     @publication.current_step = session[:publication_step]
-
-    if request.post?
-      parse_bibtex_text
-      @publication = Publication.new(params[:publication])
-
-      if @publication.save
-        logger.error "GRAVOU XXXdsfgXXX"
-      else
-        logger.error "nao gravou"
-      end
-
-    end
-
+    
+    logger.error @publication.current_step
+    
+    
   end
 
-  def create
+  def create    
+    @publication = Publication.new(params[:publication])
 
-    logger.error "AAAA create"
+    @publication.current_step = session[:publication_step]
 
-    @publication.save
+    if params[:back_button]
+      @publication.previous_step
+    else
+      @publication.next_step
+    end
+    
+    session[:publication_step] = @publication.current_step
+    
+    logger.error "AAAA"
+    logger.error session[:publication_step]
+
+
+    render "new"
   end
 
   def index

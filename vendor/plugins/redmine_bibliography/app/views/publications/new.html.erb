@@ -1,11 +1,12 @@
 <h1>New Publication</h1>
 
-<% form_for :publication do |f| %>
+<% form_for :publication, :url => { :action => "create" } do |f| %>
   <% f.error_messages %>
 
-  <% render :partial  => "#{@publication.current_step}_bibtex_step", :locals => { :f => f }  %>
+  <%= render :partial  => "#{@publication.current_step}_bibtex_step", :locals => { :f => f }  %>
 
-  <%= submit_tag l(:button_submit) %>
+  <%= f.submit "Continue" %>
+  <%= f.submit "Back", :name => "back_button" unless @publication.first_step? %>
 
 <% end %>
 
