@@ -75,7 +75,7 @@ goto endofperl
 
 $VERSION  = '1.23';
 ($PROGRAM = $0) =~ s@.*/@@; $PROGRAM = "\U$PROGRAM\E";
-$debug = 2;
+$debug = 4;
 
 #------------------------------------------------------------------------
 # Define platform specific things
@@ -701,7 +701,7 @@ sub ConstructHighestIndexFile
       } else {
          print IFILE "<h1 $var{'codeheader'}>$var{'textheaderindexalldirs'}</h1>\n";
       }
-      print IFILE "<p align=\"center\">\n";
+      print IFILE "<p>\n";
 
       if ($var{'frames'} eq 'yes') {
 	  if ($irun == 0) { print IFILE "<strong>short</strong>\n"; }
@@ -878,7 +878,7 @@ sub ConstructAZIndexFile
    } elsif ($LocalShortLong eq 'long') {
       # begin create long index
       print IFILE "<table border=\"5\" width=\"100%\" cellpadding=\"5\">\n";
-      print IFILE "<tr align=\"center\"><th>Name</th><th>Description</th></tr>\n";
+      print IFILE "<tr><th>Name</th><th>Description</th></tr>\n";
 
       for('a'..'z') {
          # print "   $_: @{$_}\n";
@@ -1010,26 +1010,30 @@ sub ConstructLinks2Index
    local(*WRITEFILE, $LocalPath2Index, $PathContents, $LocalGlobalLocal) = @_;
    
    # include links to short/long - local/global index and C|contents.m
-   print WRITEFILE "\n<p align=\"center\">";
-   print WRITEFILE "$var{'textjumpindexglobal'} (";
+   print WRITEFILE "\n<p>";
+   print WRITEFILE "$var{'textjumpindexglobal'} ";
 
    if ($var{'frames'} eq 'yes') {
        print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexshortglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">short</a> | ";
-       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">long</a>)\n";
+       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionframe'}$var{'exthtml'}\">long</a>\n";
    } else {
        print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenametopframe'}$var{'exthtml'}\">short</a> | ";
-       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionindex'}$var{'exthtml'}\">long</a>)\n";
+       print WRITEFILE "<a href=\"$LocalPath2Index$var{'filenameindexlongglobal'}$var{'filenameextensionindex'}$var{'exthtml'}\">long</a>\n";
    }
 
    if ($LocalGlobalLocal eq 'local') {
       if ($var{'usecontentsm'} eq 'yes') {
          print WRITEFILE " | <a href=\"$contentsname{$PathContents}$dirnamesingle{$PathContents}$var{'exthtml'}\">Local contents</a>\n";
       }
-      # if ($var{'producetree'} eq 'yes') {
-         print WRITEFILE " | $var{'textjumpindexlocal'} (";
+      if ($var{'frames'} eq 'yes') {
+         print WRITEFILE " | $var{'textjumpindexlocal'} ";
          print WRITEFILE "<a href=\"$var{'filenameindexshortlocal'}$var{'filenameextensionframe'}$dirnamesingle{$PathContents}$var{'exthtml'}\">short</a> | ";
-         print WRITEFILE "<a href=\"$var{'filenameindexlonglocal'}$var{'filenameextensionframe'}$dirnamesingle{$PathContents}$var{'exthtml'}\">long</a>)\n";
-      # }
+         print WRITEFILE "<a href=\"$var{'filenameindexlonglocal'}$var{'filenameextensionframe'}$dirnamesingle{$PathContents}$var{'exthtml'}\">long</a>\n";
+      } else {
+         print WRITEFILE " | $var{'textjumpindexlocal'} ";
+         print WRITEFILE "<a href=\"$var{'filenameindexshortlocal'}$var{'filenameextensionindex'}$dirnamesingle{$PathContents}$var{'exthtml'}\">short</a> | ";
+         print WRITEFILE "<a href=\"$var{'filenameindexlonglocal'}$var{'filenameextensionindex'}$dirnamesingle{$PathContents}$var{'exthtml'}\">long</a>\n";
+      }
    }
    print WRITEFILE "</p>\n\n";
    print WRITEFILE "$var{'codehr'}\n";
