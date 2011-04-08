@@ -17,11 +17,11 @@ class Publication < ActiveRecord::Base
   end
   
   def next_step
-    self.current_step = step[steps.index(current_step)+1]
+    self.current_step = steps[steps.index(current_step)+1]
   end
 
   def previous_step
-    self.current_step = step[steps.index(current_step)-1]
+    self.current_step = steps[steps.index(current_step)-1]
   end
   
   def first_step?

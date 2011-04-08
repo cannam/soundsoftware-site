@@ -23,27 +23,25 @@ class PublicationsController < ApplicationController
         result = ''
         if d.class == BibTeX::Entry
           #    d.replace!(bib.strings)
-          result = [d.author, '. ', d.title].join
+          
+          result = [author, '. ', d.title].join
         end
-
-        logger.error result
       end
+
     end
   end 
 
   def new 
     @publication = Publication.new
     @publication.current_step = session[:publication_step]
-    
-    logger.error @publication.current_step
-    
-    
+        
   end
 
   def create    
     @publication = Publication.new(params[:publication])
-
     @publication.current_step = session[:publication_step]
+
+    parse_bibtex_text
 
     if params[:back_button]
       @publication.previous_step
@@ -53,10 +51,6 @@ class PublicationsController < ApplicationController
     
     session[:publication_step] = @publication.current_step
     
-    logger.error "AAAA"
-    logger.error session[:publication_step]
-
-
     render "new"
   end
 
