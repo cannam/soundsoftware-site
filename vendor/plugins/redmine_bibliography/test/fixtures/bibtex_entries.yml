@@ -1,0 +1,53 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  entry_type: 
+  address: 
+  annote: 
+  booktitle: 
+  chapter: 
+  crossref: 
+  edition: 
+  editor: 
+  eprint: 
+  howpublished: 
+  journal: 
+  key: 
+  month: 
+  note: 
+  number: 
+  organization: 
+  pages: 
+  publisher: 
+  school: 
+  series: 
+  type: 
+  url: 
+  volume: 
+  year: 1
+two:
+  id: 2
+  entry_type: 
+  address: 
+  annote: 
+  booktitle: 
+  chapter: 
+  crossref: 
+  edition: 
+  editor: 
+  eprint: 
+  howpublished: 
+  journal: 
+  key: 
+  month: 
+  note: 
+  number: 
+  organization: 
+  pages: 
+  publisher: 
+  school: 
+  series: 
+  type: 
+  url: 
+  volume: 
+  year: 1

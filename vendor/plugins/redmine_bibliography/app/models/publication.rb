@@ -3,6 +3,7 @@
 class Publication < ActiveRecord::Base
   has_many :authorships
   has_many :authors, :through => :authorships
+  has_one :bibtex_entry
 
   validates_presence_of :title
   

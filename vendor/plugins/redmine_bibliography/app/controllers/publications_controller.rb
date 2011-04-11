@@ -5,11 +5,11 @@ class PublicationsController < ApplicationController
   # parse string with bibtex authors
   # return an ordered array
   def parse_authors
-    
+
   end
 
   def parse_bibtex_file
-  
+
   end
 
   def parse_bibtex_text
@@ -17,24 +17,31 @@ class PublicationsController < ApplicationController
 
     if bibtex_entry
       bib = BibTeX.parse bibtex_entry
-      
+
       # parses the bibtex entries
       bib.data.map do |d|
         result = ''
         if d.class == BibTeX::Entry
+          @bentry = BibtexEntry.new
           #    d.replace!(bib.strings)
-          
-          result = [author, '. ', d.title].join
-        end
+
+          d.fields.keys.map do |k|
+            @bentry[k] = d[k]
+          end
+        end                
       end
 
-    end
-  end 
+      @publication.bibtex_entry = @bentry
+
+      logger.error @publication.bibtex_entry
+
+    end 
+  end
 
   def new 
     @publication = Publication.new
     @publication.current_step = session[:publication_step]
-        
+
   end
 
   def create    
@@ -43,14 +50,20 @@ class PublicationsController < ApplicationController
 
     parse_bibtex_text
 
+    if @publication.save
+      logger.error "SAVED"
+    else
+      logger.error "NOT SAVED"
+    end
+
     if params[:back_button]
       @publication.previous_step
     else
       @publication.next_step
     end
-    
+
     session[:publication_step] = @publication.current_step
-    
+
     render "new"
   end
 
@@ -74,6 +87,5 @@ class PublicationsController < ApplicationController
     @publication = Publication.find(params[id])
     @authors = @publication.authors
   end
-
 
 end
