@@ -801,8 +801,9 @@ sub ConstructAZIndexFile
    else { $extradirfilename = $dirnamesingle{$LocalActDir}; }
    $indexfile = $var{'dirhtml'}.$dirnamerelpath{$LocalActDir}.$indexfilename.$var{'filenameextensionindex'}.$extradirfilename.$var{'exthtml'};
 
-   if ($LocalShortLong eq 'short' and $var{'frames'} ne 'yes') {
-       # With no frames, this must go in the top-level index file instead
+   if ($LocalShortLong eq 'short' and $extradirfilename eq '' and $var{'frames'} ne 'yes') {
+       # With no frames and no subdir path, this must go in the
+       # top-level index file instead
        $indexfile = $var{'dirhtml'}.$var{'filenametopframe'}.$var{'exthtml'};
    }
 
@@ -878,7 +879,7 @@ sub ConstructAZIndexFile
    } elsif ($LocalShortLong eq 'long') {
       # begin create long index
       print IFILE "<table border=\"5\" width=\"100%\" cellpadding=\"5\">\n";
-      print IFILE "<tr><th>Name</th><th>Description</th></tr>\n";
+      print IFILE "<tr><th>Name</th><th>Synopsis</th></tr>\n";
 
       for('a'..'z') {
          # print "   $_: @{$_}\n";
@@ -1217,6 +1218,11 @@ sub ConstructHTMLFiles
       print HFILE "<title>$var{'texttitlefiles'} $mfilename{$name}</title>\n</head>\n";
       print HFILE "<body $var{'codebodyfiles'}>\n";
       print HFILE "<h1 $var{'codeheader'}>$var{'textheaderfiles'} $mfilename{$name}</h1>\n";
+
+# http://test.soundsoftware.ac.uk/cannam/projects/smallbox/repository/annotate/DL/RLS-DLA/SolveFISTA.m
+
+      print HFILE "<a href=\"" . $hfileindexpath{$name} . "../../projects/smallbox/repository/annotate/" . $mfiledir{$name}  . $mfilename{$name} . ".m\">View in repository</a>\n";
+
       print HFILE "$var{'codehr'}\n";
 
       # include links to short/long - local/global index and C|contents.m
