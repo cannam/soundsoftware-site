@@ -856,7 +856,7 @@ sub ConstructAZIndexFile
          # print "   $_: @{$_}\n";
          $numberofletter = $#{$_}+1;
          if ($numberofletter > 0) {
-            print IFILE "\n<tr><td colspan=\"2\"><br /><strong><a name=\"\U$_\E$_\" class=\"an\">\U$_\E</a></strong></td></tr>\n";
+            print IFILE "\n<tr><td colspan=\"2\"><br /><strong><a name=\"\U$_\E$_\"></a><span class=\"an\">\U$_\E</span></strong></td></tr>\n";
             $numberhalf = ($numberofletter + 1 - (($numberofletter+1) % 2))/2;
             if ($debug > 2) { print "   $_: @{$_} \t $numberhalf \t $numberofletter\n"; }
             for($count = 0; $count < $numberhalf; $count++) {
@@ -889,7 +889,7 @@ sub ConstructAZIndexFile
                if ($debug > 1) { print "   AZinforeach1: $name \t\t $hfilerelpath{$name} \t\t $dirnamerelpath{$LocalActDir}\n"; }
                if ($LocalGlobalLocal eq 'global') { $dirpath = $hfilerelpath{$name}; } else { $dirpath = ""; }
                if (! ($mfilename{$name} =~ /contents/i)) {
-                  if ($firstone == 1) { print IFILE "\n<tr><td colspan=\"2\"><br /><strong><a name=\"\U$_\E$_\" class=\"an\">\U$_\E</a></strong></td></tr>\n"; $firstone = 0; } 
+                  if ($firstone == 1) { print IFILE "\n<tr><td colspan=\"2\"><br /><strong><a name=\"\U$_\E$_\"></a><span class=\"an\">\U$_\E</span></strong></td></tr>\n"; $firstone = 0; } 
                   print IFILE "<tr><td valign=\"top\"><a href=\"$dirpath$mfilename{$name}$var{'exthtml'}\">$mfilename{$name}</a></td><td>$apropos{$name}</td></tr>\n";
                }
             }
@@ -1307,7 +1307,7 @@ sub ConstructHTMLFiles
             $_ = &SubstituteHTMLEntities($_);
             
             # check for comment in line and format with css em
-            s/(.*)%(.*)/$1<em class=\"mcom\">%$2<\/em>/;
+            s/^(.*)%(.*?)([\s\r\n]+)$/$1<em class=\"mcom\">%$2<\/em>$3/;
 
             # check/create cross references
             foreach $funname (@{'all'.$name}) {
