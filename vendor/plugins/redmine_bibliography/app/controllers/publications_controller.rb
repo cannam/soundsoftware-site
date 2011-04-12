@@ -15,6 +15,8 @@ class PublicationsController < ApplicationController
   def parse_bibtex_text
     bibtex_entry = params[:bibtex_entry]
 
+    logger.error bibtex_entry
+
     if bibtex_entry
       bib = BibTeX.parse bibtex_entry
 
@@ -26,12 +28,22 @@ class PublicationsController < ApplicationController
           #    d.replace!(bib.strings)
 
           d.fields.keys.map do |k|
-            @bentry[k] = d[k]
+            if k == "title"
+              @publication.title = d[k]
+            else
+              @bentry[k] = d[k]
+            end
           end
-        end                
+        end               
       end
-
+      
       @publication.bibtex_entry = @bentry
+      
+      if @publication.save
+        logger.error "SAVED"
+      else
+        logger.error "NOT SAVED"
+      end
 
       logger.error @publication.bibtex_entry
 
@@ -50,11 +62,7 @@ class PublicationsController < ApplicationController
 
     parse_bibtex_text
 
-    if @publication.save
-      logger.error "SAVED"
-    else
-      logger.error "NOT SAVED"
-    end
+
 
     if params[:back_button]
       @publication.previous_step
