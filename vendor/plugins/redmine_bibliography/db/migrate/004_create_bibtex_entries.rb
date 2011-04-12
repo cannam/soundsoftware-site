@@ -1,6 +1,7 @@
 class CreateBibtexEntries < ActiveRecord::Migration
   def self.up
     create_table :bibtex_entries do |t|
+      t.column :publication_id, :integer
       t.column :entry_type, :string
       t.column :address, :string
       t.column :annote, :string
