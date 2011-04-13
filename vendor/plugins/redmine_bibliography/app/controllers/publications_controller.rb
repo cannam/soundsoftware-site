@@ -13,57 +13,60 @@ class PublicationsController < ApplicationController
   end
 
   def parse_bibtex_text
-    bibtex_entry = params[:bibtex_entry]
+    bib = BibTeX.parse bibtex_entry
 
-    logger.error bibtex_entry
+    # parses the bibtex entries
+    bib.data.map do |d|
+      result = ''
+      if d.class == BibTeX::Entry
+        @bentry = BibtexEntry.new
+        #    d.replace!(bib.strings)
 
-    if bibtex_entry
-      bib = BibTeX.parse bibtex_entry
-
-      # parses the bibtex entries
-      bib.data.map do |d|
-        result = ''
-        if d.class == BibTeX::Entry
-          @bentry = BibtexEntry.new
-          #    d.replace!(bib.strings)
-
-          d.fields.keys.map do |k|
-            if k == "title"
-              @publication.title = d[k]
-            else
-              @bentry[k] = d[k]
-            end
+        d.fields.keys.map do |k|
+          if k == "title"
+            @publication.title = d[k]
+          else
+            @bentry[k] = d[k]
           end
-        end               
-      end
+        end
+      end               
+    end
       
-      @publication.bibtex_entry = @bentry
+    @publication.bibtex_entry = @bentry
       
-      if @publication.save
-        logger.error "SAVED"
-      else
-        logger.error "NOT SAVED"
-      end
+    if @publication.save
+      logger.error "SAVED"
+    else
+      logger.error "NOT SAVED"
+    end
 
-      logger.error @publication.bibtex_entry
+    logger.error @publication.bibtex_entry
+  end 
 
-    end 
-  end
-
-  def new 
+  def new
+    # we always try to create at least one publication
     @publication = Publication.new
+    
+    # the step we're at in the form
     @publication.current_step = session[:publication_step]
-
   end
 
-  def create    
+  def create
     @publication = Publication.new(params[:publication])
     @publication.current_step = session[:publication_step]
 
-    parse_bibtex_text
+    # contents of the paste text area
+    bibtex_entry = params[:bibtex_entry]
 
+    # debug message
+    logger.error bibtex_entry
 
+    # method for creating "pasted" bibtex entries
+    if bibtex_entry
+      parse_bibtex_text
+    end
 
+    # form's flow control
     if params[:back_button]
       @publication.previous_step
     else
