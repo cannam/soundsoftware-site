@@ -8,18 +8,22 @@ class PublicationsController < ApplicationController
 
     # the step we're at in the form
     @publication.current_step = session[:publication_step]
+
+    @new_publications = []
+    session[:publications] ||= {}
+      
   end
 
   def create
     @publication = Publication.new(params[:publication])
     @publication.current_step = session[:publication_step]
-
+    
     # contents of the paste text area
     bibtex_entry = params[:bibtex_entry]
 
     # method for creating "pasted" bibtex entries
-    if bibtex_entry
-      parse_bibtex_list bibtex_entry
+    if bibtex_entry      
+      parse_bibtex_list bibtex_entry    
     end
 
     # form's flow control
@@ -31,9 +35,14 @@ class PublicationsController < ApplicationController
 
     session[:publication_step] = @publication.current_step
 
-    render "new"
+    if @publication.new_record?
+      render "new"
+    else
+      session[:publication_step] = session[:publication_params] = nil
+      flash[:notice] = "New publication saved!"
+      redirect_to @publication
+    end
   end
-
 
   def index
     @publications = Publication.find(:all)
@@ -76,13 +85,13 @@ class PublicationsController < ApplicationController
     end
   end 
 
-  def create_bibtex_entry(d)    
+  def create_bibtex_entry(d)        
     @publication = Publication.new
     @bentry = BibtexEntry.new        
     authors = []
     institution = ""
     email = ""
-      
+
     d.fields.keys.map do |field|
       case field.to_s
       when "author"
@@ -100,7 +109,9 @@ class PublicationsController < ApplicationController
 
     @publication.bibtex_entry = @bentry
     @publication.save
-    
+
+    @created_publications << @publication.id
+
     # need to save all authors
     #   and establish the author-publication association 
     #   via the authorships table 
@@ -117,15 +128,19 @@ class PublicationsController < ApplicationController
       :institution => institution,
       :email => email,
       :order => idx)
-      
+
     end
   end
-  
-  
+
   # parses the bibtex file
   def parse_bibtex_file
 
   end
 
-  
+
+  def review_new_entries
+
+  end
+
+
 end

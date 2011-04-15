@@ -5,7 +5,8 @@
 
   <%= render :partial  => "#{@publication.current_step}_bibtex_step", :locals => { :f => f }  %>
 
-  <%= f.submit "Submit" %>
+  <p><%= f.submit "Submit" %></p>
+  <p><%= f.submit "Back", :name => "back_button" unless @publication.first_step? %></p>
   
 <% end %>
 
