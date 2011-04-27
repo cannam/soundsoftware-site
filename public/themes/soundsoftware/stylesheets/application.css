@@ -230,5 +230,9 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 
 .embedded .contents .center { text-align: center; } /* undo javadoc hack above */
 
+/* For MATLAB documentation */
+
+.embedded #matlabdoc th { text-align: left; }
+
 
 

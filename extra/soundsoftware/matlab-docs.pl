@@ -224,10 +224,17 @@ $var{'writecontentsm'} = $opt_writecontentsm  if $opt_writecontentsm;
 
 # Check the author file
 if ($var{'authorfile'} ne '') {
-   if (&CheckFileName($var{'authorfile'}, 'author file')) {
-      $var{'authorfile'} = '';
-      if (!$opt_silent) { print "   Proceeding without author information!\n"; }
-   }
+    if (!($var{'authorfile'} =~ m,^/,)) {
+	# relative path: treat as relative to config file
+	my $cfd = $var{'configfile'};
+	$cfd =~ s,/[^/]*$,/,;
+	$cfd =~ s,^[^/]*$,.,;
+	$var{'authorfile'} = "$cfd/" . $var{'authorfile'};
+    }
+    if (&CheckFileName($var{'authorfile'}, 'author file')) {
+	$var{'authorfile'} = '';
+	if (!$opt_silent) { print "   Proceeding without author information!\n"; }
+    }
 }
 
 # Call the function doing all the real work
@@ -696,6 +703,7 @@ sub ConstructHighestIndexFile
 
       print IFILE "</head>\n";
       print IFILE "<body $var{'codebodyindex'}>\n";
+      print IFILE "<div id=\"matlabdoc\">\n";
       if ($var{'textheaderindexalldirs'} eq '') {
          print IFILE "<h1 $var{'codeheader'}>Index of Directories of <em>$var{'dirmfiles'}</em></h1>\n";
       } else {
@@ -757,7 +765,7 @@ sub ConstructHighestIndexFile
 
       print IFILE "<!--navigate-->\n";
       print IFILE "<!--copyright-->\n";
-      print IFILE "</body>\n</html>\n";
+      print IFILE "</div>\n</body>\n</html>\n";
 
       close(IFILE);
 
@@ -814,11 +822,14 @@ sub ConstructAZIndexFile
    # Write the header of HTML file
    print IFILE "$TextDocTypeHTML\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n$var{'csslink'}\n";
    
+   my $dirToPrint = $LocalActDir;
+   $dirToPrint =~ s,^./,,;
+
    if ($var{'texttitleindex'} eq '') {
-      print IFILE "<title>Index of Matlab Files in Directory $LocalActDir</title>\n";
+      print IFILE "<title>Index of Matlab Files in Directory $dirToPrint</title>\n";
    } else {
       if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
-      else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
+      else { print IFILE "<title>$var{'texttitleindex'} in Directory $dirToPrint</title>\n"; }
    }
 
    if ($var{'frames'} eq 'yes') {
@@ -827,11 +838,12 @@ sub ConstructAZIndexFile
    print IFILE "</head>\n";
 
    print IFILE "<body $var{'codebodyindex'}>\n";
+   print IFILE "<div id=\"matlabdoc\">\n";
    if ($var{'textheaderindex'} eq '') {
-      print IFILE "<h1 $var{'codeheader'}>Index of Matlab Files in Directory $LocalActDir</h1>\n";
+      print IFILE "<h1 $var{'codeheader'}>Index of Matlab Files in Directory $dirToPrint</h1>\n";
    } else {
       if ($LocalGlobalLocal eq 'global') { print IFILE "<h1 $var{'codeheader'}>$var{'textheaderindex'}</h1>\n"; }
-      else { print IFILE "<h1 $var{'codeheader'}>$var{'textheaderindex'} in Directory $LocalActDir</h1>\n"; }
+      else { print IFILE "<h1 $var{'codeheader'}>$var{'textheaderindex'} in Directory $dirToPrint</h1>\n"; }
    }
 
    # include links to indexes
@@ -856,29 +868,44 @@ sub ConstructAZIndexFile
       for('a'..'z') {
          # print "   $_: @{$_}\n";
          $numberofletter = $#{$_}+1;
+	 $cols = 3;
          if ($numberofletter > 0) {
-            print IFILE "\n<tr><td colspan=\"2\"><br /><strong><a name=\"\U$_\E$_\"></a><span class=\"an\">\U$_\E</span></strong></td></tr>\n";
-            $numberhalf = ($numberofletter + 1 - (($numberofletter+1) % 2))/2;
-            if ($debug > 2) { print "   $_: @{$_} \t $numberhalf \t $numberofletter\n"; }
-            for($count = 0; $count < $numberhalf; $count++) {
-               $name = @{$_}[$count];
-               if ($LocalGlobalLocal eq 'global') { $dirpath = $hfilerelpath{$name}; } else { $dirpath = ""; }
-               print IFILE "<tr><td width=\"50%\"><a href=\"$dirpath$mfilename{$name}$var{'exthtml'}\">$mfilename{$name}</a></td>";
-               if (($count + $numberhalf) < $numberofletter) {
-                  $name = @{$_}[$count + $numberhalf];
-                  if ($LocalGlobalLocal eq 'global') { $dirpath = $hfilerelpath{$name}; } else { $dirpath = ""; }
-                  print IFILE "<td width=\"50%\"><a href=\"$dirpath$mfilename{$name}$var{'exthtml'}\">$mfilename{$name}</a></td></tr>\n";
-               } else {
-                  print IFILE "<td width=\"50%\"></td></tr>\n";
-               }
-            }
+            print IFILE "\n<tr><td><br/><strong><a name=\"\U$_\E$_\"></a><span class=\"an\">\U$_\E</span></strong></td></tr>\n";
+            for ($count = 0; $count < $numberofletter; $count++) {
+		if (($count % $cols) == 0) {
+		    if ($count > 0) {
+			print IFILE "</tr><tr>\n";
+		    }
+		    print IFILE "<tr><td></td>";
+		}
+		$name = @{$_}[$count];
+		if ($LocalGlobalLocal eq 'global') { $dirpath = $hfilerelpath{$name}; } else { $dirpath = ""; }
+		print IFILE "<td><a href=\"$dirpath$mfilename{$name}$var{'exthtml'}\">$mfilename{$name}</a></td>";
+	    }
+
+	    print IFILE "</tr>\n";
+		    
+            # $numberhalf = ($numberofletter + 1 - (($numberofletter+1) % 2))/2;
+            # if ($debug > 2) { print "   $_: @{$_} \t $numberhalf \t $numberofletter\n"; }
+            # for($count = 0; $count < $numberhalf; $count++) {
+            #    $name = @{$_}[$count];
+            #    if ($LocalGlobalLocal eq 'global') { $dirpath = $hfilerelpath{$name}; } else { $dirpath = ""; }
+            #    print IFILE "<tr><td width=\"50%\"><a href=\"$dirpath$mfilename{$name}$var{'exthtml'}\">$mfilename{$name}</a></td>";
+            #    if (($count + $numberhalf) < $numberofletter) {
+            #       $name = @{$_}[$count + $numberhalf];
+            #       if ($LocalGlobalLocal eq 'global') { $dirpath = $hfilerelpath{$name}; } else { $dirpath = ""; }
+            #       print IFILE "<td width=\"50%\"><a href=\"$dirpath$mfilename{$name}$var{'exthtml'}\">$mfilename{$name}</a></td></tr>\n";
+            #    } else {
+            #       print IFILE "<td width=\"50%\"></td></tr>\n";
+            #    }
+            # }
          }
       }
       print IFILE "</table>\n<br />$var{'codehr'}\n";
 
    } elsif ($LocalShortLong eq 'long') {
       # begin create long index
-      print IFILE "<table border=\"5\" width=\"100%\" cellpadding=\"5\">\n";
+      print IFILE "<table width=\"100%\">\n";
       print IFILE "<tr><th>Name</th><th>Synopsis</th></tr>\n";
 
       for('a'..'z') {
@@ -904,7 +931,7 @@ sub ConstructAZIndexFile
 
    print IFILE "<!--navigate-->\n";
    print IFILE "<!--copyright-->\n";
-   print IFILE "</body>\n</html>\n";
+   print IFILE "</div>\n</body>\n</html>\n";
 
    close(IFILE);
 
@@ -928,10 +955,10 @@ sub ConstructAZIndexFile
        print IFILE "$TextDocTypeHTML\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n$var{'csslink'}\n";
        
        if ($var{'texttitleindex'} eq '') {
-	   print IFILE "<title>A-Z jump index in directory $LocalActDir</title>\n";
+	   print IFILE "<title>A-Z jump index in directory $dirToPrint</title>\n";
        } else {
 	   if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
-	   else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
+	   else { print IFILE "<title>$var{'texttitleindex'} in Directory $dirToPrint</title>\n"; }
        }
 
        if ($var{'frames'} eq 'yes') {
@@ -939,6 +966,7 @@ sub ConstructAZIndexFile
        }
        print IFILE "</head>\n";
        print IFILE "<body $var{'codebodyindex'}>\n";
+       print IFILE "<div id=\"matlabdoc\">\n";
 
        # Write the A-Z jump line, generate link for letters with files starting with this letter
        # and only letters for no files starting with this letter
@@ -952,7 +980,7 @@ sub ConstructAZIndexFile
 	   }
        }
 
-       print IFILE "</body>\n</html>\n";
+       print IFILE "</div></body>\n</html>\n";
 
        close(IFILE);
 
@@ -979,10 +1007,10 @@ sub ConstructAZIndexFile
        print IFILE "$TextDocTypeHTML\n<html>\n<head>\n$var{'codeheadmeta'}\n$TextMetaCharset\n$var{'csslink'}\n";
 
        if ($var{'texttitleindex'} eq '') {
-	   print IFILE "<title>Index of Matlab Files in Directory $LocalActDir</title>\n";
+	   print IFILE "<title>Index of Matlab Files in Directory $dirToPrint</title>\n";
        } else {
 	   if ($LocalGlobalLocal eq 'global') { print IFILE "<title>$var{'texttitleindex'}</title>\n"; }
-	   else { print IFILE "<title>$var{'texttitleindex'} in Directory $LocalActDir</title>\n"; }
+	   else { print IFILE "<title>$var{'texttitleindex'} in Directory $dirToPrint</title>\n"; }
        }
        print IFILE "</head>\n";
 
@@ -1217,11 +1245,11 @@ sub ConstructHTMLFiles
       # Write Title and start body of html-file
       print HFILE "<title>$var{'texttitlefiles'} $mfilename{$name}</title>\n</head>\n";
       print HFILE "<body $var{'codebodyfiles'}>\n";
+      print HFILE "<div id=\"matlabdoc\">\n";
       print HFILE "<h1 $var{'codeheader'}>$var{'textheaderfiles'} $mfilename{$name}</h1>\n";
 
 # http://test.soundsoftware.ac.uk/cannam/projects/smallbox/repository/annotate/DL/RLS-DLA/SolveFISTA.m
-
-      print HFILE "<a href=\"" . $hfileindexpath{$name} . "../../projects/smallbox/repository/annotate/" . $mfiledir{$name}  . $mfilename{$name} . ".m\">View in repository</a>\n";
+#      print HFILE "<a href=\"" . $hfileindexpath{$name} . "../../projects/smallbox/repository/annotate/" . $mfiledir{$name}  . $mfilename{$name} . ".m\">View in repository</a>\n";
 
       print HFILE "$var{'codehr'}\n";
 
@@ -1330,7 +1358,7 @@ sub ConstructHTMLFiles
 
       print HFILE "<!--navigate-->\n";
       print HFILE "<!--copyright-->\n";
-      print HFILE "</body>\n</html>\n";
+      print HFILE "</div>\n</body>\n</html>\n";
       close(MFILE);
       close(HFILE);
 
