@@ -75,7 +75,7 @@ goto endofperl
 
 $VERSION  = '1.23';
 ($PROGRAM = $0) =~ s@.*/@@; $PROGRAM = "\U$PROGRAM\E";
-$debug = 4;
+$debug = 1;
 
 #------------------------------------------------------------------------
 # Define platform specific things

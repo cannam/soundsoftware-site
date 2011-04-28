@@ -22,7 +22,7 @@ case "$progdir" in
     *) progdir="$(pwd)/$progdir" ;;
 esac
 
-types="doxygen javadoc" # Do Doxygen first (it can be used for Java too)
+types="doxygen javadoc matlabdocs" # Do Doxygen first (it can be used for Java too)
 
 for x in $types; do
     if [ ! -x "$progdir/extract-$x.sh" ]; then
