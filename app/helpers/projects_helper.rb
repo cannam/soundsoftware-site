@@ -95,68 +95,73 @@ module ProjectsHelper
   end
 
 
+  def render_my_project_in_hierarchy(project)
+ 
+    s = ''
+
+    if User.current.member_of?(project)
+
+      # set the project environment to please macros.
+      @project = project
+
+      classes = (project.root? ? 'root' : 'child')
+      
+      s << "<li class='#{classes}'><div class='#{classes}'>" +
+        link_to_project(project, {}, :class => "project my-project")
+      if project.is_public?
+        s << " <span class='public'>" << l("field_is_public") << "</span>"
+      else
+        s << " <span class='private'>" << l("field_is_private") << "</span>"
+      end
+      s << render_project_short_description(project)
+      s << "</div>\n"
+
+      cs = ''
+      project.children.each do |child|
+        cs << render_my_project_in_hierarchy(child)
+      end
+
+      if cs != ''
+        s << "<ul class='projects'>\n" << cs << "</ul>\n";
+      end
+
+    end
+
+    s
+
+  end
+
   # Renders a tree of projects where the current user belongs
   # as a nested set of unordered lists
   # The given collection may be a subset of the whole project tree
   # (eg. some intermediate nodes are private and can not be seen)
   def render_my_project_hierarchy(projects)
+
     s = ''
 
-    a = ''
+    original_project = @project
 
-    # Flag to tell if user has any projects
-    t = FALSE
-    
-    if projects.any?
-      ancestors = []
-      original_project = @project
-      projects.each do |project|
-        # set the project environment to please macros.
-
-        @project = project
-
-        if User.current.member_of?(project):
-
-          t = TRUE
-
-          if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
-            s << "<ul class='projects #{ ancestors.empty? ? 'root' : nil}'>\n"
-          else
-            ancestors.pop
-            s << "</li>"
-            while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
-              ancestors.pop
-              s << "</ul></li>\n"
-            end
-          end
-
-          classes = (ancestors.empty? ? 'root' : 'child')
-          s << "<li class='#{classes}'><div class='#{classes}'>" +
-                 link_to_project(project, {}, :class => "project my-project")
-          if project.is_public?
-            s << " <span class='public'>" << l("field_is_public") << "</span>"
-          else
-            s << " <span class='private'>" << l("field_is_private") << "</span>"
-          end
-          s << render_project_short_description(project)
-          s << "</div>\n"
-          ancestors << project
-        end
-       end
-        s << ("</li></ul>\n" * ancestors.size)
-        @project = original_project
+    projects.each do |project|
+      if project.root? || !projects.include?(project.parent)
+        s << render_my_project_in_hierarchy(project)
+      end
     end
 
-    if t == TRUE
+    @project = original_project
+
+    if s != ''
+      a = ''
       a << "<h2>"
       a <<  l("label_my_project_plural")
       a << "</h2>"
+      a << "<ul class='projects root'>\n"
       a << s
-    else
-      a = s
+      a << "</ul>\n"
+      s = a
     end
+
+    s
     
-    a
   end
 
   # Renders a tree of projects that the current user does not belong
