@@ -237,7 +237,9 @@ module ProjectsHelper
     s << "</tr>"
 
     project.children.each do |child|
-      s << render_project_in_table(child, oddeven, level + 1)
+      if child.is_public? or User.current.member_of?(child)
+        s << render_project_in_table(child, oddeven, level + 1)
+      end
     end
     
     s
