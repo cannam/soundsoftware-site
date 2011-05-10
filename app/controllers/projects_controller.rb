@@ -59,7 +59,9 @@ class ProjectsController < ApplicationController
         @offset ||= @project_pages.current.offset
         @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
         if User.current.logged?
-          @user_projects = User.current.projects.sort_by(&:name)
+          # seems sort_by gives us case-sensitive ordering, which we don't want
+#          @user_projects = User.current.projects.sort_by(&:name)
+          @user_projects = User.current.projects.all(:order => :name)
         end
         render :template => 'projects/index.rhtml', :layout => !request.xhr?
       }
