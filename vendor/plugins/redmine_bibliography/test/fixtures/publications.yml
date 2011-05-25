@@ -1,8 +1,8 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-  title: MyString
-  bibtex_entry_id: MyString
+  title: Test Fixture Title No1
+  bibtex_entry_id: 1
 two:
   id: 2
   title: MyString

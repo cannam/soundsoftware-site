@@ -22,8 +22,10 @@ class PublicationsController < ApplicationController
     bibtex_entry = params[:bibtex_entry]
 
     # method for creating "pasted" bibtex entries
-    if bibtex_entry      
+    if bibtex_entry
+      logger.error "ANTES PARSE"      
       parse_bibtex_list bibtex_entry    
+      logger.error "DEPOIS PARSE"
     end
 
     # form's flow control
@@ -110,7 +112,8 @@ class PublicationsController < ApplicationController
     @publication.bibtex_entry = @bentry
     @publication.save
 
-    @created_publications << @publication.id
+    # what is this for??? 
+    # @created_publications << @publication.id
 
     # need to save all authors
     #   and establish the author-publication association 

@@ -1,7 +1,16 @@
 <h2>Publications#index</h2>
 
+
+<table>
+  <tr>
+    <th>Number</th>
+    <th>Title</th> 
+  </tr>
+
 <% @publications.each do |publication| %>
-	
-	<p><%= publication.id %>: <%=publication.title %></p>
+	<tr>
+	  <td><%= publication.id %></td>
+	  <td><%= publication.title %></td>
+	 	</tr>
 	
 <% end %>
