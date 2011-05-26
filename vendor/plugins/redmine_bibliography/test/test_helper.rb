@@ -5,13 +5,20 @@ require 'publications_controller'
 # Ensure that we are using the temporary fixture path
 Engines::Testing.set_fixture_path
 
-class PublicationsControllerTest < ActionController::TestCase
-  fixtures :publications, :authors, :bibtex_entries, :authorships
+class BibliographyControllerTest < ActionController::TestCase
+  fixtures :all
 
   def setup
   end
 
+  def test_publication
+  
+  end
+  
+
   def test_routing
     assert_routing(
+          {:method => :get, :path => '/requirements'},
+          :controller => 'requirements', :action => 'index'
         )
   end

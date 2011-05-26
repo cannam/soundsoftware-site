@@ -1,6 +1,8 @@
 # vendor/plugins/redmine_bibliography/app/controllers/publications_controller.rb
 
 class PublicationsController < ApplicationController
+  # TODO: should be removed on production version?
+  unloadable
 
   def new
     # we always try to create at least one publication
@@ -61,9 +63,21 @@ class PublicationsController < ApplicationController
 
   end
 
-  def show  
-    @publication = Publication.find(params[id])
-    @authors = @publication.authors
+  def show
+    @publication = Publication.find_by_id(params[:id])
+
+    if @publication.nil?
+        @publications = Publication.all
+        render "index", :alert => 'Your Publications was not found!'
+    else
+      @authors = @publication.authors
+      @bibtext_entry = @publication.bibtex_entry
+    
+      respond_to do |format|
+        format.html
+        format.xml {render :xml => @publication}
+      end
+    end
   end
 
   # parse string with bibtex authors
