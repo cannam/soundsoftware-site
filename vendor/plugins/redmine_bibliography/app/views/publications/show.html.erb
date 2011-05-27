@@ -1,12 +1,20 @@
-<h2><%= @publication.title %></h2>
+<h2>Publication Details</h2>
+<h4>Title</h4>
+<%= @publication.title %>
 
-<h3>Authors</h3>
+<h4>Authors</h4>
 <% @publication.authors.each do |author| %>
-  <%= author.name  %> <br />
+<%= author.name  %> <br />
+<% end %>
+<br />
+
+<% @publication.bibtex_entry.attributes.each do |field| %>
+  <% if field[1] != nil %>
+    <h4><%= field[0] %></h4>
+    <%= @publication.bibtex_entry.attributes[field[0]] unless field[1] == nil %>
+    <br />
+  <% end %>
 <% end %>
 
-<h3>Details</h3>
-
-<%= @publication.bibtex_entry.year %>
 
 
