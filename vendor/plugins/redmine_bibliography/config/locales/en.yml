@@ -1,3 +1,39 @@
 # English strings go here for Rails i18n
 en:
-  my_label: "My label"
+  title: "Title"
+  authors: "Authors"
+  author: "Author"
+  name: "Name"
+      
+  # bibtex_entries strings
+  id: "id" 
+  publication_id: "Publication_id"
+  entry_type: "Entry Type"
+  address: "Address"
+  annote: "Annote"
+  booktitle: "Book Title"
+  chapter: "Chapter"
+  crossref: "Cross Reference"
+  edition: "Edition"
+  editor: "Editor"
+  eprint: "eprint"
+  howpublished: "How was it Published"
+  journal: "Journal"
+  key: "Key"
+  month: "Month"
+  note: "Note"
+  number: "Number"
+  organization: "Organization"
+  pages: "Pages"
+  publisher: "Publisher"
+  school: "School"
+  series: "Series"
+  type: "Type"
+  url: "URL"
+  volume: "Volume"
+  year: "Year"
+  
+  
+  
+  
+  
