@@ -1,11 +1,16 @@
 # vendor/plugins/redmine_bibliography/app/models/publication.rb
 
 class Publication < ActiveRecord::Base
+  unloadable
+
+
   has_many :authorships
   has_many :authors, :through => :authorships
   has_one :bibtex_entry
 
   validates_presence_of :title
+  
+  accepts_nested_attributes_for :authors, :bibtex_entry
   
   attr_writer :current_step
 

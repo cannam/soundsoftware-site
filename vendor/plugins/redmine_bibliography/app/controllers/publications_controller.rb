@@ -53,7 +53,8 @@ class PublicationsController < ApplicationController
   end
 
   def edit
-    logger.error "AAAA edit"
+    @publication = Publication.find(params[:id])
+
 
   end
 
@@ -64,7 +65,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    @publication = Publication.find_by_id(params[:id])
+    @publication = Publication.find(params[:id])
 
     if @publication.nil?
         @publications = Publication.all
