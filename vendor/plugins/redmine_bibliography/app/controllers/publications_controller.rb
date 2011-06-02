@@ -54,14 +54,17 @@ class PublicationsController < ApplicationController
 
   def edit
     @publication = Publication.find(params[:id])
-
-
+    
   end
 
   def update
-
-    logger.error "AAAA update"
-
+    @publication = Publication.find(params[:id])
+    if @publication.update_attributes(params[:publication])
+      flash[:notice] = "Successfully updated Publication."
+      redirect_to @publication
+    else
+      render :action => 'edit'
+    end
   end
 
   def show
