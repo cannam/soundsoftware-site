@@ -1,0 +1,42 @@
+
+<% form_for @publication, :url => {:action => :update }, :id => 13 do |f| -%>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title, l(:title) %>  <%= f.text_field :title %>  
+  </p>
+  
+
+  <h3><%= l(:authors) -%></h3>
+  
+  <% f.fields_for :authors do |author| %>
+    <p>
+      <%= author.label :name, l("name") %> <%= author.text_field :name %>            
+    </p>
+    
+  <% end %>
+  
+  
+  <% f.fields_for @publication.bibtex_entry do |b| -%>
+    <p> 
+      <%= b.label :year, l(:year) %>  <%= b.text_field :year %>  
+    </p>
+    <p> 
+      <%= b.label :chapter, l(:chapter) %>  <%= b.text_field :chapter %>  
+    </p>
+    <p>  
+      <%= b.label :editor, l(:editor) %>  <%= b.text_field :editor %>  
+    </p>
+    <p> 
+      <%= b.label :booktitle, l(:booktitle) %>  <%= b.text_field :booktitle %>  
+    </p>
+    <p> 
+      <%= b.label :publisher, l(:publisher) %>  <%= b.text_field :publisher %>  
+    </p>
+    <p> 
+      <%= b.label :pages, l(:pages) %>  <%= b.text_field :pages %>  
+    </p>
+  <% end -%>
+
+  <%= f.submit %>
+
+<% end -%>
