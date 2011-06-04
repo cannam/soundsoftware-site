@@ -5,15 +5,13 @@ class PublicationsController < ApplicationController
   unloadable
 
   def new
-    # we always try to create at least one publication
-    @publication = Publication.new
+    @publication = Publication.new      
 
     # the step we're at in the form
     @publication.current_step = session[:publication_step]
 
     @new_publications = []
     session[:publications] ||= {}
-      
   end
 
   def create
@@ -53,6 +51,7 @@ class PublicationsController < ApplicationController
   end
 
   def edit
+    
     @publication = Publication.find(params[:id])
     
   end
@@ -145,10 +144,10 @@ class PublicationsController < ApplicationController
       end
 
       author.authorships.create!(
-      :publication => @publication,
-      :institution => institution,
-      :email => email,
-      :order => idx)
+        :publication => @publication,
+        :institution => institution,
+        :email => email,
+        :order => idx)
 
     end
   end
@@ -158,6 +157,11 @@ class PublicationsController < ApplicationController
 
   end
 
+  def import
+    @publication = Publication.new
+    
+    
+  end
 
   def review_new_entries
 
