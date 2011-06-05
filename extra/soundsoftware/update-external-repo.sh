@@ -68,7 +68,7 @@ if [ -d "$project_repo_mirror" ]; then
     if [ -d "$project_repo_mirror/.hg" ]; then
 	hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" && success=true
     elif [ -d "$project_repo_mirror/.git" ]; then
-	( cd "$project_repo_mirror" && git fetch "$remote_repo" ) && success=true
+	( cd "$project_repo_mirror" && git pull "$remote_repo" master ) && success=true
     else 
 	echo "$$: ERROR: Repo mirror dir $project_repo_mirror exists but is not an Hg or git repo" 1>&2
     fi
