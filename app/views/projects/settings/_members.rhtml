@@ -2,6 +2,7 @@
 <% roles = Role.find_all_givable
    members = @project.member_principals.find(:all, :include => [:roles, :principal]).sort %>
 
+
 <div class="splitcontentleft">
 <% if members.any? %>
 <table class="list members">
@@ -73,10 +74,10 @@
 		<% end %>
 		</div>
 		
-    <p><%= l(:label_role_plural) %>:
+    <p><%= l(:label_set_role_plural) %>:</p>
     <% roles.each do |role| %>
-    	<label><%= check_box_tag 'member[role_ids][]', role.id %> <%=h role %></label>
-   	<% end %></p>
+    	<label><%= check_box_tag 'member[role_ids][]', role.id %> <%=h role %> </label><div style="margin-left: 2em; margin-bottom: 0.5em"><i><%=l( 'label_' + role.name.downcase + "_description").to_sym %></i></div>
+   	<% end %>
    	
     <p><%= submit_tag l(:button_add), :id => 'member-add-submit' %></p>
 		</fieldset>

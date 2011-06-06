@@ -54,11 +54,16 @@
       <h3 id="project-ancestors-title"><%= page_header_title[1] %></h3>
     <% end %>  
 
-    <h1  id="project-title"
+    <h1 id="project-title"
       <% unless page_header_title[1].empty? %>
         style="margin-top: 0px; "
       <% end %>  
-    ><%= page_header_title[0] %></h1>
+    ><% if display_main_menu?(@project) %>
+       <%= link_to_project(@project) %>
+     <% else %> 
+       <%= page_header_title[0] %>
+     <% end %>
+    </h1>
     
     <% if display_main_menu?(@project) %>
     <div id="main-menu">
@@ -85,7 +90,7 @@
 	
 <div id="footer">
   <div class="bgl"><div class="bgr">
-    Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %> &copy; 2006-2011 Jean-Philippe Lang
+    <small>Powered by <%= link_to Redmine::Info.app_name, Redmine::Info.url %><br>&copy; 2006-2011 Jean-Philippe Lang</small>
   </div></div>
 </div>
 </div>

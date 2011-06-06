@@ -56,7 +56,9 @@ class ProjectsController < ApplicationController
         @offset ||= @project_pages.current.offset
         @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
         if User.current.logged?
-          @user_projects = User.current.projects.sort_by(&:name)
+          # seems sort_by gives us case-sensitive ordering, which we don't want
+#          @user_projects = User.current.projects.sort_by(&:name)
+          @user_projects = User.current.projects.all(:order => :name)
         end
         render :template => 'projects/index.rhtml', :layout => !request.xhr?
       }
@@ -215,6 +217,15 @@ class ProjectsController < ApplicationController
   end
 
   verify :method => :post, :only => :modules, :render => {:nothing => true, :status => :method_not_allowed }
+  
+  def overview
+    @project.has_welcome_page = params[:has_welcome_page]
+    if @project.save
+      flash[:notice] = l(:notice_successful_update)
+    end
+    redirect_to :action => 'settings', :id => @project, :tab => 'overview'
+  end
+
   def modules
     @project.enabled_module_names = params[:enabled_module_names]
     flash[:notice] = l(:notice_successful_update)

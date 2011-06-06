@@ -22,7 +22,7 @@ class Repository::Mercurial < Repository
   has_many :changesets, :order => "#{Changeset.table_name}.id DESC", :foreign_key => 'repository_id'
 
   attr_protected :root_url
-  validates_presence_of :url
+  # validates_presence_of :url
 
   FETCH_AT_ONCE = 100  # number of changesets to fetch at once
 

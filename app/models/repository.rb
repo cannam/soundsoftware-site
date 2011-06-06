@@ -268,6 +268,10 @@ class Repository < ActiveRecord::Base
     nil
   end
 
+  def clear_cache
+    clear_changesets
+  end
+    
   def self.scm_adapter_class
     nil
   end

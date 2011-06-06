@@ -161,7 +161,7 @@ tr.changeset td.author { text-align: center; width: 15%; }
 tr.changeset td.committed_on { text-align: center; width: 15%; }
 
 table.files tr.file td { text-align: center; }
-table.files tr.file td.filename { text-align: left; padding-left: 24px; }
+table.files tr.file td.filename { text-align: left; }
 table.files tr.file td.digest { font-size: 80%; }
 
 table.members td.roles, table.memberships td.roles { width: 45%; }
@@ -225,6 +225,7 @@ td.center {text-align:center;}
 h3.version { background: url(../images/package.png) no-repeat 0% 50%; padding-left: 20px; }
 
 div.issues h3 { background: url(../images/ticket.png) no-repeat 0% 50%; padding-left: 20px; }
+div.activity h3 { background: url(../images/ticket.png) no-repeat 0% 50%; padding-left: 20px; }
 div.members h3 { background: url(../images/group.png) no-repeat 0% 50%; padding-left: 20px; }
 div.news h3 { background: url(../images/news.png) no-repeat 0% 50%; padding-left: 20px; }
 div.projects h3 { background: url(../images/projects.png) no-repeat 0% 50%; padding-left: 20px; }
@@ -304,20 +305,24 @@ div#issue-changesets div.changeset { padding: 4px;}
 div#issue-changesets div.changeset { border-bottom: 1px solid #ddd; }
 div#issue-changesets p { margin-top: 0; margin-bottom: 1em;}
 
-div#activity dl, #search-results { margin-left: 2em; }
-div#activity dd, #search-results dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
-div#activity dt, #search-results dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; background-position: 0 50%; background-repeat: no-repeat; }
-div#activity dt.me .time { border-bottom: 1px solid #999; }
-div#activity dt .time { color: #777; font-size: 80%; }
+div#activity dl, div#news dl, #search-results { margin-left: 2em; }
+div#activity .box dl { margin-left: 0; }
+div#activity dd, div#news dd, #search-results dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
+div#activity dt, div#news dt, #search-results dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; background-position: 0 50%; background-repeat: no-repeat; }
+div#activity dt.me .time, div#news dt.me .time { border-bottom: 1px solid #999; }
+div#activity dt .time, div#news dt .time, .projects .latest .time { color: #777; font-size: 80%; }
 div#activity dd .description, #search-results dd .description { font-style: italic; }
-div#activity span.project:after, #search-results span.project:after { content: " -"; }
+div#activity span.project:after, div#news span.project:after, #search-results span.project:after { content: " -"; }
 div#activity dd span.description, #search-results dd span.description { display:block; color: #808080; }
+
+.projects .latest .title { margin-right: 0.5em; }
+.tipoftheday .tip { margin-left: 2em; margin-top: 0.5em; }
 
 #search-results dd { margin-bottom: 1em; padding-left: 20px; margin-left:0px; }
 
-div#search-results-counts {float:right;}
-div#search-results-counts ul { margin-top: 0.5em; }
-div#search-results-counts  li { list-style-type:none; float: left; margin-left: 1em; }
+div#search-results-counts { display: block; padding-left: 0; margin-left: 0; }
+div#search-results-counts ul { margin-top: 0.5em; padding-left: 0; margin-left: 0; }
+div#search-results-counts li { display: inline; list-style-type: none; margin-right: 1em; }
   
 dt.issue { background-image: url(../images/ticket.png); }
 dt.issue-edit { background-image: url(../images/ticket_edit.png); }
@@ -364,6 +369,8 @@ ul.projects ul.projects { border-left: 3px solid #e0e0e0; }
 ul.projects li.root { list-style-type:none; margin-bottom: 1em; }
 ul.projects li.child { list-style-type:none; margin-top: 1em;}
 ul.projects div.root a.project { font-weight: bold; font-size: 16px; margin: 0 0 10px 0; }
+
+li.latest { margin-bottom: 0.5em; }
 
 #tracker_project_ids ul { margin: 0;  padding-left: 1em; }
 #tracker_project_ids li { list-style-type:none; } 

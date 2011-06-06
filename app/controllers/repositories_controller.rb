@@ -36,7 +36,11 @@ class RepositoriesController < ApplicationController
 
   def edit
     @repository = @project.repository
-    if !@repository && !params[:repository_scm].blank?
+
+    if !@repository
+
+      params[:repository_scm]='Mercurial'
+
       @repository = Repository.factory(params[:repository_scm])
       @repository.project = @project if @repository
     end
@@ -55,6 +59,7 @@ class RepositoriesController < ApplicationController
       @repository.merge_extra_info(p_extra)
       @repository.save
     end
+
     render(:update) do |page|
       page.replace_html "tab-content-repository",
                         :partial => 'projects/settings/repository'

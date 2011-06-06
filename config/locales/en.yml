@@ -1,14 +1,13 @@
 en:
-  # Text direction: Left-to-Right (ltr) or Right-to-Left (rtl)
   direction: ltr
   date:
     formats:
       # Use the strftime parameters for formats.
       # When no format has been given, it uses default.
       # You can provide other formats here if you like!
-      default: "%m/%d/%Y"
-      short: "%b %d"
-      long: "%B %d, %Y"
+      default: "%d/%m/%Y"
+      short: "%d %b"
+      long: "%d %B, %Y"
       
     day_names: [Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
     abbr_day_names: [Sun, Mon, Tue, Wed, Thu, Fri, Sat]
@@ -24,10 +23,10 @@ en:
 
   time:
     formats:
-      default: "%m/%d/%Y %I:%M %p"
+      default: "%d/%m/%Y %I:%M %p"
       time: "%I:%M %p"
       short: "%d %b %H:%M"
-      long: "%B %d, %Y %H:%M"
+      long: "%d %B, %Y %H:%M"
     am: "am"
     pm: "pm"
       
@@ -70,10 +69,14 @@ en:
 
   number:
     format:
-      separator: "." 
-      delimiter: ""
+      separator: "."
+      delimiter: " "
       precision: 3
 
+    currency:
+      format:
+        format: "%u%n"
+        unit: "£"
     human:
       format:
         delimiter: ""
@@ -89,6 +92,7 @@ en:
           gb: "GB"
           tb: "TB"
 
+        
 # Used in array.to_sentence.
   support:
     array:
@@ -126,7 +130,7 @@ en:
         not_same_project: "doesn't belong to the same project"
         circular_dependency: "This relation would create a circular dependency"
         cant_link_an_issue_with_a_descendant: "An issue cannot be linked to one of its subtasks"
-        must_accept_terms_and_conditions: "You must accept the Terms and Conditions"
+        must_accept_terms_and_conditions: "You must accept the Terms and Conditions"        
 
   actionview_instancetag_blank_option: Please select
   
@@ -139,7 +143,7 @@ en:
   general_csv_decimal_separator: '.'
   general_csv_encoding: ISO-8859-1
   general_pdf_encoding: UTF-8
-  general_first_day_of_week: '7'
+  general_first_day_of_week: '1'
   
   notice_account_updated: Account was successfully updated.
   notice_account_invalid_creditentials: Invalid user or password
@@ -323,6 +327,9 @@ en:
   field_cvsroot: CVSROOT
   field_cvs_module: Module
 
+  setting_external_repository: "Select this if the project's main repository is hosted somewhere else"
+  setting_external_repository_url: "The URL of the existing external repository. Must be publicly accessible without a password"
+  label_repository_external_url: "External repository URL"
   field_terms_and_conditions: 'Terms and Conditions:'
   accept_terms_and_conditions: 'I have read and agree with the '
   setting_app_title: Application title
@@ -379,6 +386,7 @@ en:
   setting_rest_api_enabled: Enable REST web service
   setting_cache_formatted_text: Cache formatted text
   setting_default_notification_option: Default notification option
+  setting_has_welcome_page: Select this to replace the project overview page with your welcome page
   setting_commit_logtime_enabled: Enable time logging
   setting_commit_logtime_activity_id: Activity for logged time
   setting_gantt_items_limit: Maximum number of items displayed on the gantt chart
@@ -417,8 +425,8 @@ en:
   permission_comment_news: Comment news
   permission_manage_documents: Manage documents
   permission_view_documents: View documents
-  permission_manage_files: Manage Downloads
-  permission_view_files: View Downloads
+  permission_manage_files: Manage downloads
+  permission_view_files: View downloads
   permission_manage_wiki: Manage wiki
   permission_rename_wiki_pages: Rename wiki pages
   permission_delete_wiki_pages: Delete wiki pages
@@ -451,8 +459,12 @@ en:
   project_module_boards: Forums
   project_module_calendar: Calendar
   project_module_gantt: Gantt chart
-  project_module_embedded: Embedded documentation (Javadoc or Doxygen)
+  project_module_embedded: Embedded documentation (Javadoc, Doxygen or MATLAB)
   label_tipoftheday: Tip of the day
+  label_notifications: Important Message
+  field_terms_and_conditions: 'Terms and Conditions:'
+  accept_terms_and_conditions: 'I have read and agree with the '
+  label_ssamr_description: Research description
   label_ssamr_details: Other Details
   label_ssamr_institution: Institution
   label_ssamr_description: Research description
@@ -471,6 +483,7 @@ en:
     other: "%{count} projects"
   label_project_all: All Projects
   label_project_latest: Latest projects
+  label_projects_more: More projects
   label_managers: Managed by
   label_issue: Issue
   label_issue_new: New issue
@@ -531,6 +544,9 @@ en:
   label_last_login: Last connection
   label_registered_on: Registered on
   label_activity: Activity
+  label_activity_recent: Recent activity
+  label_activity_my_recent: Recent activity in my projects
+  label_activity_my_recent_none: No recent activity
   label_overall_activity: Overall activity
   label_user_activity: "%{value}'s activity"
   label_new: New
@@ -569,6 +585,8 @@ en:
   label_news_new: Add news
   label_news_plural: News
   label_news_latest: Latest news
+  label_news_site_latest: Site news
+  label_news_more: More news
   label_news_view_all: View all news
   label_news_added: News added
   label_news_comment_added: Comment added to a news
@@ -617,7 +635,7 @@ en:
   label_internal: Internal
   label_last_changes: "last %{count} changes"
   label_change_view_all: View all changes
-  label_personalize_page: Personalize this page
+  label_personalize_page: Personalise this page
   label_comment: Comment
   label_comment_plural: Comments
   label_x_comments:
@@ -657,6 +675,7 @@ en:
   label_not_contains: doesn't contain
   label_day_plural: days
   label_repository: Repository
+  label_is_external_repository: Track an external repository
   label_repository_plural: Repositories
   label_browse: Browse
   label_modification: "%{count} change"
@@ -763,6 +782,7 @@ en:
   label_added_time_by: "Added by %{author} %{age} ago"
   label_updated_time_by: "Updated by %{author} %{age} ago"
   label_updated_time: "Updated %{value} ago"
+  label_time_ago: "{{age}} ago"
   label_jump_to_a_project: Jump to a project...
   label_file_plural: Downloads
   label_changeset_plural: Changesets
@@ -831,6 +851,8 @@ en:
   label_project_copy_notifications: Send email notifications during the project copy
   label_principal_search: "Search by name:"
   label_user_search: "Search for user:"
+  label_welcome_page: "Welcome page"
+  label_has_welcome_page: "Use your own welcome page"
   label_additional_workflow_transitions_for_author: Additional transitions allowed when the user is the author
   label_additional_workflow_transitions_for_assignee: Additional transitions allowed when the user is the assignee
   label_issues_visibility_all: All issues
@@ -884,6 +906,7 @@ en:
   button_quote: Quote
   button_duplicate: Duplicate
   button_show: Show
+  button_welcome_page_edit: Create or edit welcome page
 
   status_active: active
   status_registered: registered
@@ -894,6 +917,7 @@ en:
   version_status_closed: closed
 
   field_active: Active
+  field_current: Current
 
   text_select_mail_notifications: Select actions for which email notifications should be sent.
   text_regexp_info: eg. ^[A-Z0-9]+$
@@ -908,15 +932,17 @@ en:
   text_journal_set_to: "%{label} set to %{value}"
   text_journal_deleted: "%{label} deleted (%{old})"
   text_journal_added: "%{label} %{value} added"
-  text_tip_issue_begin_day: issue beginning this day
-  text_tip_issue_end_day: issue ending this day
-  text_tip_issue_begin_end_day: issue beginning and ending this day
+  text_tip_issue_begin_day: task beginning this day
+  text_tip_issue_end_day: task ending this day
+  text_tip_issue_begin_end_day: task beginning and ending this day
   text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br />Once saved, the identifier cannot be changed.'
+  text_project_homepage_info: 'Link to an external project page.'
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
   text_length_between: "Length between %{min} and %{max} characters."
+  text_user_ssamr_description_info: 'Please describe your current research or development interests.<br/>This information will be used at registration to determine that you are a real person &ndash; so please be descriptive, or your application may be delayed or rejected.<br/>After registration, the description is publicly visible in your profile and you can edit it at any time.'
   text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
-  text_user_ssamr_description_info: 'Please describe your current research or development interests, within the fields of audio and music.<br/>This information is publicly visible in your profile and you can edit it at any time.'
+
   text_tracker_no_workflow: No workflow defined for this tracker
   text_unallowed_characters: Unallowed characters
   text_comma_separated: Multiple values allowed (comma separated).
@@ -949,7 +975,7 @@ en:
   text_enumeration_destroy_question: "%{count} objects are assigned to this value."
   text_enumeration_category_reassign_to: 'Reassign them to this value:'
   text_email_delivery_not_configured: "Email delivery is not configured, and notifications are disabled.\nConfigure your SMTP server in config/configuration.yml and restart the application to enable them."
-  text_repository_usernames_mapping: "Select or update the Redmine user mapped to each username found in the repository log.\nUsers with the same Redmine and repository username or email are automatically mapped."
+  text_repository_usernames_mapping: "Select the project member associated with each username found in the repository log.\nUsers whose name or email matches that in the repository are mapped automatically."
   text_diff_truncated: '... This diff was truncated because it exceeds the maximum size that can be displayed.'
   text_custom_field_possible_values_info: 'One line for each value'
   text_wiki_page_destroy_question: "This page has %{descendants} child page(s) and descendant(s). What do you want to do?"
@@ -960,7 +986,8 @@ en:
   text_zoom_in: Zoom in
   text_zoom_out: Zoom out
   text_warn_on_leaving_unsaved: "The current page contains unsaved text that will be lost if you leave this page."
-  text_settings_repo_creation: The repository for a project should be set up automatically within a few minutes of the project being created.<br>You should not have to adjust any settings here.<br>Please check again in ten minutes, and <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if there is any problem.
+  text_files_active_change: <br>Click the star to switch active status for a download on or off.<br>Active files will be shown more prominently in the download page.
+  text_settings_repo_creation: <b>Creating repository...</b></p><p>The source code repository for a project will be set up automatically within a few minutes of the project being created.</p><p>Please check again in five minutes, and <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if there is any problem.</p><p>If you wish to use this project to track a repository that is already hosted somewhere else, please wait until the repository has been created here and then return to this settings page to configure it.</p><p>If you don't want a repository at all, go to the Modules tab and switch it off there.
   text_scm_path_encoding_note: "Default: UTF-8"
   text_git_repository_note: "Bare and local repository (e.g. /gitrepo, c:\gitrepo)"
   text_mercurial_repository_note: "Local repository (e.g. /hgrepo, c:\hgrepo)"
@@ -968,6 +995,13 @@ en:
   text_scm_command_version: Version
   text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
   text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
+  text_settings_repo_explanation: <b>External repositories</b><p>Normally your project's primary repository will be the Mercurial repository hosted at this site.<p>However, if you already have your project hosted somewhere else, you can specify your existing external repository's URL here &ndash; then this site will track that repository in a read-only &ldquo;mirror&rdquo; copy.  External Mercurial, git and Subversion repositories can be tracked. Note that you cannot switch to an external repository if you have already made any commits to the repository hosted here.
+  text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
+  text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.
+  text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
+  text_has_welcome_page_info: <b>Welcome page</b><p>You can replace the standard {{overview_link}} page for this project with your own welcome page.<br>This page will be editable using the project Wiki.
+  text_has_welcome_page_wiki_disabled: <b>Note:</b> You must enable the Wiki module in the {{modules_link}} tab before you can create or edit this page.
+
 
   default_role_manager: Manager
   default_role_developer: Developer
@@ -995,3 +1029,13 @@ en:
   enumeration_doc_categories: Document categories
   enumeration_activities: Activities (time tracking)
   enumeration_system_activity: System Activity
+
+  label_manager_description: All powers including adding and removing members and adjusting project settings
+  label_developer_description: Can commit to repository and carry out most project editing tasks
+  label_reporter_description: Can submit bug reports; has read access for private projects
+
+  label_set_role_plural: Choose roles for new member
+
+  notice_added_to_project: 'You have been added to the project "{{project_name}}".'
+  notice_project_homepage: "You can visit the project using the following link: {{project_url}}"
+  mail_subject_added_to_project: "You've been added to a project on {{value}}"

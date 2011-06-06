@@ -32,6 +32,27 @@ class Mailer < ActionMailer::Base
     { :host => h, :protocol => Setting.protocol }
   end
 
+
+
+  # Builds a tmail object used to email the specified user that he was added to a project
+  #
+  # Example:
+  #   add_to_project(user) => tmail object
+  #   Mailer.deliver_add_to_project(user) => sends an email to the registered user
+  def added_to_project(member, project)
+
+    user = User.find(member.user_id)
+
+    set_language_if_valid user.language
+    recipients user.mail
+    subject l(:mail_subject_added_to_project, Setting.app_title)
+    body :project_url => url_for(:controller => 'projects', :action => 'show', :id => project.id),
+        :project_name => project.name
+    render_multipart('added_to_project', body)
+  end
+
+
+  
   # Builds a tmail object used to email recipients of the added issue.
   #
   # Example:
@@ -458,3 +479,7 @@ module TMail
     end
   end
 end
+
+
+
+
