@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/awesome_nested_set/lib
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/awesome_nested_set/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2011-01-22T11:46:15.415880Z
-4735
+2011-04-12T16:31:00.547886Z
+5441
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
-30e0732ab58f6380af97e08261871486
-2011-01-22T11:46:15.415880Z
-4735
+2011-06-06T13:20:52.000000Z
+1930a187dbd0635d534b5afb1a9957ba
+2011-04-12T16:31:00.547886Z
+5441
 jplang
 has-props
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-21619
+21882
 
 awesome_nested_set
 dir

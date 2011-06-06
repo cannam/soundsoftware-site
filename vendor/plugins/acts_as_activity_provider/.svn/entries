@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_activity_provider
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_activity_provider
 http://redmine.rubyforge.org/svn
 
 
 
-2008-12-08T18:20:26.452857Z
-2114
+2011-04-05T12:52:20.839202Z
+5325
 jplang
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 779d73c171dc111df084a0798cca73e2
 2008-07-27T17:54:09.197937Z
 1701

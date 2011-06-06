@@ -1,17 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 62
-/svn/!svn/ver/4509/trunk/test/unit/lib/redmine/wiki_formatting
-END
-textile_formatter_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 88
-/svn/!svn/ver/4509/trunk/test/unit/lib/redmine/wiki_formatting/textile_formatter_test.rb
-END
-macros_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 77
-/svn/!svn/ver/4509/trunk/test/unit/lib/redmine/wiki_formatting/macros_test.rb
+V 76
+/svn/!svn/ver/5878/branches/1.2-stable/test/unit/lib/redmine/wiki_formatting
 END

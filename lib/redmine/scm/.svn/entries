@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/scm
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/scm
 http://redmine.rubyforge.org/svn
 
 
 
-2011-03-03T05:51:46.224821Z
-4993
+2011-05-21T02:39:42.521746Z
+5870
 tmaruyama
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
+2011-06-06T13:15:00.000000Z
 3a053c03d210decd9105a24ff5e1aa8f
 2010-02-16T22:41:59.625572Z
 3440

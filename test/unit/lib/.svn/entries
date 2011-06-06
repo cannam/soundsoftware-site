@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/test/unit/lib
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/unit/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2011-02-28T14:12:47.115180Z
-4964
+2011-05-21T02:40:19.290757Z
+5871
 tmaruyama
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2011-03-03T11:05:08.000000Z
+2011-06-06T13:15:00.000000Z
 eec42202798f1936d0e12c27f43f9add
 2010-12-12T23:24:34.194336Z
 4509

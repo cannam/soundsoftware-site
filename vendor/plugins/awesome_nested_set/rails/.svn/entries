@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/awesome_nested_set/rails
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/awesome_nested_set/rails
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:13.000000Z
+2011-06-06T13:15:00.000000Z
 d5995cbfa2abdc12b57c44d69dc0085b
 2008-12-20T12:22:38.158335Z
 2149

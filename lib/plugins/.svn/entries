@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/lib/plugins
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/plugins
 http://redmine.rubyforge.org/svn
 
 

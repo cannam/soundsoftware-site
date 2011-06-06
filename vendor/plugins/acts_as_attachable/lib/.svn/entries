@@ -1,15 +1,15 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_attachable/lib
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_attachable/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2010-03-03T17:05:00.967826Z
-3528
-edavis10
+2011-04-15T13:23:13.506236Z
+5466
+jplang
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
-982227c44f1fe848c8aeed862ea027f3
-2010-03-03T17:05:00.967826Z
-3528
-edavis10
+2011-06-06T13:18:33.000000Z
+0c00ea7475f5fb3e2232c35f4747e2d2
+2011-04-15T13:23:13.506236Z
+5466
+jplang
 has-props
 
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-2387
+2515
 

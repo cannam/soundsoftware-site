@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/extra/sample_plugin/app/views
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/extra/sample_plugin/app/views
 http://redmine.rubyforge.org/svn
 
 

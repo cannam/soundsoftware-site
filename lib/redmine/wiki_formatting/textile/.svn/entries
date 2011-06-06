@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/wiki_formatting/textile
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/wiki_formatting/textile
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-06T17:47:27.890964Z
-4376
+2011-03-28T20:16:05.752041Z
+5242
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
-dec83b1d0d7f682d1ebf1f172fe3c90b
-2009-11-11T10:55:19.574870Z
-3025
+2011-06-06T13:20:53.000000Z
+e4c07fbafae7798129e133c528e1eec8
+2011-03-28T20:16:05.752041Z
+5242
 jplang
 has-props
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-1936
+2123
 
 formatter.rb
 file
@@ -66,10 +66,10 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
-b8052f700ecb0991fabdd3a5b684a412
-2010-11-06T17:47:27.890964Z
-4376
+2011-06-06T13:20:53.000000Z
+aeba307e1011ac3f15b25fd91065ae2e
+2011-03-14T20:35:36.619571Z
+5133
 jplang
 has-props
 
@@ -92,5 +92,5 @@ has-props
 
 
 
-4724
+4722
 

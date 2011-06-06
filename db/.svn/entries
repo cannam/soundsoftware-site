@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/db
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/db
 http://redmine.rubyforge.org/svn
 
 
 
-2011-03-01T10:14:47.182368Z
-4981
+2011-05-12T17:29:18.150936Z
+5762
 tmaruyama
 has-props
 

@@ -36,7 +36,7 @@ ContextMenu.prototype = {
 
   Click: function(e) {
   	this.hideMenu();
-  	if (Event.element(e).tagName == 'A') { return; }
+  	if (Event.element(e).tagName == 'A' || Event.element(e).tagName == 'IMG') { return; }
     if (Event.isLeftClick(e) || (navigator.appVersion.match(/\bMSIE\b/))) {      
       var tr = Event.findElement(e, 'tr');
       if (tr!=null && tr!=document && tr.hasClassName('hascontextmenu')) {
@@ -50,7 +50,7 @@ ContextMenu.prototype = {
             tr.removeClassName('context-menu-selection');
           }
         } else {
-          if (e.ctrlKey) {
+          if (e.ctrlKey || e.metaKey) {
             this.toggleSelection(tr);
           } else if (e.shiftKey) {
             if (this.lastSelected != null) {

@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/generators
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/engines/generators
 http://redmine.rubyforge.org/svn
 
 

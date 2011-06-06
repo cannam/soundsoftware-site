@@ -1,11 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
-V 43
-/svn/!svn/ver/4736/trunk/lib/redmine/export
+V 57
+/svn/!svn/ver/5878/branches/1.2-stable/lib/redmine/export
 END
 pdf.rb
 K 25
 svn:wc:ra_dav:version-url
-V 50
-/svn/!svn/ver/4736/trunk/lib/redmine/export/pdf.rb
+V 64
+/svn/!svn/ver/5878/branches/1.2-stable/lib/redmine/export/pdf.rb
 END

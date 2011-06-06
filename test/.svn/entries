@@ -1,15 +1,15 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/test
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test
 http://redmine.rubyforge.org/svn
 
 
 
-2011-03-03T03:35:13.139305Z
-4991
-tmaruyama
+2011-05-29T07:47:25.955545Z
+5947
+jplang
 
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2011-03-03T11:05:09.000000Z
+2011-06-06T13:15:00.000000Z
 bec9d26a7ae75350529040e7bca36bfa
 2010-09-10T19:44:45.405792Z
 4078
@@ -72,10 +72,10 @@ file
 
 
 
-2011-03-03T11:05:09.000000Z
-07898564890be4ff9e6c039fa6aa9d41
-2011-01-01T12:24:18.924489Z
-4603
+2011-06-06T13:18:33.000000Z
+f3caf6aac8f26ebe59945f9d81a84889
+2011-03-27T15:41:05.619509Z
+5227
 jplang
 has-props
 
@@ -98,7 +98,7 @@ has-props
 
 
 
-16997
+17224
 
 functional
 dir
@@ -118,7 +118,7 @@ file
 
 
 
-2011-03-03T11:05:09.000000Z
+2011-06-06T13:15:00.000000Z
 29604d905b321f5bf19b86f7b9797394
 2009-09-13T17:14:35.707881Z
 2887

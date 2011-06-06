@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/app/views/issue_relations
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/app/views/issue_relations
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:10.000000Z
+2011-06-06T13:14:59.000000Z
 7024ae266ddb4d218d7c24c3b17fa790
 2010-12-12T16:04:28.950669Z
 4502

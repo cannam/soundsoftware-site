@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/files
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/files
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:13.000000Z
+2011-06-06T13:15:00.000000Z
 ae0415159f2c4dba3fc1a559d4c0f9f5
 2006-06-28T18:11:03.549769Z
 4

@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2009  Jean-Philippe Lang
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -76,6 +76,15 @@ class User < Principal
 
   before_destroy :remove_references_before_destroy
   
+  named_scope :in_group, lambda {|group|
+    group_id = group.is_a?(Group) ? group.id : group.to_i
+    { :conditions => ["#{User.table_name}.id IN (SELECT gu.user_id FROM #{table_name_prefix}groups_users#{table_name_suffix} gu WHERE gu.group_id = ?)", group_id] }
+  }
+  named_scope :not_in_group, lambda {|group|
+    group_id = group.is_a?(Group) ? group.id : group.to_i
+    { :conditions => ["#{User.table_name}.id NOT IN (SELECT gu.user_id FROM #{table_name_prefix}groups_users#{table_name_suffix} gu WHERE gu.group_id = ?)", group_id] }
+  }
+  
   def before_create
     self.mail_notification = Setting.default_notification_option if self.mail_notification.blank?
     true
@@ -90,6 +99,7 @@ class User < Principal
   
   def reload(*args)
     @name = nil
+    @projects_by_role = nil
     super
   end
   
@@ -361,16 +371,33 @@ class User < Principal
     !roles_for_project(project).detect {|role| role.member?}.nil?
   end
   
+  # Returns a hash of user's projects grouped by roles
+  def projects_by_role
+    return @projects_by_role if @projects_by_role
+    
+    @projects_by_role = Hash.new {|h,k| h[k]=[]}
+    memberships.each do |membership|
+      membership.roles.each do |role|
+        @projects_by_role[role] << membership.project if membership.project
+      end
+    end
+    @projects_by_role.each do |role, projects|
+      projects.uniq!
+    end
+  
+    @projects_by_role
+  end
+  
   # Return true if the user is allowed to do the specified action on a specific context
   # Action can be:
   # * a parameter-like Hash (eg. :controller => 'projects', :action => 'edit')
   # * a permission Symbol (eg. :edit_project)
   # Context can be:
   # * a project : returns true if user is allowed to do the specified action on this project
-  # * a group of projects : returns true if user is allowed on every project
+  # * an array of projects : returns true if user is allowed on every project
   # * nil with options[:global] set : check if user has at least one role allowed for this action, 
   #   or falls back to Non Member / Anonymous permissions depending if the user is logged
-  def allowed_to?(action, context, options={})
+  def allowed_to?(action, context, options={}, &block)
     if context && context.is_a?(Project)
       # No action allowed on archived projects
       return false unless context.active?
@@ -381,12 +408,15 @@ class User < Principal
       
       roles = roles_for_project(context)
       return false unless roles
-      roles.detect {|role| (context.is_public? || role.member?) && role.allowed_to?(action)}
-      
+      roles.detect {|role|
+        (context.is_public? || role.member?) &&
+        role.allowed_to?(action) &&
+        (block_given? ? yield(role, self) : true)
+      }
     elsif context && context.is_a?(Array)
       # Authorize if user is authorized on every element of the array
       context.map do |project|
-        allowed_to?(action,project,options)
+        allowed_to?(action, project, options, &block)
       end.inject do |memo,allowed|
         memo && allowed
       end
@@ -396,7 +426,11 @@ class User < Principal
       
       # authorize if user has at least one role that has this permission
       roles = memberships.collect {|m| m.roles}.flatten.uniq
-      roles.detect {|r| r.allowed_to?(action)} || (self.logged? ? Role.non_member.allowed_to?(action) : Role.anonymous.allowed_to?(action))
+      roles << (self.logged? ? Role.non_member : Role.anonymous)
+      roles.detect {|role|
+        role.allowed_to?(action) &&
+        (block_given? ? yield(role, self) : true)
+      }
     else
       false
     end
@@ -404,8 +438,8 @@ class User < Principal
 
   # Is the user allowed to do the specified action on any project?
   # See allowed_to? for the actions and valid options.
-  def allowed_to_globally?(action, options)
-    allowed_to?(action, nil, options.reverse_merge(:global => true))
+  def allowed_to_globally?(action, options, &block)
+    allowed_to?(action, nil, options.reverse_merge(:global => true), &block)
   end
 
   safe_attributes 'login',

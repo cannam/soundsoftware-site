@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/app/views/gantts
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/app/views/gantts
 http://redmine.rubyforge.org/svn
 
 
 
-2011-02-21T15:06:11.321114Z
-4913
+2011-04-03T14:01:32.419875Z
+5301
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-03-03T11:40:18.000000Z
-6f609d119b323e4fd1a249dfbd614e38
-2011-02-21T15:06:11.321114Z
-4913
+2011-06-06T13:18:33.000000Z
+cd7362f337d3c416c33f6033220b22d5
+2011-04-03T14:01:32.419875Z
+5301
 jplang
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-6326
+5863
 

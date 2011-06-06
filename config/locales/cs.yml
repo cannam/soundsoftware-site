@@ -21,7 +21,10 @@ cs:
     month_names: [~, Leden, Únor, Březen, Duben, Květen, Červen, Červenec, Srpen, Září, Říjen, Listopad, Prosinec]
     abbr_month_names: [~, Led, Úno, Bře, Dub, Kvě, Čer, Čec, Srp, Zář, Říj, Lis, Pro]
     # Used in date_select and datime_select.
-    order: [ :year, :month, :day ]
+    order:
+      - :year
+      - :month
+      - :day
 
   time:
     formats:
@@ -272,7 +275,7 @@ cs:
   field_attr_mail: Email (atribut)
   field_onthefly: Automatické vytváření uživatelů
   field_start_date: Začátek
-  field_done_ratio: % Hotovo
+  field_done_ratio: "% Hotovo"
   field_auth_source: Autentifikační mód
   field_hide_mail: Nezobrazovat můj email
   field_comments: Komentář
@@ -334,7 +337,6 @@ cs:
   setting_cross_project_issue_relations: Povolit vazby úkolů napříč projekty
   setting_issue_list_default_columns: Výchozí sloupce zobrazené v seznamu úkolů
   setting_repositories_encodings: Kódování 
-  setting_commit_logs_encoding: Kódování zpráv při commitu
   setting_emails_header: Hlavička emailů
   setting_emails_footer: Patička emailů
   setting_protocol: Protokol
@@ -349,7 +351,7 @@ cs:
   setting_sequential_project_identifiers: Generovat sekvenční identifikátory projektů
   setting_gravatar_enabled: Použít uživatelské ikony Gravatar
   setting_gravatar_default: Výchozí Gravatar
-  setting_diff_max_lines_displayed: Maximální počet zobrazenách řádků rozdílů
+  setting_diff_max_lines_displayed: Maximální počet zobrazených řádků rozdílů
   setting_file_max_size_displayed: Maximální velikost textových souborů zobrazených přímo na stránce
   setting_repository_log_display_limit: Maximální počet revizí zobrazených v logu souboru
   setting_openid: Umožnit přihlašování a registrace s OpenID
@@ -840,7 +842,7 @@ cs:
   button_update: Aktualizovat
   button_configure: Konfigurovat
   button_quote: Citovat
-  button_duplicate: Duplikát
+  button_duplicate: Duplikovat
   button_show: Zobrazit
   
   status_active: aktivní
@@ -901,7 +903,7 @@ cs:
   text_user_wrote: "%{value} napsal:"
   text_enumeration_destroy_question: "Několik (%{count}) objektů je přiřazeno k této hodnotě."
   text_enumeration_category_reassign_to: 'Přeřadit je do této:'
-  text_email_delivery_not_configured: "Doručování e-mailů není nastaveno a odesílání notifikací je zakázáno.\nNastavte Váš SMTP server v souboru config/email.yml a restartujte aplikaci."
+  text_email_delivery_not_configured: "Doručování e-mailů není nastaveno a odesílání notifikací je zakázáno.\nNastavte Váš SMTP server v souboru config/configuration.yml a restartujte aplikaci."
   text_repository_usernames_mapping: "Vybrat nebo upravit mapování mezi Redmine uživateli a uživatelskými jmény nalezenými v logu repozitáře.\nUživatelé se shodným Redmine uživatelským jménem a uživatelským jménem v repozitáři jsou mapovaní automaticky."
   text_diff_truncated: '... Rozdílový soubor je zkrácen, protože jeho délka přesahuje max. limit.'
   text_custom_field_possible_values_info: 'Každá hodnota na novém řádku'
@@ -944,3 +946,37 @@ cs:
   text_warn_on_leaving_unsaved: The current page contains unsaved text that will be lost if you leave this page.
   label_my_queries: My custom queries
   text_journal_changed_no_detail: "%{label} updated"
+  label_news_comment_added: Comment added to a news
+  button_expand_all: Expand all
+  button_collapse_all: Collapse all
+  label_additional_workflow_transitions_for_assignee: Additional transitions allowed when the user is the assignee
+  label_additional_workflow_transitions_for_author: Additional transitions allowed when the user is the author
+  label_bulk_edit_selected_time_entries: Bulk edit selected time entries
+  text_time_entries_destroy_confirmation: Are you sure you want to delete the selected time entr(y/ies)?
+  label_role_anonymous: Anonymous
+  label_role_non_member: Non member
+  label_issue_note_added: Note added
+  label_issue_status_updated: Status updated
+  label_issue_priority_updated: Priority updated
+  label_issues_visibility_own: Issues created by or assigned to the user
+  field_issues_visibility: Issues visibility
+  label_issues_visibility_all: All issues
+  permission_set_own_issues_private: Set own issues public or private
+  field_is_private: Private
+  permission_set_issues_private: Set issues public or private
+  label_issues_visibility_public: All non private issues
+  text_issues_destroy_descendants_confirmation: This will also delete %{count} subtask(s).
+  field_commit_logs_encoding: Kódování zpráv při commitu
+  field_scm_path_encoding: Path encoding
+  text_scm_path_encoding_note: "Default: UTF-8"
+  field_path_to_repository: Path to repository
+  field_root_directory: Root directory
+  field_cvs_module: Module
+  field_cvsroot: CVSROOT
+  text_git_repository_note: Bare and local repository (e.g. /gitrepo, c:\gitrepo)
+  text_mercurial_repository_note: Local repository (e.g. /hgrepo, c:\hgrepo)
+  text_scm_command: Command
+  text_scm_command_version: Version
+  label_git_report_last_commit: Report last commit for files and directories
+  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.

@@ -1,11 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
-V 49
-/svn/!svn/ver/4602/trunk/vendor/plugins/rfpdf/lib
+V 63
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/lib
+END
+tcpdf.rb
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/lib/tcpdf.rb
 END
 rfpdf.rb
 K 25
 svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/67/trunk/vendor/plugins/rfpdf/lib/rfpdf.rb
+V 72
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/lib/rfpdf.rb
 END

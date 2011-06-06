@@ -1,53 +1,23 @@
 K 25
 svn:wc:ra_dav:version-url
-V 43
-/svn/!svn/ver/4947/trunk/public/javascripts
+V 57
+/svn/!svn/ver/5878/branches/1.2-stable/public/javascripts
 END
 prototype.js
 K 25
 svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/2493/trunk/public/javascripts/prototype.js
+V 70
+/svn/!svn/ver/5878/branches/1.2-stable/public/javascripts/prototype.js
 END
 context_menu.js
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/4947/trunk/public/javascripts/context_menu.js
-END
-repository_navigation.js
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/!svn/ver/2840/trunk/public/javascripts/repository_navigation.js
-END
-effects.js
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/2493/trunk/public/javascripts/effects.js
-END
-select_list_move.js
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/!svn/ver/3106/trunk/public/javascripts/select_list_move.js
-END
-dragdrop.js
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/2493/trunk/public/javascripts/dragdrop.js
+V 73
+/svn/!svn/ver/5878/branches/1.2-stable/public/javascripts/context_menu.js
 END
 application.js
 K 25
 svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4900/trunk/public/javascripts/application.js
-END
-controls.js
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/2493/trunk/public/javascripts/controls.js
+V 72
+/svn/!svn/ver/5878/branches/1.2-stable/public/javascripts/application.js
 END

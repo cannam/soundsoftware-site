@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/extra/sample_plugin/app/controllers
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/extra/sample_plugin/app/controllers
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:11.000000Z
+2011-06-06T13:15:00.000000Z
 9e3b32d475f8b06df8d45b28a2732d76
 2009-02-21T11:04:50.579477Z
 2493

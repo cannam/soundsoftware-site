@@ -1,15 +1,15 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/open_id_authentication
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/open_id_authentication
 http://redmine.rubyforge.org/svn
 
 
 
-2010-08-10T21:12:32.103531Z
-3933
-jbbarth
+2011-03-24T18:46:12.279245Z
+5216
+jplang
 
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 b66b372df8374607d104228f41a06671
 2009-02-11T19:06:45.087605Z
 2438
@@ -63,16 +63,13 @@ edavis10
 
 584
 
-tasks
-dir
-
 init.rb
 file
 
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 22579abfc9dc6a4cf475150e407e9a17
 2009-02-12T21:25:50.680468Z
 2458
@@ -109,7 +106,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 d23f4c2e6c00805d7172c76ad52ebe6f
 2009-02-11T19:06:45.087605Z
 2438
@@ -146,7 +143,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 45eb3e296a3591fca629d0c8eab71e4c
 2009-02-11T19:06:45.087605Z
 2438

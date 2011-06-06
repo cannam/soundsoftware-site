@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/app/views/issue_moves
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/app/views/issue_moves
 http://redmine.rubyforge.org/svn
 
 
 
-2010-12-29T20:48:51.915261Z
-4583
+2011-04-12T19:22:44.432354Z
+5443
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-03-03T11:05:10.000000Z
-9a221a421165c46becefe4e15dc6266c
-2010-12-29T20:48:51.915261Z
-4583
+2011-06-06T13:18:33.000000Z
+1adceabf61b6f698270cbf4b97c42a83
+2011-04-12T19:22:44.432354Z
+5443
 jplang
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-2874
+2946
 

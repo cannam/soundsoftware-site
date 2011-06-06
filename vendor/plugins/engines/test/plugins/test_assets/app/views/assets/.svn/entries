@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/plugins/test_assets/app/views/assets
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/engines/test/plugins/test_assets/app/views/assets
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 5c22cfc5b27a3b2b869075baacf530a6
 2009-09-13T17:14:35.707881Z
 2887
