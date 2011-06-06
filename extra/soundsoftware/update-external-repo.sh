@@ -60,6 +60,28 @@ project_repo_mirror="$project_mirror/repo"
 
 success=""
 
+# If we have a record of the last successfully updated remote repo
+# URL, check it against our current remote URL: if it has changed, we
+# will need to start again with a new clone rather than pulling
+# updates into the existing local mirror
+
+successfile="$project_mirror/last_successful_url"
+if [ -f "$successfile" ]; then
+    last=$(cat "$successfile")
+    if [ x"$last" = x"$remote_repo" ]; then
+	echo "$$: Remote URL is unchanged from last successful update"
+    else
+	echo "$$: Remote URL has changed since last successful update:"
+	echo "$$: Last URL was $last, current is $remote_repo"
+	suffix="$$.$(date +%s)"
+	echo "$$: Moving existing repos to $suffix suffix and starting afresh"
+	mv "$project_repo_mirror" "$project_repo_mirror"."$suffix"
+	mv "$local_repo" "$local_repo"."$suffix"
+	mv "$successfile" "$successfile"."$suffix"
+	touch "$project_mirror/url_changed"
+    fi
+fi
+
 if [ -d "$project_repo_mirror" ]; then
 
     # Repo mirror exists: update it
@@ -96,12 +118,12 @@ echo "Success=$success"
 
 if [ -n "$success" ]; then
     echo "$$: Update successful, pulling into local repo at $local_repo"
+    if [ ! -d "$local_repo" ]; then
+	"$hg" init "$local_repo"
+    fi
     if [ -d "$project_repo_mirror/.git" ]; then
-	if [ ! -d "$local_repo" ]; then
-	    "$hg" init "$local_repo"
-	fi
-	( cd "$local_repo" && "$hg" --config extensions.hggit= pull "$project_repo_mirror" )
+	( cd "$local_repo" && "$hg" --config extensions.hggit= pull "$project_repo_mirror" ) && echo "$remote_repo" > "$successfile"
     else 
-	( cd "$local_repo" && "$hg" pull "$project_repo_mirror" )
+	( cd "$local_repo" && "$hg" pull "$project_repo_mirror" ) && echo "$remote_repo" > "$successfile"
     fi
 fi

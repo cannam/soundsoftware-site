@@ -203,6 +203,10 @@ class Repository < ActiveRecord::Base
     nil
   end
   
+  def clear_cache
+    clear_changesets
+  end
+
   private
   
   def before_save
