@@ -89,6 +89,9 @@ if [ -d "$project_repo_mirror" ]; then
 
     if [ -d "$project_repo_mirror/.hg" ]; then
 	"$hg" --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" && success=true
+	if [ -z "$success" ]; then
+	    ( cd "$project_repo_mirror" && "$hg" pull "$remote_repo" ) && success=true
+	fi
     elif [ -d "$project_repo_mirror/.git" ]; then
 	( cd "$project_repo_mirror" && git pull "$remote_repo" master ) && success=true
     else 
