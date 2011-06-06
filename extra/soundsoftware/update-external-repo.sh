@@ -68,7 +68,7 @@ success=""
 successfile="$project_mirror/last_successful_url"
 if [ -f "$successfile" ]; then
     last=$(cat "$successfile")
-    if [ x"$last" == x"$remote_repo" ]; then
+    if [ x"$last" = x"$remote_repo" ]; then
 	echo "$$: Remote URL is unchanged from last successful update"
     else
 	echo "$$: Remote URL has changed since last successful update:"
@@ -78,6 +78,7 @@ if [ -f "$successfile" ]; then
 	mv "$project_repo_mirror" "$project_repo_mirror"."$suffix"
 	mv "$local_repo" "$local_repo"."$suffix"
 	mv "$successfile" "$successfile"."$suffix"
+	touch "$project_mirror/url_changed"
     fi
 fi
 
