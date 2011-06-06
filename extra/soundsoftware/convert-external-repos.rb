@@ -62,6 +62,8 @@ $http_user    = ''
 $http_pass    = ''
 $test         = false
 
+$mirrordir    = '/var/mirror'
+
 def log(text, options={})
   level = options[:level] || 0
   puts text unless $quiet or level > $verbose
@@ -168,6 +170,14 @@ projects.each do |project|
   end
 
   system($command, project.identifier, repos_path, external_url)
+  
+  $cache_clearance_file = File.join($mirrordir, project.identifier, 'url_changed')
+  if File.file?($cache_clearance_file)
+    log("\tproject repo url has changed, requesting cache clearance")
+    if project.post(:repository_cache, :key => $api_key)
+      File.delete($cache_clearance_file)
+    end
+  end
 
 end
   
