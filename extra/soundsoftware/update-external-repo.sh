@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mirrordir="/var/mirror"
-logfile="/var/www/test-cannam/log/update-external-repo.log"
+hg="/usr/local/bin/hg"
 
 project="$1"
 local_repo="$2"
@@ -66,9 +66,9 @@ if [ -d "$project_repo_mirror" ]; then
     echo "$$: Mirror for project $project exists at $project_repo_mirror, updating" 1>&2
 
     if [ -d "$project_repo_mirror/.hg" ]; then
-	hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" && success=true
+	"$hg" --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" && success=true
     elif [ -d "$project_repo_mirror/.git" ]; then
-	( cd "$project_repo_mirror" && git fetch "$remote_repo" ) && success=true
+	( cd "$project_repo_mirror" && git pull "$remote_repo" master ) && success=true
     else 
 	echo "$$: ERROR: Repo mirror dir $project_repo_mirror exists but is not an Hg or git repo" 1>&2
     fi
@@ -81,12 +81,12 @@ else
     case "$remote_repo" in
 	*git*) 
 	    git clone "$remote_repo" "$project_repo_mirror" ||
-	    hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror"
+	    "$hg" --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror"
 	    ;;
 	*)
-	    hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" ||
+	    "$hg" --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" ||
 	    git clone "$remote_repo" "$project_repo_mirror" ||
-	    hg clone "$remote_repo" "$project_repo_mirror"
+	    "$hg" clone "$remote_repo" "$project_repo_mirror"
 	    ;;
     esac && success=true
 
@@ -98,10 +98,10 @@ if [ -n "$success" ]; then
     echo "$$: Update successful, pulling into local repo at $local_repo"
     if [ -d "$project_repo_mirror/.git" ]; then
 	if [ ! -d "$local_repo" ]; then
-	    hg init "$local_repo"
+	    "$hg" init "$local_repo"
 	fi
-	( cd "$local_repo" && hg --config extensions.hgext.git= pull "$project_repo_mirror" )
+	( cd "$local_repo" && "$hg" --config extensions.hggit= pull "$project_repo_mirror" )
     else 
-	( cd "$local_repo" && hg pull "$project_repo_mirror" )
+	( cd "$local_repo" && "$hg" pull "$project_repo_mirror" )
     fi
 fi
