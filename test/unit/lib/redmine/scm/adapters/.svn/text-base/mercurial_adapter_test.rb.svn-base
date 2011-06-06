@@ -4,16 +4,40 @@ begin
 
   class MercurialAdapterTest < ActiveSupport::TestCase
 
-    HELPERS_DIR = Redmine::Scm::Adapters::MercurialAdapter::HELPERS_DIR
-    TEMPLATE_NAME = Redmine::Scm::Adapters::MercurialAdapter::TEMPLATE_NAME
+    HELPERS_DIR        = Redmine::Scm::Adapters::MercurialAdapter::HELPERS_DIR
+    TEMPLATE_NAME      = Redmine::Scm::Adapters::MercurialAdapter::TEMPLATE_NAME
     TEMPLATE_EXTENSION = Redmine::Scm::Adapters::MercurialAdapter::TEMPLATE_EXTENSION
 
-    REPOSITORY_PATH = RAILS_ROOT.gsub(%r{config\/\.\.}, '') + '/tmp/test/mercurial_repository'
+    REPOSITORY_PATH = RAILS_ROOT.gsub(%r{config\/\.\.}, '') +
+                         '/tmp/test/mercurial_repository'
+
+    CHAR_1_HEX = "\xc3\x9c"
 
     if File.directory?(REPOSITORY_PATH)
       def setup
-        @adapter = Redmine::Scm::Adapters::MercurialAdapter.new(REPOSITORY_PATH)
+        adapter_class = Redmine::Scm::Adapters::MercurialAdapter
+        assert adapter_class
+        assert adapter_class.client_command
+        assert_equal true, adapter_class.client_available
+        assert_equal true, adapter_class.client_version_above?([0, 9, 5])
+
+        @adapter = Redmine::Scm::Adapters::MercurialAdapter.new(
+                              REPOSITORY_PATH,
+                              nil,
+                              nil,
+                              nil,
+                             'ISO-8859-1')
         @diff_c_support = true
+        @char_1        = CHAR_1_HEX.dup
+        @tag_char_1    = "tag-#{CHAR_1_HEX}-00"
+        @branch_char_0 = "branch-#{CHAR_1_HEX}-00"
+        @branch_char_1 = "branch-#{CHAR_1_HEX}-01"
+        if @tag_char_1.respond_to?(:force_encoding)
+          @char_1.force_encoding('UTF-8')
+          @tag_char_1.force_encoding('UTF-8')
+          @branch_char_0.force_encoding('UTF-8')
+          @branch_char_1.force_encoding('UTF-8')
+        end
       end
 
       def test_hgversion
@@ -49,8 +73,8 @@ begin
           adp = Redmine::Scm::Adapters::MercurialAdapter.new(repo)
           repo_path =  adp.info.root_url.gsub(/\\/, "/")
           assert_equal REPOSITORY_PATH, repo_path
-          assert_equal '16', adp.info.lastrev.revision
-          assert_equal '4cddb4e45f52',adp.info.lastrev.scmid
+          assert_equal '28', adp.info.lastrev.revision
+          assert_equal '3ae45e2d177d',adp.info.lastrev.scmid
         end
       end
 
@@ -97,7 +121,7 @@ begin
 
       def test_diff_made_by_revision
         if @diff_c_support
-          [16, '16', '4cddb4e45f52'].each do |r1|
+          [24, '24', '4cddb4e45f52'].each do |r1|
             diff1 = @adapter.diff(nil, r1)
             assert_equal 5, diff1.size
             buf = diff1[4].gsub(/\r\n|\r|\n/, "")
@@ -219,25 +243,108 @@ begin
       end
 
       def test_tags
-        assert_equal ['tag_test.00', 'tag-init-revision'], @adapter.tags
+        assert_equal [@tag_char_1, 'tag_test.00', 'tag-init-revision'], @adapter.tags
       end
 
       def test_tagmap
-        tm = { 'tag_test.00'       => '6987191f453a',
-               'tag-init-revision' => '0885933ad4f6' }
+        tm = {
+          @tag_char_1         => 'adf805632193',
+          'tag_test.00'       => '6987191f453a',
+          'tag-init-revision' => '0885933ad4f6',
+          }
         assert_equal tm, @adapter.tagmap
       end
 
       def test_branches
-        assert_equal ['default', 'branch (1)[2]&,%.-3_4', 'test-branch-00'],
-                     @adapter.branches
+        assert_equal [
+            'default',
+            @branch_char_1,
+            'branch (1)[2]&,%.-3_4',
+            @branch_char_0,
+            'test_branch.latin-1',
+            'test-branch-00',
+          ], @adapter.branches
       end
 
       def test_branchmap
-        bm = { 'default'               => '4cddb4e45f52',
-               'branch (1)[2]&,%.-3_4' => '933ca60293d7',
-               'test-branch-00'        => '3a330eb32958' }
+        bm = {
+           'default'               => '3ae45e2d177d',
+           'test_branch.latin-1'   => 'c2ffe7da686a',
+           'branch (1)[2]&,%.-3_4' => 'afc61e85bde7',
+           'test-branch-00'        => '3a330eb32958',
+           @branch_char_0          => 'c8d3e4887474',
+           @branch_char_1          => '7bbf4c738e71',
+         }
         assert_equal bm, @adapter.branchmap
+      end
+
+      def test_path_space
+        p = 'README (1)[2]&,%.-3_4'
+        [15, '933ca60293d7'].each do |r1|
+          assert @adapter.diff(p, r1)
+          assert @adapter.cat(p, r1)
+          assert_equal 1, @adapter.annotate(p, r1).lines.length
+          [25, 'afc61e85bde7'].each do |r2|
+            assert @adapter.diff(p, r1, r2)
+          end
+        end
+      end
+
+      def test_tag_non_ascii
+        p = "latin-1-dir/test-#{@char_1}-1.txt"
+        assert @adapter.cat(p, @tag_char_1)
+        assert_equal 1, @adapter.annotate(p, @tag_char_1).lines.length
+      end
+
+      def test_branch_non_ascii
+        p = "latin-1-dir/test-#{@char_1}-subdir/test-#{@char_1}-1.txt"
+        assert @adapter.cat(p, @branch_char_1)
+        assert_equal 1, @adapter.annotate(p, @branch_char_1).lines.length
+      end
+
+      def test_nodes_in_branch
+         [
+            'default',
+            @branch_char_1,
+            'branch (1)[2]&,%.-3_4',
+            @branch_char_0,
+            'test_branch.latin-1',
+            'test-branch-00',
+               ].each do |bra|
+          nib0 = @adapter.nodes_in_branch(bra)
+          assert nib0
+          nib1 = @adapter.nodes_in_branch(bra, :limit => 1)
+          assert_equal 1, nib1.size
+          case bra
+            when 'branch (1)[2]&,%.-3_4'
+              assert_equal 3, nib0.size
+              assert_equal nib0[0], 'afc61e85bde7'
+              nib2 = @adapter.nodes_in_branch(bra, :limit => 2)
+              assert_equal 2, nib2.size
+              assert_equal nib2[1], '933ca60293d7'
+            when @branch_char_1
+              assert_equal 2, nib0.size
+              assert_equal nib0[1], '08ff3227303e'
+              nib2 = @adapter.nodes_in_branch(bra, :limit => 1)
+              assert_equal 1, nib2.size
+              assert_equal nib2[0], '7bbf4c738e71'
+          end
+        end
+      end
+
+      def test_path_encoding_default_utf8
+        adpt1 = Redmine::Scm::Adapters::MercurialAdapter.new(
+                                  REPOSITORY_PATH
+                                )
+        assert_equal "UTF-8", adpt1.path_encoding
+        adpt2 = Redmine::Scm::Adapters::MercurialAdapter.new(
+                                  REPOSITORY_PATH,
+                                  nil,
+                                  nil,
+                                  nil,
+                                  ""
+                                )
+        assert_equal "UTF-8", adpt2.path_encoding
       end
 
       private
@@ -257,10 +364,8 @@ begin
       def test_fake; assert true end
     end
   end
-
 rescue LoadError
   class MercurialMochaFake < ActiveSupport::TestCase
     def test_fake; assert(false, "Requires mocha to run those tests")  end
   end
 end
-

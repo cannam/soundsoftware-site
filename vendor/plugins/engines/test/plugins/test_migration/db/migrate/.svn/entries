@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/plugins/test_migration/db/migrate
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/engines/test/plugins/test_migration/db/migrate
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 ba950e9dc666a42d09029148ae7e3234
 2009-09-13T17:14:35.707881Z
 2887
@@ -66,7 +66,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 de937ac5b434955daacc33306a5a1a2d
 2009-09-13T17:14:35.707881Z
 2887
@@ -100,7 +100,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 b9241da5bb8308bcea2f4cd5cbd32ff1
 2009-09-13T17:14:35.707881Z
 2887

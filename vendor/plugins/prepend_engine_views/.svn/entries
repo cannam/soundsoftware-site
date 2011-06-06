@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/prepend_engine_views
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/prepend_engine_views
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 720c397a2f5ed49f4436f5d9cbe0b5ec
 2009-09-13T17:14:35.707881Z
 2887

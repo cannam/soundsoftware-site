@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_searchable/lib
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_searchable/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2010-02-17T20:20:51.097274Z
-3445
+2011-04-05T12:55:19.162428Z
+5327
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
-f282f30a34a9560d7ef3d5883aba5fe9
-2010-02-17T20:20:51.097274Z
-3445
+2011-06-06T13:18:33.000000Z
+4dd9ab6c2387d779d21e2fac9727e70f
+2011-04-05T12:55:19.162428Z
+5327
 jplang
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-5937
+6360
 

@@ -1,15 +1,15 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_watchable/lib
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_watchable/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2010-06-20T18:41:30.111362Z
-3803
-edavis10
+2011-05-29T07:18:05.033755Z
+5945
+jplang
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
-30f73616865f02dadce09f9511269b70
-2010-06-20T18:41:30.111362Z
-3803
-edavis10
+2011-06-06T13:18:33.000000Z
+3b3a89183c72eb8f1ef981156b502ca9
+2011-05-29T07:18:05.033755Z
+5945
+jplang
 has-props
 
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-2265
+2489
 

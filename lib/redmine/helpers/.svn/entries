@@ -1,15 +1,15 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/helpers
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/helpers
 http://redmine.rubyforge.org/svn
 
 
 
-2011-02-28T20:23:28.847227Z
-4968
-jplang
+2011-05-09T11:12:27.265905Z
+5720
+tmaruyama
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2011-03-03T11:40:18.000000Z
-b06b1d003a56093679e3004b619b0e04
-2011-02-28T20:23:28.847227Z
-4968
-jplang
+2011-06-06T13:20:53.000000Z
+111af23362cad335d5d23c03cc7668d1
+2011-05-09T11:12:27.265905Z
+5720
+tmaruyama
 has-props
 
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-32380
+31709
 
 diff.rb
 file
@@ -66,7 +66,7 @@ file
 
 
 
-2011-03-03T11:40:18.000000Z
+2011-06-06T13:15:00.000000Z
 a3487dfca2baab10aacea141b7c0fc5f
 2011-02-27T12:50:47.369941Z
 4953
@@ -100,11 +100,11 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
-0a7d81755cf7c1519d4b4c1d84712139
-2009-12-13T04:06:55.726600Z
-3166
-edavis10
+2011-06-06T13:20:53.000000Z
+4e48abe08914d8b6e345e9752257a603
+2011-03-27T15:43:26.269165Z
+5228
+jplang
 has-props
 
 
@@ -126,5 +126,5 @@ has-props
 
 
 
-2733
+2787
 

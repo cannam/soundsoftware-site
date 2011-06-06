@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/test/integration/lib
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/integration/lib
 http://redmine.rubyforge.org/svn
 
 

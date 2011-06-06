@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/views
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/views
 http://redmine.rubyforge.org/svn
 
 
@@ -35,7 +35,7 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
+2011-06-06T13:15:00.000000Z
 e0e38b713c41ea63221dd877c6939983
 2010-12-03T11:25:21.858858Z
 4452
@@ -69,7 +69,7 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
+2011-06-06T13:15:00.000000Z
 849e9df27c041f540e690c6192939edf
 2009-01-29T13:54:44.887081Z
 2334
@@ -106,7 +106,7 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
+2011-06-06T13:15:00.000000Z
 04feeced33ca55e9fb99099efe2fdcf6
 2010-12-03T11:25:21.858858Z
 4452

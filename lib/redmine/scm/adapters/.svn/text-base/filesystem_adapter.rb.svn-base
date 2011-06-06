@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# RedMine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # FileSystem adapter
 # File written by Paul Rivier, at Demotera.
@@ -8,12 +8,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -35,14 +35,18 @@ module Redmine
         def initialize(url, root_url=nil, login=nil, password=nil,
                        path_encoding=nil)
           @url = with_trailling_slash(url)
-          @path_encoding = path_encoding || 'UTF-8'
+          @path_encoding = path_encoding.blank? ? 'UTF-8' : path_encoding
+        end
+
+        def path_encoding
+          @path_encoding
         end
 
         def format_path_ends(path, leading=true, trailling=true)
-          path = leading ? with_leading_slash(path) : 
+          path = leading ? with_leading_slash(path) :
             without_leading_slash(path)
-          trailling ? with_trailling_slash(path) : 
-            without_trailling_slash(path) 
+          trailling ? with_trailling_slash(path) :
+            without_trailling_slash(path)
         end
 
         def info
@@ -54,13 +58,15 @@ module Redmine
           return nil
         end
 
-        def entries(path="", identifier=nil)
+        def entries(path="", identifier=nil, options={})
           entries = Entries.new
           trgt_utf8 = target(path)
           trgt = scm_iconv(@path_encoding, 'UTF-8', trgt_utf8)
           Dir.new(trgt).each do |e1|
             e_utf8 = scm_iconv('UTF-8', @path_encoding, e1)
-            relative_path_utf8 = format_path_ends((format_path_ends(path,false,true) + e_utf8),false,false)
+            next if e_utf8.blank?
+            relative_path_utf8 = format_path_ends(
+                (format_path_ends(path,false,true) + e_utf8),false,false)
             t1_utf8 = target(relative_path_utf8)
             t1 = scm_iconv(@path_encoding, 'UTF-8', t1_utf8)
             relative_path = scm_iconv(@path_encoding, 'UTF-8', relative_path_utf8)
@@ -76,7 +82,7 @@ module Redmine
                           :path => utf_8_path,
                           :kind => (File.directory?(t1) ? 'dir' : 'file'),
                           :size => (File.directory?(t1) ? nil : [File.size(t1)].pack('l').unpack('L').first),
-                          :lastrev => 
+                          :lastrev =>
                               Revision.new({:time => (File.mtime(t1)) })
                         })
             end

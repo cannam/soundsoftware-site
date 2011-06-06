@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/test/fixtures/diffs
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/fixtures/diffs
 http://redmine.rubyforge.org/svn
 
 
 
-2008-12-07T15:21:40.165860Z
-2112
+2011-03-11T20:23:29.177962Z
+5094
 jplang
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:09.000000Z
+2011-06-06T13:15:00.000000Z
 64527b211202fbff696792d538e2b14e
 2008-12-07T15:21:40.165860Z
 2112
@@ -59,4 +59,38 @@ has-props
 
 
 2741
+
+partials.diff
+file
+
+
+
+
+2011-06-06T13:18:33.000000Z
+a29e9abd0152a553dcaa1b1ed2afbea1
+2011-03-11T20:23:29.177962Z
+5094
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1801
 

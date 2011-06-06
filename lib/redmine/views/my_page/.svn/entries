@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/views/my_page
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/views/my_page
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:14.000000Z
+2011-06-06T13:15:00.000000Z
 b06dfe20a85191516f81de5874f37ec6
 2009-04-05T13:33:54.194067Z
 2659

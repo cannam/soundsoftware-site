@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_list/lib/active_record/acts
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_list/lib/active_record/acts
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 a3ee41e8bed56868bc2e4ab2cb7df73a
 2009-02-26T09:21:41.696815Z
 2526

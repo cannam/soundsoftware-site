@@ -1,16 +1,16 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -18,47 +18,48 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class RepositorySubversionTest < ActiveSupport::TestCase
-  fixtures :projects, :repositories, :enabled_modules, :users, :roles 
-  
+  fixtures :projects, :repositories, :enabled_modules, :users, :roles
+
   def setup
     @project = Project.find(3)
-    assert @repository = Repository::Subversion.create(:project => @project,
-             :url => "file://#{self.class.repository_path('subversion')}")
+    @repository = Repository::Subversion.create(:project => @project,
+             :url => self.class.subversion_repository_url)
+    assert @repository
   end
-  
+
   if repository_configured?('subversion')
     def test_fetch_changesets_from_scratch
       @repository.fetch_changesets
       @repository.reload
-      
+
       assert_equal 11, @repository.changesets.count
       assert_equal 20, @repository.changes.count
       assert_equal 'Initial import.', @repository.changesets.find_by_revision('1').comments
     end
-    
+
     def test_fetch_changesets_incremental
       @repository.fetch_changesets
       # Remove changesets with revision > 5
       @repository.changesets.find(:all).each {|c| c.destroy if c.revision.to_i > 5}
       @repository.reload
       assert_equal 5, @repository.changesets.count
-      
+
       @repository.fetch_changesets
       assert_equal 11, @repository.changesets.count
     end
-    
+
     def test_latest_changesets
       @repository.fetch_changesets
-      
+
       # with limit
       changesets = @repository.latest_changesets('', nil, 2)
       assert_equal 2, changesets.size
       assert_equal @repository.latest_changesets('', nil).slice(0,2), changesets
-      
+
       # with path
       changesets = @repository.latest_changesets('subversion_test/folder', nil)
       assert_equal ["10", "9", "7", "6", "5", "2"], changesets.collect(&:revision)
-      
+
       # with path and revision
       changesets = @repository.latest_changesets('subversion_test/folder', 8)
       assert_equal ["7", "6", "5", "2"], changesets.collect(&:revision)
@@ -67,7 +68,7 @@ class RepositorySubversionTest < ActiveSupport::TestCase
     def test_directory_listing_with_square_brackets_in_path
       @repository.fetch_changesets
       @repository.reload
-      
+
       entries = @repository.entries('subversion_test/[folder_with_brackets]')
       assert_not_nil entries, 'Expect to find entries in folder_with_brackets'
       assert_equal 1, entries.size, 'Expect one entry in folder_with_brackets'
@@ -76,7 +77,9 @@ class RepositorySubversionTest < ActiveSupport::TestCase
 
     def test_directory_listing_with_square_brackets_in_base
       @project = Project.find(3)
-      @repository = Repository::Subversion.create(:project => @project, :url => "file:///#{self.class.repository_path('subversion')}/subversion_test/[folder_with_brackets]")
+      @repository = Repository::Subversion.create(
+                          :project => @project,
+                          :url => "file:///#{self.class.repository_path('subversion')}/subversion_test/[folder_with_brackets]")
 
       @repository.fetch_changesets
       @repository.reload
@@ -143,17 +146,13 @@ class RepositorySubversionTest < ActiveSupport::TestCase
         s1 = "\xC2\x80"
         s2 = "\xc3\x82\xc2\x80"
         if s1.respond_to?(:force_encoding)
-          s3 = s1
-          s4 = s2
-          s1.force_encoding('ASCII-8BIT')
-          s2.force_encoding('ASCII-8BIT')
-          s3.force_encoding('ISO-8859-1')
-          s4.force_encoding('UTF-8')
-          assert_equal s3.encode('UTF-8'), s4
+          s1.force_encoding('ISO-8859-1')
+          s2.force_encoding('UTF-8')
+          assert_equal s1.encode('UTF-8'), s2
         end
         c = Changeset.new(:repository => @repository,
-                          :comments=>s2,
-                          :revision=>'123',
+                          :comments   => s2,
+                          :revision   => '123',
                           :committed_on => Time.now)
         assert c.save
         assert_equal s2, c.comments

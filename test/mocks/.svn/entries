@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/test/mocks
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/mocks
 http://redmine.rubyforge.org/svn
 
 
@@ -38,7 +38,7 @@ file
 
 
 
-2011-03-03T11:05:09.000000Z
+2011-06-06T13:15:00.000000Z
 c73745cf74166bf38552d6469b74b190
 2009-09-20T14:06:57.257282Z
 2895

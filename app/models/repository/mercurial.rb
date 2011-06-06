@@ -1,16 +1,16 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -26,11 +26,12 @@ class Repository::Mercurial < Repository
 
   FETCH_AT_ONCE = 100  # number of changesets to fetch at once
 
-  ATTRIBUTE_KEY_NAMES = {
-      "url"          => "Root directory",
-    }
   def self.human_attribute_name(attribute_key_name)
-    ATTRIBUTE_KEY_NAMES[attribute_key_name] || super
+    attr_name = attribute_key_name
+    if attr_name == "url"
+      attr_name = "path_to_repository"
+    end
+    super(attr_name)
   end
 
   def self.scm_adapter_class
@@ -39,6 +40,10 @@ class Repository::Mercurial < Repository
 
   def self.scm_name
     'Mercurial'
+  end
+
+  def supports_directory_revisions?
+    true
   end
 
   def repo_log_encoding
@@ -53,15 +58,6 @@ class Repository::Mercurial < Repository
   # Returns the identifier for the given Mercurial changeset
   def self.changeset_identifier(changeset)
     changeset.scmid
-  end
-
-  def branches
-    bras = scm.branches
-    bras.sort unless bras == %w|default|
-  end
-
-  def tags
-    nil
   end
 
   def diff_format_revisions(cs, cs_to, sep=':')
@@ -81,19 +77,50 @@ class Repository::Mercurial < Repository
   end
 
   # Returns the latest changesets for +path+; sorted by revision number
-  # Default behavior is to search in cached changesets
+  #
+  # Because :order => 'id DESC' is defined at 'has_many',
+  # there is no need to set 'order'.
+  # But, MySQL test fails.
+  # Sqlite3 and PostgreSQL pass.
+  # Is this MySQL bug?
   def latest_changesets(path, rev, limit=10)
-    if path.blank?
-      changesets.find(:all, :include => :user, :limit => limit)
-    else
-      changesets.find(:all, :select => "DISTINCT #{Changeset.table_name}.*",
-                      :joins => :changes,
-                      :conditions => ["#{Change.table_name}.path = ? OR #{Change.table_name}.path LIKE ? ESCAPE ?",
-                                      path.with_leading_slash,
-                                      "#{path.with_leading_slash.gsub(/[%_\\]/) { |s| "\\#{s}" }}/%", '\\'],
-                      :include => :user, :limit => limit)
-    end
+    changesets.find(:all, :include => :user,
+                    :conditions => latest_changesets_cond(path, rev, limit),
+                    :limit => limit, :order => "#{Changeset.table_name}.id DESC")
   end
+
+  def latest_changesets_cond(path, rev, limit)
+    cond, args = [], []
+    if scm.branchmap.member? rev
+      # Mercurial named branch is *stable* in each revision.
+      # So, named branch can be stored in database.
+      # Mercurial provides *bookmark* which is equivalent with git branch.
+      # But, bookmark is not implemented.
+      cond << "#{Changeset.table_name}.scmid IN (?)"
+      # Revisions in root directory and sub directory are not equal.
+      # So, in order to get correct limit, we need to get all revisions.
+      # But, it is very heavy.
+      # Mercurial does not treat direcotry.
+      # So, "hg log DIR" is very heavy.
+      branch_limit = path.blank? ? limit : ( limit * 5 )
+      args << scm.nodes_in_branch(rev, :limit => branch_limit)
+    elsif last = rev ? find_changeset_by_name(scm.tagmap[rev] || rev) : nil
+      cond << "#{Changeset.table_name}.id <= ?"
+      args << last.id
+    end
+
+    unless path.blank?
+      cond << "EXISTS (SELECT * FROM #{Change.table_name}
+                 WHERE #{Change.table_name}.changeset_id = #{Changeset.table_name}.id
+                 AND (#{Change.table_name}.path = ?
+                       OR #{Change.table_name}.path LIKE ? ESCAPE ?))"
+      args << path.with_leading_slash
+      args << "#{path.with_leading_slash.gsub(/[%_\\]/) { |s| "\\#{s}" }}/%" << '\\'
+    end
+
+    [cond.join(' AND '), *args] unless cond.empty?
+  end
+  private :latest_changesets_cond
 
   def fetch_changesets
     scm_rev = scm.info.lastrev.revision.to_i

@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/open_id_authentication/generators/open_id_authentication_tables/templates
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/open_id_authentication/generators/open_id_authentication_tables/templates
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:12.000000Z
+2011-06-06T13:15:00.000000Z
 352b0b17c079fdf355c028a9b990b3b7
 2009-02-11T19:06:45.087605Z
 2438

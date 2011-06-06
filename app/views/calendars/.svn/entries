@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/app/views/calendars
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/app/views/calendars
 http://redmine.rubyforge.org/svn
 
 
 
-2011-02-21T14:02:22.565987Z
-4911
+2011-04-01T14:34:44.070899Z
+5276
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-03-03T11:40:18.000000Z
-7da8933c1cb08241ebe459d9cabe8043
-2011-02-21T14:02:22.565987Z
-4911
+2011-06-06T13:18:33.000000Z
+ab4018273a0ea22e0fb58209d1f88be7
+2011-04-01T14:34:44.070899Z
+5276
 jplang
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-2007
+1686
 

@@ -1,29 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 42
-/svn/!svn/ver/4965/trunk/app/views/layouts
-END
-base.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/4965/trunk/app/views/layouts/base.rhtml
-END
-mailer.text.plain.erb
-K 25
-svn:wc:ra_dav:version-url
-V 64
-/svn/!svn/ver/4362/trunk/app/views/layouts/mailer.text.plain.erb
-END
-mailer.text.html.erb
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/!svn/ver/4362/trunk/app/views/layouts/mailer.text.html.erb
-END
-admin.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/3176/trunk/app/views/layouts/admin.rhtml
+V 56
+/svn/!svn/ver/5878/branches/1.2-stable/app/views/layouts
 END

@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine/helpers
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/unit/lib/redmine/helpers
 http://redmine.rubyforge.org/svn
 
 
 
-2010-12-29T20:29:42.467534Z
-4582
+2011-03-28T17:35:20.425352Z
+5236
 jplang
 
 
@@ -26,16 +26,50 @@ jplang
 
 e93f8b46-1217-0410-a6f0-8f06a7374b81
 
+calendar_test.rb
+file
+
+
+
+
+2011-06-06T13:18:32.000000Z
+5d9bda2d9476a944a5ff5e2c61cb41c8
+2011-03-27T16:49:35.269584Z
+5231
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2371
+
 gantt_test.rb
 file
 
 
 
 
-2011-03-03T11:05:08.000000Z
-1d6b4373836fef676ab3a28235c140b8
-2010-12-29T20:29:42.467534Z
-4582
+2011-06-06T13:18:32.000000Z
+7eeeaf89c44d3c361193d131cc931b9b
+2011-03-28T17:35:20.425352Z
+5236
 jplang
 
 
@@ -58,5 +92,5 @@ jplang
 
 
 
-28117
+29243
 

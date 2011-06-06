@@ -1,14 +1,14 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine/scm/adapters
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/unit/lib/redmine/scm/adapters
 http://redmine.rubyforge.org/svn
 
 
 
-2011-02-28T14:12:47.115180Z
-4964
+2011-05-21T02:40:19.290757Z
+5871
 tmaruyama
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-03-03T11:40:17.000000Z
-f0de1284b35555e358dcb810fff1e7e5
-2011-02-15T02:12:39.628343Z
-4825
+2011-06-06T13:17:45.000000Z
+f557b1bd1a675ea916f153007ba3b63b
+2011-05-13T06:18:18.001804Z
+5782
 tmaruyama
 has-props
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-2221
+2171
 
 bazaar_adapter_test.rb
 file
@@ -66,10 +66,10 @@ file
 
 
 
-2011-03-03T11:40:17.000000Z
-2f30e1187cf8e155707fdf3ff7925f55
-2011-02-15T11:05:33.284244Z
-4836
+2011-06-06T13:17:45.000000Z
+ce4b0da1349db40b4d1f5e5c2585b578
+2011-04-25T02:02:44.186808Z
+5547
 tmaruyama
 
 
@@ -92,7 +92,7 @@ tmaruyama
 
 
 
-1755
+1747
 
 git_adapter_test.rb
 file
@@ -100,10 +100,10 @@ file
 
 
 
-2011-03-03T11:40:17.000000Z
-3d2db23c9a95bf5342365aa4580873c7
-2011-02-28T14:12:47.115180Z
-4964
+2011-06-06T13:17:45.000000Z
+022aa22cafe189955d72292f45719d27
+2011-05-21T02:40:19.290757Z
+5871
 tmaruyama
 has-props
 
@@ -126,7 +126,7 @@ has-props
 
 
 
-4592
+14511
 
 mercurial_adapter_test.rb
 file
@@ -134,10 +134,10 @@ file
 
 
 
-2011-03-03T11:40:17.000000Z
-20194ed3de36e9107b3279bb4ae596e9
-2011-02-18T07:15:58.762873Z
-4875
+2011-06-06T13:17:45.000000Z
+8b5bb34f0a1bcb7d72c08d8002fdf8c9
+2011-05-21T02:38:56.933725Z
+5869
 tmaruyama
 has-props
 
@@ -160,7 +160,7 @@ has-props
 
 
 
-10201
+13973
 
 filesystem_adapter_test.rb
 file
@@ -168,11 +168,11 @@ file
 
 
 
-2011-03-03T11:05:08.000000Z
-61cf9f9a3628f6766845641d99adaa83
-2010-12-12T23:24:34.194336Z
-4509
-jbbarth
+2011-06-06T13:17:45.000000Z
+197d39b6a381ea2c7170ffb12e726b07
+2011-05-21T02:18:07.305370Z
+5865
+tmaruyama
 has-props
 
 
@@ -194,7 +194,7 @@ has-props
 
 
 
-1449
+2071
 
 cvs_adapter_test.rb
 file
@@ -202,10 +202,10 @@ file
 
 
 
-2011-03-03T11:40:17.000000Z
-ddf3ab1a187f29d3e377f684c2c0f18c
-2011-02-15T08:04:11.026838Z
-4832
+2011-06-06T13:17:45.000000Z
+b54bd12ccb2aacffac79b6374356647b
+2011-05-21T02:19:38.840190Z
+5867
 tmaruyama
 
 
@@ -228,7 +228,7 @@ tmaruyama
 
 
 
-1844
+2835
 
 darcs_adapter_test.rb
 file
@@ -236,10 +236,10 @@ file
 
 
 
-2011-03-03T11:05:08.000000Z
-3a836e9a54b113ed5fe6490ce88ebebe
-2011-01-23T04:17:03.473127Z
-4748
+2011-06-06T13:17:45.000000Z
+21e4028794985d0780acfc26daaf4b6f
+2011-05-13T06:15:57.056758Z
+5779
 tmaruyama
 
 
@@ -262,5 +262,5 @@ tmaruyama
 
 
 
-1649
+1643
 

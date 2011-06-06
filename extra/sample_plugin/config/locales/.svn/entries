@@ -1,8 +1,8 @@
 10
 
 dir
-4993
-http://redmine.rubyforge.org/svn/trunk/extra/sample_plugin/config/locales
+6000
+http://redmine.rubyforge.org/svn/branches/1.2-stable/extra/sample_plugin/config/locales
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-03-03T11:05:11.000000Z
+2011-06-06T13:15:00.000000Z
 c1dc7060239e61ce13e8840b305000c5
 2009-02-08T16:13:02.919112Z
 2413
@@ -66,7 +66,7 @@ file
 
 
 
-2011-03-03T11:05:11.000000Z
+2011-06-06T13:15:00.000000Z
 989492284a42bf9777e2bd0d39b40254
 2009-02-08T16:13:02.919112Z
 2413

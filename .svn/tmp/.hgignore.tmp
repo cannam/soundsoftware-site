@@ -24,3 +24,5 @@ tmp/sockets/*
 tmp/test/*
 vendor/rails
 *.rbc
+.svn/
+.git/
