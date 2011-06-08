@@ -4,6 +4,8 @@ en:
   authors: "Authors"
   author: "Author"
   name: "Name"
+
+  remove: "Remove"
       
   # bibtex_entries strings
   id: "id" 
