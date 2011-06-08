@@ -23,7 +23,7 @@ class PublicationsController < ApplicationController
   def create
     @publication = Publication.new(params[:publication])
 
-    if @publication.save
+    if @publication.save 
       flash[:notice] = "Successfully created publication."
       redirect_to @publication
     else
@@ -43,9 +43,7 @@ class PublicationsController < ApplicationController
 
     # method for creating "pasted" bibtex entries
     if bibtex_entry
-      logger.error "ANTES PARSE"      
       parse_bibtex_list bibtex_entry    
-      logger.error "DEPOIS PARSE"
     end
 
     # form's flow control
@@ -65,14 +63,13 @@ class PublicationsController < ApplicationController
   end
 
   def update    
-    @publication = Publication.find(params[:id])
-        
+    @publication = Publication.find(params[:id])        
     if @publication.update_attributes(params[:publication])
       flash[:notice] = "Successfully updated Publication."
+      redirect_to @publication
     else
-      flash[:notice] = "Could not Update Publication."
-    end
-    
+      render :action => 'edit'
+    end   
   end
 
   def show
