@@ -6,7 +6,10 @@ class PublicationsController < ApplicationController
 
   def new
     @publication = Publication.new      
-
+    
+    # we'll always want a new publication to have its bibtex entry
+    @publication.build_bibtex_entry
+    
     # the step we're at in the form
     @publication.current_step = session[:publication_step]
 
@@ -16,6 +19,20 @@ class PublicationsController < ApplicationController
 
   def create
     @publication = Publication.new(params[:publication])
+
+    if @publication.save
+      flash[:notice] = "Successfully created publication."
+      redirect_to @publication
+    else
+      render :action => 'new'
+    end
+  end
+
+  def index
+    @publications = Publication.find(:all)
+  end
+
+  def new_from_bibfile
     @publication.current_step = session[:publication_step]
     
     # contents of the paste text area
@@ -36,37 +53,28 @@ class PublicationsController < ApplicationController
     end
 
     session[:publication_step] = @publication.current_step
-
-    if @publication.new_record?
-      render "new"
-    else
-      session[:publication_step] = session[:publication_params] = nil
-      flash[:notice] = "New publication saved!"
-      redirect_to @publication
-    end
-  end
-
-  def index
-    @publications = Publication.find(:all)
-  end
-
-  def edit
-    
-    @publication = Publication.find(params[:id])
     
   end
 
-  def update
+
+  def edit    
     @publication = Publication.find(params[:id])
+  end
+
+  def update    
+    @publication = Publication.find(params[:id])
+        
     if @publication.update_attributes(params[:publication])
       flash[:notice] = "Successfully updated Publication."
-      redirect_to @publication
     else
-      render :action => 'edit'
+      flash[:notice] = "Could not Update Publication."
     end
+    
   end
 
   def show
+    logger.error "-------> No Show"
+    
     @publication = Publication.find(params[:id])
 
     if @publication.nil?

@@ -2,15 +2,18 @@
 
 class Publication < ActiveRecord::Base
   unloadable
-
-
+  
   has_many :authorships
   has_many :authors, :through => :authorships
-  has_one :bibtex_entry
+  has_one :bibtex_entry, :dependent => :destroy
 
   validates_presence_of :title
+
+  accepts_nested_attributes_for :authorships
+  accepts_nested_attributes_for :authors, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true
+#  accepts_nested_attributes_for :bibtex_entry, :reject_if => lambda { |a| a[:name].blank? }, :allow_destroy => true 
   
-  accepts_nested_attributes_for :authors, :bibtex_entry
+  
   
   attr_writer :current_step
 

@@ -1,0 +1,38 @@
+<% form_for @publication do |f| -%>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title, l(:title) %>  <%= f.text_field :title %>  
+  </p>
+  
+  <h3><%= l(:authors) %></h3>
+  
+  <%- f.fields_for :authors do |author| -%>
+    <p>
+      <%= author.label :name, l("name") %> <%= author.text_field :name %>            
+    </p>
+  <%- end -%>
+  
+  <% f.fields_for :bibtex_entry do |bib| -%>
+    <p> 
+      <%= bib.label :year, l(:year) %>  <%= bib.text_field :year %>  
+    </p>
+    <p> 
+      <%= bib.label :chapter, l(:chapter) %>  <%= bib.text_field :chapter %>  
+    </p>
+    <p>  
+      <%= bib.label :editor, l(:editor) %>  <%= bib.text_field :editor %>  
+    </p>
+    <p> 
+      <%= bib.label :booktitle, l(:booktitle) %>  <%= bib.text_field :booktitle %>  
+    </p>
+    <p> 
+      <%= bib.label :publisher, l(:publisher) %>  <%= bib.text_field :publisher %>  
+    </p>
+    <p> 
+      <%= bib.label :pages, l(:pages) %>  <%= bib.text_field :pages %>  
+    </p>
+  <% end -%>
+
+  <%= f.submit %>
+
+<% end -%>
