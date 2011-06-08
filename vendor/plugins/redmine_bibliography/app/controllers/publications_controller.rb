@@ -10,6 +10,9 @@ class PublicationsController < ApplicationController
     # we'll always want a new publication to have its bibtex entry
     @publication.build_bibtex_entry
     
+    # and at least one author
+    @publication.authors.build
+    
     # the step we're at in the form
     @publication.current_step = session[:publication_step]
 

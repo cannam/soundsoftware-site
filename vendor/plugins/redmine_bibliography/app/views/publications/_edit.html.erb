@@ -12,6 +12,9 @@
     </p>
   <%- end -%>
   
+  
+  <h3>Other Details</h3>
+  
   <% f.fields_for :bibtex_entry do |bib| -%>
     <p> 
       <%= bib.label :year, l(:year) %>  <%= bib.text_field :year %>  
