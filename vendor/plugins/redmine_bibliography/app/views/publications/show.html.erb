@@ -19,3 +19,11 @@
 <%- end -%>
 
 
+
+<p>
+  <%= link_to "Edit", edit_publication_path(@publication) %> |
+  <%= link_to "Destroy", @publication, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", publications_path %>
+</p>
+
+
