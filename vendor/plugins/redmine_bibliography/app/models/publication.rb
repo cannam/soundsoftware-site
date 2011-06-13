@@ -12,7 +12,9 @@ class Publication < ActiveRecord::Base
 
   accepts_nested_attributes_for :authorships
   accepts_nested_attributes_for :authors, :allow_destroy => true
-  accepts_nested_attributes_for :bibtex_entry, :allow_destroy => true 
+  accepts_nested_attributes_for :bibtex_entry, :allow_destroy => true
+  
+  has_and_belongs_to_many :projects
   
   attr_writer :current_step
 
