@@ -1,9 +1,10 @@
 # vendor/plugins/redmine_bibliography/app/controllers/publications_controller.rb
 
 class PublicationsController < ApplicationController
-  # TODO: should be removed on production version?
   unloadable
-
+  
+  before_filter :find_project, :authorize, :only => [:index, :new]
+  
   def new
     @publication = Publication.new      
     
@@ -32,7 +33,6 @@ class PublicationsController < ApplicationController
   end
 
   def index
-    @project = Project.find(params[:project_id])
     @publications = Publication.find(:all)
   end
 
@@ -174,6 +174,14 @@ class PublicationsController < ApplicationController
 
   def review_new_entries
 
+  end
+  
+  
+  private
+   
+  def find_project
+   # @project variable must be set before calling the authorize filter
+   @project = Project.find(params[:project_id])
   end
 
 

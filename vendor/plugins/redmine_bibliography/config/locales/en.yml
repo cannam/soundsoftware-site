@@ -6,6 +6,9 @@ en:
   name: "Name"
 
   remove: "Remove"
+  
+  label_publication_new: "Add Publication"
+  
       
   # bibtex_entries strings
   id: "id" 

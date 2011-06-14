@@ -1,16 +1,35 @@
-<h2>Publications#index</h2>
+<div class="contextual">
+	<% if User.current.allowed_to?(:add_publication, @project) %>
+		<%= link_to l(:label_publication_new), {:controller => 'publications', :action => 'new', :parent_id => @project}, :class => 'icon icon-add' %>
+	<% end %>
+</div>
+
+<div class="splitcontentleft">
+  <h3>Publications#index</h3>
 
 
-<table>
-  <tr>
-    <th>Number</th>
-    <th>Title</th> 
-  </tr>
+  <table>
+    <tr>
+      <th>Number</th>
+      <th>Title</th> 
+    </tr>
 
-<% @publications.each do |publication| %>
-	<tr>
-	  <td><%= publication.id %></td>
-	  <td><%= publication.title %></td>
-	 	</tr>
-	
+    <% @publications.each do |publication| %>
+	    <tr>
+	      <td><%= publication.id %></td>
+	      <td><%= publication.title %></td>
+	 	  </tr>
+    <% end %>    
+  </table>
+
+</div>
+
+<div class="splitcontentright">
+  placeholder div
+</div>
+
+
+<% content_for :sidebar do %>
+  Sidebar
 <% end %>
+  
