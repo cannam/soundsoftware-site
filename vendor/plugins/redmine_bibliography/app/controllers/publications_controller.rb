@@ -32,6 +32,7 @@ class PublicationsController < ApplicationController
   end
 
   def index
+    @project = Project.find(params[:project_id])
     @publications = Publication.find(:all)
   end
 
