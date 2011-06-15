@@ -3,7 +3,7 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  before_filter :find_project, :authorize, :only => [:index, :new]
+  before_filter :find_project_by_project_id
   
   def new
     @publication = Publication.new      
@@ -14,6 +14,8 @@ class PublicationsController < ApplicationController
     # and at least one author
     @publication.authors.build
     
+    @project_id = params[:project_id]
+    
     # the step we're at in the form
     @publication.current_step = session[:publication_step]
 
@@ -23,7 +25,13 @@ class PublicationsController < ApplicationController
 
   def create
     @publication = Publication.new(params[:publication])
+    @project = Project.find(params[:project_id])
 
+    logger.error { "FIGUEIRA" }
+    Rails.logger.debug { @project }
+
+    @publication.projects << @project
+    
     if @publication.save 
       flash[:notice] = "Successfully created publication."
       redirect_to @publication
@@ -33,7 +41,8 @@ class PublicationsController < ApplicationController
   end
 
   def index
-    @publications = Publication.find(:all)
+    @project = Project.find(params[:project_id])
+    @publications = Publication.find :all, :joins => :projects, :conditions => ["project_id = ?", @project.id]
   end
 
   def new_from_bibfile
@@ -157,7 +166,6 @@ class PublicationsController < ApplicationController
         :institution => institution,
         :email => email,
         :order => idx)
-
     end
   end
 
@@ -179,10 +187,9 @@ class PublicationsController < ApplicationController
   
   private
    
-  def find_project
+  def find_projectx
    # @project variable must be set before calling the authorize filter
    @project = Project.find(params[:project_id])
   end
-
 
 end

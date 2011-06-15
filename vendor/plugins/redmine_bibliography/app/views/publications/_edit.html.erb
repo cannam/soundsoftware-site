@@ -1,4 +1,5 @@
-<% form_for @publication do |f| -%>
+<% form_for @publication, :url => { :project_id  => @project_id, :action => :create } do |f| -%>
+
   <%= f.error_messages %>
   
   <p><%= f.label :title, l(:title) %>  <%= f.text_field :title %></p>
@@ -13,6 +14,7 @@
   <% f.fields_for :bibtex_entry do |builder| -%>
     <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
   <%- end -%>
+
 
   <%= f.submit %>
 
