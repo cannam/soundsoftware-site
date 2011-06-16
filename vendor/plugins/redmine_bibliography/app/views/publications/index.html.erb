@@ -15,7 +15,7 @@
     <% @publications.each do |publication| %>
 	    <tr>
 	      <td><%= publication.id %></td>
-	      <td><%= publication.title %></td>
+	      <td><%= link_to publication.title, :controller => "publications", :action => "show", :id => publication, :project_id => @project %></td>
 	 	  </tr>
     <% end %>    
   </table>
