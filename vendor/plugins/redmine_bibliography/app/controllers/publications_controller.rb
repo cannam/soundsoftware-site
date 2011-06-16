@@ -17,7 +17,7 @@ class PublicationsController < ApplicationController
     @project_id = params[:project_id]
     
     # the step we're at in the form
-    @publication.current_step = session[:publication_step]
+    #    @publication.current_step = session[:publication_step]
 
     @new_publications = []
     session[:publications] ||= {}
@@ -34,7 +34,7 @@ class PublicationsController < ApplicationController
     
     if @publication.save 
       flash[:notice] = "Successfully created publication."
-      redirect_to @publication
+      redirect_to :action => :show, :id => @publication, :project_id => @project.id
     else
       render :action => 'new'
     end
@@ -187,9 +187,14 @@ class PublicationsController < ApplicationController
   
   private
    
-  def find_projectx
-   # @project variable must be set before calling the authorize filter
-   @project = Project.find(params[:project_id])
-  end
-
+  # TODO: luisf. - only here for debugging purposes 
+  # Find project of id params[:project_id]
+   def find_project_by_project_id
+     
+     logger.error { "FIND PROJECT BY PROJECT ID" }
+     
+     @project = Project.find(params[:project_id])
+   rescue ActiveRecord::RecordNotFound
+     render_404
+   end
 end
