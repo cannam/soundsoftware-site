@@ -8,6 +8,8 @@ en:
   remove: "Remove"
   
   label_publication_new: "Add Publication"
+  label_add_project_to_publication: "Add Project to Publication"
+  label_project_search: "Search by name: "
   
       
   # bibtex_entries strings

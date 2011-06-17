@@ -180,10 +180,26 @@ class PublicationsController < ApplicationController
     
   end
 
-  def review_new_entries
-
-  end
   
+  def add_project
+    Rails.logger.debug { "ADD PROJECT" }
+    
+    @project = Project.find(params[:project_id])    
+    @publication = Publication.find(params[:id])
+    
+    @publication.projects << @project
+    
+  end
+
+
+  def autocomplete_for_project
+    # TODO luisf - Should This Be HERE???
+    @publication = Publication.find(params[:id])
+    
+    @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects
+    logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
+    render :layout => false
+  end
   
   private
    

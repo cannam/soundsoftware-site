@@ -1,3 +1,37 @@
 <h1>New Publication</h1>
 
-<%= render :partial => 'edit' %>
+
+
+<div class="splitcontentleft">
+  <%= render :partial => 'edit' %>
+</div>
+
+
+<% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
+
+<div class="splitcontentright">
+
+  <% form_remote_for(:project, @project, 
+                     :url => {:controller => 'publication', :action => 'new', :id => @publication.id, :project_id => @project}, 
+                     :method => :post,
+									   :loading => "$('project-add-submit').disable()",
+									   :complete => "$('project-add-submit').enable()") do |f| %>
+      
+      <fieldset><legend><%=l(:label_add_project_to_publication)%></legend>
+    
+	      <p><%= label_tag "project_search", l(:label_project_search) %><%= text_field_tag 'project_search', nil %></p>
+	     
+	      <%= observe_field(:project_search,
+               :frequency => 0.5,
+               :update => :projects,
+               :url => { :controller => 'publications', :action => 'autocomplete_for_project', :id => @publication, :project_id => @project},
+               :with => 'q')
+                %>
+
+        <p><%= submit_tag l(:button_add), :id => 'project-add-submit' %></p>
+    
+    
+      </fieldset>
+  <% end %>
+    
+</div>
