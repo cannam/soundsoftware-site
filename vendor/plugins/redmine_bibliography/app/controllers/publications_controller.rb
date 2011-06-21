@@ -3,7 +3,8 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  before_filter :find_project_by_project_id
+  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project]
+  
   
   def new
     @publication = Publication.new      
@@ -193,10 +194,10 @@ class PublicationsController < ApplicationController
 
 
   def autocomplete_for_project
-    # TODO luisf - Should This Be HERE???
     @publication = Publication.find(params[:id])
-    
     @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects
+            
+#    @projects = Project.active.like(params[:q]).find(:all, :limit => 100)
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
     render :layout => false
   end

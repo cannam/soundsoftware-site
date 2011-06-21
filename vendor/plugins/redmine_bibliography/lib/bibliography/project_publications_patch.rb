@@ -8,7 +8,7 @@ module Bibliography
           
             named_scope :like, lambda {|q| 
               s = "%#{q.to_s.strip.downcase}%"
-              {:conditions => ["LOWER(name) LIKE :s OR LOWER(description) LIKE :s OR LOWER(homepage) LIKE :s", {:s => s}],
+              {:conditions => ["LOWER(name) LIKE :s OR LOWER(homepage) LIKE :s", {:s => s}],
                :order => 'name'
               }
             }
