@@ -1,4 +1,6 @@
 <h2>Publication Details</h2>
+
+<div class="splitcontentleft">
 <h4>Title</h4>
 <%= h @publication.title %>
 
@@ -18,12 +20,24 @@
 <%- end -%>
 <%- end -%>
 
-
-
 <p>
   <%= link_to "Edit", edit_publication_path(@publication) %> |
   <%= link_to "Destroy", @publication, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", publications_path %>
 </p>
+</div>
 
 
+<% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
+
+<div class="splitcontentright">
+
+
+  <h4>List of Projects</h4>
+  <p id="list_projects">
+    <%= render :partial => 'list_projects' %>
+  </p>
+
+  <%= render :partial => 'add_project_form' %>
+    
+</div>

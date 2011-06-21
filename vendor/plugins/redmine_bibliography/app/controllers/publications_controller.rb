@@ -183,21 +183,23 @@ class PublicationsController < ApplicationController
 
   
   def add_project
-    Rails.logger.debug { "ADD PROJECT" }
+    @projects = Project.find(params[:publication][:project_ids])    
+    @publication = Publication.find(params[:id])        
+    @publication.projects << @projects
     
-    @project = Project.find(params[:project_id])    
-    @publication = Publication.find(params[:id])
-    
-    @publication.projects << @project
-    
+    # TODO luisf should also respond to HTML??? 
+    respond_to do |format|
+      format.js      
+    end
   end
-
 
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
-    @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects
-            
-#    @projects = Project.active.like(params[:q]).find(:all, :limit => 100)
+    
+    logger.error "aaaaaaaa"
+    logger.error { @publication.id }
+    
+    @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects            
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
     render :layout => false
   end

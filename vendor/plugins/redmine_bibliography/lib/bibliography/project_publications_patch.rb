@@ -4,7 +4,7 @@ module Bibliography
   module ProjectPublicationsPatch
     def self.included(base)
           base.class_eval do
-            has_and_belongs_to_many :publications
+            has_and_belongs_to_many :publications, :uniq => true
           
             named_scope :like, lambda {|q| 
               s = "%#{q.to_s.strip.downcase}%"
