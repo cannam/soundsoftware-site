@@ -4,6 +4,9 @@ en:
   authors: "Authors"
   author: "Author"
   name: "Name"
+  
+  add_me_as_author: "Add me as an author"
+  add_another_author: "Add another author"
 
   remove: "Remove"
   

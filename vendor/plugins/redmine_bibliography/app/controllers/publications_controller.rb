@@ -3,7 +3,7 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project]
+  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author]
   
   
   def new
@@ -16,12 +16,8 @@ class PublicationsController < ApplicationController
     @publication.authors.build
     
     @project_id = params[:project_id]
-    
-    # the step we're at in the form
-    #    @publication.current_step = session[:publication_step]
+    @current_user = User.current
 
-    @new_publications = []
-    session[:publications] ||= {}
   end
 
   def create
@@ -66,6 +62,16 @@ class PublicationsController < ApplicationController
 
     session[:publication_step] = @publication.current_step
     
+  end
+
+  def add_author
+    if (request.xhr?)
+      render :text => User.find(params[:user_id]).name
+    else
+      # No?  Then render an action.
+      #render :action => 'view_attribute', :attr => @name
+      logger.error { "ERRO ADD AUTHOR" }
+    end
   end
 
 

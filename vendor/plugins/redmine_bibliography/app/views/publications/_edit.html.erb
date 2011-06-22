@@ -1,10 +1,24 @@
+<% content_for :header_tags do %>
+    <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
+<% end %>
+
+
 <% form_for @publication, :url => { :project_id  => @project_id, :action => :create } do |f| -%>
 
   <%= f.error_messages %>
   
   <p><%= f.label :title, l(:title) %>  <%= f.text_field :title %></p>
 
-  <h3><%= l(:authors) %></h3>  
+  <h3><%= l(:authors) %></h3>    
+  <%= link_to_remote l(:add_me_as_author), {:url => { :controller => 'publications', :action => 'add_author', :user_id => @current_user}, :update => 'users_div' }, { :id => 'add_me_as_an_author', :class => 'icon icon-add' } %>  
+
+  <div id='users_div'>aaa</div>
+  
+  
+  
+  
+  
+  
   <%- f.fields_for :authors do |builder| -%>
     <%= render :partial => 'authors_fields', :locals => { :f => builder} %>
   <%- end -%>
