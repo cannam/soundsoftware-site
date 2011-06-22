@@ -6,10 +6,16 @@ RAILS_DEFAULT_LOGGER.info 'Starting Bibliography Plugin for RedMine'
 # Patches to the Redmine core.
 Dispatcher.to_prepare :redmine_model_dependencies do
   require_dependency 'project'
+  require_dependency 'user'
 
   unless Project.included_modules.include? Bibliography::ProjectPublicationsPatch
     Project.send(:include, Bibliography::ProjectPublicationsPatch)
   end
+
+  unless Project.included_modules.include? Bibliography::UserAuthorPatch
+    Project.send(:include, Bibliography::UserAuthorPatch)
+  end
+
 end
 
 
