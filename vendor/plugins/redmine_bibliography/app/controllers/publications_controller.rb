@@ -13,7 +13,7 @@ class PublicationsController < ApplicationController
     @publication.build_bibtex_entry
     
     # and at least one author
-    @publication.authors.build
+    3.times {@publication.authors.build}
     
     @project_id = params[:project_id]
     @current_user = User.current

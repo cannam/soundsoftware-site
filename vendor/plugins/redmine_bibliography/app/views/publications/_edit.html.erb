@@ -4,24 +4,19 @@
 
 
 <% form_for @publication, :url => { :project_id  => @project_id, :action => :create } do |f| -%>
-
   <%= f.error_messages %>
   
   <p><%= f.label :title, l(:title) %>  <%= f.text_field :title %></p>
 
   <h3><%= l(:authors) %></h3>    
-  <%= link_to_remote l(:add_me_as_author), {:url => { :controller => 'publications', :action => 'add_author', :user_id => @current_user}, :update => 'users_div' }, { :id => 'add_me_as_an_author', :class => 'icon icon-add' } %>  
+    <%= link_to_remote l(:add_me_as_author), {:url => { :controller => 'publications', :action => 'add_author', :user_id => @current_user}, :update => 'users_div' }, { :id => 'add_me_as_an_author', :class => 'icon icon-add' } %>  
 
-  <div id='users_div'>aaa</div>
-  
-  
-  
-  
-  
-  
-  <%- f.fields_for :authors do |builder| -%>
-    <%= render :partial => 'authors_fields', :locals => { :f => builder} %>
-  <%- end -%>
+
+  <div id='authors'>    
+    <%= link_to_add_fields l(:add_another_author), f, :authors %>
+
+    <%= render :partial => 'author_fields', :collection => @publication.authors %>    
+  </div>  
     
   <h3>Other Details</h3>
 
