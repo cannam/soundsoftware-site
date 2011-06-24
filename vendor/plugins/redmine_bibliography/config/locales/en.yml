@@ -8,15 +8,22 @@ en:
   add_me_as_author: "Add me as an author"
   add_another_author: "Add another author"
 
-  remove: "Remove"
+  remove_author: "Remove this author"
   
   label_publications_plural: "Publications"
   label_publication_new: "Add Publication"
   label_add_project_to_publication: "Add Project to Publication"
   label_project_search: "Search by name: "
   
+  text_institution: "Please insert the institution as it appears on the paper."
+  text_name_on_paper: "Please insert the name of the author as it appears on the paper."
+  
+  # authorships model
+  institution: "Institution"
+  naem_on_paper: "Name" 
+  
       
-  # bibtex_entries strings
+  # bibtex_entries model
   id: "id" 
   publication_id: "Publication_id"
   entry_type: "Entry Type"

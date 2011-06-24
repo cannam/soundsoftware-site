@@ -3,7 +3,7 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author]
+  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors]
   
   
   def new
@@ -13,7 +13,7 @@ class PublicationsController < ApplicationController
     @publication.build_bibtex_entry
     
     # and at least one author
-    3.times {@publication.authors.build}
+    @publication.authorships.build.build_author
     
     @project_id = params[:project_id]
     @current_user = User.current
@@ -52,16 +52,6 @@ class PublicationsController < ApplicationController
     if bibtex_entry
       parse_bibtex_list bibtex_entry    
     end
-
-    # form's flow control
-    if params[:back_button]
-      @publication.previous_step
-    else
-      @publication.next_step
-    end
-
-    session[:publication_step] = @publication.current_step
-    
   end
 
   def add_author
@@ -186,7 +176,6 @@ class PublicationsController < ApplicationController
     
     
   end
-
   
   def add_project
     @projects = Project.find(params[:publication][:project_ids])    
@@ -209,6 +198,15 @@ class PublicationsController < ApplicationController
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
     render :layout => false
   end
+
+
+  def sort_authors
+    params[:authors].each_with_index do |id, index|
+      Author.update_all(['order=?', index+1], ['id=?', id])
+    end
+    render :nothing => true
+  end
+
   
   private
    
