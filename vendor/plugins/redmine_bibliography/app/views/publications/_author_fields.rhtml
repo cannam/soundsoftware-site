@@ -3,6 +3,6 @@
     <%= f.label :name, l("name") %>
     <%= f.text_field :name %>            
     <%= f.hidden_field :_destroy %>
-    <%= link_to_function "Remove", "remove_author(this)" %>
+    <%= link_to_remove_fields "remove", f %><br />
   </p>
 </div>

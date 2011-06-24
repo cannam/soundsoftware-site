@@ -1,8 +1,3 @@
-function remove_author(link){
-	$(link).previous('input[type=hidden]').value = 1;
-	$(link).up('.author_fields').remove();
-}
-
 function remove_fields(link) {
   $(link).previous("input[type=hidden]").value = "1";
   $(link).up(".fields").hide();
