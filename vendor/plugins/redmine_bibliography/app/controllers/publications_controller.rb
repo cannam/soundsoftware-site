@@ -24,9 +24,6 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(params[:publication])
     @project = Project.find(params[:project_id])
 
-    logger.error { "FIGUEIRA" }
-    Rails.logger.debug { @project }
-
     @publication.projects << @project
     
     if @publication.save 
@@ -63,6 +60,23 @@ class PublicationsController < ApplicationController
       logger.error { "ERRO ADD AUTHOR" }
     end
   end
+
+  def add_me_as_author
+     if (request.xhr?)       
+       if User.current.author.nil?
+         logger.error { "current user has an author" }
+         @author = Author.new(:user_id => User.current)         
+       else
+         logger.error { "current user does not have an author" }
+         @author = User.current.author
+       end                     
+      @authorship = Authorship.create(:author => @author, :publication => @publication)                    
+     else
+       # No?  Then render an action.
+       #render :action => 'view_attribute', :attr => @name
+       logger.error { "ERROR ADD ME AS AUTHOR" }
+     end
+   end
 
 
   def edit    

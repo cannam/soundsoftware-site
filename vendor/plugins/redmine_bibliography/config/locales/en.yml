@@ -5,8 +5,8 @@ en:
   author: "Author"
   name: "Name"
   
-  add_me_as_author: "Add me as an author"
-  add_another_author: "Add another author"
+  label_add_me_as_author: "Add me as an author"
+  label_add_another_author: "Add another author"
 
   remove_author: "Remove this author"
   
