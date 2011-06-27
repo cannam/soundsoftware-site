@@ -266,7 +266,11 @@ class ApplicationController < ActionController::Base
           # soundsoftware: if back_url is the home page,
           # change it to My Page (#125)
           if (uri.path == home_path)
-            uri.path = uri.path + "/my"
+            if (uri.path =~ /\/$/)
+              uri.path = uri.path + "my"
+            else
+              uri.path = uri.path + "/my"
+            end
           end
           # soundsoftware: if login page is https but back_url http,
           # switch back_url to https to ensure cookie validity (#83)
