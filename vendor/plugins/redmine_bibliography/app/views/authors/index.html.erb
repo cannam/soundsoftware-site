@@ -1,0 +1,5 @@
+<h2>Authors#index</h2>
+
+<% @authors.each do |author| %>
+	<p><%= author.name %> - <%= author.publications.first.title%></p>
+<% end %>

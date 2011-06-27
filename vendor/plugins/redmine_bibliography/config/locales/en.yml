@@ -1,0 +1,57 @@
+# English strings go here for Rails i18n
+en:
+  title: "Title"
+  authors: "Authors"
+  author: "Author"
+  name: "Name"
+  
+  label_add_me_as_author: "Add me as an author"
+  label_add_another_author: "Add another author"
+
+  remove_author: "Remove this author"
+  
+  label_publications_plural: "Publications"
+  label_publication_new: "Add Publication"
+  label_add_project_to_publication: "Add Project to Publication"
+  label_project_search: "Search by name: "
+  
+  text_institution: "Please insert the institution as it appears on the paper."
+  text_name_on_paper: "Please insert the name of the author as it appears on the paper."
+  
+  # authorships model
+  institution: "Institution"
+  naem_on_paper: "Name" 
+  
+      
+  # bibtex_entries model
+  id: "id" 
+  publication_id: "Publication_id"
+  entry_type: "Entry Type"
+  address: "Address"
+  annote: "Annote"
+  booktitle: "Book Title"
+  chapter: "Chapter"
+  crossref: "Cross Reference"
+  edition: "Edition"
+  editor: "Editor"
+  eprint: "eprint"
+  howpublished: "How was it Published"
+  journal: "Journal"
+  key: "Key"
+  month: "Month"
+  note: "Note"
+  number: "Number"
+  organization: "Organization"
+  pages: "Pages"
+  publisher: "Publisher"
+  school: "School"
+  series: "Series"
+  type: "Type"
+  url: "URL"
+  volume: "Volume"
+  year: "Year"
+  
+  
+  
+  
+  

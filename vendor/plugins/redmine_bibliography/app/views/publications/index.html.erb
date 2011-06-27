@@ -1,0 +1,33 @@
+<div class="contextual">		
+		<%= link_to l(:label_publication_new), {:controller => 'publications', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>
+</div>
+
+<div class="splitcontentleft">
+  <h3>Publications#index</h3>
+
+
+  <table>
+    <tr>
+      <th>Number</th>
+      <th>Title</th> 
+    </tr>
+
+    <% @publications.each do |publication| %>
+	    <tr>
+	      <td><%= publication.id %></td>
+	      <td><%= link_to publication.title, :controller => "publications", :action => "show", :id => publication, :project_id => @project %></td>
+	 	  </tr>
+    <% end %>    
+  </table>
+
+</div>
+
+<div class="splitcontentright">
+  placeholder div
+</div>
+
+
+<% content_for :sidebar do %>
+  Sidebar
+<% end %>
+  
