@@ -14,23 +14,13 @@
   <% f.fields_for :authorships do |builder| %>
     <%= render "authorship_fields", :f => builder %>
   <% end %>
+
   <p><%= link_to_add_fields l(:label_add_another_author), f, :authorships %></p>
       
-  <%= link_to_remote l(:label_add_me_as_author), 
-                     { :url => { :controller => 'publications', :action => 'add_me_as_author', :project_id => @project },
-                       :method => 'post',
-                       :update => 'me',
-                       :complete => ""
-                     }, { :class => 'icon icon-add', :id => "add_me_as_author" } %>
-
-  <div id="me"></div>
-    
   <h3>Other Details</h3>
   <% f.fields_for :bibtex_entry do |builder| -%>
     <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
   <%- end -%>
 
-
   <%= f.submit %>
-
 <% end -%>

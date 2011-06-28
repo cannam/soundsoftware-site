@@ -69,7 +69,11 @@ class PublicationsController < ApplicationController
        else
          logger.error { "current user does not have an author" }
          @author = User.current.author
-       end                     
+       end
+
+      @own_authorship = Authorship.new :name_on_paper => User.current.name
+      
+                                   
       @authorship = Authorship.create(:author => @author, :publication => @publication)                    
      else
        # No?  Then render an action.
@@ -204,15 +208,19 @@ class PublicationsController < ApplicationController
 
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
-    
-    logger.error "aaaaaaaa"
-    logger.error { @publication.id }
-    
+        
     @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects            
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
     render :layout => false
   end
 
+  def autocomplete_for_author
+    @publication = Publication.find(params[:id])
+        
+    @authors = Authors.active.like(params[:q]).find(:all, :limit => 100) - @publication.authors
+    logger.debug "Query for \"#{params[:q]}\" returned \"#{@authors.size}\" results"
+    render :layout => false
+  end
 
   def sort_authors
     params[:authors].each_with_index do |id, index|

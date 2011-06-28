@@ -1,1 +1,3 @@
-page.insert_html :bottom, :authors, :partial => 'authorships_fields', :locals => { :authorships => @authorship }
+page["publication_authorships_attributes_0_name_on_paper"].value = User.current.name
+page["publication_authorships_attributes_0_institution"].value = User.current.ssamr_user_detail.institution_id.to_i
+page["publication_authorships_attributes_0_author_user_id"].value = User.current.id

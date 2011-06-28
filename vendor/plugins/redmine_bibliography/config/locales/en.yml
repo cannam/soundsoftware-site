@@ -15,13 +15,14 @@ en:
   label_add_project_to_publication: "Add Project to Publication"
   label_project_search: "Search by name: "
   
-  text_institution: "Please insert the institution as it appears on the paper."
-  text_name_on_paper: "Please insert the name of the author as it appears on the paper."
+  text_author_email: "Author's email address as on the paper."
+  text_author_institution: "Author's institution name as on paper."
+  text_author_name_on_paper: "Name of the author as it appears on paper."
   
   # authorships model
   institution: "Institution"
-  naem_on_paper: "Name" 
-  
+  name_on_paper: "Name" 
+  email: "Email Address"
       
   # bibtex_entries model
   id: "id" 

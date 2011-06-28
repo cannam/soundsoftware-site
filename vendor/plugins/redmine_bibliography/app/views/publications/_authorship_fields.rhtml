@@ -2,11 +2,30 @@
   <p>
     <%= f.label :name_on_paper, l("name") %>
     <%= f.text_field :name_on_paper %><br />
-    <em><%= h l("text_name_on_paper") %></em><br />
+    <em><%= h l("text_author_name_on_paper") %></em><br />
+    
+
+                         
+                         
+<%= render :partial => 'identify_author_form' %>                         
+                         </br>
+    
+    
+    
+    
+    
     <%= f.label :institution, l("institution") %>
     <%= f.text_field :institution %><br />
-    <em><%= h l("text_institution") %></em><br />
+    <em><%= h l("text_author_institution") %></em><br />
+
+    <%= f.label :email, l("email") %>
+    <%= f.text_field :email %><br />
+    <em><%= h l("text_author_email") %></em><br />
+    
+    <% f.fields_for :author do |builder| %>
+      <%= builder.hidden_field :user_id %>
+    <% end %>
     <%= f.hidden_field :_destroy %>
-    <%= link_to_remove_fields l("remove_author"), f %>
+    <%= link_to_remove_fields l("remove_author"), f %>    
   </p>
 </div>

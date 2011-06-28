@@ -1,0 +1,35 @@
+<% form_remote_for(:publication, 
+                     :url => {:controller => 'publications', :action => 'identify_author', :id => @publication, :project_id => @project}, 
+                     :method => :post,
+                     :html => { :id => 'add_project_form' }, 
+									   :loading => "$('project-add-submit').disable()",
+									   :complete => "$('project-add-submit').enable()") do |f| %>
+									   
+								<legend><%= "Identify Authors in the system…" %></legend>
+
+                  <%= link_to_remote "It's me!", 
+                                     { :url => { :controller => 'publications', 
+                                       :action => 'add_me_as_author',
+                                       :project_id => @project }, :method => 'post'}, 
+                                       { :class => 'icon icon-add', :id => "add_me_as_author" } %>
+
+	      <p>
+	        <%= label_tag "author_search", l(:label_project_search) %><%= text_field_tag 'author_search', nil %>
+	      </p>
+	     
+	      <%= observe_field(:author_search,
+               :frequency => 0.5,
+               :update => :projects,
+               :url => { :controller => 'publications', :action => 'autocomplete_for_authors', :id => @publication },
+               :with => 'q')
+                %>
+
+					<div id="projects">
+					<% if params[:q] && params[:q].length > 1 %>
+			  		  <%= authors_check_box_tags 'author[author_ids][]', @projects %>
+					<% end %>
+					</div>
+
+        <p><%= submit_tag l(:button_add), :id => 'project-add-submit' %></p>
+    
+  <% end %>
