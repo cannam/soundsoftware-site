@@ -20,7 +20,7 @@
 	      <%= observe_field(:author_search,
                :frequency => 0.5,
                :update => :projects,
-               :url => { :controller => 'publications', :action => 'autocomplete_for_authors', :id => @publication },
+               :url => { :controller => 'publications', :action => 'autocomplete_for_author' },
                :with => 'q')
                 %>
 

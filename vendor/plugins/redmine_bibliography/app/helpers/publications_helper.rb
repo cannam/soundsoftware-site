@@ -9,6 +9,19 @@ module PublicationsHelper
     s 
   end
   
+  def link_to_author(author, options={}, html_options = nil)
+    #TODO luisf
+    h(author.name)
+  end
+  
+  def authors_check_box_tags(name, authors)
+    s = ''
+    authors.sort.each do |author|
+      s << "<label>#{ check_box_tag name, author.id, false } #{link_to_author author}</label>\n"
+    end
+    s 
+  end
+
   def link_to_remove_fields(name, f)
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)")
   end

@@ -3,7 +3,7 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors]
+  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
   
   
   def new
@@ -64,16 +64,13 @@ class PublicationsController < ApplicationController
   def add_me_as_author
      if (request.xhr?)       
        if User.current.author.nil?
-         logger.error { "current user has an author" }
-         @author = Author.new(:user_id => User.current)         
+         logger.error { "current user has no author" }
+         @author = Author.new(:user_id => User.current, :name => User.current.name)
        else
          logger.error { "current user does not have an author" }
          @author = User.current.author
        end
-
-      @own_authorship = Authorship.new :name_on_paper => User.current.name
-      
-                                   
+       
       @authorship = Authorship.create(:author => @author, :publication => @publication)                    
      else
        # No?  Then render an action.
@@ -215,9 +212,7 @@ class PublicationsController < ApplicationController
   end
 
   def autocomplete_for_author
-    @publication = Publication.find(params[:id])
-        
-    @authors = Authors.active.like(params[:q]).find(:all, :limit => 100) - @publication.authors
+    @authors = Author.like(params[:q]).find(:all, :limit => 100)
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@authors.size}\" results"
     render :layout => false
   end
@@ -228,6 +223,11 @@ class PublicationsController < ApplicationController
     end
     render :nothing => true
   end
+
+  def identify_author
+    
+  end
+
 
   
   private

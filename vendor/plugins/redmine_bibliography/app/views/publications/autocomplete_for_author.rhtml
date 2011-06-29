@@ -1,0 +1,3 @@
+<% if params[:q] && params[:q].length > 1 %>
+	<%= authors_check_box_tags 'publication[author_ids][]', @authors %>
+<% end %>
