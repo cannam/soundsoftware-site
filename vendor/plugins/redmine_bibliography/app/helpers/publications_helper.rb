@@ -9,15 +9,14 @@ module PublicationsHelper
     s 
   end
   
-  def link_to_author(author, options={}, html_options = nil)
-    #TODO luisf
-    h(author.name)
+  def identify_author(author)    
+    link_to_function(author.name, "console.log($(this).up('div').up('div').select('input[id$=name_on_paper]'))")
   end
   
-  def authors_check_box_tags(name, authors)
+  def choose_author_link(name, authors)
     s = ''
     authors.sort.each do |author|
-      s << "<label>#{ check_box_tag name, author.id, false } #{link_to_author author}</label>\n"
+      s << "#{identify_author author}\n"
     end
     s 
   end

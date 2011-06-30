@@ -10,10 +10,10 @@ class PublicationsController < ApplicationController
     @publication = Publication.new      
     
     # we'll always want a new publication to have its bibtex entry
-    @publication.build_bibtex_entry
+    # @publication.build_bibtex_entry
     
     # and at least one author
-    @publication.authorships.build.build_author
+    # @publication.authorships.build.build_author
     
     @project_id = params[:project_id]
     @current_user = User.current
@@ -212,8 +212,20 @@ class PublicationsController < ApplicationController
   end
 
   def autocomplete_for_author
-    @authors = Author.like(params[:q]).find(:all, :limit => 100)
-    logger.debug "Query for \"#{params[:q]}\" returned \"#{@authors.size}\" results"
+    @authors = []
+    
+    authors_list = Author.like(params[:q]).find(:all, :limit => 100)    
+    users_list = User.active.like(params[:q]).find(:all, :limit => 100)
+
+    logger.debug "Query for \"#{params[:q]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\""
+    
+    # need to subtract both lists
+    # give priority to the users
+    
+    authors_list.each do |author|
+      @authors << author unless author.user_id.nil?
+    end
+                
     render :layout => false
   end
 

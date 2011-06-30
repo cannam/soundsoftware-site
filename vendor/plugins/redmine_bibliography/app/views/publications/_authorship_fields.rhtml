@@ -1,11 +1,10 @@
 <div class="fields">
-  <p>
+  <p>        
     <%= f.label :name_on_paper, l("name") %>
     <%= f.text_field :name_on_paper %><br />
     <em><%= h l("text_author_name_on_paper") %></em><br />
                                                 
-    <%= render :partial => 'identify_author_form' %>                         
-                         </br>
+    <%= render :partial => 'identify_author_form' %></br>
       
     <%= f.label :institution, l("institution") %>
     <%= f.text_field :institution %><br />
@@ -17,5 +16,6 @@
     
     <%= f.hidden_field :_destroy %>
     <%= link_to_remove_fields l("remove_author"), f %>    
+    
   </p>
 </div>
