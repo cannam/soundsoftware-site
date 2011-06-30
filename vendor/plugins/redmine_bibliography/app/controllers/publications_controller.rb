@@ -67,11 +67,11 @@ class PublicationsController < ApplicationController
          logger.error { "current user has no author" }
          @author = Author.new(:user_id => User.current, :name => User.current.name)
        else
-         logger.error { "current user does not have an author" }
+         logger.error { "current user already has an author" }
          @author = User.current.author
        end
        
-      @authorship = Authorship.create(:author => @author, :publication => @publication)                    
+      # @authorship = Authorship.create(:author => @author, :publication => @publication)                    
      else
        # No?  Then render an action.
        #render :action => 'view_attribute', :attr => @name
