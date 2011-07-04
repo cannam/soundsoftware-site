@@ -10,7 +10,7 @@
   <%= label_tag "author_search", l(:label_project_search) %><%= text_field_tag 'author_search', nil %>
 </p>
 	     
-<%= observe_field(:author_search,
+<%= observe_field( form_tag_id(f.object_name, :name),
      :frequency => 0.5,
      :update => :identify_author,
      :url => { :controller => 'publications', :action => 'autocomplete_for_author' },

@@ -2,7 +2,6 @@
     <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
 <% end %>
 
-
 <% form_for @publication, :url => { :project_id  => @project_id, :action => :create } do |f| -%>
   <%= f.error_messages %>  
   <p>

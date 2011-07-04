@@ -10,3 +10,7 @@ function add_fields(link, association, content) {
     before: content.replace(regexp, new_id)
   });
 }
+
+function update_author_info(link){
+	$(link).up('div').up('div').select('input[id$=name_on_paper]').each(function(e){e.value='aaaaa'})
+}

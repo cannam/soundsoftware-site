@@ -10,7 +10,7 @@ module PublicationsHelper
   end
   
   def identify_author(author)    
-    link_to_function(author.name, "console.log($(this).up('div').up('div').select('input[id$=name_on_paper]'))")
+    link_to_function(author.name, "update_author_info(this)")
   end
   
   def choose_author_link(name, authors)
@@ -32,4 +32,19 @@ module PublicationsHelper
     end    
     link_to_function(name, h("add_fields(this, '#{association}', '#{escape_javascript(fields)}')"), { :class => 'icon icon-add', :id => "add_another_author" })
   end  
+
+  def sanitized_object_name(object_name)
+    object_name.gsub(/\]\[|[^-a-zA-Z0-9:.]/,"_").sub(/_$/,"")
+  end
+
+  def sanitized_method_name(method_name)
+    method_name.sub(/\?$/, "")
+  end
+
+  def form_tag_id(object_name, method_name)    
+    str = "#{sanitized_object_name(object_name.to_s)}_#{sanitized_method_name(method_name.to_s)}"
+    str.to_sym
+  end
+
 end
+
