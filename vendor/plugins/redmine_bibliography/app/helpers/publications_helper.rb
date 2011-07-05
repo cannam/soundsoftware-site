@@ -9,8 +9,17 @@ module PublicationsHelper
     s 
   end
   
-  def identify_author(author)    
-    link_to_function(author.name, "update_author_info(this)")
+  def identify_author(author)
+    
+    if author.class == Author    
+      author_info = { 
+        :name_on_paper => author.name, 
+        :user_id => author.user_id,
+        :id => author.id
+      }
+    end
+                
+    link_to_function(author.name, "update_author_info(this," + author_info.to_json + ")")
   end
   
   def choose_author_link(name, authors)

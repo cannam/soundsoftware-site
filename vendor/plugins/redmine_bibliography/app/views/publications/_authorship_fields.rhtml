@@ -4,9 +4,6 @@
     <%= f.text_field :name_on_paper %><br />
     <em><%= h l("text_author_name_on_paper") %></em><br />
                                                 
-
-
-
     <legend><%= "Identify Authors in the system…" %></legend>
 
     <%= link_to_remote "It's me!", 
@@ -20,10 +17,10 @@
       <%= f.text_field :author_search %>
     </p>
 
-    <%= observe_field( form_tag_id(f.object_name, :author_search), :frequency => 0.5, :update => :identify_author, :url => { :controller => 'publications', :action => 'autocomplete_for_author' }, :with => 'q')
+    <%= observe_field( form_tag_id(f.object_name, :author_search), :frequency => 0.5, :update => form_tag_id(f.object_name, :identify_author), :url => { :controller => 'publications', :action => 'autocomplete_for_author' }, :with => 'q')
     %>
 
-    <div id="identify_author">
+    <div id="<%= form_tag_id(f.object_name, :identify_author) %>">
       <% if params[:q] && params[:q].length > 1 %>
         <%= select_author_links 'author[author_ids][]', @authors %>
       <% end %>
@@ -37,7 +34,10 @@
     <%= f.text_field :email %><br />
     <em><%= h l("text_author_email") %></em><br />
     
-    <%= f.hidden_field :_destroy %>
+    <% f.fields_for :author do |author| %>
+      <%= author.hidden_field :user_id %>
+    <% end %>
+    
     <%= link_to_remove_fields l("remove_author"), f %>    
     
   </p>
