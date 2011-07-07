@@ -10,13 +10,20 @@ module PublicationsHelper
   end
   
   def identify_author(author)
+    if author.class == User
+      author_info = {
+        :name_on_paper => author.name,
+        :user_id => author.id
+      }
     
-    if author.class == Author    
+    else 
+      if author.class == Author    
       author_info = { 
         :name_on_paper => author.name, 
         :user_id => author.user_id,
         :id => author.id
       }
+      end
     end
                 
     link_to_function(author.name, "update_author_info(this," + author_info.to_json + ")")

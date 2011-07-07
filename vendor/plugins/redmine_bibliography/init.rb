@@ -12,8 +12,8 @@ Dispatcher.to_prepare :redmine_model_dependencies do
     Project.send(:include, Bibliography::ProjectPublicationsPatch)
   end
 
-  unless Project.included_modules.include? Bibliography::UserAuthorPatch
-    Project.send(:include, Bibliography::UserAuthorPatch)
+  unless User.included_modules.include? Bibliography::UserAuthorPatch
+    User.send(:include, Bibliography::UserAuthorPatch)
   end
 
 end

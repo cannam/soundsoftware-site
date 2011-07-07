@@ -61,25 +61,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def add_me_as_author
-     if (request.xhr?)       
-       if User.current.author.nil?
-         logger.error { "current user has no author" }
-         @author = Author.new(:user_id => User.current, :name => User.current.name)
-       else
-         logger.error { "current user already has an author" }
-         @author = User.current.author
-       end
-       
-      # @authorship = Authorship.create(:author => @author, :publication => @publication)                    
-     else
-       # No?  Then render an action.
-       #render :action => 'view_attribute', :attr => @name
-       logger.error { "ERROR ADD ME AS AUTHOR" }
-     end
-   end
-
-
   def edit    
     @publication = Publication.find(params[:id])
   end

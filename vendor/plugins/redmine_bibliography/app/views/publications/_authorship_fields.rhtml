@@ -6,11 +6,7 @@
                                                 
     <legend><%= "Identify Authors in the system…" %></legend>
 
-    <%= link_to_remote "It's me!", 
-       { :url => { :controller => 'publications', 
-         :action => 'add_me_as_author',
-         :project_id => @project }, :method => 'post'}, 
-       { :class => 'icon icon-add', :id => "add_me_as_author" } %>
+    <%= link_to_function "Add Me as Author", "update_author_info(this," + User.current.to_json + ")", :class => 'icon icon-add', :id => "add_me_as_author" %>
 
     <p>
       <%= f.label :author_search, l(:label_project_search) %>
@@ -19,7 +15,7 @@
 
     <%= observe_field( form_tag_id(f.object_name, :author_search), :frequency => 0.5, :update => form_tag_id(f.object_name, :identify_author), :url => { :controller => 'publications', :action => 'autocomplete_for_author' }, :with => 'q')
     %>
-
+    
     <div id="<%= form_tag_id(f.object_name, :identify_author) %>">
       <% if params[:q] && params[:q].length > 1 %>
         <%= select_author_links 'author[author_ids][]', @authors %>
@@ -34,9 +30,7 @@
     <%= f.text_field :email %><br />
     <em><%= h l("text_author_email") %></em><br />
     
-    <% f.fields_for :author do |author| %>
-      <%= author.hidden_field :user_id %>
-    <% end %>
+    <%= f.hidden_field :author_id %>
     
     <%= link_to_remove_fields l("remove_author"), f %>    
     
