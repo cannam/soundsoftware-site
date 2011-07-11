@@ -1,0 +1,25 @@
+<legend><%= "Identify Authors in the system…" %></legend>
+
+<%= link_to_remote "It's me!", 
+   { :url => { :controller => 'publications', 
+     :action => 'add_me_as_author',
+     :project_id => @project }, :method => 'post'}, 
+   { :class => 'icon icon-add', :id => "add_me_as_author" } %>
+
+<p>
+  <%= label_tag "author_search", l(:label_project_search) %><%= text_field_tag 'author_search', nil %>
+</p>
+	     
+<%= observe_field( form_tag_id(f.object_name, :name),
+     :frequency => 0.5,
+     :update => :identify_author,
+     :url => { :controller => 'publications', :action => 'autocomplete_for_author' },
+     :with => 'q')
+%>
+
+<div id="identify_author">
+  <% if params[:q] && params[:q].length > 1 %>
+    <%= select_author_links 'author[author_ids][]', @authors %>
+  <% end %>
+</div>
+

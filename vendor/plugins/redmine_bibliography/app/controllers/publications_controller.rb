@@ -3,17 +3,17 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors]
+  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
   
   
   def new
     @publication = Publication.new      
     
     # we'll always want a new publication to have its bibtex entry
-    @publication.build_bibtex_entry
+    # @publication.build_bibtex_entry
     
     # and at least one author
-    @publication.authorships.build.build_author
+    # @publication.authorships.build.build_author
     
     @project_id = params[:project_id]
     @current_user = User.current
@@ -60,24 +60,6 @@ class PublicationsController < ApplicationController
       logger.error { "ERRO ADD AUTHOR" }
     end
   end
-
-  def add_me_as_author
-     if (request.xhr?)       
-       if User.current.author.nil?
-         logger.error { "current user has an author" }
-         @author = Author.new(:user_id => User.current)         
-       else
-         logger.error { "current user does not have an author" }
-         @author = User.current.author
-       end                     
-      @authorship = Authorship.create(:author => @author, :publication => @publication)                    
-     else
-       # No?  Then render an action.
-       #render :action => 'view_attribute', :attr => @name
-       logger.error { "ERROR ADD ME AS AUTHOR" }
-     end
-   end
-
 
   def edit    
     @publication = Publication.find(params[:id])
@@ -204,15 +186,29 @@ class PublicationsController < ApplicationController
 
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
-    
-    logger.error "aaaaaaaa"
-    logger.error { @publication.id }
-    
+        
     @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects            
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
     render :layout => false
   end
 
+  def autocomplete_for_author
+    @authors = []
+    
+    authors_list = Author.like(params[:q]).find(:all, :limit => 100)    
+    users_list = User.active.like(params[:q]).find(:all, :limit => 100)
+
+    logger.debug "Query for \"#{params[:q]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\""
+    
+    # need to subtract both lists
+    # give priority to the users
+    
+    authors_list.each do |author|
+      @authors << author unless author.user_id.nil?
+    end
+                
+    render :layout => false
+  end
 
   def sort_authors
     params[:authors].each_with_index do |id, index|
@@ -220,6 +216,11 @@ class PublicationsController < ApplicationController
     end
     render :nothing => true
   end
+
+  def identify_author
+    
+  end
+
 
   
   private

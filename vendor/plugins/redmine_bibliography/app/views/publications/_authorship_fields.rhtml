@@ -1,12 +1,38 @@
-<div class="fields">
-  <p>
+<div id="authors" class="fields">
+  <p>        
     <%= f.label :name_on_paper, l("name") %>
     <%= f.text_field :name_on_paper %><br />
-    <em><%= h l("text_name_on_paper") %></em><br />
+    <em><%= h l("text_author_name_on_paper") %></em><br />
+                                                
+    <legend><%= "Identify Authors in the system…" %></legend>
+
+    <%= link_to_function "Add Me as Author", "update_author_info(this," + User.current.to_json + ")", :class => 'icon icon-add', :id => "add_me_as_author" %>
+
+    <p>
+      <%= f.label :author_search, l(:label_project_search) %>
+      <%= f.text_field :author_search %>
+    </p>
+
+    <%= observe_field( form_tag_id(f.object_name, :author_search), :frequency => 0.5, :update => form_tag_id(f.object_name, :identify_author), :url => { :controller => 'publications', :action => 'autocomplete_for_author' }, :with => 'q')
+    %>
+    
+    <div id="<%= form_tag_id(f.object_name, :identify_author) %>">
+      <% if params[:q] && params[:q].length > 1 %>
+        <%= select_author_links 'author[author_ids][]', @authors %>
+      <% end %>
+    </div>
+      
     <%= f.label :institution, l("institution") %>
     <%= f.text_field :institution %><br />
-    <em><%= h l("text_institution") %></em><br />
-    <%= f.hidden_field :_destroy %>
-    <%= link_to_remove_fields l("remove_author"), f %>
+    <em><%= h l("text_author_institution") %></em><br />
+
+    <%= f.label :email, l("email") %>
+    <%= f.text_field :email %><br />
+    <em><%= h l("text_author_email") %></em><br />
+    
+    <%= f.hidden_field :author_id %>
+    
+    <%= link_to_remove_fields l("remove_author"), f %>    
+    
   </p>
 </div>
