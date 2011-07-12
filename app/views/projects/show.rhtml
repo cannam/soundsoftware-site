@@ -10,6 +10,14 @@
 
 <% if page %>
 
+<% if @project.module_enabled? :wiki %>
+<% if User.current.allowed_to?(:edit_wiki_pages, @project) %>
+<div class="contextual">
+<%= link_to(l(:button_welcome_page_edit_this), {:controller => 'wiki', :action => 'edit', :project_id => @project, :id => Wiki.titleize("Overview")}, :class => 'icon icon-edit') %>
+</div>
+<% end %>
+<% end %>
+
 <div class="contextual" style="clear: right">
 <ul>
 <% @users_by_role.keys.sort.each do |role| %>
