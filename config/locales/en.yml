@@ -907,6 +907,7 @@ en:
   button_duplicate: Duplicate
   button_show: Show
   button_welcome_page_edit: Create or edit welcome page
+  button_welcome_page_edit_this: Edit this page
 
   status_active: active
   status_registered: registered
