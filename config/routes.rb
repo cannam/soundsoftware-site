@@ -232,6 +232,7 @@ ActionController::Routing::Routes.draw do |map|
   #left old routes at the bottom for backwards compat
   map.connect 'projects/:project_id/queries/:action', :controller => 'queries'
   map.connect 'projects/:project_id/issues/:action', :controller => 'issues'
+  map.connect 'projects/:project_id/members/:action', :controller => 'members'
   map.connect 'projects/:project_id/documents/:action', :controller => 'documents'
   map.connect 'projects/:project_id/boards/:action/:id', :controller => 'boards'
   map.connect 'boards/:board_id/topics/:action/:id', :controller => 'messages'
