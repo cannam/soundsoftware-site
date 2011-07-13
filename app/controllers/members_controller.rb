@@ -61,11 +61,11 @@ class MembersController < ApplicationController
     respond_to do |format|
       if members.present? && members.all? {|m| m.valid? }
 
-        format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+        format.html { redirect_to :action => 'index', :project_id => @project }
 
         format.js { 
           render(:update) {|page| 
-            page.replace_html "tab-content-members", :partial => 'projects/settings/members'
+            page.replace_html "memberlist", :partial => 'editlist'
             page << 'hideOnLoad()'
             members.each {|member| page.visual_effect(:highlight, "member-#{member.id}") }
           }
@@ -89,10 +89,10 @@ class MembersController < ApplicationController
   def edit
     if request.post? and @member.update_attributes(params[:member])
   	 respond_to do |format|
-        format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+        format.html { redirect_to :action => 'index', :project_id => @project }
         format.js { 
           render(:update) {|page| 
-            page.replace_html "tab-content-members", :partial => 'projects/settings/members'
+            page.replace_html "memberlist", :partial => 'editlist'
             page << 'hideOnLoad()'
             page.visual_effect(:highlight, "member-#{@member.id}")
           }
@@ -106,9 +106,9 @@ class MembersController < ApplicationController
       @member.destroy
     end
     respond_to do |format|
-      format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+      format.html { redirect_to :action => 'index', :project_id => @project }
       format.js { render(:update) {|page|
-          page.replace_html "tab-content-members", :partial => 'projects/settings/members'
+          page.replace_html "memberlist", :partial => 'editlist'
           page << 'hideOnLoad()'
         }
       }
