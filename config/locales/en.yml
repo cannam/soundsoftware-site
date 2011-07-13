@@ -705,7 +705,8 @@ en:
   label_roadmap_overdue: "%{value} late"
   label_roadmap_no_issues: No issues for this version
   label_search: Search
-  label_result_plural: Results
+  label_result_plural: Search results
+  label_matching_project_plural: Matching project names
   label_all_words: All words
   label_wiki: Wiki
   label_wiki_edit: Wiki edit

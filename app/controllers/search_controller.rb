@@ -69,6 +69,7 @@ class SearchController < ApplicationController
       # no more than 5 tokens to search for
       @tokens.slice! 5..-1 if @tokens.size > 5  
       
+      @project_matches = []
       @results = []
       @results_by_type = Hash.new {|h,k| h[k] = 0}
       
@@ -82,6 +83,12 @@ class SearchController < ApplicationController
           :before => params[:previous].nil?)
         @results += r
         @results_by_type[s] += c
+        if s == 'projects'
+          r, c = s.singularize.camelcase.constantize.search(@tokens, nil,
+                                                            :all_words => @all_words,
+                                                            :titles_only => 1)
+          @project_matches += r
+        end
       end
       @results = @results.sort {|a,b| b.event_datetime <=> a.event_datetime}
       if params[:previous].nil?
