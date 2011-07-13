@@ -301,7 +301,7 @@ private
     # is in this issues watcher's list
     # if not, adds it.
 
-    if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
+    if params[:issue] && params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?:
      unless @issue.watched_by?(User.find(params[:issue][:assigned_to_id])):
        @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
      end
