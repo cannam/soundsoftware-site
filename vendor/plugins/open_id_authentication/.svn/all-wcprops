@@ -1,29 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 62
-/svn/!svn/ver/3933/trunk/vendor/plugins/open_id_authentication
-END
-Rakefile
-K 25
-svn:wc:ra_dav:version-url
-V 71
-/svn/!svn/ver/2438/trunk/vendor/plugins/open_id_authentication/Rakefile
-END
-init.rb
-K 25
-svn:wc:ra_dav:version-url
-V 70
-/svn/!svn/ver/2458/trunk/vendor/plugins/open_id_authentication/init.rb
-END
-CHANGELOG
-K 25
-svn:wc:ra_dav:version-url
-V 72
-/svn/!svn/ver/2438/trunk/vendor/plugins/open_id_authentication/CHANGELOG
-END
-README
-K 25
-svn:wc:ra_dav:version-url
-V 69
-/svn/!svn/ver/2438/trunk/vendor/plugins/open_id_authentication/README
+V 76
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/open_id_authentication
 END

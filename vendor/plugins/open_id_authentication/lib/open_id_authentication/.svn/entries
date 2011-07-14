@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/open_id_authentication/lib/open_id_authentication
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/open_id_authentication/lib/open_id_authentication
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.835838Z
+2011-07-14T09:24:11.000000Z
 1effe2a3ab6ff2cf3a4ffc288222b114
 2009-02-11T19:06:45.087605Z
 2438
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:45.835838Z
+2011-07-14T09:24:11.000000Z
 9ed2aea6a3f0e76f21a84bf5bdb1bebe
 2009-02-11T19:06:45.087605Z
 2438
@@ -100,7 +100,7 @@ file
 
 
 
-2010-09-23T14:37:45.835838Z
+2011-07-14T09:24:11.000000Z
 4aa743638f54375c2f1f25e62fa50bf3
 2009-02-11T19:06:45.087605Z
 2438
@@ -134,7 +134,7 @@ file
 
 
 
-2010-09-23T14:37:45.835838Z
+2011-07-14T09:24:11.000000Z
 d05c8725996156d4cc153a2fc0891db8
 2009-02-11T19:06:45.087605Z
 2438
@@ -168,7 +168,7 @@ file
 
 
 
-2010-09-23T14:37:45.835838Z
+2011-07-14T09:24:11.000000Z
 6a6fdfddabbc9ae4b8c11f69bc653107
 2009-02-11T19:06:45.087605Z
 2438
@@ -202,7 +202,7 @@ file
 
 
 
-2010-09-23T14:37:45.835838Z
+2011-07-14T09:24:11.000000Z
 42863e1d17d5af05e0e896d336def59c
 2009-02-11T19:06:45.087605Z
 2438

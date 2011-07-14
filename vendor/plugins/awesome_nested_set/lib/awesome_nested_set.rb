@@ -425,7 +425,7 @@ module CollectiveIdea #:nodoc:
         # the base ActiveRecord class, using the :scope declared in the acts_as_nested_set
         # declaration.
         def nested_set_scope
-          options = {:order => quoted_left_column_name}
+          options = {:order => "#{self.class.table_name}.#{quoted_left_column_name}"}
           scopes = Array(acts_as_nested_set_options[:scope])
           options[:conditions] = scopes.inject({}) do |conditions,attr|
             conditions.merge attr => self[attr]
@@ -444,17 +444,20 @@ module CollectiveIdea #:nodoc:
         # Prunes a branch off of the tree, shifting all of the elements on the right
         # back to the left so the counts still work.
         def prune_from_tree
-          return if right.nil? || left.nil?
-          diff = right - left + 1
+          return if right.nil? || left.nil? || leaf? || !self.class.exists?(id)
 
           delete_method = acts_as_nested_set_options[:dependent] == :destroy ?
             :destroy_all : :delete_all
 
+          # TODO: should destroy children (not descendants) when deleted_method is :destroy_all
           self.class.base_class.transaction do
+            reload_nested_set
             nested_set_scope.send(delete_method,
               ["#{quoted_left_column_name} > ? AND #{quoted_right_column_name} < ?",
                 left, right]
             )
+            reload_nested_set
+            diff = right - left + 1
             nested_set_scope.update_all(
               ["#{quoted_left_column_name} = (#{quoted_left_column_name} - ?)", diff],
               ["#{quoted_left_column_name} >= ?", right]
@@ -464,6 +467,9 @@ module CollectiveIdea #:nodoc:
               ["#{quoted_right_column_name} >= ?", right]
             )
           end
+          
+          # Reload is needed because children may have updated their parent (self) during deletion.
+          reload
         end
 
         # reload left, right, and parent

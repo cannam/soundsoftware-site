@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/public/help
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/public/help
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-29T22:48:59.506153Z
-4308
-jbbarth
+2011-05-02T23:07:16.509786Z
+5614
+tmaruyama
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-11-19T13:04:51.444942Z
-380699b753ffb01cba5c9504216ff64b
-2010-10-29T22:48:59.506153Z
-4308
-jbbarth
+2011-07-14T09:24:22.000000Z
+001a8d607fd9aee0f2dab7d389c61086
+2011-05-02T23:07:16.509786Z
+5614
+tmaruyama
 
 
 
@@ -58,7 +58,7 @@ jbbarth
 
 
 
-11397
+12101
 
 wiki_syntax.html
 file
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:45.075747Z
+2011-07-14T09:24:10.000000Z
 f3c9e77ebd5a0c8e580df191a00bc01c
 2008-09-13T09:45:07.868598Z
 1803

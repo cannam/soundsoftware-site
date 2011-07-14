@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/default_data
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/default_data
 http://redmine.rubyforge.org/svn
 
 
 
-2010-06-30T01:55:44.694582Z
-3820
-edavis10
+2011-04-15T13:23:13.506236Z
+5466
+jplang
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-09-23T14:37:45.023772Z
-41958e843a8ba03548eed089e8002549
-2010-06-30T01:55:44.694582Z
-3820
-edavis10
+2011-07-14T09:24:22.000000Z
+a052713b43f76c049afa9cba6ed46e77
+2011-04-15T13:23:13.506236Z
+5466
+jplang
 has-props
 
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-10686
+10750
 
