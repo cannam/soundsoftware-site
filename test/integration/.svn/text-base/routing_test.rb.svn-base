@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require "#{File.dirname(__FILE__)}/../test_helper"
+require File.expand_path('../../test_helper', __FILE__)
 
 class RoutingTest < ActionController::IntegrationTest
   context "activities" do
@@ -91,14 +91,12 @@ class RoutingTest < ActionController::IntegrationTest
     should_route :post, "/issues/1/quoted", :controller => 'journals', :action => 'new', :id => '1'
 
     should_route :get, "/issues/calendar", :controller => 'calendars', :action => 'show'
-    should_route :put, "/issues/calendar", :controller => 'calendars', :action => 'update'
     should_route :get, "/projects/project-name/issues/calendar", :controller => 'calendars', :action => 'show', :project_id => 'project-name'
-    should_route :put, "/projects/project-name/issues/calendar", :controller => 'calendars', :action => 'update', :project_id => 'project-name'
 
     should_route :get, "/issues/gantt", :controller => 'gantts', :action => 'show'
-    should_route :put, "/issues/gantt", :controller => 'gantts', :action => 'update'
+    should_route :get, "/issues/gantt.pdf", :controller => 'gantts', :action => 'show', :format => 'pdf'
     should_route :get, "/projects/project-name/issues/gantt", :controller => 'gantts', :action => 'show', :project_id => 'project-name'
-    should_route :put, "/projects/project-name/issues/gantt", :controller => 'gantts', :action => 'update', :project_id => 'project-name'
+    should_route :get, "/projects/project-name/issues/gantt.pdf", :controller => 'gantts', :action => 'show', :project_id => 'project-name', :format => 'pdf'
 
     should_route :get, "/issues/auto_complete", :controller => 'auto_completes', :action => 'issues'
 
@@ -197,6 +195,14 @@ class RoutingTest < ActionController::IntegrationTest
     should_route :delete, "/projects/1.xml", :controller => 'projects', :action => 'destroy', :id => '1', :format => 'xml'
     should_route :delete, "/projects/64/enumerations", :controller => 'project_enumerations', :action => 'destroy', :project_id => '64'
   end
+  
+  context "queries" do
+    should_route :get, "/queries/new", :controller => 'queries', :action => 'new'
+    should_route :get, "/projects/redmine/queries/new", :controller => 'queries', :action => 'new', :project_id => 'redmine'
+    
+    should_route :post, "/queries/new", :controller => 'queries', :action => 'new'
+    should_route :post, "/projects/redmine/queries/new", :controller => 'queries', :action => 'new', :project_id => 'redmine'
+  end
 
   context "repositories" do
     should_route :get, "/projects/redmine/repository", :controller => 'repositories', :action => 'show', :id => 'redmine'
@@ -285,17 +291,26 @@ class RoutingTest < ActionController::IntegrationTest
 
   context "users" do
     should_route :get, "/users", :controller => 'users', :action => 'index'
+    should_route :get, "/users.xml", :controller => 'users', :action => 'index', :format => 'xml'
     should_route :get, "/users/44", :controller => 'users', :action => 'show', :id => '44'
+    should_route :get, "/users/44.xml", :controller => 'users', :action => 'show', :id => '44', :format => 'xml'
+    should_route :get, "/users/current", :controller => 'users', :action => 'show', :id => 'current'
+    should_route :get, "/users/current.xml", :controller => 'users', :action => 'show', :id => 'current', :format => 'xml'
     should_route :get, "/users/new", :controller => 'users', :action => 'new'
     should_route :get, "/users/444/edit", :controller => 'users', :action => 'edit', :id => '444'
     should_route :get, "/users/222/edit/membership", :controller => 'users', :action => 'edit', :id => '222', :tab => 'membership'
 
     should_route :post, "/users", :controller => 'users', :action => 'create'
+    should_route :post, "/users.xml", :controller => 'users', :action => 'create', :format => 'xml'
     should_route :post, "/users/123/memberships", :controller => 'users', :action => 'edit_membership', :id => '123'
     should_route :post, "/users/123/memberships/55", :controller => 'users', :action => 'edit_membership', :id => '123', :membership_id => '55'
     should_route :post, "/users/567/memberships/12/destroy", :controller => 'users', :action => 'destroy_membership', :id => '567', :membership_id => '12'
 
     should_route :put, "/users/444", :controller => 'users', :action => 'update', :id => '444'
+    should_route :put, "/users/444.xml", :controller => 'users', :action => 'update', :id => '444', :format => 'xml'
+
+    should_route :delete, "/users/44", :controller => 'users', :action => 'destroy', :id => '44'
+    should_route :delete, "/users/44.xml", :controller => 'users', :action => 'destroy', :id => '44', :format => 'xml'
   end
 
   # TODO: should they all be scoped under /projects/:project_id ?

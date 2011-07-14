@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2009  Jean-Philippe Lang
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,14 +15,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 require 'sys_controller'
+require 'mocha'
 
 # Re-raise errors caught by the controller.
 class SysController; def rescue_action(e) raise e end; end
 
 class SysControllerTest < ActionController::TestCase
-  fixtures :projects, :repositories
+  fixtures :projects, :repositories, :enabled_modules
   
   def setup
     @controller = SysController.new
@@ -55,11 +56,13 @@ class SysControllerTest < ActionController::TestCase
   end
   
   def test_fetch_changesets
+    Repository::Subversion.any_instance.expects(:fetch_changesets).returns(true)
     get :fetch_changesets
     assert_response :success
   end
   
   def test_fetch_changesets_one_project
+    Repository::Subversion.any_instance.expects(:fetch_changesets).returns(true)
     get :fetch_changesets, :id => 'ecookbook'
     assert_response :success
   end

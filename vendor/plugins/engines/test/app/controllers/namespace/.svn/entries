@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/test/app/controllers/namespace
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/engines/test/app/controllers/namespace
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.711814Z
+2011-07-14T09:24:11.000000Z
 ed9f029690f9d77b31e0d68cff2f8ff3
 2009-09-13T17:14:35.707881Z
 2887

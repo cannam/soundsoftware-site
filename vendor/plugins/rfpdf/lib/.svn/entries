@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/rfpdf/lib
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/rfpdf/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2010-02-07T12:30:44.486359Z
-3389
-jplang
+2011-07-02T15:44:02.109574Z
+6156
+tmaruyama
 
 
 
@@ -26,8 +26,48 @@ jplang
 
 e93f8b46-1217-0410-a6f0-8f06a7374b81
 
+barcode
+dir
+
+fpdf
+dir
+
 rfpdf
 dir
+
+tcpdf.rb
+file
+
+
+
+
+2011-07-14T09:28:11.000000Z
+1982fe0c734af19e656f19d88b8e2870
+2011-05-09T07:35:02.800600Z
+5717
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+111093
 
 rfpdf.rb
 file
@@ -35,11 +75,11 @@ file
 
 
 
-2010-09-23T14:37:45.847779Z
-9667df0ee17c3893ec4025f214d990ee
-2006-11-21T18:34:04.275680Z
-49
-jplang
+2011-07-14T09:28:11.000000Z
+8d496f73e24615f94ce6b264e9d13f19
+2011-03-30T03:23:54.585875Z
+5247
+tmaruyama
 
 
 
@@ -61,5 +101,14 @@ jplang
 
 
 
-1329
+1454
+
+config
+dir
+
+core
+dir
+
+fonts
+dir
 

@@ -1,14 +1,14 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_activity_provider/lib
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_activity_provider/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2008-12-08T18:20:26.452857Z
-2114
+2011-04-05T12:52:20.839202Z
+5325
 jplang
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2010-09-23T14:37:45.535765Z
-21fbeb28c4ce556d2534306b96be9497
-2008-12-08T18:20:26.452857Z
-2114
+2011-07-14T09:24:22.000000Z
+59f4bcfa68e4f7d5f4d881d01a9ba8be
+2011-04-05T12:52:20.839202Z
+5325
 jplang
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-3534
+3971
 

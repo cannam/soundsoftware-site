@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/app/views/calendars
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/app/views/calendars
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-07T15:26:53.500793Z
-4238
-winterheart
+2011-04-01T14:34:44.070899Z
+5276
+jplang
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-11-19T13:04:49.472856Z
-d47ece5d0e0ff017f3f1b5ce4b776ba0
-2010-10-07T15:26:53.500793Z
-4238
-winterheart
+2011-07-14T09:24:21.000000Z
+ab4018273a0ea22e0fb58209d1f88be7
+2011-04-01T14:34:44.070899Z
+5276
+jplang
 has-props
 
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-1946
+1686
 

@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/extra/svn
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/extra/svn
 http://redmine.rubyforge.org/svn
 
 
 
-2010-10-29T22:55:50.222644Z
-4309
-jbbarth
+2011-05-17T13:32:08.404109Z
+5825
+tmaruyama
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-11-19T13:04:50.864947Z
-a0d169b0fc20459335e531e4f3921ede
-2010-10-24T21:00:05.611798Z
-4288
-jplang
+2011-07-14T09:24:22.000000Z
+b9371e264b5907bf884bf17deba8c835
+2011-05-17T13:32:08.404109Z
+5825
+tmaruyama
 has-props
 
 
@@ -58,7 +58,7 @@ has-props
 
 
 
-10545
+10512
 
 svnserve.wrapper
 file
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-23T14:37:44.967747Z
+2011-07-14T09:24:10.000000Z
 f41d78e45e03554626edf5e4e6663d80
 2007-04-02T19:01:31.084001Z
 402
@@ -100,11 +100,11 @@ file
 
 
 
-2010-11-19T13:04:50.864947Z
-5ed4546a59c9729cbd9b407ad0996b9b
-2010-10-29T22:55:50.222644Z
-4309
-jbbarth
+2011-07-14T09:24:10.000000Z
+c3d331d6024a3d0f0c250fda387ce052
+2011-02-23T17:27:31.762248Z
+4936
+jplang
 has-props
 
 
@@ -126,7 +126,7 @@ has-props
 
 
 
-10752
+10843
 
 create_views.sql
 file
@@ -134,7 +134,7 @@ file
 
 
 
-2010-09-23T14:37:44.963747Z
+2011-07-14T09:24:10.000000Z
 96fdfe0a7a4913dbbfc1b871d7abab02
 2007-04-01T19:43:59.029417Z
 396

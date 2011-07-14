@@ -1,47 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 43
-/svn/!svn/ver/4307/trunk/app/views/versions
-END
-index.html.erb
-K 25
-svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4082/trunk/app/views/versions/index.html.erb
-END
-new.html.erb
-K 25
-svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/4097/trunk/app/views/versions/new.html.erb
-END
-show.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/4307/trunk/app/views/versions/show.rhtml
-END
-_form.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/3123/trunk/app/views/versions/_form.rhtml
-END
-_issue_counts.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 63
-/svn/!svn/ver/4098/trunk/app/views/versions/_issue_counts.rhtml
-END
-_overview.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/3064/trunk/app/views/versions/_overview.rhtml
-END
-edit.rhtml
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/!svn/ver/4097/trunk/app/views/versions/edit.rhtml
+V 57
+/svn/!svn/ver/5878/branches/1.2-stable/app/views/versions
 END

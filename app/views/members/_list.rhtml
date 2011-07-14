@@ -1,0 +1,26 @@
+
+<% roles = Role.find_all_givable
+   members = @project.member_principals.find(:all, :include => [:roles, :principal]).sort %>
+
+<% if members.any? %>
+
+<div id="members">
+<dl>
+<% members.each do |member| %>
+<dt id="member-<%= member.id %>" class="member <%= member.principal.class.name.downcase %> <%= User.current.logged? && User.current == member.user ? 'me' : nil %>">
+<%= avatar(member.user, :size => "24") %>
+<span class="user"><%= link_to_user member.principal %></span>
+<span class="email"><%= member.user.mail %></span>
+<dd id="member-<%= member.id %>" class="roles <%= member.principal.class.name.downcase %> <%= User.current.logged? && User.current == member.user ? 'me' : nil %>">
+<span class="roles" id="member-<%= member.id %>-roles"><%=h member.roles.sort.collect(&:to_s).join(', ') %></span>
+</dd>
+<% end %>
+</dl>
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+</div>
+
+<% content_for :sidebar do %>
+<% end %>
+

@@ -1,11 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
-V 69
-/svn/!svn/ver/2114/trunk/vendor/plugins/acts_as_activity_provider/lib
+V 83
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/acts_as_activity_provider/lib
 END
 acts_as_activity_provider.rb
 K 25
 svn:wc:ra_dav:version-url
-V 98
-/svn/!svn/ver/2114/trunk/vendor/plugins/acts_as_activity_provider/lib/acts_as_activity_provider.rb
+V 112
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/acts_as_activity_provider/lib/acts_as_activity_provider.rb
 END

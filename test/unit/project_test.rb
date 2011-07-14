@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class ProjectTest < ActiveSupport::TestCase
   fixtures :all
@@ -58,6 +58,35 @@ class ProjectTest < ActiveSupport::TestCase
   def test_truth
     assert_kind_of Project, @ecookbook
     assert_equal "eCookbook", @ecookbook.name
+  end
+  
+  def test_default_attributes
+    with_settings :default_projects_public => '1' do
+      assert_equal true, Project.new.is_public
+      assert_equal false, Project.new(:is_public => false).is_public
+    end
+
+    with_settings :default_projects_public => '0' do
+      assert_equal false, Project.new.is_public
+      assert_equal true, Project.new(:is_public => true).is_public
+    end
+
+    with_settings :sequential_project_identifiers => '1' do
+      assert !Project.new.identifier.blank?
+      assert Project.new(:identifier => '').identifier.blank?
+    end
+
+    with_settings :sequential_project_identifiers => '0' do
+      assert Project.new.identifier.blank?
+      assert !Project.new(:identifier => 'test').blank?
+    end
+
+    with_settings :default_projects_modules => ['issue_tracking', 'repository'] do
+      assert_equal ['issue_tracking', 'repository'], Project.new.enabled_module_names
+    end
+    
+    assert_equal Tracker.all, Project.new.trackers
+    assert_equal Tracker.find(1, 3), Project.new(:tracker_ids => [1, 3]).trackers
   end
   
   def test_update
@@ -151,6 +180,41 @@ class ProjectTest < ActiveSupport::TestCase
     assert_nil Member.first(:conditions => {:project_id => @ecookbook.id})
     assert_nil Board.first(:conditions => {:project_id => @ecookbook.id})
     assert_nil Issue.first(:conditions => {:project_id => @ecookbook.id})
+  end
+  
+  def test_destroying_root_projects_should_clear_data
+    Project.roots.each do |root|
+      root.destroy
+    end
+    
+    assert_equal 0, Project.count, "Projects were not deleted: #{Project.all.inspect}"
+    assert_equal 0, Member.count, "Members were not deleted: #{Member.all.inspect}"
+    assert_equal 0, MemberRole.count
+    assert_equal 0, Issue.count
+    assert_equal 0, Journal.count
+    assert_equal 0, JournalDetail.count
+    assert_equal 0, Attachment.count
+    assert_equal 0, EnabledModule.count
+    assert_equal 0, IssueCategory.count
+    assert_equal 0, IssueRelation.count
+    assert_equal 0, Board.count
+    assert_equal 0, Message.count
+    assert_equal 0, News.count
+    assert_equal 0, Query.count(:conditions => "project_id IS NOT NULL")
+    assert_equal 0, Repository.count
+    assert_equal 0, Changeset.count
+    assert_equal 0, Change.count
+    assert_equal 0, Comment.count
+    assert_equal 0, TimeEntry.count
+    assert_equal 0, Version.count
+    assert_equal 0, Watcher.count
+    assert_equal 0, Wiki.count
+    assert_equal 0, WikiPage.count
+    assert_equal 0, WikiContent.count
+    assert_equal 0, WikiContent::Version.count
+    assert_equal 0, Project.connection.select_all("SELECT * FROM projects_trackers").size
+    assert_equal 0, Project.connection.select_all("SELECT * FROM custom_fields_projects").size
+    assert_equal 0, CustomValue.count(:conditions => {:customized_type => ['Project', 'Issue', 'TimeEntry', 'Version']})
   end
   
   def test_move_an_orphan_project_to_a_root_project
@@ -524,6 +588,62 @@ class ProjectTest < ActiveSupport::TestCase
     assert_nil Project.next_identifier
   end
   
+  def test_enabled_module_names
+    with_settings :default_projects_modules => ['issue_tracking', 'repository'] do
+      project = Project.new
+      
+      project.enabled_module_names = %w(issue_tracking news)
+      assert_equal %w(issue_tracking news), project.enabled_module_names.sort
+    end
+  end
+
+  context "enabled_modules" do
+    setup do
+      @project = Project.find(1)
+    end
+
+    should "define module by names and preserve ids" do
+      # Remove one module
+      modules = @project.enabled_modules.slice(0..-2)
+      assert modules.any?
+      assert_difference 'EnabledModule.count', -1 do
+        @project.enabled_module_names = modules.collect(&:name)
+      end
+      @project.reload
+      # Ids should be preserved
+      assert_equal @project.enabled_module_ids.sort, modules.collect(&:id).sort
+    end
+
+    should "enable a module" do
+      @project.enabled_module_names = []
+      @project.reload
+      assert_equal [], @project.enabled_module_names
+      #with string
+      @project.enable_module!("issue_tracking")
+      assert_equal ["issue_tracking"], @project.enabled_module_names
+      #with symbol
+      @project.enable_module!(:gantt)
+      assert_equal ["issue_tracking", "gantt"], @project.enabled_module_names
+      #don't add a module twice
+      @project.enable_module!("issue_tracking")
+      assert_equal ["issue_tracking", "gantt"], @project.enabled_module_names
+    end
+
+    should "disable a module" do
+      #with string
+      assert @project.enabled_module_names.include?("issue_tracking")
+      @project.disable_module!("issue_tracking")
+      assert ! @project.reload.enabled_module_names.include?("issue_tracking")
+      #with symbol
+      assert @project.enabled_module_names.include?("gantt")
+      @project.disable_module!(:gantt)
+      assert ! @project.reload.enabled_module_names.include?("gantt")
+      #with EnabledModule object
+      first_module = @project.enabled_modules.first
+      @project.disable_module!(first_module)
+      assert ! @project.reload.enabled_module_names.include?(first_module.name)
+    end
+  end
 
   def test_enabled_module_names_should_not_recreate_enabled_modules
     project = Project.find(1)
@@ -741,6 +861,22 @@ class ProjectTest < ActiveSupport::TestCase
         assert_equal @project, membership.project
       end
     end
+    
+    should "copy memberships with groups and additional roles" do
+      group = Group.create!(:lastname => "Copy group")
+      user = User.find(7) 
+      group.users << user
+      # group role
+      Member.create!(:project_id => @source_project.id, :principal => group, :role_ids => [2])
+      member = Member.find_by_user_id_and_project_id(user.id, @source_project.id)
+      # additional role
+      member.role_ids = [1]
+
+      assert @project.copy(@source_project)
+      member = Member.find_by_user_id_and_project_id(user.id, @project.id)
+      assert_not_nil member
+      assert_equal [1, 2], member.role_ids.sort
+    end
 
     should "copy project specific queries" do
       assert @project.valid?
@@ -853,14 +989,6 @@ class ProjectTest < ActiveSupport::TestCase
     should "be nil if there are no issues on the project" do
       assert_nil @project.start_date
     end
-
-    should "be nil if issue tracking is disabled" do
-      Issue.generate_for_project!(@project, :start_date => Date.today)
-      @project.enabled_modules.find_all_by_name('issue_tracking').each {|m| m.destroy}
-      @project.reload
-      
-      assert_nil @project.start_date
-    end
     
     should "be tested when issues have no start date"
 
@@ -882,14 +1010,6 @@ class ProjectTest < ActiveSupport::TestCase
     end
     
     should "be nil if there are no issues on the project" do
-      assert_nil @project.due_date
-    end
-
-    should "be nil if issue tracking is disabled" do
-      Issue.generate_for_project!(@project, :due_date => Date.today)
-      @project.enabled_modules.find_all_by_name('issue_tracking').each {|m| m.destroy}
-      @project.reload
-      
       assert_nil @project.due_date
     end
     

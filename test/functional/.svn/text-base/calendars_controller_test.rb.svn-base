@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class CalendarsControllerTest < ActionController::TestCase
   fixtures :all
@@ -19,7 +19,7 @@ class CalendarsControllerTest < ActionController::TestCase
 
   context "GET :show" do
     should "run custom queries" do
-      @query = Query.generate_default!
+      @query = Query.generate_default!(:is_public => true)
       
       get :show, :query_id => @query.id
       assert_response :success
