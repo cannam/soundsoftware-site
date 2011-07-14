@@ -40,33 +40,39 @@ module Redmine
             @ic = Iconv.new(pdf_encoding, 'UTF-8')
           end
           super('P', 'mm', 'A4', (pdf_encoding == 'UTF-8'), pdf_encoding)
-          case pdf_encoding
-          when 'UTF-8'
-            @font_for_content = 'FreeSans'
-            @font_for_footer  = 'FreeSans'
-          when 'CP949'
-            extend(PDF_Korean)
-            AddUHCFont()
-            @font_for_content = 'UHC'
-            @font_for_footer  = 'UHC'
-          when 'CP932'
-            extend(PDF_Japanese)
-            AddSJISFont()
-            @font_for_content = 'SJIS'
-            @font_for_footer  = 'SJIS'
-          when 'GB18030'
-            extend(PDF_Chinese)
-            AddGBFont()
-            @font_for_content = 'GB'
-            @font_for_footer  = 'GB'
-          when 'BIG5'
-            extend(PDF_Chinese)
-            AddBig5Font()
-            @font_for_content = 'Big5'
-            @font_for_footer  = 'Big5'
+          case current_language.to_s.downcase
+          when 'vi'
+            @font_for_content = 'DejaVuSans'
+            @font_for_footer  = 'DejaVuSans'
           else
-            @font_for_content = 'Arial'
-            @font_for_footer  = 'Helvetica'
+            case pdf_encoding
+            when 'UTF-8'
+              @font_for_content = 'FreeSans'
+              @font_for_footer  = 'FreeSans'
+            when 'CP949'
+              extend(PDF_Korean)
+              AddUHCFont()
+              @font_for_content = 'UHC'
+              @font_for_footer  = 'UHC'
+            when 'CP932', 'SJIS', 'SHIFT_JIS'
+              extend(PDF_Japanese)
+              AddSJISFont()
+              @font_for_content = 'SJIS'
+              @font_for_footer  = 'SJIS'
+            when 'GB18030'
+              extend(PDF_Chinese)
+              AddGBFont()
+              @font_for_content = 'GB'
+              @font_for_footer  = 'GB'
+            when 'BIG5'
+              extend(PDF_Chinese)
+              AddBig5Font()
+              @font_for_content = 'Big5'
+              @font_for_footer  = 'Big5'
+            else
+              @font_for_content = 'Arial'
+              @font_for_footer  = 'Helvetica'
+            end
           end
           SetCreator(Redmine::Info.app_name)
           SetFont(@font_for_content)
@@ -101,12 +107,12 @@ module Redmine
           RDMPdfEncoding::rdm_pdf_iconv(@ic, txt)
         end
 
-        def RDMCell(w,h=0,txt='',border=0,ln=0,align='',fill=0,link='')
-          Cell(w,h,fix_text_encoding(txt),border,ln,align,fill,link)
+        def RDMCell(w ,h=0, txt='', border=0, ln=0, align='', fill=0, link='')
+          Cell(w, h, fix_text_encoding(txt), border, ln, align, fill, link)
         end
 
-        def RDMMultiCell(w,h=0,txt='',border=0,align='',fill=0)
-          MultiCell(w,h,fix_text_encoding(txt),border,align,fill)
+        def RDMMultiCell(w, h=0, txt='', border=0, align='', fill=0, ln=1)
+          MultiCell(w, h, fix_text_encoding(txt), border, align, fill, ln)
         end
 
         def Footer
@@ -276,8 +282,6 @@ module Redmine
              "#{issue.project} - #{issue.tracker} # #{issue.id}: #{issue.subject}")
         pdf.Ln
 
-        y0 = pdf.GetY
-
         pdf.SetFontStyle('B',9)
         pdf.RDMCell(35,5, l(:field_status) + ":","LT")
         pdf.SetFontStyle('',9)
@@ -325,18 +329,18 @@ module Redmine
           pdf.RDMMultiCell(155,5, (show_value custom_value),"R")
         end
 
+        y0 = pdf.GetY
+
         pdf.SetFontStyle('B',9)
         pdf.RDMCell(35,5, l(:field_subject) + ":","LT")
         pdf.SetFontStyle('',9)
         pdf.RDMMultiCell(155,5, issue.subject,"RT")
+        pdf.Line(pdf.GetX, y0, pdf.GetX, pdf.GetY)
 
         pdf.SetFontStyle('B',9)
-        pdf.RDMCell(35,5, l(:field_description) + ":","LT")
+        pdf.RDMCell(35+155, 5, l(:field_description), "LRT", 1)
         pdf.SetFontStyle('',9)
-        pdf.RDMMultiCell(155,5, issue.description.to_s,"RT")
-
-        pdf.Line(pdf.GetX, y0, pdf.GetX, pdf.GetY)
-        pdf.Line(pdf.GetX, pdf.GetY, pdf.GetX + 190, pdf.GetY)
+        pdf.RDMMultiCell(35+155, 5, issue.description.to_s, "LRB")
         pdf.Ln
 
         if issue.changesets.any? &&
@@ -346,8 +350,9 @@ module Redmine
           pdf.Ln
           for changeset in issue.changesets
             pdf.SetFontStyle('B',8)
-            pdf.RDMCell(190,5,
-              format_time(changeset.committed_on) + " - " + changeset.author.to_s)
+            csstr  = "#{l(:label_revision)} #{changeset.format_identifier} - "
+            csstr += format_time(changeset.committed_on) + " - " + changeset.author.to_s
+            pdf.RDMCell(190, 5, csstr)
             pdf.Ln
             unless changeset.comments.blank?
               pdf.SetFontStyle('',8)
@@ -408,6 +413,13 @@ module Redmine
               txt = Redmine::CodesetUtil.replace_invalid_utf8(txt)
             end
             txt.force_encoding('ASCII-8BIT')
+          elsif RUBY_PLATFORM == 'java'
+            begin
+              ic ||= Iconv.new(l(:general_pdf_encoding), 'UTF-8')
+              txt = ic.iconv(txt)
+            rescue
+              txt = txt.gsub(%r{[^\r\n\t\x20-\x7e]}, '?')
+            end
           else
             ic ||= Iconv.new(l(:general_pdf_encoding), 'UTF-8')
             txtar = ""

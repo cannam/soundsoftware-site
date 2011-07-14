@@ -1,5 +1,17 @@
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/5961/branches/1.2-stable/app/helpers
+/svn/!svn/ver/6202/branches/1.2-stable/app/helpers
+END
+search_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/6202/branches/1.2-stable/app/helpers/search_helper.rb
+END
+queries_helper.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/6175/branches/1.2-stable/app/helpers/queries_helper.rb
 END

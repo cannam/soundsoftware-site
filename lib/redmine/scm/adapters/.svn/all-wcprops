@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/!svn/ver/5878/branches/1.2-stable/lib/redmine/scm/adapters
+/svn/!svn/ver/6253/branches/1.2-stable/lib/redmine/scm/adapters
 END
 subversion_adapter.rb
 K 25
@@ -19,7 +19,7 @@ abstract_adapter.rb
 K 25
 svn:wc:ra_dav:version-url
 V 83
-/svn/!svn/ver/5878/branches/1.2-stable/lib/redmine/scm/adapters/abstract_adapter.rb
+/svn/!svn/ver/6105/branches/1.2-stable/lib/redmine/scm/adapters/abstract_adapter.rb
 END
 git_adapter.rb
 K 25
@@ -31,7 +31,7 @@ mercurial_adapter.rb
 K 25
 svn:wc:ra_dav:version-url
 V 84
-/svn/!svn/ver/5878/branches/1.2-stable/lib/redmine/scm/adapters/mercurial_adapter.rb
+/svn/!svn/ver/6253/branches/1.2-stable/lib/redmine/scm/adapters/mercurial_adapter.rb
 END
 filesystem_adapter.rb
 K 25
