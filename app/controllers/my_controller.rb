@@ -34,7 +34,7 @@ class MyController < ApplicationController
            }.merge(Redmine::Views::MyPage::Block.additional_blocks).freeze
 
   DEFAULT_LAYOUT = {  'left' => ['tipoftheday', 'activitymyprojects'], 
-                      'right' => ['issueswatched','calendar'] 
+                      'right' => ['issueswatched'] 
                    }.freeze
 
   verify :xhr => true,

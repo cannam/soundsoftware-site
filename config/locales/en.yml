@@ -506,7 +506,7 @@ en:
   label_role_anonymous: Anonymous
   label_role_non_member: Non member
   label_member: Member
-  label_member_new: New member
+  label_member_new: Add new member
   label_member_plural: Members
   label_tracker: Tracker
   label_tracker_plural: Trackers
@@ -705,7 +705,8 @@ en:
   label_roadmap_overdue: "%{value} late"
   label_roadmap_no_issues: No issues for this version
   label_search: Search
-  label_result_plural: Results
+  label_result_plural: Search results
+  label_matching_project_plural: Matching project names
   label_all_words: All words
   label_wiki: Wiki
   label_wiki_edit: Wiki edit
@@ -907,6 +908,7 @@ en:
   button_duplicate: Duplicate
   button_show: Show
   button_welcome_page_edit: Create or edit welcome page
+  button_welcome_page_edit_this: Edit this page
 
   status_active: active
   status_registered: registered
@@ -940,6 +942,8 @@ en:
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
   text_length_between: "Length between %{min} and %{max} characters."
+  text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
+  text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
   text_user_ssamr_description_info: 'Please describe your current research or development interests.<br/>This information will be used at registration to determine that you are a real person &ndash; so please be descriptive, or your application may be delayed or rejected.<br/>After registration, the description is publicly visible in your profile and you can edit it at any time.'
   text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
 

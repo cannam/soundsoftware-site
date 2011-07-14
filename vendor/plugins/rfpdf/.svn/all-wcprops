@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 59
-/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf
+/svn/!svn/ver/6156/branches/1.2-stable/vendor/plugins/rfpdf
 END
 utf8test.txt
 K 25
@@ -26,6 +26,12 @@ K 25
 svn:wc:ra_dav:version-url
 V 69
 /svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/CHANGELOG
+END
+MIT-LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/MIT-LICENSE
 END
 README
 K 25

@@ -315,6 +315,13 @@ div#activity dd .description, #search-results dd .description { font-style: ital
 div#activity span.project:after, div#news span.project:after, #search-results span.project:after { content: " -"; }
 div#activity dd span.description, #search-results dd span.description { display:block; color: #808080; }
 
+div#members dl { margin-left: 2em; }
+div#members dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
+div#members dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; background-position: 0 50%; background-repeat: no-repeat; }
+div#members dt.me .email { border-bottom: 1px solid #999; }
+div#members dt .email { color: #777; font-size: 80%; }
+div#members dd .roles { font-style: italic; }
+
 .projects .latest .title { margin-right: 0.5em; }
 .tipoftheday .tip { margin-left: 2em; margin-top: 0.5em; }
 
@@ -954,7 +961,7 @@ td.username img.gravatar {
 	vertical-align: top;
 }
 
-#activity dt img.gravatar {
+#activity dt img.gravatar, #members dt img.gravatar {
 	float: left;
 	margin: 0 1em 1em 0;
 }

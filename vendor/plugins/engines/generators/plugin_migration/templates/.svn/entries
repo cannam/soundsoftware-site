@@ -1,7 +1,7 @@
 10
 
 dir
-6000
+6270
 http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/engines/generators/plugin_migration/templates
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-06-06T13:15:00.000000Z
+2011-07-14T09:24:11.000000Z
 0b30f95c4244242093ded274caf9e4a8
 2008-07-12T10:17:14.809831Z
 1654

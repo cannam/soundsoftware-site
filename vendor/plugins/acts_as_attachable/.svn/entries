@@ -1,7 +1,7 @@
 10
 
 dir
-6000
+6270
 http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_attachable
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-06-06T13:15:00.000000Z
+2011-07-14T09:24:10.000000Z
 b215588c95e69b4bb8f91ad91606bfbe
 2008-12-09T16:54:46.963649Z
 2116
