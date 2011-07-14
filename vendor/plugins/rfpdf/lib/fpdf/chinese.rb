@@ -142,7 +142,7 @@ module PDF_Chinese
   	return l*@font_size/1000
   end
 
-  def MultiCell(w,h,txt,border=0,align='L',fill=0)
+  def MultiCell(w,h,txt,border=0,align='L',fill=0,ln=1)
   	if(@current_font['type']=='Type0')
   		MBMultiCell(w,h,txt,border,align,fill)
   	else
@@ -236,7 +236,7 @@ module PDF_Chinese
   	@x=@l_margin
   end
 
-  def Write(h,txt,link='')
+  def Write(h,txt,link='',fill=0)
   	if(@current_font['type']=='Type0')
   		MBWrite(h,txt,link)
   	else

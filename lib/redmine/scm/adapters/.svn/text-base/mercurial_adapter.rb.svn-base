@@ -95,6 +95,10 @@ module Redmine
           Info.new(:root_url => CGI.unescape(summary['repository']['root']),
                    :lastrev => Revision.new(:revision => tip['revision'],
                                             :scmid => tip['node']))
+        # rescue HgCommandAborted
+        rescue Exception => e
+          logger.error "hg: error during getting info: #{e.message}"
+          nil
         end
 
         def tags
@@ -276,7 +280,8 @@ module Redmine
           end
           blame
         rescue HgCommandAborted
-          nil  # means not found or cannot be annotated
+          # means not found or cannot be annotated
+          Annotate.new
         end
 
         class Revision < Redmine::Scm::Adapters::Revision

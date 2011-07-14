@@ -1,7 +1,19 @@
 K 25
 svn:wc:ra_dav:version-url
 V 50
-/svn/!svn/ver/5879/branches/1.2-stable/lib/redmine
+/svn/!svn/ver/6261/branches/1.2-stable/lib/redmine
+END
+plugin.rb
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/6105/branches/1.2-stable/lib/redmine/plugin.rb
+END
+i18n.rb
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/6105/branches/1.2-stable/lib/redmine/i18n.rb
 END
 codeset_util.rb
 K 25
@@ -13,7 +25,7 @@ version.rb
 K 25
 svn:wc:ra_dav:version-url
 V 61
-/svn/!svn/ver/5879/branches/1.2-stable/lib/redmine/version.rb
+/svn/!svn/ver/6261/branches/1.2-stable/lib/redmine/version.rb
 END
 custom_field_format.rb
 K 25

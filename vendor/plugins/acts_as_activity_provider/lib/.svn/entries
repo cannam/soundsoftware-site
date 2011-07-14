@@ -1,7 +1,7 @@
 10
 
 dir
-6000
+6270
 http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_activity_provider/lib
 http://redmine.rubyforge.org/svn
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-06-06T13:20:52.000000Z
+2011-07-14T09:24:22.000000Z
 59f4bcfa68e4f7d5f4d881d01a9ba8be
 2011-04-05T12:52:20.839202Z
 5325

@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 53
-/svn/!svn/ver/5998/branches/1.2-stable/config/locales
+/svn/!svn/ver/6140/branches/1.2-stable/config/locales
 END
 lt.yml
 K 25
@@ -49,7 +49,7 @@ pt-BR.yml
 K 25
 svn:wc:ra_dav:version-url
 V 63
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/pt-BR.yml
+/svn/!svn/ver/6097/branches/1.2-stable/config/locales/pt-BR.yml
 END
 tr.yml
 K 25
@@ -61,7 +61,7 @@ ru.yml
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/ru.yml
+/svn/!svn/ver/6102/branches/1.2-stable/config/locales/ru.yml
 END
 en-GB.yml
 K 25
@@ -99,23 +99,23 @@ svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/5961/branches/1.2-stable/config/locales/cs.yml
 END
-es.yml
-K 25
-svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/es.yml
-END
 mk.yml
 K 25
 svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/5961/branches/1.2-stable/config/locales/mk.yml
 END
-zh-TW.yml
+es.yml
 K 25
 svn:wc:ra_dav:version-url
-V 63
-/svn/!svn/ver/5971/branches/1.2-stable/config/locales/zh-TW.yml
+V 60
+/svn/!svn/ver/6029/branches/1.2-stable/config/locales/es.yml
+END
+ko.yml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/5961/branches/1.2-stable/config/locales/ko.yml
 END
 eu.yml
 K 25
@@ -123,11 +123,11 @@ svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/5961/branches/1.2-stable/config/locales/eu.yml
 END
-ko.yml
+zh-TW.yml
 K 25
 svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/ko.yml
+V 63
+/svn/!svn/ver/5971/branches/1.2-stable/config/locales/zh-TW.yml
 END
 mn.yml
 K 25
@@ -159,17 +159,17 @@ svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/5961/branches/1.2-stable/config/locales/uk.yml
 END
-sr.yml
-K 25
-svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/sr.yml
-END
 da.yml
 K 25
 svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/5961/branches/1.2-stable/config/locales/da.yml
+END
+sr.yml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/5961/branches/1.2-stable/config/locales/sr.yml
 END
 fa.yml
 K 25
@@ -177,29 +177,29 @@ svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/5961/branches/1.2-stable/config/locales/fa.yml
 END
-de.yml
-K 25
-svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/5987/branches/1.2-stable/config/locales/de.yml
-END
 bg.yml
 K 25
 svn:wc:ra_dav:version-url
 V 60
 /svn/!svn/ver/5963/branches/1.2-stable/config/locales/bg.yml
 END
+de.yml
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/6095/branches/1.2-stable/config/locales/de.yml
+END
 sv.yml
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/sv.yml
+/svn/!svn/ver/6140/branches/1.2-stable/config/locales/sv.yml
 END
 ja.yml
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/ja.yml
+/svn/!svn/ver/6015/branches/1.2-stable/config/locales/ja.yml
 END
 he.yml
 K 25
@@ -265,5 +265,5 @@ vi.yml
 K 25
 svn:wc:ra_dav:version-url
 V 60
-/svn/!svn/ver/5961/branches/1.2-stable/config/locales/vi.yml
+/svn/!svn/ver/6036/branches/1.2-stable/config/locales/vi.yml
 END

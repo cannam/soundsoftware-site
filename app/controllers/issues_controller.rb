@@ -27,7 +27,8 @@ class IssuesController < ApplicationController
   before_filter :find_optional_project, :only => [:index]
   before_filter :check_for_default_issue_status, :only => [:new, :create]
   before_filter :build_new_issue_from_params, :only => [:new, :create]
-  accept_key_auth :index, :show, :create, :update, :destroy
+  accept_rss_auth :index, :show
+  accept_api_auth :index, :show, :create, :update, :destroy
 
   rescue_from Query::StatementInvalid, :with => :query_statement_invalid
 
@@ -322,6 +323,7 @@ private
     end
 
     @issue.project = @project
+    @issue.author = User.current
     # Tracker must be set before custom field values
     @issue.tracker ||= @project.trackers.find((params[:issue] && params[:issue][:tracker_id]) || params[:tracker_id] || :first)
     if @issue.tracker.nil?
@@ -335,7 +337,6 @@ private
         @issue.watcher_user_ids = params[:issue]['watcher_user_ids']
       end
     end
-    @issue.author = User.current
     @priorities = IssuePriority.all
     @allowed_statuses = @issue.new_statuses_allowed_to(User.current, true)
   end

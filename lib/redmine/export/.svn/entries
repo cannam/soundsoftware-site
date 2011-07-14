@@ -1,14 +1,14 @@
 10
 
 dir
-6000
+6270
 http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/export
 http://redmine.rubyforge.org/svn
 
 
 
-2011-05-10T01:03:28.091124Z
-5723
+2011-07-02T13:15:54.719761Z
+6153
 tmaruyama
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2011-06-06T13:20:53.000000Z
-2ed64538eebb760396d45f10184ff550
-2011-05-10T01:03:28.091124Z
-5723
+2011-07-14T09:28:12.000000Z
+1a01e5ae7cc73f48f39fea205f6f4db2
+2011-07-02T13:15:54.719761Z
+6153
 tmaruyama
 has-props
 
@@ -58,5 +58,5 @@ has-props
 
 
 
-14982
+15568
 

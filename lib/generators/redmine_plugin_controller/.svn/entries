@@ -1,15 +1,15 @@
 10
 
 dir
-6000
+6270
 http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/generators/redmine_plugin_controller
 http://redmine.rubyforge.org/svn
 
 
 
-2010-06-17T19:02:07.893033Z
-3770
-edavis10
+2011-06-21T03:16:49.595160Z
+6105
+jbbarth
 
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2011-06-06T13:15:00.000000Z
+2011-07-14T09:24:10.000000Z
 60c1792566a450d246dd66ff274ae06c
 2008-09-05T10:31:06.632668Z
 1786
@@ -66,11 +66,11 @@ file
 
 
 
-2011-06-06T13:15:00.000000Z
+2011-07-14T09:28:12.000000Z
 23b15404071adb39cb140a6113057f15
-2010-02-28T12:15:47.320153Z
-3514
-jplang
+2011-06-21T03:16:49.595160Z
+6105
+jbbarth
 has-props
 
 

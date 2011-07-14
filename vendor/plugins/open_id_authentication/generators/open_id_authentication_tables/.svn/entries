@@ -1,7 +1,7 @@
 10
 
 dir
-6000
+6270
 http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/open_id_authentication/generators/open_id_authentication_tables
 http://redmine.rubyforge.org/svn
 
@@ -35,7 +35,7 @@ file
 
 
 
-2011-06-06T13:15:00.000000Z
+2011-07-14T09:24:11.000000Z
 ee799e52b83b842fa2a879431195e9eb
 2009-02-11T19:06:45.087605Z
 2438
