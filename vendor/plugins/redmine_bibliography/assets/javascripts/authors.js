@@ -12,9 +12,12 @@ function add_fields(link, association, content) {
 }
 
 function update_author_info(link, author_info){
+		
 	$(link).up('div').up('div').select('input[id^=publication_authorships_attributes]').each(
 		function(e){
-			key = e.name.split("[").last().trim().sub(']','');			
+			key = e.name.split("[").last().trim().sub(']','');
+			
+			// test for undefined			
 			e.value = author_info[key];
 		}		
 	)

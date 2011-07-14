@@ -15,15 +15,37 @@ module Bibliography
     end  
     
     module InstanceMethods
-      def get_author_name
-        if self.author 
-          self.author.name
-        else
-          "No Name"
-        end
-      end
-      
+
       def get_author_info
+        info = { 
+          :name_on_paper => "",
+          :email => "",
+          :institution => "",
+          :user_id => self.id                    
+        }
+        
+        unless self.author.nil?
+          logger.error { "We've got author" }          
+          info[:name_on_paper] = self.author.name            
+
+          if self.author.authorships.length > 0
+            info[:email] = self.author.authorships.first.email
+            info[:institution] = self.author.authorships.first.institution
+          end
+
+        else
+          logger.error { "No author" }
+          
+          info[:name_on_paper] = "No Name"
+          info[:email] = self.mail
+          if self.ssamr_user_detail
+            info[:institution]  = self.ssamr_user_detail.institution
+          else
+            info[:institution] = "No institution"
+          end
+        end
+        
+        return info
         
       end            
     end #InstanceMethods

@@ -12,5 +12,18 @@ class Authorship < ActiveRecord::Base
   
   def author_search=(string)
   end
+
+  # setter and getter for virtual attribute :user_id
+  def user_id
+    logger.error { "USER ID SETTER" }
+    logger.error { self }
+    logger.error { "END USER ID SETTER" }
+    
+  end 
   
+  def user_id=(uid)
+    # process the user id
+    # test for undefined 
+
+  end
 end

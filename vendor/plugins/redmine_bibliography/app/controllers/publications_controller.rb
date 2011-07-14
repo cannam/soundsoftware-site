@@ -24,6 +24,9 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(params[:publication])
     @project = Project.find(params[:project_id])
 
+    logger.error { "PARAMS publication" }
+    logger.error { params[:publication] }
+
     @publication.projects << @project
     
     if @publication.save 
