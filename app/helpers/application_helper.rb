@@ -913,6 +913,17 @@ module ApplicationHelper
     '<meta name="robots" content="noindex,follow,noarchive" />'
   end
 
+  def stylesheet_platform_font_tag
+    agent = request.env['HTTP_USER_AGENT']
+    name = 'fonts-generic'
+    if agent and agent =~ %r{Windows}
+      name = 'fonts-ms'
+    elsif agent and agent =~ %r{Macintosh}
+      name = 'fonts-mac'
+    end
+    stylesheet_link_tag name, :media => 'all'
+  end
+
   # Returns true if arg is expected in the API response
   def include_in_api_response?(arg)
     unless @included_in_api_response
