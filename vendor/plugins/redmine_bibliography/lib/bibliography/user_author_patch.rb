@@ -7,7 +7,8 @@ module Bibliography
       extend ClassMethods     
           
       base.class_eval do
-        has_one :publication            
+        has_one :publication
+                                    
       end
     end #self.included
     

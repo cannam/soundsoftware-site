@@ -4,8 +4,7 @@ class PublicationsController < ApplicationController
   unloadable
   
   before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
-  
-  
+    
   def new
     @publication = Publication.new      
     
@@ -17,8 +16,8 @@ class PublicationsController < ApplicationController
     
     @project_id = params[:project_id]
     @current_user = User.current
-
   end
+
 
   def create
     @publication = Publication.new(params[:publication])
@@ -26,6 +25,9 @@ class PublicationsController < ApplicationController
 
     logger.error { "PARAMS publication" }
     logger.error { params[:publication] }
+
+    # array with the user ids
+    @users = []
 
     @publication.projects << @project
     
@@ -196,20 +198,23 @@ class PublicationsController < ApplicationController
   end
 
   def autocomplete_for_author
-    @authors = []
+    @results = []
     
     authors_list = Author.like(params[:q]).find(:all, :limit => 100)    
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
-    logger.debug "Query for \"#{params[:q]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\""
+    logger.debug "Query for \"#{params[:q]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\" users"
     
     # need to subtract both lists
-    # give priority to the users
-    
-    authors_list.each do |author|
-      @authors << author unless author.user_id.nil?
+    # give priority to the users    
+    users_list.each do |user|      
+      @results << user
     end
-                
+    
+    authors_list.each do |author|      
+      @results << author unless users_list.include?(author.user_id)
+    end
+                 
     render :layout => false
   end
 

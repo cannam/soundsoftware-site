@@ -14,16 +14,12 @@ class Authorship < ActiveRecord::Base
   end
 
   # setter and getter for virtual attribute :user_id
-  def user_id
-    logger.error { "USER ID SETTER" }
-    logger.error { self }
-    logger.error { "END USER ID SETTER" }
-    
+  def user_id    
   end 
   
   def user_id=(uid)
-    # process the user id
-    # test for undefined 
-
+    if User.find(uid).author.nil?      
+      User.find(uid).author = Author.new :name => User.find(uid).name
+    end    
   end
 end
