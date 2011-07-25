@@ -10,5 +10,15 @@ class SsamrUserDetail < ActiveRecord::Base
       institution_id.blank? and other_institution.blank?
   end
 
-
+  def institution_name()
+    if not self.institution_type.nil?
+      if self.institution_type
+        Institution.find(self.institution_id).name
+      else
+        self.other_institution
+      end
+    else
+      ""
+    end
+  end
 end
