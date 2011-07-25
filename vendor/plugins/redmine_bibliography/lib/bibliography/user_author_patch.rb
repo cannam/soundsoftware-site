@@ -39,10 +39,8 @@ module Bibliography
           
           info[:name_on_paper] = "No Name"
           info[:email] = self.mail
-          if self.ssamr_user_detail
-            info[:institution]  = self.ssamr_user_detail.institution
-          else
-            info[:institution] = "No institution"
+          if not self.ssamr_user_detail.nil?
+            info[:institution]  = self.ssamr_user_detail.institution_name
           end
         end
         
