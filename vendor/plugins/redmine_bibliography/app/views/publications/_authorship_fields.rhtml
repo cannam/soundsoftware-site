@@ -6,7 +6,7 @@
                                                 
     <legend><%= "Identify Authors in the system…" %></legend>
 
-    <%= link_to_function "Add Me as Author", "update_author_info(this," + User.current.to_json + ")", :class => 'icon icon-add', :id => "add_me_as_author" %>
+    <%= link_to_function "Add Me as Author", "update_author_info(this," + User.current.get_author_info.to_json + ")", :class => 'icon icon-add', :id => "add_me_as_author" %>
 
     <p>
       <%= f.label :author_search, l(:label_project_search) %>
@@ -30,7 +30,7 @@
     <%= f.text_field :email %><br />
     <em><%= h l("text_author_email") %></em><br />
     
-    <%= f.hidden_field :author_id %>
+    <%= f.hidden_field :user_id %>
     
     <%= link_to_remove_fields l("remove_author"), f %>    
     
