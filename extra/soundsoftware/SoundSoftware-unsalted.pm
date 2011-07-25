@@ -116,7 +116,7 @@ sub SoundSoftwareDSN {
     my ($self, $parms, $arg) = @_;
     $self->{SoundSoftwareDSN} = $arg;
     my $query = "SELECT 
-                 hashed_password, salt, auth_source_id, permissions
+                 hashed_password, auth_source_id, permissions
               FROM members, projects, users, roles, member_roles
               WHERE 
                 projects.id=members.project_id
@@ -324,7 +324,7 @@ sub is_permitted {
     $sth->execute($redmine_user, $project_id);
 
     my $ret;
-    while (my ($hashed_password, $salt, $auth_source_id, $permissions) = $sth->fetchrow_array) {
+    while (my ($hashed_password, $auth_source_id, $permissions) = $sth->fetchrow_array) {
 
 	# Test permissions for this user before we verify credentials
 	# -- if the user is not permitted this action anyway, there's
@@ -341,8 +341,7 @@ sub is_permitted {
 	    print STDERR "SoundSoftware.pm: User $redmine_user has required role, checking credentials\n";
 
 	    unless ($auth_source_id) {
-                my $salted_password = Digest::SHA1::sha1_hex($salt.$pass_digest);
-		if ($hashed_password eq $salted_password) {
+		if ($hashed_password eq $pass_digest) {
 		    print STDERR "SoundSoftware.pm: User $redmine_user authenticated via password\n";
 		    $ret = 1;
 		    last;

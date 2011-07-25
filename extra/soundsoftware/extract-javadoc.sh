@@ -50,22 +50,30 @@ find "$projectdir" -type f -name \*.java \
 		continue
 	    fi
 	    if [ "$prefix" != "$current_prefix" ]; then
+		echo "Package $package matches file path and has new prefix $prefix"
 		if [ -n "$current_packages" ]; then
 		    echo "Running Javadoc for packages $current_packages from prefix $current_prefix"
+		    echo "Command is: javadoc -sourcepath "$current_prefix" -d "$targetdir" -subpackages $current_packages"
 		    javadoc -sourcepath "$current_prefix" -d "$targetdir" -subpackages $current_packages
 		fi
 		current_prefix="$prefix"
-		current_packages=
+		current_packages="$package"
 	    else
+		echo "Package $package matches file path with same prefix as previous file"
 		current_packages="$current_packages $package"
 	    fi
 	done
 	prefix=${prefix:=$projectdir}
 	if [ -n "$current_packages" ]; then
 	    echo "Running Javadoc for packages $current_packages in prefix $current_prefix"
+  	    echo "Command is: javadoc -sourcepath "$current_prefix" -d "$targetdir" -subpackages $current_packages"
 	    javadoc -sourcepath "$current_prefix" -d "$targetdir" -subpackages $current_packages
 	fi
     )
+
+if [ -f "$targetdir"/overview-tree.html ]; then
+    cp "$targetdir"/overview-tree.html "$targetdir"/index.html
+fi
 
 # for exit code:
 [ -f "$targetdir/index.html" ]
