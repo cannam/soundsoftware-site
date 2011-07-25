@@ -17,7 +17,7 @@ en:
   
   text_author_email: "Author's email address as on the paper."
   text_author_institution: "Author's institution name as on paper."
-  text_author_name_on_paper: "Name of the author as it appears on paper."
+  text_author_name_on_paper: "Name of the author as it appears on paper. (In case it applies, please use the autocomplete suggestions.)"
   
   # authorships model
   institution: "Institution"

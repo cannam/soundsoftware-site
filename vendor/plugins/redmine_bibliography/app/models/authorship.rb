@@ -5,14 +5,6 @@ class Authorship < ActiveRecord::Base
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :publication
   
- 
-  # setter and getter for virtual attribute :author search
-  def author_search
-  end 
-  
-  def author_search=(string)
-  end
-
   # setter and getter for virtual attribute :user_id
   def user_id    
   end 
