@@ -17,8 +17,19 @@
        <div id="clipboard_button"><%= image_tag 'paste.png', :plugin => 'redmine_checkout' %></div>
     </div>
     <% end -%>
-    <% if default_protocol %><p><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %></p><% end %>
-  
+
+    <p>
+    <% if User.current.logged? %>
+      <% if repository.is_external? %>
+      <%=l :label_access_type_all, :type => l(:label_access_read_only) %>
+      <% else %>
+      <% if default_protocol %><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %><% end %>
+      <% end %>
+    <% else %>
+      &nbsp;
+    <% end %>
+    </p>
+
     <% javascript_tag do %>
       var checkout_access   = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{l(p.access_label(User.current))}'"}.join(', ') %>});
       var checkout_commands = $H({<%= protocols.inject([]){|r,p| r << "'checkout_protocol_#{p.protocol.to_s.underscore}': '#{escape_javascript(p.full_command(checkout_path))}'"}.join(', ') %>});
@@ -26,6 +37,11 @@
     <% end %>
   </div>
   <% end%>
+  <% if repository.is_external? %>
+    <div style="clear: left">
+    </div>
+    <p class="topline" style="padding-top: 1em"><%= l(:text_repository_external, :location => repository.external_url) %></p>
+  <% end %>
 </div>
 <div style="clear: left"></div>
 

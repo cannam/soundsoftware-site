@@ -1,29 +1,47 @@
 K 25
 svn:wc:ra_dav:version-url
-V 45
-/svn/!svn/ver/3389/trunk/vendor/plugins/rfpdf
+V 59
+/svn/!svn/ver/6156/branches/1.2-stable/vendor/plugins/rfpdf
+END
+utf8test.txt
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/utf8test.txt
 END
 init.rb
 K 25
 svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/1623/trunk/vendor/plugins/rfpdf/init.rb
+V 67
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/init.rb
+END
+test_unicode.rfpdf
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/test_unicode.rfpdf
 END
 CHANGELOG
 K 25
 svn:wc:ra_dav:version-url
-V 53
-/svn/!svn/ver/67/trunk/vendor/plugins/rfpdf/CHANGELOG
+V 69
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/CHANGELOG
 END
 MIT-LICENSE
 K 25
 svn:wc:ra_dav:version-url
-V 55
-/svn/!svn/ver/67/trunk/vendor/plugins/rfpdf/MIT-LICENSE
+V 71
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/MIT-LICENSE
 END
 README
 K 25
 svn:wc:ra_dav:version-url
-V 50
-/svn/!svn/ver/67/trunk/vendor/plugins/rfpdf/README
+V 66
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/README
+END
+logo_example.png
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/rfpdf/logo_example.png
 END

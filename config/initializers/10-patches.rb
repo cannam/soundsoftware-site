@@ -7,7 +7,7 @@ module ActiveRecord
     
     # Translate attribute names for validation errors display
     def self.human_attribute_name(attr)
-      l("field_#{attr.to_s.gsub(/_id$/, '')}")
+      l("field_#{attr.to_s.gsub(/_id$/, '')}", :default => attr)
     end
   end
 end
@@ -79,15 +79,21 @@ end
 
 ActionMailer::Base.send :include, AsynchronousMailer
 
-# TODO: Hack to support i18n 4.x on Rails 2.3.5.  Remove post 2.3.6.
-# See http://www.redmine.org/issues/6428 and http://www.redmine.org/issues/5608
-module I18n
-  module Backend
-    module Base
-      def warn_syntax_deprecation!(*args)
-        return if @skip_syntax_deprecation
-        warn "The {{key}} interpolation syntax in I18n messages is deprecated. Please use %{key} instead.\nDowngrade your i18n gem to 0.3.7 (everything above must be deinstalled) to remove this warning, see http://www.redmine.org/issues/5608 for more information."
-        @skip_syntax_deprecation = true
+# TMail::Unquoter.convert_to_with_fallback_on_iso_8859_1 introduced in TMail 1.2.7
+# triggers a test failure in test_add_issue_with_japanese_keywords(MailHandlerTest)
+module TMail
+  class Unquoter
+    class << self
+      alias_method :convert_to, :convert_to_without_fallback_on_iso_8859_1
+    end
+  end
+end
+
+module ActionController
+  module MimeResponds
+    class Responder
+      def api(&block)
+        any(:xml, :json, &block)
       end
     end
   end

@@ -1,4 +1,4 @@
-require "#{File.dirname(__FILE__)}/../test_helper"
+require File.expand_path('../../test_helper', __FILE__)
 
 class LayoutTest < ActionController::IntegrationTest
   fixtures :all
@@ -20,5 +20,30 @@ class LayoutTest < ActionController::IntegrationTest
     get "/admin"
     assert_response :forbidden
     assert_select "#admin-menu", :count => 0
+  end
+
+  def test_top_menu_and_search_not_visible_when_login_required
+    with_settings :login_required => '1' do
+      get '/'
+      assert_select "#top-menu > ul", 0
+      assert_select "#quick-search", 0
+    end
+  end
+
+  def test_top_menu_and_search_visible_when_login_not_required
+    with_settings :login_required => '0' do
+      get '/'
+      assert_select "#top-menu > ul"
+      assert_select "#quick-search"
+    end
+  end
+  
+  def test_wiki_formatter_header_tags
+    Role.anonymous.add_permission! :add_issues
+    
+    get '/projects/ecookbook/issues/new'
+    assert_tag :script,
+      :attributes => {:src => %r{^/javascripts/jstoolbar/textile.js}},
+      :parent => {:tag => 'head'}
   end
 end

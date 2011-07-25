@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/engines/lib/engines/rails_extensions
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/engines/lib/engines/rails_extensions
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.707755Z
+2011-07-14T09:24:11.000000Z
 3e26c9fe2cd009cb5e81f6ccea3f012c
 2009-02-21T11:04:50.579477Z
 2493
@@ -66,7 +66,7 @@ file
 
 
 
-2010-09-24T12:48:29.635919Z
+2011-07-14T09:24:11.000000Z
 c5a5e8b469c1e3fefcc5bedca9f4ac82
 2010-09-17T04:06:40.671348Z
 4094
@@ -100,7 +100,7 @@ file
 
 
 
-2010-09-23T14:37:45.707755Z
+2011-07-14T09:24:11.000000Z
 6e29697f02c187c9033624422365044a
 2009-02-21T11:04:50.579477Z
 2493
@@ -134,7 +134,7 @@ file
 
 
 
-2010-09-23T14:37:45.707755Z
+2011-07-14T09:24:11.000000Z
 f26da6a18ffcc7b846838f038a0abea4
 2008-07-12T10:17:14.809831Z
 1654
@@ -168,7 +168,7 @@ file
 
 
 
-2010-09-23T14:37:45.707755Z
+2011-07-14T09:24:11.000000Z
 8f8e408b9f1a72af1cc5232ddb888266
 2009-02-21T11:04:50.579477Z
 2493

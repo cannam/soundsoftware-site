@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class CommentTest < ActiveSupport::TestCase
   fixtures :users, :news, :comments
@@ -30,6 +30,15 @@ class CommentTest < ActiveSupport::TestCase
     assert comment.save
     @news.reload
     assert_equal 2, @news.comments_count
+  end
+  
+  def test_create_should_send_notification
+    Setting.notified_events << 'news_comment_added'
+    Watcher.create!(:watchable => @news, :user => @jsmith)
+    
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      Comment.create!(:commented => @news, :author => @jsmith, :comments => "my comment")
+    end
   end
 
   def test_validate

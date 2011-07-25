@@ -55,6 +55,30 @@ class SysController < ActionController::Base
     render :nothing => true, :status => 404
   end
 
+  def get_external_repo_url
+    project = Project.find(params[:id])
+    if project.repository
+      repo = project.repository
+      if repo.is_external?
+        render :text => repo.external_url, :status => 200
+      else
+        render :nothing => true, :status => 200
+      end
+    end
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
+  end
+
+  def clear_repository_cache
+    project = Project.find(params[:id])
+    if project.repository
+      project.repository.clear_cache
+    end
+    render :nothing => true, :status => 200
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
+  end
+  
   def set_embedded_active
     project = Project.find(params[:id])
     mods = project.enabled_modules

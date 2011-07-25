@@ -17,10 +17,21 @@
 
 class MembersController < ApplicationController
   model_object Member
-  before_filter :find_model_object, :except => [:new, :autocomplete_for_member]
-  before_filter :find_project_from_association, :except => [:new, :autocomplete_for_member]
+  menu_item :members
+  before_filter :find_model_object, :except => [:index, :new, :autocomplete_for_member]
+  before_filter :find_project_from_association, :except => [:new, :index, :autocomplete_for_member]
   before_filter :find_project, :only => [:new, :autocomplete_for_member]
+  before_filter :find_project_by_project_id, :only => [:index] 
   before_filter :authorize
+
+  def index
+    logger.debug('in index')
+    respond_to do |format|
+      format.html {
+        render :layout => false if request.xhr?
+      }
+    end
+  end
 
   def new
     members = []
@@ -50,11 +61,11 @@ class MembersController < ApplicationController
     respond_to do |format|
       if members.present? && members.all? {|m| m.valid? }
 
-        format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+        format.html { redirect_to :action => 'index', :project_id => @project }
 
         format.js { 
           render(:update) {|page| 
-            page.replace_html "tab-content-members", :partial => 'projects/settings/members'
+            page.replace_html "memberlist", :partial => 'editlist'
             page << 'hideOnLoad()'
             members.each {|member| page.visual_effect(:highlight, "member-#{member.id}") }
           }
@@ -78,10 +89,10 @@ class MembersController < ApplicationController
   def edit
     if request.post? and @member.update_attributes(params[:member])
   	 respond_to do |format|
-        format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+        format.html { redirect_to :action => 'index', :project_id => @project }
         format.js { 
           render(:update) {|page| 
-            page.replace_html "tab-content-members", :partial => 'projects/settings/members'
+            page.replace_html "memberlist", :partial => 'editlist'
             page << 'hideOnLoad()'
             page.visual_effect(:highlight, "member-#{@member.id}")
           }
@@ -95,9 +106,9 @@ class MembersController < ApplicationController
       @member.destroy
     end
     respond_to do |format|
-      format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+      format.html { redirect_to :action => 'index', :project_id => @project }
       format.js { render(:update) {|page|
-          page.replace_html "tab-content-members", :partial => 'projects/settings/members'
+          page.replace_html "memberlist", :partial => 'editlist'
           page << 'hideOnLoad()'
         }
       }

@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2008  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class QueryTest < ActiveSupport::TestCase
   fixtures :projects, :enabled_modules, :users, :members, :member_roles, :roles, :trackers, :issue_statuses, :issue_categories, :enumerations, :issues, :watchers, :custom_fields, :custom_values, :versions, :queries
@@ -191,6 +191,29 @@ class QueryTest < ActiveSupport::TestCase
     result.each {|issue| assert issue.subject.downcase.include?('unable') }
   end
   
+  def test_range_for_this_week_with_week_starting_on_monday
+    I18n.locale = :fr
+    assert_equal '1', I18n.t(:general_first_day_of_week)
+    
+    Date.stubs(:today).returns(Date.parse('2011-04-29'))
+    
+    query = Query.new(:project => Project.find(1), :name => '_')
+    query.add_filter('due_date', 'w', [''])
+    assert query.statement.match(/issues\.due_date > '2011-04-24 23:59:59(\.9+)?' AND issues\.due_date <= '2011-05-01 23:59:59(\.9+)?/), "range not found in #{query.statement}"
+    I18n.locale = :en
+  end
+  
+  def test_range_for_this_week_with_week_starting_on_sunday
+    I18n.locale = :en
+    assert_equal '7', I18n.t(:general_first_day_of_week)
+    
+    Date.stubs(:today).returns(Date.parse('2011-04-29'))
+    
+    query = Query.new(:project => Project.find(1), :name => '_')
+    query.add_filter('due_date', 'w', [''])
+    assert query.statement.match(/issues\.due_date > '2011-04-23 23:59:59(\.9+)?' AND issues\.due_date <= '2011-04-30 23:59:59(\.9+)?/), "range not found in #{query.statement}"
+  end
+  
   def test_operator_does_not_contains
     query = Query.new(:project => Project.find(1), :name => '_')
     query.add_filter('subject', '!~', ['uNable'])
@@ -218,6 +241,14 @@ class QueryTest < ActiveSupport::TestCase
     User.current = nil
   end
   
+  def test_statement_should_be_nil_with_no_filters
+    q = Query.new(:name => '_')
+    q.filters = {}
+    
+    assert q.valid?
+    assert_nil q.statement
+  end
+  
   def test_default_columns
     q = Query.new
     assert !q.columns.empty? 
@@ -234,6 +265,22 @@ class QueryTest < ActiveSupport::TestCase
   def test_groupable_columns_should_include_custom_fields
     q = Query.new
     assert q.groupable_columns.detect {|c| c.is_a? QueryCustomFieldColumn}
+  end
+
+  def test_grouped_with_valid_column
+    q = Query.new(:group_by => 'status')
+    assert q.grouped?
+    assert_not_nil q.group_by_column
+    assert_equal :status, q.group_by_column.name
+    assert_not_nil q.group_by_statement
+    assert_equal 'status', q.group_by_statement
+  end
+  
+  def test_grouped_with_invalid_column
+    q = Query.new(:group_by => 'foo')
+    assert !q.grouped?
+    assert_nil q.group_by_column
+    assert_nil q.group_by_statement
   end
   
   def test_default_sort
@@ -382,6 +429,12 @@ class QueryTest < ActiveSupport::TestCase
       assert users[:values].map{|u|u[1]}.include?("3")
     end
 
+    should "include visible projects in cross-project view" do
+      projects = @query.available_filters["project_id"]
+      assert_not_nil projects
+      assert projects[:values].map{|u|u[1]}.include?("1")
+    end
+
     context "'member_of_group' filter" do
       should "be present" do
         assert @query.available_filters.keys.include?("member_of_group")
@@ -462,7 +515,6 @@ class QueryTest < ActiveSupport::TestCase
         # Users not in a group
         assert_query_statement_includes @query, "#{Issue.table_name}.assigned_to_id IS NULL OR #{Issue.table_name}.assigned_to_id NOT IN ('#{@user_in_group.id}','#{@second_user_in_group.id}','#{@user_in_group2.id}')"
         assert_find_issues_with_query_is_successful @query
-
       end
 
       should "search assigned to any group member (all)" do
@@ -472,7 +524,22 @@ class QueryTest < ActiveSupport::TestCase
         # Only users in a group
         assert_query_statement_includes @query, "#{Issue.table_name}.assigned_to_id IN ('#{@user_in_group.id}','#{@second_user_in_group.id}','#{@user_in_group2.id}')"
         assert_find_issues_with_query_is_successful @query
-
+      end
+      
+      should "return an empty set with = empty group" do
+        @empty_group = Group.generate!
+        @query = Query.new(:name => '_')
+        @query.add_filter('member_of_group', '=', [@empty_group.id.to_s])
+        
+        assert_equal [], find_issues_with_query(@query)
+      end
+      
+      should "return issues with ! empty group" do
+        @empty_group = Group.generate!
+        @query = Query.new(:name => '_')
+        @query.add_filter('member_of_group', '!', [@empty_group.id.to_s])
+        
+        assert_find_issues_with_query_is_successful @query
       end
     end
 
@@ -516,6 +583,22 @@ class QueryTest < ActiveSupport::TestCase
         @query.add_filter('assigned_to_role', '*', [''])
 
         assert_query_statement_includes @query, "#{Issue.table_name}.assigned_to_id IN ('#{@manager.id}','#{@developer.id}','#{@boss.id}')"
+        assert_find_issues_with_query_is_successful @query
+      end
+      
+      should "return an empty set with empty role" do
+        @empty_role = Role.generate!
+        @query = Query.new(:name => '_')
+        @query.add_filter('assigned_to_role', '=', [@empty_role.id.to_s])
+        
+        assert_equal [], find_issues_with_query(@query)
+      end
+      
+      should "return issues with ! empty role" do
+        @empty_role = Role.generate!
+        @query = Query.new(:name => '_')
+        @query.add_filter('member_of_group', '!', [@empty_role.id.to_s])
+        
         assert_find_issues_with_query_is_successful @query
       end
     end

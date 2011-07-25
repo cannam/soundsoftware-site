@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/extra/sample_plugin/app/models
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/extra/sample_plugin/app/models
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:44.947762Z
+2011-07-14T09:24:09.000000Z
 5161ccc668c61730638ef23bec50232f
 2008-07-27T19:18:35.954247Z
 1704

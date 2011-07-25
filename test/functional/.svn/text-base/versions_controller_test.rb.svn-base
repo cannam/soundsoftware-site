@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,14 +15,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 require 'versions_controller'
 
 # Re-raise errors caught by the controller.
 class VersionsController; def rescue_action(e) raise e end; end
 
 class VersionsControllerTest < ActionController::TestCase
-  fixtures :projects, :versions, :issues, :users, :roles, :members, :member_roles, :enabled_modules
+  fixtures :projects, :versions, :issues, :users, :roles, :members, :member_roles, :enabled_modules, :issue_statuses
   
   def setup
     @controller = VersionsController.new
@@ -142,6 +142,12 @@ class VersionsControllerTest < ActionController::TestCase
   
   def test_issue_status_by
     xhr :get, :status_by, :id => 2
+    assert_response :success
+    assert_template '_issue_counts'
+  end
+  
+  def test_issue_status_by_status
+    xhr :get, :status_by, :id => 2, :status_by => 'status'
     assert_response :success
     assert_template '_issue_counts'
   end

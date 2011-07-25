@@ -1,5 +1,5 @@
-# redMine - project management software
-# Copyright (C) 2006  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class UserTest < ActiveSupport::TestCase
   fixtures :users, :members, :projects, :roles, :member_roles, :auth_sources
@@ -109,16 +109,227 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "john", @admin.login
   end
   
-  def test_destroy
-    User.find(2).destroy
+  def test_destroy_should_delete_members_and_roles
+    members = Member.find_all_by_user_id(2)
+    ms = members.size
+    rs = members.collect(&:roles).flatten.size
+    
+    assert_difference 'Member.count', - ms do
+      assert_difference 'MemberRole.count', - rs do
+        User.find(2).destroy
+      end
+    end
+    
     assert_nil User.find_by_id(2)
     assert Member.find_all_by_user_id(2).empty?
   end
   
-  def test_validate
+  def test_destroy_should_update_attachments
+    attachment = Attachment.create!(:container => Project.find(1),
+      :file => uploaded_test_file("testfile.txt", "text/plain"),
+      :author_id => 2)
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, attachment.reload.author
+  end
+  
+  def test_destroy_should_update_comments
+    comment = Comment.create!(
+      :commented => News.create!(:project_id => 1, :author_id => 1, :title => 'foo', :description => 'foo'),
+      :author => User.find(2),
+      :comments => 'foo'
+    )
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, comment.reload.author
+  end
+  
+  def test_destroy_should_update_issues
+    issue = Issue.create!(:project_id => 1, :author_id => 2, :tracker_id => 1, :subject => 'foo')
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, issue.reload.author
+  end
+  
+  def test_destroy_should_unassign_issues
+    issue = Issue.create!(:project_id => 1, :author_id => 1, :tracker_id => 1, :subject => 'foo', :assigned_to_id => 2)
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_nil issue.reload.assigned_to
+  end
+  
+  def test_destroy_should_update_journals
+    issue = Issue.create!(:project_id => 1, :author_id => 2, :tracker_id => 1, :subject => 'foo')
+    issue.init_journal(User.find(2), "update")
+    issue.save!
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, issue.journals.first.reload.user
+  end
+  
+  def test_destroy_should_update_journal_details_old_value
+    issue = Issue.create!(:project_id => 1, :author_id => 1, :tracker_id => 1, :subject => 'foo', :assigned_to_id => 2)
+    issue.init_journal(User.find(1), "update")
+    issue.assigned_to_id = nil
+    assert_difference 'JournalDetail.count' do
+      issue.save!
+    end
+    journal_detail = JournalDetail.first(:order => 'id DESC')
+    assert_equal '2', journal_detail.old_value
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous.id.to_s, journal_detail.reload.old_value
+  end
+  
+  def test_destroy_should_update_journal_details_value
+    issue = Issue.create!(:project_id => 1, :author_id => 1, :tracker_id => 1, :subject => 'foo')
+    issue.init_journal(User.find(1), "update")
+    issue.assigned_to_id = 2
+    assert_difference 'JournalDetail.count' do
+      issue.save!
+    end
+    journal_detail = JournalDetail.first(:order => 'id DESC')
+    assert_equal '2', journal_detail.value
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous.id.to_s, journal_detail.reload.value
+  end
+  
+  def test_destroy_should_update_messages
+    board = Board.create!(:project_id => 1, :name => 'Board', :description => 'Board')
+    message = Message.create!(:board_id => board.id, :author_id => 2, :subject => 'foo', :content => 'foo')
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, message.reload.author
+  end
+  
+  def test_destroy_should_update_news
+    news = News.create!(:project_id => 1, :author_id => 2, :title => 'foo', :description => 'foo')
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, news.reload.author
+  end
+  
+  def test_destroy_should_delete_private_queries
+    query = Query.new(:name => 'foo', :is_public => false)
+    query.project_id = 1
+    query.user_id = 2
+    query.save!
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_nil Query.find_by_id(query.id)
+  end
+  
+  def test_destroy_should_update_public_queries
+    query = Query.new(:name => 'foo', :is_public => true)
+    query.project_id = 1
+    query.user_id = 2
+    query.save!
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, query.reload.user
+  end
+  
+  def test_destroy_should_update_time_entries
+    entry = TimeEntry.new(:hours => '2', :spent_on => Date.today, :activity => TimeEntryActivity.create!(:name => 'foo'))
+    entry.project_id = 1
+    entry.user_id = 2
+    entry.save!
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, entry.reload.user
+  end
+  
+  def test_destroy_should_delete_tokens
+    token = Token.create!(:user_id => 2, :value => 'foo')
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_nil Token.find_by_id(token.id)
+  end
+  
+  def test_destroy_should_delete_watchers
+    issue = Issue.create!(:project_id => 1, :author_id => 1, :tracker_id => 1, :subject => 'foo')
+    watcher = Watcher.create!(:user_id => 2, :watchable => issue)
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_nil Watcher.find_by_id(watcher.id)
+  end
+  
+  def test_destroy_should_update_wiki_contents
+    wiki_content = WikiContent.create!(
+      :text => 'foo',
+      :author_id => 2,
+      :page => WikiPage.create!(:title => 'Foo', :wiki => Wiki.create!(:project_id => 1, :start_page => 'Start'))
+    )
+    wiki_content.text = 'bar'
+    assert_difference 'WikiContent::Version.count' do
+      wiki_content.save!
+    end
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_equal User.anonymous, wiki_content.reload.author
+    wiki_content.versions.each do |version|
+      assert_equal User.anonymous, version.reload.author
+    end
+  end
+  
+  def test_destroy_should_nullify_issue_categories
+    category = IssueCategory.create!(:project_id => 1, :assigned_to_id => 2, :name => 'foo')
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_nil category.reload.assigned_to_id
+  end
+  
+  def test_destroy_should_nullify_changesets
+    changeset = Changeset.create!(
+      :repository => Repository::Subversion.create!(
+        :project_id => 1,
+        :url => 'file:///var/svn'
+      ),
+      :revision => '12',
+      :committed_on => Time.now,
+      :committer => 'jsmith'
+      )
+    assert_equal 2, changeset.user_id
+    
+    User.find(2).destroy
+    assert_nil User.find_by_id(2)
+    assert_nil changeset.reload.user_id
+  end
+  
+  def test_anonymous_user_should_not_be_destroyable
+    assert_no_difference 'User.count' do
+      assert_equal false, User.anonymous.destroy
+    end
+  end
+  
+  def test_validate_login_presence
     @admin.login = ""
     assert !@admin.save
     assert_equal 1, @admin.errors.count
+  end
+  
+  def test_validate_mail_notification_inclusion
+    u = User.new
+    u.mail_notification = 'foo'
+    u.save
+    assert_not_nil u.errors.on(:mail_notification)
   end
   
   context "User#try_to_login" do
@@ -150,7 +361,6 @@ class UserTest < ActiveSupport::TestCase
     user = User.try_to_login("admin", "hello")
     assert_kind_of User, user
     assert_equal "admin", user.login
-    assert_equal User.hash_password("hello"), user.hashed_password    
   end
   
   def test_name_format
@@ -170,6 +380,22 @@ class UserTest < ActiveSupport::TestCase
     
     user = User.try_to_login("jsmith", "jsmith")
     assert_equal nil, user  
+  end
+  
+  context ".try_to_login" do
+    context "with good credentials" do
+      should "return the user" do
+        user = User.try_to_login("admin", "admin")
+        assert_kind_of User, user
+        assert_equal "admin", user.login
+      end
+    end
+    
+    context "with wrong credentials" do
+      should "return nil" do
+        assert_nil User.try_to_login("admin", "foo")
+      end
+    end
   end
   
   if ldap_configured?
@@ -294,6 +520,36 @@ class UserTest < ActiveSupport::TestCase
     
     # user with no role
     assert_nil @dlopper.roles_for_project(Project.find(2)).detect {|role| role.member?}
+  end
+  
+  def test_projects_by_role_for_user_with_role
+    user = User.find(2)
+    assert_kind_of Hash, user.projects_by_role
+    assert_equal 2, user.projects_by_role.size
+    assert_equal [1,5], user.projects_by_role[Role.find(1)].collect(&:id).sort
+    assert_equal [2], user.projects_by_role[Role.find(2)].collect(&:id).sort
+  end
+  
+  def test_projects_by_role_for_user_with_no_role
+    user = User.generate!
+    assert_equal({}, user.projects_by_role)
+  end
+  
+  def test_projects_by_role_for_anonymous
+    assert_equal({}, User.anonymous.projects_by_role)
+  end
+
+  def test_valid_notification_options
+    # without memberships
+    assert_equal 5, User.find(7).valid_notification_options.size
+    # with memberships
+    assert_equal 6, User.find(2).valid_notification_options.size
+  end
+  
+  def test_valid_notification_options_class_method
+    assert_equal 5, User.valid_notification_options.size
+    assert_equal 5, User.valid_notification_options(User.find(7)).size
+    assert_equal 6, User.valid_notification_options(User.find(2)).size
   end
   
   def test_mail_notification_all
@@ -437,60 +693,88 @@ class UserTest < ActiveSupport::TestCase
       end
 
       should "be true for a user with :all" do
-        @author.update_attribute(:mail_notification, :all)
+        @author.update_attribute(:mail_notification, 'all')
         assert @author.notify_about?(@issue)
       end
       
       should "be false for a user with :none" do
-        @author.update_attribute(:mail_notification, :none)
+        @author.update_attribute(:mail_notification, 'none')
         assert ! @author.notify_about?(@issue)
       end
       
       should "be false for a user with :only_my_events and isn't an author, creator, or assignee" do
-        @user = User.generate_with_protected!(:mail_notification => :only_my_events)
+        @user = User.generate_with_protected!(:mail_notification => 'only_my_events')
+        Member.create!(:user => @user, :project => @project, :role_ids => [1])
         assert ! @user.notify_about?(@issue)
       end
       
       should "be true for a user with :only_my_events and is the author" do
-        @author.update_attribute(:mail_notification, :only_my_events)
+        @author.update_attribute(:mail_notification, 'only_my_events')
         assert @author.notify_about?(@issue)
       end
       
       should "be true for a user with :only_my_events and is the assignee" do
-        @assignee.update_attribute(:mail_notification, :only_my_events)
+        @assignee.update_attribute(:mail_notification, 'only_my_events')
         assert @assignee.notify_about?(@issue)
       end
       
       should "be true for a user with :only_assigned and is the assignee" do
-        @assignee.update_attribute(:mail_notification, :only_assigned)
+        @assignee.update_attribute(:mail_notification, 'only_assigned')
         assert @assignee.notify_about?(@issue)
       end
       
       should "be false for a user with :only_assigned and is not the assignee" do
-        @author.update_attribute(:mail_notification, :only_assigned)
+        @author.update_attribute(:mail_notification, 'only_assigned')
         assert ! @author.notify_about?(@issue)
       end
       
       should "be true for a user with :only_owner and is the author" do
-        @author.update_attribute(:mail_notification, :only_owner)
+        @author.update_attribute(:mail_notification, 'only_owner')
         assert @author.notify_about?(@issue)
       end
       
       should "be false for a user with :only_owner and is not the author" do
-        @assignee.update_attribute(:mail_notification, :only_owner)
+        @assignee.update_attribute(:mail_notification, 'only_owner')
         assert ! @assignee.notify_about?(@issue)
       end
       
-      should "be false if the mail_notification is anything else" do
-        @assignee.update_attribute(:mail_notification, :somthing_else)
-        assert ! @assignee.notify_about?(@issue)
+      should "be true for a user with :selected and is the author" do
+        @author.update_attribute(:mail_notification, 'selected')
+        assert @author.notify_about?(@issue)
       end
       
+      should "be true for a user with :selected and is the assignee" do
+        @assignee.update_attribute(:mail_notification, 'selected')
+        assert @assignee.notify_about?(@issue)
+      end
+      
+      should "be false for a user with :selected and is not the author or assignee" do
+        @user = User.generate_with_protected!(:mail_notification => 'selected')
+        Member.create!(:user => @user, :project => @project, :role_ids => [1])
+        assert ! @user.notify_about?(@issue)
+      end
     end
 
     context "other events" do
       should 'be added and tested'
     end
+  end
+
+  def test_salt_unsalted_passwords
+    # Restore a user with an unsalted password
+    user = User.find(1)
+    user.salt = nil
+    user.hashed_password = User.hash_password("unsalted")
+    user.save!
+    
+    User.salt_unsalted_passwords!
+    
+    user.reload
+    # Salt added
+    assert !user.salt.blank?
+    # Password still valid
+    assert user.check_password?("unsalted")
+    assert_equal user, User.try_to_login(user.login, "unsalted")
   end
   
   if Object.const_defined?(:OpenID)

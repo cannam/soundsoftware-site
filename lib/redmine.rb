@@ -41,14 +41,16 @@ Redmine::CustomFieldFormat.map do |fields|
   fields.register Redmine::CustomFieldFormat.new('list', :label => :label_list, :order => 5)
   fields.register Redmine::CustomFieldFormat.new('date', :label => :label_date, :order => 6)
   fields.register Redmine::CustomFieldFormat.new('bool', :label => :label_boolean, :order => 7)
+  fields.register Redmine::CustomFieldFormat.new('user', :label => :label_user, :only => %w(Issue TimeEntry Version Project), :edit_as => 'list', :order => 8)
+  fields.register Redmine::CustomFieldFormat.new('version', :label => :label_version, :only => %w(Issue TimeEntry Version Project), :edit_as => 'list', :order => 9)
 end
 
 # Permissions
 Redmine::AccessControl.map do |map|
-  map.permission :view_project, {:projects => [:show], :activities => [:index]}, :public => true
+  map.permission :view_project, {:projects => [:show], :activities => [:index], :members => [:index]}, :public => true
   map.permission :search_project, {:search => :index}, :public => true
   map.permission :add_project, {:projects => [:new, :create]}, :require => :loggedin
-  map.permission :edit_project, {:projects => [:settings, :edit, :update]}, :require => :member
+  map.permission :edit_project, {:projects => [:settings, :edit, :update, :overview]}, :require => :member
   map.permission :select_project_modules, {:projects => :modules}, :require => :member
   map.permission :manage_members, {:projects => :settings, :members => [:new, :edit, :destroy, :autocomplete_for_member]}, :require => :member
   map.permission :manage_versions, {:projects => :settings, :versions => [:new, :create, :edit, :update, :close_completed, :destroy]}, :require => :member
@@ -62,13 +64,15 @@ Redmine::AccessControl.map do |map|
                                   :auto_complete => [:issues],
                                   :context_menus => [:issues],
                                   :versions => [:index, :show, :status_by],
-                                  :journals => :index,
+                                  :journals => [:index, :diff],
                                   :queries => :index,
                                   :reports => [:issue_report, :issue_report_details]}
     map.permission :add_issues, {:issues => [:new, :create, :update_form]}
     map.permission :edit_issues, {:issues => [:edit, :update, :bulk_edit, :bulk_update, :update_form], :journals => [:new]}
     map.permission :manage_issue_relations, {:issue_relations => [:new, :destroy]}
     map.permission :manage_subtasks, {}
+    map.permission :set_issues_private, {}
+    map.permission :set_own_issues_private, {}, :require => :loggedin
     map.permission :add_issue_notes, {:issues => [:edit, :update], :journals => [:new]}
     map.permission :edit_issue_notes, {:journals => :edit}, :require => :loggedin
     map.permission :edit_own_issue_notes, {:journals => :edit}, :require => :loggedin
@@ -84,10 +88,10 @@ Redmine::AccessControl.map do |map|
   end
   
   map.project_module :time_tracking do |map|
-    map.permission :log_time, {:timelog => [:new, :create, :edit, :update]}, :require => :loggedin
-    map.permission :view_time_entries, :timelog => [:index], :time_entry_reports => [:report]
-    map.permission :edit_time_entries, {:timelog => [:new, :create, :edit, :update, :destroy]}, :require => :member
-    map.permission :edit_own_time_entries, {:timelog => [:new, :create, :edit, :update, :destroy]}, :require => :loggedin
+    map.permission :log_time, {:timelog => [:new, :create, :edit, :update, :bulk_edit, :bulk_update]}, :require => :loggedin
+    map.permission :view_time_entries, :timelog => [:index, :show], :time_entry_reports => [:report]
+    map.permission :edit_time_entries, {:timelog => [:new, :create, :edit, :update, :destroy, :bulk_edit, :bulk_update]}, :require => :member
+    map.permission :edit_own_time_entries, {:timelog => [:new, :create, :edit, :update, :destroy,:bulk_edit, :bulk_update]}, :require => :loggedin
     map.permission :manage_project_activities, {:project_enumerations => [:update, :destroy]}, :require => :member
   end
   
@@ -185,6 +189,8 @@ end
 
 Redmine::MenuManager.map :project_menu do |menu|
   menu.push :overview, { :controller => 'projects', :action => 'show' }
+  menu.push :members, { :controller => 'members', :action => 'index' }, :param => :project_id
+  menu.push :news, { :controller => 'news', :action => 'index' }, :param => :project_id, :caption => :label_news_plural
   menu.push :activity, { :controller => 'activities', :action => 'index' }
   menu.push :roadmap, { :controller => 'versions', :action => 'index' }, :param => :project_id,
               :if => Proc.new { |p| p.shared_versions.any? }
@@ -193,7 +199,6 @@ Redmine::MenuManager.map :project_menu do |menu|
               :html => { :accesskey => Redmine::AccessKeys.key_for(:new_issue) }
   menu.push :gantt, { :controller => 'gantts', :action => 'show' }, :param => :project_id, :caption => :label_gantt
   menu.push :calendar, { :controller => 'calendars', :action => 'show' }, :param => :project_id, :caption => :label_calendar
-  menu.push :news, { :controller => 'news', :action => 'index' }, :param => :project_id, :caption => :label_news_plural
   menu.push :documents, { :controller => 'documents', :action => 'index' }, :param => :project_id, :caption => :label_document_plural
   menu.push :wiki, { :controller => 'wiki', :action => 'show', :id => nil }, :param => :project_id,
               :if => Proc.new { |p| p.wiki && !p.wiki.new_record? }
@@ -229,3 +234,5 @@ end
 Redmine::WikiFormatting.map do |format|
   format.register :textile, Redmine::WikiFormatting::Textile::Formatter, Redmine::WikiFormatting::Textile::Helper
 end
+
+ActionView::Template.register_template_handler :rsb, Redmine::Views::ApiTemplateHandler

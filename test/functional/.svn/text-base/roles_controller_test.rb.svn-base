@@ -15,14 +15,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 require 'roles_controller'
 
 # Re-raise errors caught by the controller.
 class RolesController; def rescue_action(e) raise e end; end
 
 class RolesControllerTest < ActionController::TestCase
-  fixtures :roles, :users, :members, :member_roles, :workflows
+  fixtures :roles, :users, :members, :member_roles, :workflows, :trackers
   
   def setup
     @controller = RolesController.new
@@ -114,7 +114,7 @@ class RolesControllerTest < ActionController::TestCase
   def test_destroy_role_in_use
     post :destroy, :id => 1
     assert_redirected_to '/roles'
-    assert flash[:error] == 'This role is in use and can not be deleted.'
+    assert flash[:error] == 'This role is in use and cannot be deleted.'
     assert_not_nil Role.find_by_id(1)
   end
   

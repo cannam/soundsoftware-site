@@ -7,14 +7,14 @@
 # == Usage
 #
 #    reposman [OPTIONS...] -s [DIR] -r [HOST]
-#     
+#
 #  Examples:
-#    reposman --svn-dir=/var/svn --redmine-host=redmine.example.net --scm subversion
+#    reposman --scm-dir=/var/svn --redmine-host=redmine.example.net --scm subversion
 #    reposman -s /var/git -r redmine.example.net -u http://svn.example.net --scm git
 #
 # == Arguments (mandatory)
 #
-#   -s, --svn-dir=DIR         use DIR as base directory for svn repositories
+#   -s, --scm-dir=DIR         use DIR as base directory for repositories
 #   -r, --redmine-host=HOST   assume Redmine is hosted on HOST. Examples:
 #                             -r redmine.example.net
 #                             -r http://redmine.example.net
@@ -57,7 +57,7 @@
 #   -q, --quiet               no log
 #
 # == References
-# 
+#
 # You can find more information on the redmine's wiki : http://www.redmine.org/wiki/redmine/HowTos
 
 
@@ -70,7 +70,7 @@ Version = "1.3"
 SUPPORTED_SCM = %w( Subversion Darcs Mercurial Bazaar Git Filesystem )
 
 opts = GetoptLong.new(
-                      ['--svn-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--scm-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
                       ['--redmine-host', '-r', GetoptLong::REQUIRED_ARGUMENT],
                       ['--key',          '-k', GetoptLong::REQUIRED_ARGUMENT],
                       ['--owner',        '-o', GetoptLong::REQUIRED_ARGUMENT],
@@ -133,7 +133,7 @@ end
 begin
   opts.each do |opt, arg|
     case opt
-    when '--svn-dir';        $repos_base   = arg.dup
+    when '--scm-dir';        $repos_base   = arg.dup
     when '--redmine-host';   $redmine_host = arg.dup
     when '--key';            $api_key      = arg.dup
     when '--owner';          $svn_owner    = arg.dup; $use_groupid = false;
@@ -174,7 +174,7 @@ if ($redmine_host.empty? or $repos_base.empty?)
 end
 
 unless File.directory?($repos_base)
-  log("directory '#{$repos_base}' doesn't exists", :exit => true)
+  log("directory '#{$repos_base}' doesn't exist", :exit => true)
 end
 
 begin
@@ -184,7 +184,7 @@ rescue LoadError
 end
 
 class Project < ActiveResource::Base
-  self.headers["User-agent"] = "Redmine repository manager/#{Version}"
+  self.headers["User-agent"] = "SoundSoftware repository manager/#{Version}"
 end
 
 log("querying Redmine for projects...", :level => 1);
@@ -210,7 +210,7 @@ end
 log("retrieved #{projects.size} projects", :level => 1)
 
 def set_owner_and_rights(project, repos_path, &block)
-  if RUBY_PLATFORM =~ /mswin/
+  if mswin?
     yield if block_given?
   else
     uid, gid = Etc.getpwnam($svn_owner).uid, ($use_groupid ? Etc.getgrnam(project.identifier).gid : Etc.getgrnam($svn_group).gid)
@@ -230,9 +230,9 @@ end
 def owner_name(file)
   mswin? ?
     $svn_owner :
-    Etc.getpwuid( File.stat(file).uid ).name  
+    Etc.getpwuid( File.stat(file).uid ).name
 end
-  
+
 def mswin?
   (RUBY_PLATFORM =~ /(:?mswin|mingw)/) || (RUBY_PLATFORM == 'java' && (ENV['OS'] || ENV['os']) =~ /windows/i)
 end
@@ -251,7 +251,6 @@ projects.each do |project|
   repos_path = File.join($repos_base, project.identifier).gsub(File::SEPARATOR, File::ALT_SEPARATOR || File::SEPARATOR)
 
   create_repos = false
-
   # Logic required for SoundSoftware.ac.uk repositories:
   #
   # * If the project has a repository path declared already,
@@ -342,9 +341,7 @@ projects.each do |project|
     rescue => e
       log("\trepository #{repos_path} not registered in Redmine: #{e.message}");
     end
-
     log("\trepository #{repos_path} created");
   end
-
 end
-  
+

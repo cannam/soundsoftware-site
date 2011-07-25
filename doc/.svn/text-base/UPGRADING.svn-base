@@ -1,7 +1,7 @@
 == Redmine upgrade
 
 Redmine - project management software
-Copyright (C) 2006-2010  Jean-Philippe Lang
+Copyright (C) 2006-2011  Jean-Philippe Lang
 http://www.redmine.org/
 
 
@@ -10,8 +10,10 @@ http://www.redmine.org/
 1. Uncompress the program archive in a new directory
 
 2. Copy your database settings (RAILS_ROOT/config/database.yml)
-   and SMTP settings (RAILS_ROOT/config/email.yml) into the new
-   config directory
+   and your configuration file (RAILS_ROOT/config/configuration.yml)
+   into the new config directory
+   Note: before Redmine 1.2, SMTP configuration was stored in
+   config/email.yml. It should now be stored in config/configuration.yml. 
 
 3. Copy the RAILS_ROOT/files directory content into your new installation
    This directory contains all the attached files.
@@ -28,7 +30,7 @@ http://www.redmine.org/
 
 6. Migrate your database
 
-   If you are upgrading to Rails 2.3.5 as part of this migration, you
+   If you are upgrading to Rails 2.3.11 as part of this migration, you
    need to upgrade the plugin migrations before running the plugin migrations
    using:
      rake db:migrate:upgrade_plugin_migrations RAILS_ENV="production"
@@ -54,7 +56,7 @@ http://www.redmine.org/
 
 == Notes
 
-* Rails 2.3.5 is required for versions 0.9.x and 1.0.x.
+* Rails 2.3.11 is required for versions 1.2.x.
 
 == References
 

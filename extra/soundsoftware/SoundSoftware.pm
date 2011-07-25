@@ -25,6 +25,8 @@ section for the repository and so will be approved by hgwebdir?)
 
 4. Push to repo for private project: "Permitted" users only (as above)
 
+5. Push to any repo that is tracking an external repo: Refused always
+
 =head1 INSTALLATION
 
 Debian/ubuntu:
@@ -114,7 +116,7 @@ sub SoundSoftwareDSN {
     my ($self, $parms, $arg) = @_;
     $self->{SoundSoftwareDSN} = $arg;
     my $query = "SELECT 
-                 hashed_password, auth_source_id, permissions
+                 hashed_password, salt, auth_source_id, permissions
               FROM members, projects, users, roles, member_roles
               WHERE 
                 projects.id=members.project_id
@@ -160,7 +162,7 @@ my %read_only_methods = map { $_ => 1 } qw/GET PROPFIND REPORT OPTIONS/;
 sub access_handler {
     my $r = shift;
 
-    print STDERR "SoundSoftware.pm: In access handler at " . scalar localtime() . "\n";
+    print STDERR "SoundSoftware.pm:$$: In access handler at " . scalar localtime() . "\n";
 
     unless ($r->some_auth_required) {
 	$r->log_reason("No authentication has been configured");
@@ -169,37 +171,43 @@ sub access_handler {
 
     my $method = $r->method;
 
-    print STDERR "SoundSoftware.pm: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
-    print STDERR "SoundSoftware.pm: Accept: " . $r->headers_in->{Accept} . "\n";
-
-    if (!defined $read_only_methods{$method}) {
-	print STDERR "SoundSoftware.pm: Method is not read-only, authentication handler required\n";
-	return OK;
-    }
+    print STDERR "SoundSoftware.pm:$$: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
+    print STDERR "SoundSoftware.pm:$$: Accept: " . $r->headers_in->{Accept} . "\n";
 
     my $dbh = connect_database($r);
     unless ($dbh) {
-	print STDERR "SoundSoftware.pm: Database connection failed!: " . $DBI::errstr . "\n";
+	print STDERR "SoundSoftware.pm:$$: Database connection failed!: " . $DBI::errstr . "\n";
 	return FORBIDDEN;
     }
 
-
-print STDERR "Connected to db, dbh is " . $dbh . "\n";
+    print STDERR "Connected to db, dbh is " . $dbh . "\n";
 
     my $project_id = get_project_identifier($dbh, $r);
+
+    if (!defined $read_only_methods{$method}) {
+        print STDERR "SoundSoftware.pm:$$: Method is not read-only\n";
+        if (project_repo_is_readonly($dbh, $project_id, $r)) {
+            print STDERR "SoundSoftware.pm:$$: Project repo is read-only, refusing access\n";
+	    return FORBIDDEN;
+        } else {
+	    print STDERR "SoundSoftware.pm:$$: Project repo is read-write, authentication handler required\n";
+            return OK;
+        }
+    }
+
     my $status = get_project_status($dbh, $project_id, $r);
 
     $dbh->disconnect();
     undef $dbh;
 
     if ($status == 0) { # nonexistent
-	print STDERR "SoundSoftware.pm: Project does not exist, refusing access\n";
+	print STDERR "SoundSoftware.pm:$$: Project does not exist, refusing access\n";
 	return FORBIDDEN;
     } elsif ($status == 1) { # public
-	print STDERR "SoundSoftware.pm: Project is public, no restriction here\n";
+	print STDERR "SoundSoftware.pm:$$: Project is public, no restriction here\n";
 	$r->set_handlers(PerlAuthenHandler => [\&OK])
     } else { # private
-	print STDERR "SoundSoftware.pm: Project is private, authentication handler required\n";
+	print STDERR "SoundSoftware.pm:$$: Project is private, authentication handler required\n";
     }
 
     return OK
@@ -208,11 +216,11 @@ print STDERR "Connected to db, dbh is " . $dbh . "\n";
 sub authen_handler {
     my $r = shift;
     
-    print STDERR "SoundSoftware.pm: In authentication handler at " . scalar localtime() . "\n";
+    print STDERR "SoundSoftware.pm:$$: In authentication handler at " . scalar localtime() . "\n";
 
     my $dbh = connect_database($r);
     unless ($dbh) {
-        print STDERR "SoundSoftware.pm: Database connection failed!: " . $DBI::errstr . "\n";
+        print STDERR "SoundSoftware.pm:$$: Database connection failed!: " . $DBI::errstr . "\n";
         return AUTH_REQUIRED;
     }
     
@@ -227,7 +235,7 @@ sub authen_handler {
 	return $res;
     }
     
-    print STDERR "SoundSoftware.pm: User is " . $r->user . ", got password\n";
+    print STDERR "SoundSoftware.pm:$$: User is " . $r->user . ", got password\n";
 
     my $permitted = is_permitted($dbh, $project_id, $r->user, $redmine_pass, $r);
     
@@ -237,7 +245,7 @@ sub authen_handler {
     if ($permitted) {
 	return OK;
     } else {
-	print STDERR "SoundSoftware.pm: Not permitted\n";
+	print STDERR "SoundSoftware.pm:$$: Not permitted\n";
 	$r->note_auth_failure();
 	return AUTH_REQUIRED;
     }
@@ -271,6 +279,34 @@ sub get_project_status {
     $ret;
 }
 
+sub project_repo_is_readonly {
+    my $dbh = shift;
+    my $project_id = shift;
+    my $r = shift;
+
+    if (!defined $project_id or $project_id eq '') {
+        return 0; # nonexistent
+    }
+
+    my $sth = $dbh->prepare(
+        "SELECT repositories.is_external FROM repositories, projects WHERE projects.identifier = ? AND repositories.project_id = projects.id;"
+    );
+
+    $sth->execute($project_id);
+    my $ret = 0; # nonexistent
+    if (my @row = $sth->fetchrow_array) {
+        if (defined($row[0]) && ($row[0] eq "1" || $row[0] eq "t")) {
+            $ret = 1; # read-only (i.e. external)
+        } else {
+            $ret = 0; # read-write
+        }
+    }
+    $sth->finish();
+    undef $sth;
+
+    $ret;
+}
+
 sub is_permitted {
     my $dbh = shift;
     my $project_id = shift;
@@ -288,7 +324,7 @@ sub is_permitted {
     $sth->execute($redmine_user, $project_id);
 
     my $ret;
-    while (my ($hashed_password, $auth_source_id, $permissions) = $sth->fetchrow_array) {
+    while (my ($hashed_password, $salt, $auth_source_id, $permissions) = $sth->fetchrow_array) {
 
 	# Test permissions for this user before we verify credentials
 	# -- if the user is not permitted this action anyway, there's
@@ -305,7 +341,8 @@ sub is_permitted {
 	    print STDERR "SoundSoftware.pm: User $redmine_user has required role, checking credentials\n";
 
 	    unless ($auth_source_id) {
-		if ($hashed_password eq $pass_digest) {
+                my $salted_password = Digest::SHA1::sha1_hex($salt.$pass_digest);
+		if ($hashed_password eq $salted_password) {
 		    print STDERR "SoundSoftware.pm: User $redmine_user authenticated via password\n";
 		    $ret = 1;
 		    last;
@@ -325,7 +362,7 @@ sub is_permitted {
 			filter  => "(".$rowldap[6]."=%s)"
 			);
 		    if ($ldap->authenticate($redmine_user, $redmine_pass)) {
-			print STDERR "SoundSoftware.pm: User $redmine_user authenticated via LDAP\n";
+			print STDERR "SoundSoftware.pm:$$: User $redmine_user authenticated via LDAP\n";
 			$ret = 1;
 		    }
 		}
@@ -333,7 +370,7 @@ sub is_permitted {
 		undef $sthldap;
 	    }
 	} else {
-	    print STDERR "SoundSoftware.pm: User $redmine_user lacks required role for this project\n";
+	    print STDERR "SoundSoftware.pm:$$: User $redmine_user lacks required role for this project\n";
 	}
     }
 
@@ -384,7 +421,7 @@ sub get_project_identifier {
     $sth->finish();
     undef $sth;
 
-    print STDERR "SoundSoftware.pm: Repository '$repo' belongs to project '$identifier'\n";
+    print STDERR "SoundSoftware.pm:$$: Repository '$repo' belongs to project '$identifier'\n";
 
     $identifier;
 }

@@ -1,11 +1,11 @@
 K 25
 svn:wc:ra_dav:version-url
-V 49
-/svn/!svn/ver/3820/trunk/lib/redmine/default_data
+V 63
+/svn/!svn/ver/5878/branches/1.2-stable/lib/redmine/default_data
 END
 loader.rb
 K 25
 svn:wc:ra_dav:version-url
-V 59
-/svn/!svn/ver/3820/trunk/lib/redmine/default_data/loader.rb
+V 73
+/svn/!svn/ver/5878/branches/1.2-stable/lib/redmine/default_data/loader.rb
 END

@@ -1,41 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 50
-/svn/!svn/ver/4397/trunk/test/integration/api_test
-END
-token_authentication_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 79
-/svn/!svn/ver/4358/trunk/test/integration/api_test/token_authentication_test.rb
-END
-http_basic_login_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 75
-/svn/!svn/ver/4360/trunk/test/integration/api_test/http_basic_login_test.rb
-END
-projects_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 67
-/svn/!svn/ver/4397/trunk/test/integration/api_test/projects_test.rb
-END
-issues_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 65
-/svn/!svn/ver/4397/trunk/test/integration/api_test/issues_test.rb
-END
-http_basic_login_with_api_token_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 90
-/svn/!svn/ver/4363/trunk/test/integration/api_test/http_basic_login_with_api_token_test.rb
-END
-disabled_rest_api_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 76
-/svn/!svn/ver/4357/trunk/test/integration/api_test/disabled_rest_api_test.rb
+V 64
+/svn/!svn/ver/5946/branches/1.2-stable/test/integration/api_test
 END
