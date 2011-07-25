@@ -1,5 +1,4 @@
 @import url(../../../stylesheets/application.css);
-@import url(fonts.css);
 
 /* Colours:
 
@@ -31,13 +30,6 @@ body {
 
 h1 {
   color: #3e442c;
-  font-family: GilliusADFNo2, 'Gill Sans', Tahoma, sans-serif;
-  font-weight: normal;
-}    
-
-body,p,h2,h3,h4,li,table,.wiki h1 { 
-  font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; 
-  line-height: 1.34;
 }
 
 h2,h3,h4,.wiki h1 {
@@ -116,21 +108,20 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
 #header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #fdfbf5; border-bottom: 2px solid #a9b680; /* height:80px; */ padding: 20px 0 0.5em 0; margin-bottom: 0; }
 #header a { color: #be5700; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
+#header #project-title a, #header #project-title a:hover { color: #525a38; text-decoration: none; }
 .header-general h1 {
   background: url('soundsoftware-logo-title-only-transparent-beta.png') no-repeat 0 0;
   text-indent: -9999px;
   width: 500px;
   height: 34px;
  }
- 
+
 #quick-search { margin-right: 6px; margin-top: 1em; color: #000; }
 #project-jump-box { float: right;  margin-right: 6px; margin-top: 5px; color: #000; }
 #project-ancestors-title {
     margin-bottom: 0px;
     margin-left: 12px;
     margin-top: 6px;
-    font-family: GilliusADFNo2, 'Gill Sans', Tahoma, sans-serif;
-    font-weight: normal;
 }
 
 #main-menu { position: absolute; top: 100px; /* background-color: #be5700; */ left: 0; border-top: 0; width: 100%;/* height: 1.82em; */ padding: 0; margin: 0; border: 0; }
@@ -182,7 +173,6 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 .NavBarCell1 { background-color: #ffe69b; color:#000000 }
 
 .embedded table { border: 0px solid #fff; }
-.embedded h1 { font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; }
 .embedded h3 { margin-top: 0.5em; }
 .embedded hr { color: #a9b680; background-color: #a9b680 }
 .embedded center { text-align: left; } /* haha */
@@ -229,6 +219,10 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 .embedded .navigation h2 { padding-top: 0.5em; padding-bottom: 0.25em; }
 
 .embedded .contents .center { text-align: center; } /* undo javadoc hack above */
+
+/* For MATLAB documentation */
+
+.embedded #matlabdoc th { text-align: left; }
 
 
 

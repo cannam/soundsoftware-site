@@ -1,14 +1,14 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/acts_as_customizable
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/acts_as_customizable
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-07T14:15:01.891476Z
-4382
+2011-04-01T13:44:58.700463Z
+5272
 jplang
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.539808Z
+2011-07-14T09:24:10.000000Z
 0d1f178b7636d6712b38304954530928
 2008-06-27T20:13:56.888432Z
 1592

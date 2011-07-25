@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/scm/adapters
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/scm/adapters
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-07T15:19:05.831621Z
-4386
-jbbarth
+2011-07-11T02:08:03.947910Z
+6253
+tmaruyama
 
 
 
@@ -32,45 +32,11 @@ file
 
 
 
-2010-09-23T14:37:45.043748Z
-638ab1af3838c9e8d9f7688224ebf18b
-2010-06-20T16:08:26.745839Z
-3800
-edavis10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-10736
-
-bazaar_adapter.rb
-file
-
-
-
-
-2010-09-23T14:37:45.039790Z
-5a2dba12961234e4853397c87cef0b5e
-2010-05-01T09:56:59.025016Z
-3723
-jplang
+2011-07-14T09:24:22.000000Z
+bf7d7b180f55d2100736e363ce125552
+2011-05-10T17:52:56.415969Z
+5731
+tmaruyama
 has-props
 
 
@@ -92,7 +58,41 @@ has-props
 
 
 
-7225
+11495
+
+bazaar_adapter.rb
+file
+
+
+
+
+2011-07-14T09:24:22.000000Z
+8bcb2a65cfdf8d27dc53f10469887018
+2011-05-06T12:57:32.851840Z
+5668
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8398
 
 mercurial
 dir
@@ -103,44 +103,10 @@ file
 
 
 
-2010-09-24T11:56:52.980004Z
-b23f6bf941ce74af0650c41e1094ba8a
-2010-02-21T14:38:34.467603Z
-3469
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-9610
-
-git_adapter.rb
-file
-
-
-
-
-2010-11-19T13:04:51.245032Z
-6b1c25eff34500f43f3b7cf9c0a78bec
-2010-11-07T15:19:05.831621Z
-4386
+2011-07-14T09:28:12.000000Z
+d2cd43405e57519c00a107de2b3d6ae5
+2011-06-21T03:16:49.595160Z
+6105
 jbbarth
 has-props
 
@@ -163,7 +129,41 @@ has-props
 
 
 
-9867
+9870
+
+git_adapter.rb
+file
+
+
+
+
+2011-07-14T09:24:22.000000Z
+8b7b85fc7884f18402dfd33412bb1632
+2011-05-21T02:39:42.521746Z
+5870
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+13537
 
 mercurial_adapter.rb
 file
@@ -171,11 +171,11 @@ file
 
 
 
-2010-09-24T11:56:52.992085Z
-c16d3e25388f47c99f1633eab2140ba7
-2010-05-01T09:55:40.597772Z
-3722
-jplang
+2011-07-14T09:28:12.000000Z
+4ccc46fcc4b9e3fca57dad66cdedd298
+2011-07-11T02:08:03.947910Z
+6253
+tmaruyama
 has-props
 
 
@@ -197,7 +197,7 @@ has-props
 
 
 
-8130
+11989
 
 filesystem_adapter.rb
 file
@@ -205,11 +205,11 @@ file
 
 
 
-2010-09-23T14:37:45.039790Z
-5f311f051bcb17a87475757807f8a63e
-2008-06-08T15:44:23.440995Z
-1510
-jplang
+2011-07-14T09:24:22.000000Z
+23ac49fabb89c7578c173ef09c7f280f
+2011-05-21T02:17:34.152882Z
+5864
+tmaruyama
 has-props
 
 
@@ -231,7 +231,7 @@ has-props
 
 
 
-3509
+4409
 
 cvs_adapter.rb
 file
@@ -239,11 +239,11 @@ file
 
 
 
-2010-09-23T14:37:45.039790Z
-19e0348377774a0c41b78a3f0a482284
-2008-12-14T15:57:13.349302Z
-2135
-jplang
+2011-07-14T09:24:22.000000Z
+0c56303ba5340dfff7860be537a1ccc1
+2011-05-21T02:18:53.346845Z
+5866
+tmaruyama
 has-props
 
 
@@ -265,7 +265,7 @@ has-props
 
 
 
-13401
+16766
 
 darcs_adapter.rb
 file
@@ -273,11 +273,11 @@ file
 
 
 
-2010-09-23T14:37:45.039790Z
-dc6df25045764c81cdfcdb441997823b
-2009-01-04T13:27:48.560402Z
-2232
-jplang
+2011-07-14T09:24:22.000000Z
+f039e19c659f52d26c9be8a566b90539
+2011-05-06T12:57:54.181968Z
+5669
+tmaruyama
 has-props
 
 
@@ -299,5 +299,5 @@ has-props
 
 
 
-7515
+8935
 

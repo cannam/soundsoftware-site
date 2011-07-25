@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/awesome_nested_set/test
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/awesome_nested_set/test
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-23T14:37:45.603759Z
+2011-07-14T09:24:11.000000Z
 41b65aff686211d45ba085c1b0791218
 2008-12-20T12:22:38.158335Z
 2149
@@ -75,7 +75,7 @@ file
 
 
 
-2010-09-23T14:37:45.599759Z
+2011-07-14T09:24:11.000000Z
 d177339aefb3c4a8f280efff48c974b6
 2008-12-20T12:22:38.158335Z
 2149

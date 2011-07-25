@@ -1,14 +1,14 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine/menu_manager
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/unit/lib/redmine/menu_manager
 http://redmine.rubyforge.org/svn
 
 
 
-2010-08-08T07:07:38.841875Z
-3926
+2010-12-12T23:24:34.194336Z
+4509
 jbbarth
 
 
@@ -32,10 +32,10 @@ file
 
 
 
-2010-09-23T14:37:45.495799Z
-f711293b27708be59b9a214afebd2301
-2010-08-08T07:07:38.841875Z
-3926
+2011-07-14T09:24:10.000000Z
+fdf6a6902bb3de694d7a4fabbdfe2798
+2010-12-12T23:24:34.194336Z
+4509
 jbbarth
 
 
@@ -58,7 +58,7 @@ jbbarth
 
 
 
-4418
+4423
 
 menu_helper_test.rb
 file
@@ -66,11 +66,11 @@ file
 
 
 
-2010-09-23T14:37:45.495799Z
-39fc6bb354951d8a63ce60d7a8c6f3b9
-2009-11-25T05:36:56.757796Z
-3092
-edavis10
+2011-07-14T09:24:10.000000Z
+fdde38850555e88b18c742d7d15be035
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 
 
 
@@ -92,7 +92,7 @@ edavis10
 
 
 
-10654
+10659
 
 mapper_test.rb
 file
@@ -100,11 +100,11 @@ file
 
 
 
-2010-09-23T14:37:45.495799Z
-36bcd70d121e19e4c51ee3b66120bd7a
-2010-02-18T05:01:39.440573Z
-3447
-edavis10
+2011-07-14T09:24:10.000000Z
+18c96ac64de73c38eb9d766226b34ca7
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 
 
 
@@ -126,5 +126,5 @@ edavis10
 
 
 
-7891
+7896
 

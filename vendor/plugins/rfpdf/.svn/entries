@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/rfpdf
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/rfpdf
 http://redmine.rubyforge.org/svn
 
 
 
-2010-02-07T12:30:44.486359Z
-3389
-jplang
+2011-07-02T15:44:02.109574Z
+6156
+tmaruyama
 
 
 
@@ -29,17 +29,51 @@ e93f8b46-1217-0410-a6f0-8f06a7374b81
 test
 dir
 
+utf8test.txt
+file
+
+
+
+
+2011-07-14T09:28:12.000000Z
+f9fe2827506cd6b421d6c146e0a5242b
+2011-03-30T03:23:54.585875Z
+5247
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4542
+
 init.rb
 file
 
 
 
 
-2010-09-23T14:37:45.843778Z
-1da9fbada6119233134b3aab6c7d0edf
-2008-07-04T17:58:14.743502Z
-1623
-jplang
+2011-07-14T09:28:12.000000Z
+6bb137515bea7692cadd9bba1576d488
+2011-03-30T05:46:58.358840Z
+5257
+tmaruyama
 
 
 
@@ -61,7 +95,41 @@ jplang
 
 
 
-247
+270
+
+test_unicode.rfpdf
+file
+
+
+
+
+2011-07-14T09:28:12.000000Z
+4532560d82aed21773043033722c24ec
+2011-03-30T03:23:54.585875Z
+5247
+tmaruyama
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4812
 
 lib
 dir
@@ -72,11 +140,11 @@ file
 
 
 
-2010-09-23T14:37:45.843778Z
-275a3dc6407eaf7c40f1d8f4e6b08803
-2006-11-21T18:34:04.275680Z
-49
-jplang
+2011-07-14T09:28:12.000000Z
+6778639658f16109525036ebe955c3df
+2011-03-30T03:23:54.585875Z
+5247
+tmaruyama
 
 
 
@@ -98,7 +166,7 @@ jplang
 
 
 
-608
+715
 
 MIT-LICENSE
 file
@@ -106,7 +174,7 @@ file
 
 
 
-2010-09-23T14:37:45.843778Z
+2011-07-14T09:28:12.000000Z
 40cf182dab06e3de067375de5bbab322
 2006-11-21T18:34:04.275680Z
 49
@@ -140,11 +208,11 @@ file
 
 
 
-2010-09-23T14:37:45.843778Z
-d58199e83ebcaa5d234764407c238bb2
-2006-11-21T18:34:04.275680Z
-49
-jplang
+2011-07-14T09:28:12.000000Z
+14180635c63b79d7db3c7e6ae4e2df45
+2011-03-30T03:23:54.585875Z
+5247
+tmaruyama
 
 
 
@@ -166,5 +234,39 @@ jplang
 
 
 
-2454
+838
+
+logo_example.png
+file
+
+
+
+
+2011-07-14T09:28:12.000000Z
+5f263c19d9009be6148a784dc31028c0
+2011-03-30T03:23:54.585875Z
+5247
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+19411
 

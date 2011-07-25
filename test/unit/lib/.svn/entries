@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/test/unit/lib
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/unit/lib
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-07T22:38:10.728638Z
-4388
-jplang
+2011-06-21T03:16:49.595160Z
+6105
+jbbarth
 
 
 
@@ -35,11 +35,11 @@ file
 
 
 
-2010-11-19T13:04:41.321681Z
-8adb9955639998853d35f1a1181cd654
-2010-11-07T22:38:10.728638Z
-4388
-jplang
+2011-07-14T09:24:10.000000Z
+eec42202798f1936d0e12c27f43f9add
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 
 
 
@@ -61,5 +61,5 @@ jplang
 
 
 
-3430
+3435
 

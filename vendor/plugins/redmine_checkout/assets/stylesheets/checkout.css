@@ -20,6 +20,10 @@ table.checkout_protocol_table td.protocol_append_path, table.checkout_protocol_t
   border-bottom: 1px solid #ccc;
 }
 
+.topline {
+  border-top: 1px solid #ccc;
+}
+
 #checkout_box {
   margin: 10px 0;
 }

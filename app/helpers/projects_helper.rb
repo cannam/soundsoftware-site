@@ -1,16 +1,16 @@
-# redMine - project management software
-# Copyright (C) 2006  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -20,11 +20,11 @@ module ProjectsHelper
     return '' unless version && version.is_a?(Version)
     link_to_if version.visible?, format_version_name(version), { :controller => 'versions', :action => 'show', :id => version }, options
   end
-  
+
   def project_settings_tabs
     tabs = [{:name => 'info', :action => :edit_project, :partial => 'projects/edit', :label => :label_information_plural},
+            {:name => 'overview', :action => :edit_project, :partial => 'projects/settings/overview', :label => :label_welcome_page},
             {:name => 'modules', :action => :select_project_modules, :partial => 'projects/settings/modules', :label => :label_module_plural},
-            {:name => 'members', :action => :manage_members, :partial => 'projects/settings/members', :label => :label_member_plural},
             {:name => 'versions', :action => :manage_versions, :partial => 'projects/settings/versions', :label => :label_version_plural},
             {:name => 'categories', :action => :manage_categories, :partial => 'projects/settings/issue_categories', :label => :label_issue_category_plural},
             {:name => 'wiki', :action => :manage_wiki, :partial => 'projects/settings/wiki', :label => :label_wiki},
@@ -32,9 +32,9 @@ module ProjectsHelper
             {:name => 'boards', :action => :manage_boards, :partial => 'projects/settings/boards', :label => :label_board_plural},
             {:name => 'activities', :action => :manage_project_activities, :partial => 'projects/settings/activities', :label => :enumeration_activities}
             ]
-    tabs.select {|tab| User.current.allowed_to?(tab[:action], @project)}     
+    tabs.select {|tab| User.current.allowed_to?(tab[:action], @project)}
   end
-  
+
   def parent_project_select_tag(project)
     selected = project.parent
     # retrieve the requested parent project
@@ -42,11 +42,21 @@ module ProjectsHelper
     if parent_id
       selected = (parent_id.blank? ? nil : Project.find(parent_id))
     end
-    
+
     options = ''
     options << "<option value=''></option>" if project.allowed_parents.include?(nil)
     options << project_tree_options_for_select(project.allowed_parents.compact, :selected => selected)
     content_tag('select', options, :name => 'project[parent_id]', :id => 'project_parent_id')
+  end
+
+  def render_project_short_description(project)
+    s = ''
+    if (project.short_description)
+      s << "<div class='description'>"
+      s << textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
+      s << "</div>"
+    end
+    s
   end
   
   # Renders a tree of projects as a nested set of unordered lists
@@ -65,7 +75,7 @@ module ProjectsHelper
         else
           ancestors.pop
           s << "</li>"
-          while (ancestors.any? && !project.is_descendant_of?(ancestors.last)) 
+          while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
             ancestors.pop
             s << "</ul></li>\n"
           end
@@ -73,7 +83,7 @@ module ProjectsHelper
         classes = (ancestors.empty? ? 'root' : 'child')
         s << "<li class='#{classes}'><div class='#{classes}'>" +
                link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
-        s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
+        s << render_project_short_description(project)
         s << "</div>\n"
         ancestors << project
       end
@@ -84,68 +94,73 @@ module ProjectsHelper
   end
 
 
+  def render_my_project_in_hierarchy(project)
+ 
+    s = ''
+
+    if User.current.member_of?(project)
+
+      # set the project environment to please macros.
+      @project = project
+
+      classes = (project.root? ? 'root' : 'child')
+      
+      s << "<li class='#{classes}'><div class='#{classes}'>" +
+        link_to_project(project, {}, :class => "project my-project")
+      if project.is_public?
+        s << " <span class='public'>" << l("field_is_public") << "</span>"
+      else
+        s << " <span class='private'>" << l("field_is_private") << "</span>"
+      end
+      s << render_project_short_description(project)
+      s << "</div>\n"
+
+      cs = ''
+      project.children.each do |child|
+        cs << render_my_project_in_hierarchy(child)
+      end
+
+      if cs != ''
+        s << "<ul class='projects'>\n" << cs << "</ul>\n";
+      end
+
+    end
+
+    s
+
+  end
+
   # Renders a tree of projects where the current user belongs
   # as a nested set of unordered lists
   # The given collection may be a subset of the whole project tree
   # (eg. some intermediate nodes are private and can not be seen)
   def render_my_project_hierarchy(projects)
+
     s = ''
 
-    a = ''
+    original_project = @project
 
-    # Flag to tell if user has any projects
-    t = FALSE
-    
-    if projects.any?
-      ancestors = []
-      original_project = @project
-      projects.each do |project|
-        # set the project environment to please macros.
-
-        @project = project
-
-        if User.current.member_of?(project):
-
-          t = TRUE
-
-          if (ancestors.empty? || project.is_descendant_of?(ancestors.last))
-            s << "<ul class='projects #{ ancestors.empty? ? 'root' : nil}'>\n"
-          else
-            ancestors.pop
-            s << "</li>"
-            while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
-              ancestors.pop
-              s << "</ul></li>\n"
-            end
-          end
-
-          classes = (ancestors.empty? ? 'root' : 'child')
-          s << "<li class='#{classes}'><div class='#{classes}'>" +
-                 link_to_project(project, {}, :class => "project my-project")
-          if project.is_public?
-            s << " <span class='public'>" << l("field_is_public") << "</span>"
-          else
-            s << " <span class='private'>" << l("field_is_private") << "</span>"
-          end
-          s << "<div class='wiki description'>#{textilizable(project.short_description, :project => project)}</div>" unless project.description.blank?
-          s << "</div>\n"
-          ancestors << project
-        end
-       end
-        s << ("</li></ul>\n" * ancestors.size)
-        @project = original_project
+    projects.each do |project|
+      if project.root? || !projects.include?(project.parent)
+        s << render_my_project_in_hierarchy(project)
+      end
     end
 
-    if t == TRUE
+    @project = original_project
+
+    if s != ''
+      a = ''
       a << "<h2>"
       a <<  l("label_my_project_plural")
       a << "</h2>"
+      a << "<ul class='projects root'>\n"
       a << s
-    else
-      a = s
+      a << "</ul>\n"
+      s = a
     end
+
+    s
     
-    a
   end
 
   # Renders a tree of projects that the current user does not belong
@@ -198,11 +213,7 @@ module ProjectsHelper
     s << " no_description" if project.description.blank?
     s << "'>" << link_to_project(project, {}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}");
     s << "</div>"
-    unless project.description.blank?
-      s << "<div class='wiki description'>"
-      s << textilizable(project.short_description, :project => project)
-      s << "</div>"
-    end
+    s << render_project_short_description(project)
       
     s << "<td class='managers' align=top>"
 
@@ -230,7 +241,9 @@ module ProjectsHelper
     s << "</tr>"
 
     project.children.each do |child|
-      s << render_project_in_table(child, oddeven, level + 1)
+      if child.is_public? or User.current.member_of?(child)
+        s << render_project_in_table(child, oddeven, level + 1)
+      end
     end
     
     s
@@ -247,7 +260,7 @@ module ProjectsHelper
     if selected && !versions.include?(selected)
       grouped[selected.project.name] << [selected.name, selected.id]
     end
-    
+
     if grouped.keys.size > 1
       grouped_options_for_select(grouped, selected && selected.id)
     else

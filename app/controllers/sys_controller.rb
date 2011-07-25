@@ -69,6 +69,16 @@ class SysController < ActionController::Base
     render :nothing => true, :status => 404
   end
 
+  def clear_repository_cache
+    project = Project.find(params[:id])
+    if project.repository
+      project.repository.clear_cache
+    end
+    render :nothing => true, :status => 200
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
+  end
+  
   def set_embedded_active
     project = Project.find(params[:id])
     mods = project.enabled_modules

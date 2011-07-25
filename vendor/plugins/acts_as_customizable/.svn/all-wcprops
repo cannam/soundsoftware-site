@@ -1,11 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 60
-/svn/!svn/ver/4382/trunk/vendor/plugins/acts_as_customizable
-END
-init.rb
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/!svn/ver/1592/trunk/vendor/plugins/acts_as_customizable/init.rb
+V 74
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/acts_as_customizable
 END

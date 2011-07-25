@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 require 'groups_controller'
 
 # Re-raise errors caught by the controller.
@@ -103,5 +103,14 @@ class GroupsControllerTest < ActionController::TestCase
     assert_difference 'Group.find(10).members.count', -1 do
       post :destroy_membership, :id => 10, :membership_id => 6
     end
+  end
+  
+  def test_autocomplete_for_user
+    get :autocomplete_for_user, :id => 10, :q => 'mis'
+    assert_response :success
+    users = assigns(:users)
+    assert_not_nil users
+    assert users.any?
+    assert !users.include?(Group.find(10).users.first)
   end
 end

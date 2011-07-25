@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/test/unit/lib/redmine
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/test/unit/lib/redmine
 http://redmine.rubyforge.org/svn
 
 
 
-2010-11-06T17:47:27.890964Z
-4376
-jplang
+2011-06-21T03:16:49.595160Z
+6105
+jbbarth
 
 
 
@@ -26,16 +26,201 @@ jplang
 
 e93f8b46-1217-0410-a6f0-8f06a7374b81
 
+i18n_test.rb
+file
+
+
+
+
+2011-07-14T09:24:22.000000Z
+f51e2bdf18df778a4462c9a477c720d5
+2011-05-08T07:12:34.399007Z
+5707
+tmaruyama
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5261
+
+export
+dir
+
+scm
+dir
+
+safe_attributes_test.rb
+file
+
+
+
+
+2011-07-14T09:24:10.000000Z
+761d6ebcd277ba4a1d0a2216a7fe8925
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2988
+
+themes_test.rb
+file
+
+
+
+
+2011-07-14T09:24:10.000000Z
+2e952466cca65bea9ea095ad2ec01811
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1822
+
+mime_type_test.rb
+file
+
+
+
+
+2011-07-14T09:24:10.000000Z
+161e4b78a0d1cdfd67d5bd54f6480726
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2014
+
+wiki_formatting
+dir
+
+views
+dir
+
+menu_manager
+dir
+
+wiki_formatting.rb
+file
+
+
+
+
+2011-07-14T09:24:10.000000Z
+22afe4f1981d3d856beef3275f95f243
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1966
+
 menu_manager_test.rb
 file
 
 
 
 
-2010-09-23T14:37:45.495799Z
-ac6fa3504bb54b2f4279e3fb031b8366
-2010-08-08T07:07:38.841875Z
-3926
+2011-07-14T09:24:10.000000Z
+1a6043d0994b5fb4a09f3962ab5542ce
+2010-12-12T23:24:34.194336Z
+4509
 jbbarth
 
 
@@ -58,7 +243,7 @@ jbbarth
 
 
 
-1039
+1044
 
 plugin_test.rb
 file
@@ -66,11 +251,11 @@ file
 
 
 
-2010-09-23T14:37:45.495799Z
-e77b70f296a1c5879f34d10c097bb45c
-2009-12-16T02:07:46.084185Z
-3175
-edavis10
+2011-07-14T09:24:10.000000Z
+d2f2e4457ed4eda1b5efb8a41a3de255
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 has-props
 
 
@@ -92,75 +277,7 @@ has-props
 
 
 
-4163
-
-wiki_formatting.rb
-file
-
-
-
-
-2010-09-23T14:37:45.499807Z
-720444ae100b378352bff8ea8494b96f
-2010-02-17T20:47:50.603139Z
-3446
-jplang
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1961
-
-i18n_test.rb
-file
-
-
-
-
-2010-11-19T13:04:41.309564Z
-a134c7beb75336db19db53dcfdb95250
-2010-09-26T17:13:52.794850Z
-4183
-edavis10
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-3798
+4168
 
 hook_test.rb
 file
@@ -168,11 +285,11 @@ file
 
 
 
-2010-09-23T14:37:45.491768Z
-6fea1c3686a222539646f8c8efd7084b
-2009-12-21T02:24:56.260725Z
-3211
-edavis10
+2011-07-14T09:28:09.000000Z
+6b610cfc1e3e51f457eea06a6e6fb9a0
+2011-06-21T03:16:49.595160Z
+6105
+jbbarth
 has-props
 
 
@@ -194,9 +311,9 @@ has-props
 
 
 
-5736
+5741
 
-scm
+helpers
 dir
 
 access_control_test.rb
@@ -205,11 +322,11 @@ file
 
 
 
-2010-09-23T14:37:45.491768Z
-199d1a545256f49d0ac0dd5daa732322
-2009-09-13T17:14:35.707881Z
-2887
-edavis10
+2011-07-14T09:24:10.000000Z
+6682bde90d30369ef1d27b806391134f
+2010-12-12T23:24:34.194336Z
+4509
+jbbarth
 has-props
 
 
@@ -231,55 +348,18 @@ has-props
 
 
 
-1796
+1801
 
-helpers
-dir
-
-mime_type_test.rb
+configuration_test.rb
 file
 
 
 
 
-2010-09-23T14:37:45.495799Z
-48babd3529b798dd5170d1214e8c732a
-2009-09-13T17:14:35.707881Z
-2887
-edavis10
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2009
-
-unified_diff_test.rb
-file
-
-
-
-
-2010-09-23T14:37:45.499807Z
-a17bdd131369acd640ce61013ce4233b
-2009-11-11T13:25:53.648186Z
-3028
+2011-07-14T09:24:10.000000Z
+d96ffe5035b073e1dffdb3f01fe8e06e
+2011-02-25T14:30:05.998365Z
+4949
 jplang
 has-props
 
@@ -302,10 +382,75 @@ has-props
 
 
 
-1918
+1877
 
-wiki_formatting
-dir
+ciphering_test.rb
+file
+
+
+
+
+2011-07-14T09:24:10.000000Z
+c2c353211cdd7cf9a87b9102e26b8d14
+2011-02-26T13:09:25.657748Z
+4950
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3125
+
+unified_diff_test.rb
+file
+
+
+
+
+2011-07-14T09:24:22.000000Z
+a821efaefd2d94d0b1be4ac66a0f6b7a
+2011-03-11T20:23:29.177962Z
+5094
+jplang
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4750
 
 notifiable_test.rb
 file
@@ -313,11 +458,11 @@ file
 
 
 
-2010-11-19T13:04:41.309564Z
-5bcb90581762b7478b6fd175746846e7
-2010-09-28T21:09:06.467392Z
-4222
-edavis10
+2011-07-14T09:24:22.000000Z
+56129dfa45c8b7d521d0d0dcf534c307
+2011-03-04T14:32:58.878627Z
+5003
+jplang
 
 
 
@@ -339,8 +484,5 @@ edavis10
 
 
 
-1323
-
-menu_manager
-dir
+1347
 

@@ -1,15 +1,15 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/gems
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/gems
 http://redmine.rubyforge.org/svn
 
 
 
-2009-11-25T05:36:44.792571Z
-3090
-edavis10
+2011-01-22T13:18:01.557255Z
+4739
+jplang
 
 
 
@@ -25,6 +25,9 @@ edavis10
 
 
 e93f8b46-1217-0410-a6f0-8f06a7374b81
+
+coderay-0.9.7
+dir
 
 rubytree-0.5.2
 dir

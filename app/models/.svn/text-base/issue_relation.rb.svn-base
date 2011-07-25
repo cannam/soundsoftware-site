@@ -47,7 +47,12 @@ class IssueRelation < ActiveRecord::Base
     if issue_from && issue_to
       errors.add :issue_to_id, :invalid if issue_from_id == issue_to_id
       errors.add :issue_to_id, :not_same_project unless issue_from.project_id == issue_to.project_id || Setting.cross_project_issue_relations?
-      errors.add_to_base :circular_dependency if issue_to.all_dependent_issues.include? issue_from
+      #detect circular dependencies depending wether the relation should be reversed
+      if TYPES.has_key?(relation_type) && TYPES[relation_type][:reverse]
+        errors.add_to_base :circular_dependency if issue_from.all_dependent_issues.include? issue_to
+      else
+        errors.add_to_base :circular_dependency if issue_to.all_dependent_issues.include? issue_from
+      end
       errors.add_to_base :cant_link_an_issue_with_a_descendant if issue_from.is_descendant_of?(issue_to) || issue_from.is_ancestor_of?(issue_to)
     end
   end
@@ -84,14 +89,15 @@ class IssueRelation < ActiveRecord::Base
   
   def set_issue_to_dates
     soonest_start = self.successor_soonest_start
-    if soonest_start
+    if soonest_start && issue_to
       issue_to.reschedule_after(soonest_start)
     end
   end
   
   def successor_soonest_start
-    return nil unless (TYPE_PRECEDES == self.relation_type) && (issue_from.start_date || issue_from.due_date)
-    (issue_from.due_date || issue_from.start_date) + 1 + delay
+    if (TYPE_PRECEDES == self.relation_type) && delay && issue_from && (issue_from.start_date || issue_from.due_date)
+      (issue_from.due_date || issue_from.start_date) + 1 + delay
+    end
   end
   
   def <=>(relation)

@@ -1,13 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 51
-/svn/!svn/ver/4404/trunk/test/fixtures/mail_handler
-END
-message_reply_by_subject.eml
-K 25
-svn:wc:ra_dav:version-url
-V 80
-/svn/!svn/ver/2294/trunk/test/fixtures/mail_handler/message_reply_by_subject.eml
+/svn/!svn/ver/4575/trunk/test/fixtures/mail_handler
 END
 ticket_html_only.eml
 K 25
@@ -15,23 +9,29 @@ svn:wc:ra_dav:version-url
 V 72
 /svn/!svn/ver/2136/trunk/test/fixtures/mail_handler/ticket_html_only.eml
 END
+message_reply_by_subject.eml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/2294/trunk/test/fixtures/mail_handler/message_reply_by_subject.eml
+END
 issue_update_with_multiple_quoted_reply_above.eml
 K 25
 svn:wc:ra_dav:version-url
 V 101
 /svn/!svn/ver/4361/trunk/test/fixtures/mail_handler/issue_update_with_multiple_quoted_reply_above.eml
 END
-ticket_with_spaces_between_attribute_and_separator.eml
-K 25
-svn:wc:ra_dav:version-url
-V 106
-/svn/!svn/ver/2838/trunk/test/fixtures/mail_handler/ticket_with_spaces_between_attribute_and_separator.eml
-END
 ticket_with_localized_attributes.eml
 K 25
 svn:wc:ra_dav:version-url
 V 88
 /svn/!svn/ver/4395/trunk/test/fixtures/mail_handler/ticket_with_localized_attributes.eml
+END
+ticket_with_spaces_between_attribute_and_separator.eml
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/2838/trunk/test/fixtures/mail_handler/ticket_with_spaces_between_attribute_and_separator.eml
 END
 ticket_with_long_subject.eml
 K 25
@@ -91,7 +91,7 @@ ticket_reply_with_status.eml
 K 25
 svn:wc:ra_dav:version-url
 V 80
-/svn/!svn/ver/4394/trunk/test/fixtures/mail_handler/ticket_reply_with_status.eml
+/svn/!svn/ver/4575/trunk/test/fixtures/mail_handler/ticket_reply_with_status.eml
 END
 ticket_on_given_project.eml
 K 25
@@ -105,17 +105,17 @@ svn:wc:ra_dav:version-url
 V 92
 /svn/!svn/ver/4361/trunk/test/fixtures/mail_handler/issue_update_with_quoted_reply_above.eml
 END
-ticket_reply.eml
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/!svn/ver/2288/trunk/test/fixtures/mail_handler/ticket_reply.eml
-END
 ticket_with_custom_fields.eml
 K 25
 svn:wc:ra_dav:version-url
 V 81
 /svn/!svn/ver/2211/trunk/test/fixtures/mail_handler/ticket_with_custom_fields.eml
+END
+ticket_reply.eml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/2288/trunk/test/fixtures/mail_handler/ticket_reply.eml
 END
 message_reply.eml
 K 25

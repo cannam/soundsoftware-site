@@ -1,47 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 41
-/svn/!svn/ver/4407/trunk/test/integration
-END
-application_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 61
-/svn/!svn/ver/2779/trunk/test/integration/application_test.rb
-END
-routing_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 57
-/svn/!svn/ver/4372/trunk/test/integration/routing_test.rb
-END
-admin_test.rb
-K 25
-svn:wc:ra_dav:version-url
 V 55
-/svn/!svn/ver/4231/trunk/test/integration/admin_test.rb
-END
-projects_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4407/trunk/test/integration/projects_test.rb
-END
-issues_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/4407/trunk/test/integration/issues_test.rb
-END
-account_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 57
-/svn/!svn/ver/4407/trunk/test/integration/account_test.rb
-END
-layout_test.rb
-K 25
-svn:wc:ra_dav:version-url
-V 56
-/svn/!svn/ver/3951/trunk/test/integration/layout_test.rb
+/svn/!svn/ver/5946/branches/1.2-stable/test/integration
 END

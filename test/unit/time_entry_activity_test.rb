@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class TimeEntryActivityTest < ActiveSupport::TestCase
   fixtures :enumerations, :time_entries
@@ -23,10 +23,10 @@ class TimeEntryActivityTest < ActiveSupport::TestCase
   def test_should_be_an_enumeration
     assert TimeEntryActivity.ancestors.include?(Enumeration)
   end
-  
+
   def test_objects_count
     assert_equal 3, TimeEntryActivity.find_by_name("Design").objects_count
-    assert_equal 1, TimeEntryActivity.find_by_name("Development").objects_count
+    assert_equal 2, TimeEntryActivity.find_by_name("Development").objects_count
   end
 
   def test_option_name

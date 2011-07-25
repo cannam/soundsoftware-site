@@ -1,8 +1,8 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/vendor/plugins/gravatar/spec
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/vendor/plugins/gravatar/spec
 http://redmine.rubyforge.org/svn
 
 
@@ -32,7 +32,7 @@ file
 
 
 
-2010-09-24T12:48:29.643852Z
+2011-07-14T09:24:11.000000Z
 26b23e5e988b11435e121bf53624d934
 2010-09-10T03:09:02.311267Z
 4072

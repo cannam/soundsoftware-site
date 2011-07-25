@@ -1,16 +1,16 @@
 10
 
 dir
-4411
-http://redmine.rubyforge.org/svn/trunk/lib/redmine/scm/adapters/mercurial
+6270
+http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/redmine/scm/adapters/mercurial
 http://redmine.rubyforge.org/svn
 
 
 
-2008-06-07T09:19:50.659015Z
-1499
-jplang
-
+2011-03-14T02:23:54.474379Z
+5112
+tmaruyama
+has-props
 
 
 
@@ -32,11 +32,11 @@ file
 
 
 
-2010-09-24T11:56:52.980004Z
-6ba619703ae315a3683836144d19773c
-2008-06-07T09:19:50.659015Z
-1499
-jplang
+2011-07-14T09:24:10.000000Z
+961af0eb6ab17203d985cdeac685937e
+2011-01-05T15:02:24.961855Z
+4633
+tmaruyama
 has-props
 
 
@@ -58,7 +58,41 @@ has-props
 
 
 
-812
+824
+
+redminehelper.py
+file
+
+
+
+
+2011-07-14T09:24:22.000000Z
+e00d9a9bc9249ea3dca63636370ba377
+2011-03-14T02:23:54.474379Z
+5112
+tmaruyama
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7856
 
 hg-template-1.0.tmpl
 file
@@ -66,11 +100,11 @@ file
 
 
 
-2010-09-24T11:56:52.992085Z
-2cd7a2264dff3758a1d3340af87a615f
-2008-06-07T09:19:50.659015Z
-1499
-jplang
+2011-07-14T09:24:10.000000Z
+9d5de62ae8cdc141d3f8b970dbba07a0
+2011-01-05T15:02:24.961855Z
+4633
+tmaruyama
 has-props
 
 
@@ -92,5 +126,5 @@ has-props
 
 
 
-825
+840
 

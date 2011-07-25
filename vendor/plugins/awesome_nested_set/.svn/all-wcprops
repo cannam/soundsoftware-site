@@ -1,35 +1,5 @@
 K 25
 svn:wc:ra_dav:version-url
-V 58
-/svn/!svn/ver/4406/trunk/vendor/plugins/awesome_nested_set
-END
-awesome_nested_set.gemspec
-K 25
-svn:wc:ra_dav:version-url
-V 85
-/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/awesome_nested_set.gemspec
-END
-Rakefile
-K 25
-svn:wc:ra_dav:version-url
-V 67
-/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/Rakefile
-END
-README.rdoc
-K 25
-svn:wc:ra_dav:version-url
-V 70
-/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/README.rdoc
-END
-init.rb
-K 25
-svn:wc:ra_dav:version-url
-V 66
-/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/init.rb
-END
-MIT-LICENSE
-K 25
-svn:wc:ra_dav:version-url
-V 70
-/svn/!svn/ver/2304/trunk/vendor/plugins/awesome_nested_set/MIT-LICENSE
+V 72
+/svn/!svn/ver/5878/branches/1.2-stable/vendor/plugins/awesome_nested_set
 END

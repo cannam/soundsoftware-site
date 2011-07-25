@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mirrordir="/var/mirror"
-logfile="/var/www/test-cannam/log/update-external-repo.log"
+hg="/usr/local/bin/hg"
 
 project="$1"
 local_repo="$2"
@@ -60,15 +60,40 @@ project_repo_mirror="$project_mirror/repo"
 
 success=""
 
+# If we have a record of the last successfully updated remote repo
+# URL, check it against our current remote URL: if it has changed, we
+# will need to start again with a new clone rather than pulling
+# updates into the existing local mirror
+
+successfile="$project_mirror/last_successful_url"
+if [ -f "$successfile" ]; then
+    last=$(cat "$successfile")
+    if [ x"$last" = x"$remote_repo" ]; then
+	echo "$$: Remote URL is unchanged from last successful update"
+    else
+	echo "$$: Remote URL has changed since last successful update:"
+	echo "$$: Last URL was $last, current is $remote_repo"
+	suffix="$$.$(date +%s)"
+	echo "$$: Moving existing repos to $suffix suffix and starting afresh"
+	mv "$project_repo_mirror" "$project_repo_mirror"."$suffix"
+	mv "$local_repo" "$local_repo"."$suffix"
+	mv "$successfile" "$successfile"."$suffix"
+	touch "$project_mirror/url_changed"
+    fi
+fi
+
 if [ -d "$project_repo_mirror" ]; then
 
     # Repo mirror exists: update it
     echo "$$: Mirror for project $project exists at $project_repo_mirror, updating" 1>&2
 
     if [ -d "$project_repo_mirror/.hg" ]; then
-	hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" && success=true
+	"$hg" --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" && success=true
+	if [ -z "$success" ]; then
+	    ( cd "$project_repo_mirror" && "$hg" pull "$remote_repo" ) && success=true
+	fi
     elif [ -d "$project_repo_mirror/.git" ]; then
-	( cd "$project_repo_mirror" && git fetch "$remote_repo" ) && success=true
+	( cd "$project_repo_mirror" && git pull "$remote_repo" master ) && success=true
     else 
 	echo "$$: ERROR: Repo mirror dir $project_repo_mirror exists but is not an Hg or git repo" 1>&2
     fi
@@ -81,12 +106,12 @@ else
     case "$remote_repo" in
 	*git*) 
 	    git clone "$remote_repo" "$project_repo_mirror" ||
-	    hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror"
+	    "$hg" --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror"
 	    ;;
 	*)
-	    hg --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" ||
+	    "$hg" --config extensions.convert= convert --datesort "$remote_repo" "$project_repo_mirror" ||
 	    git clone "$remote_repo" "$project_repo_mirror" ||
-	    hg clone "$remote_repo" "$project_repo_mirror"
+	    "$hg" clone "$remote_repo" "$project_repo_mirror"
 	    ;;
     esac && success=true
 
@@ -96,12 +121,12 @@ echo "Success=$success"
 
 if [ -n "$success" ]; then
     echo "$$: Update successful, pulling into local repo at $local_repo"
+    if [ ! -d "$local_repo" ]; then
+	"$hg" init "$local_repo"
+    fi
     if [ -d "$project_repo_mirror/.git" ]; then
-	if [ ! -d "$local_repo" ]; then
-	    hg init "$local_repo"
-	fi
-	( cd "$local_repo" && hg --config extensions.hgext.git= pull "$project_repo_mirror" )
+	( cd "$local_repo" && "$hg" --config extensions.hggit= pull "$project_repo_mirror" ) && echo "$remote_repo" > "$successfile"
     else 
-	( cd "$local_repo" && hg pull "$project_repo_mirror" )
+	( cd "$local_repo" && "$hg" pull "$project_repo_mirror" ) && echo "$remote_repo" > "$successfile"
     fi
 fi
