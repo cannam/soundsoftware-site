@@ -4,6 +4,8 @@ en:
   authors: "Authors"
   author: "Author"
   name: "Name"
+  publications_box: "My Publications"
+  label_my_publications_box: "My Publications"
   
   label_add_me_as_author: "Add me as an author"
   label_add_another_author: "Add another author"
@@ -17,7 +19,7 @@ en:
   
   text_author_email: "Author's email address as on the paper."
   text_author_institution: "Author's institution name as on paper."
-  text_author_name_on_paper: "Name of the author as it appears on paper."
+  text_author_name_on_paper: "Name of the author as it appears on paper. (In case it applies, please use the autocomplete suggestions.)"
   
   # authorships model
   institution: "Institution"

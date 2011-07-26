@@ -21,14 +21,16 @@ class PublicationsController < ApplicationController
 
   def create
     @publication = Publication.new(params[:publication])
+    
+    logger.error { "PUBLICATION CREATE ACTION" }
+    logger.error { params[:publication]  }
+    
+    
     @project = Project.find(params[:project_id])
 
     logger.error { "PARAMS publication" }
     logger.error { params[:publication] }
-
-    # array with the user ids
-    @users = []
-
+    
     @publication.projects << @project
     
     if @publication.save 

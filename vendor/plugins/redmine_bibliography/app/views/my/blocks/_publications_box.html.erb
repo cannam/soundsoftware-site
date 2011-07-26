@@ -1,0 +1,14 @@
+<h3><%=l(:label_my_publications_box)%> <%= "(" + User.current.author.authorships.count.to_s + ")" unless User.current.author.nil? %></h3>
+
+<% Publication.find(:all).each do |pub|%>
+<div class="wiki">
+  <h3><%= link_to pub.title, pub %></h3> 
+  
+  <% pub.projects.each do |proj| %>
+    <%= link_to proj.name, proj %>
+  <% end %>
+  	
+</div>
+<% end %>
+
+
