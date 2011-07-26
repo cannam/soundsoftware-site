@@ -3,7 +3,7 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
+  # before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
     
   def new
     @publication = Publication.new      
@@ -24,8 +24,7 @@ class PublicationsController < ApplicationController
     
     logger.error { "PUBLICATION CREATE ACTION" }
     logger.error { params[:publication]  }
-    
-    
+        
     @project = Project.find(params[:project_id])
 
     logger.error { "PARAMS publication" }
@@ -83,7 +82,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    logger.error "-------> No Show"
+    find_project_by_project_id unless params[:project_id].nil?
     
     @publication = Publication.find(params[:id])
 
