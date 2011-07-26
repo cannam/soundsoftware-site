@@ -7,6 +7,10 @@ en:
   publications_box: "My Publications"
   label_my_publications_box: "My Publications"
   
+  field_publication_title: Title
+  field_publication_authors: Authors
+  field_publication_projects: "Associated Projects" 
+  
   label_add_me_as_author: "Add me as an author"
   label_add_another_author: "Add another author"
 
