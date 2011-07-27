@@ -6,30 +6,26 @@ class PublicationsController < ApplicationController
   # before_filter :find_project, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
     
   def new
-    @publication = Publication.new      
+    find_project_by_project_id
+    @publication = Publication.new
     
     # we'll always want a new publication to have its bibtex entry
-    # @publication.build_bibtex_entry
+    @publication.build_bibtex_entry
     
     # and at least one author
     # @publication.authorships.build.build_author
     
     @project_id = params[:project_id]
-    @current_user = User.current
+    @current_user = User.current    
   end
 
 
-  def create
+  def create    
+    find_project_by_project_id
+    
     @publication = Publication.new(params[:publication])
-    
-    logger.error { "PUBLICATION CREATE ACTION" }
-    logger.error { params[:publication]  }
-        
-    @project = Project.find(params[:project_id])
 
-    logger.error { "PARAMS publication" }
-    logger.error { params[:publication] }
-    
+    # @project = Project.find(params[:project_id])
     @publication.projects << @project
     
     if @publication.save 
