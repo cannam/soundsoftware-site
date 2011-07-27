@@ -1,14 +1,30 @@
-<h3><%=l(:label_my_publications_box)%> <%= "(" + User.current.author.authorships.count.to_s + ")" unless User.current.author.nil? %></h3>
+<% get_my_publications %>
 
-<% Publication.find(:all).each do |pub|%>
-<div class="wiki">
-  <h3><%= link_to pub.title, pub %></h3> 
-  
-  <% pub.projects.each do |proj| %>
-    <%= link_to proj.name, proj %>
-  <% end %>
-  	
-</div>
-<% end %>
+<h3><%=l(:label_my_publications_box) %> <%= "(" + @my_publications.count.to_s + ")" %> </h3>
+
+<table class="list publications">		
+	<thead><tr>
+	<th><%=l(:field_publication_title)%></th>
+	<th><%=l(:field_publication_authors)%></th>
+	<th><%=l(:field_publication_projects)%></th>
+	</tr></thead>
+	<tbody>
+	  	
+  <% @my_publications.each do |publication|%>    
+	<tr id="publication-<%= publication.id %>" class="<%= cycle('odd', 'even') %>">
+		<td class="title">
+			<%= link_to publication.title, publication %>
+		</td>
+    <td class="authors">
+      <%= render_publications_authors(publication) %>
+    </td>
+    <td class="project">             
+      <%= render_publications_projects(publication) %>	
+    </td>
+	</tr>
+	<% end %>
+	</tbody>
+</table>
+
 
 
