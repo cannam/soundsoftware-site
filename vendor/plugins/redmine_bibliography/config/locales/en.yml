@@ -9,7 +9,10 @@ en:
   
   field_publication_title: Title
   field_publication_authors: Authors
-  field_publication_projects: "Associated Projects" 
+  field_publication_projects: "Associated Projects"
+  field_author_name: Author
+  field_author_username: "Associated User"
+  field_author_publications: "Publications by this Author" 
   
   label_add_me_as_author: "Add me as an author"
   label_add_another_author: "Add another author"
