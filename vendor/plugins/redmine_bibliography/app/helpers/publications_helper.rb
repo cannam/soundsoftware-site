@@ -61,6 +61,23 @@ module PublicationsHelper
     str = "#{sanitized_object_name(object_name.to_s)}_#{sanitized_method_name(method_name.to_s)}"
     str.to_sym
   end
+  
+  def render_projects_list(publication)
+    s = ""
+    projs = []
+    
+    publication.projects.each do |proj|
+      projs << link_to_project(proj)
+    end
+    
+    if projs.size < 3
+      s << '<nobr>' << projs.join(', ') << '</nobr>'
+    else
+      s << projs.join(', ')
+    end
+    s
+  end
+  
 
 end
 
