@@ -1,0 +1,14 @@
+article|1
+book|2
+booklet|3
+inbook|4
+incollection|5
+conference|6
+inproceedings|7
+manual|8
+masterthesis|9
+misc|10
+phdthesis|11
+proceedings|12
+techreport|13
+unpublished|14
