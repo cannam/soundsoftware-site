@@ -70,10 +70,13 @@ class PublicationsController < ApplicationController
 
   def edit    
     @publication = Publication.find(params[:id])
+    @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type  
   end
 
   def update    
     @publication = Publication.find(params[:id])        
+
+    logger.error { "INSIDE THE UPDATE ACTION IN THE PUBLICATION CONTROLLER" }
 
     if @publication.update_attributes(params[:publication])
       flash[:notice] = "Successfully updated Publication."

@@ -18,13 +18,7 @@
 <br />
 
 <%- if @publication.bibtex_entry != nil -%>
-<% @publication.bibtex_entry.attributes.each do |field| %>
-  <% if field[1] != nil %>
-    <h4><%= field[0] %></h4>
-    <%= @publication.bibtex_entry.attributes[field[0]] unless field[1] == nil %>
-    <br />
-  <%- end -%>
-<%- end -%>
+  <%= show_bibtex_fields(@publication.bibtex_entry) %>
 <%- end -%>
 
 <p>

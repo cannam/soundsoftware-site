@@ -3,11 +3,10 @@
 <% end %>
 
 <div class="splitcontentleft">
-  <% form_for @publication, :url => { :project_id  => @project_id, :action => :create } do |f| -%>
+  <% form_for @publication, :url => { :project_id  => @project_id, :action => :create }, :builder => TabularFormBuilder do |f| -%>
     <%= f.error_messages %>  
     <p>
-      <%= f.label :title, l(:title) %><br />
-      <%= f.text_field :title %>
+      <%= f.text_field :title, :required => true, :size => 60 %>
     </p>
 
     <h3><%= l(:authors) %></h3>    
