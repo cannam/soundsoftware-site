@@ -1,0 +1,26 @@
+<h2>Authors#index</h2>
+
+<table class="list authors">		
+	<thead><tr>
+	<th><%=l(:field_author_name)%></th>
+	<th><%=l(:field_author_username)%></th>
+	<th><%=l(:field_author_publications)%></th>
+	</tr></thead>
+	<tbody>
+	  	
+  <% @authors.each do |author|%>    
+	<tr id="author-<%= author.id %>" class="<%= cycle('odd', 'even') %>">
+		<td class="title">
+			<%= h author.name %>
+		</td>
+    <td class="username ">
+      <%= link_to author.user unless author.user.nil? %>
+    </td>
+    <td class="project">             
+      <%= render_author_publications(author) %>	
+    </td>
+	</tr>
+	<% end %>
+	</tbody>
+</table>
+

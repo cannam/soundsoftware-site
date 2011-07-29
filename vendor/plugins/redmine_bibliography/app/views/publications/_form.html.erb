@@ -1,0 +1,30 @@
+
+<div class="splitcontentleft">
+    <%= f.error_messages %>  
+    <p>
+      <%= f.text_field :title, :required => true, :size => 60 %>
+    </p>
+
+    <h3><%= l(:authors) %></h3>    
+    <% f.fields_for :authorships do |builder| %>
+      <%= render "authorship_fields", :f => builder %>
+    <% end %>
+
+    <p><%= link_to_add_fields l(:label_add_another_author), f, :authorships %></p>
+
+</div>
+
+<div class="splitcontentright">      
+  <h3>Other Details</h3>
+  <% f.fields_for :bibtex_entry do |builder| -%>
+    <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
+  <%- end -%>
+</div>
+
+<% content_for :sidebar do %>
+
+  placeholder
+
+<% end %>
+
+

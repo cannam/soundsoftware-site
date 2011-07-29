@@ -1,0 +1,26 @@
+<div class="box">
+
+
+<p><label for="bibtex_entry_type"><%=l("field_entry_type")%> <span class="required">*</span></label>
+	<%= f.collection_select(:entry_type, BibtexEntryType.find(:all), :id, :name,  {:selected => @selected_bibtex_entry_type_id, :prompt => true})  %>
+    </p>
+    <p> 
+      <%= f.text_field :year, :size => 60 %>  
+    </p>  
+    <p>   
+      <%= f.text_field :chapter, :size => 60 %>  
+    </p>  
+    <p>   
+      <%= f.text_field :editor, :size => 60  %>  
+    </p>  
+    <p>   
+      <%= f.text_field :booktitle,:size => 60  %>  
+    </p>  
+    <p>   
+      <%= f.text_field :publisher,:size => 60  %>  
+    </p>  
+    <p>   
+      <%= f.text_field :pages, :size => 60  %>  
+    </p>
+
+</div>

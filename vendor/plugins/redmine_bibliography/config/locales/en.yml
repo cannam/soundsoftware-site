@@ -1,0 +1,76 @@
+# English strings go here for Rails i18n
+en:
+  title: "Title"
+  authors: "Authors"
+  author: "Author"
+  name: "Name"
+  publications_box: "My Publications"
+  label_my_publications_box: "My Publications"
+  
+  field_publication_title: Title
+  field_publication_authors: Authors
+  field_publication_projects: "Associated Projects"
+  field_author_name: Author
+  field_author_username: "Associated User"
+  field_author_publications: "Publications by this Author" 
+  
+  bibtex_entry:
+    entry_type: "Bibtex Entry Type"
+  
+  label_add_me_as_author: "Add me as an author"
+  label_add_another_author: "Add another author"
+
+  remove_author: "Remove this author"
+  
+  label_publications_plural: "Publications"
+  label_publication_new: "Create New Publication"
+  label_add_publication_to_project: "Add Publication to this project"
+  label_publication_edit: "Edit Publication"
+  label_publication_show: "Publication Details"
+  label_add_project_to_publication: "Add Project to Publication"
+  label_project_search: "Search by name: "
+  label_publication_project_index: "Projects associated with this publication"
+  label_publication_index: "View all publications"
+  
+  text_author_email: "Author's email address as on the paper."
+  text_author_institution: "Author's institution name as on paper."
+  text_author_name_on_paper: "Name of the author as it appears on paper. (In case it applies, please use the autocomplete suggestions.)"
+  
+  # authorships model
+  field_institution: "Institution"
+  field_name_on_paper: "Name" 
+  field_email: "Email Address"
+      
+  # bibtex_entries model
+  field_entry_type: "Entry Type"
+  field_id: "id" 
+  field_publication_id: "Publication_id"
+  field_entry_type: "Entry Type"
+  field_address: "Address"
+  field_annote: "Annote"
+  field_booktitle: "Book Title"
+  field_chapter: "Chapter"
+  field_crossref: "Cross Reference"
+  field_edition: "Edition"
+  field_editor: "Editor"
+  field_eprint: "eprint"
+  field_howpublished: "How was it Published"
+  field_journal: "Journal"
+  field_key: "Key"
+  field_month: "Month"
+  field_note: "Note"
+  field_number: "Number"
+  field_organization: "Organization"
+  field_pages: "Pages"
+  field_publisher: "Publisher"
+  field_school: "School"
+  field_series: "Series"
+  field_type: "Type"
+  field_url: "URL"
+  field_volume: "Volume"
+  field_year: "Year"
+  
+  
+  
+  
+  

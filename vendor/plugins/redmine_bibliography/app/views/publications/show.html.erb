@@ -1,0 +1,41 @@
+<h2><%=l(:label_publication_show)%></h2>
+
+<div class="splitcontentleft">
+<h4>Title</h4>
+<%= h @publication.title %>
+
+<h4><%= l(:authors) %></h4>
+<ul id="authorships">
+  <% for authorship in @publication.authorships %>
+    <% content_tag_for :li, authorship do %>
+      <%= h authorship.name_on_paper %> <br />
+      <%= h authorship.institution %> <br />
+    <% end %>
+  <% end %>
+</ul>
+<%= sortable_element("authorships", :url => { :controller => :publications, :action => :sort_authors }) %>
+
+<br />
+
+<%- if @publication.bibtex_entry != nil -%>
+  <%= show_bibtex_fields(@publication.bibtex_entry) %>
+<%- end -%>
+
+<p>
+  <%= link_to l(:label_publication_edit), { :controller => "publications", :action => "edit", :id => @publication, :project_id => @project } %> |
+  <%= link_to "Destroy", @publication, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", publications_path %>
+</p>
+</div>
+
+
+<% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
+
+<div class="splitcontentright">
+  
+  <h4><%=l(:label_publication_project_index)%></h4>
+  <p id="list_projects">
+    <%= render :partial => 'list_projects' %>
+  </p>
+    <%= render :partial => 'add_project_form' %>    
+</div>
