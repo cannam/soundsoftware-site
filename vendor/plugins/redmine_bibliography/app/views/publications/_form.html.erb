@@ -1,9 +1,5 @@
-<% content_for :header_tags do %>
-    <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
-<% end %>
 
 <div class="splitcontentleft">
-  <% form_for @publication, :url => { :project_id  => @project_id, :action => :create }, :builder => TabularFormBuilder do |f| -%>
     <%= f.error_messages %>  
     <p>
       <%= f.text_field :title, :required => true, :size => 60 %>
@@ -26,8 +22,6 @@
     <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
   <%- end -%>
 </div>
-
-<% end -%>
 
 <% content_for :sidebar do %>
 

@@ -23,7 +23,9 @@ en:
   remove_author: "Remove this author"
   
   label_publications_plural: "Publications"
-  label_publication_new: "Add Publication"
+  label_publication_new: "Create New Publication"
+  label_publication_edit: "Edit Publication"
+  label_publication_show: "Publication Details"
   label_add_project_to_publication: "Add Project to Publication"
   label_project_search: "Search by name: "
   
