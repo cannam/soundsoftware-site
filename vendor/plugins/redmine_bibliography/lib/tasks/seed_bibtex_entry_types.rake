@@ -10,8 +10,7 @@ namespace :redmine do
 
         open(File.dirname(__FILE__) + "/../../db/seed_data/bibtex_entry_types_list.txt") do |bibtex_entry_types|
           bibtex_entry_types.read.each_line do |bibtex_entry_type|
-            bibtype=bibtex_entry_type.split('|')
-            BibtexEntryType.create(:name => bibtype[0].chomp, :id => bibtype[1].chomp)
+            BibtexEntryType.create(:name => bibtex_entry_type.chomp)
           end
         end
       end 
