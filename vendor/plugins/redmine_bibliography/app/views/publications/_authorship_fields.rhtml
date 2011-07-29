@@ -1,6 +1,5 @@
 <div id="authors" class="fields">
   <p>        
-    <%= f.label :name_on_paper, l("name") %>
     <%= f.text_field :name_on_paper %><br />
     <em><%= h l("text_author_name_on_paper") %></em><br />
                                                 
@@ -15,12 +14,10 @@
       <% end %>
     </div>
       
-    <%= f.label :institution, l("institution") %>
-    <%= f.text_field :institution %><br />
+    <%= f.text_field :institution, :size => 60 %><br />
     <em><%= h l("text_author_institution") %></em><br />
 
-    <%= f.label :email, l("email") %>
-    <%= f.text_field :email %><br />
+    <%= f.text_field :email, :size => 60  %><br />
     <em><%= h l("text_author_email") %></em><br />
     
     <%= f.hidden_field :user_id %>

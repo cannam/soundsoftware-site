@@ -61,6 +61,38 @@ module PublicationsHelper
     str = "#{sanitized_object_name(object_name.to_s)}_#{sanitized_method_name(method_name.to_s)}"
     str.to_sym
   end
+  
+  def render_projects_list(publication)
+    s = ""
+    projs = []
+    
+    publication.projects.each do |proj|
+      projs << link_to_project(proj)
+    end
+    
+    if projs.size < 3
+      s << '<nobr>' << projs.join(', ') << '</nobr>'
+    else
+      s << projs.join(', ')
+    end
+    s
+  end
+  
+  def show_bibtex_fields(bibtex_entry)
+    s = ""
 
+    bibtex_entry.attributes.each do |field|
+      if field[1] != nil
+        s << "<h4>" + field[0].titleize + "</h4>" 
+
+        if field[0] == "entry_type"
+          s << bibtex_entry.entry_type_name.capitalize
+        else
+          s << bibtex_entry.attributes[field[0]].to_s
+        end
+      end
+    end
+    s
+  end 
 end
 

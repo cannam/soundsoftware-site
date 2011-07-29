@@ -3,33 +3,29 @@
 class PublicationsController < ApplicationController
   unloadable
   
-  # before_filter :find_project_by_project_id, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
+  # before_filter :find_project, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
     
   def new
-    @publication = Publication.new      
+    find_project_by_project_id
+    @publication = Publication.new
     
     # we'll always want a new publication to have its bibtex entry
-    # @publication.build_bibtex_entry
+    @publication.build_bibtex_entry
     
     # and at least one author
     # @publication.authorships.build.build_author
     
     @project_id = params[:project_id]
-    @current_user = User.current
+    @current_user = User.current    
   end
 
 
-  def create
+  def create    
+    find_project_by_project_id
+    
     @publication = Publication.new(params[:publication])
-    
-    logger.error { "PUBLICATION CREATE ACTION" }
-    logger.error { params[:publication]  }
-        
-    @project = Project.find(params[:project_id])
 
-    logger.error { "PARAMS publication" }
-    logger.error { params[:publication] }
-    
+    # @project = Project.find(params[:project_id])
     @publication.projects << @project
     
     if @publication.save 
@@ -41,8 +37,13 @@ class PublicationsController < ApplicationController
   end
 
   def index
-    @project = Project.find(params[:project_id])
-    @publications = Publication.find :all, :joins => :projects, :conditions => ["project_id = ?", @project.id]
+    if !params[:project_id].nil?
+      find_project_by_project_id
+      @project = Project.find(params[:project_id])
+      @publications = Publication.find :all, :joins => :projects, :conditions => ["project_id = ?", @project.id]
+    else
+      @publications = Publication.find :all
+    end
   end
 
   def new_from_bibfile
@@ -67,15 +68,26 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def edit    
+  def edit   
+    find_project_by_project_id unless params[:project_id].nil?
+     
     @publication = Publication.find(params[:id])
+    @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type  
   end
 
   def update    
     @publication = Publication.find(params[:id])        
+
+    logger.error { "INSIDE THE UPDATE ACTION IN THE PUBLICATION CONTROLLER" }
+
     if @publication.update_attributes(params[:publication])
       flash[:notice] = "Successfully updated Publication."
-      redirect_to @publication
+
+      if !params[:project_id].nil?
+        redirect_to :action => :show, :id => @publication, :project_id => params[:project_id]
+      else
+        redirect_to :action => :show, :id => @publication
+      end
     else
       render :action => 'edit'
     end   
@@ -85,18 +97,13 @@ class PublicationsController < ApplicationController
     find_project_by_project_id unless params[:project_id].nil?
     
     @publication = Publication.find(params[:id])
-
+    
     if @publication.nil?
         @publications = Publication.all
-        render "index", :alert => 'Your Publications was not found!'
+        render "index", :alert => 'The publication was not found!'
     else
       @authors = @publication.authors
       @bibtext_entry = @publication.bibtex_entry
-    
-      respond_to do |format|
-        format.html
-        format.xml {render :xml => @publication}
-      end
     end
   end
 
@@ -230,18 +237,6 @@ class PublicationsController < ApplicationController
     
   end
 
-
-  
   private
-   
-  # TODO: luisf. - only here for debugging purposes 
-  # Find project of id params[:project_id]
-   def find_project_by_project_id
-     
-     logger.error { "FIND PROJECT BY PROJECT ID" }
-     
-     @project = Project.find(params[:project_id])
-   rescue ActiveRecord::RecordNotFound
-     render_404
-   end
+
 end
