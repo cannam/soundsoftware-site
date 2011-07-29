@@ -29,6 +29,8 @@ en:
   label_publication_show: "Publication Details"
   label_add_project_to_publication: "Add Project to Publication"
   label_project_search: "Search by name: "
+  label_publication_project_index: "Projects associated with this publication"
+  label_publication_index: "View all publications"
   
   text_author_email: "Author's email address as on the paper."
   text_author_institution: "Author's institution name as on paper."

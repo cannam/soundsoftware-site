@@ -68,7 +68,9 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def edit    
+  def edit   
+    find_project_by_project_id unless params[:project_id].nil?
+     
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type  
   end
@@ -92,12 +94,10 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    logger.error { "PARAMS PROJECT_ID #{params[:project_id]} <---" }
-
     find_project_by_project_id unless params[:project_id].nil?
     
     @publication = Publication.find(params[:id])
-
+    
     if @publication.nil?
         @publications = Publication.all
         render "index", :alert => 'The publication was not found!'

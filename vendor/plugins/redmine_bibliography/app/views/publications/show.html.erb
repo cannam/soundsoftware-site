@@ -22,7 +22,7 @@
 <%- end -%>
 
 <p>
-  <%= link_to "Edit", edit_publication_path(@publication) %> |
+  <%= link_to l(:label_publication_edit), { :controller => "publications", :action => "edit", :id => @publication, :project_id => @project } %> |
   <%= link_to "Destroy", @publication, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", publications_path %>
 </p>
@@ -32,13 +32,10 @@
 <% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
 
 <div class="splitcontentright">
-
-
-  <h4>List of Projects</h4>
+  
+  <h4><%=l(:label_publication_project_index)%></h4>
   <p id="list_projects">
     <%= render :partial => 'list_projects' %>
   </p>
-
-  <%= render :partial => 'add_project_form' %>
-    
+    <%= render :partial => 'add_project_form' %>    
 </div>
