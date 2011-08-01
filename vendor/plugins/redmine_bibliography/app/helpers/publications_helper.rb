@@ -10,11 +10,17 @@ module PublicationsHelper
   end
   
   def identify_author(author)
-    if author.class == User      
+    if author.class == User
       author_info = {
         :name_on_paper => author.name,
-        :user_id => author.id
+        :email => author.mail,
+        :user_id => author.id, 
+        :institution  => ""
       }
+      
+      unless author.ssamr_user_detail.nil?
+        author_info[:institution] = author.ssamr_user_detail.institution_name
+      end
     
     else 
       if author.class == Author    
