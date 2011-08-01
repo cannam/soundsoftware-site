@@ -24,10 +24,10 @@ class PublicationsController < ApplicationController
     find_project_by_project_id
     
     @publication = Publication.new(params[:publication])
-
+        
     # @project = Project.find(params[:project_id])
-    @publication.projects << @project
-    
+    @publication.projects << @project unless @project.nil?
+        
     if @publication.save 
       flash[:notice] = "Successfully created publication."
       redirect_to :action => :show, :id => @publication, :project_id => @project.id
