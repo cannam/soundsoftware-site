@@ -24,6 +24,7 @@ en:
   
   label_publications_plural: "Publications"
   label_publication_new: "Create New Publication"
+  label_publication_index: "List of Publication"
   label_add_publication_to_project: "Add Publication to this project"
   label_publication_edit: "Edit Publication"
   label_publication_show: "Publication Details"
