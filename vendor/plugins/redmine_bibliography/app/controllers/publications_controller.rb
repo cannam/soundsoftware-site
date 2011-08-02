@@ -232,6 +232,26 @@ class PublicationsController < ApplicationController
     end
     render :nothing => true
   end
+  
+  def remove_from_project_list
+    pub = Publication.find(params[:id])
+    proj = Project.find(params[:project_id])
+
+    if pub.projects.length > 1
+      if pub.projects.exists? proj
+        pub.projects.delete proj if request.post?
+      end
+    else
+      logger.error { "Cannot remove project from publication list" }      
+    end
+    
+    respond_to do |format|
+      format.js { render(:update) {|page| page.replace_html "list_projects", :partial => 'list_projects', :id  => pub} } 
+    end
+    
+    
+  end
+  
 
   def identify_author
     

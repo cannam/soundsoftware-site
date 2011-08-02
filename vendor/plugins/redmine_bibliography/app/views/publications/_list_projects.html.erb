@@ -1,1 +1,3 @@
-<%= render_projects_list(@publication) %>
+<% publication = Publication.find(params[:id]) %>
+
+<%= render_projects_list(publication) %>

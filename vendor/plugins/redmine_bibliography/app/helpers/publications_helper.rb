@@ -70,18 +70,12 @@ module PublicationsHelper
   
   def render_projects_list(publication)
     s = ""
-    projs = []
     
     publication.projects.each do |proj|
-      projs << link_to_project(proj)
+      s << link_to_project(proj) + link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_from_project_list', :id => publication, :project_id => proj }, :method => :post }, :class => 'icon icon-del') + "<br />"
     end
     
-    if projs.size < 3
-      s << '<nobr>' << projs.join(', ') << '</nobr>'
-    else
-      s << projs.join(', ')
-    end
-    s
+    s  
   end
   
   def show_bibtex_fields(bibtex_entry)
