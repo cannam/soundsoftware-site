@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+
 <h2><%=l(:label_publication_show)%></h2>
 
 <div class="splitcontentleft">
@@ -8,12 +10,13 @@
 <ul id="authorships">
   <% for authorship in @publication.authorships.find(:all, :order => :auth_order) %>
     <% content_tag_for :li, authorship do %>
+      <span class="handle">[drag to reorder]</span>
       <%= h authorship.name_on_paper %> <br />
       <%= h authorship.institution %> <br />
     <% end %>
   <% end %>
 </ul>
-<%= sortable_element("authorships", :url => { :controller => :publications, :action => :sort_author_order }) %>
+<%= sortable_element("authorships", :url => { :controller => :publications, :action => :sort_author_order }, :handle => "handle") %>
 
 <br />
 
