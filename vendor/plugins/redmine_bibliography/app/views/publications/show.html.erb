@@ -6,7 +6,7 @@
 
 <h4><%= l(:authors) %></h4>
 <ul id="authorships">
-  <% for authorship in @publication.authorships %>
+  <% for authorship in @publication.authorships.find(:all, :order => :auth_order) %>
     <% content_tag_for :li, authorship do %>
       <%= h authorship.name_on_paper %> <br />
       <%= h authorship.institution %> <br />
