@@ -226,9 +226,9 @@ class PublicationsController < ApplicationController
     render :layout => false
   end
 
-  def sort_authors
-    params[:authors].each_with_index do |id, index|
-      Author.update_all(['order=?', index+1], ['id=?', id])
+  def sort_author_order
+    params[:authorships].each_with_index do |id, index|
+      Authorship.update_all(['auth_order=?', index+1], ['id=?', id])
     end
     render :nothing => true
   end
