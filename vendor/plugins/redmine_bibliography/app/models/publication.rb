@@ -6,7 +6,7 @@ class Publication < ActiveRecord::Base
   has_many :authorships, :dependent => :destroy
   has_many :authors, :through => :authorships, :uniq => true
   
-  has_one :bibtex_entry, :dependent => :destroy
+  has_one :bibtex_entry
 
   validates_presence_of :title
 
