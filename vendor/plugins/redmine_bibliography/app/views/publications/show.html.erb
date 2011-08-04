@@ -26,7 +26,8 @@
 
 <p>
   <%= link_to l(:label_publication_edit), { :controller => "publications", :action => "edit", :id => @publication, :project_id => @project } %> |
-  <%= link_to "Destroy", @publication, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "Delete", {:controller => 'publications', :action => 'destroy', :id => @publication, :project_id => @project },
+                                                     :confirm => l(:text_are_you_sure), :method => :delete, :title => l(:button_delete) %> |
   <%= link_to "View All", publications_path %>
 </p>
 </div>

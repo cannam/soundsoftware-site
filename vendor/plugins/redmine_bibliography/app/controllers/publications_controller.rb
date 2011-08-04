@@ -3,6 +3,9 @@
 class PublicationsController < ApplicationController
   unloadable
   
+  model_object Publication
+  before_filter :find_model_object, :except => [:new, :create, :index]
+  
   # before_filter :find_project, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
     
   def new
@@ -252,6 +255,14 @@ class PublicationsController < ApplicationController
     
   end
   
+  def destroy
+    find_project_by_project_id
+    
+    @publication.destroy
+        
+    flash[:notice] = "Successfully deleted Publication."
+    redirect_to :controller => :publications, :action => 'index', :project_id => @project
+  end
 
   def identify_author
     
