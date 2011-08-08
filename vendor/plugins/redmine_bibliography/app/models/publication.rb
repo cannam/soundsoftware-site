@@ -26,7 +26,7 @@ class Publication < ActiveRecord::Base
     authorships.each_with_index do |authorship, index|
       if authorship.auth_order.nil?
          authorship.auth_order = index
-         authorship.save!
+         authorship.update
       end
     end    
   end

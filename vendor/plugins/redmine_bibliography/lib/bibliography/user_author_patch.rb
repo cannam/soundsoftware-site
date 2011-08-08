@@ -22,29 +22,29 @@ module Bibliography
           :name_on_paper => "",
           :email => "",
           :institution => "",
-          :user_id => self.id                    
+          :author_user_id => self.id,
+          :is_user => "1"                    
         }
         
         if self.author.nil?
-          logger.error { "NO AUTHOR HERE" }
+          logger.debug { "Bibliography: The current user has no author associated." }
           info[:name_on_paper] = self.name
           info[:email] = self.mail
           if not self.ssamr_user_detail.nil?
             info[:institution]  = self.ssamr_user_detail.institution_name
           end
         else
-          logger.error { "-----> We've got an author associated with the user." }          
+          logger.error { "Bibliography: We've got an author associated with the current user." }          
           info[:name_on_paper] = self.author.name            
 
           if self.author.authorships.length > 0
             info[:email] = self.author.authorships.first.email
             info[:institution] = self.author.authorships.first.institution
           end
-        end
-        
-        return info
-        
-      end            
+        end        
+        return info        
+      end
+                
     end #InstanceMethods
     
   end #UserPublicationsPatch
