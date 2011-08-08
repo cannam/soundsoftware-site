@@ -1,4 +1,6 @@
 class Authorship < ActiveRecord::Base
+  unloadable 
+  
   belongs_to :author
   belongs_to :publication
   
@@ -11,17 +13,22 @@ class Authorship < ActiveRecord::Base
   end 
   
   def user_id=(uid)  
-    unless uid.blank?
+    if uid.blank?
+      author = Author.new :name => self.name_on_paper
+      author.save!
+      self.author_id = author.id
+    else
       user = User.find(uid)                         
+      
       if user.author.nil?      
         # TODO: should reflect the name_on_paper parameter
-        author = Author.new :name => user.name
+        author = Author.new :name => self.name_on_paper
         author.save!
         user.author = author
         user.save!
-     end
-           
-    self.author_id = user.author.id
+      else
+        self.author_id = user.author.id        
+      end
     end    
   end
 end

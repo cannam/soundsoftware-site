@@ -3,6 +3,9 @@
 class PublicationsController < ApplicationController
   unloadable
   
+  model_object Publication
+  before_filter :find_model_object, :except => [:new, :create, :index, :autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
+  
   # before_filter :find_project, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
     
   def new
@@ -24,10 +27,10 @@ class PublicationsController < ApplicationController
     find_project_by_project_id
     
     @publication = Publication.new(params[:publication])
-
+        
     # @project = Project.find(params[:project_id])
-    @publication.projects << @project
-    
+    @publication.projects << @project unless @project.nil?
+        
     if @publication.save 
       flash[:notice] = "Successfully created publication."
       redirect_to :action => :show, :id => @publication, :project_id => @project.id
@@ -226,11 +229,39 @@ class PublicationsController < ApplicationController
     render :layout => false
   end
 
-  def sort_authors
-    params[:authors].each_with_index do |id, index|
-      Author.update_all(['order=?', index+1], ['id=?', id])
+  def sort_author_order
+    params[:authorships].each_with_index do |id, index|
+      Authorship.update_all(['auth_order=?', index+1], ['id=?', id])
     end
     render :nothing => true
+  end
+  
+  def remove_from_project_list
+    pub = Publication.find(params[:id])
+    proj = Project.find(params[:project_id])
+
+    if pub.projects.length > 1
+      if pub.projects.exists? proj
+        pub.projects.delete proj if request.post?
+      end
+    else
+      logger.error { "Cannot remove project from publication list" }      
+    end
+    
+    respond_to do |format|
+      format.js { render(:update) {|page| page.replace_html "list_projects", :partial => 'list_projects', :id  => pub} } 
+    end
+    
+    
+  end
+  
+  def destroy
+    find_project_by_project_id
+    
+    @publication.destroy
+        
+    flash[:notice] = "Successfully deleted Publication."
+    redirect_to :controller => :publications, :action => 'index', :project_id => @project
   end
 
   def identify_author

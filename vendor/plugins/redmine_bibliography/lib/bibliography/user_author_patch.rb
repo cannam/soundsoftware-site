@@ -25,22 +25,20 @@ module Bibliography
           :user_id => self.id                    
         }
         
-        unless self.author.nil?
-          logger.error { "We've got author" }          
+        if self.author.nil?
+          logger.error { "NO AUTHOR HERE" }
+          info[:name_on_paper] = self.name
+          info[:email] = self.mail
+          if not self.ssamr_user_detail.nil?
+            info[:institution]  = self.ssamr_user_detail.institution_name
+          end
+        else
+          logger.error { "-----> We've got an author associated with the user." }          
           info[:name_on_paper] = self.author.name            
 
           if self.author.authorships.length > 0
             info[:email] = self.author.authorships.first.email
             info[:institution] = self.author.authorships.first.institution
-          end
-
-        else
-          logger.error { "No author" }
-          
-          info[:name_on_paper] = "No Name"
-          info[:email] = self.mail
-          if not self.ssamr_user_detail.nil?
-            info[:institution]  = self.ssamr_user_detail.institution_name
           end
         end
         

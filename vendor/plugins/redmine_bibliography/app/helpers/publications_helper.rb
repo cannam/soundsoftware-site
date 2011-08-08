@@ -10,11 +10,17 @@ module PublicationsHelper
   end
   
   def identify_author(author)
-    if author.class == User      
+    if author.class == User
       author_info = {
         :name_on_paper => author.name,
-        :user_id => author.id
+        :email => author.mail,
+        :user_id => author.id, 
+        :institution  => ""
       }
+      
+      unless author.ssamr_user_detail.nil?
+        author_info[:institution] = author.ssamr_user_detail.institution_name
+      end
     
     else 
       if author.class == Author    
@@ -64,18 +70,12 @@ module PublicationsHelper
   
   def render_projects_list(publication)
     s = ""
-    projs = []
     
     publication.projects.each do |proj|
-      projs << link_to_project(proj)
+      s << link_to_project(proj) + link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_from_project_list', :id => publication, :project_id => proj }, :method => :post }, :class => 'icon icon-del') + "<br />"
     end
     
-    if projs.size < 3
-      s << '<nobr>' << projs.join(', ') << '</nobr>'
-    else
-      s << projs.join(', ')
-    end
-    s
+    s  
   end
   
   def show_bibtex_fields(bibtex_entry)
