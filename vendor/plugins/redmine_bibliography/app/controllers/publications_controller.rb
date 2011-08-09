@@ -223,7 +223,7 @@ class PublicationsController < ApplicationController
     end
     
     authors_list.each do |author|      
-      @results << author unless users_list.include?(author.user_id)
+      @results << author unless users_list.include?(author.user)
     end
                  
     render :layout => false
