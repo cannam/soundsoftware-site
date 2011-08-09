@@ -3,7 +3,7 @@
 class Publication < ActiveRecord::Base
   unloadable
   
-  has_many :authorships, :dependent => :destroy
+  has_many :authorships, :dependent => :destroy, :order => "auth_order ASC"
   has_many :authors, :through => :authorships, :uniq => true
   
   has_one :bibtex_entry, :dependent => :destroy
