@@ -20,7 +20,8 @@
     <%= f.text_field :email, :size => 60  %><br />
     <em><%= h l("text_author_email") %></em><br />
     
-    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :is_user %>
+    <%= f.text_field :author_user_id %>
     
     <%= link_to_remove_fields l("remove_author"), f %>    
     

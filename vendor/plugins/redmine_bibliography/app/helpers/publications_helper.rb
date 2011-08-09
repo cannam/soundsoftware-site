@@ -11,11 +11,15 @@ module PublicationsHelper
   
   def identify_author(author)
     if author.class == User
+
+      Rails.logger.debug { "Identify Author: USER" }
+
       author_info = {
         :name_on_paper => author.name,
         :email => author.mail,
         :user_id => author.id, 
-        :institution  => ""
+        :institution  => "",
+        :is_user  => "1"
       }
       
       unless author.ssamr_user_detail.nil?
@@ -24,11 +28,14 @@ module PublicationsHelper
     
     else 
       if author.class == Author    
-      author_info = { 
-        :name_on_paper => author.name, 
-        :user_id => author.user_id,
-        :id => author.id
-      }
+        Rails.logger.debug { "Identify Author: AUTHOR" }
+
+        author_info = { 
+          :name_on_paper => author.name, 
+          :user_id => author.user_id,
+          :id => author.id, 
+          :is_user  => "0"
+        }
       end
     end
                 

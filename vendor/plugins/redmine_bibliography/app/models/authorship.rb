@@ -7,28 +7,36 @@ class Authorship < ActiveRecord::Base
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :publication
   
+  attr_accessor :is_user, :author_user_id 
+  before_save :associate_author_user
   
-  # setter and getter for virtual attribute :user_id
-  def user_id    
-  end 
-  
-  def user_id=(uid)  
-    if uid.blank?
-      author = Author.new :name => self.name_on_paper
-      author.save!
-      self.author_id = author.id
-    else
-      user = User.find(uid)                         
-      
-      if user.author.nil?      
-        # TODO: should reflect the name_on_paper parameter
-        author = Author.new :name => self.name_on_paper
-        author.save!
-        user.author = author
-        user.save!
+  protected 
+  def associate_author_user 
+    logger.error { "Before Save: associate_author_user" }   
+
+    case self.is_user
+      when "0"
+        author = Author.find(self.author_user_id)
+        self.author_id = author.id        
+      when "1"
+        user = User.find(self.author_user_id)
+        
+        if user.author.nil?
+          author = Author.new :name => self.name_on_paper
+          author.save
+          self.author_id = author.id
+          user.author = author
+          user.save
+        else
+          author = user.author
+          self.author_id = author.id
+        end        
       else
-        self.author_id = user.author.id        
+        author = Author.new :name => self.name_on_paper
+        logger.error { "SAVED AUTHOR" }
+        author.save
+        self.author_id = author.id
+        
       end
-    end    
   end
 end
