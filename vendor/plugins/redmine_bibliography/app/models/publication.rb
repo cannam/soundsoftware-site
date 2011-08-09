@@ -16,7 +16,7 @@ class Publication < ActiveRecord::Base
   
   has_and_belongs_to_many :projects, :uniq => true
   
-  after_save :set_initial_author_order
+  before_save :set_initial_author_order
   
   def set_initial_author_order
     authorships = self.authorships
@@ -26,7 +26,6 @@ class Publication < ActiveRecord::Base
     authorships.each_with_index do |authorship, index|
       if authorship.auth_order.nil?
          authorship.auth_order = index
-         authorship.update
       end
     end    
   end
