@@ -6,10 +6,6 @@ module Bibliography
       base.send(:include, InstanceMethods) 
       extend ClassMethods     
           
-      base.class_eval do
-        has_one :publication
-                                    
-      end
     end #self.included
     
     module ClassMethods
