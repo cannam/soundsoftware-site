@@ -21,7 +21,7 @@ module PublicationsHelper
 
       author_info = {
         :name_on_paper => author.name,
-        :user_id => author.id, 
+        :author_user_id => author.id, 
         :institution  => "",
         :is_user  => "1"
       }
@@ -36,7 +36,7 @@ module PublicationsHelper
 
       author_info = { 
         :name_on_paper => author.name, 
-        :user_id => author.user_id,
+        :author_user_id => author.user_id,
         :id => author.id, 
         :is_user  => "0"
       }
