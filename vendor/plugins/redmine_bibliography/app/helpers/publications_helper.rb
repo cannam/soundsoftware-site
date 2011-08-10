@@ -19,12 +19,8 @@ module PublicationsHelper
 
       Rails.logger.debug { "Identify Author: USER" }
 
-      author_info = {
-        :name_on_paper => author.name,
-        :author_user_id => author.id, 
-        :institution  => "",
-        :is_user  => "1"
-      }
+      # fc defined in the users_author_patch
+      author_info = author.get_author_info
 
       link_text = h(author.name)
 

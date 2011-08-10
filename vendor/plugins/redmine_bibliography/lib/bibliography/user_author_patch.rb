@@ -15,15 +15,12 @@ module Bibliography
 
       def get_author_info
         info = { 
-          :name_on_paper => "",
-          :email => "",
+          :name_on_paper =>  self.name,
+          :email => self.mail,
           :institution => "",
           :author_user_id => self.id,
           :is_user => "1"                    
         }
-
-        info[:name_on_paper] = self.name
-        info[:email] = self.mail
 
         unless self.ssamr_user_detail.nil?
           info[:institution]  = self.ssamr_user_detail.institution_name
