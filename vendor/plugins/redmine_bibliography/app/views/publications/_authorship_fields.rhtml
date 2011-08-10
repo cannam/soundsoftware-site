@@ -11,9 +11,6 @@
     %>
 
     <div id="<%= form_tag_id(f.object_name, :identify_author) %>">
-      <% if params[:q] && params[:q].length > 1 %>
-        <%= select_author_links 'author[author_ids][]', @authors %>
-      <% end %>
     </div>
       
     <p>

@@ -23,6 +23,7 @@ en:
   
   label_author_is_me: "(I am this author)"
   label_add_me_as_author: "Add me as an author"
+  label_add_an_author: "Add an author"
   label_add_another_author: "Add another author"
 
   remove_author: "Remove this author"

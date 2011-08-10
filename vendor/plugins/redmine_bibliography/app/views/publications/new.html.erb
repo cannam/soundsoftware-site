@@ -6,5 +6,6 @@
 
 <% form_for @publication, :url => { :project_id  => @project_id, :action => :create }, :builder => TabularFormBuilder do |f| -%>
   <%= render :partial => 'form', :locals => { :f => f }  %>
+  <div style="clear:both"></div>
   <%= f.submit %>
 <% end %>
