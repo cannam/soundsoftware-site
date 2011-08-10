@@ -21,23 +21,14 @@ module Bibliography
           :author_user_id => self.id,
           :is_user => "1"                    
         }
-        
-        if self.author.nil?
-          logger.debug { "Bibliography: The current user has no author associated." }
-          info[:name_on_paper] = self.name
-          info[:email] = self.mail
-          if not self.ssamr_user_detail.nil?
-            info[:institution]  = self.ssamr_user_detail.institution_name
-          end
-        else
-          logger.error { "Bibliography: We've got an author associated with the current user." }          
-          info[:name_on_paper] = self.author.name            
 
-          if self.author.authorships.length > 0
-            info[:email] = self.author.authorships.first.email
-            info[:institution] = self.author.authorships.first.institution
-          end
-        end        
+        info[:name_on_paper] = self.name
+        info[:email] = self.mail
+
+        unless self.ssamr_user_detail.nil?
+          info[:institution]  = self.ssamr_user_detail.institution_name
+        end
+
         return info        
       end
                 
