@@ -405,12 +405,15 @@ textarea#custom_field_possible_values {width: 99%}
 p.pagination {margin-top:8px;}
 
 /***** Tabular forms ******/
-.tabular p{
+.tabular p, .tabular ul{
 margin: 0;
 padding: 5px 0 8px 0;
 padding-left: 180px; /*width of left column containing the label elements*/
 height: 1%;
 clear:left;
+}
+.tabular ul{
+margin-top: -4px;
 }
 
 html>body .tabular p {overflow:hidden;}
@@ -424,7 +427,7 @@ width: 175px; /*width of labels. Should be smaller than left column to create so
 margin*/
 }
 
-.tabular .splitcontentleft .box p, .tabular .splitcontentright .box p, .splitcontentleft .tabular p, .splitcontentright .tabular p {
+.tabular .splitcontentleft .box p, .tabular .splitcontentright .box p, .splitcontentleft .tabular p, .splitcontentright .tabular p, .tabular .splitcontentleft .box ul, .tabular .splitcontentright .box ul, .splitcontentleft .tabular ul, .splitcontentright .tabular ul {
 padding-left: 120px;
 }
 

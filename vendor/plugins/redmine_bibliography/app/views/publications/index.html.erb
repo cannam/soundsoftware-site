@@ -3,8 +3,11 @@
 </div>
 
 <div class="splitcontentleft">
-  <h3>Publications#index</h3>
-
+  <% if @project %>
+  <h3><%= l(:label_all_publications_for_project, :project => @project.name) %></h3>
+  <% else %>
+  <h3><%= l(:label_all_publications) %></h3>
+  <% end %>
 
   <table>
     <tr>

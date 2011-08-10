@@ -10,42 +10,59 @@ module PublicationsHelper
   end
   
   def identify_author(author)
+
+    link_text = ''
+    suffix = ''
+    user = nil
+
     if author.class == User
 
       Rails.logger.debug { "Identify Author: USER" }
 
       author_info = {
         :name_on_paper => author.name,
-        :email => author.mail,
         :user_id => author.id, 
         :institution  => "",
         :is_user  => "1"
       }
-      
-      unless author.ssamr_user_detail.nil?
-        author_info[:institution] = author.ssamr_user_detail.institution_name
-      end
-    
-    else 
-      if author.class == Author    
-        Rails.logger.debug { "Identify Author: AUTHOR" }
 
-        author_info = { 
-          :name_on_paper => author.name, 
-          :user_id => author.user_id,
-          :id => author.id, 
-          :is_user  => "0"
-        }
+      link_text = h(author.name)
+
+      user = author
+      
+    elsif author.class == Author    
+
+      Rails.logger.debug { "Identify Author: AUTHOR" }
+
+      author_info = { 
+        :name_on_paper => author.name, 
+        :user_id => author.user_id,
+        :id => author.id, 
+        :is_user  => "0"
+      }
+      
+      link_text = h(author.name)
+      
+      user = author.user
+    end
+
+    unless user.nil?
+      author_info[:email] = user.mail
+      unless user.ssamr_user_detail.nil?
+        author_info[:institution] = user.ssamr_user_detail.institution_name
+        suffix = '<em>' + h(author_info[:institution]) + '</em>'
       end
     end
-                
-    link_to_function(author.name, "update_author_info(this," + author_info.to_json + ")")
+    
+    unless link_text.empty?
+      link_to_function(link_text, "update_author_info(this," + author_info.to_json + ")") + ' ' + suffix
+    end
   end
   
   def choose_author_link(name, authors_users)
     s = ''
     authors_users.sort.each do |author_user|
-      s << "#{identify_author author_user}\n"
+      s << "<li>#{identify_author author_user}</li>"
     end
     s 
   end

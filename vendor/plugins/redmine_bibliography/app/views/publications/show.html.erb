@@ -11,8 +11,7 @@
   <% for authorship in @publication.authorships.find(:all, :order => :auth_order) %>
     <% content_tag_for :li, authorship do %>
       <span class="handle">[drag to reorder]</span>
-      <%= h authorship.name_on_paper %> <br />
-      <%= h authorship.institution %> <br />
+      <%= h authorship.name_on_paper %> <em><%= h authorship.institution %></em> <br />
     <% end %>
   <% end %>
 </ul>
