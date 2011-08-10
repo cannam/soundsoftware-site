@@ -6,6 +6,9 @@ en:
   name: "Name"
   publications_box: "My Publications"
   label_my_publications_box: "My Publications"
+
+  label_all_publications: All Publications
+  label_all_publications_for_project: Publications associated with %{project}
   
   field_publication_title: Title
   field_publication_authors: Authors
@@ -27,11 +30,11 @@ en:
   label_publications_plural: "Publications"
   label_publication_new: "Create New Publication"
   label_publication_index: "List of Publication"
-  label_add_publication_to_project: "Add Publication to this project"
+  label_add_publication_to_project: "Add publication to this project"
   label_publication_edit: "Edit Publication"
   label_publication_show: "Publication Details"
-  label_add_project_to_publication: "Add Project to Publication"
-  label_project_search: "Search by name: "
+  label_add_project_to_publication: "Add this publication to a project"
+  label_project_search: "Find project by name: "
   label_publication_project_index: "Projects associated with this publication"
   label_publication_index: "View all publications"
   
