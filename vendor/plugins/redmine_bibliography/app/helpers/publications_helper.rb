@@ -21,38 +21,33 @@ module PublicationsHelper
 
       # fc defined in the users_author_patch
       author_info = author.get_author_info
-
-      link_text = h(author.name)
-
-      user = author
-      
+  
     elsif author.class == Author    
 
       Rails.logger.debug { "Identify Author: AUTHOR" }
 
       author_info = { 
         :name_on_paper => author.name, 
-        :author_user_id => author.user_id,
-        :id => author.id, 
-        :is_user  => "0"
+        :author_user_id => '',
+        :is_user  => '0',
+        :institution => "",
+        :email => ""
       }
       
-      link_text = h(author.name)
-      
-      user = author.user
-    end
+      link_text = h(author.name)      
 
-    unless user.nil?
-      author_info[:email] = user.mail
-      unless user.ssamr_user_detail.nil?
-        author_info[:institution] = user.ssamr_user_detail.institution_name
-        suffix = '<em>' + h(author_info[:institution]) + '</em>'
+      if author.user.nil?
+        author_info[:author_user_id] = author.id
+        # TODO: AUTHORSHIPS INFORMATION
+#     else
+#       author_info[:email] = author.user.mail
+#       author_info[:institution] = author.user.institution_name
       end
     end
     
-    unless link_text.empty?
-      link_to_function(link_text, "update_author_info(this," + author_info.to_json + ")") + ' ' + suffix
-    end
+    suffix = '<em>' + h(author_info[:institution]) + '</em>'
+
+    link_to_function(link_text, "update_author_info(this," + author_info.to_json + ")") + ' ' + suffix
   end
   
   def choose_author_link(name, authors_users)
