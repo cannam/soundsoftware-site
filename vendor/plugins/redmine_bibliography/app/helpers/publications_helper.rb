@@ -77,9 +77,9 @@ module PublicationsHelper
   
   def render_projects_list(publication)
     s = ""
-    
+
     publication.projects.each do |proj|
-      s << link_to_project(proj) + link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_from_project_list', :id => publication, :project_id => proj }, :method => :post }, :class => 'icon icon-del') + "<br />"
+      s << link_to_project(proj) + link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post }, :class => 'icon icon-del') + "<br />"
     end
     
     s  

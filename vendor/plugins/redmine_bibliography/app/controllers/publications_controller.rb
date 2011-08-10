@@ -98,7 +98,7 @@ class PublicationsController < ApplicationController
 
   def show
     find_project_by_project_id unless params[:project_id].nil?
-    
+        
     @publication = Publication.find(params[:id])
     
     if @publication.nil?
@@ -189,17 +189,6 @@ class PublicationsController < ApplicationController
     
   end
   
-  def add_project
-    @projects = Project.find(params[:publication][:project_ids])    
-    @publication = Publication.find(params[:id])        
-    @publication.projects << @projects
-    
-    # TODO luisf should also respond to HTML??? 
-    respond_to do |format|
-      format.js      
-    end
-  end
-
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
         
@@ -235,24 +224,47 @@ class PublicationsController < ApplicationController
     end
     render :nothing => true
   end
-  
-  def remove_from_project_list
-    pub = Publication.find(params[:id])
-    proj = Project.find(params[:project_id])
 
-    if pub.projects.length > 1
-      if pub.projects.exists? proj
-        pub.projects.delete proj if request.post?
+  def add_project
+    @projects = Project.find(params[:publication][:project_ids])    
+    @publication.projects << @projects
+    
+    # TODO luisf should also respond to HTML??? 
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { 
+        render(:update) {|page| 
+          page[:add_project_form].reset          
+          page.replace_html :list_projects, :partial => 'list_projects'
+        }
+      }
+    end
+  end
+  
+  def remove_project
+    find_project_by_project_id
+    proj_to_remove = Project.find(params[:remove_project_id])
+    
+    if proj_to_remove == @project
+      warning = "You are about to remove the current project from the publication's project list. Are you sure?"
+    end
+
+    if @publication.projects.length > 1
+      if @publication.projects.exists? proj_to_remove
+        @publication.projects.delete proj_to_remove if request.post?
       end
     else
-      logger.error { "Cannot remove project from publication list" }      
+      logger.error { "Cannot remove project from publication list" }
     end
     
     respond_to do |format|
-      format.js { render(:update) {|page| page.replace_html "list_projects", :partial => 'list_projects', :id  => pub} } 
+      format.html { redirect_to :back }
+      format.js { 
+         render(:update) {|page| 
+           page.replace_html :list_projects, :partial => 'list_projects'
+         }
+       }
     end
-    
-    
   end
   
   def destroy
