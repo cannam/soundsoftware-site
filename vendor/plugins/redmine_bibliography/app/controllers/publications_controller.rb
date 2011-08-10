@@ -98,12 +98,10 @@ class PublicationsController < ApplicationController
 
   def show
     find_project_by_project_id unless params[:project_id].nil?
-        
-    @publication = Publication.find(params[:id])
     
     if @publication.nil?
-        @publications = Publication.all
-        render "index", :alert => 'The publication was not found!'
+      @publications = Publication.all
+      render "index", :alert => 'The publication was not found!'
     else
       @authors = @publication.authors
       @bibtext_entry = @publication.bibtex_entry
@@ -228,6 +226,7 @@ class PublicationsController < ApplicationController
   def add_project
     @projects = Project.find(params[:publication][:project_ids])    
     @publication.projects << @projects
+    @project = Project.find(params[:project_id])    
     
     # TODO luisf should also respond to HTML??? 
     respond_to do |format|
@@ -241,32 +240,26 @@ class PublicationsController < ApplicationController
     end
   end
   
+  
   def remove_project
-    find_project_by_project_id
-    proj_to_remove = Project.find(params[:remove_project_id])
-    
-    if proj_to_remove == @project
-      warning = "You are about to remove the current project from the publication's project list. Are you sure?"
-    end
+    @project = Project.find(params[:project_id])
+    proj = Project.find(params[:remove_project_id])
 
     if @publication.projects.length > 1
-      if @publication.projects.exists? proj_to_remove
-        @publication.projects.delete proj_to_remove if request.post?
+      if @publication.projects.exists? proj
+        @publication.projects.delete proj if request.post?
       end
     else
-      logger.error { "Cannot remove project from publication list" }
+      logger.error { "Cannot remove project from publication list" }      
     end
     
-    respond_to do |format|
-      format.html { redirect_to :back }
-      format.js { 
-         render(:update) {|page| 
-           page.replace_html :list_projects, :partial => 'list_projects'
-         }
-       }
-    end
+    logger.error { "CURRENT projectr name#{proj.name} and wanna delete #{@project.name}" }
+        
+    render(:update) {|page| 
+      page.replace_html "list_projects", :partial => 'list_projects', :id  => @publication
+    }    
   end
-  
+    
   def destroy
     find_project_by_project_id
     

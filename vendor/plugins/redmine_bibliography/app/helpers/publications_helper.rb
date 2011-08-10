@@ -76,10 +76,18 @@ module PublicationsHelper
   end
   
   def render_projects_list(publication)
+    logger.error { "PROJECT NAME #{@project.name unless @project.nil?}" }
+    
     s = ""
 
     publication.projects.each do |proj|
-      s << link_to_project(proj) + link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post }, :class => 'icon icon-del') + "<br />"
+      if @project == proj
+        confirm_msg = "Are you sure you want to remove the current project from this publication's projects list?"
+      else
+        confirm_msg = false
+      end 
+      
+      s << link_to_project(proj) + link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del') + "<br />"
     end
     
     s  
