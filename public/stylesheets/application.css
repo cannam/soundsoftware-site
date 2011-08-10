@@ -251,6 +251,11 @@ line-height:1.5em;
 border: 1px solid #e4e4e4;
 }
 
+.box h4 {
+margin-top: 0;
+padding-top: 0;
+}
+
 div.square {
  border: 1px solid #999;
  float: left;
@@ -417,6 +422,15 @@ text-align: right;
 margin-left: -180px; /*width of left column*/
 width: 175px; /*width of labels. Should be smaller than left column to create some right 
 margin*/
+}
+
+.tabular .splitcontentleft .box p, .tabular .splitcontentright .box p, .splitcontentleft .tabular p, .splitcontentright .tabular p {
+padding-left: 120px;
+}
+
+.tabular .splitcontentleft .box label, .tabular .splitcontentright .box label, .splitcontentleft .tabular label, .splitcontentright .tabular label {
+margin-left: -120px;
+width: 115px;
 }
 
 .tabular label.floating{
