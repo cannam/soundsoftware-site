@@ -76,6 +76,21 @@ en:
   field_url: "URL"
   field_volume: "Volume"
   field_year: "Year"
+
+  field_bibtex_article: Journal article
+  field_bibtex_book: Book
+  field_bibtex_booklet: Booklet
+  field_bibtex_conference: Article in conference proceedings
+  field_bibtex_inbook: Book chapter or part
+  field_bibtex_incollection: Part of a collection
+  field_bibtex_inproceedings: Article in conference proceedings
+  field_bibtex_manual: Technical manual
+  field_bibtex_masterthesis: "Master's thesis"
+  field_bibtex_misc: Other
+  field_bibtex_phdthesis: "PhD thesis"
+  field_bibtex_proceedings: Conference proceedings
+  field_bibtex_techreport: Technical report
+  field_bibtex_unpublished: Unpublished
   
   label_author_1: First author
   label_author_2: Second author

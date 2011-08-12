@@ -9,6 +9,9 @@ class BibtexEntry < ActiveRecord::Base
     BibtexEntryType.find(entry_type).name
   end
   
-  
+  def entry_type_label
+    entry_type = self.entry_type
+    BibtexEntryType.find(entry_type).label
+  end
   
 end

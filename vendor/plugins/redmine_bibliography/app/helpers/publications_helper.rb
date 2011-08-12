@@ -106,10 +106,10 @@ module PublicationsHelper
 
     bibtex_entry.attributes.each do |field|
       if field[1] != nil
-        s << "<h4>" + field[0].titleize + "</h4>" 
+        s << "<h4>" + l("field_#{field[0]}") + "</h4>" 
 
         if field[0] == "entry_type"
-          s << bibtex_entry.entry_type_name.capitalize
+          s << bibtex_entry.entry_type_label
         else
           s << bibtex_entry.attributes[field[0]].to_s
         end
