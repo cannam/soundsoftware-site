@@ -26,6 +26,7 @@ en:
   label_add_me_as_author: "Add me as an author"
   label_add_an_author: "Add an author"
   label_add_another_author: "Add another author"
+  field_search_name: "Search author"
 
   remove_author: "Remove this author"
   
@@ -42,7 +43,9 @@ en:
   
   text_author_email: "Author's email address as on the paper."
   text_author_institution: "Author's institution name as on paper."
-  text_author_name_on_paper: "Name of the author as it appears on paper. (In case it applies, please use the autocomplete suggestions.)"
+  text_author_name_on_paper: "Name of the author as it appears on paper."
+  
+  text_author_search: "Search existing authors"
   
   # authorships model
   field_institution: "Institution"

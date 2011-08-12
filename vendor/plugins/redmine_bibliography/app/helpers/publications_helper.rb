@@ -9,52 +9,71 @@ module PublicationsHelper
     s 
   end
   
-  def identify_author(author)
+  def generate_autofill_suggestions(item)
+
+    logger.error { "Generate Autofill Suggestions for #{item.class} #{item.id}" }
 
     link_text = ''
     suffix = ''
-    user = nil
+    
+    if item.respond_to? :name_on_paper
+      # if it walks like a duck, than it's an Authorship
+      Rails.logger.debug { "Identify Author (Authorship): class - #{item.class} id - #{item.id}" }
 
-    if author.class == User
-
-      Rails.logger.debug { "Identify Author: USER" }
-
-      # fc defined in the users_author_patch
-      author_info = author.get_author_info
-  
-    elsif author.class == Author    
-
-      Rails.logger.debug { "Identify Author: AUTHOR" }
-
-      author_info = { 
-        :name_on_paper => author.name, 
-        :author_user_id => '',
+      item_info = { 
+        :name_on_paper => item.name_on_paper, 
+        :author_user_id => item.author_id,
         :is_user  => '0',
-        :institution => "",
-        :email => ""
+        :institution => item.institution,
+        :email => item.email
       }
       
-      link_text = h(author.name)      
+      link_text = h(item.name_on_paper)  
 
-      if author.user.nil?
-        author_info[:author_user_id] = author.id
-        # TODO: AUTHORSHIPS INFORMATION
-#     else
-#       author_info[:email] = author.user.mail
-#       author_info[:institution] = author.user.institution_name
+    else
+      Rails.logger.debug { "Identify Author (User): class - #{item.class} id - #{item.id}" }
+
+      # fc defined in the users_author_patch
+      item_info = item.get_author_info
+      
+      link_text = h(item.name)
+
+    end
+
+
+    suffix << '<em>' + h(item_info[:institution]) 
+    suffix << '&nbsp;' + h(item_info[:is_user]) + '</em>'
+
+    link_to_function(link_text, "update_author_info(this," + item_info.to_json + ")") + '&nbsp;' + suffix
+  end
+  
+  def choose_author_link(name, items)
+    s = ''    
+    list = []
+
+    items.sort.each do |item|
+      if item.respond_to? :name_on_paper
+        logger.error { "CHOOSE AUTHOR LINK - Authorship #{item.id}" }
+        list << item      
+      else 
+        logger.error { "CHOOSE AUTHOR LINK: USER #{item.id}" }
+  
+        list << item
+        unless item.author.nil? 
+          unless item.author.authorships.nil?
+            list << item.author.authorships 
+            list.flatten!
+          end
+        end
+      end
+    end
+
+    if list.length > 0    
+      list.each do |element|
+        s << "<li>#{generate_autofill_suggestions element}</li>"
       end
     end
     
-    suffix = '<em>' + h(author_info[:institution]) + '</em>'
-
-    link_to_function(link_text, "update_author_info(this," + author_info.to_json + ")") + ' ' + suffix
-  end
-  
-  def choose_author_link(name, authors_users)
-    s = ''
-    authors_users.sort.each do |author_user|
-      s << "<li>#{identify_author author_user}</li>"
-    end
     s 
   end
 

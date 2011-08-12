@@ -7,8 +7,20 @@ class Authorship < ActiveRecord::Base
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :publication
   
-  attr_accessor :is_user, :author_user_id 
+  attr_accessor :is_user, :author_user_id, :search_name
   before_save :associate_author_user
+
+  named_scope :like, lambda {|q| 
+    s = "%#{q.to_s.strip.downcase}%"
+    {:conditions => ["LOWER(name_on_paper) LIKE :s", {:s => s}],
+     :order => 'name_on_paper'
+    }
+  }
+  
+  
+  def <=>(authorship)
+    name_on_paper.downcase <=> authorship.name_on_paper.downcase
+  end
   
   protected 
   def associate_author_user 

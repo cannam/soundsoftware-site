@@ -2,16 +2,24 @@
 
   <h4><%= l("label_author_1") %></h4>
 
+  <p>
+	<%= f.text_field :search_name, :size => 25 %>
+	
+	<%= observe_field( form_tag_id(f.object_name, :search_name), :frequency => 0.5, :update => form_tag_id(f.object_name, :identify_author), :url => { :controller => 'publications', :action => 'autocomplete_for_author' }, :with => 'q') %>
+	 
+	<%= link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %>
+	<br />
+	<em><%= h l("text_author_search") %></em>
+  </p>
+
+  <p>
+    <div id="<%= form_tag_id(f.object_name, :identify_author) %>">
+    </div>	
+  </p>
+  
   <p>        
     <%= f.text_field :name_on_paper, :size => 25 %> 
-    <%= link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %><br />
     <em><%= h l("text_author_name_on_paper") %></em><br />
-
-    <%= observe_field( form_tag_id(f.object_name, :name_on_paper), :frequency => 0.5, :update => form_tag_id(f.object_name, :identify_author), :url => { :controller => 'publications', :action => 'autocomplete_for_author' }, :with => 'q')
-    %>
-
-    <div id="<%= form_tag_id(f.object_name, :identify_author) %>">
-    </div>
       
     <p>
     <%= f.text_field :institution, :size => 35 %><br />

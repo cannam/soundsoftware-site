@@ -198,21 +198,24 @@ class PublicationsController < ApplicationController
   def autocomplete_for_author
     @results = []
     
-    authors_list = Author.like(params[:q]).find(:all, :limit => 100)    
+    authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
-    logger.debug "Query for \"#{params[:q]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\" users"
+    logger.debug "Query for \"#{params[:q]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
     
-    # need to subtract both lists
-    # give priority to the users    
+    # need to subtract both lists; give priority to the users    
     users_list.each do |user|      
       @results << user
+      logger.error { "Added USER #{user.id} to the results list" }
     end
     
-    authors_list.each do |author|      
-      @results << author unless users_list.include?(author.user)
+    authorships_list.each do |authorship|
+      unless users_list.include?(authorship.author.user)
+        @results << authorship 
+        logger.error { "Added AUTHORSHIP #{authorship.id} to the results list" }
+      end
     end
-                 
+
     render :layout => false
   end
 
@@ -253,7 +256,7 @@ class PublicationsController < ApplicationController
       logger.error { "Cannot remove project from publication list" }      
     end
     
-    logger.error { "CURRENT projectr name#{proj.name} and wanna delete #{@project.name}" }
+    logger.error { "CURRENT project name#{proj.name} and wanna delete #{@project.name}" }
         
     render(:update) {|page| 
       page.replace_html "list_projects", :partial => 'list_projects', :id  => @publication
@@ -267,10 +270,6 @@ class PublicationsController < ApplicationController
         
     flash[:notice] = "Successfully deleted Publication."
     redirect_to :controller => :publications, :action => 'index', :project_id => @project
-  end
-
-  def identify_author
-    
   end
 
   private
