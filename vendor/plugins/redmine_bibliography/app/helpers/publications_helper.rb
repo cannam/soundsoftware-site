@@ -47,10 +47,14 @@ module PublicationsHelper
     link_to_function(link_text, "update_author_info(this," + item_info.to_json + ")") + '&nbsp;' + suffix
   end
   
-  def choose_author_link(name, items)
-    s = ''    
+  def choose_author_link(items)
+    # called by autocomplete_for_author (publications' action/view)
+    # creates the select list based on the results array
+    # results is an array with both Users and Authorships objects
+    
+    s = ''
     list = []
-
+    
     items.sort.each do |item|
       if item.respond_to? :name_on_paper
         logger.error { "CHOOSE AUTHOR LINK - Authorship #{item.id}" }
@@ -74,7 +78,23 @@ module PublicationsHelper
       end
     end
     
-    s 
+    @options = []
+    @results.each do |result|
+      @options << ["#{result.name} (#{result.mail})", "#{result.class.to_s}_#{result.id.to_s}"]
+    end
+    
+    if @results.size > 0
+      s = select_tag('country', options_for_select(@options), :size => 3) 
+      s << observe_field( 'country', :on => 'click', :function => "alert('Element changed')", :with => 'q')
+      
+      s << radio_button_tag("publication[authorship_attributes]", "category", "rails")
+      s << radio_button_tag("post", "category", "java")
+      s << radio_button_tag("post", "category", "java")
+      
+    else
+      s = "<em>No Authors found that match your search… sorry!</em>"
+    end
+      
   end
 
   def link_to_remove_fields(name, f)

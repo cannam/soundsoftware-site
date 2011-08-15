@@ -13,10 +13,13 @@
   </p>
 
   <p>
-    <div id="<%= form_tag_id(f.object_name, :identify_author) %>">
+    <div id="<%= form_tag_id( f.object_name, :identify_author ) %>">		
+		<%= f.radio_button :add_this_author, false %>
+		<%= f.radio_button :add_this_author, false %>
+		<%= f.radio_button :add_this_author, true %>
     </div>	
   </p>
-  
+
   <p>        
     <%= f.text_field :name_on_paper, :size => 25 %> 
     <em><%= h l("text_author_name_on_paper") %></em><br />

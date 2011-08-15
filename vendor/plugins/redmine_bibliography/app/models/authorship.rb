@@ -7,7 +7,7 @@ class Authorship < ActiveRecord::Base
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :publication
   
-  attr_accessor :is_user, :author_user_id, :search_name
+  attr_accessor :is_user, :author_user_id, :search_name, :add_this_author, :correct_author_info, :ignore_author
   before_save :associate_author_user
 
   named_scope :like, lambda {|q| 
@@ -17,9 +17,16 @@ class Authorship < ActiveRecord::Base
     }
   }
   
+  def name
+    return self.name_on_paper
+  end
   
   def <=>(authorship)
-    name_on_paper.downcase <=> authorship.name_on_paper.downcase
+    name.downcase <=> authorship.name.downcase
+  end
+    
+  def mail
+    return self.email
   end
   
   protected 

@@ -20,6 +20,9 @@ class PublicationsController < ApplicationController
     
     @project_id = params[:project_id]
     @current_user = User.current    
+    
+    @options = []
+    @results = []
   end
 
 
@@ -196,6 +199,8 @@ class PublicationsController < ApplicationController
   end
 
   def autocomplete_for_author
+    #TODO: luisf. optimize this Query: possible?
+    
     @results = []
     
     authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
@@ -203,18 +208,29 @@ class PublicationsController < ApplicationController
 
     logger.debug "Query for \"#{params[:q]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
     
-    # need to subtract both lists; give priority to the users    
-    users_list.each do |user|      
-      @results << user
-      logger.error { "Added USER #{user.id} to the results list" }
-    end
-    
     authorships_list.each do |authorship|
-      unless users_list.include?(authorship.author.user)
-        @results << authorship 
-        logger.error { "Added AUTHORSHIP #{authorship.id} to the results list" }
+      # NEED TO COMPARE AUTHORSHIPS FOR SIMILAR NAME/INST/EMAIL              
+      @results << authorship
+      logger.error { "Added AUTHORSHIP #{authorship.id} to the results list" }
+    end
+
+    # need to subtract both lists; give priority to the users    
+    flag = true
+    users_list.each do |user|      
+      if user.author.nil?
+        @results << user
+      else
+        user.author.authorships.each do |auth|
+          if authorships_list.include?(auth)
+            flag = false
+            break
+          end
+        end  
+        @results << user unless flag
       end
     end
+
+#    @results.uniq!
 
     render :layout => false
   end
