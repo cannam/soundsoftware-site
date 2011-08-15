@@ -78,22 +78,20 @@ module PublicationsHelper
       end
     end
     
-    @options = []
+    
+    
+    @author_options = []
     @results.each do |result|
-      @options << ["#{result.name} (#{result.mail})", "#{result.class.to_s}_#{result.id.to_s}"]
+      @author_options << ["#{result.name} (#{result.mail})", "#{result.class.to_s}_#{result.id.to_s}"]
     end
     
-    if @results.size > 0
-      s = select_tag('country', options_for_select(@options), :size => 3) 
-      s << observe_field( 'country', :on => 'click', :function => "alert('Element changed')", :with => 'q')
-      
-      s << radio_button_tag("publication[authorship_attributes]", "category", "rails")
-      s << radio_button_tag("post", "category", "java")
-      s << radio_button_tag("post", "category", "java")
-      
-    else
-      s = "<em>No Authors found that match your search… sorry!</em>"
-    end
+#   if @results.size > 0
+#     s = select('country', options_for_select(@options), :size => 3) 
+#     s << observe_field( 'country', :on => 'click', :function => "alert('Element changed')", :with => 'q')
+#     
+#   else
+#     s = "<em>No Authors found that match your search… sorry!</em>"
+#   end
       
   end
 

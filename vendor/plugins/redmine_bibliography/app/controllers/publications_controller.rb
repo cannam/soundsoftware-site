@@ -20,9 +20,9 @@ class PublicationsController < ApplicationController
     
     @project_id = params[:project_id]
     @current_user = User.current    
-    
-    @options = []
-    @results = []
+
+    @author_options = []
+
   end
 
 
