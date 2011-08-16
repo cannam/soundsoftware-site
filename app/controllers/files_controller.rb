@@ -8,9 +8,8 @@ class FilesController < ApplicationController
   include SortHelper
 
   def index
-    sort_init 'active', 'desc'
+    sort_init 'filename', 'asc'
     sort_update 'filename' => "#{Attachment.table_name}.filename",
-		'active' => "#{Attachment.table_name}.active",
                 'created_on' => "#{Attachment.table_name}.created_on",
                 'size' => "#{Attachment.table_name}.filesize",
                 'downloads' => "#{Attachment.table_name}.downloads"

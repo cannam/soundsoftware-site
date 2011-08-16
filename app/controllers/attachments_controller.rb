@@ -20,7 +20,6 @@ class AttachmentsController < ApplicationController
   before_filter :find_project
   before_filter :file_readable, :read_authorize, :except => :destroy
   before_filter :delete_authorize, :only => :destroy
-  before_filter :active_authorize, :only => :toggle_active
 
   verify :method => :post, :only => :destroy
 
@@ -56,12 +55,6 @@ class AttachmentsController < ApplicationController
     redirect_to :controller => 'projects', :action => 'show', :id => @project
   end
 
-  def toggle_active
-    @attachment.active = !@attachment.active?
-    @attachment.save!
-    render :layout => false
-  end
-
 private
   def find_project
     @attachment = Attachment.find(params[:id])
@@ -83,10 +76,6 @@ private
 
   def delete_authorize
     @attachment.deletable? ? true : deny_access
-  end
-
-  def active_authorize
-    true
   end
 
   def detect_content_type(attachment)
