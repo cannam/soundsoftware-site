@@ -18,9 +18,10 @@ en:
   field_author_user: User Name
   field_author_username: "Associated User"
   field_author_publications: "Publications by this Author" 
-  
-  bibtex_entry:
-    entry_type: "Bibtex Entry Type"
+  field_identify_author_yes: "Yes"
+  field_identify_author_correct: "Corrections"
+  field_identify_author_no: "No"
+  entry_type: "Bibtex Entry Type"
   
   label_author_is_me: "(I am this author)"
   label_add_me_as_author: "Add me as an author"

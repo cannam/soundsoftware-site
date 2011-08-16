@@ -206,7 +206,6 @@ class PublicationsController < ApplicationController
     object_id = params[:object_id]
     @object_name = "publications[authorships_attributes][#{object_id}]"
     
-    
     logger.error { "OBJECT NAME #{@object_name}" }
     
     authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)

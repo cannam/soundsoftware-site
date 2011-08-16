@@ -14,16 +14,14 @@
 
   <p>
     <div id="<%= form_tag_id( f.object_name, :identify_author ) %>">		
-		<p id="<%= form_tag_id( f.object_name, :identify_author_results ) %>">
-		</p>
-
-<p>
-			    <label><%= f.radio_button :add_this_author, false %><%= l(:field_identify_author_yes) %></label><br />
-			    <label><%= f.radio_button :add_this_author, false %><%= l(:field_identify_author_correct) %></label><br />
-			    <label><%= f.radio_button :add_this_author, false %><%= l(:field_identify_author_no) %></label><br />
-
-</p>
-		
+		  <p id="<%= form_tag_id( f.object_name, :identify_author_results ) %>">
+	    </p>
+      <p>
+        Is it this author?<br />
+	      <%= f.radio_button :identify_author, "yes" %><%= f.label :identify_author_yes %><br />
+	      <%= f.radio_button :identify_author, "correct" %><%= f.label :identify_author_correct %><br />
+	      <%= f.radio_button :identify_author, "no" %><%= f.label :identify_author_no %><br />
+      </p>
     </div>	
   </p>
 
