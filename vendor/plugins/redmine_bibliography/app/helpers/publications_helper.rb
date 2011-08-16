@@ -47,52 +47,22 @@ module PublicationsHelper
     link_to_function(link_text, "update_author_info(this," + item_info.to_json + ")") + '&nbsp;' + suffix
   end
   
-  def choose_author_link(items)
+  def choose_author_link(object_name, items)
     # called by autocomplete_for_author (publications' action/view)
     # creates the select list based on the results array
     # results is an array with both Users and Authorships objects
-    
-    s = ''
-    list = []
-    
-    items.sort.each do |item|
-      if item.respond_to? :name_on_paper
-        logger.error { "CHOOSE AUTHOR LINK - Authorship #{item.id}" }
-        list << item      
-      else 
-        logger.error { "CHOOSE AUTHOR LINK: USER #{item.id}" }
-  
-        list << item
-        unless item.author.nil? 
-          unless item.author.authorships.nil?
-            list << item.author.authorships 
-            list.flatten!
-          end
-        end
-      end
-    end
-
-    if list.length > 0    
-      list.each do |element|
-        s << "<li>#{generate_autofill_suggestions element}</li>"
-      end
-    end
-    
-    
-    
+        
     @author_options = []
     @results.each do |result|
       @author_options << ["#{result.name} (#{result.mail})", "#{result.class.to_s}_#{result.id.to_s}"]
     end
     
-#   if @results.size > 0
-#     s = select('country', options_for_select(@options), :size => 3) 
-#     s << observe_field( 'country', :on => 'click', :function => "alert('Element changed')", :with => 'q')
-#     
-#   else
-#     s = "<em>No Authors found that match your search… sorry!</em>"
-#   end
-      
+   if @results.size > 0
+     s = select_tag( form_tag_name(object_name, :author_search_results), options_for_select(@author_options), { :id => form_tag_id(object_name, :author_search_results), :size => 3} )
+     s << observe_field( form_tag_id(object_name, :author_search_results), :on => 'click', :function => "alert('Element changed')", :with => 'q')
+   else
+     s = "<em>No Authors found that match your search… sorry!</em>"
+   end      
   end
 
   def link_to_remove_fields(name, f)
@@ -114,7 +84,12 @@ module PublicationsHelper
   def sanitized_method_name(method_name)
     method_name.sub(/\?$/, "")
   end
-
+  
+  def form_tag_name(object_name, method_name)
+      str = "#{object_name.to_s}[#{sanitized_method_name(method_name.to_s)}]"
+      str.to_sym 
+  end
+  
   def form_tag_id(object_name, method_name)    
     str = "#{sanitized_object_name(object_name.to_s)}_#{sanitized_method_name(method_name.to_s)}"
     str.to_sym

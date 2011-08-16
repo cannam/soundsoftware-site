@@ -203,6 +203,10 @@ class PublicationsController < ApplicationController
     
     @results = []
     
+    @object_name = params[:object_name]
+    
+    logger.error { "OBJECT NAME #{@object_name}" }
+    
     authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
