@@ -28,6 +28,7 @@ en:
   label_add_an_author: "Add an author"
   label_add_another_author: "Add another author"
   field_search_name: "Search author"
+  field_search_results: "Authors"
 
   remove_author: "Remove this author"
   

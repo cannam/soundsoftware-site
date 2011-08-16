@@ -9,6 +9,11 @@ module PublicationsHelper
     s 
   end
   
+  
+  
+  
+  
+  
   def generate_autofill_suggestions(item)
 
     logger.error { "Generate Autofill Suggestions for #{item.class} #{item.id}" }
@@ -39,7 +44,6 @@ module PublicationsHelper
       link_text = h(item.name)
 
     end
-
 
     suffix << '<em>' + h(item_info[:institution]) 
     suffix << '&nbsp;' + h(item_info[:is_user]) + '</em>'

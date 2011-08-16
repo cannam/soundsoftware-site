@@ -4,7 +4,7 @@ class PublicationsController < ApplicationController
   unloadable
   
   model_object Publication
-  before_filter :find_model_object, :except => [:new, :create, :index, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author]
+  before_filter :find_model_object, :except => [:new, :create, :index, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]
   
   # before_filter :find_project, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
     
@@ -20,11 +20,10 @@ class PublicationsController < ApplicationController
     
     @project_id = params[:project_id]
     @current_user = User.current    
-
-    @author_options = []
-
+    
+    # TODO - something more interesting here
+    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
   end
-
 
   def create    
     find_project_by_project_id
@@ -204,7 +203,7 @@ class PublicationsController < ApplicationController
     @results = []
     
     object_id = params[:object_id]
-    @object_name = "publications[authorships_attributes][#{object_id}]"
+    @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
     
     logger.error { "OBJECT NAME #{@object_name}" }
     
@@ -236,8 +235,29 @@ class PublicationsController < ApplicationController
     end
 
 #    @results.uniq!
+    
+    render :layout => false    
+  end
+  
+  
+  def get_user_info
+    object_id = params[:object_id]
+    value = params[:value]
+    classname = Kernel.const_get(value.split('_')[0])
 
-    render :layout => false
+    item = classname.find(value.split('_')[1])
+
+    name_field = "publication_authorships_attributes_#{object_id}_name_on_paper".to_sym
+    email_field = "publication_authorships_attributes_#{object_id}_email".to_sym
+    
+    respond_to do |format|
+      format.js {logger.error { "JS" }
+        render(:update) {|page| 
+          page[name_field].value = item.name
+          page[email_field].value = item.mail
+        }
+      }
+    end
   end
 
   def sort_author_order

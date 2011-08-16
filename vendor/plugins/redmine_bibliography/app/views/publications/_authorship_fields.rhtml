@@ -5,7 +5,7 @@
   <p>
 	<%= f.text_field :search_name, :size => 25 %>
 	
-	<%= observe_field( form_tag_id(f.object_name, :search_name), :frequency => 0.5, :update => form_tag_id( f.object_name, :identify_author_results), :url => { :controller => 'publications', :action => 'autocomplete_for_author', :object_name => form_object_id(f.object_name)  },  :with => 'q' ) %>
+	<%= observe_field( form_tag_id(f.object_name, :search_name), :frequency => 0.5, :update => form_tag_id( f.object_name, :search_results), :url => { :controller => 'publications', :action => 'autocomplete_for_author', :object_name => form_object_id(f.object_name)  },  :with => 'q' ) %>
 	 
 	<%= link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %>
 	<br />
@@ -13,11 +13,14 @@
   </p>
 
   <p>
-    <div id="<%= form_tag_id( f.object_name, :identify_author ) %>">		
-		  <p id="<%= form_tag_id( f.object_name, :identify_author_results ) %>">
-	    </p>
+    <div id="<%= form_tag_id( f.object_name, :identify_author ) %>">
       <p>
-        Is it this author?<br />
+        <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
+          :onChange => remote_function( :url => { :controller => :publications, :action => :get_user_info, :object_id => form_object_id(f.object_name) }, :with => "'value=' + 
+          value" )} %>
+      </p>
+        <h5>Is it this author?</h5>
+      <p>
 	      <%= f.radio_button :identify_author, "yes" %><%= f.label :identify_author_yes %><br />
 	      <%= f.radio_button :identify_author, "correct" %><%= f.label :identify_author_correct %><br />
 	      <%= f.radio_button :identify_author, "no" %><%= f.label :identify_author_no %><br />
@@ -35,9 +38,6 @@
 
     <%= f.text_field :email, :size => 35  %><br />
     <em><%= h l("text_author_email") %></em><br />
-    
-    <%= f.hidden_field :is_user %>
-    <%= f.text_field :author_user_id, :size => 35 %><br/>
     
     <%= link_to_remove_fields l("remove_author"), f %>    
     </p>
