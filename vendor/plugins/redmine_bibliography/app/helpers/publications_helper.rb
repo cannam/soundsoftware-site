@@ -9,12 +9,7 @@ module PublicationsHelper
     s 
   end
   
-  
-  
-  
-  
-  
-  def generate_autofill_suggestions(item)
+  def TO_BE_DELETED_generate_autofill_suggestions(item)
 
     logger.error { "Generate Autofill Suggestions for #{item.class} #{item.id}" }
 

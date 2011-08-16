@@ -249,12 +249,21 @@ class PublicationsController < ApplicationController
 
     name_field = "publication_authorships_attributes_#{object_id}_name_on_paper".to_sym
     email_field = "publication_authorships_attributes_#{object_id}_email".to_sym
+    institution_field = "publication_authorships_attributes_#{object_id}_institution".to_sym
+    
+    yes_radio = "publication_authorships_attributes_#{object_id}_identify_author_yes".to_sym
     
     respond_to do |format|
       format.js {logger.error { "JS" }
         render(:update) {|page| 
           page[name_field].value = item.name
           page[email_field].value = item.mail
+          page[institution_field].value = item.institution
+
+          page[yes_radio].checked = true
+          page[name_field].disabled = true
+          page[email_field].disabled = true
+          page[institution_field].disabled = true
         }
       }
     end

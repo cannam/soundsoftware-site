@@ -13,7 +13,17 @@ module Bibliography
     
     module InstanceMethods
 
+      def institution
+        unless self.ssamr_user_detail.nil?
+          institution_name = self.ssamr_user_detail.institution_name
+        else
+          institution_name = "No Institution Set"
+        end        
+        return institution_name        
+      end
+
       def get_author_info
+        # TODO: DELETE THIS METHOD??
         info = { 
           :name_on_paper =>  self.name,
           :email => self.mail,

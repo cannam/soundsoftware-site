@@ -11,21 +11,32 @@ function add_fields(link, association, content) {
   });
 }
 
-function update_author_info(form_object_id){
-	$author = $('publication_authorships_attributes_' + form_object_id + '_search_results').value;
-	
-	alert($author.split('_')[0] + "  " + $author.split('_')[1]);
-	
-	alert("<%= " + $author.split('_')[0] + ".find(" + $author.split('_')[1] + ").name %>")
-	
-	$('publication_authorships_attributes_' + form_object_id + '_name_on_paper').value = $author
-			
-	//$(link).up('div').up('div').select('input[id^=publication_authorships_attributes]').each(
-	//	function(e){
-	//		key = e.name.split("[").last().trim().sub(']','');
-	//		
-	//		// test for undefined			
-	//		e.value = author_info[key];
-	//	}		
-	//)
+function identify_author_status(status, object_id) {
+	name_field = $('publication_authorships_attributes_' + object_id + '_name_on_paper');
+    email_field = $('publication_authorships_attributes_' + object_id + '_email');
+    institution_field = $('publication_authorships_attributes_' + object_id + '_institution');
+
+	switch(status)
+	{
+		case "yes":
+			name_field.disabled = true;
+			email_field.disabled = true;
+			institution_field.disabled = true;
+		break;
+		case "no":
+			name_field.value = "";
+			email_field.value = "";
+			institution_field.value = "";
+		
+			name_field.disabled = false;
+			email_field.disabled = false;
+			institution_field.disabled = false;
+
+		break;
+		case "correct":
+			name_field.disabled = false;
+			email_field.disabled = false;
+			institution_field.disabled = false;
+		break;
+	}
 }
