@@ -95,6 +95,11 @@ module PublicationsHelper
     str.to_sym
   end
   
+  def form_object_id(object_name)
+    str = object_name.split("\[").last().gsub("\]","")
+    str.to_sym
+  end
+  
   def render_projects_list(publication)
     logger.error { "PROJECT NAME #{@project.name unless @project.nil?}" }
     

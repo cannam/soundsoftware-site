@@ -5,7 +5,7 @@
   <p>
 	<%= f.text_field :search_name, :size => 25 %>
 	
-	<%= observe_field( form_tag_id(f.object_name, :search_name), :frequency => 0.5, :update => form_tag_id( f.object_name, :identify_author_results), :url => { :controller => 'publications', :action => 'autocomplete_for_author', :object_name => f.object_name },  :with => 'q' ) %>
+	<%= observe_field( form_tag_id(f.object_name, :search_name), :frequency => 0.5, :update => form_tag_id( f.object_name, :identify_author_results), :url => { :controller => 'publications', :action => 'autocomplete_for_author', :object_name => form_object_id(f.object_name)  },  :with => 'q' ) %>
 	 
 	<%= link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %>
 	<br />
@@ -17,10 +17,12 @@
 		<p id="<%= form_tag_id( f.object_name, :identify_author_results ) %>">
 		</p>
 
-			<%= f.radio_button :add_this_author, false %>
-			<%= f.radio_button :add_this_author, false %>
-			<%= f.radio_button :add_this_author, true %>
+<p>
+			    <label><%= f.radio_button :add_this_author, false %><%= l(:field_identify_author_yes) %></label><br />
+			    <label><%= f.radio_button :add_this_author, false %><%= l(:field_identify_author_correct) %></label><br />
+			    <label><%= f.radio_button :add_this_author, false %><%= l(:field_identify_author_no) %></label><br />
 
+</p>
 		
     </div>	
   </p>
