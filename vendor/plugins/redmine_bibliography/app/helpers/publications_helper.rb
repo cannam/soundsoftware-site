@@ -9,43 +9,6 @@ module PublicationsHelper
     s 
   end
   
-  def TO_BE_DELETED_generate_autofill_suggestions(item)
-
-    logger.error { "Generate Autofill Suggestions for #{item.class} #{item.id}" }
-
-    link_text = ''
-    suffix = ''
-    
-    if item.respond_to? :name_on_paper
-      # if it walks like a duck, than it's an Authorship
-      Rails.logger.debug { "Identify Author (Authorship): class - #{item.class} id - #{item.id}" }
-
-      item_info = { 
-        :name_on_paper => item.name_on_paper, 
-        :author_user_id => item.author_id,
-        :is_user  => '0',
-        :institution => item.institution,
-        :email => item.email
-      }
-      
-      link_text = h(item.name_on_paper)  
-
-    else
-      Rails.logger.debug { "Identify Author (User): class - #{item.class} id - #{item.id}" }
-
-      # fc defined in the users_author_patch
-      item_info = item.get_author_info
-      
-      link_text = h(item.name)
-
-    end
-
-    suffix << '<em>' + h(item_info[:institution]) 
-    suffix << '&nbsp;' + h(item_info[:is_user]) + '</em>'
-
-    link_to_function(link_text, "update_author_info(this," + item_info.to_json + ")") + '&nbsp;' + suffix
-  end
-  
   def choose_author_link(object_name, items)
     # called by autocomplete_for_author (publications' action/view)
     # creates the select list based on the results array
