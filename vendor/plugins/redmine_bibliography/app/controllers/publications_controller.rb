@@ -197,45 +197,34 @@ class PublicationsController < ApplicationController
     render :layout => false
   end
 
-  def autocomplete_for_author
-    #TODO: luisf. optimize this Query: possible?
-    
+  def autocomplete_for_author    
     @results = []
     
     object_id = params[:object_id]
     @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
-    
-    logger.error { "OBJECT NAME #{@object_name}" }
-    
-    authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
+        
+    authorships_list = Authorship.like_unique(params[:q]).find(:all, :limit => 100)
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
     logger.debug "Query for \"#{params[:q]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
     
-    authorships_list.each do |authorship|
-      # NEED TO COMPARE AUTHORSHIPS FOR SIMILAR NAME/INST/EMAIL              
-      @results << authorship
-      logger.error { "Added AUTHORSHIP #{authorship.id} to the results list" }
-    end
+    @results = users_list
 
-    # need to subtract both lists; give priority to the users    
-    flag = true
-    users_list.each do |user|      
-      if user.author.nil?
-        @results << user
-      else
-        user.author.authorships.each do |auth|
-          if authorships_list.include?(auth)
-            flag = false
-            break
-          end
-        end  
-        @results << user unless flag
+    # TODO: can be optimized…    
+    authorships_list.each do |authorship|      
+      flag = true
+      
+      users_list.each do |user|
+        if authorship.name == user.name && authorship.email == user.mail && authorship.institution == user.institution
+          Rails.logger.debug { "Rejecting Authorship #{authorship.id}" }
+          flag = false
+          break
+        end
       end
+
+      @results << authorship if flag
     end
 
-#    @results.uniq!
-    
     render :layout => false    
   end
   
@@ -261,9 +250,9 @@ class PublicationsController < ApplicationController
           page[institution_field].value = item.institution
 
           page[yes_radio].checked = true
-          page[name_field].disabled = true
-          page[email_field].disabled = true
-          page[institution_field].disabled = true
+          page[name_field].readOnly = true
+          page[email_field].readOnly = true
+          page[institution_field].readOnly = true
         }
       }
     end

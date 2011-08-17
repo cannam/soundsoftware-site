@@ -19,24 +19,24 @@ function identify_author_status(status, object_id) {
 	switch(status)
 	{
 		case "yes":
-			name_field.disabled = true;
-			email_field.disabled = true;
-			institution_field.disabled = true;
+			name_field.readOnly = true;
+			email_field.readOnly = true;
+			institution_field.readOnly = true;
 		break;
 		case "no":
 			name_field.value = "";
 			email_field.value = "";
 			institution_field.value = "";
 		
-			name_field.disabled = false;
-			email_field.disabled = false;
-			institution_field.disabled = false;
+			name_field.readOnly = false;
+			email_field.readOnly = false;
+			institution_field.readOnly = false;
 
 		break;
 		case "correct":
-			name_field.disabled = false;
-			email_field.disabled = false;
-			institution_field.disabled = false;
+			name_field.readOnly = false;
+			email_field.readOnly = false;
+			institution_field.readOnly = false;
 		break;
 	}
 }

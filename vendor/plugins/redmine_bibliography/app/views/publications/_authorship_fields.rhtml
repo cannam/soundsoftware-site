@@ -1,46 +1,39 @@
 <div id="authors" class="fields">
-
   <h4><%= l("label_author_1") %></h4>
+  <small>(<%= link_to l(:label_search_existing_author), {}, :onclick => 'Effect.toggle("' + form_tag_id( f.object_name, :search_author ).to_s + '", "appear", {duration:0.3}); return false;' %>)</small>
 
-  <p>
-	<%= f.text_field :search_name, :size => 25 %>
-	
-	<%= observe_field( form_tag_id(f.object_name, :search_name), :frequency => 0.5, :update => form_tag_id( f.object_name, :search_results), :url => { :controller => 'publications', :action => 'autocomplete_for_author', :object_name => form_object_id(f.object_name)  },  :with => 'q' ) %>
-	 
-	<%= link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %>
-	<br />
-	<em><%= h l("text_author_search") %></em>
-  </p>
-
-  <p>
-    <div id="<%= form_tag_id( f.object_name, :identify_author ) %>">
+  <div id="<%= form_tag_id( f.object_name, :search_author ) %>">
+    <div class="splitcontentleft">
       <p>
-        <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
-          :onChange => remote_function( :url => { :controller => :publications, :action => :get_user_info, :object_id => form_object_id(f.object_name) }, :with => "'value=' + 
-          value" )} %>
+        <%= f.text_field :search_name, :size => 25 %>
+        <%= observe_field( form_tag_id(f.object_name, :search_name), :frequency => 0.5, :update => form_tag_id( f.object_name, :search_results), :url => { :controller => 'publications', :action => 'autocomplete_for_author', :object_name => form_object_id(f.object_name)  },  :with => 'q' ) %>
       </p>
-        <h5>Is it this author?</h5>
+      <%# link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %>
+
+      <h5>Is it this author?</h5>
       <p>
-	      <%= f.radio_button :identify_author, "yes", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_yes %><br />
-	      <%= f.radio_button :identify_author, "correct", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_correct %><br />
-	      <%= f.radio_button :identify_author, "no", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_no %><br />
+        <%= f.radio_button :identify_author, "yes", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_yes %><br />
+        <%= f.radio_button :identify_author, "correct", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_correct %><br />
+        <%= f.radio_button :identify_author, "no", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_no %>
       </p>
     </div>	
-  </p>
 
-  <p>        
-    <%= f.text_field :name_on_paper, :size => 25 %> 
-    <em><%= h l("text_author_name_on_paper") %></em><br />
-      
+    <div class="splitcontentright">       
+      <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
+        :onChange => remote_function( :url => { :controller => :publications, :action => :get_user_info, :object_id => form_object_id(f.object_name) }, :with => "'value=' + 
+        value" )} %>
+    </div>	
+  </div>
+  
+  <div class="box">
     <p>
-    <%= f.text_field :institution, :size => 35 %><br />
-    <em><%= h l("text_author_institution") %></em><br />
-
-    <%= f.text_field :email, :size => 35  %><br />
-    <em><%= h l("text_author_email") %></em><br />
-    
-    <%= link_to_remove_fields l("remove_author"), f %>    
+      <%= f.text_field :name_on_paper, :size => 25 %><br />
+      <em><%= h l("text_author_name_on_paper") %></em><br />
+      <%= f.text_field :institution, :size => 35 %><br />
+      <em><%= h l("text_author_institution") %></em><br />
+      <%= f.text_field :email, :size => 35  %><br />
+      <em><%= h l("text_author_email") %></em><br />
     </p>
-    
-  </p>
+  </div>
+  <%= link_to_remove_fields l("remove_author"), f %>
 </div>
