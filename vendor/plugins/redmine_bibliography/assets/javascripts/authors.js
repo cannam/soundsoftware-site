@@ -27,16 +27,31 @@ function toggle_div(div_id){
 	Effect.toggle(div_id, "appear", {duration:0.3});
 }
 
-function toggle_input_field(field_id){
-	field_id.addClassName('readonly').next('em').hide();
-	field_id.readOnly = true;
+function toggle_input_field(field){	
+	if(field.readOnly == false){
+		field.readOnly = true;	
+		field.addClassName('readonly').next('em').hide();
+	} else{
+		field.readOnly = false;
+		field.removeClassName('readonly').next('em').show();		
+	};	
 }
 
-function toggle_save_author(form_object_id){
+function toggle_edit_save_button(object_id){
+	$button = $('publication_authorships_attributes_' + object_id + '_edit_save_button');
+	if($button.value == "Save Author"){
+		$button.value = "Edit Author";	
+	} else {
+		$button.value = "Save Author";
+	};
+}
+
+function toggle_save_author(form_object_id, $this){
 	$('publication_authorships_attributes_' + form_object_id + '_edit_author_info').select('input').each(function(s) {
-	  toggle_input_field(s);
+	  toggle_input_field(s, $this);
 	});
 	
+	toggle_edit_save_button(form_object_id);
 	toggle_div("publication_authorships_attributes_" + form_object_id +"_search_author");
 }
 
