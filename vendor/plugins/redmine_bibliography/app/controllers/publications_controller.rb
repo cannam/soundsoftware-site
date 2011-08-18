@@ -21,12 +21,14 @@ class PublicationsController < ApplicationController
     @project_id = params[:project_id]
     @current_user = User.current    
     
-    # TODO - something more interesting here
-    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
+    @author_options = Authorship.like_unique(User.name).find(:all, :limit => 100)
   end
 
   def create    
     find_project_by_project_id
+    
+    @author_options = Authorship.like_unique(User.name).find(:all, :limit => 100)
+    
     
     @publication = Publication.new(params[:publication])
         
