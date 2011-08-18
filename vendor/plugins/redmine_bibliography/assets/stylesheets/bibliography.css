@@ -5,5 +5,7 @@ li .handle {
 }
 
 input.readonly {
-        border: none;
+	border: none;
+	background-color: transparent;
+	
 }

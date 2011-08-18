@@ -12,33 +12,15 @@ function add_fields(link, association, content) {
 }
 
 function identify_author_status(status, object_id) {
-	name_field = $('publication_authorships_attributes_' + object_id + '_name_on_paper');
-    email_field = $('publication_authorships_attributes_' + object_id + '_email');
-    institution_field = $('publication_authorships_attributes_' + object_id + '_institution');
-
-	switch(status)
-	{
-		case "yes":
-			name_field.readOnly = true;
-			email_field.readOnly = true;
-			institution_field.readOnly = true;
-		break;
-		case "no":
-			name_field.value = "";
-			email_field.value = "";
-			institution_field.value = "";
+	$('publication_authorships_attributes_' + object_id + '_edit_author_info').select('input').each(function(s) {
+		if(status == "no"){
+			s.value = "";
+			s.readOnly = false;
+		};
 		
-			name_field.readOnly = false;
-			email_field.readOnly = false;
-			institution_field.readOnly = false;
-
-		break;
-		case "correct":
-			name_field.readOnly = false;
-			email_field.readOnly = false;
-			institution_field.readOnly = false;
-		break;
-	}
+		if(status == "correct"){s.readOnly = false;};
+		if(status == "yes"){s.readOnly = true;};
+	});
 }
 
 function toggle_div(div_id){	
@@ -46,15 +28,15 @@ function toggle_div(div_id){
 }
 
 function toggle_input_field(field_id){
-	$(field_id).addClassName('readonly');
-	$(field_id).next('em').hide();
+	field_id.addClassName('readonly').next('em').hide();
+	field_id.readOnly = true;
 }
 
 function toggle_save_author(form_object_id){
-	toggle_input_field("publication_authorships_attributes_" + form_object_id + "_name_on_paper");
-	toggle_input_field("publication_authorships_attributes_" + form_object_id + "_institution");
-	toggle_input_field("publication_authorships_attributes_" + form_object_id + "_email");
-
+	$('publication_authorships_attributes_' + form_object_id + '_edit_author_info').select('input').each(function(s) {
+	  toggle_input_field(s);
+	});
+	
 	toggle_div("publication_authorships_attributes_" + form_object_id +"_search_author");
 }
 
