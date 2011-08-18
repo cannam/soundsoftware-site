@@ -28,10 +28,10 @@ function toggle_div(div_id){
 }
 
 function toggle_input_field(field){	
-	if(field.readOnly == false){
+	if(field.classNames().inspect().include("readonly") == false){
 		field.readOnly = true;	
 		field.addClassName('readonly').next('em').hide();
-	} else{
+	} else {
 		field.readOnly = false;
 		field.removeClassName('readonly').next('em').show();		
 	};	
