@@ -16,20 +16,14 @@ class PublicationsController < ApplicationController
     @publication.build_bibtex_entry
     
     # and at least one author
-    # @publication.authorships.build.build_author
-    
-    @project_id = params[:project_id]
-    @current_user = User.current    
-    
+    # @publication.authorships.build.build_author        
     @author_options = Authorship.like_unique(User.name).find(:all, :limit => 100)
   end
 
   def create    
-    find_project_by_project_id
-    
+    @project_id = params[:project_id]    
     @author_options = Authorship.like_unique(User.name).find(:all, :limit => 100)
-    
-    
+        
     @publication = Publication.new(params[:publication])
         
     # @project = Project.find(params[:project_id])
@@ -39,7 +33,7 @@ class PublicationsController < ApplicationController
       flash[:notice] = "Successfully created publication."
       redirect_to :action => :show, :id => @publication, :project_id => @project.id
     else
-      render :action => 'new'
+      render :action => 'new', :project_id => @project_id
     end
   end
 
