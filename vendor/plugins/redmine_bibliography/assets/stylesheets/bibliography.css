@@ -3,3 +3,7 @@ li .handle {
   cursor: move;
   color: #777;
 }
+
+input.readonly {
+        border: none;
+}
