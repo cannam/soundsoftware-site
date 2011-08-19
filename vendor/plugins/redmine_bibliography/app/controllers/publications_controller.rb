@@ -31,7 +31,7 @@ class PublicationsController < ApplicationController
         
     if @publication.save 
       flash[:notice] = "Successfully created publication."
-      redirect_to :action => :show, :id => @publication, :project_id => @project.id
+      redirect_to :action => :show, :id => @publication, :project_id => @project_id
     else
       render :action => 'new', :project_id => @project_id
     end
@@ -71,7 +71,10 @@ class PublicationsController < ApplicationController
 
   def edit   
     find_project_by_project_id unless params[:project_id].nil?
-     
+    
+    @edit_view = true;
+    
+    @author_options = [] 
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type  
   end

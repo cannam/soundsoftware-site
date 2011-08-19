@@ -10,6 +10,6 @@
   <%= f.submit %>
 <% end %>
 <p>
-  <%= link_to l(:label_publication_show), { :controller => "publications", :action => "show", :id => @publication, :project_id => @project } %> |
+  <%= link_to l(:label_publication_show), { :controller => "publications", :action => "show", :id => @publication, :project_id => @project_id } %> |
   <%= link_to l(:label_publication_index), { :controller => "publications", :action => "index", :project_id => @project } %>
 </p>
