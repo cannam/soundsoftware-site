@@ -15,7 +15,7 @@
       <p>
         <%= f.radio_button :identify_author, "yes", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_yes %><br />
         <%= f.radio_button :identify_author, "correct", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_correct %><br />
-        <%= f.radio_button :identify_author, "no", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_no %>
+        <%= f.radio_button :identify_author, "no", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });", :checked => "checked" %><%= f.label :identify_author_no %>
       </p>
    
       <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
