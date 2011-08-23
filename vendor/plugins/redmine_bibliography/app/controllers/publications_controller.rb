@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # vendor/plugins/redmine_bibliography/app/controllers/publications_controller.rb
 
 class PublicationsController < ApplicationController
@@ -21,19 +22,18 @@ class PublicationsController < ApplicationController
   end
 
   def create    
-    @project_id = params[:project_id]    
+    @project = Project.find(params[:project_id])
+
     @author_options = Authorship.like_unique(User.name).find(:all, :limit => 100)
         
     @publication = Publication.new(params[:publication])
-        
-    # @project = Project.find(params[:project_id])
     @publication.projects << @project unless @project.nil?
         
     if @publication.save 
       flash[:notice] = "Successfully created publication."
-      redirect_to :action => :show, :id => @publication, :project_id => @project_id
+      redirect_to :action => :show, :id => @publication, :project_id => @project
     else
-      render :action => 'new', :project_id => @project_id
+      render :action => 'new', :project_id => @project
     end
   end
 
