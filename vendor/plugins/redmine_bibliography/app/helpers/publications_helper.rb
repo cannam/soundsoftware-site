@@ -1,6 +1,12 @@
 require 'bibtex'
 
 module PublicationsHelper
+
+  def link_to_publication(publication, options={}, html_options = nil)
+    url = {:controller => 'publications', :action => 'show', :id => publication}.merge(options)
+    link_to(h(publication.title), url, html_options)
+  end
+
   def projects_check_box_tags(name, projects)
     s = ''
     projects.sort.each do |project|
