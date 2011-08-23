@@ -4,4 +4,9 @@ class AuthorsController < ApplicationController
     @authors = Author.find(:all)
   end
 
+  def show
+    @author = Author.find(params[:id])  
+
+  end
+
 end

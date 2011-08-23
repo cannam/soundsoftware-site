@@ -10,6 +10,13 @@ en:
 
   label_all_publications: All Publications
   label_all_publications_for_project: Publications associated with %{project}
+  label_authors_show: "Authorships by this author"
+  label_authors_show: "List of authors"
+  
+  field_authorship_publication_title: "Publication Title"
+  field_authorship_name: "Name"
+  field_authorship_email: "Email Address"
+  field_authorship_institution: "Institution"
   
   field_publication_title: Title
   field_publication_authors: Authors
