@@ -7,6 +7,9 @@ class PublicationsController < ApplicationController
   model_object Publication
   before_filter :find_model_object, :except => [:new, :create, :index, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]
   
+  before_filter :find_project_by_project_id, :authorize, :only => :edit
+
+
   # before_filter :find_project, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
     
   def new
@@ -18,14 +21,16 @@ class PublicationsController < ApplicationController
     
     # and at least one author
     # @publication.authorships.build.build_author        
-    @author_options = Authorship.like_unique(User.name).find(:all, :limit => 100)
+    @author_options = [User.current]
+
+
   end
 
   def create    
     @project = Project.find(params[:project_id])
 
-    @author_options = Authorship.like_unique(User.name).find(:all, :limit => 100)
-        
+    @author_options = [User.current]
+
     @publication = Publication.new(params[:publication])
     @publication.projects << @project unless @project.nil?
         

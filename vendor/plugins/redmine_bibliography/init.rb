@@ -31,8 +31,8 @@ Redmine::Plugin.register :redmine_bibliography do
   settings :default => { 'menu' => 'Bibliography' }, :partial => 'settings/bibliography'
 
   project_module :redmine_bibliography do
-    permission :publications, { :publications => :index }, :public => true
-    permission :edit_redmine_bibliography, {:redmine_bibliography => [:edit, :update]}
+    permission :publications, { :publications => :index }
+    permission :edit_publication, {:redmine_bibliography => [:edit, :update]}
     permission :add_publication, {:redmine_bibliography => [:new, :create]}
   end
 
