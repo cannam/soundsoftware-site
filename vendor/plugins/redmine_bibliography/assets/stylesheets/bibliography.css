@@ -1,11 +1,18 @@
 li .handle {
-  font-size: 12px;
-  cursor: move;
-  color: #777;
+    font-size: 12px;
+    cursor: move;
+    color: #777;
 }
 
 input.readonly {
-	border: none;
-	background-color: transparent;
-	
+    border: none;
+    background-color: transparent;
+}
+
+.tabular .identify_author label {
+    font-weight: normal;
+    float: inherit;
+    text-align: inherit;
+    margin-left: 0;
+    width: computed;
 }
