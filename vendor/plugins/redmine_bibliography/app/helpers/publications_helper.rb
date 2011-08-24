@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'bibtex'
 
 module PublicationsHelper
@@ -75,7 +76,7 @@ module PublicationsHelper
 
     publication.projects.each do |proj|
       if @project == proj
-        confirm_msg = "Are you sure you want to remove the current project from this publication's projects list?"
+        confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
       else
         confirm_msg = false
       end 
@@ -88,17 +89,17 @@ module PublicationsHelper
   
   def show_bibtex_fields(bibtex_entry)
     s = ""
-
-    bibtex_entry.attributes.each do |field|
-      if field[1] != nil
-        s << "<h4>" + l("field_#{field[0]}") + "</h4>" 
-
-        if field[0] == "entry_type"
-          s << bibtex_entry.entry_type_label
-        else
-          s << bibtex_entry.attributes[field[0]].to_s
-        end
+    bibtex_entry.attributes.keys.sort.each do |key|
+      value = bibtex_entry.attributes[key].to_s
+      next if key == 'id' or key == 'publication_id' or value == ""
+      s << "<h4>" + l("field_#{key}") + "</h4>" 
+      s << "<p>"
+      if key == "entry_type"
+        s << bibtex_entry.entry_type_label
+      else
+        s << value
       end
+      s << "</p>"
     end
     s
   end 

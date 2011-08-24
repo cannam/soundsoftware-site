@@ -11,16 +11,18 @@
       </p>
       <%# link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %>
 
+      <p>   
+      <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
+        :onChange => remote_function( :url => { :controller => :publications, :action => :get_user_info, :object_id => form_object_id(f.object_name) }, :with => "'value=' + 
+        value" )} %>
+	</p>  
+
       <h5>Is it this author?</h5>
-      <p>
+      <p class='identify_author'>
         <%= f.radio_button :identify_author, "yes", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_yes %><br />
         <%= f.radio_button :identify_author, "correct", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_correct %><br />
         <%= f.radio_button :identify_author, "no", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });", :checked => "checked" %><%= f.label :identify_author_no %>
       </p>
-   
-      <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
-        :onChange => remote_function( :url => { :controller => :publications, :action => :get_user_info, :object_id => form_object_id(f.object_name) }, :with => "'value=' + 
-        value" )} %>
     </div>	
   
   <div id="<%= form_tag_id( f.object_name, :edit_author_info ) %>">
