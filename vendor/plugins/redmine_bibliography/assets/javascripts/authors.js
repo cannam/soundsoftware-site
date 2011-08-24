@@ -50,7 +50,7 @@ function toggle_save_author(form_object_id, $this){
     $('publication_authorships_attributes_' + form_object_id + '_edit_author_info').select('input').each(function(s) {
 	toggle_input_field(s, $this);
     });
-    $$('p.description').each(function(s) {
+    $('publication_authorships_attributes_' + form_object_id + '_edit_author_info').select('p.description').each(function(s) {
 	s.toggle();
     });
     toggle_edit_save_button(form_object_id);
