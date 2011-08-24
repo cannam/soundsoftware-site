@@ -34,8 +34,8 @@ en:
   label_add_me_as_author: "Add me as an author"
   label_add_an_author: "Add an author"
   label_add_another_author: "Add another author"
-  field_search_name: "Search author"
-  field_search_results: "Authors"
+  field_search_name: "Search by name"
+  field_search_results: ""
   label_save_author: "Save Author"
   label_author_information: "Author Information"
 
@@ -51,6 +51,7 @@ en:
   label_project_search: "Find project by name: "
   label_publication_project_index: "Projects associated with this publication"
   label_publication_index: "View all publications"
+  label_publication_other_details: "Details"
   
   text_author_email: "Author's email address as on the paper."
   text_author_institution: "Author's institution name as on paper."
