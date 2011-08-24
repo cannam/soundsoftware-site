@@ -10,8 +10,8 @@ en:
   
   identify_author_question: Is the right person selected above?
   identify_author_yes: "Yes"
-  identify_author_correct: "Yes, but I need to correct some details"
-  identify_author_no: "No"
+  identify_author_correct: "Yes, but I need to correct some details below"
+  identify_author_no: "No, the author was not found in the search"
 
   label_all_publications: All Publications
   label_all_publications_for_project: Publications associated with %{project}
@@ -41,7 +41,7 @@ en:
   label_add_another_author: "Add another author"
   field_search_name: "Search by name"
   field_search_results: ""
-  label_save_author: "Save Author"
+  label_save_author: "Save author"
   label_author_information: "Author Information"
 
   remove_author: "Remove this author"

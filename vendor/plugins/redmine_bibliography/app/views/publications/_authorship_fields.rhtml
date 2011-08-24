@@ -18,23 +18,23 @@
 	</p>  
 
       <p style="margin-bottom: -2.5em; padding-bottom; 0"><label><%= l(:identify_author_question) %></label></p>
-      <p class="identify_author">
-        <label><%= radio_button_tag(:identify_author, "yes", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_yes ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_yes) %> </label><br />
+      <p class="author_identify">
+        <label class='inline'><%= radio_button_tag(:identify_author, "yes", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_yes ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_yes) %> </label><br />
        
-        <label><%= radio_button_tag(:identify_author, "correct", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_corrections ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_correct) %> </label><br />
+        <label class='inline'><%= radio_button_tag(:identify_author, "correct", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_corrections ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_correct) %> </label><br />
         
-        <label><%= radio_button_tag(:identify_author, "no", true, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_no ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_no) %> </label><br />
+        <label class='inline'><%= radio_button_tag(:identify_author, "no", true, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_no ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_no) %> </label><br />
       </p>
     </div>	
   
-  <div id="<%= form_tag_id( f.object_name, :edit_author_info ) %>">
+  <div class='author_edit' id="<%= form_tag_id( f.object_name, :edit_author_info ) %>">
     <p>
-      <%= f.text_field :name_on_paper, {:class => ("readonly" unless params[:action] == "new") } %><br />
-      <em style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_name_on_paper") %></em><br />
-      <%= f.text_field :institution, {:class => ("readonly" unless params[:action] == "new") }  %><br />
-      <em style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_institution") %></em><br />
-      <%= f.text_field :email, {:class => ("readonly" unless params[:action] == "new") }  %><br />
-      <em style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_email") %></em><br />
+      <%= f.text_field :name_on_paper, {:class => ("readonly" unless params[:action] == "new") } %></p>
+      <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_name_on_paper") %></p>
+      <p><%= f.text_field :institution, {:class => ("readonly" unless params[:action] == "new") }  %></p>
+      <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_institution") %></p>
+      <p><%= f.text_field :email, {:class => ("readonly" unless params[:action] == "new") }  %></p>
+      <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_email") %></p>
     </p>
   </div>
   
@@ -43,8 +43,10 @@
 	
   </div>
 
+  <p>
   <%= button_to_function l(:label_save_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
 
   <%= link_to_remove_fields l("remove_author"), f %>
+  </p>
 </div>
 <br/>

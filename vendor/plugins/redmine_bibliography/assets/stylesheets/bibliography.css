@@ -6,13 +6,21 @@ li .handle {
 
 input.readonly {
     border: none;
+    padding: 0;
+    margin: 0;
     background-color: transparent;
 }
 
-.tabular .identify_author label {
+.tabular .author_identify label {
     font-weight: normal;
-    float: inherit;
-    text-align: inherit;
-    margin-left: 0;
-    width: computed;
 }
+
+.tabular .author_edit p {
+    padding-bottom: 0;
+}
+
+.tabular .author_edit .description {
+    padding-top: 0;
+    font-style: italic;
+}
+
