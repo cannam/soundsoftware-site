@@ -10,7 +10,7 @@ en:
   
   identify_author_question: Is the right person selected above?
   identify_author_yes: "Yes"
-  identify_author_corrections: "Yes, but I need to correct some details"
+  identify_author_correct: "Yes, but I need to correct some details"
   identify_author_no: "No"
 
   label_all_publications: All Publications
