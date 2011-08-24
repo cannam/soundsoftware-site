@@ -21,7 +21,7 @@ class PublicationsController < ApplicationController
     
     # and at least one author
     # @publication.authorships.build.build_author        
-    @author_options = [User.current]
+    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
 
 
   end
@@ -29,7 +29,7 @@ class PublicationsController < ApplicationController
   def create    
     @project = Project.find(params[:project_id])
 
-    @author_options = [User.current]
+    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
 
     @publication = Publication.new(params[:publication])
     @publication.projects << @project unless @project.nil?
@@ -79,7 +79,7 @@ class PublicationsController < ApplicationController
     
     @edit_view = true;
     
-    @author_options = [] 
+    @options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type  
   end
