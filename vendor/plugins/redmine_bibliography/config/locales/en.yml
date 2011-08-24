@@ -8,9 +8,10 @@ en:
   publications_box: "My Publications"
   label_my_publications_box: "My Publications"
   
+  identify_author_question: Is the right person selected above?
   identify_author_yes: "Yes"
+  identify_author_corrections: "Yes, but I need to correct some details"
   identify_author_no: "No"
-  identify_author_corrections: "Corrections"
 
   label_all_publications: All Publications
   label_all_publications_for_project: Publications associated with %{project}
@@ -57,9 +58,9 @@ en:
   label_publication_index: "View all publications"
   label_publication_other_details: "Details"
   
+  text_author_name_on_paper: "Author's name as it appears on the paper."
+  text_author_institution: "Author's institution as on the paper."
   text_author_email: "Author's email address as on the paper."
-  text_author_institution: "Author's institution name as on paper."
-  text_author_name_on_paper: "Name of the author as it appears on paper."
   
   text_author_search: "Search existing authors"
   

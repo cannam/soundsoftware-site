@@ -27,16 +27,13 @@ function toggle_div(div_id){
 	Effect.toggle(div_id, "appear", {duration:0.3});
 }
 
-
-
-
 function toggle_input_field(field){	
 	if(field.classNames().inspect().include("readonly") == false){
 		field.readOnly = true;	
 		field.addClassName('readonly').next('em').hide();
 	} else {
 		field.readOnly = false;
-		field.removeClassName('readonly').next('em').show();		
+		field.removeClassName('readonly').next('em').show();
 	};	
 }
 

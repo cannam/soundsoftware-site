@@ -17,12 +17,11 @@
         value" )} %>
 	</p>  
 
-      <h5>Is it this author?</h5>
-      <p class='identify_author'>
+      <p style="margin-bottom: -2.5em; padding-bottom; 0"><label><%= l(:identify_author_question) %></label></p>
+      <p class="identify_author">
         <label><%= radio_button_tag(:identify_author, "yes", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_yes ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_yes) %> </label><br />
-        
+       
         <label><%= radio_button_tag(:identify_author, "corrections", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_corrections ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_corrections) %> </label><br />
-        
         
         <label><%= radio_button_tag(:identify_author, "no", true, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_no ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_no) %> </label><br />
       </p>
@@ -48,3 +47,4 @@
 
   <%= link_to_remove_fields l("remove_author"), f %>
 </div>
+<br/>
