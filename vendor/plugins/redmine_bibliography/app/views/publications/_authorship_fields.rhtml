@@ -19,9 +19,12 @@
 
       <h5>Is it this author?</h5>
       <p class='identify_author'>
-        <%= f.radio_button :identify_author, "yes", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_yes %><br />
-        <%= f.radio_button :identify_author, "correct", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });" %><%= f.label :identify_author_correct %><br />
-        <%= f.radio_button :identify_author, "no", :onClick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });", :checked => "checked" %><%= f.label :identify_author_no %>
+        <label><%= radio_button_tag(:identify_author, "yes", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_yes ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_yes) %> </label><br />
+        
+        <label><%= radio_button_tag(:identify_author, "corrections", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_corrections ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_corrections) %> </label><br />
+        
+        
+        <label><%= radio_button_tag(:identify_author, "no", true, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_no ), :onclick => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_no) %> </label><br />
       </p>
     </div>	
   

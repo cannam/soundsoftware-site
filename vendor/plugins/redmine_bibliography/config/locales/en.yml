@@ -7,6 +7,10 @@ en:
   year: "Year"
   publications_box: "My Publications"
   label_my_publications_box: "My Publications"
+  
+  identify_author_yes: "Yes"
+  identify_author_no: "No"
+  identify_author_corrections: "Corrections"
 
   label_all_publications: All Publications
   label_all_publications_for_project: Publications associated with %{project}
