@@ -75,13 +75,20 @@ module PublicationsHelper
     s = ""
 
     publication.projects.each do |proj|
-      if @project == proj
-        confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
-      else
-        confirm_msg = false
-      end 
+      s << link_to_project(proj, {}, :class => 'publication_project')
       
-      s << link_to_project(proj, {}, :class => 'publication_project') + link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del') + "<br />"
+      if User.current.allowed_to?(:edit_publication, @project)
+        if @project == proj
+          confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
+        else
+          confirm_msg = false
+        end 
+            
+        s << link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del') 
+      end
+      
+      s << "<br />"
+      
     end
     
     s  
