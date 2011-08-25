@@ -6,10 +6,7 @@ class PublicationsController < ApplicationController
   
   model_object Publication
   before_filter :find_model_object, :except => [:new, :create, :index, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]  
-
-  before_filter :find_project_by_project_id, :authorize, :only => :edit
-    
-    
+  before_filter :find_project_by_project_id, :authorize, :only => [ :edit, :new, :update, :create ]
     
   def new
     find_project_by_project_id
