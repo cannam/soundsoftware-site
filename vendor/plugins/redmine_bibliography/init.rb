@@ -15,7 +15,6 @@ Dispatcher.to_prepare :redmine_model_dependencies do
   unless User.included_modules.include? Bibliography::UserAuthorPatch
     User.send(:include, Bibliography::UserAuthorPatch)
   end
-
 end
 
 
@@ -34,6 +33,8 @@ Redmine::Plugin.register :redmine_bibliography do
     permission :publications, { :publications => :index }, :public => true
     permission :edit_publication, {:publications => [:edit, :update]}
     permission :add_publication, {:publications => [:new, :create]}
+    permission :delete_publication, {:publications => :destroy}
+
   end
 
   # extending the Project Menu
