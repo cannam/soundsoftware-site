@@ -11,14 +11,14 @@
 <ul id="authorships">
   <% for authorship in @publication.authorships.find(:all, :order => :auth_order) %>
     <% content_tag_for :li, authorship do %>
-      <%- if User.current.allowed_to?(:edit_publication, @project) -%>    
+      <%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>    
         <span class="handle">[drag to reorder]</span>
       <%- end -%>
       <%= h authorship.name_on_paper %> <em><%= h authorship.institution %></em> <br />
     <%- end -%>
   <%- end -%>
 </ul>
-<%- if User.current.allowed_to?(:edit_publication, @project) -%>
+<%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>
   <%= sortable_element("authorships", :url => { :controller => :publications, :action => :sort_author_order }, :handle => "handle") %>
 <%- end -%>
 
