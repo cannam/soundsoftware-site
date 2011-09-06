@@ -251,6 +251,11 @@ line-height:1.5em;
 border: 1px solid #e4e4e4;
 }
 
+.box h4 {
+margin-top: 0;
+padding-top: 0;
+}
+
 div.square {
  border: 1px solid #999;
  float: left;
@@ -400,12 +405,15 @@ textarea#custom_field_possible_values {width: 99%}
 p.pagination {margin-top:8px;}
 
 /***** Tabular forms ******/
-.tabular p{
+.tabular p, .tabular ul{
 margin: 0;
 padding: 5px 0 8px 0;
 padding-left: 180px; /*width of left column containing the label elements*/
 height: 1%;
 clear:left;
+}
+.tabular ul{
+margin-top: -4px;
 }
 
 html>body .tabular p {overflow:hidden;}
@@ -417,6 +425,15 @@ text-align: right;
 margin-left: -180px; /*width of left column*/
 width: 175px; /*width of labels. Should be smaller than left column to create some right 
 margin*/
+}
+
+.tabular .splitcontentleft .box p, .tabular .splitcontentright .box p, .splitcontentleft .tabular p, .splitcontentright .tabular p, .tabular .splitcontentleft .box ul, .tabular .splitcontentright .box ul, .splitcontentleft .tabular ul, .splitcontentright .tabular ul {
+padding-left: 120px;
+}
+
+.tabular .splitcontentleft .box label, .tabular .splitcontentright .box label, .splitcontentleft .tabular label, .splitcontentright .tabular label {
+margin-left: -120px;
+width: 115px;
 }
 
 .tabular label.floating{

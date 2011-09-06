@@ -4,7 +4,9 @@
 	<% end %>
 	
 	<% if @project.module_enabled? :redmine_bibliography %>
-		<%= link_to l(:label_add_publication_to_project), {:controller => 'publications', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>		
+	  <% if User.current.allowed_to?(:add_publication, @project) %>	
+		  <%= link_to l(:label_add_publication_to_project), {:controller => 'publications', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>		
+	  <% end %>
 	<% end %>
 </div>
 

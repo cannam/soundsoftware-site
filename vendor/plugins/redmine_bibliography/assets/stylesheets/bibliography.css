@@ -1,5 +1,29 @@
 li .handle {
-  font-size: 12px;
-  cursor: move;
-  color: #777;
+    font-size: 12px;
+    cursor: move;
+    color: #777;
+}
+
+input.readonly {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
+
+.tabular .author_identify label {
+    font-weight: normal;
+}
+
+.tabular .author_edit p {
+    padding-bottom: 0;
+}
+
+.tabular .author_edit .description {
+    padding-top: 0;
+    font-style: italic;
+}
+
+.publication_project {
+    margin-right: 18px;
 }

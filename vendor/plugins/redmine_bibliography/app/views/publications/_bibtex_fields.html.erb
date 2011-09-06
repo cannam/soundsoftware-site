@@ -1,26 +1,21 @@
-<div class="box">
-
 
 <p><label for="bibtex_entry_type"><%=l("field_entry_type")%> <span class="required">*</span></label>
-	<%= f.collection_select(:entry_type, BibtexEntryType.find(:all), :id, :name,  {:selected => @selected_bibtex_entry_type_id, :prompt => true})  %>
+	<%= f.collection_select(:entry_type, BibtexEntryType.find(:all).reject { |x| x.redundant? }, :id, :label,  {:selected => @selected_bibtex_entry_type_id, :prompt => true})  %>
     </p>
     <p> 
-      <%= f.text_field :year, :size => 60 %>  
+      <%= f.text_field :year, :size => 4 %> 
+    </p><p> 
+      <%= f.text_field :chapter, :size => 15 %>  
     </p>  
     <p>   
-      <%= f.text_field :chapter, :size => 60 %>  
+      <%= f.text_field :editor, :size => 33  %>  
     </p>  
     <p>   
-      <%= f.text_field :editor, :size => 60  %>  
+      <%= f.text_field :booktitle,:size => 33  %>  
     </p>  
     <p>   
-      <%= f.text_field :booktitle,:size => 60  %>  
+      <%= f.text_field :publisher,:size => 33  %>  
     </p>  
     <p>   
-      <%= f.text_field :publisher,:size => 60  %>  
-    </p>  
-    <p>   
-      <%= f.text_field :pages, :size => 60  %>  
+      <%= f.text_field :pages, :size => 12  %>  
     </p>
-
-</div>
