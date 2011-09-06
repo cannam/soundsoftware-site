@@ -32,7 +32,7 @@
     <%= link_to "Delete", {:controller => 'publications', :action => 'destroy', :id => @publication, :project_id => @project },
                                                      :confirm => l(:text_are_you_sure), :method => :delete, :title => l(:button_delete) %> |
   <% end %>
-  <%= link_to l(:view_all_publications), publications_path %>
+  <%= link_to l(:view_all_publications), {:controller => 'publications', :action => 'index', :project_id => @project } %>
 </div>
 
 <% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
