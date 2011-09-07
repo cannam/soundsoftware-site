@@ -1,8 +1,11 @@
 <% if @project.publications.any? %>
   <div class="bibliography box">
-	  <h3><%=l(:label_publications_plural)%></h3>	
+	  <h3><%=l(:label_related_publication_plural)%></h3>	
 	  <p><% @project.publications.each do |publication| %>
-	    <%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication, :project_id => @project %><br />
+	    <%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication, :project_id => @project %> - 
+	    <%= publication.authorships.map { |a| h a.name_on_paper }.join(', ') %>
+	    <% if publication.bibtex_entry.year.to_s != "" %>(<%= publication.bibtex_entry.year %>)<% end %>
+	    <br />
 	  <% end %></p>
   </div>
 <% end %>
