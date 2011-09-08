@@ -17,6 +17,17 @@ class Publication < ActiveRecord::Base
   has_and_belongs_to_many :projects, :uniq => true
   
   before_save :set_initial_author_order
+  after_save :notify_authors
+  
+  # Returns the mail adresses of users that should be notified
+  def notify_authors
+    
+    self.authors.each do |author|
+      Mailer.deliver_added_to_new_publication(author.user, self) unless author.user.nil?
+    end
+    
+  end
+  
   
   def set_initial_author_order
     authorships = self.authorships
