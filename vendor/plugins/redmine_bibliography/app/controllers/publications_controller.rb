@@ -17,7 +17,7 @@ class PublicationsController < ApplicationController
     
     # and at least one author
     # @publication.authorships.build.build_author        
-    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
+    @author_options = [["#{User.current.name} (@#{User.current.mail.partition('@')[2]})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
 
 
   end
@@ -79,8 +79,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
 
-    # todo: should be removed? 
-    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]  
+    @author_options = []  
   end
 
   def update    
