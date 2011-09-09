@@ -31,6 +31,8 @@ class PublicationsController < ApplicationController
     @publication.projects << @project unless @project.nil?
         
     if @publication.save 
+      @publication.notify_authors_publication_added(@project)
+      
       flash[:notice] = "Successfully created publication."
       redirect_to :action => :show, :id => @publication, :project_id => @project
     else
