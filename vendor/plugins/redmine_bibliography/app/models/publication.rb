@@ -21,8 +21,9 @@ class Publication < ActiveRecord::Base
   
   # Returns the mail adresses of users that should be notified
   def notify_authors
-    
+        
     self.authors.each do |author|
+      Rails.logger.debug { "Sending mail to \"#{self.title}\" publication authors." }
       Mailer.deliver_publication_added(author.user, self) unless author.user.nil?
     end
     

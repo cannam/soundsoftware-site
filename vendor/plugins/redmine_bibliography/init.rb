@@ -7,7 +7,7 @@ RAILS_DEFAULT_LOGGER.info 'Starting Bibliography Plugin for RedMine'
 Dispatcher.to_prepare :redmine_model_dependencies do
   require_dependency 'project'
   require_dependency 'user'
-  require_dependency 'mailer_patch'
+  require_dependency 'mailer'
 
   unless Project.included_modules.include? Bibliography::ProjectPublicationsPatch
     Project.send(:include, Bibliography::ProjectPublicationsPatch)
@@ -17,8 +17,8 @@ Dispatcher.to_prepare :redmine_model_dependencies do
     User.send(:include, Bibliography::UserAuthorPatch)
   end
 
-  unless Mailer.included_modules.include? MailerPatch
-    Mailer.send(:include, MailerPatch)
+  unless Mailer.included_modules.include? Bibliography::MailerPatch
+    Mailer.send(:include, Bibliography::MailerPatch)
   end
 
 
