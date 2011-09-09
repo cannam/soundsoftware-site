@@ -13,14 +13,10 @@ module MyHelper
     projs = []
     
     publication.projects.each do |proj|
-      projs << link_to(proj.name, proj)               
+      projs << link_to(proj.name, proj)
     end
     
-    if projs.size < 3
-        s << '<nobr>' << projs.join(', ') << '</nobr>'
-      else
-        s << projs.join(', ')
-    end  
+    s << projs.join(', ')
     
     s
   end
@@ -33,11 +29,8 @@ module MyHelper
       auths << h(auth.name_on_paper)
     end
     
-    if auths.size < 3
-        s << '<nobr>' << auths.join(', ') << '</nobr>'
-      else
-        s << auths.join(', ')
-    end
+    s << auths.join(', ')
+
     s
   end
 
