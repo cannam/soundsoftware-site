@@ -137,6 +137,8 @@ en:
   label_author_19: Nineteenth author
   label_author_20: Twentieth author
 
+  mail_subject_publication_added: "You have been added a an author to a new publication"
+  mail_body_publication_added: "A new publication (%{publication}) has been added to the project %{project}."
   
   
   

@@ -1,3 +1,1 @@
-<%= link_to(h(@publication.title), @publication_url) %> <br />
-<br />
-<%= textilizable(@publication, :title, :only_path => false) %>
+<%= l(:mail_body_publication_added, :publication => @publication.title, :project => @project.name) %>
