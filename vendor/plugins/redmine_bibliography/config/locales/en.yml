@@ -26,10 +26,10 @@ en:
   
   field_publication_title: Title
   field_publication_authors: Authors
-  field_publication_projects: "Associated Projects"
+  field_publication_projects: "Associated projects"
   field_author_name: Author
   field_author_user: User Name
-  field_author_username: "Associated User"
+  field_author_username: "Associated user"
   field_author_publications: "Publications by this Author" 
   field_identify_author_yes: "Yes"
   field_identify_author_correct: "Corrections"
