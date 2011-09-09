@@ -28,6 +28,10 @@ input.readonly {
     margin-right: 18px;
 }
 
+.edit_publication select {
+    min-width: 150px;
+}
+
 div#bibliography dl { margin-left: 2em; }
 div#bibliography .box dl { margin-left: 0; }
 div#bibliography dt { margin-bottom: 0px; padding-left: 20px }

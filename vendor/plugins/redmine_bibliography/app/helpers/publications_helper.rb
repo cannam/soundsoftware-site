@@ -23,7 +23,11 @@ module PublicationsHelper
         
     @author_options = []
     @results.each do |result|
-      @author_options << ["#{result.name} (#{result.mail})", "#{result.class.to_s}_#{result.id.to_s}"]
+      email_bit = result.mail.partition('@')[2]
+      if email_bit != "":
+          email_bit = "(@#{email_bit})"
+      end
+      @author_options << ["#{result.name} #{email_bit}", "#{result.class.to_s}_#{result.id.to_s}"]
     end
     
    if @results.size > 0
