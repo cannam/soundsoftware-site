@@ -17,6 +17,29 @@ class Publication < ActiveRecord::Base
   has_and_belongs_to_many :projects, :uniq => true
   
   before_save :set_initial_author_order
+  after_save :notify_authors
+
+  # Ensure error message uses proper text instead of
+  # bibtex_entry.entry_type (#268).  There has to be a better way to
+  # do this!
+  def self.human_attribute_name(k)
+    if k == 'bibtex_entry.entry_type'
+      l(:field_entry_type)
+    else
+      super
+    end
+  end
+
+  # Returns the mail adresses of users that should be notified
+  def notify_authors
+        
+    self.authors.each do |author|
+      Rails.logger.debug { "Sending mail to \"#{self.title}\" publication authors." }
+      Mailer.deliver_publication_added(author.user, self) unless author.user.nil?
+    end
+    
+  end
+  
   
   def set_initial_author_order
     authorships = self.authorships

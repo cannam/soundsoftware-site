@@ -24,17 +24,17 @@ en:
   field_authorship_email: "Email Address"
   field_authorship_institution: "Institution"
   
+  field_external_url: "External URL"
   field_publication_title: Title
   field_publication_authors: Authors
-  field_publication_projects: "Associated Projects"
+  field_publication_projects: "Associated projects"
   field_author_name: Author
   field_author_user: User Name
-  field_author_username: "Associated User"
+  field_author_username: "Associated user"
   field_author_publications: "Publications by this Author" 
   field_identify_author_yes: "Yes"
   field_identify_author_correct: "Corrections"
   field_identify_author_no: "No"
-  entry_type: "Bibtex Entry Type"
   
   label_author_is_me: "(I am this author)"
   label_add_me_as_author: "Add me as an author"
@@ -43,11 +43,13 @@ en:
   field_search_name: "Search by name"
   field_search_results: ""
   label_save_author: "Save author"
+  label_edit_author: "Edit author"
   label_author_information: "Author Information"
 
   remove_author: "Remove this author"
   
-  label_publications_plural: "Publications"
+  label_publication_plural: "Publications"
+  label_related_publication_plural: "Related publications"
   label_publication_new: "Create New Publication"
   label_publication_index: "List of Publication"
   label_add_publication_to_project: "Add publication to this project"
@@ -59,6 +61,7 @@ en:
   label_publication_index: "View all publications"
   label_publication_other_details: "Details"
   
+  text_external_url: "Link to the publication or to an external page about it."
   text_author_name_on_paper: "Author's name as it appears on the paper."
   text_author_institution: "Author's institution as on the paper."
   text_author_email: "Author's email address as on the paper."

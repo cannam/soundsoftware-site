@@ -2,7 +2,7 @@
 
 
 <div id="authors" class="fields">
-  <h4><%= l("label_author_1") %></h4>
+<!--  <h4><%= l("label_author_1") %></h4> -->
 
   <div id="<%= form_tag_id( f.object_name, :search_author ) %>" style=<%= "display:none;" unless params[:action] == "new" %> >
       <p>
@@ -44,7 +44,14 @@
   </div>
 
   <p>
-  <%= button_to_function l(:label_save_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
+
+  <% if params[:action] == 'new' %>
+   <%= button_to_function l(:label_save_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
+  <% else %>
+<%= button_to_function l(:label_edit_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
+
+ <% end %>
+
 
   <%= link_to_remove_fields l("remove_author"), f %>
   </p>

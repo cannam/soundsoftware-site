@@ -1,5 +1,7 @@
-<div class="contextual">		
-		<%= link_to l(:label_publication_new), {:controller => 'publications', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>
+<div class="contextual">
+  <% if User.current.allowed_to?(:add_publication, @project) %>			
+	  <%= link_to l(:label_publication_new), {:controller => 'publications', :action => 'new', :project_id => @project}, :class => 'icon icon-add' %>
+	<% end %>
 </div>
 
   <% if @project %>
