@@ -26,6 +26,16 @@
   <%= show_bibtex_fields(@publication.bibtex_entry) %>
 <%- end -%>
 
+
+<% unless @publication.external_url.blank? %>
+  <h4>
+    <%= l(:field_external_url) %>
+  </h4>
+  <p>
+    <%= link_to h(@publication.external_url), @publication.external_url, {:target => "_blank"} %>
+  </p>
+<% end %>
+
 <br / >
   <% if User.current.allowed_to?(:add_publication, @project) %>	
     <%= link_to l(:label_publication_edit), { :controller => "publications", :action => "edit", :id => @publication, :project_id => @project } %> |

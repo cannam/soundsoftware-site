@@ -24,6 +24,7 @@ en:
   field_authorship_email: "Email Address"
   field_authorship_institution: "Institution"
   
+  field_external_url: "External URL"
   field_publication_title: Title
   field_publication_authors: Authors
   field_publication_projects: "Associated projects"
@@ -59,6 +60,7 @@ en:
   label_publication_index: "View all publications"
   label_publication_other_details: "Details"
   
+  text_external_url: "Link to the publication itself."
   text_author_name_on_paper: "Author's name as it appears on the paper."
   text_author_institution: "Author's institution as on the paper."
   text_author_email: "Author's email address as on the paper."

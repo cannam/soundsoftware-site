@@ -8,6 +8,13 @@
     <% f.fields_for :bibtex_entry do |builder| -%>
       <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
     <%- end -%>
+
+    <p>
+      <%= f.text_field :external_url, :size => 70 %>
+      <br />
+      <em><%= l(:text_external_url) %></em>
+    </p>
+
   </div>
 </div>
 
