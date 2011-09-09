@@ -23,7 +23,7 @@ class Publication < ActiveRecord::Base
   def notify_authors
     
     self.authors.each do |author|
-      Mailer.deliver_added_to_new_publication(author.user, self) unless author.user.nil?
+      Mailer.deliver_publication_added(author.user, self) unless author.user.nil?
     end
     
   end
