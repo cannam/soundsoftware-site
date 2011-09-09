@@ -34,7 +34,6 @@ en:
   field_identify_author_yes: "Yes"
   field_identify_author_correct: "Corrections"
   field_identify_author_no: "No"
-  entry_type: "Bibtex Entry Type"
   
   label_author_is_me: "(I am this author)"
   label_add_me_as_author: "Add me as an author"
