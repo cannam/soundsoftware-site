@@ -28,7 +28,7 @@ input.readonly {
     margin-right: 18px;
 }
 
-.edit_publication select {
+#authors select {
     min-width: 150px;
 }
 

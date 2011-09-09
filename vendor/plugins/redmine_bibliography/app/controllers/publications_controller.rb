@@ -25,7 +25,7 @@ class PublicationsController < ApplicationController
   def create    
     @project = Project.find(params[:project_id])
 
-    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
+    @author_options = []
 
     @publication = Publication.new(params[:publication])
     @publication.projects << @project unless @project.nil?
@@ -75,7 +75,6 @@ class PublicationsController < ApplicationController
     
     @edit_view = true;
     
-    @options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
 
@@ -85,8 +84,7 @@ class PublicationsController < ApplicationController
   def update    
     @publication = Publication.find(params[:id])        
 
-    # todo: should be removed? 
-    @author_options = [["#{User.current.name} (#{User.current.mail})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
+    @author_options = []
 
     logger.error { "INSIDE THE UPDATE ACTION IN THE PUBLICATION CONTROLLER" }
 
