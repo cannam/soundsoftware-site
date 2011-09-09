@@ -208,7 +208,8 @@ class PublicationsController < ApplicationController
     object_id = params[:object_id]
     @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
         
-    authorships_list = Authorship.like_unique(params[:q]).find(:all, :select => "name_on_paper,institution,email", :limit => 100)
+    # cc 20110909 -- revert to like instead of like_unique -- see #289
+    authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
     logger.debug "Query for \"#{params[:q]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
