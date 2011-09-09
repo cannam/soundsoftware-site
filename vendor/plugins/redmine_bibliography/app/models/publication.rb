@@ -18,7 +18,18 @@ class Publication < ActiveRecord::Base
   
   before_save :set_initial_author_order
   after_save :notify_authors
-  
+
+  # Ensure error message uses proper text instead of
+  # bibtex_entry.entry_type (#268).  There has to be a better way to
+  # do this!
+  def self.human_attribute_name(k)
+    if k == 'bibtex_entry.entry_type'
+      l(:field_entry_type)
+    else
+      super
+    end
+  end
+
   # Returns the mail adresses of users that should be notified
   def notify_authors
         
