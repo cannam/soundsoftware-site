@@ -43,6 +43,7 @@ en:
   field_search_name: "Search by name"
   field_search_results: ""
   label_save_author: "Save author"
+  label_edit_author: "Edit author"
   label_author_information: "Author Information"
 
   remove_author: "Remove this author"
