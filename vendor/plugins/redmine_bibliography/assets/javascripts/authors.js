@@ -29,11 +29,11 @@ function toggle_div(div_id){
 
 function toggle_input_field(field){	
     if (field.classNames().inspect().include("readonly") == false){
-	field.readOnly = true;	
-	field.addClassName('readonly');
+			field.readOnly = true;	
+			field.addClassName('readonly');
     } else {
-	field.readOnly = false;
-	field.removeClassName('readonly');
+			field.readOnly = false;
+			field.removeClassName('readonly');
     };	
 }
 
@@ -62,3 +62,13 @@ function edit_author(form_object_id){
 	
 }
 
+function hide_all_bibtex_required_fields() {
+	$$('input.bibtex').each(function(s){
+	    s.up('p').hide();
+		})}
+		
+function hide_all_empty_bibtex_fields() {
+	$$('input.bibtex').each(function(s){
+	    if(s.value==""){s.up('p').hide()};
+})}
+		
