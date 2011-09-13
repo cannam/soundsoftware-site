@@ -8,70 +8,7 @@
 	        :onChange => remote_function( :url => { :controller => :publications, :action => :get_bibtex_required_fields}, :with => "'value=' + value" )	              
 	%>
 </p>
-<p> 
-  <%= f.text_field :year, :size => 4, :class => 'bibtex' %> 
-</p>
-<p> 
-  <%= f.text_field :chapter, :size => 15, :class => 'bibtex' %>  
-</p>  
-<p>   
-  <%= f.text_field :editor, :size => 33, :class => 'bibtex'  %>  
-</p>  
-<p>   
-  <%= f.text_field :booktitle, :size => 33, :class => 'bibtex'  %>  
-</p>  
-<p>   
-  <%= f.text_field :publisher,:size => 33, :class => 'bibtex'  %>  
-</p>  
-<p>   
-  <%= f.text_field :pages, :size => 12, :class => 'bibtex'  %>  
-</p>
-<p>
- <%= f.text_field :address, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :annote, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :crossref, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :edition, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :eprint, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :howpublished, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :journal, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :key, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :note, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :number, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :organization, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :school, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :series, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :type, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :url, :class => 'bibtex' %>
-</p>
-<p>
- <%= f.text_field :volume, :class => 'bibtex' %>
-</p>
 
+<%- if params[:action] == "edit" || params[:action] == 'create' -%>
+  <%= render :partial => 'bibtex_entries/article', :locals => { :f => f }  %>
+<%- end -%>
