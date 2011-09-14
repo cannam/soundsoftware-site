@@ -9,6 +9,8 @@
 	%>
 </p>
 
-<%- if params[:action] == "edit" || params[:action] == 'create' -%>
+<div id="bibtex_entry_fields">
+  <%- if params[:action] == "edit" || params[:action] == 'create' -%>
   <%= render :partial => 'bibtex_entries/article', :locals => { :f => f }  %>
-<%- end -%>
+  <%- end -%>
+</div>
