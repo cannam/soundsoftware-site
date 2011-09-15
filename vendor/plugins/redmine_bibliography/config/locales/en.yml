@@ -1,5 +1,7 @@
 # English strings go here for Rails i18n
 en:
+  project_module_redmine_bibliography: Bibliography
+
   title: "Title"
   authors: "Authors"
   author: "Author"
