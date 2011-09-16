@@ -63,7 +63,7 @@ class PublicationsController < ApplicationController
   end
 
   def get_bibtex_required_fields
-    all_fields = ["editor", "publisher", "chapter", "pages", "volume", "series", "address", "edition", "year", "note", "institution", "type", "number", "month", "journal", "howpublished", "key", "school"]
+    all_fields = [ "editor", "publisher", "chapter", "pages", "volume", "series", "address", "edition", "year", "type", "note", "number", "journal", "howpublished", "key", "school", "month" ]
 
     fields = Hash.new
     fields[ 'article' ] = [ 'journal', 'year', 'volume', 'number', 'pages', 'month', 'note' ]
@@ -78,7 +78,7 @@ class PublicationsController < ApplicationController
     fields[ 'misc' ] = [ 'howpublished', 'month', 'year', 'note' ]
     fields[ 'phdthesis' ] = [ 'school', 'year', 'address', 'month', 'note' ]
     fields[ 'proceedings' ] = [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ]
-    fields[ 'techreport' ] = [ 'institution', 'year', 'type', 'number', 'address', 'month', 'note' ]
+    fields[ 'techreport' ] = [ 'year', 'type', 'number', 'address', 'month', 'note' ]
     fields[ 'unpublished' ] = [ 'note', 'month', 'year' ]
 
     entrytype = BibtexEntryType.find(params[:value]).name
@@ -86,14 +86,11 @@ class PublicationsController < ApplicationController
     respond_to do |format|
       format.js {
         render(:update) {|page| 
-          all_fields.each do |field|
-            
-            
-            
+          all_fields.each_with_index do |field, idx|            
             unless fields[entrytype].include? field
-                page["publication_bibtex_entry_attributes_#{field}"].up('p').hide()
-              else
-                page["publication_bibtex_entry_attributes_#{field}"].up('p').show()
+              page["publication_bibtex_entry_attributes_#{field}"].up('p').hide()
+            else
+              page["publication_bibtex_entry_attributes_#{field}"].up('p').show()
             end            
           end
         }
