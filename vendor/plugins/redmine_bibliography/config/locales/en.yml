@@ -11,6 +11,8 @@ en:
   publications_box: "My Publications"
   label_my_publications_box: "My Publications"
   view_all_publications: "View All Project's Publications"
+  publications: Publications
+  
   
   identify_author_question: Is the right person selected above?
   identify_author_yes: "Yes"
