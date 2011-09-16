@@ -1,5 +1,7 @@
 # English strings go here for Rails i18n
 en:
+  project_module_redmine_bibliography: Bibliography
+
   title: "Title"
   authors: "Authors"
   author: "Author"
@@ -13,6 +15,8 @@ en:
   identify_author_yes: "Yes"
   identify_author_correct: "Yes, but I need to correct some details below"
   identify_author_no: "No, the author was not found in the search"
+
+  error_no_authors: "Please add at least one author to this publication."
 
   label_all_publications: All Publications
   label_all_publications_for_project: Publications associated with %{project}

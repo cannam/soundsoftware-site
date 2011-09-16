@@ -57,18 +57,16 @@ function toggle_save_author(form_object_id, $this){
     toggle_div("publication_authorships_attributes_" + form_object_id +"_search_author");
 }
 
-function edit_author(form_object_id){
-	
-	
-}
+function edit_author(form_object_id){}
 
 function hide_all_bibtex_required_fields() {
 	$$('input.bibtex').each(function(s){
 	    s.up('p').hide();
 		})}
 		
-function hide_all_empty_bibtex_fields() {
+function show_all_required_bibtex_fields(entrytype_fields) {
 	$$('input.bibtex').each(function(s){
-	    if(s.value==""){s.up('p').hide()};
-})}
+    if(entrytype_fields.indexOf(s.id.split('_').last()) == -1){s.up('p').hide()};
+	})
+}
 		
