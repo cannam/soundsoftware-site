@@ -7,6 +7,7 @@ en:
   author: "Author"
   name: "Name"
   year: "Year"
+  associated_projects: "Associated Projects"
   publications_box: "My Publications"
   label_my_publications_box: "My Publications"
   view_all_publications: "View All Project's Publications"
