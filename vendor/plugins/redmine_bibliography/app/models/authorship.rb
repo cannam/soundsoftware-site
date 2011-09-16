@@ -6,6 +6,8 @@ class Authorship < ActiveRecord::Base
   
   accepts_nested_attributes_for :author
   accepts_nested_attributes_for :publication
+
+  validates_presence_of :name_on_paper
   
   attr_accessor :is_user, :author_user_id, :search_name, :identify_author, :search_results
   before_save :associate_author_user

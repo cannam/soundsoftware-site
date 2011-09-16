@@ -9,6 +9,7 @@ class Publication < ActiveRecord::Base
   has_one :bibtex_entry, :dependent => :destroy
 
   validates_presence_of :title
+  validates_length_of :authorships, :minimum => 1, :message => l("error_no_authors")
 
   accepts_nested_attributes_for :authorships
   accepts_nested_attributes_for :authors, :allow_destroy => true
