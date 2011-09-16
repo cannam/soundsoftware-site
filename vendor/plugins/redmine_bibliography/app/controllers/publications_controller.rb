@@ -63,31 +63,15 @@ class PublicationsController < ApplicationController
   end
 
   def get_bibtex_required_fields
-    all_fields = [ "editor", "publisher", "chapter", "pages", "volume", "series", "address", "edition", "month", "year", "type", "note", "number", "journal", "howpublished", "key", "school" ]
 
-    fields = Hash.new
-    fields[ 'article' ] = [ 'journal', 'year', 'volume', 'number', 'pages', 'month', 'note' ]
-    fields[ 'book' ] = [ 'editor', 'publisher', 'volume', 'series', 'address', 'edition', 'month', 'year', 'note' ]
-    fields[ 'booklet' ] = [ 'howpublished', 'address', 'year', 'month', 'note', 'key' ]
-    fields[ 'conference' ] = [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ]
-    fields[ 'inbook' ] = [ 'editor', 'publisher', 'chapter', 'pages', 'volume', 'series', 'address', 'edition', 'year', 'note' ]
-    fields[ 'incollection' ] = [ 'editor', 'publisher', 'chapter', 'pages', 'volume', 'series', 'address', 'edition', 'year', 'note' ]
-    fields[ 'inproceedings' ] = [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ]
-    fields[ 'manual' ] = [ 'organization', 'address', 'edition', 'month', 'year', 'note' ]
-    fields[ 'masterthesis' ] = [ 'school', 'year', 'address', 'month', 'note' ]
-    fields[ 'misc' ] = [ 'howpublished', 'month', 'year', 'note' ]
-    fields[ 'phdthesis' ] = [ 'school', 'year', 'address', 'month', 'note' ]
-    fields[ 'proceedings' ] = [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ]
-    fields[ 'techreport' ] = [ 'year', 'type', 'number', 'address', 'month', 'note' ]
-    fields[ 'unpublished' ] = [ 'note', 'month', 'year' ]
+    fields = BibtexEntryType.fields(params[:value])
+    all_fields = BibtexEntryType.all_fields
 
-    entrytype = BibtexEntryType.find(params[:value]).name
-    
     respond_to do |format|
       format.js {
         render(:update) {|page| 
           all_fields.each_with_index do |field, idx|            
-            unless fields[entrytype].include? field
+            unless fields.include? field
               page["publication_bibtex_entry_attributes_#{field}"].up('p').hide()
             else
               page["publication_bibtex_entry_attributes_#{field}"].up('p').show()
@@ -117,27 +101,7 @@ class PublicationsController < ApplicationController
 
     @author_options = []  
     
-    
-    fields = Hash.new
-    fields[ 'article' ] = [ 'journal', 'year', 'volume', 'number', 'pages', 'month', 'note' ]
-    fields[ 'book' ] = [ 'editor', 'publisher', 'volume', 'series', 'address', 'edition', 'month', 'year', 'note' ]
-    fields[ 'booklet' ] = [ 'howpublished', 'address', 'year', 'month', 'note', 'key' ]
-    fields[ 'conference' ] = [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ]
-    fields[ 'inbook' ] = [ 'editor', 'publisher', 'chapter', 'pages', 'volume', 'series', 'address', 'edition', 'year', 'note' ]
-    fields[ 'incollection' ] = [ 'editor', 'publisher', 'chapter', 'pages', 'volume', 'series', 'address', 'edition', 'year', 'note' ]
-    fields[ 'inproceedings' ] = [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ]
-    fields[ 'manual' ] = [ 'organization', 'address', 'edition', 'month', 'year', 'note' ]
-    fields[ 'masterthesis' ] = [ 'school', 'year', 'address', 'month', 'note' ]
-    fields[ 'misc' ] = [ 'howpublished', 'month', 'year', 'note' ]
-    fields[ 'phdthesis' ] = [ 'school', 'year', 'address', 'month', 'note' ]
-    fields[ 'proceedings' ] = [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ]
-    fields[ 'techreport' ] = [ 'year', 'type', 'number', 'address', 'month', 'note' ]
-    fields[ 'unpublished' ] = [ 'note', 'month', 'year' ]
-    
-    entrytype = BibtexEntryType.find(@selected_bibtex_entry_type_id).name
-    
-    @bibtype_fields = fields[entrytype]
-    
+    @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)    
   end
 
   def update    
