@@ -1,0 +1,24 @@
+<h2><%=l(:label_authors_show)%></h2>
+
+<div class="splitcontentleft">
+  <table class="list authors">		
+  	<thead>
+  	  <tr>
+  	    <th><%=l(:field_authorship_publication_title)%></th>
+  	    <th><%=l(:field_authorship_name)%></th>
+  	    <th><%=l(:field_authorship_email)%></th>
+	 	    <th><%=l(:field_authorship_institution)%></th>
+  	  </tr>
+  	</thead>
+  
+     <% @author.authorships.each do |authorship| %>
+       <tr id="authorship-<%= authorship.id %>" class="<%= cycle('odd', 'even') %>">
+         <td class="title"><%= link_to_publication(authorship.publication) %></td>
+         <td class="name"><%= h authorship.name_on_paper %></td>
+         <td class="email"><%= h authorship.email %></td>
+         <td class="institution"><%= h authorship.institution %></td>
+       </tr>
+    <% end %>
+  	</tbody>
+  </table>
+</div>
