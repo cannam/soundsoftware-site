@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
 # vendor/plugins/redmine_bibliography/app/controllers/publications_controller.rb
 
 class PublicationsController < ApplicationController
   unloadable
   
-  # before_filter :find_project, :except => [:autocomplete_for_project, :add_author, :sort_authors, :autocomplete_for_author]
+  model_object Publication
+  before_filter :find_model_object, :except => [:new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]  
+  before_filter :find_project_by_project_id, :authorize, :only => [ :edit, :new, :update, :create ]
     
   def new
     find_project_by_project_id
@@ -13,26 +16,27 @@ class PublicationsController < ApplicationController
     @publication.build_bibtex_entry
     
     # and at least one author
-    # @publication.authorships.build.build_author
-    
-    @project_id = params[:project_id]
-    @current_user = User.current    
+    # @publication.authorships.build.build_author        
+    @author_options = [["#{User.current.name} (@#{User.current.mail.partition('@')[2]})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
+
+
   end
 
-
   def create    
-    find_project_by_project_id
-    
-    @publication = Publication.new(params[:publication])
+    @project = Project.find(params[:project_id])
 
-    # @project = Project.find(params[:project_id])
-    @publication.projects << @project
-    
+    @author_options = []
+
+    @publication = Publication.new(params[:publication])
+    @publication.projects << @project unless @project.nil?
+        
     if @publication.save 
+      @publication.notify_authors_publication_added(@project)
+      
       flash[:notice] = "Successfully created publication."
-      redirect_to :action => :show, :id => @publication, :project_id => @project.id
+      redirect_to :action => :show, :id => @publication, :project_id => @project
     else
-      render :action => 'new'
+      render :action => 'new', :project_id => @project
     end
   end
 
@@ -58,25 +62,52 @@ class PublicationsController < ApplicationController
     end
   end
 
+  def get_bibtex_required_fields
+
+    fields = BibtexEntryType.fields(params[:value])
+    all_fields = BibtexEntryType.all_fields
+
+    respond_to do |format|
+      format.js {
+        render(:update) {|page| 
+          all_fields.each_with_index do |field, idx|            
+            unless fields.include? field
+              page["publication_bibtex_entry_attributes_#{field}"].up('p').hide()
+            else
+              page["publication_bibtex_entry_attributes_#{field}"].up('p').show()
+            end            
+          end
+        }
+      }
+    end
+  end
+
   def add_author
     if (request.xhr?)
       render :text => User.find(params[:user_id]).name
     else
       # No?  Then render an action.
       #render :action => 'view_attribute', :attr => @name
-      logger.error { "ERRO ADD AUTHOR" }
+      logger.error { "Error while adding Author to publication." }
     end
   end
 
   def edit   
     find_project_by_project_id unless params[:project_id].nil?
-     
+    
+    @edit_view = true;
     @publication = Publication.find(params[:id])
-    @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type  
+    @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
+
+    @author_options = []  
+    
+    @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)    
   end
 
   def update    
     @publication = Publication.find(params[:id])        
+
+    @author_options = []
 
     logger.error { "INSIDE THE UPDATE ACTION IN THE PUBLICATION CONTROLLER" }
 
@@ -95,12 +126,10 @@ class PublicationsController < ApplicationController
 
   def show
     find_project_by_project_id unless params[:project_id].nil?
-    
-    @publication = Publication.find(params[:id])
-    
+        
     if @publication.nil?
-        @publications = Publication.all
-        render "index", :alert => 'The publication was not found!'
+      @publications = Publication.all
+      render "index", :alert => 'The publication was not found!'
     else
       @authors = @publication.authors
       @bibtext_entry = @publication.bibtex_entry
@@ -186,17 +215,6 @@ class PublicationsController < ApplicationController
     
   end
   
-  def add_project
-    @projects = Project.find(params[:publication][:project_ids])    
-    @publication = Publication.find(params[:id])        
-    @publication.projects << @projects
-    
-    # TODO luisf should also respond to HTML??? 
-    respond_to do |format|
-      format.js      
-    end
-  end
-
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
         
@@ -205,36 +223,119 @@ class PublicationsController < ApplicationController
     render :layout => false
   end
 
-  def autocomplete_for_author
+  def autocomplete_for_author    
     @results = []
     
-    authors_list = Author.like(params[:q]).find(:all, :limit => 100)    
+    object_id = params[:object_id]
+    @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
+        
+    # cc 20110909 -- revert to like instead of like_unique -- see #289
+    authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
-    logger.debug "Query for \"#{params[:q]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\" users"
+    logger.debug "Query for \"#{params[:q]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
     
-    # need to subtract both lists
-    # give priority to the users    
-    users_list.each do |user|      
-      @results << user
+    @results = users_list
+
+    # TODO: can be optimized…    
+    authorships_list.each do |authorship|      
+      flag = true
+      
+      users_list.each do |user|
+        if authorship.name == user.name && authorship.email == user.mail && authorship.institution == user.institution
+          Rails.logger.debug { "Rejecting Authorship #{authorship.id}" }
+          flag = false
+          break
+        end
+      end
+
+      @results << authorship if flag
     end
+
+    render :layout => false    
+  end
+  
+  
+  def get_user_info
+    object_id = params[:object_id]
+    value = params[:value]
+    classname = Kernel.const_get(value.split('_')[0])
+
+    item = classname.find(value.split('_')[1])
+
+    name_field = "publication_authorships_attributes_#{object_id}_name_on_paper".to_sym
+    email_field = "publication_authorships_attributes_#{object_id}_email".to_sym
+    institution_field = "publication_authorships_attributes_#{object_id}_institution".to_sym
     
-    authors_list.each do |author|      
-      @results << author unless users_list.include?(author.user_id)
+    yes_radio = "publication_authorships_attributes_#{object_id}_identify_author_yes".to_sym
+    
+    respond_to do |format|
+      format.js {
+        render(:update) {|page| 
+          page[name_field].value = item.name
+          page[email_field].value = item.mail
+          page[institution_field].value = item.institution
+
+          page[yes_radio].checked = true
+          page[name_field].readOnly = true
+          page[email_field].readOnly = true
+          page[institution_field].readOnly = true
+        }
+      }
     end
-                 
-    render :layout => false
   end
 
-  def sort_authors
-    params[:authors].each_with_index do |id, index|
-      Author.update_all(['order=?', index+1], ['id=?', id])
+  def sort_author_order
+    params[:authorships].each_with_index do |id, index|
+      Authorship.update_all(['auth_order=?', index+1], ['id=?', id])
     end
     render :nothing => true
   end
 
-  def identify_author
+  def add_project
+    @projects = Project.find(params[:publication][:project_ids])    
+    @publication.projects << @projects
+    @project = Project.find(params[:project_id])    
     
+    # TODO luisf should also respond to HTML??? 
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { 
+        render(:update) {|page| 
+          page[:add_project_form].reset          
+          page.replace_html :list_projects, :partial => 'list_projects'
+        }
+      }
+    end
+  end
+  
+  
+  def remove_project
+    @project = Project.find(params[:project_id])
+    proj = Project.find(params[:remove_project_id])
+
+    if @publication.projects.length > 1
+      if @publication.projects.exists? proj
+        @publication.projects.delete proj if request.post?
+      end
+    else
+      logger.error { "Cannot remove project from publication list" }      
+    end
+    
+    logger.error { "CURRENT project name#{proj.name} and wanna delete #{@project.name}" }
+        
+    render(:update) {|page| 
+      page.replace_html "list_projects", :partial => 'list_projects', :id  => @publication
+    }    
+  end
+    
+  def destroy
+    find_project_by_project_id
+    
+    @publication.destroy
+        
+    flash[:notice] = "Successfully deleted Publication."
+    redirect_to :controller => :publications, :action => 'index', :project_id => @project
   end
 
   private

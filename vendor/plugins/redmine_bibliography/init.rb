@@ -7,6 +7,7 @@ RAILS_DEFAULT_LOGGER.info 'Starting Bibliography Plugin for RedMine'
 Dispatcher.to_prepare :redmine_model_dependencies do
   require_dependency 'project'
   require_dependency 'user'
+  require_dependency 'mailer'
 
   unless Project.included_modules.include? Bibliography::ProjectPublicationsPatch
     Project.send(:include, Bibliography::ProjectPublicationsPatch)
@@ -15,6 +16,11 @@ Dispatcher.to_prepare :redmine_model_dependencies do
   unless User.included_modules.include? Bibliography::UserAuthorPatch
     User.send(:include, Bibliography::UserAuthorPatch)
   end
+
+  unless Mailer.included_modules.include? Bibliography::MailerPatch
+    Mailer.send(:include, Bibliography::MailerPatch)
+  end
+
 
 end
 
@@ -32,8 +38,10 @@ Redmine::Plugin.register :redmine_bibliography do
 
   project_module :redmine_bibliography do
     permission :publications, { :publications => :index }, :public => true
-    permission :edit_redmine_bibliography, {:redmine_bibliography => [:edit, :update]}, :public => true
-    permission :add_publication, {:redmine_bibliography => [:new, :create]}, :public => true
+    permission :edit_publication, {:publications => [:edit, :update]}
+    permission :add_publication, {:publications => [:new, :create]}
+    permission :delete_publication, {:publications => :destroy}
+
   end
 
   # extending the Project Menu

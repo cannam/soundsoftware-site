@@ -1,10 +1,13 @@
 <% content_for :header_tags do %>
     <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
+    <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+    <%= javascript_tag 'Event.observe(window, "load", hide_all_bibtex_required_fields);' %>
 <% end %>
 
 <h2><%=l(:label_publication_new)%></h2>
 
-<% form_for @publication, :url => { :project_id  => @project_id, :action => :create }, :builder => TabularFormBuilder do |f| -%>
+<% form_for @publication, :url => { :project_id  => @project, :action => :create }, :builder => TabularFormBuilder do |f| -%>
   <%= render :partial => 'form', :locals => { :f => f }  %>
+  <div style="clear:both"></div>
   <%= f.submit %>
 <% end %>

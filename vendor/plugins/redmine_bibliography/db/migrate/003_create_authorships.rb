@@ -4,7 +4,7 @@ class CreateAuthorships < ActiveRecord::Migration
       t.column :author_id, :integer
       t.column :publication_id, :integer
       t.column :name_on_paper, :string
-      t.column :order, :integer
+      t.column :auth_order, :integer
       t.column :institution, :string
       t.column :email, :string
     end

@@ -17,4 +17,12 @@ module AuthorsHelper
     s    
   end
   
+  
+  # Generates a link to an author
+  #   todo: test options
+  def link_to_author(author, options={}, html_options = nil)
+    url = {:controller => 'authors', :action => 'show', :id => author}.merge(options)
+    link_to(h(author.name), url, html_options)
+  end
+
 end

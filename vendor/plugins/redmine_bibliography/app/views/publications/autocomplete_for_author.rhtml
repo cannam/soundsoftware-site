@@ -1,3 +1,4 @@
 <% if params[:q] && params[:q].length > 1 %>
-	<%= choose_author_link 'publication[author_ids][]', @results %>
+	<%= choose_author_link @object_name, @results %>
 <% end %>
+

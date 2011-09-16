@@ -1,0 +1,45 @@
+li .handle {
+    font-size: 12px;
+    cursor: move;
+    color: #777;
+}
+
+input.readonly {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
+
+.tabular .author_identify label {
+    font-weight: normal;
+}
+
+.tabular .author_edit p {
+    padding-bottom: 0;
+}
+
+.tabular .author_edit .description {
+    padding-top: 0;
+    font-style: italic;
+}
+
+.publication_project {
+    margin-right: 18px;
+}
+
+#authors select {
+    min-width: 150px;
+}
+
+div#bibliography dl { margin-left: 2em; }
+div#bibliography .box dl { margin-left: 0; }
+div#bibliography dt { margin-bottom: 0px; padding-left: 20px }
+div#bibliography .box dt { margin-bottom: 0px; padding-left: 10px }
+div#bibliography dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
+div#bibliography .box dd { margin-bottom: 0.6em; padding-left: 0; }
+div#bibliography dd .authors { font-style: italic; }
+div#bibliography dd span.authors { color: #808080; }
+div#bibliography dd span.year { padding-left: 0.6em; }
+
+div#bibliography h3 { background: url(../../../images/table_multiple.png) no-repeat 0% 50%; padding-left: 20px; }

@@ -1,26 +1,80 @@
-<div class="box">
+<p>
+  <label for="bibtex_entry_type"><%=l("field_entry_type")%> <span class="required">*</span></label>
+	<%= f.collection_select :entry_type, 
+	        BibtexEntryType.find(:all).reject { |x| x.redundant? }, 
+	        :id, 
+	        :label,  
+	        { :selected => @selected_bibtex_entry_type_id, :prompt => true },	           
+	        :onChange => remote_function( :url => { :controller => :publications, :action => :get_bibtex_required_fields}, :with => "'value=' + value" )	              
+	%>
+</p>
+<p> 
+  <%= f.text_field :year, :size => 4, :class => 'bibtex' %> 
+</p>
+<p> 
+  <%= f.text_field :month, :size => 4, :class => 'bibtex' %> 
+</p>
+<p> 
+  <%= f.text_field :chapter, :size => 15, :class => 'bibtex' %>  
+</p>  
+<p>   
+  <%= f.text_field :editor, :size => 33, :class => 'bibtex'  %>  
+</p>  
+<p>   
+  <%= f.text_field :booktitle, :size => 33, :class => 'bibtex'  %>  
+</p>  
+<p>   
+  <%= f.text_field :publisher,:size => 33, :class => 'bibtex'  %>  
+</p>  
+<p>   
+  <%= f.text_field :pages, :size => 12, :class => 'bibtex'  %>  
+</p>
+<p>
+ <%= f.text_field :address, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :annote, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :crossref, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :edition, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :eprint, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :howpublished, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :journal, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :key, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :note, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :number, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :organization, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :school, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :series, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :type, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :url, :class => 'bibtex' %>
+</p>
+<p>
+ <%= f.text_field :volume, :class => 'bibtex' %>
+</p>
 
-
-<p><label for="bibtex_entry_type"><%=l("field_entry_type")%> <span class="required">*</span></label>
-	<%= f.collection_select(:entry_type, BibtexEntryType.find(:all), :id, :name,  {:selected => @selected_bibtex_entry_type_id, :prompt => true})  %>
-    </p>
-    <p> 
-      <%= f.text_field :year, :size => 60 %>  
-    </p>  
-    <p>   
-      <%= f.text_field :chapter, :size => 60 %>  
-    </p>  
-    <p>   
-      <%= f.text_field :editor, :size => 60  %>  
-    </p>  
-    <p>   
-      <%= f.text_field :booktitle,:size => 60  %>  
-    </p>  
-    <p>   
-      <%= f.text_field :publisher,:size => 60  %>  
-    </p>  
-    <p>   
-      <%= f.text_field :pages, :size => 60  %>  
-    </p>
-
-</div>
