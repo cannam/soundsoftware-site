@@ -5,9 +5,9 @@
 </div>
 
   <% if @project %>
-  <h3><%= l(:label_all_publications_for_project, :project => @project.name) %></h3>
+    <h3><%= l(:label_all_publications_for_project, :project => @project.name) %></h3>
   <% else %>
-  <h3><%= l(:label_all_publications) %></h3>
+    <h3><%= l(:label_all_publications) %></h3>
   <% end %>
 
   <div class="autoscroll">
@@ -15,25 +15,23 @@
     <thead><tr>
       <th><%= l(:title) %></th> 
       <th><%= l(:authors) %></th> 
-      <th><%= l(:year) %></th> 
+      <th><%= l(:year) %></th>
+      <th><%= l(:associated_projects) %></th>
     </tr></thead>
 
-    <% @publications.each do |publication| %>
-    <tr class="<%= cycle('odd', 'even') %>">
-      <td class="firstcol title" align="top"><%= link_to publication.title, :controller => "publications", :action => "show", :id => publication, :project_id => @project %></td>
-      <td class="authors" align="top">
-	      <% publication.authorships.each do |authorship| %>
-	          <%# if authorship.author.user.nil? || !authorship.author.user.active? %>
-	            <%= h authorship.name_on_paper %>
-	          <%# else %>
-              <%#= link_to(authorship.name_on_paper, :controller => 'users', :action => 'show', :id => authorship.author.user) %>
-	          <%# end %>
-	          
-	<em><%= authorship.institution %></em><br/>
-	<% end %>
-      <td class="year"><%= publication.bibtex_entry.year %></td>
-    </tr>
-    <% end %>    
+    <%- @publications.each do |publication| -%>        
+      <%- if publication.projects.visible.length > 0 -%>
+        <tr class="<%= cycle('odd', 'even') %>">
+          <td class="firstcol title" align="top"><%= link_to publication.title, :controller => "publications", :action => "show", :id => publication, :project_id => @project %></td>
+          <td class="authors" align="top">
+            <%= render_authorships_list(publication) %>
+          <td class="year"><%= publication.bibtex_entry.year %></td>
+          <td class="projects">
+              <%= render_projects_list(publication, false) %>
+          </td>
+        </tr>
+      <%- end -%>
+    <%- end -%>
   </table>
   </div>
 

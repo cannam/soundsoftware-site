@@ -64,21 +64,21 @@ class PublicationsController < ApplicationController
 
   def get_bibtex_required_fields
 
-    fields = BibtexEntryType.fields(params[:value])
-    all_fields = BibtexEntryType.all_fields
+    unless params[:value].empty?
+      fields = BibtexEntryType.fields(params[:value]) 
+    end
 
     respond_to do |format|
       format.js {
-        render(:update) {|page| 
-          all_fields.each_with_index do |field, idx|            
-            unless fields.include? field
-              page["publication_bibtex_entry_attributes_#{field}"].up('p').hide()
-            else
-              page["publication_bibtex_entry_attributes_#{field}"].up('p').show()
-            end            
+        render(:update) {|page|       
+          if params[:value].empty?
+            page << "hideOnLoad();"
+          else
+            page << "show_required_bibtex_fields(#{fields.to_json()});"
           end
         }
       }
+    
     end
   end
 

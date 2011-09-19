@@ -2,6 +2,7 @@
 require 'bibtex'
 
 module PublicationsHelper
+  include AuthorshipsHelper
 
   def link_to_publication(publication, options={}, html_options = nil)
     url = {:controller => 'publications', :action => 'show', :id => publication}.merge(options)
@@ -72,29 +73,40 @@ module PublicationsHelper
     str = object_name.split("\[").last().gsub("\]","")
     str.to_sym
   end
-  
-  def render_projects_list(publication)
-    logger.error { "PROJECT NAME #{@project.name unless @project.nil?}" }
-    
-    s = ""
 
-    publication.projects.each do |proj|
+  def render_authorships_list(publication)   
+    s = '<p>'
+    
+    publication.authorships.each do |authorship|
+      s << link_to_authorship(authorship)
+      s << "<br /><em>#{authorship.institution}</em></p>"
+    end    
+
+    s   
+  end
+  
+    
+  def render_projects_list(publication, show_delete_icon)    
+    s= ""
+    
+    publication.projects.visible.each do |proj|
       s << link_to_project(proj, {}, :class => 'publication_project')
-      
-      if User.current.allowed_to?(:edit_publication, @project)
-        if @project == proj
-          confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
-        else
-          confirm_msg = false
-        end 
-            
-        s << link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del') 
+    
+      if show_delete_icon  
+        if User.current.allowed_to?(:edit_publication, @project)
+          if @project == proj
+            confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
+          else
+            confirm_msg = false
+          end 
+          
+          s << link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del') 
+        end
       end
       
-      s << "<br />"
-      
-    end
-    
+      s << "<br />"      
+    end    
+
     s  
   end
   
