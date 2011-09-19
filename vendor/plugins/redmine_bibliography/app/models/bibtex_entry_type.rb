@@ -1,6 +1,6 @@
 class BibtexEntryType < ActiveRecord::Base
 
-  @@all_fields = [ "editor", "publisher", "chapter", "pages", "volume", "series", "address", "edition", "month", "year", "type", "note", "number", "journal", "howpublished", "key", "school" ]
+  @@all_fields = [ "booktitle", "editor", "publisher", "chapter", "pages", "volume", "series", "address", "edition", "month", "year", "type", "note", "number", "journal", "howpublished", "key", "school" ]
 
   @@fields = Hash['article', ['journal', 'year', 'volume', 'number', 'pages', 'month', 'note' ], 
                   'book' , [ 'editor', 'publisher', 'volume', 'series', 'address', 'edition', 'month', 'year', 'note' ],
