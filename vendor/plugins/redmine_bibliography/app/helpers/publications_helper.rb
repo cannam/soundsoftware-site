@@ -2,6 +2,7 @@
 require 'bibtex'
 
 module PublicationsHelper
+  include AuthorshipsHelper
 
   def link_to_publication(publication, options={}, html_options = nil)
     url = {:controller => 'publications', :action => 'show', :id => publication}.merge(options)
@@ -77,17 +78,7 @@ module PublicationsHelper
     s = '<p>'
     
     publication.authorships.each do |authorship|
-    
-    if authorship.author.nil?
-      # legacy reasons…
-      s << h(authorship.name_on_paper)
-    else
-      if authorship.author.user.nil?      
-        s << link_to(authorship.name_on_paper, :controller => 'authors', :action => 'show', :id => authorship.author)
-      else
-        s << link_to(authorship.name_on_paper, :controller => 'users', :action => 'show', :id => authorship.author.user)
-      end
-    end
+      s << link_to_authorship(authorship)
       s << "<br /><em>#{authorship.institution}</em></p>"
     end    
 
