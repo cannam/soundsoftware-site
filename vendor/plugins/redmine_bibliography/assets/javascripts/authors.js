@@ -3,16 +3,20 @@ function remove_fields(link) {
     $(link).up(".fields").hide();
 }
 
+
 function add_author_fields(link, association, content, action) {
 	var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g");
   $(link).insert({
 		before: content.replace(regexp, new_id)
   });
+
 	if(action != "new"){
 		toggle_save_author(new_id, $(link));
 	};
 }
+
+
 
 function identify_author_status(status, object_id) {
     $('publication_authorships_attributes_' + object_id + '_edit_author_info').select('input').each(function(s) {
@@ -73,4 +77,57 @@ function show_required_bibtex_fields(entrytype_fields) {
 			}
 	})
 }
+
+
+// 
+// 
+// 
+Event.observe(window, 'load', function() {
+
+	// All page's functions
+	var Publication = {
+		init: function(){
+			var self = this;
+			var authorshipButton = $('add_another_author');						
+			
+			authorshipButton.observe('click', function(event){
+				self.addAuthorship();
+			});
+		},
 		
+		addAuthorship: function(){
+			Publication.Authorships.add()
+		}
+		
+		// $(this).previous('div').down('.edit-save-button').observe('click', function(event){
+		    //	  alert(Event.element(event).innerHTML);
+		//		alert($(this).id);
+		//	 })
+	
+	
+	// ~ Pulication.Authorships					
+	};
+
+
+	Publication.Authorships = {
+		init: function(){
+			var self = this;
+									
+		},
+		
+		add: function(){
+			alert("Button Pressed");
+		},
+		
+		
+		state: 'edit'	
+	// ~ Pulication.Authorships	
+	};
+
+
+	// main
+	Publication.init();
+
+
+// ~ Event.observe	
+}); 
