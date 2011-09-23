@@ -13,7 +13,9 @@ module PublicationsHelper
     s = ''
     projects.sort.each do |project|
       s << "<label>#{ check_box_tag name, project.id, false } #{link_to_project project}</label>\n"
+      s << '<br />'
     end
+
     s 
   end
   
