@@ -12,8 +12,10 @@ module PublicationsHelper
   def projects_check_box_tags(name, projects)
     s = ''
     projects.sort.each do |project|
-      s << "<label>#{ check_box_tag name, project.id, false } #{link_to_project project}</label>\n"
-      s << '<br />'
+      if User.current.allowed_to?(:edit_publication, project) 
+        s << "<label>#{ check_box_tag name, project.id, false } #{link_to_project project}</label>\n"
+        s << '<br />'
+      end
     end
 
     s 
