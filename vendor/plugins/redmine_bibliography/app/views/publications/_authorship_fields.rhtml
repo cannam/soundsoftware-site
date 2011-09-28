@@ -48,7 +48,7 @@
   <%- if params[:action] == 'new' -%>
     <%= button_to_function l(:label_save_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button ), :class => 'edit-save-button' } %>
   <%- else -%>
-    <%= button_to_function l(:label_edit_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
+    <%= button_to_function l(:label_edit_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button ), :class => 'edit-save-button' } %>
   <%- end -%>
 
 

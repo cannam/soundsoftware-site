@@ -99,12 +99,7 @@ Event.observe(window, 'load', function() {
 			Publication.Authorships.add()
 		}
 		
-		// $(this).previous('div').down('.edit-save-button').observe('click', function(event){
-		    //	  alert(Event.element(event).innerHTML);
-		//		alert($(this).id);
-		//	 })
-	
-	
+		
 	// ~ Pulication.Authorships					
 	};
 
@@ -117,6 +112,13 @@ Event.observe(window, 'load', function() {
 		
 		add: function(){
 			alert("Button Pressed");
+
+			self.previous('div').down('.edit-save-button').observe('click', function(event){
+				alert(Event.element(event).innerHTML);
+				alert(self.id);
+			})
+		
+		
 		},
 		
 		
