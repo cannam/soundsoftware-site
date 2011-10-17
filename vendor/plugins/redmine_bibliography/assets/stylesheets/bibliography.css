@@ -39,6 +39,7 @@ div#bibliography .box dt { margin-bottom: 0px; padding-left: 10px }
 div#bibliography dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
 div#bibliography .box dd { margin-bottom: 0.6em; padding-left: 0; }
 div#bibliography dd .authors { font-style: italic; }
+div#bibliography dt .title { font-style: italic; }
 div#bibliography dd span.authors { color: #808080; }
 div#bibliography dd span.year { padding-left: 0.6em; }
 
