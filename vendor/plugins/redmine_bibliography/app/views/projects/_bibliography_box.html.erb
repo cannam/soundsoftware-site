@@ -13,7 +13,7 @@
      <span class="title"><%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication, :project_id => @project %></span>
      <% if publication.bibtex_entry.year.to_s != "" %>
      <span class="year">
-       (<%= publication.bibtex_entry.year %>)
+       &nbsp;(<%= publication.bibtex_entry.year %>)
      </span>
      <% end %>
      </dt><dd></dd>
