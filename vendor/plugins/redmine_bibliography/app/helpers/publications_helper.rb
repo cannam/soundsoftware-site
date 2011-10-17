@@ -2,6 +2,7 @@
 require 'bibtex'
 
 module PublicationsHelper
+  include AuthorshipsHelper
 
   def link_to_publication(publication, options={}, html_options = nil)
     url = {:controller => 'publications', :action => 'show', :id => publication}.merge(options)
@@ -11,8 +12,12 @@ module PublicationsHelper
   def projects_check_box_tags(name, projects)
     s = ''
     projects.sort.each do |project|
-      s << "<label>#{ check_box_tag name, project.id, false } #{link_to_project project}</label>\n"
+      if User.current.allowed_to?(:edit_publication, project) 
+        s << "<label>#{ check_box_tag name, project.id, false } #{link_to_project project}</label>\n"
+        s << '<br />'
+      end
     end
+
     s 
   end
   
@@ -42,12 +47,12 @@ module PublicationsHelper
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", :class => 'icon icon-del')
   end
     
-  def link_to_add_fields(name, f, association)
+  def link_to_add_author_fields(name, f, association, action)
     new_object = f.object.class.reflect_on_association(association).klass.new
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end    
-    link_to_function(name, h("add_fields(this, '#{association}', '#{escape_javascript(fields)}')"), { :class => 'icon icon-add', :id => "add_another_author" })
+    link_to_function(name, h("add_author_fields(this, '#{association}', '#{escape_javascript(fields)}', '#{action}')"), { :class => 'icon icon-add', :id => "add_another_author" })
   end  
 
   def sanitized_object_name(object_name)
@@ -72,29 +77,40 @@ module PublicationsHelper
     str = object_name.split("\[").last().gsub("\]","")
     str.to_sym
   end
-  
-  def render_projects_list(publication)
-    logger.error { "PROJECT NAME #{@project.name unless @project.nil?}" }
-    
-    s = ""
 
-    publication.projects.each do |proj|
+  def render_authorships_list(publication)   
+    s = '<p>'
+    
+    publication.authorships.each do |authorship|
+      s << link_to_authorship(authorship)
+      s << "<br /><em>#{authorship.institution}</em></p>"
+    end    
+
+    s   
+  end
+  
+    
+  def render_projects_list(publication, show_delete_icon)    
+    s= ""
+    
+    publication.projects.visible.each do |proj|
       s << link_to_project(proj, {}, :class => 'publication_project')
-      
-      if User.current.allowed_to?(:edit_publication, @project)
-        if @project == proj
-          confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
-        else
-          confirm_msg = false
-        end 
-            
-        s << link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del') 
+    
+      if show_delete_icon  
+        if User.current.allowed_to?(:edit_publication, @project)
+          if @project == proj
+            confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
+          else
+            confirm_msg = false
+          end 
+          
+          s << link_to_remote(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del') 
+        end
       end
       
-      s << "<br />"
-      
-    end
-    
+      s << "<br />"      
+    end    
+
     s  
   end
   

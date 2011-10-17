@@ -3,12 +3,15 @@ function remove_fields(link) {
     $(link).up(".fields").hide();
 }
 
-function add_fields(link, association, content) {
-    var new_id = new Date().getTime();
-    var regexp = new RegExp("new_" + association, "g")
-    $(link).insert({
-	before: content.replace(regexp, new_id)
-    });
+function add_author_fields(link, association, content, action) {
+	var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g");
+  $(link).insert({
+		before: content.replace(regexp, new_id)
+  });
+	if(action != "new"){
+		toggle_save_author(new_id, $(link));
+	};
 }
 
 function identify_author_status(status, object_id) {
@@ -57,16 +60,17 @@ function toggle_save_author(form_object_id, $this){
     toggle_div("publication_authorships_attributes_" + form_object_id +"_search_author");
 }
 
-function edit_author(form_object_id){}
+function hide_all_bibtex_required_fields(){$$('p.bibtex').each(function(s){s.hide()})}
 
-function hide_all_bibtex_required_fields() {
-	$$('input.bibtex').each(function(s){
-	    s.up('p').hide();
-		})}
-		
-function show_all_required_bibtex_fields(entrytype_fields) {
-	$$('input.bibtex').each(function(s){
-    if(entrytype_fields.indexOf(s.id.split('_').last()) == -1){s.up('p').hide()};
+// entrytype_fields is a jsno array with the fields requires by the selected bibtex entry 
+function show_required_bibtex_fields(entrytype_fields) {
+	$$('p.bibtex').each(function(s){
+		if(entrytype_fields.indexOf(s.down('input').id.split('_').last()) != -1){
+			s.show();
+			}
+		else {
+			s.hide();
+			}
 	})
 }
 		
