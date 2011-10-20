@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+
 <div class="contextual">
 <%= link_to(l(:button_edit), edit_user_path(@user), :class => 'icon icon-edit') if User.current.admin? %>
 </div>
@@ -40,6 +42,32 @@
 </div>
 
 <div class="splitcontentright">
+
+  <% if @user.author %>
+  <div id="bibliography">
+    <% @publications = Publication.all(:include => :authors, :conditions => "authors.id = #{@user.author.id}") %>
+
+    <h3><%=l(:publications) %> <%= "(" + @publications.count.to_s + ")" %> </h3>
+
+    <% @publications.each do |publication|%>    
+      <dt>
+        <%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication %>
+      </dt>
+
+      <dd>
+        <span class="authors">
+          <%= publication.authorships.map { |a| h a.name_on_paper }.join(', ') %>
+        </span>
+        <% if publication.bibtex_entry.year.to_s != "" %>
+          <span class="year">
+            <%= publication.bibtex_entry.year %>
+          </span>
+        <% end %>
+      </dd>
+  	<% end %>
+  </div>
+  <% end %>
+
 
 <% unless @events_by_day.empty? %>
 <h3><%= link_to l(:label_activity), :controller => 'activities', :action => 'index', :id => nil, :user_id => @user, :from => @events_by_day.keys.first %></h3>

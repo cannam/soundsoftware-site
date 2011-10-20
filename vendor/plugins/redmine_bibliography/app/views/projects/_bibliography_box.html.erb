@@ -1,0 +1,26 @@
+<% if @project.publications.any? %>
+<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+  <div id="bibliography">
+    <div class="box">
+    <h3><%=l(:label_related_publication_plural)%></h3>
+
+   <dl>
+     <% @project.publications.each do |publication| %>
+     <dt>
+       <%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication, :project_id => @project %>
+     </dt>
+     <dd>
+     <span class="authors">
+       <%= publication.authorships.map { |a| h a.name_on_paper }.join(', ') %>
+     </span>
+     <% if publication.bibtex_entry.year.to_s != "" %>
+     <span class="year">
+       <%= publication.bibtex_entry.year %>
+     </span>
+     <% end %>
+     </dd>
+   <% end -%>
+   </dl>
+  </div>
+</div>
+<% end %>

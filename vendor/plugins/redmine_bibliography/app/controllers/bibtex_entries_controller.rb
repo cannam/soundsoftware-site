@@ -1,0 +1,3 @@
+class BibtexEntriesController < ApplicationController
+
+end

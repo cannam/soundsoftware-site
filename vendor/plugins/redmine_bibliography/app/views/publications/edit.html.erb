@@ -1,0 +1,18 @@
+<% content_for :header_tags do %>
+    <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
+    <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>  
+    <%= javascript_tag 'Event.observe(window, "load", function(e){show_required_bibtex_fields(' + @bibtype_fields.to_json + ')});' %>
+<% end %>
+
+<h2><%=l(:label_publication_show)%></h2>
+
+<% form_for @publication, :url => { :project_id  => @project, :action => :update }, :builder => TabularFormBuilder do |f| -%>
+  <%= render :partial => 'form', :locals => { :f => f }  %>
+
+  <div style="clear:both"></div>
+  <%= f.submit %>
+<% end %>
+<p>
+  <%= link_to l(:label_publication_show), { :controller => "publications", :action => "show", :id => @publication, :project_id => @project_id } %> |
+  <%= link_to l(:label_publication_index), { :controller => "publications", :action => "index", :project_id => @project } %>
+</p>

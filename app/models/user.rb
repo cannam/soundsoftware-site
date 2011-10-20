@@ -54,6 +54,8 @@ class User < Principal
   
   has_one :ssamr_user_detail, :dependent => :destroy, :class_name => 'SsamrUserDetail'
   accepts_nested_attributes_for :ssamr_user_detail
+  
+  has_one :author
 
   # Active non-anonymous users scope
   named_scope :active, :conditions => "#{User.table_name}.status = #{STATUS_ACTIVE}"

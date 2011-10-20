@@ -1,0 +1,6 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  entry_type: InProceedings
+  booktitle: International Conference on Software Maintenance
+  year: 1995
