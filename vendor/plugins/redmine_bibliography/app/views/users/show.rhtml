@@ -43,6 +43,7 @@
 
 <div class="splitcontentright">
 
+  <% if @user.author %>
   <div id="bibliography">
     <% @publications = Publication.all(:include => :authors, :conditions => "authors.id = #{@user.author.id}") %>
 
@@ -65,7 +66,7 @@
       </dd>
   	<% end %>
   </div>
-
+  <% end %>
 
 
 <% unless @events_by_day.empty? %>
