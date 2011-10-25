@@ -1,0 +1,8 @@
+BAHAUS
+
+<% unless project.tag_list.empty? %>
+  <tr>
+    <td><b><%=l(:tags)%>:</b></td>
+    <td><%= project.tag_counts.collect{ |t| render_tag_link(t, :show_count => false, :open_only => false) }.join(', ') %></td>
+  </tr>
+<% end %>

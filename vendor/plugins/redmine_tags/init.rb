@@ -41,6 +41,10 @@ end
 require 'dispatcher'
 
 Dispatcher.to_prepare :redmine_tags do
+  unless Project.included_modules.include?(RedmineTags::Patches::ProjectPatch)
+    Project.send(:include, RedmineTags::Patches::ProjectPatch)
+  end
+
   unless Issue.included_modules.include?(RedmineTags::Patches::IssuePatch)
     Issue.send(:include, RedmineTags::Patches::IssuePatch)
   end
@@ -65,3 +69,5 @@ end
 
 require 'redmine_tags/hooks/model_issue_hook'
 require 'redmine_tags/hooks/views_issues_hook'
+require 'redmine_tags/hooks/views_projects_hook'
+
