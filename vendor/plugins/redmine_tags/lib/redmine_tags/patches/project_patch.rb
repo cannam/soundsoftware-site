@@ -5,14 +5,36 @@ require_dependency 'project'
 module RedmineTags
   module Patches
     module ProjectPatch
-      def self.included(base)
+      def self.included(base) # :nodoc:
         base.extend(ClassMethods)
 
         base.class_eval do
           unloadable
           acts_as_taggable
+          alias_method_chain :before_save, :save_tags
         end
       end
+
+      def before_save_with_save_tags(context={})
+
+        logger.error { "GONNA SAVE TAG LIST" }
+        logger.error { @project.name }
+
+    #    if params && params[:project] && !params[:project][:tag_list].nil?
+    #      old_tags = context[:project].tag_list.to_s
+    #      context[:project].tag_list = params[:project][:tag_list]
+    #      new_tags = context[:project].tag_list.to_s
+    #
+    #      unless (old_tags == new_tags || context[:project].current_journal.blank?)
+    #        context[:project].current_journal.details << JournalDetail.new(:property => 'attr',
+    #                                                                     :prop_key => 'tag_list',
+    #                                                                     :old_value => old_tags,
+    #                                                                     :value => new_tags)
+    #      end
+    #    end
+      end
+      
+
 
       module ClassMethods
         # Returns available issue tags
@@ -34,7 +56,7 @@ module RedmineTags
           end
 
           if open_only
-            visible << ["#{Issue.table_name}.status_id IN " +
+            visible << ["#{Project.table_name}.status_id IN " +
                         "( SELECT issue_status.id " + 
                         "    FROM #{IssueStatus.table_name} issue_status " +
                         "   WHERE issue_status.is_closed = ? )", false]
