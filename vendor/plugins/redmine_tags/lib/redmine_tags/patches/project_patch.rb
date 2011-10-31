@@ -7,18 +7,27 @@ module RedmineTags
     module ProjectPatch
       def self.included(base) # :nodoc:
         base.extend(ClassMethods)
+        base.send(:include, InstanceMethods)
 
         base.class_eval do
           unloadable
+
+          attr_accessor :tag_list
+
           acts_as_taggable
-          alias_method_chain :before_save, :save_tags
+
         end
       end
 
-      def before_save_with_save_tags(context={})
-
+      def before_save_with_save_tags()
+#        debugger
         logger.error { "GONNA SAVE TAG LIST" }
-        logger.error { @project.name }
+
+
+#        params[:tag_list]
+        
+        
+        # logger.error { @project.name }
 
     #    if params && params[:project] && !params[:project][:tag_list].nil?
     #      old_tags = context[:project].tag_list.to_s
@@ -34,7 +43,9 @@ module RedmineTags
     #    end
       end
       
-
+      module InstanceMethods
+        
+      end
 
       module ClassMethods
         # Returns available issue tags
