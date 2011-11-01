@@ -12,17 +12,17 @@ module RedmineTags
       end
 
       module InstanceMethods
-          
-        
-        def add_tags_to_project
-#          debugger
-          logger.error { "TAG_LIST-->#{params[:project][:tag_list]}" }
+        def add_tags_to_project                    
+          if params && params[:project] && !params[:project][:tag_list].nil?
+            old_tags = @project.tag_list.to_s
+            new_tags = params[:project][:tag_list].to_s
+           
+            unless (old_tags == new_tags)
+              @project.tag_list = new_tags
+            end
+          end                    
         end
       end
     end
   end
 end
-
-
-
-
