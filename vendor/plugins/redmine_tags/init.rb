@@ -41,9 +41,16 @@ end
 require 'dispatcher'
 
 Dispatcher.to_prepare :redmine_tags do
+  
+  require_dependency 'redmine_project_filtering'
+  
   unless Project.included_modules.include?(RedmineTags::Patches::ProjectPatch)
     Project.send(:include, RedmineTags::Patches::ProjectPatch)
   end
+  
+  unless ProjectsHelper.included_modules.include?(RedmineTags::Patches::ProjectsHelperPatch)
+    ProjectsHelper.send(:include, RedmineTags::Patches::ProjectsHelperPatch)
+  end    
 
   unless Issue.included_modules.include?(RedmineTags::Patches::IssuePatch)
     Issue.send(:include, RedmineTags::Patches::IssuePatch)

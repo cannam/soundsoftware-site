@@ -48,6 +48,17 @@ module RedmineTags
       end
 
       module ClassMethods
+
+
+        def search_by_question(question)
+          if question.length > 1
+            search(RedmineProjectFiltering.calculate_tokens(question), nil, :all_words => true).first.sort_by(&:lft)
+          else
+            all(:order => 'lft')
+          end
+        end
+
+
         # Returns available issue tags
         # === Parameters
         # * <i>options</i> = (optional) Options hash of

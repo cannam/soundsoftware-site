@@ -1,0 +1,67 @@
+<% content_for :header_tags do %>
+    <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
+<% end %>
+
+<div class="contextual">
+    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }%>
+    <%= '| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true) %>
+</div>
+
+<% form_tag('/projects', :method => :get, :id => :project_filtering) do %>
+  <fieldset id="filters" class="collapsible">
+    <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+    <div>
+      <p class='q'>
+        <%= label_tag 'q', l('project_filtering_q_label') %>
+        <%= text_field_tag 'q', @question, :size => 30, :id => 'search-input' %>
+      </p>
+      <%= render :partial => 'custom_field', :collection => @custom_fields_used_for_project_filtering %>
+      <p class='buttons'><%= submit_tag( l(:button_send), :id => 'filter_button') -%></p>
+    </div>
+  </fieldset>
+<% end %>
+
+
+<%= javascript_tag "Field.focus('search-input');" %>
+<%= javascript_tag "$('filter_button').hide();" %>
+<%= observe_form( :project_filtering,
+  :frequency => 0.5,
+  :url => { :controller => :projects, :action => :index, :format => :js },
+  :method => :get
+  )
+%>
+
+<div id="projects">
+  <%= render :partial => 'filtered_projects' %>
+</div>
+
+
+<div style="clear:both;"></div>
+
+<% if User.current.logged? %>
+<p style="text-align:right;">
+<span class="my-project"><%= l(:label_my_projects) %></span>
+</p>
+<% end %>
+
+
+END
+
+<% if @user_projects %>  
+  <%= render_my_project_hierarchy(@user_projects)%>
+<% end %>
+
+<h2>
+  <%= l("label_project_all") %>
+</h2>
+
+<%= render_project_table(@projects) %>
+
+<p class="pagination"><%= pagination_links_full @project_pages, @project_count %></p>
+
+
+<% other_formats_links do |f| %>
+	<%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>
+<% end %>
+
+<% html_title(l(:label_project_plural)) -%>
