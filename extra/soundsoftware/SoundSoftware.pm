@@ -456,6 +456,7 @@ sub is_permitted {
 		}
 		$sthldap->finish();
 		undef $sthldap;
+                last if ($ret);
 	    }
 	} else {
 	    print STDERR "SoundSoftware.pm:$$: User $redmine_user lacks required role for this project\n";
