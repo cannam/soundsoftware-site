@@ -4,6 +4,11 @@
 
 <%= link_to l(:label_statistics), {:action => 'stats', :id => @project}, :class => 'icon icon-stats' %>
 
+| <a href="/hg/<%= h(@project.identifier) %>/archive/<%= 
+    rev_text = @changeset.nil? ? @rev : format_revision(@changeset);
+    rev_text.blank? ? "tip" : rev_text 
+%>.zip">Download this revision</a>
+
 <% form_tag({:action => controller.action_name, :id => @project, :path => to_path_param(@path), :rev => ''}, {:method => :get, :id => 'revision_selector'}) do -%>
   <!-- Branches Dropdown -->
   <% if !@repository.branches.nil? && @repository.branches.length > 0 -%>
