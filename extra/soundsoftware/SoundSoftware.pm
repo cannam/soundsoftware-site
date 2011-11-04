@@ -245,16 +245,18 @@ sub access_handler {
 	# fall through
     }
 
+    my $cfg = Apache2::Module::get_config
+        (__PACKAGE__, $r->server, $r->per_dir_config);
     if ($cfg->{SoundSoftwareSslRequired} eq "on") {
 	if ($r->dir_config('HTTPS') eq "on") {
 	    return OK;
 	} else {
 	    my $redir_to = "https://" . $r->hostname() . $r->unparsed_uri();
 	    print STDERR "SoundSoftware.pm:$$: Need to switch to HTTPS, redirecting to $redir_to\n";
-	    $r->header_out(Location => $redir_to);
+	    $r->headers_out->add('Location' => $redir_to);
 	    return REDIRECT;
 	}
-    } else if ($cfg->{SoundSoftwareSslRequired} eq "off") {
+    } elsif ($cfg->{SoundSoftwareSslRequired} eq "off") {
 	return OK;
     } else {
 	print STDERR "WARNING: SoundSoftware.pm:$$: SoundSoftwareSslRequired should be either 'on' or 'off'\n";
@@ -508,6 +510,18 @@ sub get_realm {
     # to project identifier if any are found
     if ($name =~ m/[^\w\d\s\._-]/) {
 	$name = $project_id;
+    } elsif ($name =~ m/^\s*$/) {
+	# empty or whitespace
+	$name = $project_id;
+    }
+    
+    if ($name =~ m/^\s*$/) {
+        # nothing even in $project_id -- probably a nonexistent project.
+        # use repo name instead (don't want to admit to user that project
+        # doesn't exist)
+        my $location = $r->location;
+        my ($repo) = $r->uri =~ m{$location/*([^/]+)};
+        $name = $repo;
     }
 
     my $realm = '"Mercurial repository for ' . "'$name'" . '"';
