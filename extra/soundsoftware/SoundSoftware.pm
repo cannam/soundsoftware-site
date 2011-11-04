@@ -473,7 +473,7 @@ sub get_project_identifier {
     my $dbh = shift;
     my $r = shift;
     my $location = $r->location;
-    my $repo = ($r->uri =~ m{$location/*([^/]+)});
+    my ($repo) = $r->uri =~ m{$location/*([^/]*)};
 
     return $repo if (!$repo);
 
@@ -546,7 +546,7 @@ sub get_realm {
         # use repo name instead (don't want to admit to user that project
         # doesn't exist)
         my $location = $r->location;
-        my $repo = ($r->uri =~ m{$location/*([^/]+)});
+        my ($repo) = $r->uri =~ m{$location/*([^/]*)};
         $name = $repo;
     }
 
