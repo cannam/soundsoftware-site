@@ -472,14 +472,13 @@ sub is_permitted {
 sub get_project_identifier {
     my $dbh = shift;
     my $r = shift;
-
     my $location = $r->location;
-    my ($repo) = $r->uri =~ m{$location/*([^/]+)};
+    my $repo = ($r->uri =~ m{$location/*([^/]+)});
 
     return $repo if (!$repo);
 
     $repo =~ s/[^a-zA-Z0-9\._-]//g;
-
+    
     # The original Redmine.pm returns the string just calculated as
     # the project identifier.  That won't do for us -- we may have
     # (and in fact already do have, in our test instance) projects
@@ -499,7 +498,6 @@ sub get_project_identifier {
 
     my $prefix = $cfg->{SoundSoftwareRepoPrefix};
     if (!defined $prefix) { $prefix = '%/'; }
-
     my $identifier = '';
 
     $sth->execute($prefix . $repo);
@@ -548,7 +546,7 @@ sub get_realm {
         # use repo name instead (don't want to admit to user that project
         # doesn't exist)
         my $location = $r->location;
-        my ($repo) = $r->uri =~ m{$location/*([^/]+)};
+        my $repo = ($r->uri =~ m{$location/*([^/]+)});
         $name = $repo;
     }
 
