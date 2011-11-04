@@ -215,6 +215,8 @@ sub access_handler {
     $dbh->disconnect();
     undef $dbh;
 
+    my $auth_ssl_reqd = will_require_ssl_auth($r);
+
     if ($status == 1) { # public
 
 	print STDERR "SoundSoftware.pm:$$: Project is public\n";
@@ -231,6 +233,16 @@ sub access_handler {
 		# fall through, this is the normal case
 	    }
 
+        } elsif ($auth_ssl_reqd and $r->unparsed_uri =~ m/cmd=branchmap/) {
+
+            # A hac^H^H^Hspecial case. We want to ensure we switch to
+            # https (if it will be necessarily for authentication) 
+            # before the first POST request, and this is what I think
+            # will give us suitable warning for Mercurial.
+
+            print STDERR "SoundSoftware.pm:$$: Switching to HTTPS in preparation\n";
+            # fall through, this is the normal case
+
 	} else {
 	    # Public project, read-only method -- this is the only
 	    # case we can decide for certain to accept in this function
@@ -245,22 +257,13 @@ sub access_handler {
 	# fall through
     }
 
-    my $cfg = Apache2::Module::get_config
-        (__PACKAGE__, $r->server, $r->per_dir_config);
-    if ($cfg->{SoundSoftwareSslRequired} eq "on") {
-	if ($r->dir_config('HTTPS') eq "on") {
-	    return OK;
-	} else {
-	    my $redir_to = "https://" . $r->hostname() . $r->unparsed_uri();
-	    print STDERR "SoundSoftware.pm:$$: Need to switch to HTTPS, redirecting to $redir_to\n";
-	    $r->headers_out->add('Location' => $redir_to);
-	    return REDIRECT;
-	}
-    } elsif ($cfg->{SoundSoftwareSslRequired} eq "off") {
-	return OK;
+    if ($auth_ssl_reqd) {
+        my $redir_to = "https://" . $r->hostname() . $r->unparsed_uri();
+        print STDERR "SoundSoftware.pm:$$: Need to switch to HTTPS, redirecting to $redir_to\n";
+        $r->headers_out->add('Location' => $redir_to);
+        return REDIRECT;
     } else {
-	print STDERR "WARNING: SoundSoftware.pm:$$: SoundSoftwareSslRequired should be either 'on' or 'off'\n";
-	return OK;
+        return OK;
     }
 }
 
@@ -338,6 +341,30 @@ sub get_project_status {
     undef $sth;
 
     $ret;
+}
+
+sub will_require_ssl_auth {
+    my $r = shift;
+
+    my $cfg = Apache2::Module::get_config
+        (__PACKAGE__, $r->server, $r->per_dir_config);
+
+    if ($cfg->{SoundSoftwareSslRequired} eq "on") {
+        if ($r->dir_config('HTTPS') eq "on") {
+            # already have ssl
+            return 0;
+        } else {
+            # require ssl for auth, don't have it yet
+            return 1;
+        }
+    } elsif ($cfg->{SoundSoftwareSslRequired} eq "off") {
+        # don't require ssl for auth
+        return 0;
+    } else {
+        print STDERR "WARNING: SoundSoftware.pm:$$: SoundSoftwareSslRequired should be either 'on' or 'off'\n";
+        # this is safer
+        return 1;
+    }
 }
 
 sub project_repo_is_readonly {
