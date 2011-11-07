@@ -51,9 +51,14 @@
                        :id => @project, :page => nil, :key => User.current.rss_key})) %>
 <%     end %>
 
+<p class="statistics">
+<%= link_to l(:label_statistics), {:action => 'stats', :id => @project}, :class => 'icon icon-stats' %>
+</p>
+
 <%     other_formats_links do |f| %>
   <%= f.link_to 'Atom', :url => {:action => 'revisions', :id => @project, :key => User.current.rss_key} %>
 <%     end %>
+
 <%   end %>
 <% end %>
 
