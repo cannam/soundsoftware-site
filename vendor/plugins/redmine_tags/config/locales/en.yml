@@ -33,3 +33,5 @@ en:
   issue_tags_sidebar_cloud: Cloud
 
   auto_complete_new_tag: Add new...
+  
+  project_filtering_q_label: "Textual search"

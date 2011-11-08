@@ -59,12 +59,20 @@ module RedmineTags
 
         # Returns available project tags
         #  does not show tags from private projects
-        def available_tags
+        def available_tags( options = {} )
+
+          name_like = options[:name_like]
           options = {}
           visible   = ARCondition.new
                   
           visible << ["#{Project.table_name}.is_public = \"1\""]
+
+          if name_like
+            visible << ["#{ActsAsTaggableOn::Tag.table_name}.name LIKE ?", "%#{name_like.downcase}%"]
+          end
+
           options[:conditions] = visible.conditions
+
           self.all_tag_counts(options)          
         end
       end

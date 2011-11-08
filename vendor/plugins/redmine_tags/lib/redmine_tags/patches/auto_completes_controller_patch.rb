@@ -35,7 +35,7 @@ module RedmineTags
 
         def project_tags
           @name = params[:q].to_s
-          @tags = Project.available_tags :project_id => @project, :name_like => @name
+          @tags = Project.available_tags :name_like => @name
           render :layout => false, :partial => 'tag_list'
         end
       end
