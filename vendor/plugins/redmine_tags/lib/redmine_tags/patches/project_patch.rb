@@ -48,8 +48,6 @@ module RedmineTags
       end
 
       module ClassMethods
-
-
         def search_by_question(question)
           if question.length > 1
             search(RedmineProjectFiltering.calculate_tokens(question), nil, :all_words => true).first.sort_by(&:lft)
@@ -59,37 +57,15 @@ module RedmineTags
         end
 
 
-        # Returns available issue tags
-        # === Parameters
-        # * <i>options</i> = (optional) Options hash of
-        #   * project   - Project to search in.
-        #   * open_only - Boolean. Whenever search within open issues only.
-        #   * name_like - String. Substring to filter found tags.
-        def available_tags(options = {})
-          project   = options[:project]
-          open_only = options[:open_only]
-          name_like = options[:name_like]
-          options   = {}
+        # Returns available project tags
+        #  does not show tags from private projects
+        def available_tags
+          options = {}
           visible   = ARCondition.new
-          
-          if project
-            project = project.id if project.is_a? Project
-            visible << ["#{Issue.table_name}.project_id = ?", project]
-          end
-
-          if open_only
-            visible << ["#{Project.table_name}.status_id IN " +
-                        "( SELECT issue_status.id " + 
-                        "    FROM #{IssueStatus.table_name} issue_status " +
-                        "   WHERE issue_status.is_closed = ? )", false]
-          end
-
-          if name_like
-            visible << ["#{ActsAsTaggableOn::Tag.table_name}.name LIKE ?", "%#{name_like.downcase}%"]
-          end
-
+                  
+          visible << ["#{Project.table_name}.is_public = \"1\""]
           options[:conditions] = visible.conditions
-          self.all_tag_counts(options)
+          self.all_tag_counts(options)          
         end
       end
     end
