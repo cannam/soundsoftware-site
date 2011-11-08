@@ -1,0 +1,12 @@
+<p class='tag'>
+  <%= label_tag 'Tag' %>
+  <%= select_tag("tag[#{tag.id}]", 
+        options_from_collection_for_select(
+          [nil] + Project.available_tags, 
+          'to_s', 
+          'to_s',
+          @custom_fields[custom_field.id.to_s]
+        )
+      )
+  %>
+</p>
