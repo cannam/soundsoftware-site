@@ -8,7 +8,7 @@ module RedmineTags
         base.class_eval do          
           unloadable 
           before_filter :add_tags_to_project, :only => [:save, :update]
-          before_filter :filter_projects, :only => :index          
+          before_filter :filter_projects, :only => :index                
         end
       end
 
@@ -30,9 +30,10 @@ module RedmineTags
           end
 
           def filter_projects
-            
-            logger.error { "FILTRA PA!" }
-            
+            logger.error { "before_filter: filter_projects" }
+
+            @project = Project.new
+                                  
             respond_to do |format|
               format.any(:html, :xml) { 
                 calculate_filtered_projects

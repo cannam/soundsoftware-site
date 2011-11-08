@@ -18,6 +18,11 @@
       <%= render :partial => 'custom_field', :collection => @custom_fields_used_for_project_filtering %>
       <p class='buttons'><%= submit_tag( l(:button_send), :id => 'filter_button') -%></p>
     </div>
+
+    <div id='filter_tags'>
+      <%= render :partial => 'filter_tags' %>
+    </div>
+
   </fieldset>
 <% end %>
 
