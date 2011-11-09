@@ -56,19 +56,26 @@ module RedmineTags
 
           def calculate_filtered_projects
 
-            @question = (params[:q] || "").strip
-            @custom_fields = params[:custom_fields] || {}
+            @question = (params[:q] || "").strip            
 
-            @projects = Project.visible
-
-            unless @custom_fields.empty?
-              @projects = @projects.with_custom_values(params[:custom_fields])
+            if params.has_key?(:project)
+              @tag_list = (params[:project][:tag_list] || "").strip.split(",")
+            else
+              @tag_list = []
             end
+            
+            @projects = Project.visible
 
             @featured_projects = @projects.featured if Project.respond_to? :featured
 
-            @projects = @projects.search_by_question(@question)
-            debugger                                  
+            # luisf 
+            @projects = @projects.search_by_question(@question) unless @question == ""
+            @tagged_projects_ids = Project.tagged_with(@tag_list).collect{ |project| Project.find(project.id) } unless @tag_list.empty?
+            
+            # intersection of both prject groups            
+            @projects = @projects && @tagged_projects_ids unless @tag_list.empty?
+            
+            # luisf: what exactly are the featured projects? could they be "my projects"?
             @featured_projects = @featured_projects.search_by_question(@question) if @featured_projects
 
           end
