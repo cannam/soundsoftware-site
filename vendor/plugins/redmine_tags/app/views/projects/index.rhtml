@@ -60,7 +60,7 @@ END
   <%= l("label_project_all") %>
 </h2>
 
-<%= render_project_table(@projects) %>
+<%= render_project_table_with_filtering(@projects, @question) %>
 
 <p class="pagination"><%= pagination_links_full @project_pages, @project_count %></p>
 

@@ -9,7 +9,101 @@ module RedmineTags
         end
       end
 
-      module InstanceMethods
+      module InstanceMethods        
+        # Renders a tree of projects that the current user does not belong
+        # to, or of all projects if the current user is not logged in.  The
+        # given collection may be a subset of the whole project tree
+        # (eg. some intermediate nodes are private and can not be seen).  We
+        # are potentially interested in various things: the project name,
+        # description, manager(s), creation date, last activity date,
+        # general activity level, whether there is anything actually hosted
+        # here for the project, etc.
+        def render_project_table_with_filtering(projects, question)
+          custom_fields = ""
+          s = ""
+          if projects.any?
+            tokens = RedmineProjectFiltering.calculate_tokens(question, custom_fields)
+            
+            s << "<div class='autoscroll'>"
+            s << "<table class='list projects'>"
+            s << "<thead><tr>"
+        
+            s << sort_header_tag('name', :caption => l("field_name"))
+            s << "<th class='managers'>" << l("label_managers") << "</th>"
+            s << "<th class='tags'>" << l("tags") << "</th>"
+            s << sort_header_tag('created_on', :default_order => 'desc')
+            s << sort_header_tag('updated_on', :default_order => 'desc')
+        
+            s << "</tr></thead><tbody>"
+        
+            original_project = @project
+        
+            projects.each do |project|
+              s << render_project_in_table_with_filtering(project, cycle('odd', 'even'), 0, tokens)
+            end
+        
+            s << "</table>"
+          else
+            s << "\n"
+          end
+          @project = original_project
+
+          s
+        end
+
+        def render_project_in_table_with_filtering(project, oddeven, level, tokens)          
+          # set the project environment to please macros.
+          @project = project
+
+          classes = (level == 0 ? 'root' : 'child')
+
+          s = ""
+
+          s << "<tr class='#{oddeven} #{classes} level#{level}'>"
+          s << "<td class='firstcol' align=top><div class='name hosted_here"
+          s << " no_description" if project.description.blank?
+          s << "'>" << link_to( highlight_tokens(project.name, tokens), {:controller => 'projects', :action => 'show', :id => project}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
+          s << "</div>"
+          s << render_project_short_description(project)
+          s << "<td class='managers' align=top>"
+           
+          u = project.users_by_role
+          if u
+            u.keys.each do |r|
+              if r.allowed_to?(:edit_project)
+                mgrs = []
+                u[r].sort.each do |m|
+                  mgrs << link_to_user(m)
+                end
+                if mgrs.size < 3
+                  s << '<nobr>' << mgrs.join(', ') << '</nobr>'
+                else
+                  s << mgrs.join(', ')
+                end
+              end
+            end
+          end
+
+          s << "</td>"
+          
+          # taglist
+          s << "<td class='tags' align=top>" << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') << "</td>"
+          s << "<td class='created_on' align=top>" << format_date(project.created_on) << "</td>"
+          s << "<td class='updated_on' align=top>" << format_date(project.updated_on) << "</td>"
+
+          s << "</tr>"
+
+          project.children.each do |child|
+            if child.is_public? or User.current.member_of?(child)
+              s << render_project_in_table_with_filtering(child, oddeven, level + 1, tokens)
+            end
+          end
+
+          s
+        end
+        
+        
+        
         # Renders a tree of projects as a nested set of unordered lists
         # The given collection may be a subset of the whole project tree
         # (eg. some intermediate nodes are private and can not be seen)
