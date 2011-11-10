@@ -41,9 +41,7 @@ module TagsHelper
   end
 
   def render_project_tag_link(tag)
-
-    content = link_to tag.name, application_path(:controller => :projects, :action => :index, :project => {:tag_list => tag.name}), 
-
+    content = link_to tag.name, :controller => :projects, :action => :index, :project => { :tag_list => tag.name } 
     content_tag('span', content, :class => 'tag-label')
   end
 
