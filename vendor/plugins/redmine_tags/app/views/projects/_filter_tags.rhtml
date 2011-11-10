@@ -6,6 +6,7 @@
       </p>
       <div id="project_tag_candidates" class="autocomplete"></div>
       <%= javascript_include_tag 'tags_input', :plugin => 'redmine_tags' %>
+
       <%= javascript_tag "observeProjectTagsField('#{url_for(:controller => 'auto_completes', :action => 'project_tags')}')" %>
     </div>
   <% end -%>
