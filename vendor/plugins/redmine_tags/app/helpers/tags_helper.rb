@@ -40,6 +40,14 @@ module TagsHelper
     content_tag('span', content, :class => 'tag-label')
   end
 
+  def render_project_tag_link(tag)
+
+    content = link_to tag.name, application_path(:controller => :projects, :action => :index, :project => {:tag_list => tag.name}), 
+
+    content_tag('span', content, :class => 'tag-label')
+  end
+
+
   # Renders list of tags
   # Clouds are rendered as block <tt>div</tt> with internal <tt>span</t> per tag.
   # Lists are rendered as unordered lists <tt>ul</tt>. Lists are ordered by
