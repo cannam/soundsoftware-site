@@ -25,10 +25,10 @@ module RedmineTags
           end
         end
 
-        # luisf - TO BE REMOVED?
-        def calculate_project_filtering_settings
-          @project_filtering_settings = Setting[:plugin_redmine_project_filtering]
-        end
+        # # luisf - TO BE REMOVED?
+        # def calculate_project_filtering_settings
+        #   @project_filtering_settings = Setting[:plugin_redmine_project_filtering]
+        # end
 
         def filter_projects
           @project = Project.new
@@ -53,7 +53,7 @@ module RedmineTags
 
         private
 
-        def calculate_filtered_projects
+        def calculate_filtered_projects                  
           @question = (params[:q] || "").strip     
 
           if params.has_key?(:project)
@@ -70,13 +70,12 @@ module RedmineTags
           @projects = @projects.search_by_question(@question) unless @question == ""
           @tagged_projects_ids = Project.tagged_with(@tag_list).collect{ |project| Project.find(project.id) } unless @tag_list.empty?
 
+          debugger
+
           # intersection of both prject groups            
           @projects = @projects && @tagged_projects_ids unless @tag_list.empty?
-
-          # luisf: what exactly are the featured projects? could they be "my projects"?
-          #        if not should remove this code…
-          @featured_projects = @featured_projects.search_by_question(@question) if @featured_projects
-
+          
+          @filtered_projects = @projects
         end
       end
     end

@@ -19,6 +19,8 @@ module RedmineTags
         # general activity level, whether there is anything actually hosted
         # here for the project, etc.
         def render_project_table_with_filtering(projects, question)
+          debugger
+          
           custom_fields = ""
           s = ""
           if projects.any?
