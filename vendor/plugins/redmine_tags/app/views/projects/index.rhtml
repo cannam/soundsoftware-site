@@ -16,7 +16,7 @@
 
 
 <div style="clear:both;"></div>
-<% form_tag('/projects', :method => :get, :id => :project_filtering) do %>
+<% form_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
   <fieldset id="filters" class="collapsible">
     <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
     <div>
