@@ -75,6 +75,7 @@ module RedmineTags
           # intersection of both prject groups            
           @projects = @projects && @tagged_projects_ids unless @tag_list.empty?
           
+          debugger          
           @filtered_projects = @projects
         end
       end
