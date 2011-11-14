@@ -224,5 +224,12 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 
 .embedded #matlabdoc th { text-align: left; }
 
+/* autocomplete positioning fix */
+div.autocomplete {
+	margin-top:136px;
+}
+
+
+
 
 
