@@ -55,7 +55,7 @@ class ProjectsController < ApplicationController
         @project_count = Project.visible_roots.count
         @project_pages = Paginator.new self, @project_count, @limit, params['page']
         @offset ||= @project_pages.current.offset
-        @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
+        @projects = Project.visible_roots.find(@filtered_projects, :offset => @offset, :limit => @limit, :order => sort_clause) 
         if User.current.logged?
           # seems sort_by gives us case-sensitive ordering, which we don't want
 #          @user_projects = User.current.projects.sort_by(&:name)
