@@ -1,6 +1,8 @@
 <% content_for :header_tags do %>
     <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
 <% end %>
+<%= javascript_include_tag 'projects_index', :plugin => 'redmine_tags' %>
+
 
 <div class="contextual">
     <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }%>
@@ -17,8 +19,9 @@
 
 <div style="clear:both;"></div>
 <% form_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
-  <fieldset id="filters" class="collapsible">
+  <fieldset id="filters" class="collapsible collapsed">
     <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+    <div style="display: none;">
     <div>
       <p class='q'>
         <%= label_tag 'q', l('project_filtering_q_label') %>
