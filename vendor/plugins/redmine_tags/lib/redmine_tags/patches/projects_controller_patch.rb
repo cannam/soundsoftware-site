@@ -35,9 +35,9 @@ module RedmineTags
           sort_init 'name'
           sort_update %w(name lft created_on updated_on)
           @limit = per_page_option
-          @project_count = Project.visible_roots.count
+          @project_count = Project.visible_roots.find(@projects).count
           @project_pages = ActionController::Pagination::Paginator.new self, @project_count, @limit, params['page']
-          @offset ||= @project_pages.current.offset          
+          @offset ||= @project_pages.current.offset
         end
 
 
@@ -47,10 +47,12 @@ module RedmineTags
           @project = Project.new
           filter_projects
 
+          debugger
+
           respond_to do |format|
             format.html { 
               paginate_projects
-              @projects = Project.visible_roots.find(@filtered_projects, :offset => @offset, :limit => @limit, :order => sort_clause) 
+              @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause) 
 
               if User.current.logged?
                 # seems sort_by gives us case-sensitive ordering, which we don't want
@@ -63,7 +65,7 @@ module RedmineTags
             format.api  {
               @offset, @limit = api_offset_and_limit
               @project_count = Project.visible.count
-              @projects = Project.visible.find(@filtered_projects, :offset => @offset, :limit => @limit, :order => 'lft')
+              @projects = Project.visible.find(@projects, :offset => @offset, :limit => @limit, :order => 'lft')
             }
             format.atom {
               projects = Project.visible.find(:all, :order => 'created_on DESC', :limit => Setting.feeds_limit.to_i)
@@ -72,7 +74,7 @@ module RedmineTags
             format.js {
               render :update do |page|
                 paginate_projects
-                @projects = Project.visible_roots.find(@filtered_projects, :offset => @offset, :limit => @limit, :order => sort_clause)
+                @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause)
                 page.replace_html 'projects', :partial => 'filtered_projects'
               end
             }
@@ -102,9 +104,6 @@ module RedmineTags
 
           # intersection of both prject groups            
           @projects = @projects && @tagged_projects_ids unless @tag_list.empty?
-          
-          debugger          
-          @filtered_projects = @projects
         end
       end
     end
