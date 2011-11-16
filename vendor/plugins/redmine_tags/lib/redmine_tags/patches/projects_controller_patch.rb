@@ -94,16 +94,15 @@ module RedmineTags
 
           @projects = Project.visible
 
-          @featured_projects = @projects.featured if Project.respond_to? :featured
-
           # luisf 
           @projects = @projects.search_by_question(@question) unless @question == ""
           @tagged_projects_ids = Project.tagged_with(@tag_list).collect{ |project| Project.find(project.id) } unless @tag_list.empty?
 
+          # intersection of both prject groups            
+          @projects = @projects & @tagged_projects_ids unless @tag_list.empty?
+
           debugger
 
-          # intersection of both prject groups            
-          @projects = @projects && @tagged_projects_ids unless @tag_list.empty?
         end
       end
     end
