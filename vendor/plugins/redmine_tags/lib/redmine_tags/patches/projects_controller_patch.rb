@@ -40,14 +40,31 @@ module RedmineTags
           @offset ||= @project_pages.current.offset
         end
 
+        def set_fieldset_status(field, status)
+          session[(field + "_status").to_sym] = status
+        end
+
+        # gets the status of the collabsible fieldsets
+        def get_fieldset_statuses      
+          if session[:filter_status].nil?
+            @filter_status = session[:filter_status]
+          else
+            @filter_status = false
+          end
+          
+          if session[:myproj_status].nil?          
+            @myproj_status = session[:myproj_status]
+          else
+            @myproj_status = true
+          end                  
+        end
 
         # Lists visible projects. Paginator is for top-level projects only
         # (subprojects belong to them)
         def filtered_index
           @project = Project.new
           filter_projects
-
-          debugger
+          get_fieldset_statuses
 
           respond_to do |format|
             format.html { 
