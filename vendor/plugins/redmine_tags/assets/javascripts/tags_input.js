@@ -93,11 +93,6 @@ function observeIssueTagsField(url) {
   new Redmine.TagsInput('issue_tag_list').autocomplete('issue_tag_candidates', url);
 }
 
-
-function observeProjectTagsField(url, index) {
-	if(index){
-		new Redmine.TagsInput('project_tag_list').autocomplete('project_tag_candidates', url);
-	}else{
-		new Redmine.TagsInput('project_tag_list').autocomplete('project_tag_candidates', url);
-	}	
+function observeProjectTagsField(url) {
+	new Redmine.TagsInput('project_tag_list').autocomplete('project_tag_candidates', url);
 }

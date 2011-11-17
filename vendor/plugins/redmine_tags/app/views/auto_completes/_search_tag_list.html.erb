@@ -1,0 +1,5 @@
+<ul>
+	<% @tags.each do |tag| -%>
+  		<%= content_tag 'li', h('%s (%d)' % [tag.name, tag.count]), :name => tag.name %>
+	<% end -%>
+</ul>
