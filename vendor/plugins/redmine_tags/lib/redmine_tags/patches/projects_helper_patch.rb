@@ -18,9 +18,7 @@ module RedmineTags
         # description, manager(s), creation date, last activity date,
         # general activity level, whether there is anything actually hosted
         # here for the project, etc.
-        def render_project_table_with_filtering(projects, question)
-          debugger
-          
+        def render_project_table_with_filtering(projects, question)          
           custom_fields = ""
           s = ""
           if projects.any?

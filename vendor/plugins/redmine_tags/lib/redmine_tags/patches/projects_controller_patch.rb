@@ -7,6 +7,8 @@ module RedmineTags
         base.send(:include, InstanceMethods)
         base.class_eval do          
           unloadable 
+          skip_before_filter :authorize, :only => [:set_fieldset_status]
+          skip_before_filter :find_project, :only => [:set_fieldset_status]
           before_filter :add_tags_to_project, :only => [:save, :update]
 #          before_filter :filter_projects, :only => :index
 
@@ -30,7 +32,6 @@ module RedmineTags
           end
         end
 
-
         def paginate_projects
           sort_init 'name'
           sort_update %w(name lft created_on updated_on)
@@ -40,22 +41,28 @@ module RedmineTags
           @offset ||= @project_pages.current.offset
         end
 
-        def set_fieldset_status(field, status)
+        def set_fieldset_status
+
+          # luisf. test for missing parameters………
+          field = params[:field_id]
+          status = params[:status]
+
           session[(field + "_status").to_sym] = status
+          render :nothing => true
         end
 
         # gets the status of the collabsible fieldsets
-        def get_fieldset_statuses      
-          if session[:filter_status].nil?
-            @filter_status = session[:filter_status]
-          else
-            @filter_status = false
-          end
-          
-          if session[:myproj_status].nil?          
-            @myproj_status = session[:myproj_status]
-          else
+        def get_fieldset_statuses
+          if session[:my_projects_fieldset_status].nil?
             @myproj_status = true
+          else
+            @myproj_status = session[:my_projects_fieldset_status]
+          end
+                    
+          if session[:filters_fieldset_status].nil?
+            @filter_status = false
+          else
+            @filter_status = session[:filters_fieldset_status]
           end                  
         end
 
@@ -64,6 +71,11 @@ module RedmineTags
         def filtered_index
           @project = Project.new
           filter_projects
+          
+          debugger
+          
+          logger.error { "JASUS" }
+          
           get_fieldset_statuses
 
           respond_to do |format|
@@ -117,9 +129,6 @@ module RedmineTags
 
           # intersection of both prject groups            
           @projects = @projects & @tagged_projects_ids unless @tag_list.empty?
-
-          debugger
-
         end
       end
     end

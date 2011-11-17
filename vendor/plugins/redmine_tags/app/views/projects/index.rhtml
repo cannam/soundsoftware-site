@@ -16,12 +16,18 @@
   <%= render :partial => 'my_projects' %>
 <% end %>
 
-
 <div style="clear:both;"></div>
 <% form_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
-  <fieldset id="filters" class="collapsible collapsed">
-    <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
-    <div style="display: none;">
+
+
+<% if @filter_status %>
+<fieldset id="filters_fieldset" class="collapsible">
+  <legend onclick="toggleFieldsetWithState(this);"><%= l(:label_filter_plural) %></legend>
+<% else %>
+  <fieldset id="filters_fieldset" class="collapsible collapsed">
+    <legend onclick="toggleFieldsetWithState(this);"><%= l(:label_filter_plural) %></legend>
+      <div style="display: none;">
+<% end %>
     <div>
       <p class='q'>
         <%= label_tag 'q', l('project_filtering_q_label') %>
