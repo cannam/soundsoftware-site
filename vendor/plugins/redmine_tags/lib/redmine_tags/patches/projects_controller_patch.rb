@@ -48,6 +48,8 @@ module RedmineTags
           status = params[:status]
 
           session[(field + "_status").to_sym] = status
+          logger.error { "SET - DEBUG-ME #{session.inspect}" }
+
           render :nothing => true
         end
 
@@ -63,7 +65,7 @@ module RedmineTags
             @filter_status = false
           else
             @filter_status = session[:filters_fieldset_status]
-          end                  
+          end                            
         end
 
         # Lists visible projects. Paginator is for top-level projects only
@@ -71,11 +73,6 @@ module RedmineTags
         def filtered_index
           @project = Project.new
           filter_projects
-          
-          debugger
-          
-          logger.error { "JASUS" }
-          
           get_fieldset_statuses
 
           respond_to do |format|

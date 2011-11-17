@@ -19,8 +19,7 @@
 <div style="clear:both;"></div>
 <% form_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
 
-
-<% if @filter_status %>
+<% if @filter_status=="true" %>
 <fieldset id="filters_fieldset" class="collapsible">
   <legend onclick="toggleFieldsetWithState(this);"><%= l(:label_filter_plural) %></legend>
 <% else %>

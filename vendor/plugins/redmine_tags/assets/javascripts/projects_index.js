@@ -4,14 +4,12 @@ Event.observe(window, 'load', function() {
 
 
 function toggleFieldsetWithState(this_field){
-	toggleFieldset(this_field);
-	
-	id =  Element.up(this_field, 'fieldset').id;
-	
+	id = Element.up(this_field, 'fieldset').id;	
 	// is the fieldset collapsed?
 	status = $(id).hasClassName("collapsed");
-	
 	change_session(id, status);
+	
+	toggleFieldset(this_field);
 };
 
 function change_session(id, nstatus) {
@@ -19,6 +17,6 @@ function change_session(id, nstatus) {
  	var request = new Ajax.Request(url, {
 		method: 'post',
 	 	parameters: {field_id: id, status: nstatus},
-    asynchronous: true
-  });
+    	asynchronous: true
+  	});
 }
