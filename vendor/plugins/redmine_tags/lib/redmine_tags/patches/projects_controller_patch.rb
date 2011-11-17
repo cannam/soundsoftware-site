@@ -88,7 +88,7 @@ module RedmineTags
               
               render :template => 'projects/index.rhtml', :layout => !request.xhr?
             }
-            format.api  {
+            format.api {
               @offset, @limit = api_offset_and_limit
               @project_count = Project.visible.count
               @projects = Project.visible.find(@projects, :offset => @offset, :limit => @limit, :order => 'lft')
@@ -98,9 +98,9 @@ module RedmineTags
               render_feed(projects, :title => "#{Setting.app_title}: #{l(:label_project_latest)}")
             }
             format.js {
+              paginate_projects
+              @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause)
               render :update do |page|
-                paginate_projects
-                @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause)
                 page.replace_html 'projects', :partial => 'filtered_projects'
               end
             }

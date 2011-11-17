@@ -17,7 +17,7 @@
 <% end %>
 
 <div style="clear:both;"></div>
-<% form_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
+<% form_remote_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
 
 <% if @filter_status=="true" %>
 <fieldset id="filters_fieldset" class="collapsible">
