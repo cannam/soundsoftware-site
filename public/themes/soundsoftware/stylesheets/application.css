@@ -232,6 +232,42 @@ div.autocomplete {
 }
 
 
+/* For Google search results */
+    
+.gs-title {
+    text-decoration: none !important;
+}
+.gs-title:hover {
+    text-decoration: underline !important;
+}
+.gs-title b {
+    color: #be5700 !important;
+/*    background-color: #FCFD8D; */
+    text-decoration: none !important;
+}
+.gs-snippet {
+    font-style: italic; color: #808080;
+}
+/*
+.gs-snippet b {
+   background-color: #FCFD8D;
+}
+*/
+.gs-visibleUrl {
+    display: none;
+}
+.gs-title, .gs-title b {
+    font-size: 12px !important;
+}
+.gs-snippet,.gs-visibleUrl,.gsc-cursor-page,.gsc-result-info {
+    font-size: 11px !important;
+}
+.gsc-result-info,.gs-fileFormat,.gs-fileFormatType {
+    font-size: 10px !important;
+}
+.gs-result {
+    padding-left: 40px;
+}
 
 
 

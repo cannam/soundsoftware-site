@@ -9,3 +9,8 @@ body,p,h2,h3,h4,li,table,.wiki h1,.embedded h1 {
   font-family: 'Lucida Grande', 'Lucida Sans Unicode', DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; 
   line-height: 1.34;
 }
+
+.gs-title,.gs-snippet,.gs-visibleUrl,.gsc-cursor-page,.gsc-result-info,.gs-fileFormat,.gs-fileFormatType {
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; 
+  line-height: 1.34;
+}
