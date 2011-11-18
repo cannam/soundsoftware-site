@@ -21,12 +21,14 @@
 var Redmine = Redmine || {};
 
 Redmine.TagsInput = Class.create({
-  initialize: function(element) {
+  initialize: function(element, update) {
     this.element  = $(element);
     this.input    = new Element('input', { 'type': 'text', 'autocomplete': 'off', 'size': 10 });
     this.button   = new Element('span', { 'class': 'tag-add icon icon-add' });
     this.tags     = new Hash();
     
+		this.update = update;
+
     Event.observe(this.button, 'click', this.readTags.bind(this));
     Event.observe(this.input, 'keypress', this.onKeyPress.bindAsEventListener(this));
 
@@ -35,15 +37,16 @@ Redmine.TagsInput = Class.create({
     this.addTagsList(this.element.value);
   },
 
-  readTags: function() {
+  readTags: function() {		
     this.addTagsList(this.input.value);
     this.input.value = '';
+		if(this.update){submitForm();};
   },
 
   onKeyPress: function(event) {
     if (Event.KEY_RETURN == event.keyCode) {
       this.readTags(event);
-      Event.stop(event);
+      Event.stop(event);			
     }
   },
 
@@ -57,10 +60,13 @@ Redmine.TagsInput = Class.create({
     this.element.value = this.getTagsList();
     this.element.insert({ 'before': label });
 
+		if(this.update){submitForm();};
+
     Event.observe(button, 'click', function(){
       this.tags.unset(tag);
       this.element.value = this.getTagsList();
       label.remove();
+		  if(this.update){submitForm();};
     }.bind(this));
   },
 
@@ -90,9 +96,13 @@ Redmine.TagsInput = Class.create({
 
 
 function observeIssueTagsField(url) {
-  new Redmine.TagsInput('issue_tag_list').autocomplete('issue_tag_candidates', url);
+  new Redmine.TagsInput('issue_tag_list', false).autocomplete('issue_tag_candidates', url);
 }
 
-function observeProjectTagsField(url) {
-	new Redmine.TagsInput('project_tag_list').autocomplete('project_tag_candidates', url);
+function observeProjectTagsField(url, update) {
+	if(!update) { 
+			var update = false;
+		};
+	
+	new Redmine.TagsInput('project_tag_list', update).autocomplete('project_tag_candidates', url);
 }

@@ -1,7 +1,3 @@
-// Event.observe(window, 'load', function() {
-// });
-
-
 function toggleFieldsetWithState(this_field){
 	id = Element.up(this_field, 'fieldset').id;	
 	// is the fieldset collapsed?
@@ -18,4 +14,8 @@ function change_session(id, nstatus) {
 	 	parameters: {field_id: id, status: nstatus},
     	asynchronous: true
   	});
+}
+
+function submitForm(){
+	$('submitButton').click(); return false;
 }
