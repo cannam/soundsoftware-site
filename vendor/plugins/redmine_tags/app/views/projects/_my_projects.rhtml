@@ -1,5 +1,11 @@
-<fieldset id="filters" class="collapsible">
-    <legend onclick="toggleFieldset(this);"><%= l(:label_my_projects) %></legend>
+<% if @myproj_status=="true" %>
+<fieldset id="my_projects_fieldset" class="collapsible">
+    <legend onclick="toggleFieldsetWithState(this);"><%= l(:label_my_projects) %></legend>
+<% else %>
+<fieldset id="my_projects_fieldset" class="collapsible collapsed">
+    <legend onclick="toggleFieldsetWithState(this);"><%= l(:label_my_projects) %></legend>
+    <div style="display: none;">    
+<%  end%>
     <% if @user_projects %>  
     <div>
       <%= render_my_project_hierarchy(@user_projects)%>

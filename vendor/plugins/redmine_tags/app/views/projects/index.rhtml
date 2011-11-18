@@ -1,6 +1,8 @@
 <% content_for :header_tags do %>
     <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
 <% end %>
+<%= javascript_include_tag 'projects_index', :plugin => 'redmine_tags' %>
+
 
 <div class="contextual">
     <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }%>
@@ -14,11 +16,17 @@
   <%= render :partial => 'my_projects' %>
 <% end %>
 
-
 <div style="clear:both;"></div>
-<% form_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
-  <fieldset id="filters" class="collapsible">
-    <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
+<% form_remote_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
+
+<% if @filter_status=="true" %>
+<fieldset id="filters_fieldset" class="collapsible">
+  <legend onclick="toggleFieldsetWithState(this);"><%= l(:label_filter_plural) %></legend>
+<% else %>
+  <fieldset id="filters_fieldset" class="collapsible collapsed">
+    <legend onclick="toggleFieldsetWithState(this);"><%= l(:label_filter_plural) %></legend>
+      <div style="display: none;">
+<% end %>
     <div>
       <p class='q'>
         <%= label_tag 'q', l('project_filtering_q_label') %>
@@ -26,7 +34,7 @@
       </p>
 
       <div id='filter_tags'>
-        <%= render :partial => 'filter_tags' %>
+        <%= render :partial => 'filter_search_tags' %>
       </div>
 
       <p class='buttons'><%= submit_tag( l('button_filter'), :id => 'filter_button') -%></p>                  
