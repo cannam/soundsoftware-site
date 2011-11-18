@@ -76,6 +76,7 @@ module RedmineTags
           respond_to do |format|
             format.html { 
               paginate_projects
+              
               @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause) 
 
               if User.current.logged?
@@ -116,14 +117,20 @@ module RedmineTags
             @tag_list = []
           end
 
-          @projects = Project.visible
+          if  @question == ""
+            @projects = Project.visible
+          else
+            @projects = Project.visible.search_by_question(@question)
+          end
+  
+          unless @tag_list.empty?
+            @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |project| Project.find(project.id) }
+            @projects = @projects & @tagged_projects_ids
+          end
+          
+          @projects = @projects.collect{ |project| project.root }
+          @projects = @projects.uniq
 
-          # luisf 
-          @projects = @projects.search_by_question(@question) unless @question == ""
-          @tagged_projects_ids = Project.tagged_with(@tag_list).collect{ |project| Project.find(project.id) } unless @tag_list.empty?
-
-          # intersection of both prject groups            
-          @projects = @projects & @tagged_projects_ids unless @tag_list.empty?
         end
       end
     end
