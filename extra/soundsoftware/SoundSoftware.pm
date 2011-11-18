@@ -110,6 +110,11 @@ my @directives = (
     req_override => OR_AUTHCFG,
     args_how => TAKE1,
   },
+  {
+    name => 'SoundSoftwareSslRequired',
+    req_override => OR_AUTHCFG,
+    args_how => TAKE1,
+  },
 );
 
 sub SoundSoftwareDSN { 
@@ -142,6 +147,8 @@ sub SoundSoftwareRepoPrefix {
 	$self->{SoundSoftwareRepoPrefix} = $arg;
     }
 }
+
+sub SoundSoftwareSslRequired { set_val('SoundSoftwareSslRequired', @_); }
 
 sub trim {
     my $string = shift;
@@ -184,33 +191,80 @@ sub access_handler {
 
     my $project_id = get_project_identifier($dbh, $r);
 
-    if (!defined $read_only_methods{$method}) {
-        print STDERR "SoundSoftware.pm:$$: Method is not read-only\n";
-        if (project_repo_is_readonly($dbh, $project_id, $r)) {
-            print STDERR "SoundSoftware.pm:$$: Project repo is read-only, refusing access\n";
-	    return FORBIDDEN;
-        } else {
-	    print STDERR "SoundSoftware.pm:$$: Project repo is read-write, authentication handler required\n";
-            return OK;
-        }
-    }
+    # We want to delegate most of the work to the authentication
+    # handler (to ensure that user is asked to login even for 
+    # nonexistent projects -- so they can't tell whether a private
+    # project exists or not without authenticating). So 
+    # 
+    # * if the project is public
+    #   - if the method is read-only
+    #     + set handler to OK, no auth needed
+    #   - if the method is not read-only
+    #     + if the repo is read-only, return forbidden
+    #     + else require auth
+    # * if the project is not public or does not exist
+    #     + require auth
+    #
+    # If we are requiring auth and are not currently https, and
+    # https is required, then we must return a redirect to https
+    # instead of an OK.
 
     my $status = get_project_status($dbh, $project_id, $r);
+    my $readonly = project_repo_is_readonly($dbh, $project_id, $r);
 
     $dbh->disconnect();
     undef $dbh;
 
-    if ($status == 0) { # nonexistent
-	print STDERR "SoundSoftware.pm:$$: Project does not exist, refusing access\n";
-	return FORBIDDEN;
-    } elsif ($status == 1) { # public
-	print STDERR "SoundSoftware.pm:$$: Project is public, no restriction here\n";
-	$r->set_handlers(PerlAuthenHandler => [\&OK])
-    } else { # private
-	print STDERR "SoundSoftware.pm:$$: Project is private, authentication handler required\n";
+    my $auth_ssl_reqd = will_require_ssl_auth($r);
+
+    if ($status == 1) { # public
+
+	print STDERR "SoundSoftware.pm:$$: Project is public\n";
+
+	if (!defined $read_only_methods{$method}) {
+
+	    print STDERR "SoundSoftware.pm:$$: Method is not read-only\n";
+
+	    if ($readonly) {
+		print STDERR "SoundSoftware.pm:$$: Project repo is read-only, refusing access\n";
+		return FORBIDDEN;
+	    } else {
+		print STDERR "SoundSoftware.pm:$$: Project repo is read-write, auth required\n";
+		# fall through, this is the normal case
+	    }
+
+        } elsif ($auth_ssl_reqd and $r->unparsed_uri =~ m/cmd=branchmap/) {
+
+            # A hac^H^H^Hspecial case. We want to ensure we switch to
+            # https (if it will be necessarily for authentication) 
+            # before the first POST request, and this is what I think
+            # will give us suitable warning for Mercurial.
+
+            print STDERR "SoundSoftware.pm:$$: Switching to HTTPS in preparation\n";
+            # fall through, this is the normal case
+
+	} else {
+	    # Public project, read-only method -- this is the only
+	    # case we can decide for certain to accept in this function
+	    print STDERR "SoundSoftware.pm:$$: Method is read-only, no restriction here\n";
+	    $r->set_handlers(PerlAuthenHandler => [\&OK]);
+	    return OK;
+	}
+
+    } else { # status != 1, i.e. nonexistent or private -- equivalent here
+
+	print STDERR "SoundSoftware.pm:$$: Project is private or nonexistent, auth required\n";
+	# fall through
     }
 
-    return OK
+    if ($auth_ssl_reqd) {
+        my $redir_to = "https://" . $r->hostname() . $r->unparsed_uri();
+        print STDERR "SoundSoftware.pm:$$: Need to switch to HTTPS, redirecting to $redir_to\n";
+        $r->headers_out->add('Location' => $redir_to);
+        return REDIRECT;
+    } else {
+        return OK;
+    }
 }
 
 sub authen_handler {
@@ -236,6 +290,16 @@ sub authen_handler {
     }
     
     print STDERR "SoundSoftware.pm:$$: User is " . $r->user . ", got password\n";
+
+    my $status = get_project_status($dbh, $project_id, $r);
+    if ($status == 0) {
+	# nonexistent, behave like private project you aren't a member of
+	print STDERR "SoundSoftware.pm:$$: Project doesn't exist, not permitted\n";
+	$dbh->disconnect();
+	undef $dbh;
+	$r->note_auth_failure();
+	return AUTH_REQUIRED;
+    }
 
     my $permitted = is_permitted($dbh, $project_id, $r->user, $redmine_pass, $r);
     
@@ -277,6 +341,30 @@ sub get_project_status {
     undef $sth;
 
     $ret;
+}
+
+sub will_require_ssl_auth {
+    my $r = shift;
+
+    my $cfg = Apache2::Module::get_config
+        (__PACKAGE__, $r->server, $r->per_dir_config);
+
+    if ($cfg->{SoundSoftwareSslRequired} eq "on") {
+        if ($r->dir_config('HTTPS') eq "on") {
+            # already have ssl
+            return 0;
+        } else {
+            # require ssl for auth, don't have it yet
+            return 1;
+        }
+    } elsif ($cfg->{SoundSoftwareSslRequired} eq "off") {
+        # don't require ssl for auth
+        return 0;
+    } else {
+        print STDERR "WARNING: SoundSoftware.pm:$$: SoundSoftwareSslRequired should be either 'on' or 'off'\n";
+        # this is safer
+        return 1;
+    }
 }
 
 sub project_repo_is_readonly {
@@ -368,6 +456,7 @@ sub is_permitted {
 		}
 		$sthldap->finish();
 		undef $sthldap;
+                last if ($ret);
 	    }
 	} else {
 	    print STDERR "SoundSoftware.pm:$$: User $redmine_user lacks required role for this project\n";
@@ -383,14 +472,13 @@ sub is_permitted {
 sub get_project_identifier {
     my $dbh = shift;
     my $r = shift;
-
     my $location = $r->location;
-    my ($repo) = $r->uri =~ m{$location/*([^/]+)};
+    my ($repo) = $r->uri =~ m{$location/*([^/]*)};
 
     return $repo if (!$repo);
 
     $repo =~ s/[^a-zA-Z0-9\._-]//g;
-
+    
     # The original Redmine.pm returns the string just calculated as
     # the project identifier.  That won't do for us -- we may have
     # (and in fact already do have, in our test instance) projects
@@ -410,7 +498,6 @@ sub get_project_identifier {
 
     my $prefix = $cfg->{SoundSoftwareRepoPrefix};
     if (!defined $prefix) { $prefix = '%/'; }
-
     my $identifier = '';
 
     $sth->execute($prefix . $repo);
@@ -449,6 +536,18 @@ sub get_realm {
     # to project identifier if any are found
     if ($name =~ m/[^\w\d\s\._-]/) {
 	$name = $project_id;
+    } elsif ($name =~ m/^\s*$/) {
+	# empty or whitespace
+	$name = $project_id;
+    }
+    
+    if ($name =~ m/^\s*$/) {
+        # nothing even in $project_id -- probably a nonexistent project.
+        # use repo name instead (don't want to admit to user that project
+        # doesn't exist)
+        my $location = $r->location;
+        my ($repo) = $r->uri =~ m{$location/*([^/]*)};
+        $name = $repo;
     }
 
     my $realm = '"Mercurial repository for ' . "'$name'" . '"';

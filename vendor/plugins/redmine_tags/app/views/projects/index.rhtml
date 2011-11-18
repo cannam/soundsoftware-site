@@ -17,6 +17,11 @@
 <% end %>
 
 <div style="clear:both;"></div>
+<h2>
+  <%= l("label_project_all") %>
+</h2>
+
+<div style="clear:both;"></div>
 <% form_remote_tag(:controller => :projects, :action => :index, :method => :get, :html => {:id => :project_filtering_form}) do %>
 
 <% if @filter_status=="true" %>
@@ -43,11 +48,6 @@
     </div>
   </fieldset>
 <% end %>
-
-<div style="clear:both;"></div>
-<h2>
-  <%= l("label_project_all") %>
-</h2>
 
 <div id="projects">
   <%= render :partial => 'filtered_projects' %>

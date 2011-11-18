@@ -2,7 +2,7 @@
   <%= javascript_include_tag 'repository_navigation' %>
 <% end %>
 
-<%= link_to l(:label_statistics), {:action => 'stats', :id => @project}, :class => 'icon icon-stats' %>
+<%= link_to_revision_archive(@repository, @changeset, @project, { :text => l(:label_download_revision), :class => 'icon icon-package' }) %>
 
 <% form_tag({:action => controller.action_name, :id => @project, :path => to_path_param(@path), :rev => ''}, {:method => :get, :id => 'revision_selector'}) do -%>
   <!-- Branches Dropdown -->
@@ -19,3 +19,5 @@
   | <%= l(:label_revision) %>: 
   <%= text_field_tag 'rev', @rev, :size => 8 %>
 <% end -%>
+
+

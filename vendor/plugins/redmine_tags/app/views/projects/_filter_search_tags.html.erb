@@ -2,7 +2,7 @@
   <% fields_for @project, :builder => TabularFormBuilder do |f| -%>
     <div>
       <p id="project_tags">
-        <%= f.text_field :tag_list, :label => :tags, :size => 60, :class => 'hol' %>
+        <%= f.text_field :tag_list, :label => :label_tags_search, :size => 60, :class => 'hol' %>
       </p>
       <div id="project_tag_candidates" class="autocomplete"></div>
       <%= javascript_include_tag 'tags_input', :plugin => 'redmine_tags' %>

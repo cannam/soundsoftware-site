@@ -169,7 +169,7 @@ en:
   notice_failed_to_save_issues: "Failed to save %{count} issue(s) on %{total} selected: %{ids}."
   notice_failed_to_save_members: "Failed to save member(s): %{errors}."
   notice_no_issue_selected: "No issue is selected! Please, check the issues you want to edit."
-  notice_account_pending: "Your account was created and is now pending administrator approval."
+  notice_account_pending: "Your account is now awaiting administrator approval. You will receive a notification email when your account has been activated."
   notice_default_data_loaded: Default configuration successfully loaded.
   notice_unable_delete_version: Unable to delete version.
   notice_unable_delete_time_entry: Unable to delete time log entry.
@@ -698,6 +698,7 @@ en:
   label_latest_revision_plural: Latest revisions
   label_view_revisions: View revisions
   label_view_all_revisions: View all revisions
+  label_download_revision: Download as Zip
   label_max_size: Maximum size
   label_sort_highest: Move to top
   label_sort_higher: Move up

@@ -33,3 +33,5 @@ div.tags .tag-nube-7 { font-size: 1.4em; }
 div.tags .tag-nube-8 { font-size: 1.5em; }
 
 .tag-count { font-size: .75em; margin-left: .5em; }
+
+#project_tags label { padding-right: .5em; }
