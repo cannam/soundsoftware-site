@@ -48,21 +48,19 @@ module RedmineTags
           status = params[:status]
 
           session[(field + "_status").to_sym] = status
-          logger.error { "SET - DEBUG-ME #{session.inspect}" }
-
           render :nothing => true
         end
 
         # gets the status of the collabsible fieldsets
         def get_fieldset_statuses
           if session[:my_projects_fieldset_status].nil?
-            @myproj_status = true
+            @myproj_status = "true"
           else
             @myproj_status = session[:my_projects_fieldset_status]
           end
                     
           if session[:filters_fieldset_status].nil?
-            @filter_status = false
+            @filter_status = "false"
           else
             @filter_status = session[:filters_fieldset_status]
           end                            
