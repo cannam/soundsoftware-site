@@ -19,3 +19,18 @@ function change_session(id, nstatus) {
 function submitForm(){
 	$('submitButton').click(); return false;
 }
+
+function keypressHandler (event){
+    var key = event.which || event.keyCode;
+    switch (key) {
+        default:
+        break;
+        case Event.KEY_RETURN:
+            $('submitButton').click(); return false;
+        break;   
+    }
+}
+
+document.observe("dom:loaded", function() {
+	$('search-input').observe('keypress', keypressHandler);	
+});
