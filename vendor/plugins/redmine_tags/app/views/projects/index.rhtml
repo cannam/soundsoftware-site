@@ -17,7 +17,7 @@
 <% end %>
 
 <div style="clear:both;"></div>
-<% form_remote_tag(:controller => :projects, :action => :index, :method => :get, :id => :project_filtering) do %>
+<% form_remote_tag(:controller => :projects, :action => :index, :method => :get, :html => {:id => :project_filtering_form}) do %>
 
 <% if @filter_status=="true" %>
 <fieldset id="filters_fieldset" class="collapsible">
@@ -37,7 +37,9 @@
         <%= render :partial => 'filter_search_tags' %>
       </div>
 
-      <p class='buttons'><%= submit_tag( l('button_filter'), :id => 'filter_button') -%></p>                  
+      <p style="display: none;"><%= submit_tag( l('button_filter'), :id => 'submitButton') -%></p>
+      <%= link_to l(:button_apply), {}, :onclick => "$('submitButton').click(); return false;", :class => 'icon icon-checked' %>      
+      <%= link_to l(:button_clear), {}, :class => 'icon icon-reload'  %>                         
     </div>
   </fieldset>
 <% end %>

@@ -1,6 +1,5 @@
-Event.observe(window, 'load', function() {
-
-});
+// Event.observe(window, 'load', function() {
+// });
 
 
 function toggleFieldsetWithState(this_field){
