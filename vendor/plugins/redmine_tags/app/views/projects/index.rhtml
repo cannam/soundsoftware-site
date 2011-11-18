@@ -33,14 +33,15 @@
       <div style="display: none;">
 <% end %>
     <div>
-      <p class='q'>
-        <%= label_tag 'q', l('project_filtering_q_label') %>
-        <%= text_field_tag 'q', @question, :size => 30, :id => 'search-input' %>
-      </p>
 
       <div id='filter_tags'>
         <%= render :partial => 'filter_search_tags' %>
       </div>
+
+      <p class='q'>
+        <%= label_tag 'q', l('project_filtering_q_label') %>
+        <%= text_field_tag 'q', @question, :size => 30, :id => 'search-input' %>
+      </p>
 
       <p style="display: none;"><%= submit_tag( l('button_filter'), :id => 'submitButton') -%></p>
       <%= link_to l(:button_apply), {}, :onclick => "$('submitButton').click(); return false;", :class => 'icon icon-checked' %>      
