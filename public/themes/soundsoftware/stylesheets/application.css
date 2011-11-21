@@ -231,6 +231,10 @@ div.autocomplete {
 	margin-top:136px;
 }
 
+#my_projects_fieldset.collapsible {
+	font-size: 1.0em;
+	font-color: green;
+}
 
 
 
