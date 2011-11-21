@@ -63,7 +63,12 @@ module RedmineTags
             @filter_status = "false"
           else
             @filter_status = session[:filters_fieldset_status]
-          end                            
+          end
+          
+          if params && params[:project] && !params[:project][:tag_list].nil?
+            @filter_status = "true"
+          end
+                                      
         end
 
         # Lists visible projects. Paginator is for top-level projects only
