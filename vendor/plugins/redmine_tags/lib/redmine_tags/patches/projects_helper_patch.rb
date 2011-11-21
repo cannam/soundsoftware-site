@@ -64,7 +64,7 @@ module RedmineTags
           s << " no_description" if project.description.blank?
           s << "'>" << link_to( highlight_tokens(project.name, tokens), {:controller => 'projects', :action => 'show', :id => project}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
           s << "</div>"
-          s << render_project_short_description(project)
+          s << highlight_tokens(render_project_short_description(project), tokens)
           s << "<td class='managers' align=top>"
            
           u = project.users_by_role

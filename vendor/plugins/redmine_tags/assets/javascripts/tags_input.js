@@ -28,7 +28,12 @@ Redmine.TagsInput = Class.create({
     this.tags     = new Hash();
     
 		this.update = update;
-
+		
+		var uri_params = window.location.href.toQueryParams();
+		if (uri_params["project[tag_list]"] != undefined){
+			this.addTag(uri_params["project[tag_list]"], true);			
+		};
+		
     Event.observe(this.button, 'click', this.readTags.bind(this));
     Event.observe(this.input, 'keypress', this.onKeyPress.bindAsEventListener(this));
 
@@ -40,7 +45,9 @@ Redmine.TagsInput = Class.create({
   readTags: function() {		
     this.addTagsList(this.input.value);
     this.input.value = '';
-		if(this.update){submitForm();};
+		if(this.update){
+			submitForm();
+		};
   },
 
   onKeyPress: function(event) {
@@ -50,8 +57,10 @@ Redmine.TagsInput = Class.create({
     }
   },
 
-  addTag: function(tag) {
+  addTag: function(tag, noSubmit) {
     if (tag.blank() || this.tags.get(tag)) return;
+
+		if(noSubmit==undefined){noSubmit=false;}
 
     var button = new Element('span', { 'class': 'tag-delete icon icon-del' });
     var label  = new Element('span', { 'class': 'tag-label' }).insert(tag).insert(button);
@@ -60,7 +69,11 @@ Redmine.TagsInput = Class.create({
     this.element.value = this.getTagsList();
     this.element.insert({ 'before': label });
 
-		if(this.update){submitForm();};
+		if(noSubmit==false){
+			if(this.update){
+				submitForm();
+			};
+		};
 
     Event.observe(button, 'click', function(){
       this.tags.unset(tag);

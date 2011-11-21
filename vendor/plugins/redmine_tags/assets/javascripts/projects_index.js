@@ -5,7 +5,12 @@ function toggleFieldsetWithState(this_field){
 	change_session(id, status);
 	
 	toggleFieldset(this_field);
+
 };
+
+	function submitForm(){
+		$('submitButton').click();		
+	};
 
 function change_session(id, nstatus) {
 	var url = "projects/set_fieldset_status";
@@ -16,20 +21,16 @@ function change_session(id, nstatus) {
   	});
 }
 
-function submitForm(){
-	$('submitButton').click(); return false;
-}
-
 function keypressHandler (event){
-    var key = event.which || event.keyCode;
-    switch (key) {
-        default:
-        break;
-        case Event.KEY_RETURN:
-            $('submitButton').click(); return false;
-        break;   
-    }
-}
+  var key = event.which || event.keyCode;
+  switch (key) {
+      default:
+      break;
+      case Event.KEY_RETURN:
+          $('submitButton').click(); return false;
+      break;   
+  };
+};
 
 document.observe("dom:loaded", function() {
 	$('search-input').observe('keypress', keypressHandler);	
