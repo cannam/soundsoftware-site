@@ -71,8 +71,6 @@ Redmine.TagsInput = Class.create({
 
 		if(noSubmit==false){
 			if(this.update){
-				console.log('It is true??');
-				console.log(this.update);
 				submitForm();
 			};
 		};
