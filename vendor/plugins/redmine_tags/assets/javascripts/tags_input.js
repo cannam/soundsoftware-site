@@ -31,7 +31,7 @@ Redmine.TagsInput = Class.create({
 		
 		var uri_params = window.location.href.toQueryParams();
 		if (uri_params["project[tag_list]"] != undefined){
-			this.addTag(uri_params["project[tag_list]"], true);			
+			this.addTag(uri_params["project[tag_list]"].stripTags(), true);			
 		};
 		
     Event.observe(this.button, 'click', this.readTags.bind(this));
