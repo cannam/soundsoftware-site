@@ -160,6 +160,81 @@ module RedmineTags
           s.join "\n"
         end
         
+        # Renders a tree of projects where the current user belongs
+        # as a nested set of unordered lists
+        # The given collection may be a subset of the whole project tree
+        # (eg. some intermediate nodes are private and can not be seen)
+        def render_my_project_hierarchy_with_tags(projects)
+
+          s = ''
+
+          original_project = @project
+
+          projects.each do |project|
+            if project.root? || !projects.include?(project.parent)
+              s << render_my_project_in_hierarchy_with_tags(project)
+            end
+          end
+
+          @project = original_project
+
+          if s != ''
+            a = ''
+            a << "<ul class='projects root'>\n"
+            a << s
+            a << "</ul>\n"
+            s = a
+          end
+
+          s
+
+        end
+        
+        
+        
+
+        def render_my_project_in_hierarchy_with_tags(project)
+
+          s = ''
+
+          if User.current.member_of?(project)
+
+            # set the project environment to please macros.
+            @project = project
+
+            classes = (project.root? ? 'root' : 'child')
+
+            s << "<li class='#{classes}'><div class='#{classes}'>" +
+              link_to_project(project, {}, :class => "project my-project")
+            if project.is_public?
+              s << " <span class='public'>" << l("field_is_public") << "</span>"
+            else
+              s << " <span class='private'>" << l("field_is_private") << "</span>"
+            end
+            s << render_project_short_description(project)
+
+            s << l(:tags) << ":&nbsp"
+            s << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ')
+
+            s << "</div>\n"
+
+            cs = ''
+            project.children.each do |child|
+              cs << render_my_project_in_hierarchy(child)
+            end
+
+            if cs != ''
+              s << "<ul class='projects'>\n" << cs << "</ul>\n";
+            end
+
+          end
+
+          s
+
+        end
+
+        
+        
         private
         
         # copied from search_helper. This one doesn't escape html or limit the text length

@@ -3,3 +3,5 @@
 <% else %>
 <%= render_project_table_with_filtering(@projects, @question) %>
 <% end %>
+
+<p class="pagination"><%= pagination_links_full @project_pages, @project_count %></p>
