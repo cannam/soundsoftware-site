@@ -24,7 +24,7 @@
     <% f.fields_for :authorships do |builder| -%>
       <%= render "authorship_fields", :f => builder %>
     <%- end -%>
-    <%= link_to_add_fields l(:label_add_an_author), f, :authorships %>
+    <%= link_to_add_author_fields l(:label_add_an_author), f, :authorships, params[:action] %>
   </div>
 </div>
 

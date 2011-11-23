@@ -38,6 +38,12 @@ module RedmineTags
           @tags = Project.available_tags :name_like => @name
           render :layout => false, :partial => 'tag_list'
         end
+        
+        def project_search_tags
+          @name = params[:q].to_s
+          @tags = Project.available_tags :name_like => @name
+          render :layout => false, :partial => 'search_tag_list'
+        end
       end
     end
   end

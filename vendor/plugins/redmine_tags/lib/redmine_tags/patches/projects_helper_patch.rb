@@ -18,9 +18,7 @@ module RedmineTags
         # description, manager(s), creation date, last activity date,
         # general activity level, whether there is anything actually hosted
         # here for the project, etc.
-        def render_project_table_with_filtering(projects, question)
-          debugger
-          
+        def render_project_table_with_filtering(projects, question)          
           custom_fields = ""
           s = ""
           if projects.any?
@@ -31,8 +29,8 @@ module RedmineTags
             s << "<thead><tr>"
         
             s << sort_header_tag('name', :caption => l("field_name"))
-            s << "<th class='managers'>" << l("label_managers") << "</th>"
             s << "<th class='tags'>" << l("tags") << "</th>"
+            s << "<th class='managers'>" << l("label_managers") << "</th>"
             s << sort_header_tag('created_on', :default_order => 'desc')
             s << sort_header_tag('updated_on', :default_order => 'desc')
         
@@ -66,7 +64,12 @@ module RedmineTags
           s << " no_description" if project.description.blank?
           s << "'>" << link_to( highlight_tokens(project.name, tokens), {:controller => 'projects', :action => 'show', :id => project}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
           s << "</div>"
-          s << render_project_short_description(project)
+          s << highlight_tokens(render_project_short_description(project), tokens)
+          s << "</td>"
+
+          # taglist
+          s << "<td class='tags' align=top>" << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') << "</td>"
+
           s << "<td class='managers' align=top>"
            
           u = project.users_by_role
@@ -88,8 +91,6 @@ module RedmineTags
 
           s << "</td>"
           
-          # taglist
-          s << "<td class='tags' align=top>" << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') << "</td>"
           s << "<td class='created_on' align=top>" << format_date(project.created_on) << "</td>"
           s << "<td class='updated_on' align=top>" << format_date(project.updated_on) << "</td>"
 
@@ -161,6 +162,86 @@ module RedmineTags
           end
           s.join "\n"
         end
+        
+        # Renders a tree of projects where the current user belongs
+        # as a nested set of unordered lists
+        # The given collection may be a subset of the whole project tree
+        # (eg. some intermediate nodes are private and can not be seen)
+        def render_my_project_hierarchy_with_tags(projects)
+
+          s = ''
+
+          original_project = @project
+
+          projects.each do |project|
+            if project.root? || !projects.include?(project.parent)
+              s << render_my_project_in_hierarchy_with_tags(project)
+            end
+          end
+
+          @project = original_project
+
+          if s != ''
+            a = ''
+            a << "<ul class='projects root'>\n"
+            a << s
+            a << "</ul>\n"
+            s = a
+          end
+
+          s
+
+        end
+        
+        
+        
+
+        def render_my_project_in_hierarchy_with_tags(project)
+
+          s = ''
+
+          if User.current.member_of?(project)
+
+            # set the project environment to please macros.
+            @project = project
+
+            classes = (project.root? ? 'root' : 'child')
+
+            s << "<li class='#{classes}'><div class='#{classes}'>" +
+              link_to_project(project, {}, :class => "project my-project")
+            if project.is_public?
+              s << " <span class='public'>" << l(:field_is_public) << "</span>"
+            else
+              s << " <span class='private'>" << l(:field_is_private) << "</span>"
+            end
+           
+            tc = project.tag_counts
+            if tc.empty?
+              s << " <span class='no-tags'>" << l(:field_no_tags) << "</span>"
+            else
+              s << " <span class='tags'>" << tc.collect{ |t| render_project_tag_link(t) }.join(', ') << "</span>"
+            end
+
+            s << render_project_short_description(project)
+
+            s << "</div>\n"
+
+            cs = ''
+            project.children.each do |child|
+              cs << render_my_project_in_hierarchy_with_tags(child)
+            end
+
+            if cs != ''
+              s << "<ul class='projects'>\n" << cs << "</ul>\n";
+            end
+
+          end
+
+          s
+
+        end
+
+        
         
         private
         
