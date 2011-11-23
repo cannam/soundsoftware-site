@@ -37,3 +37,7 @@ div.tags .tag-nube-8 { font-size: 1.5em; }
 ul.projects .tags, ul.projects .no-tags { padding-left: 0.5em; color: #3e442c; font-size: 0.95em }
 table.projects th.tags { color: #3e442c; }
 
+dl.tags { margin-top: 1.5em; margin-left: 0; padding-bottom: 1em; overflow: hidden; margin-bottom: 1em; border-bottom: 1px dotted #bbbbbb; }
+dt.tags-title { float: left; font-weight: bold; color: #3e442c; } 
+dd.tags { margin-left: .5em; float: left; color: #3e442c; }
+ 

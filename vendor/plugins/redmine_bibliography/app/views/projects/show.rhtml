@@ -101,6 +101,7 @@
 </div>
 
 <% content_for :sidebar do %>
+    <%= call_hook(:view_projects_show_sidebar_top, :project => @project) %>
     <% if @total_hours && User.current.allowed_to?(:view_time_entries, @project) %>
     <h3><%= l(:label_spent_time) %></h3>
     <p><span class="icon icon-time"><%= l_hours(@total_hours) %></span></p>
