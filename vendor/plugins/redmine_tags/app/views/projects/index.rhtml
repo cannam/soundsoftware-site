@@ -1,5 +1,6 @@
 <% content_for :header_tags do %>
     <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
+    <%= stylesheet_link_tag 'redmine_tags', :plugin => 'redmine_tags' %>
 <% end %>
 <%= javascript_include_tag 'projects_index', :plugin => 'redmine_tags' %>
 
