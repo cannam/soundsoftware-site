@@ -23,8 +23,8 @@ module RedmineTags
         def add_tags_to_project
 
           if params && params[:project] && !params[:project][:tag_list].nil?
-            old_tags = @project.tag_list.to_s
-            new_tags = params[:project][:tag_list].to_s
+            old_tags = @project.tag_list.to_s.downcase
+            new_tags = params[:project][:tag_list].to_s.downcase
 
             unless (old_tags == new_tags)
               @project.tag_list = new_tags
