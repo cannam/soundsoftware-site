@@ -1,13 +1,12 @@
 <p class='tag'>
-  <% fields_for @project, :builder => TabularFormBuilder do |f| -%>
+  <%- fields_for @project, :builder => TabularFormBuilder do |f| -%>
     <div>
       <p id="project_tags">
-        <%= f.text_field :tag_list, :label => :label_tags_search, :size => 60, :class => 'hol' %>
+        <%= f.text_field :tag_list, :label => :label_tags_search, :size => 60, :class => 'hol' -%>
       </p>
       <div id="project_tag_candidates" class="autocomplete"></div>
-      <%= javascript_include_tag 'tags_input', :plugin => 'redmine_tags' %>
-
-      <%= javascript_tag "observeProjectTagsField('#{url_for(:controller => 'auto_completes', :action => 'project_search_tags', :project_id => Project.first.id)}', true)" %>
+      <%= javascript_include_tag 'tags_input', :plugin => 'redmine_tags' -%>
+      <%= javascript_tag "observeProjectTagsField('#{url_for(:controller => 'auto_completes', :action => 'project_search_tags', :project_id => Project.first.id)}', true)" -%>
     </div>
-  <% end -%>
+  <%- end -%>
 </p>

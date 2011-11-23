@@ -29,8 +29,8 @@ module RedmineTags
             s << "<thead><tr>"
         
             s << sort_header_tag('name', :caption => l("field_name"))
-            s << "<th class='managers'>" << l("label_managers") << "</th>"
             s << "<th class='tags'>" << l("tags") << "</th>"
+            s << "<th class='managers'>" << l("label_managers") << "</th>"
             s << sort_header_tag('created_on', :default_order => 'desc')
             s << sort_header_tag('updated_on', :default_order => 'desc')
         
@@ -65,6 +65,11 @@ module RedmineTags
           s << "'>" << link_to( highlight_tokens(project.name, tokens), {:controller => 'projects', :action => 'show', :id => project}, :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}")
           s << "</div>"
           s << highlight_tokens(render_project_short_description(project), tokens)
+          s << "</td>"
+
+          # taglist
+          s << "<td class='tags' align=top>" << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') << "</td>"
+
           s << "<td class='managers' align=top>"
            
           u = project.users_by_role
@@ -86,8 +91,6 @@ module RedmineTags
 
           s << "</td>"
           
-          # taglist
-          s << "<td class='tags' align=top>" << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') << "</td>"
           s << "<td class='created_on' align=top>" << format_date(project.created_on) << "</td>"
           s << "<td class='updated_on' align=top>" << format_date(project.updated_on) << "</td>"
 
@@ -207,20 +210,25 @@ module RedmineTags
             s << "<li class='#{classes}'><div class='#{classes}'>" +
               link_to_project(project, {}, :class => "project my-project")
             if project.is_public?
-              s << " <span class='public'>" << l("field_is_public") << "</span>"
+              s << " <span class='public'>" << l(:field_is_public) << "</span>"
             else
-              s << " <span class='private'>" << l("field_is_private") << "</span>"
+              s << " <span class='private'>" << l(:field_is_private) << "</span>"
             end
-            s << render_project_short_description(project)
+           
+            tc = project.tag_counts
+            if tc.empty?
+              s << " <span class='no-tags'>" << l(:field_no_tags) << "</span>"
+            else
+              s << " <span class='tags'>" << tc.collect{ |t| render_project_tag_link(t) }.join(', ') << "</span>"
+            end
 
-            s << l(:tags) << ":&nbsp"
-            s << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ')
+            s << render_project_short_description(project)
 
             s << "</div>\n"
 
             cs = ''
             project.children.each do |child|
-              cs << render_my_project_in_hierarchy(child)
+              cs << render_my_project_in_hierarchy_with_tags(child)
             end
 
             if cs != ''
