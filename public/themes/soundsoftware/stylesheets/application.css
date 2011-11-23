@@ -134,6 +134,8 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
 #footer { background-color: #fdfbf5; border: 0; border-top: 2px solid #a9b680; color: #3e442c; text-align: right; }
 #footer a { color: #be5700; font-weight: bold; }
 
+p.statistics { text-align: right; font-size:0.9em; color: #666; }
+
 #main { margin-top: 135px; font:95%; background: #fdfaf0; }
 #main a { font-weight: medium; color: #be5700;}
 #main a:hover { color: #be5700; text-decoration: underline; }
@@ -223,6 +225,17 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 /* For MATLAB documentation */
 
 .embedded #matlabdoc th { text-align: left; }
+
+/* autocomplete positioning fix */
+div.autocomplete {
+	margin-top:136px;
+}
+
+#my_projects_fieldset.collapsible {
+	font-size: 1.0em;
+	font-color: green;
+}
+
 
 
 

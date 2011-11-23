@@ -7,18 +7,16 @@
    <dl>
      <% @project.publications.each do |publication| %>
      <dt>
-       <%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication, :project_id => @project %>
-     </dt>
-     <dd>
      <span class="authors">
-       <%= publication.authorships.map { |a| h a.name_on_paper }.join(', ') %>
+       <%= publication.authorships.map { |a| h a.name_on_paper }.join(', ') %><% if !publication.authorships.empty? %>.<% end %>
      </span>
+     <span class="title"><%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication, :project_id => @project %></span>
      <% if publication.bibtex_entry.year.to_s != "" %>
      <span class="year">
-       <%= publication.bibtex_entry.year %>
+       &nbsp;(<%= publication.bibtex_entry.year %>)
      </span>
      <% end %>
-     </dd>
+     </dt><dd></dd>
    <% end -%>
    </dl>
   </div>

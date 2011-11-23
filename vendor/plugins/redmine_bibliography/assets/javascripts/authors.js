@@ -3,12 +3,15 @@ function remove_fields(link) {
     $(link).up(".fields").hide();
 }
 
-function add_fields(link, association, content) {
-    var new_id = new Date().getTime();
-    var regexp = new RegExp("new_" + association, "g")
-    $(link).insert({
-	before: content.replace(regexp, new_id)
-    });
+function add_author_fields(link, association, content, action) {
+	var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g");
+  $(link).insert({
+		before: content.replace(regexp, new_id)
+  });
+	if(action != "new"){
+		toggle_save_author(new_id, $(link));
+	};
 }
 
 function identify_author_status(status, object_id) {

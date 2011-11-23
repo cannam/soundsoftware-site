@@ -150,9 +150,6 @@ module ProjectsHelper
 
     if s != ''
       a = ''
-      a << "<h2>"
-      a <<  l("label_my_project_plural")
-      a << "</h2>"
       a << "<ul class='projects root'>\n"
       a << s
       a << "</ul>\n"
