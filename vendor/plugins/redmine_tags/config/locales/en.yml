@@ -36,6 +36,6 @@ en:
 
   auto_complete_new_tag: Add new...
   
-  project_filtering_q_label: "Textual search"
+  project_filtering_q_label: "Search for text:"
   project_filter_no_results: "No matching projects found"
   button_filter: "Filter"
