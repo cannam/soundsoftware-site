@@ -110,9 +110,9 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
 #header #project-title a, #header #project-title a:hover { color: #525a38; text-decoration: none; }
 .header-general h1 {
-  background: url('soundsoftware-logo-title-only-transparent-beta.png') no-repeat 0 0;
+  background: url('soundsoftware-logo-code-title-only-transparent.png') no-repeat 0 0;
   text-indent: -9999px;
-  width: 500px;
+  width: 537px;
   height: 34px;
  }
 
