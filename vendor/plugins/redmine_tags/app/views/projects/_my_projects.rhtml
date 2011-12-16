@@ -1,8 +1,17 @@
-<fieldset id="filters" class="collapsible">
-    <legend onclick="toggleFieldset(this);"><%= l(:label_my_projects) %></legend>
-    <% if @user_projects %>  
+<% if !@user_projects.empty? %>
+<% if @myproj_status=="true" %>
+<fieldset id="my_projects_fieldset" class="collapsible">
+    <legend onclick="toggleFieldsetWithState(this);"><h2><%= l(:label_my_project_plural) %></h2></legend>
+<% else %>
+<fieldset id="my_projects_fieldset" class="collapsible collapsed">
+    <legend onclick="toggleFieldsetWithState(this);"><h2><%= l(:label_my_project_plural) %></h2></legend>
+    <div style="display: none;">    
+<% end %>
     <div>
-      <%= render_my_project_hierarchy(@user_projects)%>
+      <%= render_my_project_hierarchy_with_tags(@user_projects)%>
     </div>
-  <% end %>
+  <% unless @myproj_status=="true" %>
+    </div>
+  <%- end -%>
 </fieldset>
+<% end %>
