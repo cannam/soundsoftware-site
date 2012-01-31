@@ -46,7 +46,12 @@
 </fieldset>
 <% end %>
 
-<% if @project.new_record? || @project.module_enabled?('issue_tracking') %>
+<% if @project.new_record? %>
+<% @trackers.each do |tracker| %>
+    <%= hidden_field_tag 'project[tracker_ids][]', tracker.id %>
+<% end %>
+<%= hidden_field_tag 'project[tracker_ids][]', '' %>
+<% elsif @project.module_enabled?('issue_tracking') %>
 <% unless @trackers.empty? %>
 <fieldset class="box" id="project_trackers"><legend><%=l(:label_tracker_plural)%></legend>
 <% @trackers.each do |tracker| %>
