@@ -10,24 +10,21 @@ module RedmineTags
           skip_before_filter :authorize, :only => [:set_fieldset_status]
           skip_before_filter :find_project, :only => [:set_fieldset_status]
           before_filter :add_tags_to_project, :only => [:save, :update]
-#          before_filter :filter_projects, :only => :index
 
           alias :index filtered_index
         end
       end
 
       module InstanceMethods
-        
-        
-        
+                
         def add_tags_to_project
 
           if params && params[:project] && !params[:project][:tag_list].nil?
-            old_tags = @project.tag_list.to_s
-            new_tags = params[:project][:tag_list].to_s
+            old_tags = @project.tag_list.to_s.downcase
+            new_tags = params[:project][:tag_list].to_s.downcase
 
             unless (old_tags == new_tags)
-              @project.tag_list = new_tags
+              @project.tag_list = ActionController::Base.helpers.strip_tags(new_tags)
             end
           end
         end

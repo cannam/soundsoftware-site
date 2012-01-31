@@ -65,7 +65,7 @@ module RedmineTags
           options = {}
           visible   = ARCondition.new
                   
-          visible << ["#{Project.table_name}.is_public = \"1\""]
+          visible << ["#{Project.table_name}.is_public = '1'"]
 
           if name_like
             visible << ["#{ActsAsTaggableOn::Tag.table_name}.name LIKE ?", "%#{name_like.downcase}%"]

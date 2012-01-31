@@ -86,7 +86,7 @@ Redmine.TagsInput = Class.create({
   addTagsList: function(tags_list) {
     var tags = tags_list.split(',');
     for (var i = 0; i < tags.length; i++) {
-      this.addTag(tags[i].strip());
+      this.addTag(tags[i].strip().stripTags().toLowerCase());
     }
   },
 
