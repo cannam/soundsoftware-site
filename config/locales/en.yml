@@ -453,9 +453,9 @@ en:
   
   project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
-  project_module_news: News
-  project_module_documents: Documents
-  project_module_files: Files for download
+  project_module_news: News updates
+  project_module_documents: Documents for download
+  project_module_files: Files for download (such as software builds)
   project_module_wiki: Wiki
   project_module_repository: Source code repository
   project_module_boards: Forums
