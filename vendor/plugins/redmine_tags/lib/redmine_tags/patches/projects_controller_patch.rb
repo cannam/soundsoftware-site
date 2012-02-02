@@ -34,6 +34,7 @@ module RedmineTags
           sort_update %w(name lft created_on updated_on)
           @limit = per_page_option
           @project_count = Project.visible_roots.find(@projects).count
+
           @project_pages = ActionController::Pagination::Paginator.new self, @project_count, @limit, params['page']
           @offset ||= @project_pages.current.offset
         end
@@ -120,9 +121,9 @@ module RedmineTags
           end
 
           if  @question == ""
-            @projects = Project.visible
+            @projects = Project.visible_roots
           else
-            @projects = Project.visible.search_by_question(@question)
+            @projects = Project.visible_roots.find(Project.visible.search_by_question(@question))
           end
   
           unless @tag_list.empty?
@@ -132,7 +133,7 @@ module RedmineTags
           
           @projects = @projects.collect{ |project| project.root }
           @projects = @projects.uniq
-
+                    
         end
       end
     end
