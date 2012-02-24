@@ -1,27 +1,34 @@
 # English strings go here for Rails i18n
 en:
+  project_module_redmine_bibliography: "Publications (references to papers related to the project)"
+
   title: "Title"
   authors: "Authors"
   author: "Author"
   name: "Name"
   year: "Year"
+  associated_projects: "Associated Projects"
   publications_box: "My Publications"
   label_my_publications_box: "My Publications"
   view_all_publications: "View All Project's Publications"
+  publications: Publications
+  
   
   identify_author_question: Is the right person selected above?
   identify_author_yes: "Yes"
   identify_author_correct: "Yes, but I need to correct some details below"
   identify_author_no: "No, the author was not found in the search"
 
+  error_no_authors: "Please add at least one author to this publication."
+
   label_all_publications: All Publications
   label_all_publications_for_project: Publications associated with %{project}
-  label_authors_show: "Authorships by this author"
+  label_authors_show: "Authorships associated with this author"
   label_authors_index: "List of authors"
   
-  field_authorship_publication_title: "Publication Title"
-  field_authorship_name: "Name"
-  field_authorship_email: "Email Address"
+  field_authorship_publication_title: "Publication"
+  field_authorship_name: "Name on Paper"
+  field_authorship_email: "Email"
   field_authorship_institution: "Institution"
   
   field_external_url: "External URL"
@@ -79,7 +86,7 @@ en:
   field_publication_id: "Publication_id"
   field_address: "Address"
   field_annote: "Annote"
-  field_booktitle: "Book Title"
+  field_booktitle: "Title of Book or Proceedings"
   field_chapter: "Chapter"
   field_crossref: "Cross Reference"
   field_edition: "Edition"

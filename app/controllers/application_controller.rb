@@ -177,14 +177,14 @@ class ApplicationController < ActionController::Base
   def find_project
     @project = Project.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find project of id params[:project_id]
   def find_project_by_project_id
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find a project based on params[:project_id]

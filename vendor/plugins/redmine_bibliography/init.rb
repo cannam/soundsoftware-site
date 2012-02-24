@@ -34,7 +34,7 @@ Redmine::Plugin.register :redmine_bibliography do
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
 
-  settings :default => { 'menu' => 'Bibliography' }, :partial => 'settings/bibliography'
+  settings :default => { 'menu' => 'Publications' }, :partial => 'settings/bibliography'
 
   project_module :redmine_bibliography do
     permission :publications, { :publications => :index }, :public => true

@@ -5,7 +5,7 @@ class PublicationsController < ApplicationController
   unloadable
   
   model_object Publication
-  before_filter :find_model_object, :except => [:new, :create, :index, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]  
+  before_filter :find_model_object, :except => [:new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]  
   before_filter :find_project_by_project_id, :authorize, :only => [ :edit, :new, :update, :create ]
     
   def new
@@ -62,13 +62,33 @@ class PublicationsController < ApplicationController
     end
   end
 
+  def get_bibtex_required_fields
+
+    unless params[:value].empty?
+      fields = BibtexEntryType.fields(params[:value]) 
+    end
+
+    respond_to do |format|
+      format.js {
+        render(:update) {|page|       
+          if params[:value].empty?
+            page << "hideOnLoad();"
+          else
+            page << "show_required_bibtex_fields(#{fields.to_json()});"
+          end
+        }
+      }
+    
+    end
+  end
+
   def add_author
     if (request.xhr?)
       render :text => User.find(params[:user_id]).name
     else
       # No?  Then render an action.
       #render :action => 'view_attribute', :attr => @name
-      logger.error { "ERRO ADD AUTHOR" }
+      logger.error { "Error while adding Author to publication." }
     end
   end
 
@@ -76,11 +96,12 @@ class PublicationsController < ApplicationController
     find_project_by_project_id unless params[:project_id].nil?
     
     @edit_view = true;
-    
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
 
     @author_options = []  
+    
+    @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)    
   end
 
   def update    
@@ -105,7 +126,7 @@ class PublicationsController < ApplicationController
 
   def show
     find_project_by_project_id unless params[:project_id].nil?
-    
+        
     if @publication.nil?
       @publications = Publication.all
       render "index", :alert => 'The publication was not found!'
@@ -208,7 +229,8 @@ class PublicationsController < ApplicationController
     object_id = params[:object_id]
     @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
         
-    authorships_list = Authorship.like_unique(params[:q]).find(:all, :limit => 100)
+    # cc 20110909 -- revert to like instead of like_unique -- see #289
+    authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
     logger.debug "Query for \"#{params[:q]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
@@ -248,7 +270,7 @@ class PublicationsController < ApplicationController
     yes_radio = "publication_authorships_attributes_#{object_id}_identify_author_yes".to_sym
     
     respond_to do |format|
-      format.js {logger.error { "JS" }
+      format.js {
         render(:update) {|page| 
           page[name_field].value = item.name
           page[email_field].value = item.mail

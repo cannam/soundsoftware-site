@@ -169,7 +169,7 @@ en:
   notice_failed_to_save_issues: "Failed to save %{count} issue(s) on %{total} selected: %{ids}."
   notice_failed_to_save_members: "Failed to save member(s): %{errors}."
   notice_no_issue_selected: "No issue is selected! Please, check the issues you want to edit."
-  notice_account_pending: "Your account was created and is now pending administrator approval."
+  notice_account_pending: "Your account is now awaiting administrator approval. You will receive a notification email when your account has been activated."
   notice_default_data_loaded: Default configuration successfully loaded.
   notice_unable_delete_version: Unable to delete version.
   notice_unable_delete_time_entry: Unable to delete time log entry.
@@ -453,9 +453,9 @@ en:
   
   project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
-  project_module_news: News
-  project_module_documents: Documents
-  project_module_files: Files for download
+  project_module_news: News updates
+  project_module_documents: Documents for download
+  project_module_files: Files for download (such as software builds)
   project_module_wiki: Wiki
   project_module_repository: Source code repository
   project_module_boards: Forums
@@ -698,6 +698,7 @@ en:
   label_latest_revision_plural: Latest revisions
   label_view_revisions: View revisions
   label_view_all_revisions: View all revisions
+  label_download_revision: Download as Zip
   label_max_size: Maximum size
   label_sort_highest: Move to top
   label_sort_higher: Move up
@@ -940,13 +941,13 @@ en:
   text_tip_issue_begin_day: task beginning this day
   text_tip_issue_end_day: task ending this day
   text_tip_issue_begin_end_day: task beginning and ending this day
-  text_project_identifier_info: 'Only lower case letters (a-z), numbers and dashes are allowed.<br />Once saved, the identifier cannot be changed.'
-  text_project_homepage_info: 'Link to an external project page.'
+  text_project_identifier_info: 'The system identifier that will form the unique part of the URL for your project.<br/>Only lower case letters (a-z), numbers and dashes are allowed.<br />Once saved, the identifier cannot be changed.'
+  text_project_homepage_info: 'Optional link to an external project page.'
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
   text_length_between: "Length between %{min} and %{max} characters."
-  text_project_name_info: "This will be the name of your project throughout this site.<br /> You can change your project's name at any time, in the project's settings."
-  text_project_visibility_info: "If your project is not public, it will only be visible to users that you have added as project members."
+  text_project_name_info: "This will be the name of your project as it appears throughout this site.<br /> You can change it at any time, in the project's settings."
+  text_project_visibility_info: "If your project is not public, it will be visible only to you and to users that you have added as project members.<br/>You can change this later if you wish."
   text_user_ssamr_description_info: 'Please describe your current research or development interests.<br/>This information will be used at registration to determine that you are a real person &ndash; so please be descriptive, or your application may be delayed or rejected.<br/>After registration, the description is publicly visible in your profile and you can edit it at any time.'
   text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
 
