@@ -1,37 +1,0 @@
-10
-
-dir
-6270
-http://redmine.rubyforge.org/svn/branches/1.2-stable/lib/generators
-http://redmine.rubyforge.org/svn
-
-
-
-2011-06-21T03:16:49.595160Z
-6105
-jbbarth
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-e93f8b46-1217-0410-a6f0-8f06a7374b81
-
-redmine_plugin
-dir
-
-redmine_plugin_model
-dir
-
-redmine_plugin_controller
-dir
-
