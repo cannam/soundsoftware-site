@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 # Redmine - project management software
 # Copyright (C) 2006-2011  Jean-Philippe Lang
 #
@@ -46,7 +48,7 @@ module ProjectsHelper
     options = ''
     options << "<option value=''></option>" if project.allowed_parents.include?(nil)
     options << project_tree_options_for_select(project.allowed_parents.compact, :selected => selected)
-    content_tag('select', options, :name => 'project[parent_id]', :id => 'project_parent_id')
+    content_tag('select', options.html_safe, :name => 'project[parent_id]', :id => 'project_parent_id')
   end
 
   def render_project_short_description(project)
@@ -90,7 +92,7 @@ module ProjectsHelper
       s << ("</li></ul>\n" * ancestors.size)
       @project = original_project
     end
-    s
+    s.html_safe
   end
 
 
