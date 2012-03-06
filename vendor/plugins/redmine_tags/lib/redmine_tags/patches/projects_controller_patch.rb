@@ -88,7 +88,7 @@ module RedmineTags
                 @user_projects = User.current.projects.all(:order => :name)
               end
               
-              render :template => 'projects/index.erb', :layout => !request.xhr?
+              render :template => 'projects/index.html.erb', :layout => !request.xhr?
             }
             format.api {
               @offset, @limit = api_offset_and_limit
