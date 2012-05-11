@@ -1,0 +1,29 @@
+<% content_for :header_tags do %>
+    <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
+<% end %>
+
+<div class="contextual">
+    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }%>
+    <%= '| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true) %>
+</div>
+
+<% if @user_projects %>
+  
+  <%= render_my_project_hierarchy(@user_projects)%>
+
+<% end %>
+
+<h2>
+<%= l("label_project_all") %>
+</h2>
+
+<%= render_project_table(@projects) %>
+
+<p class="pagination"><%= pagination_links_full @project_pages, @project_count %></p>
+
+
+<% other_formats_links do |f| %>
+  <%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>
+<% end %>
+
+<% html_title(l(:label_project_plural)) -%>

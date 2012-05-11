@@ -1,16 +1,16 @@
 # Redmine - project management software
-# Copyright (C) 2006-2009  Jean-Philippe Lang
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -119,7 +119,7 @@ class MyController < ApplicationController
       end
     end
   end
-  
+
   # Create a new feeds key
   def reset_rss_key
     if request.post?
@@ -153,7 +153,7 @@ class MyController < ApplicationController
     @block_options = []
     BLOCKS.each {|k, v| @block_options << [l("my.blocks.#{v}", :default => [v, v.to_s.humanize]), k.dasherize]}
   end
-  
+
   # Add a block to user's page
   # The block is added on top of the page
   # params[:block] : id of the block to add
@@ -167,10 +167,10 @@ class MyController < ApplicationController
     # add it on top
     layout['top'].unshift block
     @user.pref[:my_page_layout] = layout
-    @user.pref.save 
+    @user.pref.save
     render :partial => "block", :locals => {:user => @user, :block_name => block}
   end
-  
+
   # Remove a block to user's page
   # params[:block] : id of the block to remove
   def remove_block
@@ -180,7 +180,7 @@ class MyController < ApplicationController
     layout = @user.pref[:my_page_layout] || {}
     %w(top left right).each {|f| (layout[f] ||= []).delete block }
     @user.pref[:my_page_layout] = layout
-    @user.pref.save 
+    @user.pref.save
     render :nothing => true
   end
 
@@ -200,7 +200,7 @@ class MyController < ApplicationController
         }
         layout[group] = group_items
         @user.pref[:my_page_layout] = layout
-        @user.pref.save 
+        @user.pref.save
       end
     end
     render :nothing => true
