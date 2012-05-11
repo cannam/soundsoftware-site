@@ -1,43 +1,0 @@
-10
-
-dir
-4993
-http://redmine.rubyforge.org/svn/trunk/app
-http://redmine.rubyforge.org/svn
-
-
-
-2011-03-03T03:30:10.954225Z
-4990
-tmaruyama
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-e93f8b46-1217-0410-a6f0-8f06a7374b81
-
-helpers
-dir
-
-models
-dir
-
-controllers
-dir
-
-sweepers
-dir
-
-views
-dir
-

@@ -1,0 +1,62 @@
+
+<%= javascript_include_tag 'repository' %>
+
+<% remote_form_for :repository, @repository,
+                   :url => { :controller => 'repositories', :action => 'edit', :id => @project },
+                   :builder => TabularFormBuilder,
+                   :lang => current_language do |f| %>
+
+<%= error_messages_for 'repository' %>
+
+<div class="box tabular">
+
+<p>
+<% if @repository %>
+   <%= l(:text_settings_repo_explanation) %></ br>
+   <% if @repository.is_external %>
+     <p><%= l(:text_settings_repo_is_external) %></ br>
+   <% else %>
+     <p><%= l(:text_settings_repo_is_internal) %></ br>
+   <% end %>
+</p>
+
+
+
+
+
+<p>
+	<%= label_tag('repository_is_external', l(:label_is_external_repository)) %>
+	<%= check_box :repository, :is_external, :onclick => "toggle_ext_url()" %> 
+	<br/><em><%= l(:setting_external_repository) %></em>
+</p>
+
+
+<p>
+	<%= label_tag('repository_external_url', l(:label_repository_external_url)) %>
+	<%= text_field :repository, :external_url, :disabled => !(@repository and @repository.is_external) %> 
+	<br/><em><%= l(:setting_external_repository_url) %></em>
+</p>
+
+<p><%= l(:text_settings_repo_need_help) %></p>
+
+</div>
+
+<div class="contextual">
+<% if @repository && !@repository.new_record? %>
+<%= link_to(l(:label_user_plural),
+                {
+                :controller => 'repositories',
+                :action     => 'committers',
+                :id         => @project
+                },
+             :class => 'icon icon-user') %>
+<% end %>
+</div>
+
+<%= submit_tag(l(:button_save), :onclick => remote_function(:url => { :controller => 'repositories', :action => 'edit', :id => @project }, :method => :get, :with => "Form.serialize(this.form)")) %>
+
+<% else %>
+   <%= l(:text_settings_repo_creation) %></ br>
+<% end %>
+
+<% end %>

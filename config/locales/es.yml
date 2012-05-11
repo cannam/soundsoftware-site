@@ -132,7 +132,7 @@ es:
         greater_than_start_date: "debe ser posterior a la fecha de comienzo"
         not_same_project: "no pertenece al mismo proyecto"
         circular_dependency: "Esta relación podría crear una dependencia circular"
-        cant_link_an_issue_with_a_descendant: "An issue can not be linked to one of its subtasks"
+        cant_link_an_issue_with_a_descendant: "Esta petición no puede ser ligada a una de estas tareas"
 
         # Append your own errors here or at the model/attributes scope.
 
@@ -159,7 +159,10 @@ es:
     month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Setiembre, Octubre, Noviembre, Diciembre]
     abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Set, Oct, Nov, Dic]
     # Used in date_select and datime_select.
-    order: [ :year, :month, :day ]
+    order:
+      - :year
+      - :month
+      - :day
 
   time:
     formats:
@@ -242,6 +245,7 @@ es:
   error_can_t_load_default_data: "No se ha podido cargar la configuración por defecto: %{value}"
   error_issue_not_found_in_project: 'La petición no se encuentra o no está asociada a este proyecto'
   error_scm_annotate: "No existe la entrada o no ha podido ser anotada"
+  error_scm_annotate_big_text_file: "La entrada no puede anotarse, al superar el tamaño máximo para ficheros de texto."
   error_scm_command_failed: "Se produjo un error al acceder al repositorio: %{value}"
   error_scm_not_found: "La entrada y/o la revisión no existe en el repositorio."
   field_account: Cuenta
@@ -264,7 +268,7 @@ es:
   field_default_value: Estado por defecto
   field_delay: Retraso
   field_description: Descripción
-  field_done_ratio: % Realizado
+  field_done_ratio: "% Realizado"
   field_downloads: Descargas
   field_due_date: Fecha fin
   field_effective_date: Fecha
@@ -316,7 +320,7 @@ es:
   field_start_date: Fecha de inicio
   field_start_page: Página principal
   field_status: Estado
-  field_subject: Tema
+  field_subject: Asunto
   field_subproject: Proyecto secundario
   field_summary: Resumen
   field_time_zone: Zona horaria
@@ -333,7 +337,7 @@ es:
   general_csv_separator: ';'
   general_first_day_of_week: '1'
   general_lang_name: 'Español'
-  general_pdf_encoding: ISO-8859-15
+  general_pdf_encoding: UTF-8
   general_text_No: 'No'
   general_text_Yes: 'Sí'
   general_text_no: 'no'
@@ -461,6 +465,7 @@ es:
   label_help: Ayuda
   label_history: Histórico
   label_home: Inicio
+  label_home_heading: Inicio
   label_in: en
   label_in_less_than: en menos que
   label_in_more_than: en más que
@@ -677,7 +682,7 @@ es:
   notice_default_data_loaded: Configuración por defecto cargada correctamente.
   notice_email_error: "Ha ocurrido un error mientras enviando el correo (%{value})"
   notice_email_sent: "Se ha enviado un correo a %{value}"
-  notice_failed_to_save_issues: "Imposible grabar %s peticion(es) en %{count} seleccionado: %{ids}."
+  notice_failed_to_save_issues: "Imposible grabar %{count} peticion(es) de %{total} seleccionada(s): %{ids}."
   notice_feeds_access_key_reseted: Su clave de acceso para RSS ha sido reiniciada.
   notice_file_not_found: La página a la que intenta acceder no existe.
   notice_locking_conflict: Los datos han sido modificados por otro usuario.
@@ -752,7 +757,6 @@ es:
   setting_autologin: Conexión automática
   setting_bcc_recipients: Ocultar las copias de carbón (bcc)
   setting_commit_fix_keywords: Palabras clave para la corrección
-  setting_commit_logs_encoding: Codificación de los mensajes de commit
   setting_commit_ref_keywords: Palabras clave para la referencia
   setting_cross_project_issue_relations: Permitir relacionar peticiones de distintos proyectos
   setting_date_format: Formato de fecha
@@ -774,7 +778,6 @@ es:
   setting_per_page_options: Objetos por página
   setting_plain_text_mail: sólo texto plano (no HTML)
   setting_protocol: Protocolo
-  setting_repositories_encodings: Codificaciones del repositorio
   setting_self_registration: Registro permitido
   setting_sequential_project_identifiers: Generar identificadores de proyecto
   setting_sys_api_enabled: Habilitar SW para la gestión del repositorio
@@ -968,12 +971,76 @@ es:
   field_visible: Visible
   setting_emails_header: Encabezado de Correos
 
-  setting_commit_logtime_activity_id: Activity for logged time
-  text_time_logged_by_changeset: Applied in changeset %{value}.
-  setting_commit_logtime_enabled: Enable time logging
-  notice_gantt_chart_truncated: The chart was truncated because it exceeds the maximum number of items that can be displayed (%{max})
-  setting_gantt_items_limit: Maximum number of items displayed on the gantt chart
-  field_warn_on_leaving_unsaved: Warn me when leaving a page with unsaved text
-  text_warn_on_leaving_unsaved: The current page contains unsaved text that will be lost if you leave this page.
-  label_my_queries: My custom queries
-  text_journal_changed_no_detail: "%{label} updated"
+  setting_commit_logtime_activity_id: Actividad de los tiempos registrados
+  text_time_logged_by_changeset: Aplicado en los cambios %{value}.
+  setting_commit_logtime_enabled: Habilitar registro de horas
+  notice_gantt_chart_truncated: Se recortó el diagrama porque excede el número máximo de elementos que pueden ser mostrados (%{max})
+  setting_gantt_items_limit: Número máximo de elementos mostrados en el diagrama de Gantt
+  field_warn_on_leaving_unsaved: Avisarme cuando vaya a abandonar una página con texto no guardado
+  text_warn_on_leaving_unsaved: Esta página contiene texto no guardado y si la abandona sus cambios se perderán
+  label_my_queries: Mis consultas personalizadas
+  text_journal_changed_no_detail: "Se actualizó %{label}"
+  label_news_comment_added: Comentario añadido a noticia
+  button_expand_all: Expandir todo
+  button_collapse_all: Contraer todo
+  label_additional_workflow_transitions_for_assignee: Transiciones adicionales permitidas cuando la petición está asignada al usuario
+  label_additional_workflow_transitions_for_author: Transiciones adicionales permitidas cuando el usuario es autor de la petición
+  label_bulk_edit_selected_time_entries: Editar en bloque las horas seleccionadas
+  text_time_entries_destroy_confirmation: ¿Está seguro de querer eliminar (la hora seleccionada/las horas seleccionadas)?
+  label_role_anonymous: Anónimo
+  label_role_non_member: No miembro
+  label_issue_note_added: Nota añadida
+  label_issue_status_updated: Estado actualizado
+  label_issue_priority_updated: Prioridad actualizada
+  label_issues_visibility_own: Peticiones creadas por el usuario o asignadas a él
+  field_issues_visibility: Visibilidad de las peticiones
+  label_issues_visibility_all: Todas las peticiones
+  permission_set_own_issues_private: Poner las peticiones propias como públicas o privadas
+  field_is_private: Privada
+  permission_set_issues_private: Poner peticiones como públicas o privadas
+  label_issues_visibility_public: Todas las peticiones no privadas
+  text_issues_destroy_descendants_confirmation: Se procederá a borrar también %{count} subtarea(s).
+  field_commit_logs_encoding: Codificación de los mensajes de commit
+  field_scm_path_encoding: Codificación de las rutas
+  text_scm_path_encoding_note: "Por defecto: UTF-8"
+  field_path_to_repository: Ruta al repositorio
+  field_root_directory: Directorio raíz
+  field_cvs_module: Módulo
+  field_cvsroot: CVSROOT
+  text_mercurial_repository_note: Repositorio local (e.g. /hgrepo, c:\hgrepo)
+  text_scm_command: Orden
+  text_scm_command_version: Versión
+  label_git_report_last_commit: Informar del último commit para ficheros y directorios
+  text_scm_config: Puede configurar las órdenes de cada scm en configuration/configuration.yml. Por favor, reinicie la aplicación después de editarlo
+  text_scm_command_not_available: La orden para el Scm no está disponible. Por favor, compruebe la configuración en el panel de administración.
+  notice_issue_successful_create: Petición %{id} creada.
+  label_between: entre
+  setting_issue_group_assignment: Permitir asignar peticiones a grupos
+  label_diff: diferencias
+  text_git_repository_note: El repositorio es básico y local (p.e. /gitrepo, c:\gitrepo)
+  description_query_sort_criteria_direction: Dirección de ordenación
+  description_project_scope: Ámbito de búsqueda
+  description_filter: Filtro
+  description_user_mail_notification: Configuración de notificaciones por correo
+  description_date_from: Introduzca la fecha de inicio
+  description_message_content: Contenido del mensaje
+  description_available_columns: Columnas disponibles
+  description_date_range_interval: Elija el rango seleccionando la fecha de inicio y fin
+  description_issue_category_reassign: Elija la categoría de la petición
+  description_search: Campo de búsqueda
+  description_notes: Notas
+  description_date_range_list: Elija el rango en la lista
+  description_choose_project: Proyectos
+  description_date_to: Introduzca la fecha fin
+  description_query_sort_criteria_attribute: Atributo de ordenación
+  description_wiki_subpages_reassign: Elija la nueva página padre
+  description_selected_columns: Columnas seleccionadas
+  label_parent_revision: Padre
+  label_child_revision: Hijo
+  setting_default_issue_start_date_to_creation_date: Use current date as start date for new issues
+  button_edit_section: Edit this section
+  setting_repositories_encodings: Attachments and repositories encodings
+  description_all_columns: Todas las columnas
+  button_export: Exportar
+  label_export_options: "%{export_format} opciones de exportación"
+  error_attachment_too_big: Este fichero no se puede adjuntar porque excede el tamaño máximo de fichero (%{max_size})

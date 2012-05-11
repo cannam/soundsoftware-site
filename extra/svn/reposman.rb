@@ -7,7 +7,7 @@
 # == Usage
 #
 #    reposman [OPTIONS...] -s [DIR] -r [HOST]
-#     
+#
 #  Examples:
 #    reposman --svn-dir=/var/svn --redmine-host=redmine.example.net --scm subversion
 #    reposman -s /var/git -r redmine.example.net -u http://svn.example.net --scm git
@@ -19,7 +19,8 @@
 #                             -r redmine.example.net
 #                             -r http://redmine.example.net
 #                             -r https://example.net/redmine
-#   -k, --key=KEY             use KEY as the Redmine API key
+#   -k, --key=KEY             use KEY as the Redmine API key (you can use the
+#                             --key-file option as an alternative)
 #
 # == Options
 #
@@ -48,8 +49,13 @@
 #                             kind.
 #                             This command override the default creation for git
 #                             and subversion.
+#   --http-user=USER          User for HTTP Basic authentication with Redmine WS
+#   --http-pass=PASSWORD      Password for Basic authentication with Redmine WS
 #   -f, --force               force repository creation even if the project
 #                             repository is already declared in Redmine
+#       --key-file=PATH       path to a file that contains the Redmine API key
+#                             (use this option instead of --key if you don't 
+#                             the key to appear in the command line)
 #   -t, --test                only show what should be done
 #   -h, --help                show help and exit
 #   -v, --verbose             verbose
@@ -57,7 +63,7 @@
 #   -q, --quiet               no log
 #
 # == References
-# 
+#
 # You can find more information on the redmine's wiki : http://www.redmine.org/wiki/redmine/HowTos
 
 
@@ -73,11 +79,14 @@ opts = GetoptLong.new(
                       ['--svn-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
                       ['--redmine-host', '-r', GetoptLong::REQUIRED_ARGUMENT],
                       ['--key',          '-k', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--key-file',           GetoptLong::REQUIRED_ARGUMENT],
                       ['--owner',        '-o', GetoptLong::REQUIRED_ARGUMENT],
                       ['--group',        '-g', GetoptLong::REQUIRED_ARGUMENT],
                       ['--url',          '-u', GetoptLong::REQUIRED_ARGUMENT],
                       ['--command' ,     '-c', GetoptLong::REQUIRED_ARGUMENT],
                       ['--scm',                GetoptLong::REQUIRED_ARGUMENT],
+                      ['--http-user',          GetoptLong::REQUIRED_ARGUMENT],
+                      ['--http-pass',          GetoptLong::REQUIRED_ARGUMENT],
                       ['--test',         '-t', GetoptLong::NO_ARGUMENT],
                       ['--force',        '-f', GetoptLong::NO_ARGUMENT],
                       ['--verbose',      '-v', GetoptLong::NO_ARGUMENT],
@@ -90,6 +99,8 @@ $verbose      = 0
 $quiet        = false
 $redmine_host = ''
 $repos_base   = ''
+$http_user    = ''
+$http_pass    = ''
 $svn_owner    = 'root'
 $svn_group    = 'root'
 $use_groupid  = true
@@ -134,10 +145,19 @@ begin
     when '--svn-dir';        $repos_base   = arg.dup
     when '--redmine-host';   $redmine_host = arg.dup
     when '--key';            $api_key      = arg.dup
+    when '--key-file'
+      begin
+        $api_key = File.read(arg).strip
+      rescue Exception => e
+        $stderr.puts "Unable to read the key from #{arg}: #{e.message}"
+        exit 1
+      end
     when '--owner';          $svn_owner    = arg.dup; $use_groupid = false;
     when '--group';          $svn_group    = arg.dup; $use_groupid = false;
     when '--url';            $svn_url      = arg.dup
     when '--scm';            $scm          = arg.dup.capitalize; log("Invalid SCM: #{$scm}", :exit => true) unless SUPPORTED_SCM.include?($scm)
+    when '--http-user';      $http_user    = arg.dup
+    when '--http-pass';      $http_pass    = arg.dup
     when '--command';        $command =      arg.dup
     when '--verbose';        $verbose += 1
     when '--test';           $test = true
@@ -182,6 +202,7 @@ end
 
 class Project < ActiveResource::Base
   self.headers["User-agent"] = "Redmine repository manager/#{Version}"
+  self.format = :xml
 end
 
 log("querying Redmine for projects...", :level => 1);
@@ -190,22 +211,26 @@ $redmine_host.gsub!(/^/, "http://") unless $redmine_host.match("^https?://")
 $redmine_host.gsub!(/\/$/, '')
 
 Project.site = "#{$redmine_host}/sys";
+Project.user = $http_user;
+Project.password = $http_pass;
 
 begin
   # Get all active projects that have the Repository module enabled
   projects = Project.find(:all, :params => {:key => $api_key})
+rescue ActiveResource::ForbiddenAccess
+  log("Request was denied by your Redmine server. Make sure that 'WS for repository management' is enabled in application settings and that you provided the correct API key.")
 rescue => e
   log("Unable to connect to #{Project.site}: #{e}", :exit => true)
 end
 
 if projects.nil?
-  log('no project found, perhaps you forgot to "Enable WS for repository management"', :exit => true)
+  log('No project found, perhaps you forgot to "Enable WS for repository management"', :exit => true)
 end
 
 log("retrieved #{projects.size} projects", :level => 1)
 
 def set_owner_and_rights(project, repos_path, &block)
-  if RUBY_PLATFORM =~ /mswin/
+  if mswin?
     yield if block_given?
   else
     uid, gid = Etc.getpwnam($svn_owner).uid, ($use_groupid ? Etc.getgrnam(project.identifier).gid : Etc.getgrnam($svn_group).gid)
@@ -225,9 +250,9 @@ end
 def owner_name(file)
   mswin? ?
     $svn_owner :
-    Etc.getpwuid( File.stat(file).uid ).name  
+    Etc.getpwuid( File.stat(file).uid ).name
 end
-  
+
 def mswin?
   (RUBY_PLATFORM =~ /(:?mswin|mingw)/) || (RUBY_PLATFORM == 'java' && (ENV['OS'] || ENV['os']) =~ /windows/i)
 end
@@ -246,7 +271,6 @@ projects.each do |project|
   repos_path = File.join($repos_base, project.identifier).gsub(File::SEPARATOR, File::ALT_SEPARATOR || File::SEPARATOR)
 
   if File.directory?(repos_path)
-
     # we must verify that repository has the good owner and the good
     # rights before leaving
     other_read = other_read_right?(repos_path)
@@ -304,9 +328,7 @@ projects.each do |project|
         log("\trepository #{repos_path} not registered in Redmine: #{e.message}");
       end
     end
-
     log("\trepository #{repos_path} created");
   end
-
 end
-  
+

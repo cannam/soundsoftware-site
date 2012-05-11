@@ -20,6 +20,19 @@
   src: url('DroidSans-Bold.ttf');
 }
 
+@font-face
+{
+  font-family: Gillius;
+  src: url('GilliusADFNo2-Regular.otf');
+}
+
+@font-face
+{
+  font-family: Gillius; 
+  font-weight: bold;
+  src: url('GilliusADFNo2-Bold.otf');
+}
+
 body {
   background: #ffffff;
   color: #404040;

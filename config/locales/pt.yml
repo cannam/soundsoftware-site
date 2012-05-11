@@ -1,11 +1,12 @@
 # Portuguese localization for Ruby on Rails
 # by Ricardo Otero <oterosantos@gmail.com>
+# by Alberto Ferreira <toraxic@gmail.com>
 pt:
   support:
     array:
       sentence_connector: "e"
       skip_last_comma: true
-    
+
   direction: ltr
   date:
     formats:
@@ -17,17 +18,20 @@ pt:
     abbr_day_names: [Dom, Seg, Ter, Qua, Qui, Sex, Sáb]
     month_names: [~, Janeiro, Fevereiro, Março, Abril, Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro]
     abbr_month_names: [~, Jan, Fev, Mar, Abr, Mai, Jun, Jul, Ago, Set, Out, Nov, Dez]
-    order: [:day, :month, :year]
-    
+    order:
+      - :day
+      - :month
+      - :year
+
   time:
-    formats:        
+    formats:
       default: "%A, %d de %B de %Y, %H:%Mh"
       time: "%H:%M"
       short: "%d/%m, %H:%M hs"
       long: "%A, %d de %B de %Y, %H:%Mh"
     am: ''
     pm: ''
- 
+
   datetime:
     distance_in_words:
       half_a_minute: "meio minuto"
@@ -37,7 +41,7 @@ pt:
       x_seconds:
         one: "1 segundo"
         other: "%{count} segundos"
-      less_than_x_minutes: 
+      less_than_x_minutes:
         one: "menos de um minuto"
         other: "menos de %{count} minutos"
       x_minutes:
@@ -64,7 +68,7 @@ pt:
       almost_x_years:
         one:   "almost 1 year"
         other: "almost %{count} years"
-        
+
   number:
     format:
       precision: 3
@@ -132,7 +136,7 @@ pt:
 
   ## Translated by: Pedro Araújo <phcrva19@hotmail.com>
   actionview_instancetag_blank_option: Seleccione
-  
+
   general_text_No: 'Não'
   general_text_Yes: 'Sim'
   general_text_no: 'não'
@@ -141,9 +145,9 @@ pt:
   general_csv_separator: ';'
   general_csv_decimal_separator: ','
   general_csv_encoding: ISO-8859-15
-  general_pdf_encoding: ISO-8859-15
+  general_pdf_encoding: UTF-8
   general_first_day_of_week: '1'
-  
+
   notice_account_updated: A conta foi actualizada com sucesso.
   notice_account_invalid_creditentials: Utilizador ou palavra-chave inválidos.
   notice_account_password_updated: A palavra-chave foi alterada com sucesso.
@@ -168,13 +172,13 @@ pt:
   notice_account_pending: "A sua conta foi criada e está agora à espera de aprovação do administrador."
   notice_default_data_loaded: Configuração padrão carregada com sucesso.
   notice_unable_delete_version: Não foi possível apagar a versão.
-  
+
   error_can_t_load_default_data: "Não foi possível carregar a configuração padrão: %{value}"
   error_scm_not_found: "A entrada ou revisão não foi encontrada no repositório."
   error_scm_command_failed: "Ocorreu um erro ao tentar aceder ao repositório: %{value}"
   error_scm_annotate: "A entrada não existe ou não pode ser anotada."
   error_issue_not_found_in_project: 'A tarefa não foi encontrada ou não pertence a este projecto.'
-  
+
   mail_subject_lost_password: "Palavra-chave de %{value}"
   mail_body_lost_password: 'Para mudar a sua palavra-chave, clique na ligação abaixo:'
   mail_subject_register: "Activação de conta de %{value}"
@@ -185,10 +189,10 @@ pt:
   mail_body_account_activation_request: "Um novo utilizador (%{value}) registou-se. A sua conta está à espera de aprovação:"
   mail_subject_reminder: "%{count} tarefa(s) para entregar nos próximos %{days} dias"
   mail_body_reminder: "%{count} tarefa(s) que estão atribuídas a si estão agendadas para estarem completas nos próximos %{days} dias:"
-  
+
   gui_validation_error: 1 erro
   gui_validation_error_plural: "%{count} erros"
-  
+
   field_name: Nome
   field_description: Descrição
   field_summary: Sumário
@@ -219,7 +223,7 @@ pt:
   field_is_default: Valor por omissão
   field_tracker: Tipo
   field_subject: Assunto
-  field_due_date: Data final
+  field_due_date: Data fim
   field_assigned_to: Atribuído a
   field_priority: Prioridade
   field_fixed_version: Versão
@@ -228,7 +232,7 @@ pt:
   field_homepage: Página
   field_is_public: Público
   field_parent: Sub-projecto de
-  field_is_in_roadmap: Tarefas mostradas no roadmap
+  field_is_in_roadmap: Tarefas mostradas no mapa de planificação
   field_login: Nome de utilizador
   field_mail_notification: Notificações por e-mail
   field_admin: Administrador
@@ -248,9 +252,9 @@ pt:
   field_attr_firstname: Atributo nome próprio
   field_attr_lastname: Atributo último nome
   field_attr_mail: Atributo e-mail
-  field_onthefly: Criação de utilizadores na hora
-  field_start_date: Início
-  field_done_ratio: % Completo
+  field_onthefly: Criação imediata de utilizadores
+  field_start_date: Data início
+  field_done_ratio: "% Completo"
   field_auth_source: Modo de autenticação
   field_hide_mail: Esconder endereço de e-mail
   field_comments: Comentário
@@ -264,7 +268,7 @@ pt:
   field_is_filter: Usado como filtro
   field_issue_to: Tarefa relacionada
   field_delay: Atraso
-  field_assignable: As tarefas podem ser associados a esta função
+  field_assignable: As tarefas podem ser associadas a esta função
   field_redirect_existing_links: Redireccionar ligações existentes
   field_estimated_hours: Tempo estimado
   field_column_names: Colunas
@@ -273,7 +277,7 @@ pt:
   field_default_value: Valor por omissão
   field_comments_sorting: Mostrar comentários
   field_parent_title: Página pai
-  
+
   setting_app_title: Título da aplicação
   setting_app_subtitle: Sub-título da aplicação
   setting_welcome_text: Texto de boas vindas
@@ -298,8 +302,6 @@ pt:
   setting_time_format: Formato do tempo
   setting_cross_project_issue_relations: Permitir relações entre tarefas de projectos diferentes
   setting_issue_list_default_columns: Colunas na lista de tarefas por omissão
-  setting_repositories_encodings: Encodings dos repositórios
-  setting_commit_logs_encoding: Encoding das mensagens de commit
   setting_emails_footer: Rodapé do e-mails
   setting_protocol: Protocolo
   setting_per_page_options: Opções de objectos por página
@@ -310,7 +312,7 @@ pt:
   setting_mail_handler_api_enabled: Activar Web Service para e-mails recebidos
   setting_mail_handler_api_key: Chave da API
   setting_sequential_project_identifiers: Gerar identificadores de projecto sequênciais
-  
+
   project_module_issue_tracking: Tarefas
   project_module_time_tracking: Registo de tempo
   project_module_news: Notícias
@@ -319,7 +321,7 @@ pt:
   project_module_wiki: Wiki
   project_module_repository: Repositório
   project_module_boards: Forum
-  
+
   label_user: Utilizador
   label_user_plural: Utilizadores
   label_user_new: Novo utilizador
@@ -371,6 +373,7 @@ pt:
   label_register: Registar
   label_password_lost: Perdi a palavra-chave
   label_home: Página Inicial
+  label_home_heading: Página Inicial
   label_my_page: Página Pessoal
   label_my_account: Minha conta
   label_my_projects: Meus projectos
@@ -522,7 +525,7 @@ pt:
   label_sort_higher: Mover para cima
   label_sort_lower: Mover para baixo
   label_sort_lowest: Mover para o fim
-  label_roadmap: Roadmap
+  label_roadmap: Planificação
   label_roadmap_due_in: "Termina em %{value}"
   label_roadmap_overdue: "Atrasado %{value}"
   label_roadmap_no_issues: Sem tarefas para esta versão
@@ -631,7 +634,7 @@ pt:
   label_incoming_emails: E-mails a chegar
   label_generate_key: Gerar uma chave
   label_issue_watchers: Observadores
-  
+
   button_login: Entrar
   button_submit: Submeter
   button_save: Guardar
@@ -670,11 +673,11 @@ pt:
   button_update: Actualizar
   button_configure: Configurar
   button_quote: Citar
-  
+
   status_active: activo
   status_registered: registado
   status_locked: bloqueado
-  
+
   text_select_mail_notifications: Seleccionar as acções que originam uma notificação por e-mail.
   text_regexp_info: ex. ^[A-Z0-9]+$
   text_min_max_length_info: 0 siginifica sem restrição
@@ -716,7 +719,7 @@ pt:
   text_enumeration_destroy_question: "%{count} objectos estão atribuídos a este valor."
   text_enumeration_category_reassign_to: 'Re-atribuí-los para este valor:'
   text_email_delivery_not_configured: "Entrega por e-mail não está configurada, e as notificação estão desactivadas.\nConfigure o seu servidor de SMTP em config/configuration.yml e reinicie a aplicação para activar estas funcionalidades."
-  
+
   default_role_manager: Gestor
   default_role_developer: Programador
   default_role_reporter: Repórter
@@ -738,7 +741,7 @@ pt:
   default_priority_immediate: Imediata
   default_activity_design: Planeamento
   default_activity_development: Desenvolvimento
-  
+
   enumeration_issue_priorities: Prioridade de tarefas
   enumeration_doc_categories: Categorias de documentos
   enumeration_activities: Actividades (Registo de tempo)
@@ -865,7 +868,7 @@ pt:
   button_duplicate: Duplicar
   button_copy_and_follow: Copiar e seguir
   label_copy_source: Origem
-  setting_issue_done_ratio: Calcular a percentagem de progresso da tarefa 
+  setting_issue_done_ratio: Calcular a percentagem de progresso da tarefa
   setting_issue_done_ratio_issue_status: Através do estado da tarefa
   error_issue_done_ratios_not_updated: Percentagens de progresso da tarefa não foram actualizadas.
   error_workflow_copy_target: Seleccione os tipos de tarefas e funções desejadas
@@ -922,25 +925,90 @@ pt:
   project_module_calendar: Calendário
   button_edit_associated_wikipage: "Editar página Wiki associada: %{page_title}"
   text_are_you_sure_with_children: Apagar tarefa e todas as sub-tarefas?
-  field_text: Text field
-  label_user_mail_option_only_owner: Only for things I am the owner of
-  setting_default_notification_option: Default notification option
-  label_user_mail_option_only_my_events: Only for things I watch or I'm involved in
-  label_user_mail_option_only_assigned: Only for things I am assigned to
-  label_user_mail_option_none: No events
-  field_member_of_group: Assignee's group
-  field_assigned_to_role: Assignee's role
-  notice_not_authorized_archived_project: The project you're trying to access has been archived.
-  label_principal_search: "Search for user or group:"
-  label_user_search: "Search for user:"
-  field_visible: Visible
-  setting_emails_header: Emails header
-  setting_commit_logtime_activity_id: Activity for logged time
-  text_time_logged_by_changeset: Applied in changeset %{value}.
-  setting_commit_logtime_enabled: Enable time logging
-  notice_gantt_chart_truncated: The chart was truncated because it exceeds the maximum number of items that can be displayed (%{max})
-  setting_gantt_items_limit: Maximum number of items displayed on the gantt chart
+  field_text: Campo de texto
+  label_user_mail_option_only_owner: Apenas para tarefas das quais sou proprietário
+  setting_default_notification_option: Opção predefinida de notificação
+  label_user_mail_option_only_my_events: Apenas para tarefas que observo ou em que estou envolvido
+  label_user_mail_option_only_assigned: Apenas para tarefas que me foram atribuídas
+  label_user_mail_option_none: Sem eventos
+  field_member_of_group: Grupo do detentor de atribuição
+  field_assigned_to_role: Papel do detentor de atribuição
+  notice_not_authorized_archived_project: O projecto a que tentou aceder foi arquivado.
+  label_principal_search: "Procurar utilizador ou grupo:"
+  label_user_search: "Procurar utilizador:"
+  field_visible: Visível
+  setting_emails_header: Cabeçalho dos e-mails
+  setting_commit_logtime_activity_id: Actividade para tempo registado
+  text_time_logged_by_changeset: Aplicado no conjunto de alterações %{value}.
+  setting_commit_logtime_enabled: Activar registo de tempo
+  notice_gantt_chart_truncated: O gráfico foi truncado porque excede o número máximo de itens visível (%{máx.})
+  setting_gantt_items_limit: Número máximo de itens exibidos no gráfico Gantt
   field_warn_on_leaving_unsaved: Warn me when leaving a page with unsaved text
   text_warn_on_leaving_unsaved: The current page contains unsaved text that will be lost if you leave this page.
   label_my_queries: My custom queries
   text_journal_changed_no_detail: "%{label} updated"
+  label_news_comment_added: Comment added to a news
+  button_expand_all: Expand all
+  button_collapse_all: Collapse all
+  label_additional_workflow_transitions_for_assignee: Additional transitions allowed when the user is the assignee
+  label_additional_workflow_transitions_for_author: Additional transitions allowed when the user is the author
+  label_bulk_edit_selected_time_entries: Bulk edit selected time entries
+  text_time_entries_destroy_confirmation: Are you sure you want to delete the selected time entr(y/ies)?
+  label_role_anonymous: Anonymous
+  label_role_non_member: Non member
+  label_issue_note_added: Note added
+  label_issue_status_updated: Status updated
+  label_issue_priority_updated: Priority updated
+  label_issues_visibility_own: Issues created by or assigned to the user
+  field_issues_visibility: Issues visibility
+  label_issues_visibility_all: All issues
+  permission_set_own_issues_private: Set own issues public or private
+  field_is_private: Private
+  permission_set_issues_private: Set issues public or private
+  label_issues_visibility_public: All non private issues
+  text_issues_destroy_descendants_confirmation: This will also delete %{count} subtask(s).
+  field_commit_logs_encoding: Encoding das mensagens de commit
+  field_scm_path_encoding: Path encoding
+  text_scm_path_encoding_note: "Default: UTF-8"
+  field_path_to_repository: Path to repository
+  field_root_directory: Root directory
+  field_cvs_module: Module
+  field_cvsroot: CVSROOT
+  text_mercurial_repository_note: Local repository (e.g. /hgrepo, c:\hgrepo)
+  text_scm_command: Command
+  text_scm_command_version: Version
+  label_git_report_last_commit: Report last commit for files and directories
+  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
+  notice_issue_successful_create: Issue %{id} created.
+  label_between: between
+  setting_issue_group_assignment: Allow issue assignment to groups
+  label_diff: diff
+  text_git_repository_note: Repository is bare and local (e.g. /gitrepo, c:\gitrepo)
+  description_query_sort_criteria_direction: Sort direction
+  description_project_scope: Search scope
+  description_filter: Filter
+  description_user_mail_notification: Mail notification settings
+  description_date_from: Enter start date
+  description_message_content: Message content
+  description_available_columns: Available Columns
+  description_date_range_interval: Choose range by selecting start and end date
+  description_issue_category_reassign: Choose issue category
+  description_search: Searchfield
+  description_notes: Notes
+  description_date_range_list: Choose range from list
+  description_choose_project: Projects
+  description_date_to: Enter end date
+  description_query_sort_criteria_attribute: Sort attribute
+  description_wiki_subpages_reassign: Choose new parent page
+  description_selected_columns: Selected Columns
+  label_parent_revision: Parent
+  label_child_revision: Child
+  error_scm_annotate_big_text_file: The entry cannot be annotated, as it exceeds the maximum text file size.
+  setting_default_issue_start_date_to_creation_date: Use current date as start date for new issues
+  button_edit_section: Edit this section
+  setting_repositories_encodings: Attachments and repositories encodings
+  description_all_columns: All Columns
+  button_export: Export
+  label_export_options: "%{export_format} export options"
+  error_attachment_too_big: This file cannot be uploaded because it exceeds the maximum allowed file size (%{max_size})

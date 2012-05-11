@@ -1,16 +1,16 @@
 # Redmine - project management software
-# Copyright (C) 2006-2009  Jean-Philippe Lang
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -25,14 +25,16 @@ class MyController < ApplicationController
   BLOCKS = { 'issuesassignedtome' => :label_assigned_to_me_issues,
              'issuesreportedbyme' => :label_reported_issues,
              'issueswatched' => :label_watched_issues,
+             'activitymyprojects' => :label_activity_my_recent,
              'news' => :label_news_latest,
+             'tipoftheday' => :label_tipoftheday,
              'calendar' => :label_calendar,
              'documents' => :label_document_plural,
              'timelog' => :label_spent_time
            }.merge(Redmine::Views::MyPage::Block.additional_blocks).freeze
 
-  DEFAULT_LAYOUT = {  'left' => ['issuesassignedtome'], 
-                      'right' => ['issuesreportedbyme'] 
+  DEFAULT_LAYOUT = {  'left' => ['tipoftheday', 'activitymyprojects'], 
+                      'right' => ['issueswatched'] 
                    }.freeze
 
   verify :xhr => true,
@@ -53,10 +55,39 @@ class MyController < ApplicationController
   def account
     @user = User.current
     @pref = @user.pref
+    @ssamr_user_details = @user.ssamr_user_detail
+    
+    
+    if @user.ssamr_user_detail == nil
+       @selected_institution_id = nil
+     else
+       @selected_institution_id = @ssamr_user_details.institution_id.to_i
+     end    
+    
     if request.post?
       @user.safe_attributes = params[:user]
       @user.pref.attributes = params[:pref]
       @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
+
+      if @user.ssamr_user_detail == nil
+        @ssamr_user_details = SsamrUserDetail.new()
+        @user.ssamr_user_detail = @ssamr_user_details
+      else
+        @ssamr_user_details = @user.ssamr_user_detail
+      end
+
+      if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
+        @ssamr_user_details.description = @user.ssamr_user_detail.description
+        @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
+        @institution_type = @ssamr_user_details.institution_type
+        @other_institution = @ssamr_user_details.other_institution
+      else
+        @ssamr_user_details.description = params[:ssamr_user_details][:description]
+        @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
+        @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
+        @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
+      end
+                  
       if @user.save
         @user.pref.save
         @user.notified_project_ids = (@user.mail_notification == 'selected' ? params[:notified_project_ids] : [])
@@ -88,7 +119,7 @@ class MyController < ApplicationController
       end
     end
   end
-  
+
   # Create a new feeds key
   def reset_rss_key
     if request.post?
@@ -122,7 +153,7 @@ class MyController < ApplicationController
     @block_options = []
     BLOCKS.each {|k, v| @block_options << [l("my.blocks.#{v}", :default => [v, v.to_s.humanize]), k.dasherize]}
   end
-  
+
   # Add a block to user's page
   # The block is added on top of the page
   # params[:block] : id of the block to add
@@ -136,10 +167,10 @@ class MyController < ApplicationController
     # add it on top
     layout['top'].unshift block
     @user.pref[:my_page_layout] = layout
-    @user.pref.save 
+    @user.pref.save
     render :partial => "block", :locals => {:user => @user, :block_name => block}
   end
-  
+
   # Remove a block to user's page
   # params[:block] : id of the block to remove
   def remove_block
@@ -149,7 +180,7 @@ class MyController < ApplicationController
     layout = @user.pref[:my_page_layout] || {}
     %w(top left right).each {|f| (layout[f] ||= []).delete block }
     @user.pref[:my_page_layout] = layout
-    @user.pref.save 
+    @user.pref.save
     render :nothing => true
   end
 
@@ -169,7 +200,7 @@ class MyController < ApplicationController
         }
         layout[group] = group_items
         @user.pref[:my_page_layout] = layout
-        @user.pref.save 
+        @user.pref.save
       end
     end
     render :nothing => true

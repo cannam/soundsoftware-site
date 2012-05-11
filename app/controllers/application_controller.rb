@@ -1,16 +1,16 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -18,34 +18,41 @@
 require 'uri'
 require 'cgi'
 
+class Unauthorized < Exception; end
+
 class ApplicationController < ActionController::Base
   include Redmine::I18n
 
   layout 'base'
   exempt_from_layout 'builder', 'rsb'
-  
+
+  protect_from_forgery
+  def handle_unverified_request
+    super
+    cookies.delete(:autologin)
+  end
   # Remove broken cookie after upgrade from 0.8.x (#4292)
   # See https://rails.lighthouseapp.com/projects/8994/tickets/3360
   # TODO: remove it when Rails is fixed
   before_filter :delete_broken_cookies
   def delete_broken_cookies
     if cookies['_redmine_session'] && cookies['_redmine_session'] !~ /--/
-      cookies.delete '_redmine_session'    
+      cookies.delete '_redmine_session'
       redirect_to home_path
       return false
     end
   end
-  
+
   before_filter :user_setup, :check_if_login_required, :set_localization
   filter_parameter_logging :password
-  protect_from_forgery
-  
+
   rescue_from ActionController::InvalidAuthenticityToken, :with => :invalid_authenticity_token
-  
+  rescue_from ::Unauthorized, :with => :deny_access
+
   include Redmine::Search::Controller
   include Redmine::MenuManager::MenuController
   helper Redmine::MenuManager::MenuHelper
-  
+
   Redmine::Scm::Base.all.each do |scm|
     require_dependency "repository/#{scm.underscore}"
   end
@@ -56,7 +63,7 @@ class ApplicationController < ActionController::Base
     # Find the current user
     User.current = find_current_user
   end
-  
+
   # Returns the current user or nil if no user is logged in
   # and starts a session if needed
   def find_current_user
@@ -68,11 +75,11 @@ class ApplicationController < ActionController::Base
       user = User.try_to_autologin(cookies[:autologin])
       session[:user_id] = user.id if user
       user
-    elsif params[:format] == 'atom' && params[:key] && accept_key_auth_actions.include?(params[:action])
+    elsif params[:format] == 'atom' && params[:key] && request.get? && accept_rss_auth?
       # RSS key authentication does not start a session
       User.find_by_rss_key(params[:key])
-    elsif Setting.rest_api_enabled? && api_request?
-      if (key = api_key_from_request) && accept_key_auth_actions.include?(params[:action])
+    elsif Setting.rest_api_enabled? && accept_api_auth?
+      if (key = api_key_from_request)
         # Use API key
         User.find_by_api_key(key)
       else
@@ -94,14 +101,14 @@ class ApplicationController < ActionController::Base
       User.current = User.anonymous
     end
   end
-  
+
   # check if login is globally required to access the application
   def check_if_login_required
     # no check needed if user is already logged in
     return true if User.current.logged?
     require_login if Setting.login_required?
-  end 
-  
+  end
+
   def set_localization
     lang = nil
     if User.current.logged?
@@ -117,7 +124,7 @@ class ApplicationController < ActionController::Base
     lang ||= Setting.default_language
     set_language_if_valid(lang)
   end
-  
+
   def require_login
     if !User.current.logged?
       # Extract only the basic url parameters on non-GET requests
@@ -146,7 +153,7 @@ class ApplicationController < ActionController::Base
     end
     true
   end
-  
+
   def deny_access
     User.current.logged? ? render_403 : require_login
   end
@@ -174,14 +181,14 @@ class ApplicationController < ActionController::Base
   def find_project
     @project = Project.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find project of id params[:project_id]
   def find_project_by_project_id
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find a project based on params[:project_id]
@@ -197,10 +204,8 @@ class ApplicationController < ActionController::Base
   # Finds and sets @project based on @object.project
   def find_project_from_association
     render_404 unless @object.present?
-    
+
     @project = @object.project
-  rescue ActiveRecord::RecordNotFound
-    render_404
   end
 
   def find_model_object
@@ -221,12 +226,16 @@ class ApplicationController < ActionController::Base
   def find_issues
     @issues = Issue.find_all_by_id(params[:id] || params[:ids])
     raise ActiveRecord::RecordNotFound if @issues.empty?
+    if @issues.detect {|issue| !issue.visible?}
+      deny_access
+      return
+    end
     @projects = @issues.collect(&:project).compact.uniq
     @project = @projects.first if @projects.size == 1
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  
+
   # Check if project is unique before bulk operations
   def check_project_uniqueness
     unless @project
@@ -235,7 +244,7 @@ class ApplicationController < ActionController::Base
       return false
     end
   end
-  
+
   # make sure that the user is a member of the project (or admin) if project is private
   # used as a before_filter for actions that do not require any particular permission on the project
   def check_project_privacy
@@ -243,7 +252,7 @@ class ApplicationController < ActionController::Base
       if @project.is_public? || User.current.member_of?(@project) || User.current.admin?
         true
       else
-        User.current.logged? ? render_403 : require_login
+        deny_access
       end
     else
       @project = nil
@@ -263,6 +272,21 @@ class ApplicationController < ActionController::Base
         uri = URI.parse(back_url)
         # do not redirect user to another host or to the login or register page
         if (uri.relative? || (uri.host == request.host)) && !uri.path.match(%r{/(login|account/register)})
+          # soundsoftware: if back_url is the home page,
+          # change it to My Page (#125)
+          if (uri.path == home_path)
+            if (uri.path =~ /\/$/)
+              uri.path = uri.path + "my"
+            else
+              uri.path = uri.path + "/my"
+            end
+          end
+          # soundsoftware: if login page is https but back_url http,
+          # switch back_url to https to ensure cookie validity (#83)
+          if (uri.scheme == "http") && (URI.parse(request.url).scheme == "https")
+            uri.scheme = "https"
+          end
+          back_url = uri.to_s
           redirect_to(back_url)
           return
         end
@@ -271,27 +295,28 @@ class ApplicationController < ActionController::Base
       end
     end
     redirect_to default
+    false
   end
-  
+
   def render_403(options={})
     @project = nil
     render_error({:message => :notice_not_authorized, :status => 403}.merge(options))
     return false
   end
-    
+
   def render_404(options={})
     render_error({:message => :notice_file_not_found, :status => 404}.merge(options))
     return false
   end
-  
+
   # Renders an error response
   def render_error(arg)
     arg = {:message => arg} unless arg.is_a?(Hash)
-    
+
     @message = arg[:message]
     @message = l(@message) if @message.is_a?(Symbol)
     @status = arg[:status] || 500
-    
+
     respond_to do |format|
       format.html {
         render :template => 'common/error', :layout => use_layout, :status => @status
@@ -302,6 +327,19 @@ class ApplicationController < ActionController::Base
       format.json { head @status }
     end
   end
+  
+  # Filter for actions that provide an API response
+  # but have no HTML representation for non admin users
+  def require_admin_or_api_request
+    return true if api_request?
+    if User.current.admin?
+      true
+    elsif User.current.logged?
+      render_error(:status => 406)
+    else
+      deny_access
+    end
+  end
 
   # Picks which layout to use based on the request
   #
@@ -309,31 +347,59 @@ class ApplicationController < ActionController::Base
   def use_layout
     request.xhr? ? false : 'base'
   end
-  
+
   def invalid_authenticity_token
     if api_request?
       logger.error "Form authenticity token is missing or is invalid. API calls must include a proper Content-type header (text/xml or text/json)."
     end
-    render_error "Invalid form authenticity token."
+    render_error "Invalid form authenticity token.  Perhaps your session has timed out; try reloading the form and entering your details again."
   end
-  
-  def render_feed(items, options={})    
+
+  def render_feed(items, options={})
     @items = items || []
     @items.sort! {|x,y| y.event_datetime <=> x.event_datetime }
     @items = @items.slice(0, Setting.feeds_limit.to_i)
     @title = options[:title] || Setting.app_title
-    render :template => "common/feed.atom.rxml", :layout => false, :content_type => 'application/atom+xml'
+    render :template => "common/feed.atom", :layout => false,
+           :content_type => 'application/atom+xml'
   end
-  
+
+  # TODO: remove in Redmine 1.4
   def self.accept_key_auth(*actions)
-    actions = actions.flatten.map(&:to_s)
-    write_inheritable_attribute('accept_key_auth_actions', actions)
+    ActiveSupport::Deprecation.warn "ApplicationController.accept_key_auth is deprecated and will be removed in Redmine 1.4. Use accept_rss_auth (or accept_api_auth) instead."
+    accept_rss_auth(*actions)
   end
-  
+
+  # TODO: remove in Redmine 1.4
   def accept_key_auth_actions
-    self.class.read_inheritable_attribute('accept_key_auth_actions') || []
+    ActiveSupport::Deprecation.warn "ApplicationController.accept_key_auth_actions is deprecated and will be removed in Redmine 1.4. Use accept_rss_auth (or accept_api_auth) instead."
+    self.class.accept_rss_auth
   end
-  
+
+  def self.accept_rss_auth(*actions)
+    if actions.any?
+      write_inheritable_attribute('accept_rss_auth_actions', actions)
+    else
+      read_inheritable_attribute('accept_rss_auth_actions') || []
+    end
+  end
+
+  def accept_rss_auth?(action=action_name)
+    self.class.accept_rss_auth.include?(action.to_sym)
+  end
+
+  def self.accept_api_auth(*actions)
+    if actions.any?
+      write_inheritable_attribute('accept_api_auth_actions', actions)
+    else
+      read_inheritable_attribute('accept_api_auth_actions') || []
+    end
+  end
+
+  def accept_api_auth?(action=action_name)
+    self.class.accept_api_auth.include?(action.to_sym)
+  end
+
   # Returns the number of objects that should be displayed
   # on the paginated list
   def per_page_option
@@ -369,10 +435,10 @@ class ApplicationController < ActionController::Base
       offset = 0 if offset < 0
     end
     offset ||= 0
-    
+
     [offset, limit]
   end
-  
+
   # qvalues http header parser
   # code taken from webrick
   def parse_qvalues(value)
@@ -393,16 +459,16 @@ class ApplicationController < ActionController::Base
   rescue
     nil
   end
-  
+
   # Returns a string that can be used as filename value in Content-Disposition header
   def filename_for_content_disposition(name)
     request.env['HTTP_USER_AGENT'] =~ %r{MSIE} ? ERB::Util.url_encode(name) : name
   end
-  
+
   def api_request?
     %w(xml json).include? params[:format]
   end
-  
+
   # Returns the API key present in the request
   def api_key_from_request
     if params[:key].present?
@@ -440,13 +506,6 @@ class ApplicationController < ActionController::Base
     render_error "An error occurred while executing the query and has been logged. Please report this error to your Redmine administrator."
   end
 
-  # Converts the errors on an ActiveRecord object into a common JSON format
-  def object_errors_to_json(object)
-    object.errors.collect do |attribute, error|
-      { attribute => error }
-    end.to_json
-  end
-
   # Renders API response on validation failure
   def render_validation_errors(object)
     options = { :status => :unprocessable_entity, :layout => false }
@@ -459,7 +518,7 @@ class ApplicationController < ActionController::Base
     )
     render options
   end
-  
+
   # Overrides #default_template so that the api template
   # is used automatically if it exists
   def default_template(action_name = self.action_name)
@@ -473,7 +532,7 @@ class ApplicationController < ActionController::Base
     end
     super
   end
-  
+
   # Overrides #pick_layout so that #render with no arguments
   # doesn't use the layout for api requests
   def pick_layout(*args)

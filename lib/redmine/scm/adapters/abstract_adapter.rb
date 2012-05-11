@@ -1,16 +1,16 @@
-# redMine - project management software
-# Copyright (C) 2006-2007  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -24,9 +24,21 @@ module Redmine
       end
 
       class AbstractAdapter #:nodoc:
+
+        # raised if scm command exited with error, e.g. unknown revision.
+        class ScmCommandAborted < CommandFailed; end
+
         class << self
           def client_command
             ""
+          end
+
+          def shell_quote_command
+            if Redmine::Platform.mswin? && RUBY_PLATFORM == 'java'
+              client_command
+            else
+              shell_quote(client_command)
+            end
           end
 
           # Returns the version of the scm client
@@ -90,12 +102,16 @@ module Redmine
         def url
           @url
         end
-      
+
+        def path_encoding
+          nil
+        end
+
         # get info about the svn repository
         def info
           return nil
         end
-        
+
         # Returns the entry identified by path and revision identifier
         # or nil if entry doesn't exist in the repository
         def entry(path=nil, identifier=nil)
@@ -111,10 +127,10 @@ module Redmine
             es ? es.detect {|e| e.name == search_name} : nil
           end
         end
-        
+
         # Returns an Entries collection
         # or nil if the given path doesn't exist in the repository
-        def entries(path=nil, identifier=nil)
+        def entries(path=nil, identifier=nil, options={})
           return nil
         end
 
@@ -122,30 +138,30 @@ module Redmine
           return nil
         end
 
-        def tags 
+        def tags
           return nil
         end
 
         def default_branch
           return nil
         end
-        
+
         def properties(path, identifier=nil)
           return nil
         end
-    
+
         def revisions(path=nil, identifier_from=nil, identifier_to=nil, options={})
           return nil
         end
-        
+
         def diff(path, identifier_from, identifier_to=nil)
           return nil
         end
-        
+
         def cat(path, identifier=nil)
           return nil
         end
-        
+
         def with_leading_slash(path)
           path ||= ''
           (path[0,1]!="/") ? "/#{path}" : path
@@ -175,11 +191,15 @@ module Redmine
           info = self.info
           info ? info.root_url : nil
         end
-        
-        def target(path)
+
+        def target(path, sq=true)
           path ||= ''
           base = path.match(/^\//) ? root_url : url
-          shell_quote("#{base}/#{path}".gsub(/[?<>\*]/, ''))
+          str = "#{base}/#{path}".gsub(/[?<>\*]/, '')
+          if sq
+            str = shell_quote(str)
+          end
+          str
         end
 
         def logger
@@ -191,14 +211,16 @@ module Redmine
         end
 
         def self.logger
-          RAILS_DEFAULT_LOGGER
+          Rails.logger
         end
 
         def self.shellout(cmd, &block)
-          logger.debug "Shelling out: #{strip_credential(cmd)}" if logger && logger.debug?
+          if logger && logger.debug?
+            logger.debug "Shelling out: #{strip_credential(cmd)}"
+          end
           if Rails.env == 'development'
             # Capture stderr when running in dev environment
-            cmd = "#{cmd} 2>>#{RAILS_ROOT}/log/scm.stderr.log"
+            cmd = "#{cmd} 2>>#{Rails.root}/log/scm.stderr.log"
           end
           begin
             if RUBY_VERSION < '1.9'
@@ -210,10 +232,20 @@ module Redmine
               io.close_write
               block.call(io) if block_given?
             end
-          rescue Errno::ENOENT => e
+          ## If scm command does not exist,
+          ## Linux JRuby 1.6.2 (ruby-1.8.7-p330) raises java.io.IOException
+          ## in production environment.
+          # rescue Errno::ENOENT => e
+          rescue Exception => e
             msg = strip_credential(e.message)
             # The command failed, log it and re-raise
-            logger.error("SCM command failed, make sure that your SCM binary (eg. svn) is in PATH (#{ENV['PATH']}): #{strip_credential(cmd)}\n  with: #{msg}")
+            logmsg = "SCM command failed, "
+            logmsg += "make sure that your SCM command (e.g. svn) is "
+            logmsg += "in PATH (#{ENV['PATH']})\n"
+            logmsg += "You can configure your scm commands in config/configuration.yml.\n"
+            logmsg += "#{strip_credential(cmd)}\n"
+            logmsg += "with: #{msg}"
+            logger.error(logmsg)
             raise CommandFailed.new(msg)
           end
         end
@@ -223,14 +255,19 @@ module Redmine
           q = (Redmine::Platform.mswin? ? '"' : "'")
           cmd.to_s.gsub(/(\-\-(password|username))\s+(#{q}[^#{q}]+#{q}|[^#{q}]\S+)/, '\\1 xxxx')
         end
-        
+
         def strip_credential(cmd)
           self.class.strip_credential(cmd)
         end
 
         def scm_iconv(to, from, str)
           return nil if str.nil?
-          return str if to == from
+          # bug 446: non-utf8 paths in repositories blow up repo viewer and reposman
+          # -- Remove this short-circuit: we want the conversion to
+          #    happen always, so we can trap the error here if the
+          #    source text happens not to be in the advertised
+          #    encoding (instead of having the database blow up later)
+#          return str if to == from
           begin
             Iconv.conv(to, from, str)
           rescue Iconv::Failure => err
@@ -242,7 +279,7 @@ module Redmine
 
       class Entries < Array
         def sort_by_name
-          sort {|x,y| 
+          sort {|x,y|
             if x.kind == y.kind
               x.name.to_s <=> y.name.to_s
             else
@@ -250,12 +287,12 @@ module Redmine
             end
           }
         end
-        
+
         def revisions
           revisions ||= Revisions.new(collect{|entry| entry.lastrev}.compact)
         end
       end
-      
+
       class Info
         attr_accessor :root_url, :lastrev
         def initialize(attributes={})
@@ -263,7 +300,7 @@ module Redmine
           self.lastrev = attributes[:lastrev]
         end
       end
-      
+
       class Entry
         attr_accessor :name, :path, :kind, :size, :lastrev
         def initialize(attributes={})
@@ -273,20 +310,20 @@ module Redmine
           self.size = attributes[:size].to_i if attributes[:size]
           self.lastrev = attributes[:lastrev]
         end
-        
+
         def is_file?
           'file' == self.kind
         end
-        
+
         def is_dir?
           'dir' == self.kind
         end
-        
+
         def is_text?
           Redmine::MimeType.is_type?('text', name)
         end
       end
-      
+
       class Revisions < Array
         def latest
           sort {|x,y|
@@ -296,56 +333,57 @@ module Redmine
               0
             end
           }.last
-        end 
+        end
       end
-      
+
       class Revision
-        attr_accessor :scmid, :name, :author, :time, :message, :paths, :revision, :branch
-        attr_writer :identifier
+        attr_accessor :scmid, :name, :author, :time, :message,
+                      :paths, :revision, :branch, :identifier,
+                      :parents
 
         def initialize(attributes={})
           self.identifier = attributes[:identifier]
-          self.scmid = attributes[:scmid]
-          self.name = attributes[:name] || self.identifier
-          self.author = attributes[:author]
-          self.time = attributes[:time]
-          self.message = attributes[:message] || ""
-          self.paths = attributes[:paths]
-          self.revision = attributes[:revision]
-          self.branch = attributes[:branch]
-        end
-
-        # Returns the identifier of this revision; see also Changeset model
-        def identifier
-          (@identifier || revision).to_s
+          self.scmid      = attributes[:scmid]
+          self.name       = attributes[:name] || self.identifier
+          self.author     = attributes[:author]
+          self.time       = attributes[:time]
+          self.message    = attributes[:message] || ""
+          self.paths      = attributes[:paths]
+          self.revision   = attributes[:revision]
+          self.branch     = attributes[:branch]
+          self.parents    = attributes[:parents]
         end
 
         # Returns the readable identifier.
         def format_identifier
-          identifier
+          self.identifier.to_s
         end
       end
 
       class Annotate
         attr_reader :lines, :revisions
-        
+
         def initialize
           @lines = []
           @revisions = []
         end
-        
+
         def add_line(line, revision)
           @lines << line
           @revisions << revision
         end
-        
+
         def content
           content = lines.join("\n")
         end
-        
+
         def empty?
           lines.empty?
         end
+      end
+
+      class Branch < String
+        attr_accessor :revision, :scmid
       end
     end
   end

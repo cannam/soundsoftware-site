@@ -1,0 +1,12 @@
+@import url(fonts.css);
+
+h1, #project-ancestors-title {
+  font-family: GilliusADFNo2, 'Gill Sans', Tahoma, sans-serif;
+  font-weight: normal;
+}    
+
+body,p,h2,h3,h4,li,table,.wiki h1,.embedded h1 { 
+  font-family: DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; 
+  line-height: 1.34;
+}
+

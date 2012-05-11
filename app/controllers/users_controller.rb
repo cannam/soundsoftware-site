@@ -1,43 +1,46 @@
 # Redmine - project management software
-# Copyright (C) 2006-2010  Jean-Philippe Lang
+# Copyright (C) 2006-2011  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class UsersController < ApplicationController
   layout 'admin'
-  
+
   before_filter :require_admin, :except => :show
   before_filter :find_user, :only => [:show, :edit, :update, :destroy, :edit_membership, :destroy_membership]
-  accept_key_auth :index, :show, :create, :update, :destroy
+  accept_api_auth :index, :show, :create, :update, :destroy
 
   helper :sort
   include SortHelper
   helper :custom_fields
-  include CustomFieldsHelper   
+  include CustomFieldsHelper
 
   def index
     sort_init 'login', 'asc'
     sort_update %w(login firstname lastname mail admin created_on last_login_on)
-    
+
     case params[:format]
     when 'xml', 'json'
       @offset, @limit = api_offset_and_limit
     else
       @limit = per_page_option
     end
-    
+
+    scope = User
+    scope = scope.in_group(params[:group_id].to_i) if params[:group_id].present?
+
     @status = params[:status] ? params[:status].to_i : 1
     c = ARCondition.new(@status == 0 ? "status <> 0" : ["status = ?", @status])
 
@@ -45,51 +48,71 @@ class UsersController < ApplicationController
       name = "%#{params[:name].strip.downcase}%"
       c << ["LOWER(login) LIKE ? OR LOWER(firstname) LIKE ? OR LOWER(lastname) LIKE ? OR LOWER(mail) LIKE ?", name, name, name, name]
     end
-    
-    @user_count = User.count(:conditions => c.conditions)
+
+    @user_count = scope.count(:conditions => c.conditions)
     @user_pages = Paginator.new self, @user_count, @limit, params['page']
     @offset ||= @user_pages.current.offset
-    @users =  User.find :all,
+    @users =  scope.find :all,
                         :order => sort_clause,
                         :conditions => c.conditions,
                         :limit  =>  @limit,
                         :offset =>  @offset
 
-		respond_to do |format|
-		  format.html { render :layout => !request.xhr? }
+    respond_to do |format|
+      format.html {
+        @groups = Group.all.sort
+        render :layout => !request.xhr?
+      }
       format.api
-		end	
+    end	
   end
-  
+
   def show
-    # show projects based on current user visibility
-    @memberships = @user.memberships.all(:conditions => Project.visible_by(User.current))
+
+    if @user.ssamr_user_detail != nil
+      @description = @user.ssamr_user_detail.description
+      
+      if @user.ssamr_user_detail.institution_type != nil
+        # institution_type is true for listed institutions
+        if (@user.ssamr_user_detail.institution_type)
+          @institution_name = Institution.find(@user.ssamr_user_detail.institution_id).name
+        else
+          @institution_name = @user.ssamr_user_detail.other_institution
+        end
+      end
+    end
     
+    # show projects based on current user visibility
+    @memberships = @user.memberships.all(:conditions => Project.visible_condition(User.current))
+
     events = Redmine::Activity::Fetcher.new(User.current, :author => @user).events(nil, nil, :limit => 10)
     @events_by_day = events.group_by(&:event_date)
-    
+
     unless User.current.admin?
       if !@user.active? || (@user != User.current  && @memberships.empty? && events.empty?)
         render_404
         return
       end
     end
-    
+
     respond_to do |format|
       format.html { render :layout => 'base' }
       format.api
     end
   end
 
-  def new
+  def new      
     @user = User.new(:language => Setting.default_language, :mail_notification => Setting.default_notification_option)
     @auth_sources = AuthSource.find(:all)
+
+    @ssamr_user_details = SsamrUserDetail.new
   end
-  
+
   verify :method => :post, :only => :create, :render => {:nothing => true, :status => :method_not_allowed }
   def create
     @user = User.new(:language => Setting.default_language, :mail_notification => Setting.default_notification_option)
     @user.safe_attributes = params[:user]
+    @user = User.new(params[:user])    
     @user.admin = params[:user][:admin] || false
     @user.login = params[:user][:login]
     @user.password, @user.password_confirmation = params[:user][:password], params[:user][:password_confirmation] unless @user.auth_source_id
@@ -98,17 +121,24 @@ class UsersController < ApplicationController
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
 
+    @ssamr_user_details = SsamrUserDetail.new(params[:ssamr_user_details])
+
+    # associates the 2 objects
+    @user.ssamr_user_detail = @ssamr_user_details
+
     if @user.save
       @user.pref.save
-      @user.notified_project_ids = (@user.mail_notification == 'selected' ? params[:notified_project_ids] : [])
+                 
+      @ssamr_user_details.save!
+          
 
       Mailer.deliver_account_information(@user, params[:user][:password]) if params[:send_information]
-      
+
       respond_to do |format|
         format.html {
           flash[:notice] = l(:notice_successful_create)
-          redirect_to(params[:continue] ? 
-            {:controller => 'users', :action => 'new'} : 
+          redirect_to(params[:continue] ?
+            {:controller => 'users', :action => 'new'} :
             {:controller => 'users', :action => 'edit', :id => @user}
           )
         }
@@ -127,10 +157,19 @@ class UsersController < ApplicationController
   end
 
   def edit
+    
+    @ssamr_user_details = @user.ssamr_user_detail
+    
+    if @user.ssamr_user_detail == nil
+      @selected_institution_id = nil
+    else
+      @selected_institution_id = @user.ssamr_user_detail.institution_id.to_i    
+    end
+    
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
   end
-  
+
   verify :method => :put, :only => :update, :render => {:nothing => true, :status => :method_not_allowed }
   def update
     @user.admin = params[:user][:admin] if params[:user][:admin]
@@ -145,6 +184,26 @@ class UsersController < ApplicationController
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
 
+    if @user.ssamr_user_detail == nil
+      @ssamr_user_details = SsamrUserDetail.new()
+      @user.ssamr_user_detail = @ssamr_user_details
+    else
+      @ssamr_user_details = @user.ssamr_user_detail
+    end
+    
+    if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
+      @ssamr_user_details.description = @user.ssamr_user_detail.description
+      @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
+      @ssamr_user_details.other_institution = @user.ssamr_user_detail.other_institution
+      @ssamr_user_details.institution_type = @user.ssamr_user_detail.institution_type
+
+    else
+      @ssamr_user_details.description = params[:ssamr_user_details][:description]
+      @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
+      @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
+      @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
+    end
+
     if @user.save
       @user.pref.save
       @user.notified_project_ids = (@user.mail_notification == 'selected' ? params[:notified_project_ids] : [])
@@ -154,7 +213,7 @@ class UsersController < ApplicationController
       elsif @user.active? && params[:send_information] && !params[:user][:password].blank? && @user.auth_source_id.nil?
         Mailer.deliver_account_information(@user, params[:user][:password])
       end
-      
+
       respond_to do |format|
         format.html {
           flash[:notice] = l(:notice_successful_update)
@@ -207,7 +266,7 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def destroy_membership
     @membership = Member.find(params[:membership_id])
     if request.post? && @membership.deletable?
@@ -218,9 +277,9 @@ class UsersController < ApplicationController
       format.js { render(:update) {|page| page.replace_html "tab-content-memberships", :partial => 'users/memberships'} }
     end
   end
-  
+
   private
-  
+
   def find_user
     if params[:id] == 'current'
       require_login || return
