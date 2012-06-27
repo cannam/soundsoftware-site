@@ -39,7 +39,7 @@ class MembersController < ApplicationController
       attrs = params[:member].dup
       if (user_ids = attrs.delete(:user_ids))
         user_ids.each do |user_id|
-          @new_member = Member.new(attrs.merge(:user_id => user_id))
+          @new_member = Member.new(:role_ids => params[:member][:role_ids], :user_id => user_id)
           members << @new_member
 
           # send notification to member
@@ -47,7 +47,7 @@ class MembersController < ApplicationController
 
         end
       else
-        @new_member = Member.new(attrs)
+        @new_member = Member.new(:role_ids => params[:member][:role_ids], :user_id => params[:member][:user_id])
         members << @new_member
         
         # send notification to member
@@ -87,7 +87,10 @@ class MembersController < ApplicationController
   end
 
   def edit
-    if request.post? and @member.update_attributes(params[:member])
+    if params[:member]
+      @member.role_ids = params[:member][:role_ids]
+    end
+    if request.post? and @member.save
   	 respond_to do |format|
         format.html { redirect_to :action => 'index', :project_id => @project }
         format.js {
@@ -116,7 +119,7 @@ class MembersController < ApplicationController
   end
 
   def autocomplete_for_member
-    @principals = Principal.active.like(params[:q]).find(:all, :limit => 100) - @project.principals
+    @principals = Principal.active.not_member_of(@project).like(params[:q]).all(:limit => 100)
     logger.debug "Query for #{params[:q]} returned #{@principals.size} results"
     render :layout => false
   end
