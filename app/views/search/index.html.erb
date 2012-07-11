@@ -21,7 +21,7 @@
 <% end %>
 </div>
 
-<% if @project_matches and !@project_matches.empty? and (@project_matches.count < 6) and !@pagination_previous_date %>
+<% if @project_matches and !@project_matches.empty? and !@pagination_previous_date %>
    <h3><%= l(:label_matching_project_plural) %> (<%= @project_matches.count %>)</h3>
     <dl id="search-results">
       <% @project_matches.each do |e| %>

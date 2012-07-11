@@ -110,9 +110,9 @@ module ProjectsHelper
       s << "<li class='#{classes}'><div class='#{classes}'>" +
         link_to_project(project, {}, :class => "project my-project")
       if project.is_public?
-        s << " <span class='public'>" << l("field_is_public") << "</span>"
+        s << " <span class='public'>" << l(:field_is_public) << "</span>"
       else
-        s << " <span class='private'>" << l("field_is_private") << "</span>"
+        s << " <span class='private'>" << l(:field_is_private) << "</span>"
       end
       s << render_project_short_description(project)
       s << "</div>\n"
@@ -177,8 +177,8 @@ module ProjectsHelper
     s << "<table class='list projects'>"
     s << "<thead><tr>"
     
-    s << sort_header_tag('name', :caption => l("field_name"))
-    s << "<th class='managers'>" << l("label_managers") << "</th>"
+    s << sort_header_tag('name', :caption => l(:field_name))
+    s << "<th class='managers'>" << l(:label_managers) << "</th>"
     s << sort_header_tag('created_on', :default_order => 'desc')
     s << sort_header_tag('updated_on', :default_order => 'desc')
 
