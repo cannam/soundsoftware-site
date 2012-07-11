@@ -89,7 +89,6 @@ module PublicationsHelper
     s   
   end
   
-    
   def render_projects_list(publication, show_delete_icon)    
     s= ""
     
@@ -99,6 +98,7 @@ module PublicationsHelper
       if show_delete_icon  
         if User.current.allowed_to?(:edit_publication, @project)
           if @project == proj
+            # todo: move this message to yml file
             confirm_msg = 'Are you sure you want to remove the current project from this publication\'s projects list?'
           else
             confirm_msg = false
@@ -113,6 +113,29 @@ module PublicationsHelper
 
     s  
   end
+  
+  def show_cite_proc_entry(publication)    
+    s = ""
+
+    # code that should be moved either to the model or to the controller
+
+    book = BibTeX::Entry.new
+    
+    publication.bibtex_entry.attributes.keys.sort.each do |key|      
+      value = publication.bibtex_entry.attributes[key].to_s
+      next if key == 'id' or key == 'publication_id' or value == ""
+      
+      if key == "entry_type"
+         book[key.to_sym] = publication.bibtex_entry.entry_type_label
+      else
+         book[key.to_sym] = value
+      end
+                 
+    end
+  
+    s << CiteProc.process(book.to_citeproc)
+  end
+    
   
   def show_bibtex_fields(bibtex_entry)
     s = ""

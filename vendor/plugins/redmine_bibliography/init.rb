@@ -1,6 +1,10 @@
 require 'redmine'
 require 'dispatcher'
 
+require 'bibtex'
+require 'citeproc'
+
+
 RAILS_DEFAULT_LOGGER.info 'Starting Bibliography Plugin for RedMine'
 
 # Patches to the Redmine core.

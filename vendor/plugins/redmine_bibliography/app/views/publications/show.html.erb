@@ -3,9 +3,10 @@
 <h2><%=l(:label_publication_show)%></h2>
 
 <div class="box">
-<h3>
-  <%= h @publication.title %>
-</h3>
+
+<%= @publication.title %>
+
+<%=h show_cite_proc_entry(@publication)%>
 
 <h4><%= l(:authors) %></h4>
 <ul id="authorships">
@@ -18,6 +19,7 @@
     <%- end -%>
   <%- end -%>
 </ul>
+
 <%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>
   <%= sortable_element("authorships", :url => { :controller => :publications, :action => :sort_author_order }, :handle => "handle") %>
 <%- end -%>
@@ -25,7 +27,6 @@
 <%- if @publication.bibtex_entry != nil -%>
   <%= show_bibtex_fields(@publication.bibtex_entry) %>
 <%- end -%>
-
 
 <% unless @publication.external_url.blank? %>
   <h4>
@@ -46,7 +47,7 @@
 </div>
 
 <% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
-
+  
 <% content_for :sidebar do %>
   <h3><%=l(:label_publication_project_index)%></h3>
 
