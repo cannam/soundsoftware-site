@@ -1,3 +1,5 @@
+# encoding: utf-8
+#
 # Redmine - project management software
 # Copyright (C) 2006-2011  Jean-Philippe Lang
 #
@@ -46,7 +48,7 @@ module ProjectsHelper
     options = ''
     options << "<option value=''></option>" if project.allowed_parents.include?(nil)
     options << project_tree_options_for_select(project.allowed_parents.compact, :selected => selected)
-    content_tag('select', options, :name => 'project[parent_id]', :id => 'project_parent_id')
+    content_tag('select', options.html_safe, :name => 'project[parent_id]', :id => 'project_parent_id')
   end
 
   def render_project_short_description(project)
@@ -90,7 +92,7 @@ module ProjectsHelper
       s << ("</li></ul>\n" * ancestors.size)
       @project = original_project
     end
-    s
+    s.html_safe
   end
 
 
@@ -108,9 +110,9 @@ module ProjectsHelper
       s << "<li class='#{classes}'><div class='#{classes}'>" +
         link_to_project(project, {}, :class => "project my-project")
       if project.is_public?
-        s << " <span class='public'>" << l("field_is_public") << "</span>"
+        s << " <span class='public'>" << l(:field_is_public) << "</span>"
       else
-        s << " <span class='private'>" << l("field_is_private") << "</span>"
+        s << " <span class='private'>" << l(:field_is_private) << "</span>"
       end
       s << render_project_short_description(project)
       s << "</div>\n"
@@ -175,8 +177,8 @@ module ProjectsHelper
     s << "<table class='list projects'>"
     s << "<thead><tr>"
     
-    s << sort_header_tag('name', :caption => l("field_name"))
-    s << "<th class='managers'>" << l("label_managers") << "</th>"
+    s << sort_header_tag('name', :caption => l(:field_name))
+    s << "<th class='managers'>" << l(:label_managers) << "</th>"
     s << sort_header_tag('created_on', :default_order => 'desc')
     s << sort_header_tag('updated_on', :default_order => 'desc')
 

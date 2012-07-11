@@ -1,43 +1,0 @@
-10
-
-dir
-6270
-http://redmine.rubyforge.org/svn/branches/1.2-stable/app
-http://redmine.rubyforge.org/svn
-
-
-
-2011-07-11T02:08:23.222641Z
-6254
-tmaruyama
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-e93f8b46-1217-0410-a6f0-8f06a7374b81
-
-helpers
-dir
-
-models
-dir
-
-controllers
-dir
-
-sweepers
-dir
-
-views
-dir
-
