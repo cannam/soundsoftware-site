@@ -96,8 +96,8 @@ class ProjectTest < ActiveSupport::TestCase
       assert_equal ['issue_tracking', 'repository'], Project.new.enabled_module_names
     end
 
-    assert_equal Tracker.all, Project.new.trackers
-    assert_equal Tracker.find(1, 3), Project.new(:tracker_ids => [1, 3]).trackers
+    assert_equal Tracker.all.sort, Project.new.trackers.sort
+    assert_equal Tracker.find(1, 3).sort, Project.new(:tracker_ids => [1, 3]).trackers.sort
   end
 
   def test_update
@@ -584,6 +584,13 @@ class ProjectTest < ActiveSupport::TestCase
     end
 
     assert !versions.collect(&:id).include?(6)
+  end
+
+  def test_shared_versions_for_new_project_should_include_system_shared_versions
+    p = Project.find(5)
+    v = Version.create!(:name => 'system_sharing', :project => p, :sharing => 'system')
+
+    assert_include v, Project.new.shared_versions
   end
 
   def test_next_identifier
