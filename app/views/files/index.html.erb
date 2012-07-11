@@ -19,16 +19,16 @@
   </tr></thead>
   <tbody>
 <% have_file = false %>
-<% @containers.each do |container| %>	
+<% @containers.each do |container| %>
   <% next if container.attachments.empty? -%>
-	<% if container.is_a?(Version) -%>
+  <% if container.is_a?(Version) -%>
   <tr>
   	<th colspan="7" align="left">
-  		<%= link_to(h(container), {:controller => 'versions', :action => 'show', :id => container}, :class => "icon icon-package") %>
-		</th>
-	</tr>
-	<% end -%>
-  <% container.attachments.each do |file| %>		
+      <%= link_to(h(container), {:controller => 'versions', :action => 'show', :id => container}, :class => "icon icon-package") %>
+    </th>
+  </tr>
+  <% end -%>
+  <% container.attachments.each do |file| %>
   <tr class="file <%= cycle("odd", "even") %> <%= "active" if file.active? %>">
     <td class="active">
       <% have_file = true %>
@@ -55,10 +55,10 @@
     <td class="downloads"><%= file.downloads %></td>
     <td class="digest"><%= file.digest %></td>
     <td align="center">
-    <%= link_to(image_tag('delete.png'), {:controller => 'attachments', :action => 'destroy', :id => file},
-																				 :confirm => l(:text_are_you_sure), :method => :post) if delete_allowed %>
+    <%= link_to(image_tag('delete.png'), attachment_path(file),
+                                         :confirm => l(:text_are_you_sure), :method => :delete) if delete_allowed %>
     </td>
-  </tr>		
+  </tr>
   <% end
   reset_cycle %>
 <% end %>
