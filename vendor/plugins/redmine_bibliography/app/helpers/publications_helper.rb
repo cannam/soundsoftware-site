@@ -114,26 +114,14 @@ module PublicationsHelper
     s  
   end
   
-  def show_cite_proc_entry(publication)    
-    s = ""
-
-    # code that should be moved either to the model or to the controller
-
-    book = BibTeX::Entry.new
+  def show_cite_proc_entry(publication)
+    # code that should be moved either to the model or to the controller?
     
-    publication.bibtex_entry.attributes.keys.sort.each do |key|      
-      value = publication.bibtex_entry.attributes[key].to_s
-      next if key == 'id' or key == 'publication_id' or value == ""
-      
-      if key == "entry_type"
-         book[key.to_sym] = publication.bibtex_entry.entry_type_label
-      else
-         book[key.to_sym] = value
-      end
-                 
-    end
+    publication.print_entry(:ieee)
+  end
   
-    s << CiteProc.process(book.to_citeproc)
+  def print_bibtex_entry(publication)
+    publication.print_entry(:bibtex)
   end
     
   
