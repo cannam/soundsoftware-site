@@ -5,9 +5,12 @@
 <div class="box">
   <h3>Publication Info</h3>
   <%=h show_cite_proc_entry(@publication)%>
-  
-  <h3>Bibtex Format</h3>
-    <%=h print_bibtex_entry(@publication) %>
+
+  <br />  
+  <br />
+  <h4>Bibtex Code</h4>
+  <%= text_area_tag :bibtex_code, h(print_bibtex_entry(@publication)), :readonly => true, :rows => 6, :style => 'width:90%' %>
+
 </div>
 
 <div class="box">
@@ -26,10 +29,6 @@
 
 <%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>
   <%= sortable_element("authorships", :url => { :controller => :publications, :action => :sort_author_order }, :handle => "handle") %>
-<%- end -%>
-
-<%- if @publication.bibtex_entry != nil -%>
-  <%= show_bibtex_fields(@publication.bibtex_entry) %>
 <%- end -%>
 
 <% unless @publication.external_url.blank? %>

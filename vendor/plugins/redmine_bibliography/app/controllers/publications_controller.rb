@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 # vendor/plugins/redmine_bibliography/app/controllers/publications_controller.rb
 
+class BibtexParsingError < Exception; end
+
 class PublicationsController < ApplicationController
   unloadable
 
   model_object Publication
-  before_filter :find_model_object, :except => [:new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]  
+  before_filter :find_model_object, :except => [:parse_bibtex, :new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]  
   before_filter :find_project_by_project_id, :authorize, :only => [ :edit, :new, :update, :create ]
 
   def new
@@ -18,11 +20,56 @@ class PublicationsController < ApplicationController
     # and at least one author
     # @publication.authorships.build.build_author        
     @author_options = [["#{User.current.name} (@#{User.current.mail.partition('@')[2]})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
+  end
 
+
+  def parse_bibtex
+    find_project_by_project_id
+
+    @bibtex_paste = params[:bibtex_paste]
+
+    begin
+      bib = BibTeX.parse(@bibtex_paste)
+
+      if bib.errors.present? or bib[0].class == NilClass
+        raise BibtexParsingError, "Bibtex Parsing Error"
+      end
+
+      respond_to do |format| 
+        format.js {
+          render(:update) {|page|
+            flash[:notice] = "Correctly parsed BibTeX entry"
+
+            bibtex_entry_no = BibtexEntryType.find_by_name(bib[0].type.to_s).id
+            page["publication_title"].value = bib[0][:title]
+            page["publication_bibtex_entry_attributes_entry_type"].value = bibtex_entry_no
+
+            BibtexEntryType.fields(bibtex_entry_no).each do |field|
+              page["publication_bibtex_entry_attributes_#{field}"].value = bib[0][field]
+            end
+          }
+        }
+      end
+
+    rescue BibtexParsingError => e
+      logger.error { "Bibtex Parsing Error #{bib.errors}" }
+
+      # todo: not showing... should be inside render?
+      flash[:error] = e.message
+      
+      respond_to do |format|
+       format.js{ 
+         render(:update) {|page|
+         }
+       }
+      end
+
+    end
 
   end
 
-  def create    
+
+  def create            
     @project = Project.find(params[:project_id])
 
     @author_options = []
@@ -64,14 +111,12 @@ class PublicationsController < ApplicationController
 
   def get_bibtex_required_fields
 
-    unless params[:value].empty?
-      fields = BibtexEntryType.fields(params[:value]) 
-    end
+    fields = BibtexEntryType.fields(params[:q]) 
 
     respond_to do |format|
       format.js {
         render(:update) {|page|       
-          if params[:value].empty?
+          if params[:q].empty?
             page << "hideOnLoad();"
           else
             page << "show_required_bibtex_fields(#{fields.to_json()});"
@@ -109,10 +154,8 @@ class PublicationsController < ApplicationController
 
     @author_options = []
 
-    logger.error { "INSIDE THE UPDATE ACTION IN THE PUBLICATION CONTROLLER" }
-
     if @publication.update_attributes(params[:publication])
-      flash[:notice] = "Successfully updated Publication."
+      flash[:notice] = "Successfully Updated Publication."
 
       if !params[:project_id].nil?
         redirect_to :action => :show, :id => @publication, :project_id => params[:project_id]
@@ -224,6 +267,7 @@ class PublicationsController < ApplicationController
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
     render :layout => false
   end
+  
 
   def autocomplete_for_author    
     @results = []

@@ -3,11 +3,16 @@
 	<%= f.collection_select :entry_type, 
 	        BibtexEntryType.find(:all).reject { |x| x.redundant? }, 
 	        :id, 
-	        :label,  
-	        { :selected => @selected_bibtex_entry_type_id, :prompt => true },	           
-	        :onChange => remote_function( :url => { :controller => :publications, :action => :get_bibtex_required_fields}, :with => "'value=' + value" )	              
+	        :label,
+	        { :prompt => true }
 	%>
 </p>
+
+
+<%= observe_field :publication_bibtex_entry_attributes_entry_type, :url => { :controller => :publications, :action => :get_bibtex_required_fields },
+     :frequency => 0.25,
+     :with => 'q'
+     %>
 
 <p class="bibtex hol"> 
   <%= f.text_field :year, :size => 4 %> 
