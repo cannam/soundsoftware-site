@@ -291,7 +291,13 @@ module ApplicationHelper
   def principals_check_box_tags(name, principals)
     s = ''
     principals.sort.each do |principal|
-      s << "<label>#{ check_box_tag name, principal.id, false } #{link_to_user principal}</label>\n"
+      
+      if principal.type == "User":      
+        s << "<label>#{ check_box_tag name, principal.id, false } #{link_to_user principal}</label>\n"
+      else
+        s << "<label>#{ check_box_tag name, principal.id, false } #{h principal} (Group)</label>\n"
+      end
+      
     end
     s.html_safe
   end
