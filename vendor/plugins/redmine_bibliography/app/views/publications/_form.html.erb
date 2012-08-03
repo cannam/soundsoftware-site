@@ -17,8 +17,10 @@
 
 <h3><%= l(:authors) %></h3>    
 <div class="box tabular">
-  <% f.fields_for :authorships do |builder| -%>
-    <%= render "authorship_fields", :f => builder %>
-  <%- end -%>
+  <div id="authors" class="fields">
+    <% f.fields_for :authorships do |builder| -%>
+      <%= render "authorship_fields", :f => builder %>
+      <%- end -%>
+  </div>
   <%= link_to_add_author_fields l(:label_add_an_author), f, :authorships, params[:action] %>
 </div>

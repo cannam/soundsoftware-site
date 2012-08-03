@@ -1,9 +1,6 @@
 <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
 
-
-<div id="authors" class="fields">
-<!--  <h4><%= l("label_author_1") %></h4> -->
-
+<fieldset>
   <div id="<%= form_tag_id( f.object_name, :search_author ) %>" style=<%= "display:none;" unless params[:action] == "new" %> >
       <p>
         <%= f.text_field :search_name, :size => 25 %>
@@ -42,7 +39,6 @@
   <div class="box" id="<%= form_tag_id( f.object_name, :show_author_info ) %>" style="display: none">
 	
   </div>
-
   <p>
 
   <%- if params[:action] == 'new' -%>
@@ -54,5 +50,8 @@
 
   <%= link_to_remove_fields l("remove_author"), f %>
   </p>
-</div>
-<br/>
+</fieldset>
+<br />
+
+
+

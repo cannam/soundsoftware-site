@@ -43,10 +43,21 @@ class PublicationsController < ApplicationController
             bibtex_entry_no = BibtexEntryType.find_by_name(bib[0].type.to_s).id
             page["publication_title"].value = bib[0][:title]
             page["publication_bibtex_entry_attributes_entry_type"].value = bibtex_entry_no
-
+            
             BibtexEntryType.fields(bibtex_entry_no).each do |field|
               page["publication_bibtex_entry_attributes_#{field}"].value = bib[0][field]
             end
+
+            # for each author simulates a click and fills the author info                        
+            bib[0].authors.each do |author|            
+              page["add_another_author"].click
+#              page.alert(bib[0].authors.length)
+#              page.alert(page["authors"].first.id)
+            
+            end
+            
+
+
           }
         }
       end
