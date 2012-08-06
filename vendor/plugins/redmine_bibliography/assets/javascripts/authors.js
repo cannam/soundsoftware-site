@@ -6,9 +6,9 @@ function remove_fields(link) {
 function add_author_fields(link, association, content, action) {
 	var new_id = new Date().getTime();
   var regexp = new RegExp("new_" + association, "g");
-  $(link).insert({
-		before: content.replace(regexp, new_id)
-  });
+
+  $('authors').insert(content.replace(regexp, new_id));
+
 	if(action != "new"){
 		toggle_save_author(new_id, $(link));
 	};
