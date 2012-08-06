@@ -1,4 +1,5 @@
-<%= f.error_messages %>  
+<%= f.error_messages %> 
+<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
 
 <h3><%= f.text_field :title, :required => true, :size => 70 %></h3>
 
@@ -16,11 +17,14 @@
   </div>
 
 <h3><%= l(:authors) %></h3>    
-<div class="box tabular">
-  <div id="authors" class="fields">
-    <% f.fields_for :authorships do |builder| -%>
-      <%= render "authorship_fields", :f => builder %>
+  <div class="box tabular">
+    <div id="authors" class="fields">
+      
+      <% f.fields_for :authorships do |builder| -%>
+        <%= render "authorship_fields", :f => builder %>
       <%- end -%>
+
+      <%= link_to_add_author_fields l(:label_add_an_author), f, :authorships, params[:action] %>
+    </div>
   </div>
-  <%= link_to_add_author_fields l(:label_add_an_author), f, :authorships, params[:action] %>
 </div>

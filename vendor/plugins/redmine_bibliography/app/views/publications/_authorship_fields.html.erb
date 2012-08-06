@@ -1,6 +1,4 @@
-<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
-
-<fieldset>
+<fieldset> 
   <div id="<%= form_tag_id( f.object_name, :search_author ) %>" style=<%= "display:none;" unless params[:action] == "new" %> >
       <p>
         <%= f.text_field :search_name, :size => 25 %>
@@ -9,10 +7,10 @@
       <%# link_to_function l(:label_author_is_me), "update_author_info(this," + User.current.get_author_info.to_json + ")", :id => "add_me_as_author" %>
 
       <p>   
-      <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
-        :onChange => remote_function( :url => { :controller => :publications, :action => :get_user_info, :object_id => form_object_id(f.object_name) }, :with => "'value=' + 
-        value" )} %>
-	</p>  
+        <%= f.select :search_results, options_for_select(@author_options), {}, {:size => 5, 
+          :onChange => remote_function( :url => { :controller => :publications, :action => :get_user_info, :object_id => form_object_id(f.object_name) }, :with => "'value=' + 
+          value" )} %>
+	    </p>  
 
       <p style="margin-bottom: -2.5em; padding-bottom; 0"><label><%= l(:identify_author_question) %></label></p>
       <p class="author_identify">
@@ -22,7 +20,7 @@
         
         <label class='inline'><%= radio_button_tag(:identify_author, "no", true, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_no ), :onchange => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_no) %> </label><br />
       </p>
-    </div>	
+  </div>	
   
   <div class='author_edit' id="<%= form_tag_id( f.object_name, :edit_author_info ) %>">
     <p>
@@ -35,23 +33,18 @@
     </p>
   </div>
   
-
   <div class="box" id="<%= form_tag_id( f.object_name, :show_author_info ) %>" style="display: none">
-	
   </div>
+  
   <p>
-
-  <%- if params[:action] == 'new' -%>
-    <%= button_to_function l(:label_save_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
-  <%- else -%>
-    <%= button_to_function l(:label_edit_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
-  <%- end -%>
-
+    <%- if params[:action] == 'new' -%>
+      <%= button_to_function l(:label_save_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
+    <%- else -%>
+      <%= button_to_function l(:label_edit_author), {}, { :onclick => "toggle_save_author(#{form_object_id(f.object_name)}); return false;", :id => form_tag_id( f.object_name, :edit_save_button )} %>
+    <%- end -%>
 
   <%= link_to_remove_fields l("remove_author"), f %>
   </p>
+
 </fieldset>
 <br />
-
-
-
