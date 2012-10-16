@@ -487,6 +487,10 @@ en:
     zero:  no projects
     one:   1 project
     other: "%{count} projects"
+  label_x_downloads:
+    zero:  never downloaded
+    one:   downloaded once
+    other: "downloaded %{count} times"
   label_project_all: All Projects
   label_project_latest: Latest projects
   label_projects_more: More projects
