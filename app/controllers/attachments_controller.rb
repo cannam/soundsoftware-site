@@ -49,9 +49,9 @@ class AttachmentsController < ApplicationController
   end
 
   def download
-    if @attachment.container.is_a?(Version) || @attachment.container.is_a?(Project)
-      @attachment.increment_download
-    end
+    # cc: formerly this happened only if "@attachment.container.is_a?(Version)"
+    # or Project. Not good for us, we want to tally all downloads
+    @attachment.increment_download
 
     # images are sent inline
     send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),
