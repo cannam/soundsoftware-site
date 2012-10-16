@@ -506,7 +506,8 @@ fieldset#notified_events .parent { padding-left: 20px; }
 div.attachments { margin-top: 12px; }
 div.attachments p { margin:4px 0 2px 0; }
 div.attachments img { vertical-align: middle; }
-div.attachments span.author { font-size: 0.9em; color: #888; }
+div.attachments span.author { font-size: 0.9em; color: #888; font-style: italic; padding-left: 4px }
+div.attachments span.size_and_count { font-size: 0.9em; color: #888; padding-left: 4px; }
 
 p.other-formats { text-align: right; font-size:0.9em; color: #666; }
 .other-formats span + span:before { content: "| "; }
