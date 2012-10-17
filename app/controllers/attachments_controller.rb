@@ -17,6 +17,9 @@
 
 class AttachmentsController < ApplicationController
 
+  include AttachmentsHelper
+  helper :attachments
+
   before_filter :find_project
   before_filter :file_readable, :read_authorize, :except => :destroy
   before_filter :delete_authorize, :only => :destroy
@@ -50,8 +53,10 @@ class AttachmentsController < ApplicationController
 
   def download
     # cc: formerly this happened only if "@attachment.container.is_a?(Version)"
-    # or Project. Not good for us, we want to tally all downloads
-    @attachment.increment_download
+    # or Project. Not good for us, we want to tally all downloads [by humans]
+    if not user_is_search_bot?
+      @attachment.increment_download
+    end
 
     # images are sent inline
     send_file @attachment.diskfile, :filename => filename_for_content_disposition(@attachment.filename),

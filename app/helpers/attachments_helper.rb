@@ -42,4 +42,11 @@ module AttachmentsHelper
       api.created_on attachment.created_on
     end
   end
+
+  # Returns true if user agent appears (approximately) to be a search
+  # bot or crawler
+  def user_is_search_bot?
+    agent = request.env['HTTP_USER_AGENT']
+    agent and agent =~ /(bot|slurp|crawler|spider)\b/i
+  end
 end
