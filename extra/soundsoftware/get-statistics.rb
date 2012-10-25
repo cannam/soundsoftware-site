@@ -25,8 +25,8 @@ end
 
 def weeks_between(d1, d2)
    weeks = []
-   start_date = Date.civil(d1.year, d1.month, 1)
-   end_date = Date.civil(d2.year, d2.month, 1)
+   start_date = Date.civil(d1.year, d1.month, d1.day)
+   end_date = Date.civil(d2.year, d2.month, d2.day)
 
    raise ArgumentError unless d1 <= d2
 
