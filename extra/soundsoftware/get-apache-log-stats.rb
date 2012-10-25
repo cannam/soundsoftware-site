@@ -57,7 +57,9 @@ end
 
 def print_stats(h)
   h.keys.sort { |a,b| h[b] <=> h[a] }.each do |p|
-    print h[p], " ", @projects[p].name, "\n"
+    if h[p] > 0
+      print h[p], " ", @projects[p].name, "\n"
+    end
   end
 end
 
@@ -151,6 +153,10 @@ clones.keys.each do |project|
   pulls[project] -= 1
 end
 
+print parseable, " parseable\n"
+print unparseable, " unparseable\n"
+
+
 print "\nMercurial clones:\n"
 print_stats clones
 
@@ -163,9 +169,7 @@ print_stats pushes
 print "\nMercurial archive (zip file) downloads:\n"
 print_stats zips
 
-print "\nProject page hits:\n"
+print "\nProject page hits (excluding crawlers):\n"
 print_stats hits
 
-print parseable, " parseable\n"
-print unparseable, " unparseable\n"
 
