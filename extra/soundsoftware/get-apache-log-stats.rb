@@ -1,6 +1,6 @@
 
-# Read an Apache log file from the SoundSoftware site and produce some
-# per-project stats.
+# Read an Apache log file in SoundSoftware site format from stdin and
+# produce some per-project stats.
 #
 # Invoke with e.g.
 #
@@ -52,6 +52,12 @@ def is_public_project?(project)
       print "Project not found: ", project, "\n"
       false
     end
+  end
+end
+
+def print_stats(h)
+  h.keys.sort { |a,b| h[b] <=> h[a] }.each do |p|
+    print h[p], " ", @projects[p].name, "\n"
   end
 end
 
@@ -131,7 +137,6 @@ STDIN.each do |line|
       next
     end
 
-    project = project.split("?")[0]
     hits[project] += 1
 
   end
@@ -146,11 +151,20 @@ clones.keys.each do |project|
   pulls[project] -= 1
 end
 
-print clones, "\n"
-print pulls, "\n"
-print pushes, "\n"
-print zips, "\n"
-print hits, "\n"
+print "\nMercurial clones:\n"
+print_stats clones
+
+print "\nMercurial pulls (excluding clones):\n"
+print_stats pulls
+
+print "\nMercurial pushes:\n"
+print_stats pushes
+
+print "\nMercurial archive (zip file) downloads:\n"
+print_stats zips
+
+print "\nProject page hits:\n"
+print_stats hits
 
 print parseable, " parseable\n"
 print unparseable, " unparseable\n"
