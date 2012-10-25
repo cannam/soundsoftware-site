@@ -1,4 +1,13 @@
 
+# Read an Apache log file from the SoundSoftware site and produce some
+# per-project stats.
+#
+# Invoke with e.g.
+#
+# cat /var/log/apache2/code-access.log | \
+#   script/runner -e production extra/soundsoftware/get-apache-log-stats.rb
+
+
 # Use the ApacheLogRegex parser, a neat thing
 # See http://www.simonecarletti.com/blog/2009/02/apache-log-regex-a-lightweight-ruby-apache-log-parser/
 require 'apachelogregex'
@@ -14,8 +23,8 @@ clones = Hash.new(0)
 # project name -> count of hg pulls
 pulls = Hash.new(0)
 
-# project name -> count of hg commits
-commits = Hash.new(0)
+# project name -> count of hg pushes
+pushes = Hash.new(0)
 
 # project name -> count of hg archive requests (i.e. Download as Zip)
 zips = Hash.new(0)
@@ -23,8 +32,28 @@ zips = Hash.new(0)
 # project name -> count of hits to pages under /projects/projectname
 hits = Hash.new(0)
 
+# project name -> Project object
+@projects = Hash.new
+
 parseable = 0
 unparseable = 0
+
+def known_project?(project)
+  if !project
+    false
+  elsif @projects.key?(project)
+    true
+  else
+    pobj = Project.find_by_identifier(project)
+    if pobj
+      @projects[project] = pobj
+      true
+    else
+      print "Project not found: ", project
+      false
+    end
+  end
+end
 
 ARGF.each do |line|
 
@@ -75,11 +104,16 @@ ARGF.each do |line|
     # path is /hg/project?something or /hg/project/something
 
     project = components[2].split("?")[0]
+    if not known_project?(project)
+      next
+    end
 
     if components[2] =~ /&roots=00*$/
       clones[project] += 1
     elsif components[2] =~ /cmd=capabilities/
       pulls[project] += 1
+    elsif components[2] =~ /cmd=unbundle/
+      pushes[project] += 1
     elsif components[3] == "archive"
       zips[project] += 1
     end
@@ -89,10 +123,12 @@ ARGF.each do |line|
     # path is /projects/project or /projects/project/something
 
     project = components[2]
-    if project
-      project = project.split("?")[0]
-      hits[project] += 1
+    if not known_project?(project)
+      next
     end
+
+    project = project.split("?")[0]
+    hits[project] += 1
 
   end
 
@@ -108,6 +144,7 @@ end
 
 print clones, "\n"
 print pulls, "\n"
+print pushes, "\n"
 print zips, "\n"
 print hits, "\n"
 
