@@ -41,6 +41,9 @@ unparseable = 0
 def is_public_project?(project)
   if !project
     false
+  elsif project =~ /^\d+$/
+    # ignore numerical project ids, they are only used when editing projects
+    false
   elsif @projects.key?(project)
     @projects[project].is_public? 
   else
@@ -57,7 +60,9 @@ end
 
 def print_stats(h)
   h.keys.sort { |a,b| h[b] <=> h[a] }.each do |p|
-    print h[p], " ", @projects[p].name, "\n"
+    if h[p] > 0
+      print h[p], " ", @projects[p].name, " [", p, "]\n"
+    end
   end
 end
 
@@ -67,9 +72,10 @@ STDIN.each do |line|
 
   # most annoyingly, the parser can't handle the comma-separated list
   # in X-Forwarded-For where it has more than one element. If it has
-  # failed, remove any IP addresses with trailing commas and try again
+  # failed, remove any IP addresses or the word "unknown" with
+  # trailing commas and try again
   if not record
-    filtered = line.gsub(/([0-9]+\.){3}[0-9]+,\s*/, "")
+    filtered = line.gsub(/(unknown|([0-9]+\.){3}[0-9]+),\s*/, "")
     record = parser.parse(filtered)
   end
 
@@ -151,6 +157,10 @@ clones.keys.each do |project|
   pulls[project] -= 1
 end
 
+print parseable, " parseable\n"
+print unparseable, " unparseable\n"
+
+
 print "\nMercurial clones:\n"
 print_stats clones
 
@@ -163,9 +173,7 @@ print_stats pushes
 print "\nMercurial archive (zip file) downloads:\n"
 print_stats zips
 
-print "\nProject page hits:\n"
+print "\nProject page hits (excluding crawlers):\n"
 print_stats hits
 
-print parseable, " parseable\n"
-print unparseable, " unparseable\n"
 
