@@ -38,24 +38,24 @@ hits = Hash.new(0)
 parseable = 0
 unparseable = 0
 
-def known_project?(project)
+def is_public_project?(project)
   if !project
     false
   elsif @projects.key?(project)
-    true
+    @projects[project].is_public? 
   else
     pobj = Project.find_by_identifier(project)
     if pobj
       @projects[project] = pobj
-      true
+      pobj.is_public?
     else
-      print "Project not found: ", project
+      print "Project not found: ", project, "\n"
       false
     end
   end
 end
 
-ARGF.each do |line|
+STDIN.each do |line|
 
   record = parser.parse(line)
 
@@ -69,6 +69,7 @@ ARGF.each do |line|
 
   # discard, but count, unparseable lines
   if not record
+    print "Line not parseable: ", line, "\n"
     unparseable += 1
     next
   end
@@ -84,6 +85,7 @@ ARGF.each do |line|
 
   # split into method, path, protocol
   if not request =~ /^[^\s]+ ([^\s]+) [^\s]+$/
+    print "Line not parseable (bad method, path, protocol): ", line, "\n"
     unparseable += 1
     next
   end
@@ -95,6 +97,7 @@ ARGF.each do |line|
   # should have at least two elements unless path is "/"; first should
   # be empty (begins with /)
   if path != "/" and (components.size < 2 or components[0] != "")
+    print "Line not parseable (degenerate path): ", line, "\n"
     unparseable += 1
     next
   end
@@ -104,7 +107,7 @@ ARGF.each do |line|
     # path is /hg/project?something or /hg/project/something
 
     project = components[2].split("?")[0]
-    if not known_project?(project)
+    if not is_public_project?(project)
       next
     end
 
@@ -123,7 +126,8 @@ ARGF.each do |line|
     # path is /projects/project or /projects/project/something
 
     project = components[2]
-    if not known_project?(project)
+    project = project.split("?")[0] if project
+    if not is_public_project?(project)
       next
     end
 
