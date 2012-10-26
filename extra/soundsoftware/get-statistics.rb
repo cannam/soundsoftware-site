@@ -25,8 +25,8 @@ end
 
 def weeks_between(d1, d2)
    weeks = []
-   start_date = Date.civil(d1.year, d1.month, 1)
-   end_date = Date.civil(d2.year, d2.month, 1)
+   start_date = Date.civil(d1.year, d1.month, d1.day)
+   end_date = Date.civil(d2.year, d2.month, d2.day)
 
    raise ArgumentError unless d1 <= d2
 
@@ -38,41 +38,22 @@ def weeks_between(d1, d2)
    weeks << end_date
 end
 
-
-users = []
 # dates = months_between(d1, d2)
 dates = weeks_between(d1, d2)
-private_projects = []
-all_projects = []
-public_projects = []
-top_level_and_private_projects = []
-
 
 dates.each do |date|
-  users <<  User.find(:all, :conditions => {:created_on  => d1..date})
-  all_projects <<  Project.find(:all, :conditions => {:created_on  => d1..date})
-  private_projects <<  Project.find(:all, :conditions => {:created_on  => d1..date, 
+  users =  User.find(:all, :conditions => {:created_on  => d1..date})
+  all_projects =  Project.find(:all, :conditions => {:created_on  => d1..date})
+  private_projects =  Project.find(:all, :conditions => {:created_on  => d1..date, 
                                                           :is_public => false})
-  top_level_and_private_projects <<  Project.find(:all, :conditions => {:created_on  => d1..date,
+  top_level_and_private_projects =  Project.find(:all, :conditions => {:created_on  => d1..date,
                                                                         :is_public => false, 
                                                                         :parent_id => nil})
 
-  puts "#{date} #{users.size} #{all_projects.size} #{private_projects.size} \n"
+  puts "#{date} #{users.count} #{all_projects.count} #{private_projects.count} #{top_level_and_private_projects.count}\n"
 
 end
 
 
 
-
-
-
-
-
-#nusers.each_with_index do |num, idx|
-#  puts "#{dates[idx]} #{num}\n"
-#end
-
-
-
- 
 
