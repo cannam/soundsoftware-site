@@ -20,7 +20,6 @@
 	<%= link_to l(:label_news_more), { :controller => 'projects', :action => @site_project.identifier, :id => 'news' } %>
   </div>
   <% end %>
-  <% if @projects.any? %>
   <div class="projects box">
   <h3><%=l(:label_project_latest)%></h3>
     <%= render :partial => 'projects/latest' %>
@@ -36,7 +35,6 @@
     <%= render :partial => 'activities/busy' %>
     <%= link_to l(:label_projects_more), :controller => 'projects' %>
   </div>
-  <% end %>
     <%= call_hook(:view_welcome_index_right, :projects => @projects) %>
 </div>
 

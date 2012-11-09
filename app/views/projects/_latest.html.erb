@@ -1,6 +1,5 @@
     <ul>
-    <% for project in @projects %>
-      <% @project = project %>
+    <% for project in Project.latest(User.current) %>
 	<li class="latest">
 	<span class="title">
 	  <% if !project.root? %>
@@ -17,5 +16,4 @@
 	<%= render_project_short_description project %>
       </li>
     <% end %>
-    <% @project = nil %>
     </ul>
