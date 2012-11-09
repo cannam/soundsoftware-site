@@ -119,14 +119,14 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
 #quick-search { margin-right: 6px; margin-top: 1em; color: #000; }
 #project-jump-box { float: right;  margin-right: 6px; margin-top: 5px; color: #000; }
 #project-ancestors-title {
-    margin-bottom: 0px;
+    margin-bottom: -6px;
     margin-left: 12px;
     margin-top: 6px;
 }
 
 #main-menu { position: absolute; top: 100px; /* background-color: #be5700; */ left: 2px; border-top: 0; width: 100%;/* height: 1.82em; */ padding: 0; margin: 0; border: 0; }
 #main-menu li { margin: 0; padding: 0; }
-#main-menu li a { background-color: #fdfbf5; color: #be5700; border-right: 1px solid #a9b680; font-size: 97%; padding: 0em 8px 0.2em 10px; font-weight: normal; }
+#main-menu li a { background-color: #fdfbf5; color: #be5700; border-right: 1px solid #a9b680; font-size: 97%; padding: 0em 8px 0em 10px; font-weight: normal; }
 #main-menu li:last-child a { border-right: 0; }
 #main-menu li a:hover { background-color: #fdfbf5; color: #be5700; text-decoration: underline; }
 #main-menu li a.selected, #main-menu li a.selected:hover { background-color: #fdfbf5; color: #3e442c; }
