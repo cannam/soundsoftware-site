@@ -1,0 +1,21 @@
+    <ul>
+    <% for project in @projects %>
+      <% @project = project %>
+	<li class="latest">
+	<span class="title">
+	  <% if !project.root? %>
+	    <% project.ancestors.each do |p| %>
+	      <%= h(p) %>&nbsp;&#187;
+	    <% end %>
+	  <% end %>
+	<%= link_to_project project %>
+	</span>
+	<% if !project.is_public? %>
+	   <span class="private"><%= l(:field_is_private) %></span>
+	<% end %>
+	<span class="time"><%= format_time(project.created_on)%></span>
+	<%= render_project_short_description project %>
+      </li>
+    <% end %>
+    <% @project = nil %>
+    </ul>
