@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require_dependency 'projects_controller'
 
 module RedmineTags
@@ -127,13 +128,10 @@ module RedmineTags
           end
   
           unless @tag_list.empty?
-            @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |project| Project.find(project.id) }
+            @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |project| Project.find(project.id).root }
             @projects = @projects & @tagged_projects_ids
+            @projects = @projects.uniq
           end
-          
-          @projects = @projects.collect{ |project| project.root }
-          @projects = @projects.uniq
-                    
         end
       end
     end

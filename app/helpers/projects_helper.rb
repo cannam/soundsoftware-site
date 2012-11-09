@@ -162,14 +162,12 @@ module ProjectsHelper
     
   end
 
-  # Renders a tree of projects that the current user does not belong
-  # to, or of all projects if the current user is not logged in.  The
-  # given collection may be a subset of the whole project tree
-  # (eg. some intermediate nodes are private and can not be seen).  We
-  # are potentially interested in various things: the project name,
-  # description, manager(s), creation date, last activity date,
-  # general activity level, whether there is anything actually hosted
-  # here for the project, etc.
+  # Renders a tree of projects.  The given collection may be a subset
+  # of the whole project tree (eg. some intermediate nodes are private
+  # and can not be seen).  We are potentially interested in various
+  # things: the project name, description, manager(s), creation date,
+  # last activity date, general activity level, whether there is
+  # anything actually hosted here for the project, etc.
   def render_project_table(projects)
 
     s = ""
