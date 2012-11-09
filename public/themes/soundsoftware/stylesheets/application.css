@@ -124,7 +124,7 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
     margin-top: 6px;
 }
 
-#main-menu { position: absolute; top: 100px; /* background-color: #be5700; */ left: 0; border-top: 0; width: 100%;/* height: 1.82em; */ padding: 0; margin: 0; border: 0; }
+#main-menu { position: absolute; top: 100px; /* background-color: #be5700; */ left: 2px; border-top: 0; width: 100%;/* height: 1.82em; */ padding: 0; margin: 0; border: 0; }
 #main-menu li { margin: 0; padding: 0; }
 #main-menu li a { background-color: #fdfbf5; color: #be5700; border-right: 1px solid #a9b680; font-size: 97%; padding: 0em 8px 0.2em 10px; font-weight: normal; }
 #main-menu li:last-child a { border-right: 0; }
