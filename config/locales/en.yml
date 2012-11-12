@@ -494,9 +494,9 @@ en:
   label_project_all: All Projects
   label_project_latest: Latest projects
   label_projects_more: More projects
-  label_project_tags_all: Tags for projects
+  label_project_tags_all: Popular tags
   label_projects_busy: Busy projects
-  label_institutions_busy: Busy institutions
+  label_institutions_busy: Active institutions
   label_managers: Managed by
   label_issue: Issue
   label_issue_new: New issue
@@ -693,7 +693,7 @@ en:
   label_repository: Repository
   label_is_external_repository: Track an external repository
   label_repository_plural: Repositories
-  label_browse: Browse
+  label_explore_projects: Explore projects
   label_modification: "%{count} change"
   label_modification_plural: "%{count} changes"
   label_branch: Branch
