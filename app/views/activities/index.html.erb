@@ -1,4 +1,14 @@
-<h2><%= @author.nil? ? l(:label_activity) : l(:label_user_activity, link_to_user(@author)) %></h2>
+<h2><%=
+  if @author.nil?
+    if @institution_name.blank?
+      l(:label_activity)
+    else
+      l(:label_institution_activity, h(@institution_name))
+    end
+  else
+    l(:label_user_activity, link_to_user(@author))
+  end
+  %></h2>
 <p class="subtitle"><%= l(:label_date_from_to, :start => format_date(@date_to - @days), :end => format_date(@date_to-1)) %></p>
 
 <div id="activity">

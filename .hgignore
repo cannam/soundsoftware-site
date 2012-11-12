@@ -29,7 +29,7 @@ vendor/rails
 .svn/
 .git/
 *~
-
+public/themes/soundsoftware/stylesheets/fonts/*
 
 .bundle
 Gemfile.lock
