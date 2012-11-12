@@ -19,4 +19,9 @@
     <%= render :partial => 'activities/busy' %>
     <%= link_to l(:label_projects_more), :controller => 'projects' %>
   </div>
+  <div class="projects box">
+  <h3><%=l(:label_institutions_busy)%></h3>
+    <%= render :partial => 'activities/busy_institution' %>
+    <%= link_to l(:label_projects_more), :controller => 'projects' %>
+  </div>
 </div>

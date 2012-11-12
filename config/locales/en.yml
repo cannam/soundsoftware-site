@@ -496,6 +496,7 @@ en:
   label_projects_more: More projects
   label_project_tags_all: Tags for projects
   label_projects_busy: Busy projects
+  label_institutions_busy: Busy institutions
   label_managers: Managed by
   label_issue: Issue
   label_issue_new: New issue
@@ -562,6 +563,7 @@ en:
   label_activity_my_recent_none: No recent activity
   label_overall_activity: Overall activity
   label_user_activity: "%{value}'s activity"
+  label_institution_activity: "Activity from %{value}"
   label_new: New
   label_logged_as: Logged in as
   label_environment: Environment
