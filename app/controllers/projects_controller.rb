@@ -43,6 +43,8 @@ class ProjectsController < ApplicationController
   helper :repositories
   include RepositoriesHelper
   include ProjectsHelper
+  include ActivitiesHelper
+  helper :activities
 
   # Lists visible projects. Paginator is for top-level projects only
   # (subprojects belong to them)

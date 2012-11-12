@@ -1,5 +1,4 @@
 <% events = @events_by_day %>
-<% max = 5 %>
 <% if (events.nil?) 
      activity = Redmine::Activity::Fetcher.new(User.current)
      events = activity.events(Date.today - 14, Date.today + 1)
@@ -13,16 +12,7 @@
    <ul>
 
    <% 
-      # Transform events list into hash from project id to number of
-      # occurrences of project in list (there is surely a tidier way
-      # to do this, e.g. chunk() in Ruby 1.9 but not in 1.8)
-      phash = events.map { |e| e.project unless !e.respond_to?(:project) }.sort.group_by { |p| p.id }
-      phash = phash.merge(phash) { |k,v| v.length }
-      threshold = phash.values.sort.last(max).first
-      busy = phash.keys.select { |k| phash[k] >= threshold }.sample(max)
-
-      for id in busy
-        project = Project.find(id)
+      for project in busy_projects(events, 5)
    %>
 
    <li class="busy">
