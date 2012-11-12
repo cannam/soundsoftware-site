@@ -13,8 +13,14 @@ module ActivitiesHelper
   end
 
   def busy_institutions(events, count)
-    authors = events.map { |e| e.event_author unless !e.respond_to?(:event_author) }.compact
-    institutions = authors.map { |a| a.ssamr_user_detail.institution_name }
+    authors = events.map do |e|
+      e.event_author unless !e.respond_to?(:event_author) 
+    end.compact
+    institutions = authors.map do |a|
+      if a.respond_to?(:ssamr_user_detail) and !a.ssamr_user_detail.nil?
+        a.ssamr_user_detail.institution_name
+      end
+    end
     insthash = institutions.compact.sort.group_by { |i| i }
     insthash = insthash.merge(insthash) { |k,v| v.length }
     threshold = insthash.values.sort.last(count).first
