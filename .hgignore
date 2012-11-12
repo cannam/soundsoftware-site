@@ -35,3 +35,4 @@ vendor/rails
 Gemfile.lock
 Gemfile.local
 
+re:^config\.ru$
