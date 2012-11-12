@@ -1,10 +1,8 @@
-<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
-
 <h2><%=l(:label_publication_show)%></h2>
 
 <div class="box">
   <h3>Publication Info</h3>
-  <%=h show_cite_proc_entry(@publication)%>
+  <%= show_cite_proc_entry(@publication)%>
   
   <h3>Bibtex Format</h3>
     <%=h print_bibtex_entry(@publication) %>
