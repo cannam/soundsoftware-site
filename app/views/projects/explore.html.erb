@@ -1,3 +1,6 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'redmine_tags', :plugin => 'redmine_tags' %>
+<% end %>
 
 <% cache(:action => 'explore', :action_suffix => 'tags', :expires_in => 1.hour) do %>
 <h2><%= l(:label_explore_projects) %></h2>
