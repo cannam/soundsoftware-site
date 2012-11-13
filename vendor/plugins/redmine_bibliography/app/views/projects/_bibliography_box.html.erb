@@ -20,9 +20,7 @@
          <%= link_to_function "[Bibtex]", onclick="toggleBibtex(this)" -%> 
        </dd>
        <dd class="bibtex-textarea collapsed" style="display: none;">
-         <textarea> 
-           <%= publication.print_entry(:bibtex) -%>         
-         </textarea>         
+         <textarea readonly><%= publication.print_entry(:bibtex) -%></textarea>         
        </dd>
    <% end -%>
      </dl>
