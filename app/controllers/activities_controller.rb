@@ -44,6 +44,8 @@ class ActivitiesController < ApplicationController
     if !@institution_name.blank?
       events = events.select do |e|
         e.respond_to?(:event_author) and e.event_author and
+	  e.event_author.respond_to?(:ssamr_user_detail) and
+          !e.event_author.ssamr_user_detail.nil? and
           e.event_author.ssamr_user_detail.institution_name == @institution_name
       end
       if events.empty?
