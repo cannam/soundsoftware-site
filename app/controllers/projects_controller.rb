@@ -20,8 +20,8 @@ class ProjectsController < ApplicationController
   menu_item :roadmap, :only => :roadmap
   menu_item :settings, :only => :settings
 
-  before_filter :find_project, :except => [ :index, :list, :new, :create, :copy ]
-  before_filter :authorize, :except => [ :index, :list, :new, :create, :copy, :archive, :unarchive, :destroy]
+  before_filter :find_project, :except => [ :index, :list, :explore, :new, :create, :copy ]
+  before_filter :authorize, :except => [ :index, :list, :explore, :new, :create, :copy, :archive, :unarchive, :destroy]
   before_filter :authorize_global, :only => [:new, :create]
   before_filter :require_admin, :only => [ :copy, :archive, :unarchive, :destroy ]
   accept_rss_auth :index
@@ -43,6 +43,8 @@ class ProjectsController < ApplicationController
   helper :repositories
   include RepositoriesHelper
   include ProjectsHelper
+  include ActivitiesHelper
+  helper :activities
 
   # Lists visible projects. Paginator is for top-level projects only
   # (subprojects belong to them)
@@ -72,6 +74,16 @@ class ProjectsController < ApplicationController
         projects = Project.visible.find(:all, :order => 'created_on DESC',
                                               :limit => Setting.feeds_limit.to_i)
         render_feed(projects, :title => "#{Setting.app_title}: #{l(:label_project_latest)}")
+      }
+    end
+  end
+
+  # A different view of projects using explore boxes
+  def explore
+    respond_to do |format|
+      format.html {
+        @projects = Project.visible
+        render :template => 'projects/explore.html.erb', :layout => !request.xhr?
       }
     end
   end
