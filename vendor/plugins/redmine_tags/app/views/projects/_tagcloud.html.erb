@@ -1,6 +1,3 @@
-<% content_for :header_tags do %>
-    <%= stylesheet_link_tag 'redmine_tags', :plugin => 'redmine_tags' %>
-<% end %>
 
 <div id="tags">
 <%= render_tags_list(Project.available_tags, :style => :cloud) %>
