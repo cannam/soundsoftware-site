@@ -35,8 +35,8 @@ fi
 # package declarations
 
 find "$projectdir" -type f -name \*.java \
-    -exec grep '^ *package [a-zA-Z][a-zA-Z0-9\._-]*; *$' \{\} /dev/null \; |
-    sed -e 's/\/[^\/]*: *package */:/' -e 's/; *$//' |
+    -exec egrep '^ *package +[a-zA-Z][a-zA-Z0-9\._-]*;.*$' \{\} /dev/null \; |
+    sed -e 's/\/[^\/]*: *package */:/' -e 's/;.*$//' |
     sort | uniq | (
 	current_prefix=
 	current_packages=

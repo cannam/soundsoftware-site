@@ -4,6 +4,7 @@ module RedmineTags
 
       def self.included(base) # :nodoc:
         base.send(:include, InstanceMethods)
+        base.send(:include, TagsHelper)
         base.class_eval do
           unloadable
         end

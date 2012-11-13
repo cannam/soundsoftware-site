@@ -1,11 +1,26 @@
 @import url(fonts.css);
 
-h1, #project-ancestors-title {
-  font-family: GilliusADFNo2, 'Gill Sans', Tahoma, sans-serif;
+/* IE likes us to separate out normal & bold into different fonts
+   rather than use the selectors on the same font */
+
+h1, #project-ancestors-title, #top-menu a {
+  font-family: Insider-Medium, Tahoma, sans-serif;
   font-weight: normal;
 }    
 
-body,p,h2,h3,h4,li,table,.wiki h1,.embedded h1 { 
-  font-family: Calibri, DroidSans, 'Liberation Sans', tahoma, verdana, sans-serif; 
+#top-menu div, #top-menu li {
+  font-size: 12px;
+}
+
+body,p,li,table { 
+  font-family: Insider-Regular, tahoma, verdana, sans-serif; 
+  font-size: 14px;
+  line-height: 1.34;
+  font-weight: normal;
+}
+
+h2,h3,h4,.wiki h1,.embedded h1 { 
+  font-family: Insider-Medium, tahoma, verdana, sans-serif; 
+  font-weight: normal;
   line-height: 1.34;
 }
