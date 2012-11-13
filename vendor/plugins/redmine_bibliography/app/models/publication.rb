@@ -69,13 +69,12 @@ class Publication < ActiveRecord::Base
     bib.author = self.print_bibtex_author_names
     bib.title = self.title
 
-
     self.bibtex_entry.attributes.keys.sort.each do |key|      
       value = self.bibtex_entry.attributes[key].to_s
       next if key == 'id' or key == 'publication_id' or value == ""
 
-      if key == "entry_type"
-        bib.type = self.bibtex_entry.entry_type_label
+      if key == "entry_type"        
+        bib.type = BibtexEntryType.find(self.bibtex_entry.entry_type).name
       else
         bib[key.to_sym] = value
       end               
