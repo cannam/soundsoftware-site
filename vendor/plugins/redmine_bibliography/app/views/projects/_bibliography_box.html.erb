@@ -17,7 +17,7 @@
        <dd>
          <%= link_to("[More Details]", {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%> 
          
-         <%= link_to_function "[Bibtex]", onclick="toggleBibtex(this)" -%> 
+         <%= link_to_function "[B<small>IB</small>T<sub>E</sub>X]", onclick="toggleBibtex(this)" -%> 
        </dd>
        <dd class="bibtex-textarea collapsed" style="display: none;">
          <textarea readonly><%= publication.print_entry(:bibtex) -%></textarea>         

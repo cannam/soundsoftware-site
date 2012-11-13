@@ -40,7 +40,7 @@ div#bibliography dd span.authors { color: #808080; }
 div#bibliography dd span.year { padding-left: 0.6em; }
 
 div#bibliography .box dt { 
-  background: url(../../../images/document.png) no-repeat 0% 50%; padding-left: 20px;
+  background: url(../../../images/document.png) no-repeat 0% 4px; padding-left: 20px;
   margin-left: 2em;
 }
 div#bibliography .box dd { 
