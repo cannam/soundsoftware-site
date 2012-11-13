@@ -33,18 +33,20 @@ input.readonly {
 }
 
 
-div#bibliography dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
+div#bibliography dd { margin-bottom: 1em; font-size: 0.9em; }
 
 div#bibliography dd .authors { font-style: italic; }
 div#bibliography dd span.authors { color: #808080; }
 div#bibliography dd span.year { padding-left: 0.6em; }
 
 div#bibliography .box dt { 
-  background: url(../../../images/document.png) no-repeat 0% 4px; padding-left: 20px;
-  margin-left: 2em;
+  background: url(../../../images/document.png) no-repeat 0% 4px;
+  padding-left: 20px;
+  margin-left: 0;
 }
 div#bibliography .box dd { 
-  margin-left: 25px;
+  padding-left: 20px;
+  margin-left: 0;
 }
 
 div#bibliography h3 { 
