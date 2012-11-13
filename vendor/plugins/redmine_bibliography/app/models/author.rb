@@ -1,4 +1,6 @@
 class Author < ActiveRecord::Base
+  unloadable
+  
   has_many :authorships, :dependent => :destroy
   has_many :publications, :through => :authorships
 

@@ -57,7 +57,36 @@ class Publication < ActiveRecord::Base
     end    
   end
   
+  def print_bibtex_author_names
+    # this authors are correctly sorted because the authorships model 
+    # already outputs the author names ASC by auth_order
+    self.authorships.map{|a| a.name_on_paper}.join(' and ')
+  end  
   
-  
-  
+  def print_entry(style)
+    bib = BibTeX::Entry.new
+
+    bib.author = self.print_bibtex_author_names
+    bib.title = self.title
+
+
+    self.bibtex_entry.attributes.keys.sort.each do |key|      
+      value = self.bibtex_entry.attributes[key].to_s
+      next if key == 'id' or key == 'publication_id' or value == ""
+
+      if key == "entry_type"
+        bib.type = self.bibtex_entry.entry_type_label
+      else
+        bib[key.to_sym] = value
+      end               
+    end
+    
+    if style == :ieee
+      CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html      
+    else 
+      bibtex = bib.to_s :include => :meta_content
+      bibtex.strip!
+      logger.error { bibtex }
+    end  
+  end
 end
