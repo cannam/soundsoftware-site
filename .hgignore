@@ -35,3 +35,4 @@ public/themes/soundsoftware/stylesheets/fonts/*
 Gemfile.lock
 Gemfile.local
 
+re:^config\.ru$

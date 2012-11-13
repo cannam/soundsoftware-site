@@ -1,24 +1,29 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+    <%= javascript_include_tag 'bibtex', :plugin => 'redmine_bibliography' -%>
+<% end %>
+
 <% if @project.publications.any? %>
 <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
   <div id="bibliography">
     <div class="box">
     <h3><%=l(:label_related_publication_plural)%></h3>
 
-   <dl>
-     <% @project.publications.each do |publication| %>
-     <dt>
-     <span class="authors">
-       <%= publication.authorships.map { |a| h a.name_on_paper }.join(', ') %><% if !publication.authorships.empty? %>.<% end %>
-     </span>
-     <span class="title"><%= link_to publication.title, :controller => 'publications', :action => 'show', :id => publication, :project_id => @project %></span>
-     <% if publication.bibtex_entry.year.to_s != "" %>
-     <span class="year">
-       &nbsp;(<%= publication.bibtex_entry.year %>)
-     </span>
-     <% end %>
-     </dt><dd></dd>
+     <dl>       
+     <% @project.publications.each do |publication| %>       
+       <dt>
+          <%= publication.print_entry(:ieee) -%>
+       </dt>
+       <dd>
+         <%= link_to("[More Details]", {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%> 
+         
+         <%= link_to_function "[B<small>IB</small>T<sub>E</sub>X]", onclick="toggleBibtex(this)" -%> 
+       </dd>
+       <dd class="bibtex-textarea collapsed" style="display: none;">
+         <textarea readonly><%= publication.print_entry(:bibtex) -%></textarea>         
+       </dd>
    <% end -%>
-   </dl>
+     </dl>
   </div>
 </div>
-<% end %>
+<% end -%>

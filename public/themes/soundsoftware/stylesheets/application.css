@@ -147,7 +147,7 @@ h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 { border-bottom: 0px; }
 */
 /* h4 { border-bottom: dotted 1px #c0c0c0; } */
 
-.wiki p { margin-left: 3em; margin-right: 3em; }
+.wiki p, .wiki li { margin-left: 30px; margin-right: 3em; }
 
 div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px solid #a9b680; }
 
