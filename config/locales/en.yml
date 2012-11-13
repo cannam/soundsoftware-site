@@ -893,7 +893,7 @@ en:
   button_expand_all: Expand all
   button_delete: Delete
   button_create: Create
-  button_create_and_continue: Create and continue
+  button_create_and_continue: Create and Add Another
   button_test: Test
   button_edit: Edit
   button_edit_associated_wikipage: "Edit associated Wiki page: %{page_title}"
