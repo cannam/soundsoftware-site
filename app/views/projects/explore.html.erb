@@ -1,23 +1,29 @@
 
+<% cache(:action => 'explore', :action_suffix => 'tags') do %>
 <h2><%= l(:label_explore_projects) %></h2>
-
   <div class="tags box">
   <h3><%=l(:label_project_tags_all)%></h3>
     <%= render :partial => 'projects/tagcloud' %>
   </div>
+<% end %>
+
 <div class="splitcontentleft">
+  <% cache(:action => 'explore', :action_suffix => 'busy_institutions') do %>
   <div class="institutions box">
   <h3><%=l(:label_institutions_busy)%></h3>
     <%= render :partial => 'activities/busy_institution' %>
   </div>
+  <% end %>
   <div class="projects box">
   <h3><%=l(:label_project_latest)%></h3>
     <%= render :partial => 'projects/latest' %>
   </div>
 </div>
 <div class="splitcontentright">
+  <% cache(:action => 'explore', :action_suffix => 'busy_projects') do %>
   <div class="projects box">
   <h3><%=l(:label_projects_busy)%></h3>
     <%= render :partial => 'activities/busy' %>
   </div>
+  <% end %>
 </div>

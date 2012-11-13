@@ -1,6 +1,6 @@
 <% events = @events_by_day %>
 <% if (events.nil?) 
-     activity = Redmine::Activity::Fetcher.new(User.current)
+     activity = Redmine::Activity::Fetcher.new(User.anonymous)
      days = Setting.activity_days_default.to_i
      events = activity.events(Date.today - days, Date.today + 1)
    end
@@ -25,3 +25,4 @@
     <% end %>
   </ul>
 <% end %>
+
