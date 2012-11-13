@@ -21,7 +21,7 @@ class SysController < ActionController::Base
   def projects
     p = Project.active.has_module(:repository).find(:all, :include => :repository, :order => 'identifier')
     # extra_info attribute from repository breaks activeresource client
-    render :xml => p.to_xml(:only => [:id, :identifier, :name, :is_public, :status], :include => {:repository => {:only => [:id, :url]}})
+    render :xml => p.to_xml(:only => [:id, :identifier, :name, :is_public, :status], :include => {:repository => {:only => [:id, :url, :is_external, :external_url]}})
   end
 
   def create_project_repository

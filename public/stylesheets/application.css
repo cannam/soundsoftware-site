@@ -5,7 +5,7 @@ h1, h2, h3, h4 { font-family: "Trebuchet MS", Verdana, sans-serif;}
 h1 {margin:0; padding:0; font-size: 24px;}
 h2, .wiki h1 {font-size: 20px;padding: 2px 10px 1px 0px;margin: 0 0 10px 0; border-bottom: 1px solid #bbbbbb; color: #444;}
 h3, .wiki h2 {font-size: 16px;padding: 2px 10px 1px 0px;margin: 0 0 10px 0; border-bottom: 1px solid #bbbbbb; color: #444;}
-h4, .wiki h3 {font-size: 13px;padding: 2px 10px 1px 0px;margin-bottom: 5px; border-bottom: 1px dotted #bbbbbb; color: #444;}
+h4, .wiki h3 {font-size: 14px;padding: 2px 10px 1px 0px;margin-bottom: 5px; border-bottom: 1px dotted #bbbbbb; color: #444;}
 
 /***** Layout *****/
 #wrapper {background: white;}
@@ -24,14 +24,14 @@ h4, .wiki h3 {font-size: 13px;padding: 2px 10px 1px 0px;margin-bottom: 5px; bord
 
 #account {float:right;}
 
-#header {height:5.3em;margin:0;background-color:#507AAA;color:#f8f8f8; padding: 4px 8px 0px 6px; position:relative;}
+#header {height:68px;margin:0;background-color:#507AAA;color:#f8f8f8; padding: 4px 8px 0px 6px; position:relative;}
 #header a {color:#f8f8f8;}
 #header h1 a.ancestor { font-size: 80%; }
 
 #project-search-jump {float:right; }
 
 
-#main-menu {position: absolute;  bottom: 0px;  left:6px; margin-right: -500px;}
+#main-menu {position: absolute;  bottom: 0px;  left:8px; margin-right: -500px;}
 #main-menu ul {margin: 0;  padding: 0;}
 #main-menu li {
   float:left;
@@ -240,6 +240,8 @@ div.activity h3 { background: url(../images/ticket.png) no-repeat 0% 50%; paddin
 div.members h3 { background: url(../images/group.png) no-repeat 0% 50%; padding-left: 20px; }
 div.news h3 { background: url(../images/news.png) no-repeat 0% 50%; padding-left: 20px; }
 div.projects h3 { background: url(../images/projects.png) no-repeat 0% 50%; padding-left: 20px; }
+div.tags h3 { background: url(../images/ticket_note.png) no-repeat 0% 50%; padding-left: 20px; }
+div.institutions h3 { background: url(../images/group.png) no-repeat 0% 50%; padding-left: 20px; }
 
 #watchers ul {margin: 0;  padding: 0;}
 #watchers li {list-style-type:none;margin: 0px 2px 0px 0px; padding: 0px 0px 0px 0px;}
@@ -500,13 +502,14 @@ fieldset#notified_events .parent { padding-left: 20px; }
 .summary {font-style: italic;}
 
 #attachments_fields input[type=text] {margin-left: 8px; }
-#attachments_fields span {display:block; white-space:nowrap;}
+/*#attachments_fields span {display:block; white-space:nowrap;} */
 #attachments_fields img {vertical-align: middle;}
 
 div.attachments { margin-top: 12px; }
 div.attachments p { margin:4px 0 2px 0; }
 div.attachments img { vertical-align: middle; }
-div.attachments span.author { font-size: 0.9em; color: #888; }
+div.attachments span.author { font-size: 0.9em; color: #888; font-style: italic; padding-left: 4px }
+div.attachments span.size_and_count { font-size: 0.9em; color: #888; padding-left: 4px; }
 
 p.other-formats { text-align: right; font-size:0.9em; color: #666; }
 .other-formats span + span:before { content: "| "; }
