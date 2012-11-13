@@ -1,0 +1,7 @@
+<%- remote_form_for @publication, :url =>  { :project_id  => @project, :action => :parse_bibtex }, :class => "tabular" do |f| -%>
+  <div class="box tabular settings">
+    <%= text_area_tag :bibtex_paste, "Please paste your bibtex entry here" , :class => "wiki", :style => 'width:90%' -%>
+    <div style="clear:both"></div>
+    <%= f.submit "Parse BibTex" %>
+  </div>
+<%- end -%>

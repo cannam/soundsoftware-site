@@ -5,21 +5,7 @@
 
 <h2><%=l(:label_publication_new)%></h2>
 
-<p>To create a publication you can either parse a BibTeX entry or enter the publication details manually.<p>
+  <p>To create a publication you can either parse a BibTeX entry or enter the publication details manually.<p>
 
+  <%= render_tabs create_publication_tabs %>
 
-<div class="splitcontentleft">
-  <%- remote_form_for @publication, :url =>  { :project_id  => @project, :action => :parse_bibtex } do |f| -%>
-    <%= text_area_tag :bibtex_paste, "Please paste your bibtex entry here", :rows => 6, :style => 'width:90%' %>
-    <br />
-    <%= f.submit "Parse BibTex" %>
-  <%- end -%>
-</div>
-
-<div class="splitcontentright">
-  <% form_for @publication, :url => { :project_id  => @project, :action => :create }, :builder => TabularFormBuilder do |f| -%>
-    <%= render :partial => 'form', :locals => { :f => f }  %>
-    <div style="clear:both"></div>
-    <%= f.submit %>
-  <% end %>
-</div>

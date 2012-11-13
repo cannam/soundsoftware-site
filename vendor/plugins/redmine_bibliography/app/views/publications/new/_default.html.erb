@@ -1,0 +1,7 @@
+<% form_for @publication, :url => { :project_id  => @project, :action => :create }, :class => "tabular" do |f| -%>
+  <div class="box tabular settings">
+    <%= render :partial => 'form', :locals => { :f => f }  %>
+    <div style="clear:both"></div>
+    <%= f.submit %>
+  </div>
+<%- end -%>
