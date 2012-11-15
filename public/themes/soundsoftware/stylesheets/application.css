@@ -149,6 +149,8 @@ h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 { border-bottom: 0px; }
 
 .wiki p, .wiki li { margin-left: 30px; margin-right: 3em; }
 
+.repository-info .wiki p { margin-left: 0 }
+
 div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px solid #a9b680; }
 
 #top-menu a.home, #top-menu a.my-page, #top-menu a.projects, #top-menu a.administration, #top-menu a.help { 
