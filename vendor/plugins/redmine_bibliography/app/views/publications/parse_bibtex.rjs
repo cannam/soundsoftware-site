@@ -1,0 +1,4 @@
+page.replace_html :ieee_prev, @ieee_prev
+
+page.replace_html :error, flash[:error]
+flash.discard

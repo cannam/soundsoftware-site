@@ -7,7 +7,7 @@ class PublicationsController < ApplicationController
   unloadable
 
   model_object Publication
-  before_filter :find_model_object, :except => [:parse_bibtex, :new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]  
+  before_filter :find_model_object, :except => [:parse_bibtex, :new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]
   before_filter :find_project_by_project_id, :authorize, :only => [ :edit, :new, :update, :create ]
 
   def new
@@ -18,69 +18,81 @@ class PublicationsController < ApplicationController
     @publication.build_bibtex_entry
 
     # and at least one author
-    # @publication.authorships.build.build_author        
+    # @publication.authorships.build.build_author
     @author_options = [["#{User.current.name} (@#{User.current.mail.partition('@')[2]})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
   end
-
 
   def parse_bibtex
     find_project_by_project_id
 
-    @bibtex_paste = params[:bibtex_paste]
+    bibtex_paste = params[:bibtex_paste]
+    bib = BibTeX.parse(bibtex_paste)
 
-    begin
-      bib = BibTeX.parse(@bibtex_paste)
-
+    respond_to do |format|
       if bib.errors.present? or bib[0].class == NilClass
-        raise BibtexParsingError, "Bibtex Parsing Error"
+
+        # todo: response for HTML
+        format.html{}
+
+        # todo: better error handling
+        biberror = bib.errors[0].trace[4]
+        logger.error { "BibTex Parsing Error: #{biberror}" }
+        flash[:error] = "BibTex Parsing Error: #{biberror}"
+        #raise BibtexParsingError, "Bibtex Parsing Error: biberror}"
+        format.js
+      else
+        @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
+        flash['notice'] = "OK!"
+        format.js
       end
-
-      respond_to do |format| 
-        format.js {
-          render(:update) {|page|
-            flash[:notice] = "Correctly parsed BibTeX entry"
-
-            bibtex_entry_no = BibtexEntryType.find_by_name(bib[0].type.to_s).id
-            page["publication_title"].value = bib[0][:title]
-            page["publication_bibtex_entry_attributes_entry_type"].value = bibtex_entry_no
-            
-            BibtexEntryType.fields(bibtex_entry_no).each do |field|
-              page["publication_bibtex_entry_attributes_#{field}"].value = bib[0][field]
-            end
-
-            # for each author simulates a click and fills the author info                        
-            bib[0].authors.each do |author|            
-              page["add_another_author"].click
-#              page.alert(bib[0].authors.length)
-#              page.alert(page["authors"].first.id)
-            
-            end
-            
-
-
-          }
-        }
-      end
-
-    rescue BibtexParsingError => e
-      logger.error { "Bibtex Parsing Error #{bib.errors}" }
-
-      # todo: not showing... should be inside render?
-      flash[:error] = e.message
-      
-      respond_to do |format|
-       format.js{ 
-         render(:update) {|page|
-         }
-       }
-      end
-
     end
-
   end
 
 
-  def create            
+#      respond_to do |format|
+#        format.js {
+#          render(:update) {|page|
+#            flash.now[:notice] = "Correctly parsed BibTeX entry"
+#
+#            bibtex_entry_no = BibtexEntryType.find_by_name(bib[0].type.to_s).id
+#            page["publication_title"].value = bib[0][:title]
+#            page["publication_bibtex_entry_attributes_entry_type"].value = #bibtex_entry_no
+#
+#            BibtexEntryType.fields(bibtex_entry_no).each do |field|
+#              page["publication_bibtex_entry_attributes_#{field}"].value = bib[0][field#]
+#            end
+#
+#            # for each author simulates a click and fills the author info
+##            bib[0].authors.each do |author|
+##              page["add_another_author"].click
+##              page.alert(bib[0].authors.length)
+##              page.alert(page["authors"].first.id)
+##            end
+#
+#
+#
+#          }
+#        }
+#      end
+
+#    rescue BibtexParsingError => e
+#      logger.error { "Bibtex Parsing Error #{bib.errors}" }
+
+      # todo: not showing... should be inside render?
+#      flash[:error] = e.message
+
+#      respond_to do |format|
+#       format.js{
+#         render(:update) {|page|
+#         }
+#       }
+#      end
+
+#    end
+
+
+
+  def create
     @project = Project.find(params[:project_id])
 
     @author_options = []
@@ -88,7 +100,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.new(params[:publication])
     @publication.projects << @project unless @project.nil?
 
-    if @publication.save 
+    if @publication.save
       @publication.notify_authors_publication_added(@project)
 
       flash[:notice] = "Successfully created publication."
@@ -116,17 +128,17 @@ class PublicationsController < ApplicationController
 
     # method for creating "pasted" bibtex entries
     if bibtex_entry
-      parse_bibtex_list bibtex_entry    
+      parse_bibtex_list bibtex_entry
     end
   end
 
   def get_bibtex_required_fields
 
-    fields = BibtexEntryType.fields(params[:q]) 
+    fields = BibtexEntryType.fields(params[:q])
 
     respond_to do |format|
       format.js {
-        render(:update) {|page|       
+        render(:update) {|page|
           if params[:q].empty?
             page << "hideOnLoad();"
           else
@@ -148,20 +160,20 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def edit   
+  def edit
     find_project_by_project_id unless params[:project_id].nil?
 
     @edit_view = true;
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
 
-    @author_options = []  
+    @author_options = []
 
-    @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)    
+    @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)
   end
 
-  def update    
-    @publication = Publication.find(params[:id])        
+  def update
+    @publication = Publication.find(params[:id])
 
     @author_options = []
 
@@ -175,7 +187,7 @@ class PublicationsController < ApplicationController
       end
     else
       render :action => 'edit'
-    end   
+    end
   end
 
 
@@ -197,7 +209,7 @@ class PublicationsController < ApplicationController
     return authors_entry.split(" and ")
   end
 
-  # parses a list of bibtex 
+  # parses a list of bibtex
   def parse_bibtex_list(bibtex_list)
     bibliography = BibTeX.parse bibtex_list
 
@@ -210,11 +222,11 @@ class PublicationsController < ApplicationController
         create_bibtex_entry d
       end
     end
-  end 
+  end
 
-  def create_bibtex_entry(d)        
+  def create_bibtex_entry(d)
     @publication = Publication.new
-    @bentry = BibtexEntry.new        
+    @bentry = BibtexEntry.new
     authors = []
     institution = ""
     email = ""
@@ -232,17 +244,17 @@ class PublicationsController < ApplicationController
       else
         @bentry[field] = d[field]
       end
-    end 
+    end
 
     @publication.bibtex_entry = @bentry
     @publication.save
 
-    # what is this for??? 
+    # what is this for???
     # @created_publications << @publication.id
 
     # need to save all authors
-    #   and establish the author-publication association 
-    #   via the authorships table 
+    #   and establish the author-publication association
+    #   via the authorships table
     authors.each_with_index.map do |authorname, idx|
       author = Author.new(:name => authorname)
       if author.save!
@@ -274,13 +286,13 @@ class PublicationsController < ApplicationController
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
 
-    @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects            
+    @projects = Project.active.like(params[:q]).find(:all, :limit => 100) - @publication.projects
     logger.debug "Query for \"#{params[:q]}\" returned \"#{@projects.size}\" results"
     render :layout => false
   end
-  
 
-  def autocomplete_for_author    
+
+  def autocomplete_for_author
     @results = []
 
     object_id = params[:object_id]
@@ -294,8 +306,8 @@ class PublicationsController < ApplicationController
 
     @results = users_list
 
-    # TODO: can be optimized…    
-    authorships_list.each do |authorship|      
+    # TODO: can be optimized…
+    authorships_list.each do |authorship|
       flag = true
 
       users_list.each do |user|
@@ -309,7 +321,7 @@ class PublicationsController < ApplicationController
       @results << authorship if flag
     end
 
-    render :layout => false    
+    render :layout => false
   end
 
   def get_user_info
@@ -327,7 +339,7 @@ class PublicationsController < ApplicationController
 
     respond_to do |format|
       format.js {
-        render(:update) {|page| 
+        render(:update) {|page|
           page[name_field].value = item.name
           page[email_field].value = item.mail
           page[institution_field].value = item.institution
@@ -349,16 +361,16 @@ class PublicationsController < ApplicationController
   end
 
   def add_project
-    @projects = Project.find(params[:publication][:project_ids])    
+    @projects = Project.find(params[:publication][:project_ids])
     @publication.projects << @projects
-    @project = Project.find(params[:project_id])    
+    @project = Project.find(params[:project_id])
 
-    # TODO luisf should also respond to HTML??? 
+    # TODO luisf should also respond to HTML???
     respond_to do |format|
       format.html { redirect_to :back }
-      format.js { 
-        render(:update) {|page| 
-          page[:add_project_form].reset          
+      format.js {
+        render(:update) {|page|
+          page[:add_project_form].reset
           page.replace_html :list_projects, :partial => 'list_projects'
         }
       }
@@ -375,14 +387,14 @@ class PublicationsController < ApplicationController
         @publication.projects.delete proj if request.post?
       end
     else
-      logger.error { "Cannot remove project from publication list" }      
+      logger.error { "Cannot remove project from publication list" }
     end
 
     logger.error { "CURRENT project name#{proj.name} and wanna delete #{@project.name}" }
 
-    render(:update) {|page| 
+    render(:update) {|page|
       page.replace_html "list_projects", :partial => 'list_projects', :id  => @publication
-    }    
+    }
   end
 
   def destroy

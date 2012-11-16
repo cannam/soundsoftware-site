@@ -1,11 +1,23 @@
 <% content_for :header_tags do %>
-    <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
-    <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+  <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' -%>
+  <!--<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' -%>-->
 <% end %>
+
+<%= error_messages_for 'publication' %>
 
 <h2><%=l(:label_publication_new)%></h2>
 
+<div class="splitcontentleft">
   <p>To create a publication you can either parse a BibTeX entry or enter the publication details manually.<p>
 
-  <%= render_tabs create_publication_tabs %>
+    <%= render :partial => 'publications/new/bibtex' %>
 
+ <!-- <%= render_tabs create_publication_tabs %> -->
+</div>
+
+<div class="splitcontentright">
+
+    <%= render :partial => 'publications/new/default' %>
+
+
+</div>

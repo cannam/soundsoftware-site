@@ -5,9 +5,10 @@ module PublicationsHelper
   include AuthorshipsHelper
 
   def create_publication_tabs
-    tabs = [{:name => 'default', :partial => 'publications/new/default', :label => :label_default},
-            {:name => 'bibtex', :partial => 'publications/new/bibtex', :label => :label_bibtex},
-          ]
+    tabs = [
+      {:name => 'bibtex', :partial => 'publications/new/bibtex', :label => :label_bibtex},
+      {:name => 'default', :partial => 'publications/new/default', :label => :label_default}
+    ]
   end
 
   def link_to_publication(publication, options={}, html_options = nil)
