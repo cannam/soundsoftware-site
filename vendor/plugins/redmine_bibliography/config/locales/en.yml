@@ -12,8 +12,7 @@ en:
   label_my_publications_box: "My Publications"
   view_all_publications: "View All Project's Publications"
   publications: Publications
-  
-  
+
   identify_author_question: Is the right person selected above?
   identify_author_yes: "Yes"
   identify_author_correct: "Yes, but I need to correct some details below"
@@ -25,24 +24,25 @@ en:
   label_all_publications_for_project: Publications associated with %{project}
   label_authors_show: "Authorships associated with this author"
   label_authors_index: "List of authors"
-  
+
   field_authorship_publication_title: "Publication"
   field_authorship_name: "Name on Paper"
   field_authorship_email: "Email"
   field_authorship_institution: "Institution"
-  
+
   field_external_url: "External URL"
+  field_doi: "DOI"
   field_publication_title: Title
   field_publication_authors: Authors
   field_publication_projects: "Associated projects"
   field_author_name: Author
   field_author_user: User Name
   field_author_username: "Associated user"
-  field_author_publications: "Publications by this Author" 
+  field_author_publications: "Publications by this Author"
   field_identify_author_yes: "Yes"
   field_identify_author_correct: "Corrections"
   field_identify_author_no: "No"
-  
+
   label_author_is_me: "(I am this author)"
   label_add_me_as_author: "Add me as an author"
   label_add_an_author: "Add an author"
@@ -54,7 +54,7 @@ en:
   label_author_information: "Author Information"
 
   remove_author: "Remove this author"
-  
+
   label_publication_plural: "Publications"
   label_related_publication_plural: "Related publications"
   label_publication_new: "Create New Publication"
@@ -67,22 +67,23 @@ en:
   label_publication_project_index: "Projects associated with this publication"
   label_publication_index: "View all publications"
   label_publication_other_details: "Details"
-  
+
   text_external_url: "Link to the publication or to an external page about it."
+  text_doi: "DOI (Digital Object Identifier)."
   text_author_name_on_paper: "Author's name as it appears on the paper."
   text_author_institution: "Author's institution as on the paper."
   text_author_email: "Author's email address as on the paper."
-  
+
   text_author_search: "Search existing authors"
-  
+
   # authorships model
   field_institution: "Institution"
-  field_name_on_paper: "Name" 
+  field_name_on_paper: "Name"
   field_email: "Email Address"
-      
+
   # bibtex_entries model
   field_entry_type: "Publication Type"
-  field_id: "id" 
+  field_id: "id"
   field_publication_id: "Publication_id"
   field_address: "Address"
   field_annote: "Annote"
@@ -122,7 +123,7 @@ en:
   field_bibtex_proceedings: Conference proceedings
   field_bibtex_techreport: Technical report
   field_bibtex_unpublished: Unpublished
-  
+
   label_author_1: First author
   label_author_2: Second author
   label_author_3: Third author
@@ -146,6 +147,6 @@ en:
 
   mail_subject_publication_added: "You have been added as an author to a new publication"
   mail_body_publication_added: "A new publication (%{publication}) has been added to the project '%{project}.'"
-  
-  
-  
+
+
+
