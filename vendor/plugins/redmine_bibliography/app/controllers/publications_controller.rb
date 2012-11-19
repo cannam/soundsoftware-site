@@ -43,7 +43,10 @@ class PublicationsController < ApplicationController
         format.html{}
 
         if @bibtex_parse_success
+          # todo: should this code be here?
           @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
+          @bibtex_parsed_authors = bib[0].authors
+          logger.error { "Authors: #{@bibtex_parsed_authors}" }
         end
 
         format.js
@@ -81,16 +84,6 @@ class PublicationsController < ApplicationController
 
 #    rescue BibtexParsingError => e
 #      logger.error { "Bibtex Parsing Error #{bib.errors}" }
-
-      # todo: not showing... should be inside render?
-#      flash[:error] = e.message
-
-#      respond_to do |format|
-#       format.js{
-#         render(:update) {|page|
-#         }
-#       }
-#      end
 
 #    end
 
