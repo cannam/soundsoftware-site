@@ -1,4 +1,4 @@
-@import url(fonts.css);
+@import url(fonts.css?2);
 
 /* IE likes us to separate out normal & bold into different fonts
    rather than use the selectors on the same font */

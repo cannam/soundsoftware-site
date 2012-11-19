@@ -256,17 +256,17 @@ div.institutions h3 { background: url(../images/group.png) no-repeat 0% 50%; pad
 .highlight.token-3 { background-color: #aaf;}
 
 .box{
-padding:6px;
-margin-bottom: 10px;
-background-color:#f6f6f6;
-color:#505050;
-line-height:1.5em;
-border: 1px solid #e4e4e4;
+    padding:6px;
+    margin-bottom: 10px;
+    background-color:#f6f6f6;
+    color:#505050;
+    line-height:1.5em;
+    border: 1px solid #e4e4e4;
 }
 
 .box h4 {
-margin-top: 0;
-padding-top: 0;
+    margin-top: 0;
+    padding-top: 0;
 }
 
 div.square {
@@ -343,6 +343,25 @@ div#members dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; back
 div#members dt.me .email { border-bottom: 1px solid #999; }
 div#members dt .email { color: #777; font-size: 80%; }
 div#members dd .roles { font-style: italic; }
+
+div#memberbox h3 { 
+  background: url(../images/group.png) no-repeat 0% 50%; 
+  padding-left: 20px;
+}
+div#memberbox p { 
+  padding-left: 20px;
+  margin-left: 0;
+}
+
+div.issues ul {
+  padding-left: 20px;
+  margin-left: 0;
+  list-style-type: none;
+}
+div.issues p {
+  padding-left: 20px;
+  margin-left: 0;
+}
 
 .projects .latest .title { margin-right: 0.5em; }
 .tipoftheday .tip { margin-left: 2em; margin-top: 0.5em; }
