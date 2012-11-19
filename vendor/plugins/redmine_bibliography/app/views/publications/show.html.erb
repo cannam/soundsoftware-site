@@ -3,7 +3,7 @@
 <div class="box">
   <h3>Publication Info</h3>
   <%= show_cite_proc_entry(@publication)%>
-  
+
   <h3>Bibtex Format</h3>
     <%=h print_bibtex_entry(@publication) %>
 </div>
@@ -14,7 +14,7 @@
 <ul id="authorships">
   <% for authorship in @publication.authorships.find(:all, :order => :auth_order) %>
     <% content_tag_for :li, authorship do %>
-      <%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>    
+      <%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>
         <span class="handle">[drag to reorder]</span>
       <%- end -%>
       <%= link_to_authorship authorship %> <em><%= h authorship.institution %></em> <br />
@@ -30,17 +30,21 @@
   <%= show_bibtex_fields(@publication.bibtex_entry) %>
 <%- end -%>
 
-<% unless @publication.external_url.blank? %>
-  <h4>
-    <%= l(:field_external_url) %>
-  </h4>
+<%- unless @publication.external_url.blank? -%>
   <p>
-    <%= link_to h(@publication.external_url), @publication.external_url, {:target => "_blank"} %>
+    <b><%= l(:field_external_url) %>:</b> <%= link_to h(@publication.external_url), @publication.external_url, {:target => "_blank"} -%>
+  </p>
+<%- end -%>
+
+
+<% unless @publication.doi.blank? %>
+  <p>
+    <b><%= l(:field_doi)-%>:</b> <%= link_to h(@publication.doi), "http://dx.doi.org/#{@publication.doi}", {:target => "_blank"} -%>
   </p>
 <% end %>
 
 <br / >
-  <% if User.current.allowed_to?(:add_publication, @project) %>	
+  <% if User.current.allowed_to?(:add_publication, @project) %>
     <%= link_to l(:label_publication_edit), { :controller => "publications", :action => "edit", :id => @publication, :project_id => @project } %> |
     <%= link_to "Delete", {:controller => 'publications', :action => 'destroy', :id => @publication, :project_id => @project },
                                                      :confirm => l(:text_are_you_sure), :method => :delete, :title => l(:button_delete) %> |
@@ -49,15 +53,15 @@
 </div>
 
 <% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
-  
+
 <% content_for :sidebar do %>
   <h3><%=l(:label_publication_project_index)%></h3>
 
   <p id="list_projects">
     <%= render :partial => 'list_projects' %>
   </p>
-  
+
   <%- if User.current.allowed_to?(:edit_publication, @project) -%>
-    <%= render :partial => 'add_project_form' %>    
+    <%= render :partial => 'add_project_form' %>
   <%- end -%>
 <% end %>
