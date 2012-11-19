@@ -1,4 +1,8 @@
-page.replace_html :ieee_prev, @ieee_prev
+if @bibtex_parse_success
+  page.insert_html :bottom, :ieee_prev, @ieee_prev
+  page.insert_html :top, :content, '<div class="flash notice">Successfully Parsed BibTeX</div>'
+else
+  page.insert_html :top, :content, '<div class="flash error">Error parsing BibTeX.</div>'
+end
 
-page.replace_html :error, flash[:error]
 flash.discard

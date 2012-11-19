@@ -24,27 +24,31 @@ class PublicationsController < ApplicationController
 
   def parse_bibtex
     find_project_by_project_id
+    @bibtex_parse_success = true
 
-    bibtex_paste = params[:bibtex_paste]
-    bib = BibTeX.parse(bibtex_paste)
+    begin
+      bibtex_paste = params[:bibtex_paste]
+      bib = BibTeX.parse(bibtex_paste)
+    rescue
+      # todo: output errors to user
+      # bib.errors.present?
+      @bibtex_parse_success = false
+      # @bibtex_parsing_error = bib.errors[0].trace[4]
+      # logger.error { "BibTex Parsing Error: #{@bibtex_parsing_error}" }
+      logger.error { "BibTex Parsing Error" }
+    end
 
     respond_to do |format|
-      if bib.errors.present? or bib[0].class == NilClass
-
         # todo: response for HTML
         format.html{}
 
-        # todo: better error handling
-        biberror = bib.errors[0].trace[4]
-        logger.error { "BibTex Parsing Error: #{biberror}" }
-        flash[:error] = "BibTex Parsing Error: #{biberror}"
-        #raise BibtexParsingError, "Bibtex Parsing Error: biberror}"
+        if @bibtex_parse_success
+          @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
+        end
+
         format.js
-      else
-        @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
-        flash['notice'] = "OK!"
-        format.js
-      end
+
+
     end
   end
 
