@@ -2,10 +2,10 @@
 
 <div class="box">
   <h3>Publication Info</h3>
-  <p><%= show_cite_proc_entry(@publication)%></p>
+  <p><%= print_ieee_format(@publication)%></p>
 
   <h3>B<small>IB</small>T<sub>E</sub>X Format</h3>
-  <pre><%=h print_bibtex_entry(@publication) %></pre>
+  <pre><%=h print_bibtex_format(@publication) %></pre>
 </div>
 
 <div class="box">
