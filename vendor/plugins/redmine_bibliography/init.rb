@@ -25,10 +25,9 @@ Dispatcher.to_prepare :redmine_model_dependencies do
     Mailer.send(:include, Bibliography::MailerPatch)
   end
 
-  unless ProjectsController.included_modules.include?(Bibliography::ProjectsControllerPatch)
-   ProjectsController.send(:include, Bibliography::ProjectsControllerPatch)
+  unless ProjectsHelper.included_modules.include?(Bibliography::ProjectsHelperPatch)
+    ProjectsHelper.send(:include, Bibliography::ProjectsHelperPatch)
   end
-
 end
 
 
