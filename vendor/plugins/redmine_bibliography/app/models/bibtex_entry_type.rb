@@ -1,4 +1,5 @@
 class BibtexEntryType < ActiveRecord::Base
+  unloadable
 
   @@fields = Hash['article', ['journal', 'year', 'volume', 'number', 'pages', 'month', 'note' ], 
                   'book' , [ 'editor', 'publisher', 'volume', 'series', 'address', 'edition', 'month', 'year', 'note' ],

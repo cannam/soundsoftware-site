@@ -40,7 +40,22 @@ class ActivitiesController < ApplicationController
 
     events = @activity.events(@date_from, @date_to)
 
-    if events.empty? || stale?(:etag => [@activity.scope, @date_to, @date_from, @with_subprojects, @author, events.first, User.current, current_language])
+    @institution_name = params[:institution]
+    if !@institution_name.blank?
+      events = events.select do |e|
+        e.respond_to?(:event_author) and e.event_author and
+	  e.event_author.respond_to?(:ssamr_user_detail) and
+          !e.event_author.ssamr_user_detail.nil? and
+          e.event_author.ssamr_user_detail.institution_name == @institution_name
+      end
+      if events.empty?
+        # We don't want to dump into the output any arbitrary string
+        # from the URL that has no matching events
+        @institution_name = ""
+      end
+    end
+
+    if events.empty? || stale?(:etag => [@activity.scope, @date_to, @date_from, @with_subprojects, @author, @institution_name, events.first, User.current, current_language])
       respond_to do |format|
         format.html {
           @events_by_day = events.group_by(&:event_date)

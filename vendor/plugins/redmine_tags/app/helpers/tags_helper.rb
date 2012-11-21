@@ -40,8 +40,11 @@ module TagsHelper
     content_tag('span', content, :class => 'tag-label')
   end
 
-  def render_project_tag_link(tag)
+  def render_project_tag_link(tag, options = {})
     content = link_to tag.name, :controller => :projects, :action => :index, :project => { :tag_list => tag.name } 
+    if options[:show_count]
+      content << content_tag('span', "(#{tag.count})", :class => 'tag-count')
+    end
     content_tag('span', content, :class => 'tag-label')
   end
 
@@ -73,7 +76,7 @@ module TagsHelper
       end
 
       tag_cloud tags, (1..8).to_a do |tag, weight|
-        content << " " + content_tag(item_el, render_tag_link(tag, options), :class => "tag-nube-#{weight}") + " "
+        content << " " + content_tag(item_el, render_project_tag_link(tag, options), :class => "tag-nube-#{weight}") + " "
       end
 
       content_tag(list_el, content, :class => 'tags')

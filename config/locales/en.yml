@@ -130,6 +130,7 @@ en:
         circular_dependency: "This relation would create a circular dependency"
         cant_link_an_issue_with_a_descendant: "An issue cannot be linked to one of its subtasks"
         must_accept_terms_and_conditions: "You must accept the Terms and Conditions"        
+        public_or_private: "You must select either public or private"
 
   actionview_instancetag_blank_option: Please select
 
@@ -328,6 +329,7 @@ en:
   field_root_directory: Root directory
   field_cvsroot: CVSROOT
   field_cvs_module: Module
+  field_public_or_private: "Public or Private?"
 
   setting_external_repository: "Select this if the project's main repository is hosted somewhere else"
   setting_external_repository_url: "The URL of the existing external repository. Must be publicly accessible without a password"
@@ -487,9 +489,16 @@ en:
     zero:  no projects
     one:   1 project
     other: "%{count} projects"
+  label_x_downloads:
+    zero:  never downloaded
+    one:   downloaded once
+    other: "downloaded %{count} times"
   label_project_all: All Projects
   label_project_latest: Latest projects
   label_projects_more: More projects
+  label_project_tags_all: Popular tags
+  label_projects_busy: Busy projects
+  label_institutions_busy: Active institutions
   label_managers: Managed by
   label_issue: Issue
   label_issue_new: New issue
@@ -539,7 +548,7 @@ en:
   label_home: Home
   label_home_heading: Welcome!
   label_my_page: My page
-  label_my_account: My account
+  label_my_account: Account
   label_my_projects: My projects
   label_my_page_block: My page block
   label_administration: Administration
@@ -556,6 +565,7 @@ en:
   label_activity_my_recent_none: No recent activity
   label_overall_activity: Overall activity
   label_user_activity: "%{value}'s activity"
+  label_institution_activity: "Activity from %{value}"
   label_new: New
   label_logged_as: Logged in as
   label_environment: Environment
@@ -685,7 +695,7 @@ en:
   label_repository: Repository
   label_is_external_repository: Track an external repository
   label_repository_plural: Repositories
-  label_browse: Browse
+  label_explore_projects: Explore projects
   label_modification: "%{count} change"
   label_modification_plural: "%{count} changes"
   label_branch: Branch
@@ -883,7 +893,7 @@ en:
   button_expand_all: Expand all
   button_delete: Delete
   button_create: Create
-  button_create_and_continue: Create and continue
+  button_create_and_continue: Create and Add Another
   button_test: Test
   button_edit: Edit
   button_edit_associated_wikipage: "Edit associated Wiki page: %{page_title}"
@@ -958,7 +968,9 @@ en:
   text_caracters_minimum: "Must be at least %{count} characters long."
   text_length_between: "Length between %{min} and %{max} characters."
   text_project_name_info: "This will be the name of your project as it appears throughout this site.<br /> You can change it at any time, in the project's settings."
-  text_project_visibility_info: "If your project is not public, it will be visible only to you and to users that you have added as project members.<br/>You can change this later if you wish."
+  text_project_public_info: "Public: visible to anybody browsing the site."
+  text_project_private_info: "Private: visible only to you, and to users you have added as project members."
+  text_project_visibility_info: "You can change whether your project is public or private later if you wish."
   text_user_ssamr_description_info: 'Please describe your current research or development interests.<br/>This information will be used at registration to determine that you are a real person &ndash; so please be descriptive, or your application may be delayed or rejected.<br/>After registration, the description is publicly visible in your profile and you can edit it at any time.'
   text_issue_parent_issue_info: 'If this is a subtask, please insert its parent task number or write the main task name.'
 
