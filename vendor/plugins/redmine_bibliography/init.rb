@@ -4,9 +4,6 @@ require 'dispatcher'
 require 'bibtex'
 require 'citeproc'
 
-
-RAILS_DEFAULT_LOGGER.info 'Starting Bibliography Plugin for Redmine'
-
 # Patches to the Redmine core.
 Dispatcher.to_prepare :redmine_model_dependencies do
   require_dependency 'project'
