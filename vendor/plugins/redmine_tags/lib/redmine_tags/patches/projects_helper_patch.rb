@@ -4,13 +4,13 @@ module RedmineTags
 
       def self.included(base) # :nodoc:
         base.send(:include, InstanceMethods)
-        base.send(:include, TagsHelper)
+        # base.send(:include, TagsHelper)
         base.class_eval do
           unloadable
         end
       end
 
-      module InstanceMethods        
+      module InstanceMethods
         # Renders a tree of projects that the current user does not belong
         # to, or of all projects if the current user is not logged in.  The
         # given collection may be a subset of the whole project tree
@@ -19,30 +19,30 @@ module RedmineTags
         # description, manager(s), creation date, last activity date,
         # general activity level, whether there is anything actually hosted
         # here for the project, etc.
-        def render_project_table_with_filtering(projects, question)          
+        def render_project_table_with_filtering(projects, question)
           custom_fields = ""
           s = ""
           if projects.any?
             tokens = RedmineProjectFiltering.calculate_tokens(question, custom_fields)
-            
+
             s << "<div class='autoscroll'>"
             s << "<table class='list projects'>"
             s << "<thead><tr>"
-        
+
             s << sort_header_tag('name', :caption => l("field_name"))
             s << "<th class='tags'>" << l("tags") << "</th>"
             s << "<th class='managers'>" << l("label_managers") << "</th>"
             s << sort_header_tag('created_on', :default_order => 'desc')
             s << sort_header_tag('updated_on', :default_order => 'desc')
-        
+
             s << "</tr></thead><tbody>"
-        
+
             original_project = @project
-        
+
             projects.each do |project|
               s << render_project_in_table_with_filtering(project, cycle('odd', 'even'), 0, tokens)
             end
-        
+
             s << "</table>"
           else
             s << "\n"
@@ -52,7 +52,7 @@ module RedmineTags
           s
         end
 
-        def render_project_in_table_with_filtering(project, oddeven, level, tokens)          
+        def render_project_in_table_with_filtering(project, oddeven, level, tokens)
           # set the project environment to please macros.
           @project = project
 
@@ -72,7 +72,7 @@ module RedmineTags
           s << "<td class='tags' align=top>" << project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') << "</td>"
 
           s << "<td class='managers' align=top>"
-           
+
           u = project.users_by_role
           if u
             u.keys.each do |r|
@@ -91,7 +91,7 @@ module RedmineTags
           end
 
           s << "</td>"
-          
+
           s << "<td class='created_on' align=top>" << format_date(project.created_on) << "</td>"
           s << "<td class='updated_on' align=top>" << format_date(project.updated_on) << "</td>"
 
@@ -105,9 +105,9 @@ module RedmineTags
 
           s
         end
-        
-        
-        
+
+
+
         # Renders a tree of projects as a nested set of unordered lists
         # The given collection may be a subset of the whole project tree
         # (eg. some intermediate nodes are private and can not be seen)
@@ -116,7 +116,7 @@ module RedmineTags
           if projects.any?
             tokens = RedmineProjectFiltering.calculate_tokens(question, custom_fields)
             debugger
-            
+
 
             ancestors = []
             original_project = @project
@@ -128,14 +128,14 @@ module RedmineTags
               else
                 ancestors.pop
                 s << "</li>"
-                while (ancestors.any? && !project.is_descendant_of?(ancestors.last)) 
+                while (ancestors.any? && !project.is_descendant_of?(ancestors.last))
                   ancestors.pop
                   s << "</ul></li>"
                 end
               end
               classes = (ancestors.empty? ? 'root' : 'child')
               s << "<li class='#{classes}'><div class='#{classes}'>" +
-                link_to( highlight_tokens(project.name, tokens), 
+                link_to( highlight_tokens(project.name, tokens),
                   {:controller => 'projects', :action => 'show', :id => project},
                   :class => "project #{User.current.member_of?(project) ? 'my-project' : nil}"
                 )
@@ -146,7 +146,7 @@ module RedmineTags
            #    value = value_model.present? ? value_model.value : nil
            #    s << "<li><b>#{field.name.humanize}:</b> #{highlight_tokens(value, tokens)}</li>" if value.present?
            #  end
-              
+
               s << "</ul>"
               s << "<div class='clear'></div>"
               unless project.description.blank?
@@ -163,7 +163,7 @@ module RedmineTags
           end
           s.join "\n"
         end
-        
+
         # Renders a tree of projects where the current user belongs
         # as a nested set of unordered lists
         # The given collection may be a subset of the whole project tree
@@ -193,9 +193,9 @@ module RedmineTags
           s
 
         end
-        
-        
-        
+
+
+
 
         def render_my_project_in_hierarchy_with_tags(project)
 
@@ -215,7 +215,7 @@ module RedmineTags
             else
               s << " <span class='private'>" << l(:field_is_private) << "</span>"
             end
-           
+
             tc = project.tag_counts
             if tc.empty?
               s << " <span class='no-tags'>" << l(:field_no_tags) << "</span>"
@@ -242,15 +242,15 @@ module RedmineTags
 
         end
 
-        
-        
+
+
         private
-        
+
         # copied from search_helper. This one doesn't escape html or limit the text length
         def highlight_tokens(text, tokens)
           return text unless text && tokens && !tokens.empty?
           re_tokens = tokens.collect {|t| Regexp.escape(t)}
-          regexp = Regexp.new "(#{re_tokens.join('|')})", Regexp::IGNORECASE    
+          regexp = Regexp.new "(#{re_tokens.join('|')})", Regexp::IGNORECASE
           result = ''
           text.split(regexp).each_with_index do |words, i|
             words = words.mb_chars
@@ -263,7 +263,7 @@ module RedmineTags
           end
           result
         end
-      
+
       end
     end
   end
