@@ -3,11 +3,11 @@ require_dependency 'projects_controller'
 
 module RedmineTags
   module Patches
-    module ProjectsControllerPatch      
+    module ProjectsControllerPatch
       def self.included(base)
         base.send(:include, InstanceMethods)
-        base.class_eval do          
-          unloadable 
+        base.class_eval do
+          unloadable
           skip_before_filter :authorize, :only => [:set_fieldset_status]
           skip_before_filter :find_project, :only => [:set_fieldset_status]
           before_filter :add_tags_to_project, :only => [:save, :update]
@@ -17,7 +17,7 @@ module RedmineTags
       end
 
       module InstanceMethods
-                
+
         def add_tags_to_project
 
           if params && params[:project] && !params[:project][:tag_list].nil?
@@ -57,17 +57,17 @@ module RedmineTags
           else
             @myproj_status = session[:my_projects_fieldset_status]
           end
-                    
+
           if session[:filters_fieldset_status].nil?
             @filter_status = "false"
           else
             @filter_status = session[:filters_fieldset_status]
           end
-          
+
           if params && params[:project] && !params[:project][:tag_list].nil?
             @filter_status = "true"
           end
-                                      
+
         end
 
         # Lists visible projects. Paginator is for top-level projects only
@@ -78,17 +78,17 @@ module RedmineTags
           get_fieldset_statuses
 
           respond_to do |format|
-            format.html { 
+            format.html {
               paginate_projects
-              
-              @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause) 
+
+              @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause)
 
               if User.current.logged?
                 # seems sort_by gives us case-sensitive ordering, which we don't want
                 #          @user_projects = User.current.projects.sort_by(&:name)
                 @user_projects = User.current.projects.all(:order => :name)
               end
-              
+
               render :template => 'projects/index.html.erb', :layout => !request.xhr?
             }
             format.api {
@@ -112,8 +112,8 @@ module RedmineTags
 
         private
 
-        def filter_projects                  
-          @question = (params[:q] || "").strip     
+        def filter_projects
+          @question = (params[:q] || "").strip
 
           if params.has_key?(:project)
             @tag_list = (params[:project][:tag_list] || "").strip.split(",")
@@ -126,7 +126,7 @@ module RedmineTags
           else
             @projects = Project.visible_roots.find(Project.visible.search_by_question(@question))
           end
-  
+
           unless @tag_list.empty?
             @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |project| Project.find(project.id).root }
             @projects = @projects & @tagged_projects_ids

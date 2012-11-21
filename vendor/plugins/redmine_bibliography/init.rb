@@ -4,9 +4,6 @@ require 'dispatcher'
 require 'bibtex'
 require 'citeproc'
 
-
-RAILS_DEFAULT_LOGGER.info 'Starting Bibliography Plugin for RedMine'
-
 # Patches to the Redmine core.
 Dispatcher.to_prepare :redmine_model_dependencies do
   require_dependency 'project'
@@ -25,7 +22,9 @@ Dispatcher.to_prepare :redmine_model_dependencies do
     Mailer.send(:include, Bibliography::MailerPatch)
   end
 
-
+  unless ProjectsHelper.included_modules.include?(Bibliography::ProjectsHelperPatch)
+    ProjectsHelper.send(:include, Bibliography::ProjectsHelperPatch)
+  end
 end
 
 
@@ -51,5 +50,5 @@ Redmine::Plugin.register :redmine_bibliography do
   # extending the Project Menu
   menu :project_menu, :publications, { :controller => 'publications', :action => 'index', :path => nil }, :after => :activity, :param => :project_id, :caption => Proc.new { Setting.plugin_redmine_bibliography['menu'] },
    :if => Proc.new { !Setting.plugin_redmine_bibliography['menu'].blank? }
-    
+
 end
