@@ -12,9 +12,6 @@ module RedmineTags
           skip_before_filter :find_project, :only => [:set_fieldset_status]
           before_filter :add_tags_to_project, :only => [:save, :update]
 
-          helper :tags
-          include TagsHelper
-
           alias :index filtered_index
         end
       end
