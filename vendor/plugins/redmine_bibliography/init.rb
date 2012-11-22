@@ -51,4 +51,9 @@ Redmine::Plugin.register :redmine_bibliography do
   menu :project_menu, :publications, { :controller => 'publications', :action => 'index', :path => nil }, :after => :activity, :param => :project_id, :caption => Proc.new { Setting.plugin_redmine_bibliography['menu'] },
    :if => Proc.new { !Setting.plugin_redmine_bibliography['menu'].blank? }
 
+  activity_provider :publication, :class_name => 'Publication', :default => true
+
 end
+
+
+
