@@ -8,7 +8,11 @@
 
 <p><%= render :partial => 'link_to_functions' %></p>
 
-<%= render :partial => 'common/file', :locals => {:filename => @path, :content => @content} %>
+<% if @display_raw %>
+   <em><%= l(:text_binary_data) %></em>
+<% else %>
+  <%= render :partial => 'common/file', :locals => {:filename => @path, :content => @content} %>
+<% end %>
 
 <% content_for :header_tags do %>
 <%= stylesheet_link_tag "scm" %>
