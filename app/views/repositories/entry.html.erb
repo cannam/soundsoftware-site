@@ -9,7 +9,11 @@
 <p><%= render :partial => 'link_to_functions' %></p>
 
 <% if @display_raw %>
-   <em><%= l(:text_binary_data) %></em>
+   <% if @content.size && @content.size > Setting.file_max_size_displayed.to_i.kilobyte %>
+     <em><%= l(:text_data_too_large) %></em>
+   <% else %>
+     <em><%= l(:text_binary_data) %></em>
+   <% end %>
 <% else %>
   <%= render :partial => 'common/file', :locals => {:filename => @path, :content => @content} %>
 <% end %>
