@@ -143,15 +143,14 @@ class RepositoriesController < ApplicationController
 
     @content = @repository.cat(@path, @rev)
     (show_error_not_found; return) unless @content
-    if 'raw' == params[:format] ||
-         (@content.size && @content.size > Setting.file_max_size_displayed.to_i.kilobyte) ||
-         ! is_entry_text_data?(@content, @path)
+    if 'raw' == params[:format]
       # Force the download
       send_opt = { :filename => filename_for_content_disposition(@path.split('/').last) }
       send_type = Redmine::MimeType.of(@path)
       send_opt[:type] = send_type.to_s if send_type
       send_data @content, send_opt
     else
+      @display_raw = ((@content.size && @content.size > Setting.file_max_size_displayed.to_i.kilobyte) || !is_entry_text_data?(@content, @path))
       # Prevent empty lines when displaying a file with Windows style eol
       # TODO: UTF-16
       # Is this needs? AttachmentsController reads file simply.
