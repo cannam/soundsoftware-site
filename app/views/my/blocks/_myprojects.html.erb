@@ -1,0 +1,9 @@
+<%  @user_projects = User.current.projects.all(:order => :name) %>
+
+<h3><%=l(:label_my_projects)%> (<%= @user_projects.count %>)</h3>
+<div class="box">
+<%=
+   render :partial => 'projects/my', :locals => { :user => User.current }
+ %>
+</div>
+

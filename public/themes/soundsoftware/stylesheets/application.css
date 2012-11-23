@@ -96,7 +96,7 @@ table.projects .child .firstcol { padding-left: 1em }
 table.projects .level2 .firstcol { padding-left: 2em; }
 table.projects .level3 .firstcol { padding-left: 3em; }
 
-ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.95em }
+ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.9em }
 
 table.files tr.active td { padding-top: 0.5em; padding-bottom: 0.5em; }
 table.files .file .active { font-weight: bold; }
