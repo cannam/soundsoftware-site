@@ -19,19 +19,23 @@ class Publication < ActiveRecord::Base
 
   before_save :set_initial_author_order
 
+  named_scope :visible, lambda {|*args| { :include => :projects,
+                                          :conditions => Project.allowed_to_condition(args.shift || User.current, :view_publication, *args) } }
+
   acts_as_activity_provider :type => 'publication',
                             :timestamp => "#{Publication.table_name}.created_at",
-                            :author_key => "#{Publication.table_name}.builder_id",
-                            :find_options => {:joins => "INNER JOIN projects_publications ON #{Publication.table_name}.id = projects_publications.publication_id JOIN #{Project.table_name} ON #{Project.table_name}.id = projects_publications.project_id"}
+                            :find_options => {
+                              :include => :projects,
+                              :conditions => "#{Project.table_name}.id = projects_publications.project_id"
+                            }
 
   acts_as_event :title => Proc.new {|o| o.title },
                 :datetime => :created_at,
-                :author =>  nil,
                 :type => 'publications',
+                :author => nil,
                 #todo - need too move the cache from the helper to the model
                 :description => Proc.new {|o| o.print_entry(:ieee)},
-                :project => Project.first
-                # :url => Proc.new {|o| {:controller => 'publications', :action => 'show', :id => o.id }}
+                :url => Proc.new {|o| {:controller => 'publications', :action => 'show', :id => o.id }}
 
 
   # Ensure error message uses proper text instead of

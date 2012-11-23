@@ -40,10 +40,12 @@ Redmine::Plugin.register :redmine_bibliography do
   settings :default => { 'menu' => 'Publications' }, :partial => 'settings/bibliography'
 
   project_module :redmine_bibliography do
+    permission :view_publication, {:publications => :show}, :public => :true
     permission :publications, { :publications => :index }, :public => true
     permission :edit_publication, {:publications => [:edit, :update]}
     permission :add_publication, {:publications => [:new, :create]}
     permission :delete_publication, {:publications => :destroy}
+
 
   end
 
