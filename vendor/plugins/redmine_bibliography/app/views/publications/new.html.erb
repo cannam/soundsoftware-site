@@ -7,17 +7,4 @@
 
 <h2><%=l(:label_publication_new)%></h2>
 
-<div class="splitcontentleft">
-  <p>To create a publication you can either parse a BibTeX entry or enter the publication details manually.<p>
-
-    <%= render :partial => 'publications/new/bibtex' %>
-
- <!-- <%= render_tabs create_publication_tabs %> -->
-</div>
-
-<div class="splitcontentright">
-
-    <%= render :partial => 'publications/new/default' %>
-
-
-</div>
+<%= render_tabs create_publication_tabs %>

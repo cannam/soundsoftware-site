@@ -1,15 +1,13 @@
-<%= f.error_messages %> 
+<%= f.error_messages %>
 <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
 
-<h3><%= f.text_field :title, :required => true, :size => 70 %></h3>
 
-<h3><%= l(:label_publication_other_details) %></h3>
+<div class="splitcontentleft">
+  <h4><%= l(:label_publication_other_details) %></h4>
   <div class="box tabular">
-    <% f.fields_for :bibtex_entry do |builder| -%>
-      <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
-    <%- end -%>
-
+    <p><%= f.text_field :title, :required => true, :size => 70 -%></p>
     <p>
+
       <%= f.text_field :external_url, :size => 70 %>
       <br />
       <em><%= l(:text_external_url) %></em>
@@ -19,15 +17,22 @@
       <br />
       <em><%= l(:text_doi) %></em>
     </p>
+    <% f.fields_for :bibtex_entry do |builder| -%>
+      <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
+    <%- end -%>
   </div>
 
-<h3><%= l(:authors) %></h3>    
+
+</div>
+
+<div class="splitcontentright">
+  <h4><%= l(:authors) %></h4>
   <div class="box tabular">
-    <div id="authors" class="fields">      
+    <div id="authors" class="fields">
       <% f.fields_for :authorships do |builder| -%>
         <%= render "authorship_fields", :f => builder %>
       <%- end -%>
     </div>
-    <%= link_to_add_author_fields l(:label_add_an_author), f, :authorships, params[:action] %>
+    <%= link_to_add_author_fields l(:label_add_an_author), f, :authorships, params[:action] -%>
   </div>
 </div>
