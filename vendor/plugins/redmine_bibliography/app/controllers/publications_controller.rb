@@ -48,9 +48,7 @@ class PublicationsController < ApplicationController
           @bibtex_parsed_authors = bib[0].authors
           logger.error { "Authors: #{@bibtex_parsed_authors}" }
         end
-
         format.js
-
 
     end
   end
@@ -171,11 +169,14 @@ class PublicationsController < ApplicationController
 
   def update
     @publication = Publication.find(params[:id])
-
     @author_options = []
 
     if @publication.update_attributes(params[:publication])
       flash[:notice] = "Successfully Updated Publication."
+
+      # expires the previosly cached entries
+      Rails.cache.delete "publication-#{@publication.id}-ieee"
+      Rails.cache.delete "publication-#{@publication.id}-bibtex"
 
       if !params[:project_id].nil?
         redirect_to :action => :show, :id => @publication, :project_id => params[:project_id]

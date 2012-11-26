@@ -9,18 +9,18 @@
     <div class="box">
     <h3><%=l(:label_related_publication_plural)%></h3>
 
-     <dl>       
-     <% @project.publications.each do |publication| %>       
+     <dl>
+     <% @project.publications.each do |publication| %>
        <dt>
-          <%= publication.print_entry(:ieee) -%>
+          <%= print_ieee_format(publication) %>
        </dt>
        <dd>
-         <%= link_to("[More Details]", {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%> 
-         
-         <%= link_to_function "[Bibtex]", onclick="toggleBibtex(this)" -%> 
+         <%= link_to("[More Details]", {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%>
+
+         <%= link_to_function "[B<small>IB</small>T<sub>E</sub>X]", onclick="toggleBibtex(this)" -%>
        </dd>
        <dd class="bibtex-textarea collapsed" style="display: none;">
-         <textarea readonly><%= publication.print_entry(:bibtex) -%></textarea>         
+         <textarea readonly> <%= print_bibtex_format(publication) %> </textarea>
        </dd>
    <% end -%>
      </dl>

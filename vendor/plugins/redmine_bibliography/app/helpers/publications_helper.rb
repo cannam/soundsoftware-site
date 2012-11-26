@@ -121,14 +121,17 @@ module PublicationsHelper
     s
   end
 
-  def show_cite_proc_entry(publication)
-    # code that should be moved either to the model or to the controller?
+  def print_ieee_format(publication)
+    Rails.cache.fetch("publication-#{publication.id}-ieee") do
 
-    publication.print_entry(:ieee)
+      publication.print_entry(:ieee)
+    end
   end
 
-  def print_bibtex_entry(publication)
-    publication.print_entry(:bibtex)
+  def print_bibtex_format(publication)
+    Rails.cache.fetch("publication-#{publication.id}-bibtex") do
+      publication.print_entry(:bibtex)
+    end
   end
 
 
