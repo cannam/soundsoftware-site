@@ -38,6 +38,9 @@ class PublicationsController < ApplicationController
       logger.error { "BibTex Parsing Error" }
     end
 
+    # suggest likely authors/users from database
+    @suggested_authors = {}
+
     respond_to do |format|
         # todo: response for HTML
         format.html{}
@@ -45,11 +48,16 @@ class PublicationsController < ApplicationController
         if @bibtex_parse_success
           # todo: should this code be here?
           @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
-          @bibtex_parsed_authors = bib[0].authors
-          logger.error { "Authors: #{@bibtex_parsed_authors}" }
+          bibtex_parsed_authors = bib[0].authors
+
+          bibtex_parsed_authors.each do |auth|
+            @suggested_authors[auth] = suggest_authors(auth)
+          end
+
+          logger.error { "Suggested Authors: #{@suggested_authors}" }
+
         end
         format.js
-
     end
   end
 
@@ -270,17 +278,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # parses the bibtex file
-  def parse_bibtex_file
-
-  end
-
-  def import
-    @publication = Publication.new
-
-
-  end
-
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
 
@@ -289,6 +286,17 @@ class PublicationsController < ApplicationController
     render :layout => false
   end
 
+  # returns a list of authors and users
+  def suggest_authors(author)
+    firstname = author.first
+    lastname = author.last
+
+    # todo: improve name searching algorithm -- lf.20121127
+    authorships = Authorship.like(lastname).find(:all, :limit => 100).count
+    users = User.like(lastname).find(:all, :limit => 100).count
+
+    # todo: finish implementing. Use same code as in autocomplete_for_author
+  end
 
   def autocomplete_for_author
     @results = []
@@ -304,10 +312,11 @@ class PublicationsController < ApplicationController
 
     @results = users_list
 
-    # TODO: can be optimized…
+    # todo: can be optimized…
     authorships_list.each do |authorship|
       flag = true
 
+      # todo: refactor this code using select -- lf.20121127
       users_list.each do |user|
         if authorship.name == user.name && authorship.email == user.mail && authorship.institution == user.institution
           Rails.logger.debug { "Rejecting Authorship #{authorship.id}" }
