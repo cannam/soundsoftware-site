@@ -33,17 +33,25 @@ module PublicationsHelper
     # creates the select list based on the results array
     # results is an array with both Users and Authorships objects
 
-    @author_options = []
-    @results.each do |result|
+   if @results.size > 0
+    author_options = @results.map do |result|
+      logger.error { "DEBUG --> #{result}" }
+
       email_bit = result.mail.partition('@')[2]
-      if email_bit != "":
-          email_bit = "(@#{email_bit})"
-      end
-      @author_options << ["#{result.name} #{email_bit}", "#{result.class.to_s}_#{result.id.to_s}"]
+      email_bit = "(@#{email_bit})" unless email_bit = ""
+
+      ["#{result.name} #{email_bit}", "#{result.class.to_s}_#{result.id.to_s}"]
     end
 
-   if @results.size > 0
-     s = select_tag( form_tag_name(object_name, :author_search_results), options_for_select(@author_options), { :id => form_tag_id(object_name, :author_search_results), :size => 3} )
+#    @results.each do |result|
+#      email_bit = result.mail.partition('@')[2]
+#      if email_bit != "":
+#          email_bit = "(@#{email_bit})"
+#      end
+#      @author_options << ["#{result.name} #{email_bit}", "#{result.class.to_s}_#{#result.id.to_s}"]
+#    end
+
+     s = select_tag( form_tag_name(object_name, :author_search_results), options_for_select(author_options), { :id => form_tag_id(object_name, :author_search_results), :size => 3} )
      s << observe_field( form_tag_id(object_name, :author_search_results), :on => 'click', :function => "alert('Element changed')", :with => 'q')
    else
      s = "<em>No Authors found that match your search… sorry!</em>"

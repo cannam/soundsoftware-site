@@ -62,39 +62,6 @@ class PublicationsController < ApplicationController
   end
 
 
-#      respond_to do |format|
-#        format.js {
-#          render(:update) {|page|
-#            flash.now[:notice] = "Correctly parsed BibTeX entry"
-#
-#            bibtex_entry_no = BibtexEntryType.find_by_name(bib[0].type.to_s).id
-#            page["publication_title"].value = bib[0][:title]
-#            page["publication_bibtex_entry_attributes_entry_type"].value = #bibtex_entry_no
-#
-#            BibtexEntryType.fields(bibtex_entry_no).each do |field|
-#              page["publication_bibtex_entry_attributes_#{field}"].value = bib[0][field#]
-#            end
-#
-#            # for each author simulates a click and fills the author info
-##            bib[0].authors.each do |author|
-##              page["add_another_author"].click
-##              page.alert(bib[0].authors.length)
-##              page.alert(page["authors"].first.id)
-##            end
-#
-#
-#
-#          }
-#        }
-#      end
-
-#    rescue BibtexParsingError => e
-#      logger.error { "Bibtex Parsing Error #{bib.errors}" }
-
-#    end
-
-
-
   def create
     @project = Project.find(params[:project_id])
 
@@ -123,20 +90,8 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def new_from_bibfile
-    @publication.current_step = session[:publication_step]
-
-    # contents of the paste text area
-    bibtex_entry = params[:bibtex_entry]
-
-    # method for creating "pasted" bibtex entries
-    if bibtex_entry
-      parse_bibtex_list bibtex_entry
-    end
-  end
 
   def get_bibtex_required_fields
-
     fields = BibtexEntryType.fields(params[:q])
 
     respond_to do |format|
@@ -153,6 +108,7 @@ class PublicationsController < ApplicationController
     end
   end
 
+
   def add_author
     if (request.xhr?)
       render :text => User.find(params[:user_id]).name
@@ -162,6 +118,7 @@ class PublicationsController < ApplicationController
       logger.error { "Error while adding Author to publication." }
     end
   end
+
 
   def edit
     find_project_by_project_id unless params[:project_id].nil?
@@ -215,21 +172,6 @@ class PublicationsController < ApplicationController
     return authors_entry.split(" and ")
   end
 
-  # parses a list of bibtex
-  def parse_bibtex_list(bibtex_list)
-    bibliography = BibTeX.parse bibtex_list
-
-    no_entries = bibliography.data.length
-
-    # parses the bibtex entries
-    bibliography.data.map do |d|
-
-      if d.class == BibTeX::Entry
-        create_bibtex_entry d
-      end
-    end
-  end
-
   def create_bibtex_entry(d)
     @publication = Publication.new
     @bentry = BibtexEntry.new
@@ -258,23 +200,22 @@ class PublicationsController < ApplicationController
     # what is this for???
     # @created_publications << @publication.id
 
-    # need to save all authors
-    #   and establish the author-publication association
-    #   via the authorships table
+    # Saves all authors, creating the author-publication association via the authorships
     authors.each_with_index.map do |authorname, idx|
       author = Author.new(:name => authorname)
       if author.save!
-        # todo: catch the errors...
-        puts "SAVED"
-      else
-        puts "NOT SAVED"
-      end
+        author.authorships.create!(
+          :publication => @publication,
+          :institution => institution,
+          :email => email,
+          :order => idx)
 
-      author.authorships.create!(
-      :publication => @publication,
-      :institution => institution,
-      :email => email,
-      :order => idx)
+        # todo: catch the errors...
+        logger.info { "Author #{author.name} correctly created." }
+      else
+        logger.error { "Error: author #{authorname} not correctly saved when creating publication with ID=#{@publication.id}." }
+
+      end
     end
   end
 
@@ -286,16 +227,24 @@ class PublicationsController < ApplicationController
     render :layout => false
   end
 
-  # returns a list of authors and users
-  def suggest_authors(author)
-    firstname = author.first
-    lastname = author.last
+  # returns a list of authors
+  def suggest_authors(authorname)
+    firstname = authorname.first
+    lastname = authorname.last
 
     # todo: improve name searching algorithm -- lf.20121127
-    authorships = Authorship.like(lastname).find(:all, :limit => 100).count
-    users = User.like(lastname).find(:all, :limit => 100).count
+    authorships = Authorship.like(lastname).find(:all, :limit => 100)
 
-    # todo: finish implementing. Use same code as in autocomplete_for_author
+    logger.error { "Authorships #{authorships}<-" }
+
+    unless authorships.empty?
+      authors = authorships.collect {|a| a.author}
+      authors.uniq!
+
+      # @users is a list of suggested users
+      # authors = authors.reject { |a| @users.include?(a.user) }
+    end
+
   end
 
   def autocomplete_for_author
@@ -304,29 +253,17 @@ class PublicationsController < ApplicationController
     object_id = params[:object_id]
     @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
 
-    # cc 20110909 -- revert to like instead of like_unique -- see #289
-    authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
     users_list = User.active.like(params[:q]).find(:all, :limit => 100)
 
-    logger.debug "Query for \"#{params[:q]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
+    authorships_list = Authorship.like(params[:q]).find(:all, :limit => 100)
 
-    @results = users_list
+    # list with authorships that are associated with users
+    authorships_with_users = authorships_list.reject { |a| a.author.user.nil? }
 
-    # todo: can be optimized…
-    authorships_list.each do |authorship|
-      flag = true
-
-      # todo: refactor this code using select -- lf.20121127
-      users_list.each do |user|
-        if authorship.name == user.name && authorship.email == user.mail && authorship.institution == user.institution
-          Rails.logger.debug { "Rejecting Authorship #{authorship.id}" }
-          flag = false
-          break
-        end
-      end
-
-      @results << authorship if flag
-    end
+    # authorships not associated with a user
+    orphan_authorships = authorships_list - authorships_with_users
+    authorships_with_users.map! { |a| a.author.user }
+    @results = (users_list + authorships_with_users).uniq! + orphan_authorships
 
     render :layout => false
   end
