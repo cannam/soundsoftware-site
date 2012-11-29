@@ -51,12 +51,13 @@ class PublicationsController < ApplicationController
           bibtex_parsed_authors = bib[0].authors
 
           bibtex_parsed_authors.each do |auth|
-            @suggested_authors[auth] = suggest_authors(auth)
+            @suggested_authors[auth] = suggest_authors(auth.last)
           end
 
           logger.error { "Suggested Authors: #{@suggested_authors}" }
 
         end
+
         format.js
     end
   end
@@ -227,23 +228,24 @@ class PublicationsController < ApplicationController
     render :layout => false
   end
 
-  # returns a list of authors
-  def suggest_authors(authorname)
-    firstname = authorname.first
-    lastname = authorname.last
+  # returns an hash with :authors and :users lists
+  def suggest_authors(lastname)
 
     # todo: improve name searching algorithm -- lf.20121127
     authorships = Authorship.like(lastname).find(:all, :limit => 100)
+    logger.error { "Suggest Authors: Found #{authorships.count} Authorships " }
 
-    logger.error { "Authorships #{authorships}<-" }
+    suggested_authors = []
+    suggested_authors = authorships.map { |a| a.author } unless authorships.empty?
+    suggested_authors.uniq! unless suggested_authors.empty?
 
-    unless authorships.empty?
-      authors = authorships.collect {|a| a.author}
-      authors.uniq!
+    users = User.like(lastname).find(:all)
 
-      # @users is a list of suggested users
-      # authors = authors.reject { |a| @users.include?(a.user) }
-    end
+    suggested_users = users.reject { |u|
+      suggested_authors.include?(u.author)
+    }
+
+    { :authors => suggested_authors, :users => suggested_users }
 
   end
 
