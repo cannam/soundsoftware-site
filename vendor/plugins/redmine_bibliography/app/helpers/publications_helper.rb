@@ -38,18 +38,10 @@ module PublicationsHelper
       logger.error { "DEBUG --> #{result}" }
 
       email_bit = result.mail.partition('@')[2]
-      email_bit = "(@#{email_bit})" unless email_bit = ""
+      email_bit = "(@#{email_bit})" unless email_bit == ""
 
       ["#{result.name} #{email_bit}", "#{result.class.to_s}_#{result.id.to_s}"]
     end
-
-#    @results.each do |result|
-#      email_bit = result.mail.partition('@')[2]
-#      if email_bit != "":
-#          email_bit = "(@#{email_bit})"
-#      end
-#      @author_options << ["#{result.name} #{email_bit}", "#{result.class.to_s}_#{#result.id.to_s}"]
-#    end
 
      s = select_tag( form_tag_name(object_name, :author_search_results), options_for_select(author_options), { :id => form_tag_id(object_name, :author_search_results), :size => 3} )
      s << observe_field( form_tag_id(object_name, :author_search_results), :on => 'click', :function => "alert('Element changed')", :with => 'q')
