@@ -1,9 +1,18 @@
-
 <p>
   Author: <%= h(author[0]) -%>
+<br />
+  Authors:
+<br />
+  <%- author[1][:authors].each do |auth| -%>
+    <%= display_suggested_author(auth) %>
+  <%- end -%>
 
-  #authors -- <%= h author[1][:authors].count %>
-  #users -- <%= h author[1][:users].count %>
-
+  <br />
+  Users:
+<br />
+  <%- author[1][:users].each do |usr| -%>
+    <%= display_suggested_user(usr) %>
+  <%- end -%>
+<br />
 </p>
 

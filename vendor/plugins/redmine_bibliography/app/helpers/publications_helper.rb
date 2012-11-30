@@ -151,5 +151,25 @@ module PublicationsHelper
     end
     s
   end
+
+  def display_suggested_author(author)
+    s = radio_button_tag("suggested", author.id, false)
+    # todo. maybe not a safe assumption?
+    s << author.authorships.first.name_on_paper
+    s << '<br />'
+    s
+  end
+
+
+  def display_suggested_user(user)
+    s = radio_button_tag("suggested", user.id, false)
+    s << user.name
+    s << '<br />'
+    s
+  end
+
+
+
+
 end
 
