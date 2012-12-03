@@ -1,17 +1,15 @@
-<p>
-  Author: <%= h(author[0]) -%>
-<br />
-  Authors:
-<br />
-  <%- author[1][:authors].each do |auth| -%>
-    <%= display_suggested_author(auth) %>
-  <%- end -%>
 
-  <br />
-  Users:
+<% logger.error { "index #{index}//" } %>
+
+<p>
+  Suggestions for Author: <%= h(suggestions[0]) -%>
 <br />
-  <%- author[1][:users].each do |usr| -%>
-    <%= display_suggested_user(usr) %>
+  <%- suggestions[1][:authors].each do |auth| -%>
+    <%= create_author_suggestion_radio("author_#{index}", auth) -%>
+  <%- end -%>
+<br />
+  <%- suggestions[1][:users].each do |usr| -%>
+    <%= create_user_suggestion_radio("author_#{index}", usr) -%>
   <%- end -%>
 <br />
 </p>

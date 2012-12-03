@@ -2,13 +2,12 @@ if @bibtex_parse_success
   page.insert_html :bottom, :ieee_prev, @ieee_prev
   page.insert_html :top, :content, '<div class="flash notice">Successfully Parsed BibTeX</div>'
 
-  @suggested_authors.each do |auth|
-    page.insert_html :bottom, :suggest_bibtex_authors, :partial => "suggest_author" , :locals => {:author => auth}
+  @suggested_authors.each_with_index do |auth, idx|
+    page.insert_html :bottom, :suggest_bibtex_authors, :partial => "suggest_author" , :locals => {:suggestions => auth, :index => idx}
   end
 
 else
   page.insert_html :top, :content, '<div class="flash error">Error parsing BibTeX.</div>'
 end
-
 
 flash.discard
