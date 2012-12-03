@@ -37,7 +37,6 @@ class Publication < ActiveRecord::Base
                 :description => Proc.new {|o| o.print_entry(:ieee)},
                 :url => Proc.new {|o| {:controller => 'publications', :action => 'show', :id => o.id }}
 
-
   # Ensure error message uses proper text instead of
   # bibtex_entry.entry_type (#268).  There has to be a better way to
   # do this!

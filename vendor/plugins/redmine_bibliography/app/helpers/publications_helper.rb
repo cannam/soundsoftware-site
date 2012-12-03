@@ -153,7 +153,7 @@ module PublicationsHelper
   end
 
   def create_author_suggestion_radio(radio_object, author)
-    s = radio_button_tag(radio_object, author.id, false)
+    s = radio_button_tag(radio_object, "author_#{author.id}", false)
     # todo: returns first non empty name...
     author.authorships.each do |auth|
       unless auth.name_on_paper.nil?
@@ -166,7 +166,7 @@ module PublicationsHelper
   end
 
   def create_user_suggestion_radio(radio_object, user)
-    s = radio_button_tag(radio_object, user.id, false)
+    s = radio_button_tag(radio_object, "user_#{user.id}", false)
     s << user.name
     s << '<br />'
     s

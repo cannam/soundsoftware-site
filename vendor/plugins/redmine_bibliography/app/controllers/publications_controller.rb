@@ -7,7 +7,7 @@ class PublicationsController < ApplicationController
   unloadable
 
   model_object Publication
-  before_filter :find_model_object, :except => [:parse_bibtex, :new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]
+  before_filter :find_model_object, :except => [:parse_bibtex, :new, :create, :create_from_bibtex, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]
   before_filter :find_project_by_project_id, :authorize, :only => [ :edit, :new, :update, :create ]
 
   def new
@@ -50,16 +50,23 @@ class PublicationsController < ApplicationController
           @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
           bibtex_parsed_authors = bib[0].authors
 
+          # todo: need to create a bibtex object
+          ## and add it to the session hash
+
+          # creates stucture with author suggestions
           bibtex_parsed_authors.each do |auth|
             @suggested_authors[auth] = suggest_authors(auth.last)
           end
-
-          logger.error { "Suggested Authors: #{@suggested_authors}" }
-
         end
 
         format.js
     end
+  end
+
+  def create_from_bibtex
+    find_project_by_project_id
+    logger.error { "INSIDE CREATE FROM BIBTEX" }
+
   end
 
 

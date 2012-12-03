@@ -1,17 +1,23 @@
-<div class="splitcontentleft">
-  <div>
-    <h3>Paste your bibtex entry</h3>
-    <div class="box">
-      <%= text_area_tag :bibtex_paste, "Please paste your bibtex entry here" , :class => "wiki", :style => 'width:90%; height:100px;' -%>
-      <br />
-      <%= link_to_remote "Parse BiBTeX", :url =>  { :project_id  => @project, :action => :parse_bibtex}, :with => "'bibtex_paste=' + $('bibtex_paste').value" -%>
+<% form_for @publication, :url => { :project_id  => @project, :action => :create_from_bibtex }, :builder => TabularFormBuilder do |f| -%>
+
+  <div class="splitcontentleft">
+    <div>
+      <h3>Paste your bibtex entry</h3>
+      <div class="box">
+        <%= text_area_tag :bibtex_paste, "Please paste your bibtex entry here" , :class => "wiki", :style => 'width:90%; height:100px;' -%>
+        <br />
+        <%= link_to_remote "Parse BiBTeX", :url =>  { :project_id  => @project, :action => :parse_bibtex}, :with => "'bibtex_paste=' + $('bibtex_paste').value" -%>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="splitcontentright">
-  <h3>Preview and correct</h3>
+  <div class="splitcontentright">
+    <h3>Preview and correct</h3>
 
-  <div class="box" id="ieee_prev"><h3>Preview</h3></div>
-  <div class="box" id="suggest_bibtex_authors"><h3>Authors</h3></div>
-</div>
+    <div class="box" id="ieee_prev"><h3>Preview</h3></div>
+    <div class="box" id="suggest_bibtex_authors"><h3>Authors</h3></div>
+  </div>
+
+  <%= f.submit %>
+
+<%- end -%>
