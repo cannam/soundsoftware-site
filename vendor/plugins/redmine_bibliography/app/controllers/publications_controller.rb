@@ -53,6 +53,7 @@ class PublicationsController < ApplicationController
           # todo: need to create a bibtex object
           ## and add it to the session hash
 
+
           # creates stucture with author suggestions
           bibtex_parsed_authors.each do |auth|
             @suggested_authors[auth] = suggest_authors(auth.last)
@@ -65,7 +66,8 @@ class PublicationsController < ApplicationController
 
   def create_from_bibtex
     find_project_by_project_id
-    logger.error { "INSIDE CREATE FROM BIBTEX" }
+
+    debugger
 
   end
 
@@ -174,55 +176,20 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # parse string with bibtex authors
-  def parse_authors(authors_entry)
-    # in bibtex the authors are always seperated by "and"
-    return authors_entry.split(" and ")
-  end
+  # the argument is a ruby-bibtex parsed entry
+  def create_bibtex_entry(bibtex)
+    @bibtex_entry = BibtexEntry.new
 
-  def create_bibtex_entry(d)
-    @publication = Publication.new
-    @bentry = BibtexEntry.new
-    authors = []
-    institution = ""
-    email = ""
-
-    d.fields.keys.map do |field|
+    bibtex.fields.keys.map do |field|
       case field.to_s
-      when "author"
-        authors = parse_authors d[field]
       when "title"
         @publication.title = d[field]
-      when "institution"
-        institution = d[field]
-      when "email"
-        email = d[field]
+      when "author"
+        authors.each do |auth|
+          logger.warning { "AUTHOR #{author}" }
+        end
       else
-        @bentry[field] = d[field]
-      end
-    end
-
-    @publication.bibtex_entry = @bentry
-    @publication.save
-
-    # what is this for???
-    # @created_publications << @publication.id
-
-    # Saves all authors, creating the author-publication association via the authorships
-    authors.each_with_index.map do |authorname, idx|
-      author = Author.new(:name => authorname)
-      if author.save!
-        author.authorships.create!(
-          :publication => @publication,
-          :institution => institution,
-          :email => email,
-          :order => idx)
-
-        # todo: catch the errors...
-        logger.info { "Author #{author.name} correctly created." }
-      else
-        logger.error { "Error: author #{authorname} not correctly saved when creating publication with ID=#{@publication.id}." }
-
+        @bibtex_entry[field] = d[field]
       end
     end
   end
