@@ -19,12 +19,33 @@ class PublicationsController < ApplicationController
 
     # and at least one author
     # @publication.authorships.build.build_author
+    # todo - do we still need this? --lf.20121205
     @author_options = [["#{User.current.name} (@#{User.current.mail.partition('@')[2]})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
+  end
+
+  # the argument is a ruby-bibtex parsed entry
+  def create_bibtex_entry(bibtex)
+
+    bibtex.fields.keys.map do |field|
+      case field.to_s
+      when "title"
+        @publication.title = bibtex[field]
+      when "author"
+        bibtex.authors.each do |auth|
+          logger.error { "AUTHOR #{auth}" }
+        end
+      else
+        @publication.bibtex_entry[field] = bibtex[field]
+      end
+    end
   end
 
   def parse_bibtex
     find_project_by_project_id
     @bibtex_parse_success = true
+
+    @publication = Publication.new
+    @publication.build_bibtex_entry
 
     begin
       bibtex_paste = params[:bibtex_paste]
@@ -42,24 +63,32 @@ class PublicationsController < ApplicationController
     @suggested_authors = {}
 
     respond_to do |format|
-        # todo: response for HTML
-        format.html{}
-
         if @bibtex_parse_success
           # todo: should this code be here?
+
+          # creates the entry
+          create_bibtex_entry(bib[0])
+          logger.error { "Bibtex Entry #{@bibtex_entry}" }
+
+
           @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
           bibtex_parsed_authors = bib[0].authors
-
-          # todo: need to create a bibtex object
-          ## and add it to the session hash
-
 
           # creates stucture with author suggestions
           bibtex_parsed_authors.each do |auth|
             @suggested_authors[auth] = suggest_authors(auth.last)
+
+            @publication.authorships.new :name_on_paper => auth
+            logger.error { "Added Authorship: #{auth}" }
           end
+
+          # can temporarily save
+          # note that the publication still needs reviewing
+          @publication.save!
         end
 
+
+        # todo: response for HTML
         format.js
     end
   end
@@ -70,7 +99,6 @@ class PublicationsController < ApplicationController
     debugger
 
   end
-
 
   def create
     @project = Project.find(params[:project_id])
@@ -163,7 +191,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-
   def show
     find_project_by_project_id unless params[:project_id].nil?
 
@@ -173,24 +200,6 @@ class PublicationsController < ApplicationController
     else
       @authors = @publication.authors
       @bibtext_entry = @publication.bibtex_entry
-    end
-  end
-
-  # the argument is a ruby-bibtex parsed entry
-  def create_bibtex_entry(bibtex)
-    @bibtex_entry = BibtexEntry.new
-
-    bibtex.fields.keys.map do |field|
-      case field.to_s
-      when "title"
-        @publication.title = d[field]
-      when "author"
-        authors.each do |auth|
-          logger.warning { "AUTHOR #{author}" }
-        end
-      else
-        @bibtex_entry[field] = d[field]
-      end
     end
   end
 

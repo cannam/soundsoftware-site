@@ -1,16 +1,19 @@
-
+<% logger.error { "suggestions #{suggestions}//" } %>
 <% logger.error { "index #{index}//" } %>
 
-<p>
-  Suggestions for Author: <%= h(suggestions[0]) -%>
-<br />
-  <%- suggestions[1][:authors].each do |auth| -%>
-    <%= create_author_suggestion_radio("author_#{index}", auth) -%>
-  <%- end -%>
-<br />
-  <%- suggestions[1][:users].each do |usr| -%>
-    <%= create_user_suggestion_radio("author_#{index}", usr) -%>
-  <%- end -%>
-<br />
-</p>
+<%- if suggestions[1][:authors].count + suggestions[1][:users].count > 0 -%>
+  <p>
+    Could the author "<%= h(suggestions[0]) -%>" be one of the following?
+    <br />
 
+    <%- suggestions[1][:authors].each do |auth| -%>
+      <%= create_author_suggestion_radio("author_#{index}", auth) -%>
+    <%- end -%>
+    <br />
+    <%- suggestions[1][:users].each do |usr| -%>
+      <%= create_user_suggestion_radio("author_#{index}", usr) -%>
+    <%- end -%>
+    <%= radio_button_tag("author_#{index}", nil, false) -%><%= l(:none_of_above) %>
+    <br />
+  </p>
+<%- end -%>

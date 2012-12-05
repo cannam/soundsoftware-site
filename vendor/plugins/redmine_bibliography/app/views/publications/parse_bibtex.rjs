@@ -3,8 +3,10 @@ if @bibtex_parse_success
   page.insert_html :top, :content, '<div class="flash notice">Successfully Parsed BibTeX</div>'
 
   @suggested_authors.each_with_index do |auth, idx|
-    page.insert_html :bottom, :suggest_bibtex_authors, :partial => "suggest_author" , :locals => {:suggestions => auth, :index => idx}
+    page.insert_html :bottom, :suggest_bibtex_authors, :partial => "suggest_author", :locals => {:suggestions => auth, :index => idx}
   end
+
+  page.replace_html :publication_id, @publication.id
 
 else
   page.insert_html :top, :content, '<div class="flash error">Error parsing BibTeX.</div>'
