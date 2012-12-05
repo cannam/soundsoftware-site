@@ -6,7 +6,7 @@ if @bibtex_parse_success
     page.insert_html :bottom, :suggest_bibtex_authors, :partial => "suggest_author", :locals => {:suggestions => auth, :index => idx}
   end
 
-  page.replace_html :publication_id, @publication.id
+  page["bibtex_pub_id"].value = @publication.id
 
 else
   page.insert_html :top, :content, '<div class="flash error">Error parsing BibTeX.</div>'

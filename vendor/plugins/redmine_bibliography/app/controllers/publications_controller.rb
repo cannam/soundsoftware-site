@@ -70,7 +70,6 @@ class PublicationsController < ApplicationController
           create_bibtex_entry(bib[0])
           logger.error { "Bibtex Entry #{@bibtex_entry}" }
 
-
           @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
           bibtex_parsed_authors = bib[0].authors
 
@@ -82,11 +81,14 @@ class PublicationsController < ApplicationController
             logger.error { "Added Authorship: #{auth}" }
           end
 
-          # can temporarily save
+          # we can now temporarily save this publication
           # note that the publication still needs reviewing
-          @publication.save!
-        end
+          # we are skipping the validation we only have authorships
+          # associated with the publication at this stage
 
+          # in Rails 3 this should be changed to :validate => false
+          @publication.save(false)
+        end
 
         # todo: response for HTML
         format.js
