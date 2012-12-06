@@ -222,7 +222,7 @@ if projects.nil?
   log('No project found, perhaps you forgot to "Enable WS for repository management"', :exit => true)
 end
 
-log("retrieved #{projects.size} projects", :level => 1)
+log("found #{projects.size} projects at " + Time.now.inspect);
 
 def set_owner_and_rights(project, repos_path, &block)
   if mswin?
@@ -253,13 +253,13 @@ def mswin?
 end
 
 projects.each do |project|
-  log("treating project #{project.name}", :level => 1)
+  log("inspecting project #{project.name}", :level => 1)
 
   if project.identifier.empty?
-    log("\tno identifier for project #{project.name}")
+    log("\tno identifier for project #{project.name}!")
     next
   elsif not project.identifier.match(/^[a-z0-9\-]+$/)
-    log("\tinvalid identifier for project #{project.name} : #{project.identifier}");
+    log("\tinvalid identifier for project #{project.name} : #{project.identifier}!");
     next;
   end
 
@@ -282,31 +282,31 @@ projects.each do |project|
   if project.respond_to?(:repository)
 
     repos_url = project.repository.url;
-    log("\texisting url for project #{project.identifier} is #{repos_url}");
+    log("\texisting url for project #{project.identifier} is #{repos_url}", :level => 2);
 
     if repos_url.match(/^file:\//) || repos_url.match(/^\//)
 
       repos_url = repos_url.gsub(/^file:\/*/, "/");
-      log("\tthis is a local file path, at #{repos_url}");
+      log("\tthis is a local file path, at #{repos_url}", :level => 2);
 
       if repos_url.slice(0, $repos_base.length) != $repos_base
-        log("\tit is in the wrong place: replacing it");
         # leave repos_path set to our original suggestion
+        log("\tpreparing to replace incorrect repo location #{repos_url} for #{project.name} with #{repos_path}");
         create_repos = true
       else
         if !File.directory?(repos_url)
-          log("\tit doesn't exist; we should create it");
+          log("\tpreparing to create repo for #{project.name} at #{repos_url}");
           repos_path = repos_url
           create_repos = true
         else
-          log("\tit exists and is in the right place");
+          log("\tit exists and is in the right place", :level => 2);
         end
       end
     else
-      log("\tthis is a remote path, leaving alone");
+      log("\tthis is a remote path, leaving alone", :level => 2);
     end
   else
-    log("\tproject #{project.identifier} has no repository registered")
+    log("\tpreparing to set repo location and create for #{project.name} at #{repos_url}")
 #    if File.directory?(repos_path)
 #      log("\trepository path #{repos_path} already exists, not creating")
 #    else 
@@ -359,4 +359,6 @@ projects.each do |project|
     log("\trepository #{repos_path} created");
   end
 end
+
+log("project review completed at " + Time.now.inspect);
 
