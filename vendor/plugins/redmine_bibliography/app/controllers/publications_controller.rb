@@ -25,20 +25,27 @@ class PublicationsController < ApplicationController
 
   # the argument is a ruby-bibtex parsed entry
   def create_bibtex_entry(bibtex)
+    logger.error { "BIBTEX.type -->#{bibtex.type}" }
+    @publication.bibtex_entry.entry_type = BibtexEntryType.find_by_name(bibtex.type.to_s).id
+
+    logger.error { ">>>>>TYPE #{bibtex.type}->#{@publication.bibtex_entry.entry_type}<<<<" }
 
     bibtex.fields.keys.map do |field|
       case field.to_s
       when "title"
-        @publication.title = bibtex[field]
+        @publication.title = bibtex[:title].to_s
       when "author"
         bibtex.authors.each do |auth|
           logger.error { "AUTHOR #{auth}" }
         end
       else
-        @publication.bibtex_entry[field] = bibtex[field]
+        @publication.bibtex_entry[field.to_sym] = bibtex[field].to_s
       end
     end
   end
+
+
+
 
   def parse_bibtex
     find_project_by_project_id
@@ -68,7 +75,7 @@ class PublicationsController < ApplicationController
 
           # creates the entry
           create_bibtex_entry(bib[0])
-          logger.error { "Bibtex Entry #{@bibtex_entry}" }
+          logger.error { "Bibtex Entry #{@bibtex_entry} of type #{bib[0].type}" }
 
           @ieee_prev = CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
           bibtex_parsed_authors = bib[0].authors
@@ -81,13 +88,6 @@ class PublicationsController < ApplicationController
             logger.error { "Added Authorship: #{auth}" }
           end
 
-          # we can now temporarily save this publication
-          # note that the publication still needs reviewing
-          # we are skipping the validation we only have authorships
-          # associated with the publication at this stage
-
-          # in Rails 3 this should be changed to :validate => false
-          @publication.save(false)
         end
 
         # todo: response for HTML
@@ -95,10 +95,13 @@ class PublicationsController < ApplicationController
     end
   end
 
+
   def create_from_bibtex
     find_project_by_project_id
 
+    @publication = Publication.new(params[:publication])
     debugger
+
 
   end
 
