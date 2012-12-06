@@ -6,10 +6,10 @@ if @bibtex_parse_success
     page.insert_html :bottom, :suggest_bibtex_authors, :partial => "suggest_author", :locals => {:suggestions => auth, :index => idx}
   end
 
-  page[:publication_title].value = @publication.title
+  page[:pub_bibtex_title].value = @publication.title
 
   @publication.bibtex_entry.attributes.each do |k,v|
-    page["publication_bibtex_entry_attributes_#{k}"].value = v.to_s unless v.nil?
+    page["pub_bibtex_#{k}"].value = v.to_s unless v.nil?
   end
 
 else
