@@ -2,14 +2,19 @@ if @bibtex_parse_success
   page.insert_html :bottom, :ieee_prev, @ieee_prev
   page.insert_html :top, :content, '<div class="flash notice">Successfully Parsed BibTeX</div>'
 
+  # todo - use authors.each?? instead
   @suggested_authors.each_with_index do |auth, idx|
-    page.insert_html :bottom, :suggest_bibtex_authors, :partial => "suggest_author", :locals => {:suggestions => auth, :index => idx}
+    page.insert_html :bottom, :publication_authors, :partial => "authorship_from_bibtex", :locals => {:auth => auth, :index => idx}
+
+    page.insert_html :bottom, :publication_authors, :partial => "suggest_author", :locals => {:suggestions => auth, :index => idx}
   end
 
-  page[:pub_bibtex_title].value = @publication.title
+  # fills the publication's hidden fields
+  page[:pub_title].value = @publication.title
 
   @publication.bibtex_entry.attributes.each do |k,v|
-    page["pub_bibtex_#{k}"].value = v.to_s unless v.nil?
+    page.insert_html :bottom, :publication_info, :partial => "hidden_bibtex_field", :locals => {:fieldname => k, :value => v} unless v.nil?
+
   end
 
 else

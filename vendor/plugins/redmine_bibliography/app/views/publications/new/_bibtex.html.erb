@@ -13,16 +13,13 @@
 
   <div class="splitcontentright">
     <h3>Preview and correct</h3>
-
     <div class="box" id="ieee_prev"><h3>Preview</h3></div>
-
-    <div class="box" id="suggest_bibtex_authors"></div>
   </div>
 
+  <div id="publication_authors"></div>
+
   <div id="publication_info">
-    <%= hidden_field_tag "pub_bibtex_title" -%>
-    <%= hidden_field_tag "pub_bibtex_entry_type" -%>
-    <%= hidden_field_tag "pub_bibtex_year" -%>
+    <%= hidden_field_tag "pub[title]" -%>
   </div>
 
   <%= f.submit %>

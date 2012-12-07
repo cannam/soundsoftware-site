@@ -45,8 +45,6 @@ class PublicationsController < ApplicationController
   end
 
 
-
-
   def parse_bibtex
     find_project_by_project_id
     @bibtex_parse_success = true
@@ -99,9 +97,49 @@ class PublicationsController < ApplicationController
   def create_from_bibtex
     find_project_by_project_id
 
-    @publication = Publication.new(params[:publication])
-    debugger
+    # todo: drop unknown parameters from params hash lf.07122012
+    @publication = Publication.new(:title => params[:pub][:title])
+    @publication.build_bibtex_entry(params[:pub][:bibtex_entry])
+    @publication.projects << @project unless @project.nil?
 
+
+    params[:pub][:authorships].each do |idx|
+      auth = idx[1]
+
+      authorship = Authorship.new :name_on_paper => auth[:name_on_paper]
+
+      unless auth[:parent].nil?
+        if auth[:parent] > -1
+          logger.error { "AUTH PRENT #{auth[:parent]}" }
+          parent_class, parent_id = auth[:parent].split "_"
+
+          if parent_class == "user"
+            user = User.find(id)
+            author = user.author ||= Author.create(:name => auth[:name_on_paper])
+          else
+            author = Author.find(id)
+          end
+
+          authorship.author_id = author.id
+        end
+      end
+
+
+
+      # todo: test success
+      authorship.save!
+
+      @publication.authorships << authorship
+    end
+
+    if @publication.save
+      @publication.notify_authors_publication_added(@project)
+
+      flash[:notice] = "Successfully created publication."
+      redirect_to :action => :show, :id => @publication, :project_id => @project
+    else
+      render :action => 'new', :project_id => @project
+    end
 
   end
 

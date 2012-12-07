@@ -7,13 +7,13 @@
     <br />
 
     <%- suggestions[1][:authors].each do |auth| -%>
-      <%= create_author_suggestion_radio("author_#{index}", auth) -%>
+      <%= create_author_suggestion_radio("pub[authorships][#{index}][parent]", auth) -%>
     <%- end -%>
     <br />
     <%- suggestions[1][:users].each do |usr| -%>
-      <%= create_user_suggestion_radio("author_#{index}", usr) -%>
+      <%= create_user_suggestion_radio("pub[authorship][#{index}][parent]", usr) -%>
     <%- end -%>
-    <%= radio_button_tag("author_#{index}", nil, false) -%><%= l(:none_of_above) %>
+    <%= radio_button_tag("pub][authorship][#{index}][parent]", "-1", false) -%><%= l(:none_of_above) %>
     <br />
   </p>
 <%- end -%>
