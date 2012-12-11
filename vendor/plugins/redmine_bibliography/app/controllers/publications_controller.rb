@@ -96,7 +96,6 @@ class PublicationsController < ApplicationController
   def create_from_bibtex
     find_project_by_project_id
 
-    # todo: drop unknown parameters from params hash lf.07122012
     @publication = Publication.new(:title => params[:pub][:title])
     @publication.build_bibtex_entry(params[:pub][:bibtex_entry])
     @publication.projects << @project unless @project.nil?
@@ -106,8 +105,12 @@ class PublicationsController < ApplicationController
 
       authorship = Authorship.new :name_on_paper => auth[:name_on_paper]
 
-      unless auth[:parent].nil?
-        logger.error { "AUTH PRENT #{auth[:parent]}" }
+      # when there's no association at all
+      if auth[:parent].nil?
+        logger.error { "Creating new author (no assoc)" }
+        author = Author.new
+      else
+        logger.error { "AUTH PARENT #{auth[:parent]}" }
         parent_class, parent_id = auth[:parent].split "_"
 
         if parent_class == "user"
@@ -116,13 +119,12 @@ class PublicationsController < ApplicationController
         else
           author = Author.find(parent_id)
         end
-
-        authorship.author_id = author.id
       end
 
-      # todo: test success
+      authorship.author_id = author.id
       authorship.save!
 
+      @pubication.authors << author
       @publication.authorships << authorship
     end
 
@@ -256,6 +258,7 @@ class PublicationsController < ApplicationController
     logger.error { "Suggest Authors: Found #{authorships.count} Authorships " }
 
     suggested_authors = []
+    # todo. should be careful with nil author_ids
     suggested_authors = authorships.map { |a| a.author } unless authorships.empty?
     suggested_authors.uniq! unless suggested_authors.empty?
 

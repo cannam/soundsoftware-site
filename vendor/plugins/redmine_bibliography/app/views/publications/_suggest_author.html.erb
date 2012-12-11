@@ -7,6 +7,7 @@
     <br />
 
     <%- suggestions[1][:authors].each do |auth| -%>
+
       <%= create_author_suggestion_radio("pub[authorships][#{index}][parent]", auth) -%>
     <%- end -%>
     <br />
