@@ -93,7 +93,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-
   def create_from_bibtex
     find_project_by_project_id
 
@@ -102,29 +101,24 @@ class PublicationsController < ApplicationController
     @publication.build_bibtex_entry(params[:pub][:bibtex_entry])
     @publication.projects << @project unless @project.nil?
 
-
     params[:pub][:authorships].each do |idx|
       auth = idx[1]
 
       authorship = Authorship.new :name_on_paper => auth[:name_on_paper]
 
       unless auth[:parent].nil?
-        if auth[:parent] > -1
-          logger.error { "AUTH PRENT #{auth[:parent]}" }
-          parent_class, parent_id = auth[:parent].split "_"
+        logger.error { "AUTH PRENT #{auth[:parent]}" }
+        parent_class, parent_id = auth[:parent].split "_"
 
-          if parent_class == "user"
-            user = User.find(id)
-            author = user.author ||= Author.create(:name => auth[:name_on_paper])
-          else
-            author = Author.find(id)
-          end
-
-          authorship.author_id = author.id
+        if parent_class == "user"
+          user = User.find(parent_id)
+          author = user.author ||= Author.create(:name => auth[:name_on_paper])
+        else
+          author = Author.find(parent_id)
         end
+
+        authorship.author_id = author.id
       end
-
-
 
       # todo: test success
       authorship.save!
