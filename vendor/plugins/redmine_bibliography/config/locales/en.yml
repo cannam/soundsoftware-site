@@ -78,7 +78,7 @@ en:
 
   # authorships model
   field_institution: "Institution"
-  field_name_on_paper: "Name"
+  field_name_on_paper: "Name on paper"
   field_email: "Email Address"
 
   # bibtex_entries model

@@ -6,18 +6,19 @@ class Publication < ActiveRecord::Base
   has_many :authorships, :dependent => :destroy, :order => "auth_order ASC"
   has_many :authors, :through => :authorships, :uniq => true
 
-  has_one :bibtex_entry, :dependent => :destroy
+  has_one :bibtex_entry, :dependent => :destroy, :autosave => true
 
   validates_presence_of :title
-  validates_length_of :authorships, :minimum => 1, :message => l("error_no_authors")
+  validates_length_of :authors, :minimum => 1, :message => l("error_no_authors")
 
-  accepts_nested_attributes_for :authorships
+  accepts_nested_attributes_for :authorships, :allow_destroy => true
   accepts_nested_attributes_for :authors, :allow_destroy => true
-  accepts_nested_attributes_for :bibtex_entry, :allow_destroy => true
+  accepts_nested_attributes_for :bibtex_entry
 
   has_and_belongs_to_many :projects, :uniq => true
 
-  before_save :set_initial_author_order
+#  validates_associated :bibtex_entry
+#  before_save :set_initial_author_order
 
   named_scope :visible, lambda {|*args| { :include => :projects,
                                           :conditions => Project.allowed_to_condition(args.shift || User.current, :view_publication, *args) } }
@@ -66,11 +67,11 @@ class Publication < ActiveRecord::Base
   def set_initial_author_order
     authorships = self.authorships
 
-    logger.debug { "Publication \"#{self.title}\" has #{authorships.size} authors." }
+    # logger.debug { "Publication \"#{self.title}\" has #{authorships.size} authors." }
 
     authorships.each_with_index do |authorship, index|
       if authorship.auth_order.nil?
-         authorship.auth_order = index
+        authorship.auth_order = index
       end
     end
   end

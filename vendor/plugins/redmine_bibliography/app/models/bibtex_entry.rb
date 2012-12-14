@@ -2,7 +2,7 @@ class BibtexEntry < ActiveRecord::Base
   unloadable
 
   belongs_to :publication
-  validates_presence_of :entry_type
+  validates_presence_of :entry_type, :publication
 
   attr_accessible :entry_type, :address, :annote, :booktitle, :chapter, :crossref, :edition, :editor, :eprint, :howpublished, :journal, :key, :month, :note, :number, :organization, :pages, :publisher, :school, :series, :type, :url, :volume, :year
 

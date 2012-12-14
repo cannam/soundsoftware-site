@@ -1,20 +1,9 @@
 class Author < ActiveRecord::Base
   unloadable
-  
+
   has_many :authorships, :dependent => :destroy
   has_many :publications, :through => :authorships
 
-  belongs_to :user
-
-  def <=>(author)
-    name.downcase <=> author.name.downcase
-  end
-  
-  named_scope :like, lambda {|q| 
-    s = "%#{q.to_s.strip.downcase}%"
-    {:conditions => ["LOWER(name) LIKE :s", {:s => s}],
-     :order => 'name'
-    }
-  }
+#  validates_length_of :authorships, :minimum => 1, :message => "need to have at least 1 associated authorship - author not saved."
 
 end

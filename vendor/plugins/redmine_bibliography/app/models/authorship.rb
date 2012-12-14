@@ -4,15 +4,16 @@ class Authorship < ActiveRecord::Base
   belongs_to :author
   belongs_to :publication
 
-  accepts_nested_attributes_for :author
-  accepts_nested_attributes_for :publication
+  # attr_accessor :is_user, :author_user_id, :search_name, :identify_author, :search_results
 
-  validates_presence_of :name_on_paper
+  validates_associated :publication
 
-  attr_accessor :is_user, :author_user_id, :search_name, :identify_author, :search_results
+  validates_presence_of :author, :message => "is not associated with an author. Authorship not saved."
+  validates_presence_of :name_on_paper, :message => 'cannot be blank: publication not saved.'
 
-  # todo: too much logic here
-  #  before_save :associate_author_user
+
+  # todo: remove?
+  #### before_save :associate_author_user
 
   named_scope :like_unique, lambda {|q|
     s = "%#{q.to_s.strip.downcase}%"
@@ -29,12 +30,8 @@ class Authorship < ActiveRecord::Base
     }
   }
 
-  def name
-    return self.name_on_paper
-  end
-
   def <=>(authorship)
-    name.downcase <=> authorship.name.downcase
+    name_on_paper.downcase <=> authorship.name_on_paper.downcase
   end
 
   def mail
@@ -42,32 +39,34 @@ class Authorship < ActiveRecord::Base
   end
 
   protected
-  def associate_author_user
-    case self.identify_author
-      when "no"
-        author = Author.new
-        author.save
-        self.author_id = author.id
-      else
-        selected = self.search_results
-        selected_classname = Kernel.const_get(selected.split('_')[0])
-        selected_id = selected.split('_')[1]
-        object = selected_classname.find(selected_id)
 
-        if object.respond_to? :name_on_paper
-          # Authorship
-          self.author_id = object.author.id
-        else
-          # User
-          unless object.author.nil?
-            self.author_id = object.author.id
-          else
-            author = Author.new
-            object.author = author
-            object.save
-            self.author_id = object.author.id
-          end
-        end
-    end
-  end
+  # need to remove this code from this part of the model
+  #def associate_author_user
+  #  case self.identify_author
+  #    when "no"
+  #      author = Author.new
+  #      author.save
+  #      self.author_id = author.id
+  #    else
+  #      selected = self.search_results
+  #      selected_classname = Kernel.const_get(selected.split('_')[0])
+  #      selected_id = selected.split('_')[1]
+  #      object = selected_classname.find(selected_id)
+#
+  #      if object.respond_to? :name_on_paper
+  #        # Authorship
+  #        self.author_id = object.author.id
+  #      else
+  #        # User
+  #        unless object.author.nil?
+  #          self.author_id = object.author.id
+  #        else
+  #          author = Author.new
+  #          object.author = author
+  #          object.save
+  #          self.author_id = object.author.id
+  #        end
+  #      end
+  #  end
+  #end
 end

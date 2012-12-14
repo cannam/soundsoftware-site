@@ -103,30 +103,34 @@ class PublicationsController < ApplicationController
     params[:pub][:authorships].each do |idx|
       auth = idx[1]
 
-      authorship = Authorship.new :name_on_paper => auth[:name_on_paper]
-
       # when there's no association at all
       if auth[:parent].nil?
         logger.error { "Creating new author (no assoc)" }
-        author = Author.new
+        author = Author.create
+
       else
         logger.error { "AUTH PARENT #{auth[:parent]}" }
         parent_class, parent_id = auth[:parent].split "_"
 
         if parent_class == "user"
           user = User.find(parent_id)
-          author = user.author ||= Author.create(:name => auth[:name_on_paper])
+          author = user.author ||= Author.create(:user_id => user.id)
         else
           author = Author.find(parent_id)
         end
       end
 
-      authorship.author_id = author.id
-      authorship.save!
+      logger.error { "AAAAA #{auth[:name_on_paper]}" }
 
-      @pubication.authors << author
+      authorship = Authorship.create(:name_on_paper => auth[:name_on_paper], :author_id => author.id)
+
+      @publication.authors << author
       @publication.authorships << authorship
     end
+
+
+    debugger
+
 
     if @publication.save
       @publication.notify_authors_publication_added(@project)
