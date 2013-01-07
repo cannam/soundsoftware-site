@@ -474,7 +474,10 @@ class RedCloth3 < String
             style << "vertical-align:#{ v_align( $& ) };" if text =~ A_VLGN
         end
 
-        style << "#{ htmlesc $1 };" if text.sub!( /\{([^}]*)\}/, '' ) && !filter_styles
+        if text.sub!( /\{([^"}]*)\}/, '' ) && !filter_styles
+          sanitized = sanitize_styles($1)
+          style << "#{ sanitized };" unless sanitized.blank?
+        end
 
         lang = $1 if
             text.sub!( /\[([^)]+?)\]/, '' )
@@ -500,6 +503,16 @@ class RedCloth3 < String
         atts << " rowspan=\"#{ rowspan }\"" if rowspan
         
         atts
+    end
+
+    STYLES_RE = /^(color|width|height|border|background|padding|margin|font|text|float)(-[a-z]+)*:\s*((\d+%?|\d+px|\d+(\.\d+)?em|#[0-9a-f]+|[a-z]+)\s*)+$/i
+
+    def sanitize_styles(str)
+      styles = str.split(";").map(&:strip)
+      styles.reject! do |style|
+        !style.match(STYLES_RE)
+      end
+      styles.join(";")
     end
 
     TABLE_RE = /^(?:table(_?#{S}#{A}#{C})\. ?\n)?^(#{A}#{C}\.? ?\|.*?\|)(\n\n|\Z)/m
@@ -572,7 +585,7 @@ class RedCloth3 < String
                     last_line = line_id
                 end
                 if line_id - last_line > 1 or line_id == lines.length - 1
-                    depth.delete_if do |v|
+                    while v = depth.pop
                         lines[last_line] << "</li>\n\t</#{ lT( v ) }l>"
                     end
                 end
@@ -803,10 +816,10 @@ class RedCloth3 < String
             ":
             (                          # $url
             (\/|[a-zA-Z]+:\/\/|www\.|mailto:)  # $proto
-            [\w\/]\S+?
+            [[:alnum:]_\/]\S+?
             )               
             (\/)?                      # $slash
-            ([^\w\=\/;\(\)]*?)         # $post
+            ([^[:alnum:]_\=\/;\(\)]*?)         # $post
             )
             (?=<|\s|$)
         /x 

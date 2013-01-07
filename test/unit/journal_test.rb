@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,7 +18,9 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class JournalTest < ActiveSupport::TestCase
-  fixtures :projects, :issues, :issue_statuses, :journals, :journal_details, :users, :members, :member_roles
+  fixtures :projects, :issues, :issue_statuses, :journals, :journal_details,
+           :users, :members, :member_roles, :roles, :enabled_modules,
+           :projects_trackers, :trackers
 
   def setup
     @journal = Journal.find 1
@@ -45,6 +47,71 @@ class JournalTest < ActiveSupport::TestCase
 
     assert journal.save
     assert_equal 1, ActionMailer::Base.deliveries.size
+  end
+
+  def test_should_not_save_journal_with_blank_notes_and_no_details
+    journal = Journal.new(:journalized => Issue.first, :user => User.first)
+
+    assert_no_difference 'Journal.count' do
+      assert_equal false, journal.save
+    end
+  end
+
+  def test_create_should_not_split_non_private_notes
+    assert_difference 'Journal.count' do
+      assert_no_difference 'JournalDetail.count' do
+        journal = Journal.generate!(:notes => 'Notes')
+      end
+    end
+
+    assert_difference 'Journal.count' do
+      assert_difference 'JournalDetail.count' do
+        journal = Journal.generate!(:notes => 'Notes', :details => [JournalDetail.new])
+      end
+    end
+
+    assert_difference 'Journal.count' do
+      assert_difference 'JournalDetail.count' do
+        journal = Journal.generate!(:notes => '', :details => [JournalDetail.new])
+      end
+    end
+  end
+
+  def test_create_should_split_private_notes
+    assert_difference 'Journal.count' do
+      assert_no_difference 'JournalDetail.count' do
+        journal = Journal.generate!(:notes => 'Notes', :private_notes => true)
+        journal.reload
+        assert_equal true, journal.private_notes
+        assert_equal 'Notes', journal.notes
+      end
+    end
+
+    assert_difference 'Journal.count', 2 do
+      assert_difference 'JournalDetail.count' do
+        journal = Journal.generate!(:notes => 'Notes', :private_notes => true, :details => [JournalDetail.new])
+        journal.reload
+        assert_equal true, journal.private_notes
+        assert_equal 'Notes', journal.notes
+        assert_equal 0, journal.details.size
+
+        journal_with_changes = Journal.order('id DESC').offset(1).first
+        assert_equal false, journal_with_changes.private_notes
+        assert_nil journal_with_changes.notes
+        assert_equal 1, journal_with_changes.details.size
+        assert_equal journal.created_on, journal_with_changes.created_on
+      end
+    end
+
+    assert_difference 'Journal.count' do
+      assert_difference 'JournalDetail.count' do
+        journal = Journal.generate!(:notes => '', :private_notes => true, :details => [JournalDetail.new])
+        journal.reload
+        assert_equal false, journal.private_notes
+        assert_equal '', journal.notes
+        assert_equal 1, journal.details.size
+      end
+    end
   end
 
   def test_visible_scope_for_anonymous

@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -21,12 +21,12 @@ class Repository::Bazaar < Repository
   attr_protected :root_url
   validates_presence_of :url, :log_encoding
 
-  def self.human_attribute_name(attribute_key_name)
-    attr_name = attribute_key_name
+  def self.human_attribute_name(attribute_key_name, *args)
+    attr_name = attribute_key_name.to_s
     if attr_name == "url"
       attr_name = "path_to_repository"
     end
-    super(attr_name)
+    super(attr_name, *args)
   end
 
   def self.scm_adapter_class
@@ -37,7 +37,28 @@ class Repository::Bazaar < Repository
     'Bazaar'
   end
 
+  def entry(path=nil, identifier=nil)
+    scm.bzr_path_encodig = log_encoding
+    scm.entry(path, identifier)
+  end
+
+  def cat(path, identifier=nil)
+    scm.bzr_path_encodig = log_encoding
+    scm.cat(path, identifier)
+  end
+
+  def annotate(path, identifier=nil)
+    scm.bzr_path_encodig = log_encoding
+    scm.annotate(path, identifier)
+  end
+
+  def diff(path, rev, rev_to)
+    scm.bzr_path_encodig = log_encoding
+    scm.diff(path, rev, rev_to)
+  end
+
   def entries(path=nil, identifier=nil)
+    scm.bzr_path_encodig = log_encoding
     entries = scm.entries(path, identifier)
     if entries
       entries.each do |e|
@@ -63,9 +84,12 @@ class Repository::Bazaar < Repository
         end
       end
     end
+    load_entries_changesets(entries)
+    entries
   end
 
   def fetch_changesets
+    scm.bzr_path_encodig = log_encoding
     scm_info = scm.info
     if scm_info
       # latest revision found in database
@@ -78,7 +102,7 @@ class Repository::Bazaar < Repository
         while (identifier_from <= scm_revision)
           # loads changesets by batches of 200
           identifier_to = [identifier_from + 199, scm_revision].min
-          revisions = scm.revisions('', identifier_to, identifier_from, :with_paths => true)
+          revisions = scm.revisions('', identifier_to, identifier_from)
           transaction do
             revisions.reverse_each do |revision|
               changeset = Changeset.create(:repository   => self,

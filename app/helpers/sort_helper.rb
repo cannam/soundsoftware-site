@@ -89,6 +89,10 @@ module SortHelper
       sql.blank? ? nil : sql
     end
 
+    def to_a
+      @criteria.dup
+    end
+
     def add!(key, asc)
       @criteria.delete_if {|k,o| k == key}
       @criteria = [[key, asc]] + @criteria
@@ -160,7 +164,8 @@ module SortHelper
   # sort_clause.
   # - criteria can be either an array or a hash of allowed keys
   #
-  def sort_update(criteria)
+  def sort_update(criteria, sort_name=nil)
+    sort_name ||= self.sort_name
     @sort_criteria = SortCriteria.new
     @sort_criteria.available_criteria = criteria
     @sort_criteria.from_param(params[:sort] || session[sort_name])
@@ -179,6 +184,10 @@ module SortHelper
   #
   def sort_clause()
     @sort_criteria.to_sql
+  end
+
+  def sort_criteria
+    @sort_criteria
   end
 
   # Returns a link which sorts by the named column.

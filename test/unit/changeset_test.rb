@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -27,9 +27,6 @@ class ChangesetTest < ActiveSupport::TestCase
            :custom_fields, :custom_values,
            :users, :members, :member_roles, :trackers,
            :enabled_modules, :roles
-
-  def setup
-  end
 
   def test_ref_keywords_any
     ActionMailer::Base.deliveries.clear
@@ -179,7 +176,8 @@ class ChangesetTest < ActiveSupport::TestCase
   end
 
   def test_commit_closing_a_subproject_issue
-    with_settings :commit_fix_status_id => 5, :commit_fix_keywords => 'closes' do
+    with_settings :commit_fix_status_id => 5, :commit_fix_keywords => 'closes',
+                  :default_language => 'en' do
       issue = Issue.find(5)
       assert !issue.closed?
       assert_difference 'Journal.count' do
@@ -210,6 +208,36 @@ class ChangesetTest < ActiveSupport::TestCase
     assert c.issues.first.project != c.project
   end
 
+  def test_commit_referencing_a_project_with_commit_cross_project_ref_disabled
+    r = Repository::Subversion.create!(
+          :project => Project.find(3),
+          :url     => 'svn://localhost/test')
+          
+    with_settings :commit_cross_project_ref => '0' do
+      c = Changeset.new(:repository   => r,
+                        :committed_on => Time.now,
+                        :comments     => 'refs #4, an issue of a different project',
+                        :revision     => '12345')
+      assert c.save
+      assert_equal [], c.issue_ids
+    end
+  end
+
+  def test_commit_referencing_a_project_with_commit_cross_project_ref_enabled
+    r = Repository::Subversion.create!(
+          :project => Project.find(3),
+          :url     => 'svn://localhost/test')
+          
+    with_settings :commit_cross_project_ref => '1' do
+      c = Changeset.new(:repository   => r,
+                        :committed_on => Time.now,
+                        :comments     => 'refs #4, an issue of a different project',
+                        :revision     => '12345')
+      assert c.save
+      assert_equal [4], c.issue_ids
+    end
+  end
+
   def test_text_tag_revision
     c = Changeset.new(:revision => '520')
     assert_equal 'r520', c.text_tag
@@ -223,6 +251,17 @@ class ChangesetTest < ActiveSupport::TestCase
   def test_text_tag_revision_with_different_project
     c = Changeset.new(:revision => '520', :repository => Project.find(1).repository)
     assert_equal 'ecookbook:r520', c.text_tag(Project.find(2))
+  end
+
+  def test_text_tag_revision_with_repository_identifier
+    r = Repository::Subversion.create!(
+          :project_id => 1,
+          :url     => 'svn://localhost/test',
+          :identifier => 'documents')
+    
+    c = Changeset.new(:revision => '520', :repository => r)
+    assert_equal 'documents|r520', c.text_tag
+    assert_equal 'ecookbook:documents|r520', c.text_tag(Project.find(2))
   end
 
   def test_text_tag_hash

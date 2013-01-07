@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,9 +18,44 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module QueriesHelper
+  def filters_options_for_select(query)
+    options_for_select(filters_options(query))
+  end
 
-  def operators_for_select(filter_type)
-    Query.operators_by_filter_type[filter_type].collect {|o| [l(Query.operators[o]), o]}
+  def filters_options(query)
+    options = [[]]
+    sorted_options = query.available_filters.sort do |a, b|
+      ord = 0
+      if !(a[1][:order] == 20 && b[1][:order] == 20) 
+        ord = a[1][:order] <=> b[1][:order]
+      else
+        cn = (CustomField::CUSTOM_FIELDS_NAMES.index(a[1][:field].class.name) <=>
+                CustomField::CUSTOM_FIELDS_NAMES.index(b[1][:field].class.name))
+        if cn != 0
+          ord = cn
+        else
+          f = (a[1][:field] <=> b[1][:field])
+          if f != 0
+            ord = f
+          else
+            # assigned_to or author 
+            ord = (a[0] <=> b[0])
+          end
+        end
+      end
+      ord
+    end
+    options += sorted_options.map do |field, field_options|
+      [field_options[:name], field]
+    end
+  end
+
+  def available_block_columns_tags(query)
+    tags = ''.html_safe
+    query.available_block_columns.each do |column|
+      tags << content_tag('label', check_box_tag('c[]', column.name.to_s, query.has_column?(column)) + " #{column.caption}", :class => 'inline')
+    end
+    tags
   end
 
   def column_header(column)
@@ -31,11 +66,20 @@ module QueriesHelper
 
   def column_content(column, issue)
     value = column.value(issue)
-
+    if value.is_a?(Array)
+      value.collect {|v| column_value(column, issue, v)}.compact.join(', ').html_safe
+    else
+      column_value(column, issue, value)
+    end
+  end
+  
+  def column_value(column, issue, value)
     case value.class.name
     when 'String'
       if column.name == :subject
         link_to(h(value), :controller => 'issues', :action => 'show', :id => issue)
+      elsif column.name == :description
+        issue.description? ? content_tag('div', textilizable(issue, :description), :class => "wiki") : ''
       else
         h(value)
       end
@@ -46,6 +90,8 @@ module QueriesHelper
     when 'Fixnum', 'Float'
       if column.name == :done_ratio
         progress_bar(value, :width => '80px')
+      elsif  column.name == :spent_hours
+        sprintf "%.2f", value
       else
         h(value.to_s)
       end
@@ -61,6 +107,11 @@ module QueriesHelper
       l(:general_text_No)
     when 'Issue'
       link_to_issue(value, :subject => false)
+    when 'IssueRelation'
+      other = value.other_issue(issue)
+      content_tag('span',
+        (l(value.label_for(issue)) + " " + link_to_issue(other, :subject => false, :tracker => false)).html_safe,
+        :class => value.css_classes_for(issue))
     else
       h(value)
     end
@@ -87,6 +138,23 @@ module QueriesHelper
       @query = Query.find_by_id(session[:query][:id]) if session[:query][:id]
       @query ||= Query.new(:name => "_", :filters => session[:query][:filters], :group_by => session[:query][:group_by], :column_names => session[:query][:column_names])
       @query.project = @project
+    end
+  end
+
+  def retrieve_query_from_session
+    if session[:query]
+      if session[:query][:id]
+        @query = Query.find_by_id(session[:query][:id])
+        return unless @query
+      else
+        @query = Query.new(:name => "_", :filters => session[:query][:filters], :group_by => session[:query][:group_by], :column_names => session[:query][:column_names])
+      end
+      if session[:query].has_key?(:project_id)
+        @query.project_id = session[:query][:project_id]
+      else
+        @query.project = @project
+      end
+      @query
     end
   end
 

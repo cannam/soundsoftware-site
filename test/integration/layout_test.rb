@@ -1,3 +1,20 @@
+# Redmine - project management software
+# Copyright (C) 2006-2012  Jean-Philippe Lang
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 require File.expand_path('../../test_helper', __FILE__)
 
 class LayoutTest < ActionController::IntegrationTest
@@ -20,9 +37,9 @@ class LayoutTest < ActionController::IntegrationTest
   end
 
   test "browsing to an unauthorized page should render the base layout" do
-    change_user_password('miscuser9', 'test')
+    change_user_password('miscuser9', 'test1234')
 
-    log_user('miscuser9','test')
+    log_user('miscuser9','test1234')
 
     get "/admin"
     assert_response :forbidden
@@ -50,7 +67,34 @@ class LayoutTest < ActionController::IntegrationTest
 
     get '/projects/ecookbook/issues/new'
     assert_tag :script,
-      :attributes => {:src => %r{^/javascripts/jstoolbar/textile.js}},
+      :attributes => {:src => %r{^/javascripts/jstoolbar/jstoolbar-textile.min.js}},
       :parent => {:tag => 'head'}
+  end
+
+  def test_calendar_header_tags
+    with_settings :default_language => 'fr' do
+      get '/issues'
+      assert_include "/javascripts/i18n/jquery.ui.datepicker-fr.js", response.body
+    end
+
+    with_settings :default_language => 'en-GB' do
+      get '/issues'
+      assert_include "/javascripts/i18n/jquery.ui.datepicker-en-GB.js", response.body
+    end
+
+    with_settings :default_language => 'en' do
+      get '/issues'
+      assert_not_include "/javascripts/i18n/jquery.ui.datepicker", response.body
+    end
+  end
+
+  def test_search_field_outside_project_should_link_to_global_search
+    get '/'
+    assert_select 'div#quick-search form[action=/search]'
+  end
+
+  def test_search_field_inside_project_should_link_to_project_search
+    get '/projects/ecookbook'
+    assert_select 'div#quick-search form[action=/projects/ecookbook/search]'
   end
 end

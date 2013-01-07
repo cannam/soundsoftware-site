@@ -1,6 +1,6 @@
 class BuildProjectsTree < ActiveRecord::Migration
   def self.up
-    Project.rebuild!
+    Project.rebuild_tree!
   end
 
   def self.down

@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -72,7 +72,7 @@ module Redmine
           all.each do |object|
             clear = object.send(attribute)
             object.send "#{attribute}=", clear
-            raise(ActiveRecord::Rollback) unless object.save(false)
+            raise(ActiveRecord::Rollback) unless object.save(:validation => false)
           end
         end ? true : false
       end
@@ -81,8 +81,8 @@ module Redmine
         transaction do
           all.each do |object|
             clear = object.send(attribute)
-            object.write_attribute attribute, clear
-            raise(ActiveRecord::Rollback) unless object.save(false)
+            object.send :write_attribute, attribute, clear
+            raise(ActiveRecord::Rollback) unless object.save(:validation => false)
           end
         end
       end ? true : false

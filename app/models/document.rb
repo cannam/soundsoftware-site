@@ -1,5 +1,5 @@
-# RedMine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Redmine - project management software
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ class Document < ActiveRecord::Base
   validates_presence_of :project, :title, :category
   validates_length_of :title, :maximum => 60
 
-  named_scope :visible, lambda {|*args| { :include => :project,
+  scope :visible, lambda {|*args| { :include => :project,
                                           :conditions => Project.allowed_to_condition(args.shift || User.current, :view_documents, *args) } }
 
   safe_attributes 'category_id', 'title', 'description'
@@ -39,7 +39,8 @@ class Document < ActiveRecord::Base
     !user.nil? && user.allowed_to?(:view_documents, project)
   end
 
-  def after_initialize
+  def initialize(attributes=nil, *args)
+    super
     if new_record?
       self.category ||= DocumentCategory.default
     end
@@ -47,7 +48,7 @@ class Document < ActiveRecord::Base
 
   def updated_on
     unless @updated_on
-      a = attachments.find(:first, :order => 'created_on DESC')
+      a = attachments.last
       @updated_on = (a && a.created_on) || created_on
     end
     @updated_on

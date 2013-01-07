@@ -1,6 +1,7 @@
 <% diff = Redmine::UnifiedDiff.new(
             diff, :type => diff_type,
-            :max_lines => Setting.diff_max_lines_displayed.to_i) -%>
+            :max_lines => Setting.diff_max_lines_displayed.to_i,
+            :style => diff_style) -%>
 
 <% diff.each do |table_file| -%>
 <div class="autoscroll">
@@ -23,11 +24,11 @@
 <tr>
   <th class="line-num"><%= line.nb_line_left %></th>
   <td class="line-code <%= line.type_diff_left %>">
-    <pre><%= Redmine::CodesetUtil.to_utf8_by_setting(line.html_line_left) %></pre>
+    <pre><%= Redmine::CodesetUtil.to_utf8_by_setting(line.html_line_left).html_safe %></pre>
   </td>
   <th class="line-num"><%= line.nb_line_right %></th>
   <td class="line-code <%= line.type_diff_right %>">
-    <pre><%= Redmine::CodesetUtil.to_utf8_by_setting(line.html_line_right) %></pre>
+    <pre><%= Redmine::CodesetUtil.to_utf8_by_setting(line.html_line_right).html_safe %></pre>
   </td>
 </tr>
 <% end -%>
@@ -54,7 +55,7 @@
   <th class="line-num"><%= line.nb_line_left %></th>
   <th class="line-num"><%= line.nb_line_right %></th>
   <td class="line-code <%= line.type_diff %>">
-    <pre><%= Redmine::CodesetUtil.to_utf8_by_setting(line.html_line) %></pre>
+    <pre><%= Redmine::CodesetUtil.to_utf8_by_setting(line.html_line).html_safe %></pre>
   </td>
 </tr>
 <% end -%>

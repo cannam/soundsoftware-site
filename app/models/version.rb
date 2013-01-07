@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -33,11 +33,13 @@ class Version < ActiveRecord::Base
   validates_format_of :effective_date, :with => /^\d{4}-\d{2}-\d{2}$/, :message => :not_a_date, :allow_nil => true
   validates_inclusion_of :status, :in => VERSION_STATUSES
   validates_inclusion_of :sharing, :in => VERSION_SHARINGS
+  validate :validate_version
 
-  named_scope :named, lambda {|arg| { :conditions => ["LOWER(#{table_name}.name) = LOWER(?)", arg.to_s.strip]}}
-  named_scope :open, :conditions => {:status => 'open'}
-  named_scope :visible, lambda {|*args| { :include => :project,
-                                          :conditions => Project.allowed_to_condition(args.first || User.current, :view_issues) } }
+  scope :named, lambda {|arg| where("LOWER(#{table_name}.name) = LOWER(?)", arg.to_s.strip)}
+  scope :open, where(:status => 'open')
+  scope :visible, lambda {|*args|
+    includes(:project).where(Project.allowed_to_condition(args.first || User.current, :view_issues))
+  }
 
   safe_attributes 'name', 
     'description',
@@ -78,7 +80,7 @@ class Version < ActiveRecord::Base
 
   # Returns the total reported time for this version
   def spent_hours
-    @spent_hours ||= TimeEntry.sum(:hours, :include => :issue, :conditions => ["#{Issue.table_name}.fixed_version_id = ?", id]).to_f
+    @spent_hours ||= TimeEntry.joins(:issue).where("#{Issue.table_name}.fixed_version_id = ?", id).sum(:hours).to_f
   end
 
   def closed?
@@ -91,7 +93,7 @@ class Version < ActiveRecord::Base
 
   # Returns true if the version is completed: due date reached and no open issues
   def completed?
-    effective_date && (effective_date <= Date.today) && (open_issues_count == 0)
+    effective_date && (effective_date < Date.today) && (open_issues_count == 0)
   end
 
   def behind_schedule?
@@ -133,17 +135,20 @@ class Version < ActiveRecord::Base
 
   # Returns assigned issues count
   def issues_count
-    @issue_count ||= fixed_issues.count
+    load_issue_counts
+    @issue_count
   end
 
   # Returns the total amount of open issues for this version.
   def open_issues_count
-    @open_issues_count ||= Issue.count(:all, :conditions => ["fixed_version_id = ? AND is_closed = ?", self.id, false], :include => :status)
+    load_issue_counts
+    @open_issues_count
   end
 
   # Returns the total amount of closed issues for this version.
   def closed_issues_count
-    @closed_issues_count ||= Issue.count(:all, :conditions => ["fixed_version_id = ? AND is_closed = ?", self.id, true], :include => :status)
+    load_issue_counts
+    @closed_issues_count
   end
 
   def wiki_page
@@ -159,13 +164,13 @@ class Version < ActiveRecord::Base
     "#{project} - #{name}"
   end
 
-  # Versions are sorted by effective_date and "Project Name - Version name"
-  # Those with no effective_date are at the end, sorted by "Project Name - Version name"
+  # Versions are sorted by effective_date and name
+  # Those with no effective_date are at the end, sorted by name
   def <=>(version)
     if self.effective_date
       if version.effective_date
         if self.effective_date == version.effective_date
-          "#{self.project.name} - #{self.name}" <=> "#{version.project.name} - #{version.name}"
+          name == version.name ? id <=> version.id : name <=> version.name
         else
           self.effective_date <=> version.effective_date
         end
@@ -176,10 +181,17 @@ class Version < ActiveRecord::Base
       if version.effective_date
         1
       else
-        "#{self.project.name} - #{self.name}" <=> "#{version.project.name} - #{version.name}"
+        name == version.name ? id <=> version.id : name <=> version.name
       end
     end
   end
+
+  def self.fields_for_order_statement(table=nil)
+    table ||= table_name
+    ["(CASE WHEN #{table}.effective_date IS NULL THEN 1 ELSE 0 END)", "#{table}.effective_date", "#{table}.name", "#{table}.id"]
+  end
+
+  scope :sorted, order(fields_for_order_statement)
 
   # Returns the sharings that +user+ can set the version to
   def allowed_sharings(user = User.current)
@@ -203,6 +215,21 @@ class Version < ActiveRecord::Base
   end
 
   private
+
+  def load_issue_counts
+    unless @issue_count
+      @open_issues_count = 0
+      @closed_issues_count = 0
+      fixed_issues.count(:all, :group => :status).each do |status, count|
+        if status.is_closed?
+          @closed_issues_count += count
+        else
+          @open_issues_count += count
+        end
+      end
+      @issue_count = @open_issues_count + @closed_issues_count
+    end
+  end
 
   # Update the issue's fixed versions. Used if a version's sharing changes.
   def update_issues_from_sharing_change
@@ -242,12 +269,16 @@ class Version < ActiveRecord::Base
       if issues_count > 0
         ratio = open ? 'done_ratio' : 100
 
-        done = fixed_issues.sum("COALESCE(estimated_hours, #{estimated_average}) * #{ratio}",
-                                  :include => :status,
-                                  :conditions => ["is_closed = ?", !open]).to_f
+        done = fixed_issues.open(open).sum("COALESCE(estimated_hours, #{estimated_average}) * #{ratio}").to_f
         progress = done / (estimated_average * issues_count)
       end
       progress
+    end
+  end
+
+  def validate_version
+    if effective_date.nil? && @attributes['effective_date'].present?
+      errors.add :effective_date, :not_a_date
     end
   end
 end

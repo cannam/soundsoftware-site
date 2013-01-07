@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -64,6 +64,35 @@ class WikiControllerTest < ActionController::TestCase
                                                :alt => 'This is a logo' }
   end
 
+  def test_show_old_version
+    get :show, :project_id => 'ecookbook', :id => 'CookBook_documentation', :version => '2'
+    assert_response :success
+    assert_template 'show'
+
+    assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation/1', :text => /Previous/
+    assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation/2/diff', :text => /diff/
+    assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation/3', :text => /Next/
+    assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation', :text => /Current version/
+  end
+
+  def test_show_old_version_without_permission_should_be_denied
+    Role.anonymous.remove_permission! :view_wiki_edits
+
+    get :show, :project_id => 'ecookbook', :id => 'CookBook_documentation', :version => '2'
+    assert_redirected_to '/login?back_url=http%3A%2F%2Ftest.host%2Fprojects%2Fecookbook%2Fwiki%2FCookBook_documentation%2F2'
+  end
+
+  def test_show_first_version
+    get :show, :project_id => 'ecookbook', :id => 'CookBook_documentation', :version => '1'
+    assert_response :success
+    assert_template 'show'
+
+    assert_select 'a', :text => /Previous/, :count => 0
+    assert_select 'a', :text => /diff/, :count => 0
+    assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation/2', :text => /Next/
+    assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation', :text => /Current version/
+  end
+
   def test_show_redirected_page
     WikiRedirect.create!(:wiki_id => 1, :title => 'Old_title', :redirects_to => 'Another_page')
 
@@ -80,11 +109,6 @@ class WikiControllerTest < ActionController::TestCase
     assert_response :success
     assert_tag :tag => 'div', :attributes => {:id => 'sidebar'},
                               :content => /Side bar content for test_show_with_sidebar/
-  end
-
-  def test_show_unexistent_page_without_edit_right
-    get :show, :project_id => 1, :id => 'Unexistent page'
-    assert_response 404
   end
   
   def test_show_should_display_section_edit_links
@@ -119,6 +143,11 @@ class WikiControllerTest < ActionController::TestCase
     }
   end
 
+  def test_show_unexistent_page_without_edit_right
+    get :show, :project_id => 1, :id => 'Unexistent page'
+    assert_response 404
+  end
+
   def test_show_unexistent_page_with_edit_right
     @request.session[:user_id] = 2
     get :show, :project_id => 1, :id => 'Unexistent page'
@@ -126,17 +155,38 @@ class WikiControllerTest < ActionController::TestCase
     assert_template 'edit'
   end
 
+  def test_show_unexistent_page_with_parent_should_preselect_parent
+    @request.session[:user_id] = 2
+    get :show, :project_id => 1, :id => 'Unexistent page', :parent => 'Another_page'
+    assert_response :success
+    assert_template 'edit'
+    assert_tag 'select', :attributes => {:name => 'wiki_page[parent_id]'},
+      :child => {:tag => 'option', :attributes => {:value => '2', :selected => 'selected'}}
+  end
+
+  def test_show_should_not_show_history_without_permission
+    Role.anonymous.remove_permission! :view_wiki_edits
+    get :show, :project_id => 1, :id => 'Page with sections', :version => 2
+
+    assert_response 302
+  end
+
   def test_create_page
     @request.session[:user_id] = 2
-    put :update, :project_id => 1,
-                :id => 'New page',
-                :content => {:comments => 'Created the page',
-                             :text => "h1. New page\n\nThis is a new page",
-                             :version => 0}
+    assert_difference 'WikiPage.count' do
+      assert_difference 'WikiContent.count' do
+        put :update, :project_id => 1,
+                    :id => 'New page',
+                    :content => {:comments => 'Created the page',
+                                 :text => "h1. New page\n\nThis is a new page",
+                                 :version => 0}
+      end
+    end
     assert_redirected_to :action => 'show', :project_id => 'ecookbook', :id => 'New_page'
     page = Project.find(1).wiki.find_page('New page')
     assert !page.new_record?
     assert_not_nil page.content
+    assert_nil page.parent
     assert_equal 'Created the page', page.content.comments
   end
 
@@ -157,6 +207,17 @@ class WikiControllerTest < ActionController::TestCase
     assert_equal 'testfile.txt', page.attachments.first.filename
   end
 
+  def test_create_page_with_parent
+    @request.session[:user_id] = 2
+    assert_difference 'WikiPage.count' do
+      put :update, :project_id => 1, :id => 'New page',
+        :content => {:text => "h1. New page\n\nThis is a new page", :version => 0},
+        :wiki_page => {:parent_id => 2}
+    end
+    page = Project.find(1).wiki.find_page('New page')
+    assert_equal WikiPage.find(2), page.parent
+  end
+
   def test_edit_page
     @request.session[:user_id] = 2
     get :edit, :project_id => 'ecookbook', :id => 'Another_page'
@@ -166,7 +227,7 @@ class WikiControllerTest < ActionController::TestCase
 
     assert_tag 'textarea',
       :attributes => { :name => 'content[text]' },
-      :content => WikiPage.find_by_title('Another_page').content.text
+      :content => "\n"+WikiPage.find_by_title('Another_page').content.text
   end
 
   def test_edit_section
@@ -181,7 +242,7 @@ class WikiControllerTest < ActionController::TestCase
 
     assert_tag 'textarea',
       :attributes => { :name => 'content[text]' },
-      :content => section
+      :content => "\n"+section
     assert_tag 'input',
       :attributes => { :name => 'section', :type => 'hidden', :value => '2' }
     assert_tag 'input',
@@ -218,6 +279,31 @@ class WikiControllerTest < ActionController::TestCase
     assert_equal "my comments", page.content.comments
   end
 
+  def test_update_page_with_parent
+    @request.session[:user_id] = 2
+    assert_no_difference 'WikiPage.count' do
+      assert_no_difference 'WikiContent.count' do
+        assert_difference 'WikiContent::Version.count' do
+          put :update, :project_id => 1,
+            :id => 'Another_page',
+            :content => {
+              :comments => "my comments",
+              :text => "edited",
+              :version => 1
+            },
+            :wiki_page => {:parent_id => '1'}
+        end
+      end
+    end
+    assert_redirected_to '/projects/ecookbook/wiki/Another_page'
+
+    page = Wiki.find(1).pages.find_by_title('Another_page')
+    assert_equal "edited", page.content.text
+    assert_equal 2, page.content.version
+    assert_equal "my comments", page.content.comments
+    assert_equal WikiPage.find(1), page.parent
+  end
+
   def test_update_page_with_failure
     @request.session[:user_id] = 2
     assert_no_difference 'WikiPage.count' do
@@ -237,8 +323,51 @@ class WikiControllerTest < ActionController::TestCase
     assert_template 'edit'
 
     assert_error_tag :descendant => {:content => /Comment is too long/}
-    assert_tag :tag => 'textarea', :attributes => {:id => 'content_text'}, :content => 'edited'
+    assert_tag :tag => 'textarea', :attributes => {:id => 'content_text'}, :content => "\nedited"
     assert_tag :tag => 'input', :attributes => {:id => 'content_version', :value => '1'}
+  end
+
+  def test_update_page_with_parent_change_only_should_not_create_content_version
+    @request.session[:user_id] = 2
+    assert_no_difference 'WikiPage.count' do
+      assert_no_difference 'WikiContent.count' do
+        assert_no_difference 'WikiContent::Version.count' do
+          put :update, :project_id => 1,
+            :id => 'Another_page',
+            :content => {
+              :comments => '',
+              :text => Wiki.find(1).find_page('Another_page').content.text,
+              :version => 1
+            },
+            :wiki_page => {:parent_id => '1'}
+        end
+      end
+    end
+    page = Wiki.find(1).pages.find_by_title('Another_page')
+    assert_equal 1, page.content.version
+    assert_equal WikiPage.find(1), page.parent
+  end
+
+  def test_update_page_with_attachments_only_should_not_create_content_version
+    @request.session[:user_id] = 2
+    assert_no_difference 'WikiPage.count' do
+      assert_no_difference 'WikiContent.count' do
+        assert_no_difference 'WikiContent::Version.count' do
+          assert_difference 'Attachment.count' do
+            put :update, :project_id => 1,
+              :id => 'Another_page',
+              :content => {
+                :comments => '',
+                :text => Wiki.find(1).find_page('Another_page').content.text,
+                :version => 1
+              },
+              :attachments => {'1' => {'file' => uploaded_test_file('testfile.txt', 'text/plain'), 'description' => 'test file'}}
+          end
+        end
+      end
+    end
+    page = Wiki.find(1).pages.find_by_title('Another_page')
+    assert_equal 1, page.content.version
   end
 
   def test_update_stale_page_should_not_raise_an_error
@@ -377,29 +506,60 @@ class WikiControllerTest < ActionController::TestCase
   end
 
   def test_history
-    get :history, :project_id => 1, :id => 'CookBook_documentation'
+    @request.session[:user_id] = 2
+    get :history, :project_id => 'ecookbook', :id => 'CookBook_documentation'
     assert_response :success
     assert_template 'history'
     assert_not_nil assigns(:versions)
     assert_equal 3, assigns(:versions).size
+
     assert_select "input[type=submit][name=commit]"
+    assert_select 'td' do
+      assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation/2', :text => '2'
+      assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation/2/annotate', :text => 'Annotate'
+      assert_select 'a[href=?]', '/projects/ecookbook/wiki/CookBook_documentation/2', :text => 'Delete'
+    end
   end
 
   def test_history_with_one_version
-    get :history, :project_id => 1, :id => 'Another_page'
+    @request.session[:user_id] = 2
+    get :history, :project_id => 'ecookbook', :id => 'Another_page'
     assert_response :success
     assert_template 'history'
     assert_not_nil assigns(:versions)
     assert_equal 1, assigns(:versions).size
     assert_select "input[type=submit][name=commit]", false
+    assert_select 'td' do
+      assert_select 'a[href=?]', '/projects/ecookbook/wiki/Another_page/1', :text => '1'
+      assert_select 'a[href=?]', '/projects/ecookbook/wiki/Another_page/1/annotate', :text => 'Annotate'
+      assert_select 'a[href=?]', '/projects/ecookbook/wiki/Another_page/1', :text => 'Delete', :count => 0
+    end
   end
 
   def test_diff
-    get :diff, :project_id => 1, :id => 'CookBook_documentation', :version => 2, :version_from => 1
+    content = WikiPage.find(1).content
+    assert_difference 'WikiContent::Version.count', 2 do
+      content.text = "Line removed\nThis is a sample text for testing diffs"
+      content.save!
+      content.text = "This is a sample text for testing diffs\nLine added"
+      content.save!
+    end
+
+    get :diff, :project_id => 1, :id => 'CookBook_documentation', :version => content.version, :version_from => (content.version - 1)
     assert_response :success
     assert_template 'diff'
-    assert_tag :tag => 'span', :attributes => { :class => 'diff_in'},
-                               :content => /updated/
+    assert_select 'span.diff_out', :text => 'Line removed'
+    assert_select 'span.diff_in', :text => 'Line added'
+  end
+
+  def test_diff_with_invalid_version_should_respond_with_404
+    get :diff, :project_id => 1, :id => 'CookBook_documentation', :version => '99'
+    assert_response 404
+  end
+
+  def test_diff_with_invalid_version_from_should_respond_with_404
+    get :diff, :project_id => 1, :id => 'CookBook_documentation', :version => '99', :version_from => '98'
+    assert_response 404
   end
 
   def test_annotate
@@ -424,6 +584,11 @@ class WikiControllerTest < ActionController::TestCase
         }
       }
     }
+  end
+
+  def test_annotate_with_invalid_version_should_respond_with_404
+    get :annotate, :project_id => 1, :id => 'CookBook_documentation', :version => '99'
+    assert_response 404
   end
 
   def test_get_rename
@@ -497,22 +662,27 @@ class WikiControllerTest < ActionController::TestCase
     assert_nil WikiPage.find_by_title('Child_1').parent
   end
 
-  def test_destroy_child
+  def test_destroy_a_page_without_children_should_not_ask_confirmation
     @request.session[:user_id] = 2
-    delete :destroy, :project_id => 1, :id => 'Child_1'
+    delete :destroy, :project_id => 1, :id => 'Child_2'
     assert_redirected_to :action => 'index', :project_id => 'ecookbook'
   end
 
-  def test_destroy_parent
+  def test_destroy_parent_should_ask_confirmation
     @request.session[:user_id] = 2
     assert_no_difference('WikiPage.count') do
       delete :destroy, :project_id => 1, :id => 'Another_page'
     end
     assert_response :success
     assert_template 'destroy'
+    assert_select 'form' do
+      assert_select 'input[name=todo][value=nullify]'
+      assert_select 'input[name=todo][value=destroy]'
+      assert_select 'input[name=todo][value=reassign]'
+    end
   end
 
-  def test_destroy_parent_with_nullify
+  def test_destroy_parent_with_nullify_should_delete_parent_only
     @request.session[:user_id] = 2
     assert_difference('WikiPage.count', -1) do
       delete :destroy, :project_id => 1, :id => 'Another_page', :todo => 'nullify'
@@ -521,9 +691,9 @@ class WikiControllerTest < ActionController::TestCase
     assert_nil WikiPage.find_by_id(2)
   end
 
-  def test_destroy_parent_with_cascade
+  def test_destroy_parent_with_cascade_should_delete_descendants
     @request.session[:user_id] = 2
-    assert_difference('WikiPage.count', -3) do
+    assert_difference('WikiPage.count', -4) do
       delete :destroy, :project_id => 1, :id => 'Another_page', :todo => 'destroy'
     end
     assert_redirected_to :action => 'index', :project_id => 'ecookbook'
@@ -539,6 +709,18 @@ class WikiControllerTest < ActionController::TestCase
     assert_redirected_to :action => 'index', :project_id => 'ecookbook'
     assert_nil WikiPage.find_by_id(2)
     assert_equal WikiPage.find(1), WikiPage.find_by_id(5).parent
+  end
+
+  def test_destroy_version
+    @request.session[:user_id] = 2
+    assert_difference 'WikiContent::Version.count', -1 do
+      assert_no_difference 'WikiContent.count' do
+        assert_no_difference 'WikiPage.count' do
+          delete :destroy_version, :project_id => 'ecookbook', :id => 'CookBook_documentation', :version => 2
+          assert_redirected_to '/projects/ecookbook/wiki/CookBook_documentation/history'
+        end
+      end
+    end
   end
 
   def test_index
@@ -566,47 +748,49 @@ class WikiControllerTest < ActionController::TestCase
     assert_tag 'a', :attributes => { :href => '/projects/ecookbook/activity.atom?show_wiki_edits=1'}
   end
 
-  context "GET :export" do
-    context "with an authorized user to export the wiki" do
-      setup do
-        @request.session[:user_id] = 2
-        get :export, :project_id => 'ecookbook'
-      end
+  def test_export_to_html
+    @request.session[:user_id] = 2
+    get :export, :project_id => 'ecookbook'
 
-      should_respond_with :success
-      should_assign_to :pages
-      should_respond_with_content_type "text/html"
-      should "export all of the wiki pages to a single html file" do
-        assert_select "a[name=?]", "CookBook_documentation"
-        assert_select "a[name=?]", "Another_page"
-        assert_select "a[name=?]", "Page_with_an_inline_image"
-      end
+    assert_response :success
+    assert_not_nil assigns(:pages)
+    assert assigns(:pages).any?
+    assert_equal "text/html", @response.content_type
 
-    end
-
-    context "with an unauthorized user" do
-      setup do
-        get :export, :project_id => 'ecookbook'
-
-        should_respond_with :redirect
-        should_redirect_to('wiki index') { {:action => 'show', :project_id => @project, :id => nil} }
-      end
-    end
+    assert_select "a[name=?]", "CookBook_documentation"
+    assert_select "a[name=?]", "Another_page"
+    assert_select "a[name=?]", "Page_with_an_inline_image"
   end
 
-  context "GET :date_index" do
-    setup do
-      get :date_index, :project_id => 'ecookbook'
-    end
+  def test_export_to_pdf
+    @request.session[:user_id] = 2
+    get :export, :project_id => 'ecookbook', :format => 'pdf'
 
-    should_respond_with :success
-    should_assign_to :pages
-    should_assign_to :pages_by_date
-    should_render_template 'wiki/date_index'
+    assert_response :success
+    assert_not_nil assigns(:pages)
+    assert assigns(:pages).any?
+    assert_equal 'application/pdf', @response.content_type
+    assert_equal 'attachment; filename="ecookbook.pdf"', @response.headers['Content-Disposition']
+    assert @response.body.starts_with?('%PDF')
+  end
 
-    should "include atom link" do
-      assert_tag 'a', :attributes => { :href => '/projects/ecookbook/activity.atom?show_wiki_edits=1'}
-    end
+  def test_export_without_permission_should_be_denied
+    @request.session[:user_id] = 2
+    Role.find_by_name('Manager').remove_permission! :export_wiki_pages
+    get :export, :project_id => 'ecookbook'
+
+    assert_response 403
+  end
+
+  def test_date_index
+    get :date_index, :project_id => 'ecookbook'
+
+    assert_response :success
+    assert_template 'date_index'
+    assert_not_nil assigns(:pages)
+    assert_not_nil assigns(:pages_by_date)
+
+    assert_tag 'a', :attributes => { :href => '/projects/ecookbook/activity.atom?show_wiki_edits=1'}
   end
 
   def test_not_found
@@ -666,6 +850,19 @@ class WikiControllerTest < ActionController::TestCase
     assert_equal 'text/html', @response.content_type
     assert_equal 'attachment; filename="CookBook_documentation.html"',
                   @response.headers['Content-Disposition']
+    assert_tag 'h1', :content => 'CookBook documentation'
+  end
+
+  def test_show_versioned_html
+    @request.session[:user_id] = 2
+    get :show, :project_id => 1, :format => 'html', :version => 2
+    assert_response :success
+    assert_not_nil assigns(:content)
+    assert_equal 2, assigns(:content).version
+    assert_equal 'text/html', @response.content_type
+    assert_equal 'attachment; filename="CookBook_documentation.html"',
+                  @response.headers['Content-Disposition']
+    assert_tag 'h1', :content => 'CookBook documentation'
   end
 
   def test_show_txt
@@ -676,6 +873,19 @@ class WikiControllerTest < ActionController::TestCase
     assert_equal 'text/plain', @response.content_type
     assert_equal 'attachment; filename="CookBook_documentation.txt"',
                   @response.headers['Content-Disposition']
+    assert_include 'h1. CookBook documentation', @response.body
+  end
+
+  def test_show_versioned_txt
+    @request.session[:user_id] = 2
+    get :show, :project_id => 1, :format => 'txt', :version => 2
+    assert_response :success
+    assert_not_nil assigns(:content)
+    assert_equal 2, assigns(:content).version
+    assert_equal 'text/plain', @response.content_type
+    assert_equal 'attachment; filename="CookBook_documentation.txt"',
+                  @response.headers['Content-Disposition']
+    assert_include 'h1. CookBook documentation', @response.body
   end
 
   def test_edit_unprotected_page
@@ -703,5 +913,15 @@ class WikiControllerTest < ActionController::TestCase
   def test_history_of_non_existing_page_should_return_404
     get :history, :project_id => 1, :id => 'Unknown_page'
     assert_response 404
+  end
+
+  def test_add_attachment
+    @request.session[:user_id] = 2
+    assert_difference 'Attachment.count' do
+      post :add_attachment, :project_id => 1, :id => 'CookBook_documentation',
+        :attachments => {'1' => {'file' => uploaded_test_file('testfile.txt', 'text/plain'), 'description' => 'test file'}}
+    end
+    attachment = Attachment.first(:order => 'id DESC')
+    assert_equal Wiki.find(1).find_page('CookBook_documentation'), attachment.container
   end
 end
