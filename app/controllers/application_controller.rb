@@ -235,14 +235,14 @@ class ApplicationController < ActionController::Base
   def find_project
     @project = Project.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find project of id params[:project_id]
   def find_project_by_project_id
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find a project based on params[:project_id]
@@ -331,6 +331,21 @@ class ApplicationController < ActionController::Base
         uri = URI.parse(back_url)
         # do not redirect user to another host or to the login or register page
         if (uri.relative? || (uri.host == request.host)) && !uri.path.match(%r{/(login|account/register)})
+          # soundsoftware: if back_url is the home page,
+          # change it to My Page (#125)
+          if (uri.path == home_path)
+            if (uri.path =~ /\/$/)
+              uri.path = uri.path + "my"
+            else
+              uri.path = uri.path + "/my"
+            end
+          end
+          # soundsoftware: if login page is https but back_url http,
+          # switch back_url to https to ensure cookie validity (#83)
+          if (uri.scheme == "http") && (URI.parse(request.url).scheme == "https")
+            uri.scheme = "https"
+          end
+          back_url = uri.to_s
           redirect_to(back_url)
           return
         end
@@ -414,7 +429,7 @@ class ApplicationController < ActionController::Base
     if api_request?
       logger.error "Form authenticity token is missing or is invalid. API calls must include a proper Content-type header (text/xml or text/json)."
     end
-    render_error "Invalid form authenticity token."
+    render_error "Invalid form authenticity token.  Perhaps your session has timed out; try reloading the form and entering your details again."
   end
 
   def render_feed(items, options={})

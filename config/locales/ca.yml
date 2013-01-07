@@ -478,6 +478,7 @@ ca:
   label_login_with_open_id_option: "o entra amb l'OpenID"
   label_password_lost: Contrasenya perduda
   label_home: Inici
+  label_home_heading: Inici
   label_my_page: La meva pàgina
   label_my_account: El meu compte
   label_my_projects: Els meus projectes

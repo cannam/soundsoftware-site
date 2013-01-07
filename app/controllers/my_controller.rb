@@ -25,14 +25,16 @@ class MyController < ApplicationController
   BLOCKS = { 'issuesassignedtome' => :label_assigned_to_me_issues,
              'issuesreportedbyme' => :label_reported_issues,
              'issueswatched' => :label_watched_issues,
+             'activitymyprojects' => :label_activity_my_recent,
              'news' => :label_news_latest,
+             'tipoftheday' => :label_tipoftheday,
              'calendar' => :label_calendar,
              'documents' => :label_document_plural,
              'timelog' => :label_spent_time
            }.merge(Redmine::Views::MyPage::Block.additional_blocks).freeze
 
-  DEFAULT_LAYOUT = {  'left' => ['issuesassignedtome'],
-                      'right' => ['issuesreportedbyme']
+  DEFAULT_LAYOUT = {  'left' => ['tipoftheday', 'activitymyprojects'], 
+                      'right' => ['issueswatched'] 
                    }.freeze
 
   def index
@@ -50,10 +52,39 @@ class MyController < ApplicationController
   def account
     @user = User.current
     @pref = @user.pref
+    @ssamr_user_details = @user.ssamr_user_detail
+    
+    
+    if @user.ssamr_user_detail == nil
+       @selected_institution_id = nil
+     else
+       @selected_institution_id = @ssamr_user_details.institution_id.to_i
+     end    
+    
     if request.post?
       @user.safe_attributes = params[:user]
       @user.pref.attributes = params[:pref]
       @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
+
+      if @user.ssamr_user_detail == nil
+        @ssamr_user_details = SsamrUserDetail.new()
+        @user.ssamr_user_detail = @ssamr_user_details
+      else
+        @ssamr_user_details = @user.ssamr_user_detail
+      end
+
+      if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
+        @ssamr_user_details.description = @user.ssamr_user_detail.description
+        @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
+        @institution_type = @ssamr_user_details.institution_type
+        @other_institution = @ssamr_user_details.other_institution
+      else
+        @ssamr_user_details.description = params[:ssamr_user_details][:description]
+        @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
+        @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
+        @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
+      end
+                  
       if @user.save
         @user.pref.save
         @user.notified_project_ids = (@user.mail_notification == 'selected' ? params[:notified_project_ids] : [])

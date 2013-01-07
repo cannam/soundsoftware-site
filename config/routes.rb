@@ -179,6 +179,8 @@ RedmineApp::Application.routes.draw do
   end
   match '/issues', :controller => 'issues', :action => 'destroy', :via => :delete
 
+  map.connect 'explore', :controller => 'projects', :action => 'explore'
+
   resources :queries, :except => [:show]
 
   resources :news, :only => [:index, :show, :edit, :update, :destroy]

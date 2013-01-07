@@ -62,6 +62,20 @@ class UsersController < ApplicationController
   end
 
   def show
+
+    if @user.ssamr_user_detail != nil
+      @description = @user.ssamr_user_detail.description
+      
+      if @user.ssamr_user_detail.institution_type != nil
+        # institution_type is true for listed institutions
+        if (@user.ssamr_user_detail.institution_type)
+          @institution_name = Institution.find(@user.ssamr_user_detail.institution_id).name
+        else
+          @institution_name = @user.ssamr_user_detail.other_institution
+        end
+      end
+    end
+    
     # show projects based on current user visibility
     @memberships = @user.memberships.all(:conditions => Project.visible_condition(User.current))
 
@@ -81,23 +95,37 @@ class UsersController < ApplicationController
     end
   end
 
-  def new
+  def new      
     @user = User.new(:language => Setting.default_language, :mail_notification => Setting.default_notification_option)
     @auth_sources = AuthSource.find(:all)
+
+    @ssamr_user_details = SsamrUserDetail.new
   end
 
   def create
     @user = User.new(:language => Setting.default_language, :mail_notification => Setting.default_notification_option)
     @user.safe_attributes = params[:user]
+    @user = User.new(params[:user])    
     @user.admin = params[:user][:admin] || false
     @user.login = params[:user][:login]
     @user.password, @user.password_confirmation = params[:user][:password], params[:user][:password_confirmation] unless @user.auth_source_id
+
+    # TODO: Similar to My#account
+    @user.pref.attributes = params[:pref]
+    @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
+
+    @ssamr_user_details = SsamrUserDetail.new(params[:ssamr_user_details])
+
+    # associates the 2 objects
+    @user.ssamr_user_detail = @ssamr_user_details
 
     if @user.save
       @user.pref.attributes = params[:pref]
       @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
       @user.pref.save
-      @user.notified_project_ids = (@user.mail_notification == 'selected' ? params[:notified_project_ids] : [])
+                 
+      @ssamr_user_details.save!
+          
 
       Mailer.account_information(@user, params[:user][:password]).deliver if params[:send_information]
 
@@ -124,6 +152,15 @@ class UsersController < ApplicationController
   end
 
   def edit
+    
+    @ssamr_user_details = @user.ssamr_user_detail
+    
+    if @user.ssamr_user_detail == nil
+      @selected_institution_id = nil
+    else
+      @selected_institution_id = @user.ssamr_user_detail.institution_id.to_i    
+    end
+    
     @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
   end
@@ -140,6 +177,26 @@ class UsersController < ApplicationController
     # TODO: Similar to My#account
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
+
+    if @user.ssamr_user_detail == nil
+      @ssamr_user_details = SsamrUserDetail.new()
+      @user.ssamr_user_detail = @ssamr_user_details
+    else
+      @ssamr_user_details = @user.ssamr_user_detail
+    end
+    
+    if params[:ssamr_user_details].nil? or params[:ssamr_user_details].empty?
+      @ssamr_user_details.description = @user.ssamr_user_detail.description
+      @ssamr_user_details.institution_id = @user.ssamr_user_detail.institution_id
+      @ssamr_user_details.other_institution = @user.ssamr_user_detail.other_institution
+      @ssamr_user_details.institution_type = @user.ssamr_user_detail.institution_type
+
+    else
+      @ssamr_user_details.description = params[:ssamr_user_details][:description]
+      @ssamr_user_details.institution_id = params[:ssamr_user_details][:institution_id]
+      @ssamr_user_details.other_institution = params[:ssamr_user_details][:other_institution]
+      @ssamr_user_details.institution_type = params[:ssamr_user_details][:institution_type]
+    end
 
     if @user.save
       @user.pref.save

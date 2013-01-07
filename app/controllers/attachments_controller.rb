@@ -20,6 +20,10 @@ class AttachmentsController < ApplicationController
   before_filter :file_readable, :read_authorize, :only => [:show, :download, :thumbnail]
   before_filter :delete_authorize, :only => :destroy
   before_filter :authorize_global, :only => :upload
+  before_filter :active_authorize, :only => :toggle_active
+
+  include AttachmentsHelper
+  helper :attachments
 
   accept_api_auth :show, :download, :upload
 
@@ -48,7 +52,9 @@ class AttachmentsController < ApplicationController
   end
 
   def download
-    if @attachment.container.is_a?(Version) || @attachment.container.is_a?(Project)
+    # cc: formerly this happened only if "@attachment.container.is_a?(Version)"
+    # or Project. Not good for us, we want to tally all downloads [by humans]
+    if not user_is_search_bot?
       @attachment.increment_download
     end
 
@@ -106,6 +112,12 @@ class AttachmentsController < ApplicationController
     redirect_to_referer_or project_path(@project)
   end
 
+  def toggle_active
+    @attachment.active = !@attachment.active?
+    @attachment.save!
+    render :layout => false
+  end
+
 private
   def find_project
     @attachment = Attachment.find(params[:id])
@@ -127,6 +139,10 @@ private
 
   def delete_authorize
     @attachment.deletable? ? true : deny_access
+  end
+
+  def active_authorize
+    true
   end
 
   def detect_content_type(attachment)

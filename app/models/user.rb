@@ -85,6 +85,11 @@ class User < Principal
   scope :logged, :conditions => "#{User.table_name}.status <> #{STATUS_ANONYMOUS}"
   scope :status, lambda {|arg| arg.blank? ? {} : {:conditions => {:status => arg.to_i}} }
 
+  has_one :ssamr_user_detail, :dependent => :destroy, :class_name => 'SsamrUserDetail'
+  accepts_nested_attributes_for :ssamr_user_detail
+  
+  has_one :author
+
   acts_as_customizable
 
   attr_accessor :password, :password_confirmation
@@ -98,6 +103,7 @@ class User < Principal
   validates_presence_of :login, :firstname, :lastname, :mail, :if => Proc.new { |user| !user.is_a?(AnonymousUser) }
   validates_uniqueness_of :login, :if => Proc.new { |user| user.login_changed? && user.login.present? }, :case_sensitive => false
   validates_uniqueness_of :mail, :if => Proc.new { |user| user.mail_changed? && user.mail.present? }, :case_sensitive => false
+  
   # Login must contain lettres, numbers, underscores only
   validates_format_of :login, :with => /^[a-z0-9_\-@\.]*$/i
   validates_length_of :login, :maximum => LOGIN_LENGTH_LIMIT
@@ -111,6 +117,8 @@ class User < Principal
   before_create :set_mail_notification
   before_save   :update_hashed_password
   before_destroy :remove_references_before_destroy
+
+  validates_acceptance_of :terms_and_conditions, :on => :create, :message => :must_accept_terms_and_conditions
 
   scope :in_group, lambda {|group|
     group_id = group.is_a?(Group) ? group.id : group.to_i
@@ -143,6 +151,10 @@ class User < Principal
     write_attribute(:mail, arg.to_s.strip)
   end
 
+  def description=(arg)
+    write_attribute(:description, arg.to_s.strip)
+  end
+    
   def identity_url=(url)
     if url.blank?
       write_attribute(:identity_url, '')

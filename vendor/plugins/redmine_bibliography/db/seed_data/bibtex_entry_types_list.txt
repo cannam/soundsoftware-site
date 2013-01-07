@@ -1,0 +1,14 @@
+inproceedings
+conference
+article
+masterthesis
+phdthesis
+book
+booklet
+inbook
+incollection
+manual
+techreport
+proceedings
+unpublished
+misc

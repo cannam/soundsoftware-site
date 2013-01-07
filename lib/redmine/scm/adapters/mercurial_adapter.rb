@@ -198,8 +198,7 @@ module Redmine
               output.force_encoding('UTF-8')
             end
             begin
-              # Mercurial < 1.5 does not support footer template for '</log>'
-              parse_xml("#{output}</log>")['log']
+              parse_xml("#{output}")['log']
             rescue
             end
           end

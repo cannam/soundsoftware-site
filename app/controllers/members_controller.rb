@@ -17,6 +17,7 @@
 
 class MembersController < ApplicationController
   model_object Member
+  menu_item :members
   before_filter :find_model_object, :except => [:index, :create, :autocomplete]
   before_filter :find_project_from_association, :except => [:index, :create, :autocomplete]
   before_filter :find_project_by_project_id, :only => [:index, :create, :autocomplete]
@@ -54,12 +55,22 @@ class MembersController < ApplicationController
         attrs = params[:membership].dup
         user_ids = attrs.delete(:user_ids)
         user_ids.each do |user_id|
-          members << Member.new(:role_ids => params[:membership][:role_ids], :user_id => user_id)
+          @new_member = Member.new(:role_ids => params[:membership][:role_ids], :user_id => user_id)
+          members << @new_member
+
+          # send notification to member
+          Mailer.deliver_added_to_project(@new_member, @project)
         end
       else
-        members << Member.new(:role_ids => params[:membership][:role_ids], :user_id => params[:membership][:user_id])
+        @new_member = Member.new(:role_ids => params[:membership][:role_ids], :user_id => params[:membership][:user_id])
+        members << @new_member
+        
+        # send notification to member
+        Mailer.deliver_added_to_project(@new_member, @project)
       end
+
       @project.members << members
+
     end
 
     respond_to do |format|
@@ -113,6 +124,7 @@ class MembersController < ApplicationController
 
   def autocomplete
     @principals = Principal.active.not_member_of(@project).like(params[:q]).all(:limit => 100)
+    logger.debug "Query for #{params[:q]} returned #{@principals.size} results"
     render :layout => false
   end
 end

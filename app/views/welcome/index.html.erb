@@ -1,33 +1,30 @@
-<h2><%= l(:label_home) %></h2>
+<% if not Setting.notifications_text.empty? %>
+  <div class="notifications flash error">
+    <%= textilizable Setting.notifications_text %>
+  </div>
+<% end %>
+
+<h2><%= l(:label_home_heading) %></h2>
 
 <div class="splitcontentleft">
   <%= textilizable Setting.welcome_text %>
-  <% if @news.any? %>
-  <div class="news box">
-  <h3><%=l(:label_news_latest)%></h3>
-    <%= render :partial => 'news/news', :collection => @news %>
-    <%= link_to l(:label_news_view_all), :controller => 'news' %>
-  </div>
-  <% end %>
+  
   <%= call_hook(:view_welcome_index_left, :projects => @projects) %>
 </div>
 
 <div class="splitcontentright">
-    <% if @projects.any? %>
-  <div class="projects box">
-  <h3><%=l(:label_project_latest)%></h3>
-    <ul>
-    <% for project in @projects %>
-      <% @project = project %>
-      <li>
-      <%= link_to_project project %> (<%= format_time(project.created_on) %>)
-      <%= textilizable project.short_description, :project => project %>
-      </li>
-    <% end %>
-    <% @project = nil %>
-    </ul>
+  <% if @site_news.any? %>
+    <div class="news box">
+       <h3><%=l(:label_news_site_latest)%></h3>
+	<%= render :partial => 'news/news', :locals => { :project => @site_project }, :collection => @site_news %>
+	<%= link_to l(:label_news_more), { :controller => 'projects', :action => @site_project.identifier, :id => 'news' } %>
   </div>
   <% end %>
+  <div class="projects box">
+  <h3><%=l(:label_project_latest)%></h3>
+    <%= render :partial => 'projects/latest' %>
+    <%= link_to l(:label_projects_more), :controller => 'projects' %>
+  </div>
     <%= call_hook(:view_welcome_index_right, :projects => @projects) %>
 </div>
 

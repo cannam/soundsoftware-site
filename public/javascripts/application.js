@@ -603,3 +603,4 @@ function addFormObserversForDoubleSubmit() {
 
 $(document).ready(hideOnLoad);
 $(document).ready(addFormObserversForDoubleSubmit);
+

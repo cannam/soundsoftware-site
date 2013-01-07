@@ -443,6 +443,7 @@ gl:
   label_help: Axuda
   label_history: Histórico
   label_home: Inicio
+  label_home_heading: Inicio
   label_in: en
   label_in_less_than: en menos que
   label_in_more_than: en mais que

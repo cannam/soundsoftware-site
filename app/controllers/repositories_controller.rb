@@ -63,6 +63,7 @@ class RepositoriesController < ApplicationController
   end
 
   def update
+    params[:repository_scm]='Mercurial'
     attrs = pickup_extra_info
     @repository.safe_attributes = attrs[:attrs]
     if attrs[:attrs_extra].keys.any?
@@ -169,9 +170,7 @@ class RepositoriesController < ApplicationController
 
     @content = @repository.cat(@path, @rev)
     (show_error_not_found; return) unless @content
-    if is_raw ||
-         (@content.size && @content.size > Setting.file_max_size_displayed.to_i.kilobyte) ||
-         ! is_entry_text_data?(@content, @path)
+    if is_raw
       # Force the download
       send_opt = { :filename => filename_for_content_disposition(@path.split('/').last) }
       send_type = Redmine::MimeType.of(@path)
@@ -179,6 +178,7 @@ class RepositoriesController < ApplicationController
       send_opt[:disposition] = (Redmine::MimeType.is_type?('image', @path) && !is_raw ? 'inline' : 'attachment')
       send_data @content, send_opt
     else
+      @display_raw = ((@content.size && @content.size > Setting.file_max_size_displayed.to_i.kilobyte) || !is_entry_text_data?(@content, @path))
       # Prevent empty lines when displaying a file with Windows style eol
       # TODO: UTF-16
       # Is this needs? AttachmentsController reads file simply.

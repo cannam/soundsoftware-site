@@ -565,6 +565,7 @@ lt:
   label_login_with_open_id_option: arba prisijunkite su OpenID
   label_password_lost: Prarastas slaptažodis
   label_home: Pagrindinis
+  label_home_heading: Pagrindinis
   label_my_page: Mano puslapis
   label_my_account: Mano paskyra
   label_my_projects: Mano projektai

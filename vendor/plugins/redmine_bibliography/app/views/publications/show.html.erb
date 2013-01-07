@@ -1,0 +1,67 @@
+<h2><%=l(:label_publication_show)%></h2>
+
+<div class="box">
+  <h3>Publication Info</h3>
+  <p><%= print_ieee_format(@publication)%></p>
+
+  <h3>B<small>IB</small>T<sub>E</sub>X Format</h3>
+  <pre><%=h print_bibtex_format(@publication) %></pre>
+</div>
+
+<div class="box">
+
+<h4><%= l(:authors) %></h4>
+<ul id="authorships">
+  <% for authorship in @publication.authorships.find(:all, :order => :auth_order) %>
+    <% content_tag_for :li, authorship do %>
+      <%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>
+        <span class="handle">[drag to reorder]</span>
+      <%- end -%>
+      <%= link_to_authorship authorship %> <em><%= h authorship.institution %></em> <br />
+    <%- end -%>
+  <%- end -%>
+</ul>
+
+<%- if User.current.allowed_to?(:edit_publication, @project) && @publication.authorships.length > 1 -%>
+  <%= sortable_element("authorships", :url => { :controller => :publications, :action => :sort_author_order }, :handle => "handle") %>
+<%- end -%>
+
+<%- if @publication.bibtex_entry != nil -%>
+  <%= show_bibtex_fields(@publication.bibtex_entry) %>
+<%- end -%>
+
+<%- unless @publication.external_url.blank? -%>
+  <p>
+    <b><%= l(:field_external_url) %>:</b> <%= link_to h(@publication.external_url), @publication.external_url, {:target => "_blank"} -%>
+  </p>
+<%- end -%>
+
+
+<% unless @publication.doi.blank? %>
+  <p>
+    <b><%= l(:field_doi)-%>:</b> <%= link_to h(@publication.doi), "http://dx.doi.org/#{@publication.doi}", {:target => "_blank"} -%>
+  </p>
+<% end %>
+
+<br / >
+  <% if User.current.allowed_to?(:add_publication, @project) %>
+    <%= link_to l(:label_publication_edit), { :controller => "publications", :action => "edit", :id => @publication, :project_id => @project } %> |
+    <%= link_to "Delete", {:controller => 'publications', :action => 'destroy', :id => @publication, :project_id => @project },
+                                                     :confirm => l(:text_are_you_sure), :method => :delete, :title => l(:button_delete) %> |
+  <% end %>
+  <%= link_to l(:view_all_publications), {:controller => 'publications', :action => 'index', :project_id => @project } %>
+</div>
+
+<% projects = Project.active.find(:all, :limit => 100, :order => 'name ASC') - @publication.projects %>
+
+<% content_for :sidebar do %>
+  <h3><%=l(:label_publication_project_index)%></h3>
+
+  <p id="list_projects">
+    <%= render :partial => 'list_projects' %>
+  </p>
+
+  <%- if User.current.allowed_to?(:edit_publication, @project) -%>
+    <%= render :partial => 'add_project_form' %>
+  <%- end -%>
+<% end %>
