@@ -12,6 +12,7 @@ class Authorship < ActiveRecord::Base
   attr_accessor :is_user, :author_user_id, :search_name, :identify_author, :search_results
   before_save :associate_author_user
 
+  # todo: review usage of scope --lf.20130108
   scope :like_unique, lambda {|q|
     s = "%#{q.to_s.strip.downcase}%"
     {:conditions => ["LOWER(name_on_paper) LIKE :s OR LOWER(email) LIKE :s", {:s => s}],
@@ -20,6 +21,7 @@ class Authorship < ActiveRecord::Base
     }
   }
 
+  # todo: review usage of scope --lf.20130108
   scope :like, lambda {|q|
     s = "%#{q.to_s.strip.downcase}%"
     {:conditions => ["LOWER(name_on_paper) LIKE :s OR LOWER(email) LIKE :s", {:s => s}],
