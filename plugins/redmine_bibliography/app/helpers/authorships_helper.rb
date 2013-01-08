@@ -1,4 +1,4 @@
-# -*- coding: undecided -*-
+# -*- coding: utf-8 -*-
 module AuthorshipsHelper
 
   # Generates a link to either author or user, depending on which is
@@ -9,7 +9,7 @@ module AuthorshipsHelper
       # legacy reasons…
       s << h(authorship.name_on_paper)
     else
-      if authorship.author.user.nil?      
+      if authorship.author.user.nil?
         s << link_to(authorship.name_on_paper, :controller => 'authors', :action => 'show', :id => authorship.author)
       else
         s << link_to(authorship.name_on_paper, :controller => 'users', :action => 'show', :id => authorship.author.user)
