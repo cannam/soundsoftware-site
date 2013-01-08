@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_tags.  If not, see <http://www.gnu.org/licenses/>.
 
-config.gem "acts-as-taggable-on", :version => '2.0.6'
-
 require 'redmine'
 
 Redmine::Plugin.register :redmine_tags do
@@ -38,19 +36,16 @@ Redmine::Plugin.register :redmine_tags do
 end
 
 
-require 'dispatcher'
-
-Dispatcher.to_prepare :redmine_tags do
-  
+ActionDispatch::Callbacks.to_prepare do
   require_dependency 'redmine_project_filtering'
-  
+
   unless Project.included_modules.include?(RedmineTags::Patches::ProjectPatch)
     Project.send(:include, RedmineTags::Patches::ProjectPatch)
   end
-  
+
   unless ProjectsHelper.included_modules.include?(RedmineTags::Patches::ProjectsHelperPatch)
     ProjectsHelper.send(:include, RedmineTags::Patches::ProjectsHelperPatch)
-  end    
+  end
 
   unless Issue.included_modules.include?(RedmineTags::Patches::IssuePatch)
     Issue.send(:include, RedmineTags::Patches::IssuePatch)
