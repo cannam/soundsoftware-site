@@ -15,21 +15,21 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module EmbeddedHelper
+module RedmineEmbeddedHelper
 
   # Adds include tags for assets of the given template
   def asset_include_tags(template)
   
-    Redmine::Plugins::Embedded.assets(template).each { |asset| content_for(:header_tags) { asset_include_tag(asset) } }
+    Redmine::Plugins::RedmineEmbedded.assets(template).each { |asset| content_for(:header_tags) { asset_include_tag(asset) } }
   end
   
   private
 
   def asset_include_tag(asset)
     if asset =~ %r{\.js$}
-      javascript_include_tag(asset, :plugin => 'embedded')
+      javascript_include_tag(asset, :plugin => 'redmine_embedded')
     else
-      stylesheet_link_tag(asset, :plugin => 'embedded')
+      stylesheet_link_tag(asset, :plugin => 'redmine_embedded')
     end
   end
 end

@@ -17,7 +17,7 @@
 
 module Redmine
   module Plugins
-    module Embedded
+    module RedmineEmbedded
       class << self
         
         # Returns an Array of available templates
@@ -32,11 +32,11 @@ module Redmine
         
         def detect_template_from_path(path)
           t = path.to_s.split(%r{[/\\]}) & available_templates
-          t.empty? ? Setting.plugin_embedded['template'].to_s : t.first
+          t.empty? ? Setting.plugin_redmine_embedded['template'].to_s : t.first
         end
         
         def valid_extension?(path)
-          extensions = Setting.plugin_embedded['extensions'].to_s.split.each(&:downcase)
+          extensions = Setting.plugin_redmine_embedded['extensions'].to_s.split.each(&:downcase)
           extensions.include?(File.extname(path).downcase[1..-1])
         end
 
@@ -62,3 +62,8 @@ module Redmine
     end
   end
 end
+
+class << RedmineApp::Application;self;end.class_eval do
+  define_method :clear!, lambda {}
+end
+

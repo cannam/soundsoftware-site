@@ -158,8 +158,7 @@
 	font-family: Geneva, Arial, Helvetica, sans-serif;
 	font-size: 13px;
 }
-#content .search     { color: #003399;
-              font-weight: bold;
+#content .search     { color: #003399; font-weight: bold;
 }
 #content FORM.search {
               margin-bottom: 0px;
@@ -171,4 +170,55 @@
                background-color: #eeeeff;
 }
 #content TD.tiny      { font-size: 75%;
+}
+#content .tabs ul li a#MSearchClose { 
+  width: 12px; 
+  display: inline-block; 
+  overflow: hidden; 
+  padding: 2px; 
+  height: 12px; 
+  line-height: 12px; 
+}
+
+#content .tabs ul li #MSearchField {
+  width: 120px;
+  margin: 0;
+}
+
+#content .tabs ul li #MSearchBox {
+  margin-bottom: -2px;
+}
+
+#content .memitem {
+    padding: 0;
+    margin-bottom: 10px;
+}
+#content .memname {
+    white-space: nowrap;
+    font-weight: bold;
+}
+#content .memproto, .memdoc {
+    border: 1px solid #84b0c7;    
+}
+#content .memdoc {
+    padding: 2px 5px;
+    background-color: #eef3f5;
+    border-top-width: 0;
+    -webkit-border-bottom-left-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+        -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    -moz-border-radius-bottomleft: 8px;
+    -moz-border-radius-bottomright: 8px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
+}
+#content .memproto {
+    padding: 0;
+    background-color: #d5e1e8;
+    font-weight: bold;
+    -webkit-border-top-left-radius: 8px;
+    -webkit-border-top-right-radius: 8px;
+        -webkit-box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.15);
+    -moz-border-radius-topleft: 8px;
+    -moz-border-radius-topright: 8px;
+        -moz-box-shadow: rgba(0, 0, 0, 0.15) 5px 5px 5px;
 }
