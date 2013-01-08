@@ -4,7 +4,7 @@ require 'bibtex'
 require 'citeproc'
 
 # Patches to the Redmine core.
-ActionDispatch::Callbacks.to_prepare :redmine_model_dependencies do
+ActionDispatch::Callbacks.to_prepare do
   require_dependency 'project'
   require_dependency 'user'
   require_dependency 'mailer'
