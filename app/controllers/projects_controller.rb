@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
         @project_count = Project.visible_roots.count
         @project_pages = Paginator.new self, @project_count, @limit, params['page']
         @offset ||= @project_pages.current.offset
-        @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
+        @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause)
         if User.current.logged?
           # seems sort_by gives us case-sensitive ordering, which we don't want
 #          @user_projects = User.current.projects.sort_by(&:name)
@@ -175,7 +175,7 @@ class ProjectsController < ApplicationController
     # source_project not found
     render_404
   end
-	
+
   # Show @project
   def show
     if params[:jump]
@@ -246,8 +246,6 @@ class ProjectsController < ApplicationController
     redirect_to :action => 'settings', :id => @project, :tab => 'overview'
   end
 
-  verify :method => :post, :only => :modules, :render => {:nothing => true, :status => :method_not_allowed }
-  
   def modules
     @project.enabled_module_names = params[:enabled_module_names]
     flash[:notice] = l(:notice_successful_update)
