@@ -16,14 +16,27 @@
 # You should have received a copy of the GNU General Public License
 # along with redmine_tags.  If not, see <http://www.gnu.org/licenses/>.
 
-module RedmineTags
-  module Hooks
-    class ViewsIssuesHook < Redmine::Hook::ViewListener
-      render_on :view_issues_show_details_bottom, :partial => 'issues/tags'
-      render_on :view_issues_form_details_bottom, :partial => 'issues/tags_form'
-      render_on :view_issues_sidebar_planning_bottom, :partial => 'issues/tags_sidebar'
-      render_on :view_issues_bulk_edit_details_bottom, :partial => 'issues/tags_form'
+module IssuesHelper
+  include TagsHelper
+
+  def sidebar_tags
+    unless @sidebar_tags
+      @sidebar_tags = []
+      if :none != RedmineTags.settings[:issues_sidebar].to_sym
+        @sidebar_tags = Issue.available_tags({
+          :project => @project,
+          :open_only => (RedmineTags.settings[:issues_open_only].to_i == 1)
+        })
+      end
     end
+    @sidebar_tags
+  end
+
+  def render_sidebar_tags
+    render_tags_list(sidebar_tags, {
+      :show_count => (RedmineTags.settings[:issues_show_count].to_i == 1),
+      :open_only => (RedmineTags.settings[:issues_open_only].to_i == 1),
+      :style => RedmineTags.settings[:issues_sidebar].to_sym
+    })
   end
 end
-

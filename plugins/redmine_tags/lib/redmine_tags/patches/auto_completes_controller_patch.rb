@@ -23,13 +23,20 @@ module RedmineTags
     module AutoCompletesControllerPatch
       def self.included(base)
         base.send(:include, InstanceMethods)
+
+        base.class_eval do
+          unloadable
+        end
       end
 
 
       module InstanceMethods
         def issue_tags
           @name = params[:q].to_s
-          @tags = Issue.available_tags :project_id => @project, :name_like => @name
+          @tags = Issue.available_tags({
+            :project_id => @project,
+            :name_like => @name
+          })
           render :layout => false, :partial => 'tag_list'
         end
 

@@ -17,21 +17,25 @@
 # along with redmine_tags.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'redmine'
+require 'redmine_tags'
+
 
 Redmine::Plugin.register :redmine_tags do
   name        'redmine_tags'
   author      'Aleksey V Zapparov AKA "ixti"'
   description 'redMine tagging support'
-  version     '1.1.4'
-  url         'http://www.ixti.ru/'
-  author_url  'http://www.ixti.ru/'
+  version     '2.0.1-dev'
+  url         'https://github.com/ixti/redmine_tags/'
+  author_url  'http://www.ixti.net/'
 
-  requires_redmine :version_or_higher => '1.0.0'
+  requires_redmine :version_or_higher => '1.2.0'
 
   settings :default => {
     :issues_sidebar => 'none',
     :issues_show_count => 0,
-    :issues_open_only => 0
+    :issues_open_only => 0,
+    :issues_sort_by => 'name',
+    :issues_sort_order => 'asc'
   }, :partial => 'tags/settings'
 end
 

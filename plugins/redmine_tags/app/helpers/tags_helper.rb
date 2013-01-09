@@ -63,8 +63,21 @@ module TagsHelper
   def render_tags_list(tags, options = {})
     unless tags.nil? or tags.empty?
       content, style = '', options.delete(:style)
-    
-      tags.sort! { |a,b| b.count <=> a.count }
+
+      # prevent ActsAsTaggableOn::TagsHelper from calling `all`
+      # otherwise we will need sort tags after `tag_cloud`
+      tags = tags.all if tags.respond_to?(:all)
+
+      case sorting = "#{RedmineTags.settings[:issues_sort_by]}:#{RedmineTags.settings[:issues_sort_order]}"
+        when "name:asc";    tags.sort! { |a,b| a.name <=> b.name }
+        when "name:desc";   tags.sort! { |a,b| b.name <=> a.name }
+        when "count:asc";   tags.sort! { |a,b| a.count <=> b.count }
+        when "count:desc";  tags.sort! { |a,b| b.count <=> a.count }
+        # Unknown sorting option. Fallback to default one
+        else
+          logger.warn "[redmine_tags] Unknown sorting option: <#{sorting}>"
+          tags.sort! { |a,b| a.name <=> b.name }
+      end
 
       if :list == style
         list_el, item_el = 'ul', 'li'
@@ -75,8 +88,9 @@ module TagsHelper
         raise "Unknown list style"
       end
 
+      content = content.html_safe
       tag_cloud tags, (1..8).to_a do |tag, weight|
-        content << " " + content_tag(item_el, render_project_tag_link(tag, options), :class => "tag-nube-#{weight}") + " "
+        content << " ".html_safe + content_tag(item_el, render_tag_link(tag, options), :class => "tag-nube-#{weight}") + " ".html_safe
       end
 
       content_tag(list_el, content, :class => 'tags')
@@ -84,7 +98,8 @@ module TagsHelper
   end
 
   private
-  # put most massive tags in the middle
+
+  # make snowball. first tags comes in th middle.
   def cloudify(tags)
     temp, tags, trigger = tags, [], true
     temp.each do |tag|
