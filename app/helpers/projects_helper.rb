@@ -58,7 +58,7 @@ module ProjectsHelper
       s << textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
       s << "</div>"
     end
-    s
+    s.html_safe
   end
   
   # Renders a tree of projects as a nested set of unordered lists
@@ -89,8 +89,8 @@ module ProjectsHelper
         s << "</div>\n"
         ancestors << project
       end
-      s
     end
+    s.html_safe
   end
 
 
@@ -156,7 +156,7 @@ module ProjectsHelper
       s = a
     end
 
-    s
+    s.html_safe
     
   end
 
@@ -190,7 +190,7 @@ module ProjectsHelper
 
     @project = original_project
 
-    s
+    s.html_safe
   end
 
 
