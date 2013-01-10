@@ -98,6 +98,11 @@ RedmineApp::Application.routes.draw do
       match 'copy', :via => [:get, :post]
     end
 
+    resources :members, :shallow => true, :controller => 'members', :only => [:index, :show, :new, :create, :update, :destroy] do
+      collection do
+        get 'autocomplete'
+      end
+    end
     resources :memberships, :shallow => true, :controller => 'members', :only => [:index, :show, :new, :create, :update, :destroy] do
       collection do
         get 'autocomplete'
