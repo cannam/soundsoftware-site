@@ -22,7 +22,7 @@
 </h2>
 
 <div style="clear:both;"></div>
-  <%- form_remote_tag(:controller => :projects, :action => :index, :method => :get, :html => {:id => :project_filtering_form}) do -%>
+  <%- form_tag(:controller => :projects, :action => :index, :method => :get, :html => {:id => :project_filtering_form}, :remote => true) do -%>
 
     <% if @filter_status=="true" %>
       <fieldset id="filters_fieldset" class="collapsible">
@@ -45,9 +45,9 @@
 
     <p style="display: none;"><%= submit_tag( l('button_filter'), :id => 'submitButton') -%></p>
     <%= link_to l(:button_apply), {}, :onclick => "$('submitButton').click(); return false;", :class => 'icon icon-checked' -%>
-    <%= link_to l(:button_clear), {}, :class => 'icon icon-reload'  %>                         
+    <%= link_to l(:button_clear), {}, :class => 'icon icon-reload'  %>
   </div>
-  
+
     <% unless @filter_status=="true" %>
       </div>
     <%- end -%>
