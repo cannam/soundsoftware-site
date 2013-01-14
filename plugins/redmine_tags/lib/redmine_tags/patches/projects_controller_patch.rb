@@ -34,7 +34,12 @@ module RedmineTags
           sort_init 'name'
           sort_update %w(name lft created_on updated_on)
           @limit = per_page_option
-          @project_count = Project.visible_roots.find(@projects).count
+
+          # Only top-level visible projects are counted --lf.10Jan2013
+          top_level_visible_projects = @projects.select{ |p| p.parent_id.nil? and p.visible? }
+          @project_count = top_level_visible_projects.count
+
+          # Project.visible_roots.find(@projects).count
 
           @project_pages = ActionController::Pagination::Paginator.new self, @project_count, @limit, params['page']
           @offset ||= @project_pages.current.offset
@@ -77,11 +82,14 @@ module RedmineTags
           filter_projects
           get_fieldset_statuses
 
+          sort_clause = "name"
+
           respond_to do |format|
             format.html {
               paginate_projects
 
-              @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause)
+              # todo: check ordering ~luisf.14/Jan/2013
+              @projects = @projects[@offset, @limit]
 
               if User.current.logged?
                 # seems sort_by gives us case-sensitive ordering, which we don't want
@@ -129,6 +137,7 @@ module RedmineTags
 
           unless @tag_list.empty?
             @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |project| Project.find(project.id).root }
+
             @projects = @projects & @tagged_projects_ids
             @projects = @projects.uniq
           end
