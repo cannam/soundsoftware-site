@@ -162,7 +162,7 @@ module RedmineTags
             ancestors.size.times{ s << "</li></ul>" }
             @project = original_project
           end
-          s.join "\n"
+          (s.join "\n").html_safe
         end
 
         # Renders a tree of projects where the current user belongs
@@ -191,7 +191,7 @@ module RedmineTags
             s = a
           end
 
-          s
+          s.html_safe
 
         end
 
