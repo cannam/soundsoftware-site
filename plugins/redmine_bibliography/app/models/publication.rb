@@ -81,7 +81,7 @@ class Publication < ActiveRecord::Base
     end
 
     if style == :ieee
-      CiteProc.process bib.to_citeproc, :style => :ieee, :format => :html
+      CiteProc.process(bib.to_citeproc, :style => :ieee, :format => :html)
     else
       bibtex = bib.to_s :include => :meta_content
       bibtex.strip!
