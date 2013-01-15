@@ -115,7 +115,9 @@ class AttachmentsController < ApplicationController
   def toggle_active
     @attachment.active = !@attachment.active?
     @attachment.save!
-    render :layout => false
+    respond_to do |format|
+      format.js
+    end
   end
 
 private
