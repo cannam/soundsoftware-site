@@ -492,13 +492,13 @@ module ApplicationHelper
           ancestors = ancestors[-2, 2]
         end
         b += ancestors.collect {|p| link_to_project(p, {:jump => current_menu_item}, :class => 'ancestor') }
-        b = b.join(' &#187; ')
-        b << (' &#187;')
+        b = b.join(' &#187; ').html_safe
+        b << (' &#187;'.html_safe)
       end
 
       pname << h(@project)
 
-      a = [pname, b.html_safe]
+      a = [pname, b]
 
     end
   end
