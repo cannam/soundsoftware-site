@@ -50,7 +50,7 @@ module RedmineTags
           end
           @project = original_project
 
-          s
+          s.html_safe
         end
 
         def render_project_in_table_with_filtering(project, oddeven, level, tokens)
