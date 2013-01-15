@@ -35,9 +35,9 @@
       <% if active_change_allowed
            active_id = "active-" + file.id.to_s -%>
         <div id="<%= active_id %>">
-        <%= link_to_remote image_tag(file.active? ? 'fav.png' : 'fav_off.png'),
-              :url => {:controller => 'attachments', :action => 'toggle_active', :project_id => @project.id, :id => file},
-              :update => active_id
+        <%= link_to image_tag(file.active? ? 'fav.png' : 'fav_off.png'),
+              {:controller => 'attachments', :action => 'toggle_active', :project_id => @project.id, :id => file},
+	      :remote => true
         %>
         </div>
       <% else -%>
@@ -65,6 +65,6 @@
   </tbody>
 </table>
 
-<%= l(:text_files_active_change) if active_change_allowed and have_file %>
+<%= l(:text_files_active_change).html_safe if active_change_allowed and have_file %>
 
 <% html_title(l(:label_attachment_plural)) -%>
