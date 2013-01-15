@@ -1,2 +1,1 @@
-$('#active-<$= @attachment.id $>').html("This is a test");
-
+$('#active-<%= @attachment.id %>').html('<%= link_to image_tag(@attachment.active? ? 'fav.png' : 'fav_off.png'), {:controller => 'attachments', :action => 'toggle_active', :project_id => @project.id, :id => @attachment}, :remote => true %>');
