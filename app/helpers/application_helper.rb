@@ -498,7 +498,7 @@ module ApplicationHelper
 
       pname << h(@project)
 
-      a = [pname, b]
+      a = [pname, b.html_safe]
 
     end
   end
