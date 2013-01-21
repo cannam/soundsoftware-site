@@ -5,7 +5,9 @@ module ActivitiesHelper
     # Transform events list into hash from project id to number of
     # occurrences of project in list (there is surely a tidier way
     # to do this, e.g. chunk() in Ruby 1.9 but not in 1.8)
-    phash = events.map { |e| e.project unless !e.respond_to?(:project) }.sort.group_by { |p| p.id }
+    phash = events.map do |e|
+      e.project unless !e.respond_to?(:project)
+    end.select { |p| !p.nil? }.sort.group_by { |p| p.id }
     phash = phash.merge(phash) { |k,v| v.length }
     threshold = phash.values.sort.last(count).first
     busy = phash.keys.select { |k| phash[k] >= threshold }.sample(count)

@@ -19,6 +19,25 @@ class Publication < ActiveRecord::Base
 
   before_save :set_initial_author_order
 
+  named_scope :visible, lambda {|*args| { :include => :projects,
+                                          :conditions => Project.allowed_to_condition(args.shift || User.current, :view_publication, *args) } }
+
+  acts_as_activity_provider :type => 'publication',
+                            :timestamp => "#{Publication.table_name}.created_at",
+                            :find_options => {
+                              :include => :projects,
+                              :conditions => "#{Project.table_name}.id = projects_publications.project_id"
+                            }
+
+  acts_as_event :title => Proc.new {|o| o.title },
+                :datetime => :created_at,
+                :type => 'publications',
+                :author => nil,
+                #todo - need too move the cache from the helper to the model
+                :description => Proc.new {|o| o.print_entry(:ieee)},
+                :url => Proc.new {|o| {:controller => 'publications', :action => 'show', :id => o.id }}
+
+
   # Ensure error message uses proper text instead of
   # bibtex_entry.entry_type (#268).  There has to be a better way to
   # do this!
