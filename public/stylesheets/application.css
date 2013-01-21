@@ -414,10 +414,10 @@ select#issue_done_ratio { width: 95px; }
 
 ul.projects { margin: 0; padding-left: 1em; }
 ul.projects.root { margin: 0;  padding: 0; }
-ul.projects ul.projects { border-left: 3px solid #e0e0e0; }
+/*ul.projects ul.projects { border-left: 3px solid #e0e0e0; } */
 ul.projects li.root { list-style-type:none; margin-bottom: 1em; }
-ul.projects li.child { list-style-type:none; margin-top: 1em;}
-ul.projects div.root a.project { font-weight: bold; font-size: 16px; margin: 0 0 10px 0; }
+ul.projects li.child { list-style-type:none; }
+ul.projects div.root a.project { font-weight: bold; }
 
 li.latest { margin-bottom: 0.5em; }
 
