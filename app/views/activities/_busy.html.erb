@@ -1,7 +1,7 @@
 <% events = @events_by_day %>
 <% if (events.nil?) 
      activity = Redmine::Activity::Fetcher.new(User.anonymous)
-     events = activity.events(Date.today - 14, Date.today + 1)
+     events = activity.events(Date.today - 140, Date.today + 1)
    end
 %>
 
