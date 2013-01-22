@@ -23,7 +23,7 @@
   <div class="projects box">
   <h3><%=l(:label_project_latest)%></h3>
     <%= render :partial => 'projects/latest' %>
-    <%= link_to l(:label_projects_more), :controller => 'projects' %>
+    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
   </div>
     <%= call_hook(:view_welcome_index_right, :projects => @projects) %>
 </div>

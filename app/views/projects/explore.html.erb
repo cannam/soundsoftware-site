@@ -15,11 +15,13 @@
   <div class="institutions box">
   <h3><%=l(:label_institutions_busy)%></h3>
     <%= render :partial => 'activities/busy_institution' %>
+    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
   </div>
   <% end %>
   <div class="projects box">
   <h3><%=l(:label_project_latest)%></h3>
     <%= render :partial => 'projects/latest' %>
+    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
   </div>
 </div>
 <div class="splitcontentright">
@@ -27,6 +29,7 @@
   <div class="projects box">
   <h3><%=l(:label_projects_busy)%></h3>
     <%= render :partial => 'activities/busy' %>
+    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
   </div>
   <% end %>
 </div>

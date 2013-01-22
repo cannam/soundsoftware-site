@@ -77,6 +77,8 @@ h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display
 .odd {background-color:#fdf7e4;}
 .even {background-color: #fdfaf0;}
 
+.box .more { margin-left: 40px; }
+
 #content .tabs { margin-bottom: 0; }
 
 table.list th {  background-color: #fdfaf0; border-bottom: 1px solid #a9b680; }
