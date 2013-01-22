@@ -31,11 +31,11 @@
      <%
 	u = project.users_by_role
 	if ! u.empty? %>
-     (<%=
+     <%=
 	   mgmt_roles = u.keys.select{ |r| r.allowed_to?(:edit_project) }
 	   managers = mgmt_roles.map{ |r| u[r] }.flatten.sort.uniq
 	   managers.map{ |m| m.name }.join(', ')
-	 %>)<%
+	 %><%
 	end
 	%>
 	</span>
