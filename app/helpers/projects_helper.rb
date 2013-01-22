@@ -295,4 +295,12 @@ module ProjectsHelper
     end
     phash
   end
+
+  def mature_projects(count)
+    phash = all_maturity_scores
+    scores = phash.values.sort
+    threshold = scores[scores.length / 2]
+    if threshold == 0 then threshold = 1 end
+    phash.keys.select { |k| phash[k] > threshold }.sample(count)
+  end
 end
