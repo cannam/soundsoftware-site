@@ -17,7 +17,7 @@
           if e.class != Publication
             user.member_of? e.project
           else
-            e.projects.map {|p| user.member_of? p }
+            e.projects.map {|p| user.member_of? p }.any?
           end
         }
 
@@ -38,7 +38,7 @@
 <% if events.empty? %>
 
    <% if @project.nil? %>
-     <p><%= l(:label_activity_my_recent_none) %></p>
+     <div class="tip"><%= l(:label_activity_my_recent_none) %></div>
    <% end %>
 
 <% else %>
