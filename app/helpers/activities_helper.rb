@@ -2,13 +2,35 @@
 module ActivitiesHelper
 
   def busy_projects(events, count)
-    # Transform events list into hash from project id to number of
-    # occurrences of project in list (there is surely a tidier way
-    # to do this, e.g. chunk() in Ruby 1.9 but not in 1.8)
-    phash = events.map { |e| e.project unless !e.respond_to?(:project) }.sort.group_by { |p| p.id }
-    phash = phash.merge(phash) { |k,v| v.length }
-    threshold = phash.values.sort.last(count).first
-    busy = phash.keys.select { |k| phash[k] >= threshold }.sample(count)
+
+    # Score each project for which there are any events, by giving
+    # each event a score based on how long ago it was (the more recent
+    # the better).
+
+    projhash = Hash.new
+    
+    events.each do |e|
+      if e.respond_to?(:project)
+        p = e.project
+        d = if e.respond_to? :updated_at then e.updated_at else e.updated_on end
+        dd = Date.parse d.to_s
+        age = Date.today - dd
+        score = (age < 14 ? 15-age : 1)
+        if projhash.key? p
+          projhash[p] += score
+        else
+          projhash[p] = score
+        end
+      end
+    end
+
+    # pick N highest values and use cutoff value as selection threshold
+    threshold = projhash.values.sort.last(count).first
+
+    # select projects above threshold and pick N from them randomly
+    busy = projhash.keys.select { |k| projhash[k] >= threshold }.sample(count)
+
+    # return projects rather than just ids
     busy.map { |pid| Project.find(pid) }
   end
 

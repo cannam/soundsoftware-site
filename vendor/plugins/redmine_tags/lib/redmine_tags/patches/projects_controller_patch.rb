@@ -83,12 +83,6 @@ module RedmineTags
 
               @projects = Project.visible_roots.find(@projects, :offset => @offset, :limit => @limit, :order => sort_clause)
 
-              if User.current.logged?
-                # seems sort_by gives us case-sensitive ordering, which we don't want
-                #          @user_projects = User.current.projects.sort_by(&:name)
-                @user_projects = User.current.projects.all(:order => :name)
-              end
-
               render :template => 'projects/index.html.erb', :layout => !request.xhr?
             }
             format.api {
