@@ -55,6 +55,9 @@
       <% unless page_header_title[1].empty? %>
         style="margin-top: 0px; "
       <% end %>  
+      <% if !@project.nil? and @project.name.length > 35 %>
+        class="long-title"
+      <% end %>
     ><% if display_main_menu?(@project) %>
        <%= link_to_project(@project) %>
      <% else %> 

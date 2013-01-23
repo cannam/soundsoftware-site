@@ -263,4 +263,38 @@ module ProjectsHelper
     sharing = 'none' unless Version::VERSION_SHARINGS.include?(sharing)
     l("label_version_sharing_#{sharing}")
   end
+
+  def score_maturity(project)
+    nr_changes = (project.repository.nil? ? 0 : project.repository.changesets.count)
+    downloadables = [project.attachments,
+                     project.versions.collect { |v| v.attachments },
+                     project.documents.collect { |d| d.attachments }].flatten
+    nr_downloadables = downloadables.count
+    nr_downloads = downloadables.map do |d| d.downloads end.sum
+    nr_members = project.members.count
+    nr_publications = if project.respond_to? :publications
+                      then project.publications.count else 0 end
+    Math.log(1 + nr_changes) +
+      Math.log(1 + nr_downloadables) +
+      Math.log(1 + nr_downloads) +
+      Math.sqrt(nr_members > 1 ? (nr_members - 1) : 0) +
+      Math.sqrt(nr_publications)
+  end
+
+  def all_maturity_scores()
+    phash = Hash.new
+    pp = Project.visible(User.anonymous)
+    pp.each do |p| 
+      phash[p] = score_maturity p
+    end
+    phash
+  end
+
+  def mature_projects(count)
+    phash = all_maturity_scores
+    scores = phash.values.sort
+    threshold = scores[scores.length / 2]
+    if threshold == 0 then threshold = 1 end
+    phash.keys.select { |k| phash[k] > threshold }.sample(count)
+  end
 end

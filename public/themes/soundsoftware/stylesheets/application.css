@@ -86,6 +86,8 @@ h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display
 .odd {background-color:#fdf7e4;}
 .even {background-color: #fdfaf0;}
 
+.box .more { margin-left: 40px; }
+
 #content .tabs { margin-bottom: 0; }
 
 table.list th {  background-color: #fdfaf0; border-bottom: 1px solid #a9b680; }
@@ -105,7 +107,7 @@ table.projects .child .firstcol { padding-left: 1em }
 table.projects .level2 .firstcol { padding-left: 2em; }
 table.projects .level3 .firstcol { padding-left: 3em; }
 
-ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.95em }
+ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.9em }
 
 table.files tr.active td { padding-top: 0.5em; padding-bottom: 0.5em; }
 table.files .file .active { font-weight: bold; }
@@ -117,6 +119,7 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
 #header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #fdfbf5; border-bottom: 2px solid #a9b680; /* height:80px; */ padding: 20px 0 0.5em 0; margin-bottom: 0; }
 #header a { color: #be5700; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
+#header h1#project-title.long-title { font-size: 2em; line-height: 0.95em }
 #header #project-title a, #header #project-title a:hover { color: #525a38; text-decoration: none; }
 .header-general h1 {
   background: url('soundsoftware-logo-code-title-only-transparent.png') no-repeat 0 0;

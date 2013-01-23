@@ -39,10 +39,12 @@ Redmine::Plugin.register :redmine_bibliography do
   settings :default => { 'menu' => 'Publications' }, :partial => 'settings/bibliography'
 
   project_module :redmine_bibliography do
+    permission :view_publication, {:publications => :show}, :public => :true
     permission :publications, { :publications => :index }, :public => true
     permission :edit_publication, {:publications => [:edit, :update]}
     permission :add_publication, {:publications => [:new, :create]}
     permission :delete_publication, {:publications => :destroy}
+
 
   end
 
@@ -50,4 +52,9 @@ Redmine::Plugin.register :redmine_bibliography do
   menu :project_menu, :publications, { :controller => 'publications', :action => 'index', :path => nil }, :after => :activity, :param => :project_id, :caption => Proc.new { Setting.plugin_redmine_bibliography['menu'] },
    :if => Proc.new { !Setting.plugin_redmine_bibliography['menu'].blank? }
 
+  activity_provider :publication, :class_name => 'Publication', :default => true
+
 end
+
+
+
