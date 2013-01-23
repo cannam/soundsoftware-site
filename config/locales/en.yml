@@ -483,7 +483,7 @@ en:
   label_project_plural: Projects
   label_my_project_plural: My Projects
   label_other_project_plural: Other Projects
-  label_have_no_projects: Not a member of any projects.
+  label_have_no_projects: You are not a member of any projects.
   label_x_projects:
     zero:  no projects
     one:   1 project
