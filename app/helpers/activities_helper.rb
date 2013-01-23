@@ -1,6 +1,20 @@
 
 module ActivitiesHelper
 
+  def date_of_event(e)
+    if e.respond_to? :updated_at
+      e.updated_at
+    elsif e.respond_to? :updated_on
+      e.updated_on
+    elsif e.respond_to? :created_on
+      e.created_on
+    elsif e.respond_to? :committed_on
+      e.committed_on
+    else
+      nil 
+    end
+  end
+
   def busy_projects(events, count)
 
     # Score each project for which there are any events, by giving
@@ -12,14 +26,16 @@ module ActivitiesHelper
     events.each do |e|
       if e.respond_to?(:project)
         p = e.project
-        d = if e.respond_to? :updated_at then e.updated_at else e.updated_on end
-        dd = Date.parse d.to_s
-        age = Date.today - dd
-        score = (age < 14 ? 15-age : 1)
-        if projhash.key? p
-          projhash[p] += score
-        else
-          projhash[p] = score
+        d = date_of_event e
+        if !d.nil?
+          dd = Date.parse d.to_s
+          age = Date.today - dd
+          score = (age < 14 ? 15-age : 1)
+          if projhash.key? p
+            projhash[p] += score
+          else
+            projhash[p] = score
+          end
         end
       end
     end
