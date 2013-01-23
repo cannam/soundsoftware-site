@@ -332,7 +332,7 @@ div#activity .box dl { margin-left: 0; }
 div#activity dd, div#news dd, #search-results dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
 div#activity dt, div#news dt, #search-results dt { margin-bottom: 0px; padding-left: 20px; line-height: 18px; background-position: 0 50%; background-repeat: no-repeat; }
 div#activity dt.me .time, div#news dt.me .time { border-bottom: 1px solid #999; }
-div#activity dt .time, div#news dt .time, .projects .latest .time { color: #777; font-size: 80%; }
+div#activity dt .time, div#news dt .time, .projects .latest .time, .projects .busy .managers { color: #777; font-size: 80%; }
 div#activity dd .description, #search-results dd .description { font-style: italic; }
 div#activity span.project:after, div#news span.project:after, #search-results span.project:after { content: " -"; }
 div#activity dd span.description, #search-results dd span.description { display:block; color: #808080; }
@@ -363,7 +363,7 @@ div.issues p {
   margin-left: 0;
 }
 
-.projects .latest .title { margin-right: 0.5em; }
+.projects .latest .title, .projects .busy .title { margin-right: 0.5em; }
 .tipoftheday .tip { margin-left: 2em; margin-top: 0.5em; }
 
 #search-results dd { margin-bottom: 1em; padding-left: 20px; margin-left:0px; }
@@ -414,12 +414,12 @@ select#issue_done_ratio { width: 95px; }
 
 ul.projects { margin: 0; padding-left: 1em; }
 ul.projects.root { margin: 0;  padding: 0; }
-ul.projects ul.projects { border-left: 3px solid #e0e0e0; }
+/*ul.projects ul.projects { border-left: 3px solid #e0e0e0; } */
 ul.projects li.root { list-style-type:none; margin-bottom: 1em; }
-ul.projects li.child { list-style-type:none; margin-top: 1em;}
-ul.projects div.root a.project { font-weight: bold; font-size: 16px; margin: 0 0 10px 0; }
+ul.projects li.child { list-style-type:none; }
+ul.projects div.root a.project { font-weight: bold; }
 
-li.latest { margin-bottom: 0.5em; }
+li.latest, li.busy { margin-bottom: 0.5em; }
 
 #tracker_project_ids ul { margin: 0;  padding-left: 1em; }
 #tracker_project_ids li { list-style-type:none; }

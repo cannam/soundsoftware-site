@@ -335,7 +335,7 @@ en:
   setting_external_repository_url: "The URL of the existing external repository. Must be publicly accessible without a password"
   label_repository_external_url: "External repository URL"
   field_terms_and_conditions: 'Terms and Conditions:'
-  accept_terms_and_conditions: 'I have read and agree with the '
+  accept_terms_and_conditions: 'I have read, and agree to, the '
   setting_app_title: Application title
   setting_app_subtitle: Application subtitle
   setting_welcome_text: Welcome text
@@ -470,8 +470,6 @@ en:
   project_module_embedded: Embedded documentation (Javadoc, Doxygen or MATLAB)
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
-  field_terms_and_conditions: 'Terms and Conditions:'
-  accept_terms_and_conditions: 'I have read and agree with the '
   label_ssamr_description: Research description
   label_ssamr_details: Other Details
   label_ssamr_institution: Institution
@@ -485,6 +483,7 @@ en:
   label_project_plural: Projects
   label_my_project_plural: My Projects
   label_other_project_plural: Other Projects
+  label_have_no_projects: You are not a member of any projects.
   label_x_projects:
     zero:  no projects
     one:   1 project
@@ -498,6 +497,7 @@ en:
   label_projects_more: More projects
   label_project_tags_all: Popular tags
   label_projects_busy: Busy projects
+  label_projects_mature: Mature projects
   label_institutions_busy: Active institutions
   label_managers: Managed by
   label_issue: Issue
@@ -1032,7 +1032,8 @@ en:
   text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
   text_has_welcome_page_info: <b>Welcome page</b><p>You can replace the standard {{overview_link}} page for this project with your own welcome page.<br>This page will be editable using the project Wiki.
   text_has_welcome_page_wiki_disabled: <b>Note:</b> You must enable the Wiki module in the {{modules_link}} tab before you can create or edit this page.
-
+  text_binary_data: Binary data
+  text_data_too_large: Binary data, or file too large to display
 
   default_role_manager: Manager
   default_role_developer: Developer
