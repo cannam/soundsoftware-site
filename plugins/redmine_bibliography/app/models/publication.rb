@@ -19,8 +19,8 @@ class Publication < ActiveRecord::Base
 
   before_save :set_initial_author_order
 
-  named_scope :visible, lambda {|*args| { :include => :projects,
-                                          :conditions => Project.allowed_to_condition(args.shift || User.current, :view_publication, *args) } }
+  scope :visible, lambda {|*args| { :include => :projects,
+                                    :conditions => Project.allowed_to_condition(args.shift || User.current, :view_publication, *args) } }
 
   acts_as_activity_provider :type => 'publication',
                             :timestamp => "#{Publication.table_name}.created_at",
