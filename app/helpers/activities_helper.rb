@@ -45,7 +45,7 @@ module ActivitiesHelper
 
   def projects_by_activity(user, count)
 
-    # Return up to count of the user's projects ordered by that user's
+    # Return up to count of the user's project ids ordered by that user's
     # recent activity, omitting any projects for which no activity
     # occurred in the recent past and any projects not visible to
     # the current user
@@ -67,37 +67,52 @@ module ActivitiesHelper
 
     start = Time.now
 
+    my_inst = ""
+    if ! User.current.ssamr_user_detail.nil?
+      my_inst = User.current.ssamr_user_detail.institution_name
+    end
+
+    actives = Hash.new
     for c in colleagues
       u = User.find_by_id(c)
       active_projects = projects_by_activity(u, 3)
       if !active_projects.empty?
-        s << "<dl>"
+        actives[c] = active_projects
+      end
+    end
+
+    if actives.empty?
+      l(:label_no_active_colleagues)
+    else
+
+      s << "<dl>"
+      for c in actives.keys.sample(10)
+        u = User.find_by_id(c)
         s << "<dt>"
         s << avatar(u, :size => '24')
         s << "<span class='user'>"
         s << h(u.name)
         s << "</span>"
         if !u.ssamr_user_detail.nil?
-          s << " - <span class='institution'>"
-          s << h(u.ssamr_user_detail.institution_name)
-          s << "</span>"
+          inst = u.ssamr_user_detail.institution_name
+          if inst != "" and inst != my_inst
+            s << " - <span class='institution'>"
+            s << h(u.ssamr_user_detail.institution_name)
+            s << "</span>"
+          end
         end
         s << "</dt>"
         s << "<dd>"
         s << "<span class='active'>"
-        s << (active_projects.map { |p| link_to_project(p) }.join ", ")
+        s << (actives[c].map { |p| link_to_project(p) }.join ", ")
         s << "</span>"
-        s << "</dl>"
       end
-    end
+      s << "</dl>"
 
-    finish = Time.now
-    logger.info "render_active_colleagues: took #{finish-start}"
+      finish = Time.now
+      logger.info "render_active_colleagues: took #{finish-start}"
     
-    if s != ""
       s
-    else
-      l(:label_no_active_colleagues)
     end
   end
 
