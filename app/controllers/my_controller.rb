@@ -22,6 +22,7 @@ class MyController < ApplicationController
   helper :users
   helper :custom_fields
   helper :projects
+  helper :activities
 
   BLOCKS = { 'issuesassignedtome' => :label_assigned_to_me_issues,
              'issuesreportedbyme' => :label_reported_issues,
@@ -32,7 +33,8 @@ class MyController < ApplicationController
              'calendar' => :label_calendar,
              'documents' => :label_document_plural,
              'timelog' => :label_spent_time,
-             'myprojects' => :label_my_projects
+             'myprojects' => :label_my_projects,
+             'colleagues' => :label_my_colleagues
            }.merge(Redmine::Views::MyPage::Block.additional_blocks).freeze
 
   DEFAULT_LAYOUT = {  'left' => ['myprojects', 'activitymyprojects'], 

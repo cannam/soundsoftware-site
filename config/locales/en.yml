@@ -883,6 +883,9 @@ en:
   label_parent_revision: Parent
   label_child_revision: Child
   label_export_options: %{export_format} export options
+  label_my_colleagues: People I'm working with
+  label_working_in: Working in 
+  label_no_active_colleagues: No recent activity
 
   button_login: Login
   button_submit: Submit
