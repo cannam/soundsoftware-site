@@ -282,6 +282,11 @@ div.square {
 
 .splitcontentleft{float:left; width:49%;}
 .splitcontentright{float:right; width:49%;}
+
+.threecolumnleft{float:left; clear:left; width: 32%;}
+.threecolumnright{float:right; clear:right; width: 32%;}
+.threecolumnmid{margin-left: 33%; margin-right: 33%;}
+
 form {display: inline;}
 input, select {vertical-align: middle; margin-top: 1px; margin-bottom: 1px;}
 fieldset {border: 1px solid #e4e4e4; margin:0;}

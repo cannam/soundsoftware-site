@@ -18,4 +18,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module MyHelper
+
+def all_colleagues_of(user)
+  # Return a list of all user ids who have worked with the given user
+  # (on projects that are visible to the current user)
+  user.projects.select { |p| p.visible? }.map { |p| p.members.map { |m| m.user_id } }.flatten.sort.uniq.reject { |i| user.id == i }
+end
+
 end
