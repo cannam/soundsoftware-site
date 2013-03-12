@@ -1033,7 +1033,7 @@ td.username img.gravatar {
     vertical-align: top;
 }
 
-#activity dt img.gravatar, #members dt img.gravatar {
+#activity dt img.gravatar, #members dt img.gravatar, #active-colleagues img.gravatar {
     float: left;
     margin: 0 1em 1em 0;
 }

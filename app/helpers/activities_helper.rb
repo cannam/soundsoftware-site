@@ -47,9 +47,10 @@ module ActivitiesHelper
 
     # Return up to count of the user's projects ordered by that user's
     # recent activity, omitting any projects for which no activity
-    # occurred in the recent past
+    # occurred in the recent past and any projects not visible to
+    # the current user
 
-    activity = Redmine::Activity::Fetcher.new(user, :author => user)
+    activity = Redmine::Activity::Fetcher.new(User.current, :author => user)
     days = Setting.activity_days_default.to_i
     events = activity.events(Date.today - days, Date.today + 1)
     projhash = project_activity_on_events(events)
@@ -64,15 +65,20 @@ module ActivitiesHelper
       u = User.find_by_id(c)
       active_projects = projects_by_activity(u, 3)
       if !active_projects.empty?
-        s << "<div class='user'>"
-        s << link_to_user(u)
-        s << "<span class='institution'>"
-        s << h(u.ssamr_user_detail.institution_name)
+        s << "<div class='active-person'>"
+        s << avatar(u, :size => '24')
+        s << "<span class='user'>"
+        s << h(u.name)
         s << "</span>"
-        s << "</div>"
-        s << "<div class='active'>"
-        s << l(:label_working_in) << " "
+        if !u.ssamr_user_detail.nil?
+          s << " - <span class='institution'>"
+          s << h(u.ssamr_user_detail.institution_name)
+          s << "</span>"
+        end
+        s << "<br>"
+        s << "<span class='active'>"
         s << (active_projects.map { |p| link_to_project(p) }.join ", ")
+        s << "</span>"
         s << "</div>"
       end
     end
