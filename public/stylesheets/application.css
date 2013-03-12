@@ -1035,7 +1035,8 @@ td.username img.gravatar {
 
 #activity dt img.gravatar, #members dt img.gravatar, #active-colleagues img.gravatar {
     float: left;
-    margin: 0 1em 1em 0;
+    clear: left;
+    margin: 0.2em 1em 0.4em 0;
 }
 
 /* Used on 12px Gravatar img tags without the icon background */
