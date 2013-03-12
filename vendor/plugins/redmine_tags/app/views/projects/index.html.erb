@@ -10,14 +10,6 @@
     <%= '| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true) %>
 </div>
 
-
-<div style="clear:both;"></div>
-<% if User.current.logged? %>
-<div class="splitcontentleft">
-  <div class=box><b>Looking for a list of your own projects?</b><br>It's moved to <%= link_to l(:label_my_page), { :controller => 'my', :action => 'page' } %>.</div>
-</div>
-<% end %>
-
 <div style="clear:both;"></div>
 <h2>
   <%= l("label_project_all") %>
