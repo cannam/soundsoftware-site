@@ -51,6 +51,10 @@ module ActivitiesHelper
     # the current user
 
     activity = Redmine::Activity::Fetcher.new(User.current, :author => user)
+
+    # Limit scope so as to exclude issues (which non-members can add)
+    activity.scope = [ "changesets", "files", "documents", "news", "wiki_edits", "messages", "time_entries", "publications" ]
+
     days = Setting.activity_days_default.to_i
     events = activity.events(Date.today - days, Date.today + 1)
     projhash = project_activity_on_events(events)
@@ -67,7 +71,8 @@ module ActivitiesHelper
       u = User.find_by_id(c)
       active_projects = projects_by_activity(u, 3)
       if !active_projects.empty?
-        s << "<div class='active-person'>"
+        s << "<dl>"
+        s << "<dt>"
         s << avatar(u, :size => '24')
         s << "<span class='user'>"
         s << h(u.name)
@@ -77,11 +82,12 @@ module ActivitiesHelper
           s << h(u.ssamr_user_detail.institution_name)
           s << "</span>"
         end
-        s << "<br>"
+        s << "</dt>"
+        s << "<dd>"
         s << "<span class='active'>"
         s << (active_projects.map { |p| link_to_project(p) }.join ", ")
         s << "</span>"
-        s << "</div>"
+        s << "</dl>"
       end
     end
 
