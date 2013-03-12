@@ -61,6 +61,8 @@ module ActivitiesHelper
 
     s = ""
 
+    start = Time.now
+
     for c in colleagues
       u = User.find_by_id(c)
       active_projects = projects_by_activity(u, 3)
@@ -82,6 +84,9 @@ module ActivitiesHelper
         s << "</div>"
       end
     end
+
+    finish = Time.now
+    logger.info "render_active_colleagues: took #{finish-start}"
     
     if s != ""
       s
