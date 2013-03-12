@@ -1,11 +1,13 @@
 
-<% colleagues = all_colleagues_of(@user) %>
+<% colleagues = all_colleagues_of(@user).sample(10) %>
 
 <% if !colleagues.empty? %>
+<div id="activity">
   <h3><%=l(:label_my_colleagues)%></h3>
-  <div class="box" id="active-colleagues">
+  <div class="activity box" id="active-colleagues">
     <%= render_active_colleagues(colleagues) %>
   </div>
+</div>
 <% end %>
 
 
