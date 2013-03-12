@@ -67,29 +67,37 @@ module ActivitiesHelper
 
     start = Time.now
 
+    my_inst = ""
+    if ! User.current.ssamr_user_detail.nil?
+      my_inst = User.current.ssamr_user_detail.institution_name
+    end
+
+    s << "<dl>"
     for c in colleagues
       u = User.find_by_id(c)
       active_projects = projects_by_activity(u, 3)
       if !active_projects.empty?
-        s << "<dl>"
         s << "<dt>"
         s << avatar(u, :size => '24')
         s << "<span class='user'>"
         s << h(u.name)
         s << "</span>"
         if !u.ssamr_user_detail.nil?
-          s << " - <span class='institution'>"
-          s << h(u.ssamr_user_detail.institution_name)
-          s << "</span>"
+          inst = u.ssamr_user_detail.institution_name
+          if inst != "" and inst != my_inst
+            s << " - <span class='institution'>"
+            s << h(u.ssamr_user_detail.institution_name)
+            s << "</span>"
+          end
         end
         s << "</dt>"
         s << "<dd>"
         s << "<span class='active'>"
         s << (active_projects.map { |p| link_to_project(p) }.join ", ")
         s << "</span>"
-        s << "</dl>"
       end
     end
+    s << "</dl>"
 
     finish = Time.now
     logger.info "render_active_colleagues: took #{finish-start}"
