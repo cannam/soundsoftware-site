@@ -9,6 +9,7 @@
     <% else %>
       <%= link_to l(:button_reopen), reopen_project_path(@project), :data => {:confirm => l(:text_are_you_sure)}, :method => :post, :class => 'icon icon-unlock' %>
     <% end %>
+  <% end %>
 
 	<% if @project.module_enabled? :redmine_bibliography %>
 	  <% if User.current.allowed_to?(:add_publication, @project) %>	
