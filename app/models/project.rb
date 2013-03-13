@@ -515,7 +515,7 @@ class Project < ActiveRecord::Base
   end
 
   # Returns a short description of the projects (first lines)
-  def short_description(length = 255)
+  def short_description(length = 200)
 
     ## The short description is used in lists, e.g. Latest projects,
     ## My projects etc.  It should be no more than a line or two with
@@ -530,7 +530,7 @@ class Project < ActiveRecord::Base
     ## follows _any_ non-blank text, and to the next word break beyond
     ## "length" characters if the result is still longer than that.
     ##
-    description.gsub(/![^\s]+!/, '').gsub(/^(\s*[^\n\r]*).*$/m, '\1').gsub(/^(.{#{length}}\b).*$/m, '\1 ...').strip if description
+    description.gsub(/![^\s]+!/, '').gsub(/^(\s*[^\n\r]*).*$/m, '\1').gsub(/^(.{#{length}}[^\.;:,-]*).*$/m, '\1 ...').strip if description
   end
 
   def css_classes

@@ -65,15 +65,7 @@ class UsersController < ApplicationController
 
     if @user.ssamr_user_detail != nil
       @description = @user.ssamr_user_detail.description
-      
-      if @user.ssamr_user_detail.institution_type != nil
-        # institution_type is true for listed institutions
-        if (@user.ssamr_user_detail.institution_type)
-          @institution_name = Institution.find(@user.ssamr_user_detail.institution_id).name
-        else
-          @institution_name = @user.ssamr_user_detail.other_institution
-        end
-      end
+      @institution_name = @user.ssamr_user_detail.institution_name
     end
     
     # show projects based on current user visibility

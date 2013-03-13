@@ -88,6 +88,8 @@ h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display
 
 .box .more { margin-left: 40px; }
 
+.box .institution { font-size: 0.95em; }
+
 #content .tabs { margin-bottom: 0; }
 
 table.list th {  background-color: #fdfaf0; border-bottom: 1px solid #a9b680; }

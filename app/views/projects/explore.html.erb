@@ -8,35 +8,16 @@
 
 <h2><%= l(:label_explore_projects) %></h2>
 
+<div class="threecolumnleft">
 <% cache(:action => 'explore', :action_suffix => 'tags', :expires_in => 1.hour) do %>
   <div class="tags box">
   <h3><%=l(:label_project_tags_all)%></h3>
     <%= render :partial => 'projects/tagcloud' %>
   </div>
 <% end %>
-
-<div class="splitcontentleft">
-  <% cache(:action => 'explore', :action_suffix => 'busy_institutions', :expires_in => 1.hour) do %>
-  <div class="institutions box">
-  <h3><%=l(:label_institutions_busy)%></h3>
-    <%= render :partial => 'activities/busy_institution' %>
-    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
-  </div>
-  <% end %>
-  <div class="projects box">
-  <h3><%=l(:label_project_latest)%></h3>
-    <%= render :partial => 'projects/latest' %>
-    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
-  </div>
 </div>
-<div class="splitcontentright">
-  <% cache(:action => 'explore', :action_suffix => 'busy_projects', :expires_in => 1.hour) do %>
-  <div class="projects box">
-  <h3><%=l(:label_projects_busy)%></h3>
-    <%= render :partial => 'activities/busy' %>
-    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
-  </div>
-  <% end %>
+
+<div class="threecolumnright">
   <% cache(:action => 'explore', :action_suffix => 'mature_projects', :expires_in => 1.hour) do %>
   <div class="projects box">
   <h3><%=l(:label_projects_mature)%></h3>
@@ -44,3 +25,33 @@
   </div>
   <% end %>
 </div>
+
+<div class="threecolumnleft">
+  <% cache(:action => 'explore', :action_suffix => 'busy_institutions', :expires_in => 1.hour) do %>
+  <div class="institutions box">
+  <h3><%=l(:label_institutions_busy)%></h3>
+    <%= render :partial => 'activities/busy_institution' %>
+    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
+  </div>
+  <% end %>
+</div>
+
+<div class="threecolumnright">
+  <div class="projects box">
+  <h3><%=l(:label_project_latest)%></h3>
+    <%= render :partial => 'projects/latest' %>
+    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
+  </div>
+</div>
+
+<div class="threecolumnmid">
+  <% cache(:action => 'explore', :action_suffix => 'busy_projects', :expires_in => 1.hour) do %>
+  <div class="projects box">
+  <h3><%=l(:label_projects_busy)%></h3>
+    <%= render :partial => 'activities/busy' %>
+    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
+  </div>
+  <% end %>
+</div>
+
+<% html_title(l(:label_explore_projects)) -%>
