@@ -4,7 +4,7 @@
 
 <div class="contextual">
     <%= link_to l(:label_personalize_page), :action => 'page_layout' %>
-    <%= '| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true) %>
+    <%= ('| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add')).html_safe if User.current.allowed_to?(:add_project, nil, :global => true) %>
 </div>
 
 <h2><%=l(:label_my_page)%></h2>

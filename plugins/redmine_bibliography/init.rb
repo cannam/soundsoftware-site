@@ -24,6 +24,10 @@ ActionDispatch::Callbacks.to_prepare do
   unless ProjectsHelper.included_modules.include?(Bibliography::ProjectsHelperPatch)
     ProjectsHelper.send(:include, Bibliography::ProjectsHelperPatch)
   end
+
+  unless MyHelper.included_modules.include?(Bibliography::MyHelperPatch)
+    MyHelper.send(:include, Bibliography::MyHelperPatch)
+  end
 end
 
 
