@@ -6,7 +6,7 @@
 
 <h2><%=l(:label_publication_show)%></h2>
 
-<% form_for @publication, :url => { :project_id  => @project, :action => :update }, :builder => TabularFormBuilder do |f| -%>
+<% labelled_form_for @publication, :url => { :project_id  => @project, :action => :update } do |f| -%>
   <%= render :partial => 'form', :locals => { :f => f }  %>
 
   <div style="clear:both"></div>

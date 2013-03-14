@@ -23,26 +23,27 @@
 <!-- We only support English in this site 
 <p><%= f.select :language, lang_options_for_select %></p>
 -->
-
+    
+<%= labelled_fields_for :ssamr_user_details, @ssamr_user_details do |fields| %>
 <h3><%=l(:label_ssamr_details)%></h3>
-	
-		<% fields_for :ssamr_user_details, :builder => TabularFormBuilder, :lang => current_language do |ssamr_user_detail| %>	
-			<p>
-                          <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit' %>                          
-                          <em> <%=l(:text_user_ssamr_description_info)%></em>
-                        </p>
+ 
+<p>
+  <%= fields.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit' %>
+  <em> <%=l(:text_user_ssamr_description_info).html_safe%></em>
+</p>
 
-                        <p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
-							<%= ssamr_user_detail.radio_button :institution_type, true %>
-                          	<%= ssamr_user_detail.collection_select(:institution_id, Institution.find(:all, :order => "institutions.order"), :id, :name,  {:selected => @selected_institution_id, :prompt => true}).gsub('&amp;', '&')  %>
-						</p>
+<p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
+  <%= fields.radio_button :institution_type, true %>
+  <%= fields.collection_select(:institution_id, Institution.find(:all, :order => "institutions.order"), :id, :name,  {:selected => @selected_institution_id, :prompt => true}).gsub('&amp;', '&').html_safe  %>
+</p>
 
-                        <p>
-                          <%= ssamr_user_detail.radio_button :institution_type, false %> Other:
-                          <%= ssamr_user_detail.text_field(:other_institution) %>
-                        </p>
-                <% end %>
-          
+<p>
+  <%= fields.radio_button :institution_type, false %> Other:
+  <%= fields.text_field(:other_institution) %>
+</p>
+<% end %>
+      
+
 <% if Setting.openid? %>
   <p><%= f.text_field :identity_url  %></p>
 <% end %>
@@ -58,3 +59,4 @@
 
 <%= submit_tag l(:button_submit) %>
 <% end %>
+

@@ -1,5 +1,5 @@
 <p class='tag'>
-  <% fields_for @project, :builder => TabularFormBuilder do |f| -%>
+  <%= labelled_fields_for @project do |f| -%>
     <div>
       <p id="project_tags">
         <%= f.text_field :tag_list, :label => :tags, :size => 60, :class => 'hol' %>
