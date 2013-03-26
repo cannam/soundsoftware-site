@@ -19,7 +19,7 @@
 <% end %></p>
 <p><%= f.text_field :homepage, :size => 60 %>
 <br />
-  <em> <%= l(:text_project_homepage_info) %></em>
+  <em class="info"> <%= l(:text_project_homepage_info) %></em>
 </p>
 <p>
 <label for="project_is_public_1"><%= l(:field_public_or_private)%> <span class="required">*</span></label>
@@ -34,7 +34,7 @@
   <%= f.radio_button :is_public, 0, :checked => (initialised && !@project.is_public?) %>
   <%= l(:text_project_private_info) %>
 <br>
-  <em><%= l(:text_project_visibility_info) %></em>
+  <em class="info"><%= l(:text_project_visibility_info) %></em>
 </p>
 <%= wikitoolbar_for 'project_description' %>
 
