@@ -4,7 +4,7 @@
 <!--[form:project]-->
 <p><%= f.text_field :name, :required => true, :size => 60 %>
   <br />
-  <em> <%= l(:text_project_name_info) %></em>
+  <em class="info"> <%= l(:text_project_name_info).html_safe %></em>
 </p>
 
 <% unless @project.allowed_parents.compact.empty? %>
