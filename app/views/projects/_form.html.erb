@@ -22,7 +22,7 @@
   <em> <%= l(:text_project_homepage_info) %></em>
 </p>
 <p>
-<%= label(:project, :is_public_1, l(:field_public_or_private) + content_tag("span", " *", :class => "required")) %>
+<label for="project_is_public_1"><%= l(:field_public_or_private)%> <span class="required">*</span></label>
 <%
    # if the project hasn't been created fully yet, then we don't
    # want to set either public or private (make the user decide)
@@ -31,7 +31,7 @@
   <%= f.radio_button :is_public, 1, :checked => (initialised && @project.is_public?) %>
   <%= l(:text_project_public_info) %>
 <br />
-  <%= f.radio_button :is_public, 0, :checked => (initialised && !@project.is_public?) %> 
+  <%= f.radio_button :is_public, 0, :checked => (initialised && !@project.is_public?) %>
   <%= l(:text_project_private_info) %>
 <br>
   <em><%= l(:text_project_visibility_info) %></em>
