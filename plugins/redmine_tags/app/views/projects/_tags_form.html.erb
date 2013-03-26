@@ -2,7 +2,7 @@
 <div>
   <p id="project_tags"><%= f.text_field :tag_list, :label => :tags, :size => 60, :class => 'hol' %>
     <br />
-    <em class="info"><%= l(:text_tags_info) %></em>
+    <em class="info"><%= l(:text_tags_info).html_safe %></em>
   </p>
   <div id="project_tag_candidates" class="autocomplete"></div>
   <%= javascript_include_tag 'tags_input', :plugin => 'redmine_tags' %>
