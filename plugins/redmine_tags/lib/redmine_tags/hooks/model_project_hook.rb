@@ -21,7 +21,6 @@ module RedmineTags
   module Hooks
     class ModelProjectHook < Redmine::Hook::ViewListener
       def controller_project_before_save(context={})
-        debugger
         save_tags_to_project(context, true)
       end
 
@@ -30,15 +29,12 @@ module RedmineTags
       # cleared on reload. So instead, hook in after the Issue#save to update
       # this issue's tag_list and call #save ourselves.
       def controller_projects_before_save(context={})
-        debugger
         save_tags_to_project(context, false)
         context[:project].save
       end
 
       def save_tags_to_project(context, create_journal)
         params = context[:params]
-        debugger
-        logger.error { "WORKING" }
 
    #     if params && params[:issue] && !params[:issue][:tag_list].nil?
    #       old_tags = context[:issue].tag_list.to_s

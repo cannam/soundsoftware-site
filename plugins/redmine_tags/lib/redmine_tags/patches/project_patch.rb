@@ -22,6 +22,14 @@ module RedmineTags
       end
 
       module ClassMethods
+        TAGGING_IDS_LIMIT_SQL = <<-SQL
+            tag_id IN (
+                SELECT #{ActsAsTaggableOn::Tagging.table_name}.tag_id
+                FROM #{ActsAsTaggableOn::Tagging.table_name}
+                WHERE #{ActsAsTaggableOn::Tagging.table_name}.taggable_id IN (?)
+            )
+        SQL
+
         def search_by_question(question)
           if question.length > 1
             search(RedmineProjectFiltering.calculate_tokens(question), nil, :all_words => true).first.sort_by(&:lft)
@@ -30,24 +38,26 @@ module RedmineTags
           end
         end
 
-
         # Returns available project tags
-        #  does not show tags from private projects
+        # Does not return tags from private projects
+        # === Parameters
+        # * <i>options</i> = (optional) Options hash of
+        #   * name_like - String. Substring to filter found tags.
         def available_tags( options = {} )
+          ids_scope = Project.visible
 
-          name_like = options[:name_like]
-          options = {}
-          visible   = ARCondition.new
+          conditions = [""]
 
-          visible << ["#{Project.table_name}.is_public = '1'"]
-
-          if name_like
-            visible << ["#{ActsAsTaggableOn::Tag.table_name}.name LIKE ?", "%#{name_like.downcase}%"]
+          # limit to the tags matching given %name_like%
+          if options[:name_like]
+            conditions[0] << "#{ActsAsTaggableOn::Tag.table_name}.name LIKE ? AND "
+            conditions << "%#{options[:name_like].downcase}%"
           end
 
-          options[:conditions] = visible.conditions
+          conditions[0] << TAGGING_IDS_LIMIT_SQL
+          conditions << ids_scope.map{ |issue| issue.id }.push(-1)
 
-          self.all_tag_counts(options)
+          self.all_tag_counts(:conditions => conditions)
         end
       end
     end
