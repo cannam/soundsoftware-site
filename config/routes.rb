@@ -86,6 +86,7 @@ RedmineApp::Application.routes.draw do
   match 'watchers/autocomplete_for_user', :controller=> 'watchers', :action => 'autocomplete_for_user', :via => :get
 
   match 'projects/:id/settings/:tab', :to => "projects#settings"
+  match 'projects/:id/overview', :to => "projects#overview"
 
   resources :projects do
     member do

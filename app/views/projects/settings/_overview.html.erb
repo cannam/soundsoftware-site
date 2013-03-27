@@ -1,6 +1,6 @@
 
-<% form_for :project, @project,
-            :url => { :action => 'overview', :id => @project },
+<%= form_for @project,
+            :url => { :action => 'overview', :id => @project.id },
             :html => {:id => 'overview-form'} do |f| %>
 
 <div class="box tabular">
