@@ -11,14 +11,21 @@ module RedmineTags
 
         base.class_eval do
           unloadable
-
-          attr_accessor :tag_list
           acts_as_taggable
 
+          Project.safe_attributes 'tag_list'
+
+          # TODO: review need for this callback (uneeded on update) ~lf.03042013
+          after_create :save_tags
         end
       end
 
       module InstanceMethods
+        def save_tags
+          self.tags = Tag.transaction do
+            @tag_list.each(&:save)
+          end
+        end
       end
 
       module ClassMethods
