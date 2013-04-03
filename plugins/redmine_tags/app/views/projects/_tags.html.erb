@@ -2,6 +2,6 @@
   <%= stylesheet_link_tag 'redmine_tags', :plugin => 'redmine_tags' %>
   <dl class="tags">
     <dt class="tags-title"><%=l(:tags)%></dt>
-    <dd class="tags"><%= @project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') %></dd>
+    <dd class="tags"><%= raw @project.tag_counts.collect{ |t| render_project_tag_link(t) }.join(', ') %></dd>
   </dl>
 <% end %>
