@@ -10,26 +10,12 @@ module RedmineTags
           unloadable
           skip_before_filter :authorize, :only => [:set_fieldset_status]
           skip_before_filter :find_project, :only => [:set_fieldset_status]
-          before_filter :add_tags_to_project, :only => [:save, :update]
 
           alias :index filtered_index
         end
       end
 
       module InstanceMethods
-
-        def add_tags_to_project
-
-          if params && params[:project] && !params[:project][:tag_list].nil?
-            old_tags = @project.tag_list.to_s.downcase
-            new_tags = params[:project][:tag_list].to_s.downcase
-
-            unless (old_tags == new_tags)
-              @project.tag_list = ActionController::Base.helpers.strip_tags(new_tags)
-            end
-          end
-        end
-
         def paginate_projects
           sort_init 'name'
           sort_update %w(name lft created_on updated_on)
