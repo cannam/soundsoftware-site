@@ -103,15 +103,6 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @project.safe_attributes = params[:project]
 
-
-    # todo: luisf: this should be removed from here...
-    if params && params[:project] && !params[:project][:tag_list].nil?
-      new_tags = params[:project][:tag_list].to_s.downcase
-
-      @project.tag_list = ActionController::Base.helpers.strip_tags(new_tags)
-    end
-    # end of code to be removed
-
     if validate_is_public_key && validate_parent_id && @project.save
       @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
       # Add current user as a project member if he is not admin
