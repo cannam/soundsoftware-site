@@ -104,7 +104,7 @@ module RedmineTags
             end
           end
 
-          s
+          s.html_safe
         end
 
 
@@ -239,11 +239,9 @@ module RedmineTags
 
           end
 
-          s
+          s.html_safe
 
         end
-
-
 
         private
 
@@ -262,7 +260,7 @@ module RedmineTags
               result << content_tag('span', words, :class => "highlight token-#{t}")
             end
           end
-          result
+          result.html_safe
         end
 
       end

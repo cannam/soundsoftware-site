@@ -8,8 +8,8 @@ module RedmineTags
         base.send(:include, InstanceMethods)
         base.class_eval do
           unloadable
-          skip_before_filter :authorize, :only => [:set_fieldset_status]
-          skip_before_filter :find_project, :only => [:set_fieldset_status]
+          # skip_before_filter :authorize, :only => [:set_fieldset_status]
+          # skip_before_filter :find_project, :only => [:set_fieldset_status]
 
           alias :index filtered_index
         end
@@ -22,7 +22,7 @@ module RedmineTags
           @limit = per_page_option
 
           # Only top-level visible projects are counted --lf.10Jan2013
-          top_level_visible_projects = @projects.select{ |p| p.parent_id.nil? and p.visible? }
+          top_level_visible_projects = @projects.visible_roots
           @project_count = top_level_visible_projects.count
 
           # Project.visible_roots.find(@projects).count
@@ -31,42 +31,42 @@ module RedmineTags
           @offset ||= @project_pages.current.offset
         end
 
-        def set_fieldset_status
-
-          # luisf. test for missing parameters………
-          field = params[:field_id]
-          status = params[:status]
-
-          session[(field + "_status").to_sym] = status
-          render :nothing => true
-        end
+        # def set_fieldset_status
+#
+        #   # luisf. test for missing parameters………
+        #   field = params[:field_id]
+        #   status = params[:status]
+#
+        #   session[(field + "_status").to_sym] = status
+        #   render :nothing => true
+        # end
 
         # gets the status of the collabsible fieldsets
-        def get_fieldset_statuses
-          if session[:my_projects_fieldset_status].nil?
-            @myproj_status = "true"
-          else
-            @myproj_status = session[:my_projects_fieldset_status]
-          end
-
-          if session[:filters_fieldset_status].nil?
-            @filter_status = "false"
-          else
-            @filter_status = session[:filters_fieldset_status]
-          end
-
-          if params && params[:project] && !params[:project][:tag_list].nil?
-            @filter_status = "true"
-          end
-
-        end
+        # def get_fieldset_statuses
+        #   if session[:my_projects_fieldset_status].nil?
+        #     @myproj_status = "true"
+        #   else
+        #     @myproj_status = session[:my_projects_fieldset_status]
+        #   end
+#
+        #   if session[:filters_fieldset_status].nil?
+        #     @filter_status = "false"
+        #   else
+        #     @filter_status = session[:filters_fieldset_status]
+        #   end
+#
+        #   if params && params[:project] && !params[:project][:tag_list].# nil?
+        #     @filter_status = "true"
+        #   end
+#
+        # end
 
         # Lists visible projects. Paginator is for top-level projects only
         # (subprojects belong to them)
         def filtered_index
           @project = Project.new
           filter_projects
-          get_fieldset_statuses
+          # get_fieldset_statuses
 
           sort_clause = "name"
 
@@ -101,26 +101,31 @@ module RedmineTags
         private
 
         def filter_projects
-          @question = (params[:q] || "").strip
+          # find projects like question
+          @question = (params[:search] || "").strip
+#
+          # if params.has_key?(:project)
+          #   @tag_list = (params[:project][:tag_list] || "").strip.split(",")
+          # else
+          #   @tag_list = []
+          # end
+#
+          # if  @question == ""
+          #   @projects = Project.visible_roots
+          # else
+          #   @projects = Project.visible_roots.find(Project.visible.like(@question))
+          # end
+#
+          # unless @tag_list.empty?
+          #   @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |# project| Project.find(project.id).root }
+#
+          #   @projects = @projects & @tagged_projects_ids
+          #   @projects = @projects.uniq
+          # end
 
-          if params.has_key?(:project)
-            @tag_list = (params[:project][:tag_list] || "").strip.split(",")
-          else
-            @tag_list = []
-          end
+          # hack...
+          @projects = Project.like(@question)
 
-          if  @question == ""
-            @projects = Project.visible_roots
-          else
-            @projects = Project.visible_roots.find(Project.visible.search_by_question(@question))
-          end
-
-          unless @tag_list.empty?
-            @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |project| Project.find(project.id).root }
-
-            @projects = @projects & @tagged_projects_ids
-            @projects = @projects.uniq
-          end
         end
       end
     end

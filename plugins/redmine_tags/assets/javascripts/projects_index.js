@@ -2,6 +2,7 @@ var IndexFilter = {
     init: function(){
         var self = this;
         $('fieldset#filters_fieldset legend').live("click", self.toggle);
+        // $('fieldset #submitButton').live("click", self.submitSearch);
     },
 
     expanded: false,
@@ -10,8 +11,17 @@ var IndexFilter = {
         var fieldset = $(this).parents('fieldset').first();
         fieldset.toggleClass('collapsed');
         fieldset.children('div').toggle();
+    },
+    submitSearch: function(){
+        console.log("Submitting search");
+        $(this).submit();
+        return false;
     }
 };
+
+
+
+
 
 /*
     function toggleFieldsetWithState(obj){
@@ -25,9 +35,6 @@ var IndexFilter = {
     }
 
 
-    function submitForm(){
-        $('submitButton').click();
-    }
 
 
     function change_session(id, nstatus) {

@@ -15,8 +15,8 @@
 </h2>
 
 <div style="clear:both;"></div>
-  <%= form_tag(:controller => :projects, :action => :index, :method => :get, :html => {:id => :project_filtering_form}, :remote => true) do -%>
 
+  <%= form_tag :projects, :method => :get do -%>
     <fieldset id="filters_fieldset" class="collapsible">
       <legend><%= l(:label_filter_plural) %></legend>
 
@@ -26,13 +26,11 @@
         </div>
 
         <p class='q'>
-          <%= label_tag 'q', l('project_filtering_q_label') %>
-          <%= text_field_tag 'q', @question, :size => 30, :id => 'search-input' %>
+          <%= label_tag 'search', l('project_filtering_q_label') %>
+          <%= text_field_tag 'search', params[:search] -%>
+          <%= submit_tag :search, :name => nil %>
         </p>
 
-        <p style="display: none;"><%= submit_tag( l('button_filter'), :id => 'submitButton') -%></p>
-          <%= link_to l(:button_apply), {}, :onclick => "$('submitButton').click(); return false;", :class => 'icon icon-checked' -%>
-        <%= link_to l(:button_clear), {}, :class => 'icon icon-reload'  %>
       </div>
 
     </fieldset>
