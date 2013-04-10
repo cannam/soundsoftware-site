@@ -103,28 +103,26 @@ module RedmineTags
         def filter_projects
           # find projects like question
           @question = (params[:search] || "").strip
-#
-          # if params.has_key?(:project)
-          #   @tag_list = (params[:project][:tag_list] || "").strip.split(",")
-          # else
-          #   @tag_list = []
-          # end
-#
-          # if  @question == ""
-          #   @projects = Project.visible_roots
-          # else
-          #   @projects = Project.visible_roots.find(Project.visible.like(@question))
-          # end
-#
-          # unless @tag_list.empty?
-          #   @tagged_projects_ids = Project.visible.tagged_with(@tag_list).collect{ |# project| Project.find(project.id).root }
-#
-          #   @projects = @projects & @tagged_projects_ids
-          #   @projects = @projects.uniq
-          # end
 
-          # hack...
-          @projects = Project.like(@question)
+          if @question.empty?
+            projects = Project.visible
+          else
+            projects = Project.visible.like(@question)
+          end
+
+          # search for tags
+          if params.has_key?(:project)
+             tag_list = (params[:project][:tag_list] || "").strip.split(",")
+          else
+             tag_list = ""
+          end
+
+          unless tag_list.empty?
+            projects = projects.tagged_with(tag_list)
+          end
+
+          ## TODO: luisf-10Apr2013 should I only return the visible_roots?
+          @projects = projects
 
         end
       end
