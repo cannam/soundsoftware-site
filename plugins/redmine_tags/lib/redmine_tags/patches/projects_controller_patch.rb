@@ -111,8 +111,8 @@ module RedmineTags
           end
 
           # search for tags
-          if params.has_key?(:project)
-             tag_list = (params[:project][:tag_list] || "").strip.split(",")
+          if params.has_key?(:tag_search)
+             tag_list = (params[:tag_search] || "").strip.split(",")
           else
              tag_list = ""
           end

@@ -41,7 +41,8 @@ module TagsHelper
   end
 
   def render_project_tag_link(tag, options = {})
-    content = link_to tag.name, :controller => :projects, :action => :index, :project => { :tag_list => tag.name } 
+    content = link_to tag.name, :controller => :projects, :action => :index, :tag_search => tag.name
+
     if options[:show_count]
       content << content_tag('span', "(#{tag.count})", :class => 'tag-count')
     end
