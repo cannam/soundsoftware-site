@@ -28,7 +28,7 @@ en:
   issues_show_count: Display amount of issues
   issues_open_only: Display open issues only
   issues_sort_by: Sort tags by
-  
+
   issue_tags_sidebar_none: None
   issue_tags_sidebar_list: List
   issue_tags_sidebar_cloud: Cloud
@@ -40,9 +40,11 @@ en:
 
   auto_complete_new_tag: Add new...
 
-  project_filtering_q_label: "Search for text:"
+  project_filtering_q_label: "Filter by name:"
   project_filter_no_results: "No matching projects found"
   button_filter: "Filter"
-  
-  text_tags_info: "A tag can be any text you like, but they're most useful if you choose tags that are already being used for the same thing by other projects (where possible). <br />Some tag examples are: library, plugin, paper, c++, mir, alpha, stable, bsd, android, ...<br />Tags help others find your work: please don't forget to tag your projects!"
+
+  tags_search: "Filter by tag"
+
+  text_tags_search: "A tag can be any text you like, but they're most useful if you choose tags that are already being used for the same thing by other projects (where possible). <br />Some tag examples are: library, plugin, paper, c++, mir, alpha, stable, bsd, android, ...<br />Tags help others find your work: please don't forget to tag your projects!"
 

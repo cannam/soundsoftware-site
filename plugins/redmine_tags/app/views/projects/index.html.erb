@@ -2,6 +2,7 @@
     <%= auto_discovery_link_tag(:atom, {:action => 'index', :format => 'atom', :key => User.current.rss_key}) %>
     <%= stylesheet_link_tag 'redmine_tags', :plugin => 'redmine_tags' %>
 <% end %>
+
 <%= javascript_include_tag 'projects_index', :plugin => 'redmine_tags' %>
 
 <div class="contextual">
@@ -18,15 +19,16 @@
 
 <%= form_tag :projects, :method => :get do -%>
   <div>
+    <p class='q'>
+      <%= label_tag 'search', l('project_filtering_q_label') %>
+      <%= text_field_tag 'search', params[:search] -%>
+    </p>
+
     <div id='filter_tags'>
       <%= render :partial => 'filter_search_tags' -%>
     </div>
 
-    <p class='q'>
-      <%= label_tag 'search', l('project_filtering_q_label') %>
-      <%= text_field_tag 'search', params[:search] -%>
-      <%= submit_tag :search, :name => nil %>
-    </p>
+    <%= submit_tag :search, :name => "Search" %>
 
   </div>
 <%- end -%>
