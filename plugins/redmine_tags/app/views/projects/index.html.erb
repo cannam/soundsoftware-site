@@ -16,26 +16,20 @@
 
 <div style="clear:both;"></div>
 
-  <%= form_tag :projects, :method => :get do -%>
-    <fieldset id="filters_fieldset" class="collapsible">
-      <legend><%= l(:label_filter_plural) %></legend>
+<%= form_tag :projects, :method => :get do -%>
+  <div>
+    <div id='filter_tags'>
+      <%= render :partial => 'filter_search_tags' -%>
+    </div>
 
-      <div>
-        <div id='filter_tags'>
-          <%= render :partial => 'filter_search_tags' -%>
-        </div>
+    <p class='q'>
+      <%= label_tag 'search', l('project_filtering_q_label') %>
+      <%= text_field_tag 'search', params[:search] -%>
+      <%= submit_tag :search, :name => nil %>
+    </p>
 
-        <p class='q'>
-          <%= label_tag 'search', l('project_filtering_q_label') %>
-          <%= text_field_tag 'search', params[:search] -%>
-          <%= submit_tag :search, :name => nil %>
-        </p>
-
-      </div>
-
-    </fieldset>
+  </div>
 <%- end -%>
-
 
 <div id="projects">
   <%= render :partial => 'filtered_projects' %>
