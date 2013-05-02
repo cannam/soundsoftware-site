@@ -1,7 +1,7 @@
 <%= labelled_fields_for :project, project do |f| -%>
 <div>
   <p id="project_tags"><%= f.text_field :tag_list, :label => :tags, :size => 60, :class => 'hol' %>
-    <em class="info"><%= l(:text_tags_info).html_safe %></em>
+    <em class="info"><%= l(:text_tags_search).html_safe %></em>
   </p>
   <div id="project_tag_candidates" class="autocomplete" style="margin-top: 0;"></div>
   <%= stylesheet_link_tag 'jquery.tagit.css', :plugin => 'redmine_tags' %>
