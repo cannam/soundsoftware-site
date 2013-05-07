@@ -550,7 +550,9 @@ sub get_realm {
         $name = $repo;
     }
 
-    my $realm = '"Mercurial repository for ' . "'$name'" . '"';
+#    my $realm = '"Mercurial repository for ' . "'$name'" . '"';
+# see #577:
+    my $realm = '"Mercurial repository for ' . "$name" . '"';
 
     $realm;
 }
