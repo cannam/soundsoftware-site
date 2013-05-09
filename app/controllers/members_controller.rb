@@ -61,14 +61,14 @@ class MembersController < ApplicationController
           members << @new_member
 
           # send notification to member
-          Mailer.deliver_added_to_project(@new_member, @project)
+          Mailer.member_added_to_project(@new_member, @project).deliver
         end
       else
         @new_member = Member.new(:role_ids => params[:membership][:role_ids], :user_id => params[:membership][:user_id])
         members << @new_member
         
         # send notification to member
-        Mailer.deliver_added_to_project(@new_member, @project)
+        Mailer.member_added_to_project(@new_member, @project).deliver
       end
 
       @project.members << members
@@ -76,7 +76,7 @@ class MembersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+      format.html { redirect_to :action => 'index', :project_id => @project }
       format.js { @members = members }
       format.api {
         @member = members.first
@@ -95,7 +95,7 @@ class MembersController < ApplicationController
     end
     saved = @member.save
     respond_to do |format|
-      format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+      format.html { redirect_to :action => 'index', :project_id => @project }
       format.js
       format.api {
         if saved
@@ -112,7 +112,7 @@ class MembersController < ApplicationController
       @member.destroy
     end
     respond_to do |format|
-      format.html { redirect_to :controller => 'projects', :action => 'settings', :tab => 'members', :id => @project }
+      format.html { redirect_to :action => 'index', :project_id => @project }
       format.js
       format.api {
         if @member.destroyed?

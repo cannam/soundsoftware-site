@@ -844,7 +844,7 @@ en:
   label_added_time_by: "Added by %{author} %{age} ago"
   label_updated_time_by: "Updated by %{author} %{age} ago"
   label_updated_time: "Updated %{value} ago"
-  label_time_ago: "{{age}} ago"
+  label_time_ago: "%{age} ago"
   label_jump_to_a_project: Jump to a project...
   label_file_plural: Downloads
   label_changeset_plural: Changesets
@@ -1106,8 +1106,8 @@ en:
   text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
   text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.
   text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
-  text_has_welcome_page_info: <b>Welcome page</b><p>You can replace the standard {{overview_link}} page for this project with your own welcome page.<br>This page will be editable using the project Wiki.
-  text_has_welcome_page_wiki_disabled: <b>Note:</b> You must enable the Wiki module in the {{modules_link}} tab before you can create or edit this page.
+  text_has_welcome_page_info: <b>Welcome page</b><p>You can replace the standard %{overview_link} page for this project with your own welcome page.<br>This page will be editable using the project Wiki.
+  text_has_welcome_page_wiki_disabled: <b>Note:</b> You must enable the Wiki module in the %{modules_link} tab before you can create or edit this page.
   text_binary_data: Binary data
   text_data_too_large: Binary data, or file too large to display
 
@@ -1144,9 +1144,9 @@ en:
 
   label_set_role_plural: Choose roles for new member
 
-  notice_added_to_project: 'You have been added to the project "{{project_name}}".'
-  notice_project_homepage: "You can visit the project using the following link: {{project_url}}"
-  mail_subject_added_to_project: "You've been added to a project on {{value}}"
+  notice_added_to_project: 'You have been added to the project "%{project_name}".'
+  notice_project_homepage: "You can visit the project using the following link: %{project_url}"
+  mail_subject_added_to_project: "You've been added to a project on %{value}"
   description_filter: Filter
   description_search: Searchfield
   description_choose_project: Projects
