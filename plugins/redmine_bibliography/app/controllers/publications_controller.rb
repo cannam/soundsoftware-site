@@ -5,7 +5,8 @@ class PublicationsController < ApplicationController
   unloadable
 
   model_object Publication
-  before_filter :find_model_object, :except => [:new, :create, :index, :get_bibtex_required_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]
+  # before_filter :find_model_object, :except => [:new, :create, :index, :show_bibtex_fields, :autocomplete_for_project, :add_author, :sort_author_order, :autocomplete_for_author, :get_user_info ]
+
   before_filter :find_project_by_project_id, :authorize, :only => [ :edit, :new, :update, :create ]
 
   def new
@@ -60,23 +61,17 @@ class PublicationsController < ApplicationController
     end
   end
 
-  def get_bibtex_required_fields
+  def show_bibtex_fields
+    @fields = []
 
     unless params[:value].empty?
-      fields = BibtexEntryType.fields(params[:value])
+      @fields = BibtexEntryType.fields(params[:value])
     end
 
     respond_to do |format|
       format.js {
-        render(:update) {|page|
-          if params[:value].empty?
-            page << "hideOnLoad();"
-          else
-            page << "show_required_bibtex_fields(#{fields.to_json()});"
-          end
-        }
+        render :show_bibtex_fields
       }
-
     end
   end
 

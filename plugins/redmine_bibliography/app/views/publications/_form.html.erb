@@ -5,7 +5,7 @@
 <div class="splitcontentleft">
   <h3><%= l(:label_publication_other_details) %></h3>
   <div class="box tabular">
-    <% f.fields_for :bibtex_entry do |builder| -%>
+    <%= f.fields_for :bibtex_entry do |builder| -%>
       <%= render :partial => 'bibtex_fields', :locals => { :f => builder}  %>
     <%- end -%>
 
@@ -26,7 +26,7 @@
 <div class="splitcontentright">
   <h3><%= l(:authors) %></h3>
   <div class="box tabular">
-    <% f.fields_for :authorships do |builder| -%>
+    <%= f.fields_for :authorships do |builder| -%>
       <%= render "authorship_fields", :f => builder %>
     <%- end -%>
     <%= link_to_add_author_fields l(:label_add_an_author), f, :authorships, params[:action] %>

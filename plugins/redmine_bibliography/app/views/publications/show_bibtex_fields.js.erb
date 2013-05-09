@@ -1,0 +1,12 @@
+fields = <%= @fields.to_json.html_safe -%>;
+
+$.each($(".bibtex"), function( key, value ) {
+    $this = $(this);
+
+    input_id = $this.children('input').attr('id');
+    name = input_id.split('_')[4];
+
+    if ($.inArray(name, fields)){
+        $this.show();
+    }
+});
