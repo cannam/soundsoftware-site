@@ -37,7 +37,6 @@ module PublicationsHelper
 
    if @results.size > 0
      s = select_tag( form_tag_name(object_name, :author_search_results), options_for_select(@author_options), { :id => form_tag_id(object_name, :author_search_results), :size => 3} )
-     s << observe_field( form_tag_id(object_name, :author_search_results), :on => 'click', :function => "alert('Element changed')", :with => 'q')
    else
      s = "<em>No Authors found that match your search… sorry!</em>"
    end
