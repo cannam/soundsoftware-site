@@ -20,24 +20,24 @@ function identify_author_status(status, object_id) {
 	    s.value = "";
 	    s.readOnly = false;
 	};
-	
+
 	if(status == "correct"){s.readOnly = false;};
 	if(status == "yes"){s.readOnly = true;};
     });
 }
 
-function toggle_div(div_id){	
+function toggle_div(div_id){
     Effect.toggle(div_id, "appear", {duration:0.3});
 }
 
-function toggle_input_field(field){	
+function toggle_input_field(field){
     if (field.classNames().inspect().include("readonly") == false){
-			field.readOnly = true;	
+			field.readOnly = true;
 			field.addClassName('readonly');
     } else {
 			field.readOnly = false;
 			field.removeClassName('readonly');
-    };	
+    };
 }
 
 function toggle_edit_save_button(object_id){
@@ -59,18 +59,3 @@ function toggle_save_author(form_object_id, $this){
     toggle_edit_save_button(form_object_id);
     toggle_div("publication_authorships_attributes_" + form_object_id +"_search_author");
 }
-
-function hide_all_bibtex_required_fields(){$$('p.bibtex').each(function(s){s.hide()})}
-
-// entrytype_fields is a jsno array with the fields requires by the selected bibtex entry 
-function show_required_bibtex_fields(entrytype_fields) {
-	$$('p.bibtex').each(function(s){
-		if(entrytype_fields.indexOf(s.down('input').id.split('_').last()) != -1){
-			s.show();
-			}
-		else {
-			s.hide();
-			}
-	})
-}
-		
