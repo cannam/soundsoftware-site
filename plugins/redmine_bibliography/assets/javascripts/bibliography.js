@@ -1,11 +1,15 @@
+
 $("#publication_bibtex_entry_attributes_entry_type").live("change", function() {
+    $this = $(this);
+
     $.ajax({
         type: "POST",
         url: "/publications/show_bibtex_fields",
-        data: "value=" + $("#publication_bibtex_entry_attributes_entry_type").val(),
+        data: {
+            value: $this.val()
+        },
         dataType: "script"
     });
 
     return false;
 });
-
