@@ -1,17 +1,17 @@
-function remove_fields(link) {
-    $(link).previous("input[type=hidden]").value = "1";
-    $(link).up(".fields").hide();
+function add_author_fields(link, association, content, action) {
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g");
+
+    $(link).before(content.replace(regexp, new_id));
+
+    if(action != "new"){
+        toggle_save_author(new_id, $(link));
+    }
 }
 
-function add_author_fields(link, association, content, action) {
-	var new_id = new Date().getTime();
-  var regexp = new RegExp("new_" + association, "g");
-  $(link).insert({
-		before: content.replace(regexp, new_id)
-  });
-	if(action != "new"){
-		toggle_save_author(new_id, $(link));
-	};
+function remove_fields(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".fields").hide();
 }
 
 function identify_author_status(status, object_id) {

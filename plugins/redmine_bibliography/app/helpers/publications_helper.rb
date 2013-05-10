@@ -52,7 +52,7 @@ module PublicationsHelper
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end
-    link_to_function(name, h("add_author_fields(this, '#{association}', '#{escape_javascript(fields)}', '#{action}')"), { :class => 'icon icon-add', :id => "add_another_author" })
+    link_to_function(name, "add_author_fields(this, '#{association}', '#{escape_javascript(fields)}', '#{action}')", { :class => 'icon icon-add', :id => "add_another_author" })
   end
 
   def sanitized_object_name(object_name)
