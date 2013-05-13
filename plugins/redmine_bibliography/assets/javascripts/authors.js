@@ -15,28 +15,11 @@ function remove_fields(link) {
 }
 
 $(".author_search").live('keyup.autocomplete', function(){
-    $this = $(this);
-
-    $.ajax({
-        type: "POST",
-        url: "/publications/autocomplete_for_author",
-        dataType: "json",
-        data: {
-            q: $this.val()
-        },
-
-        success: function(data, type) {
-            console.log("OK: " + data);
-            items = data;
-            response(items);
-        },
-
-        error: function(data, type){
-            console.log("ERROR: " + type);
-        }
+     $(this).autocomplete({
+        source: '/publications/autocomplete_for_author',
+        minLength: 2
     });
 });
-
 
 function identify_author_status(status, object_id) {
     $('publication_authorships_attributes_' + object_id + '_edit_author_info').select('input').each(function(s) {
