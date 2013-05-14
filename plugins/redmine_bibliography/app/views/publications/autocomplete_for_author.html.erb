@@ -1,4 +1,8 @@
-<% if params[:q] && params[:q].length > 1 %>
-	<%= choose_author_link @object_name, @results %>
-<% end %>
-
+<%= raw @results.map {|result| {
+      'id' => result.id,
+      'label' => "#{result.name} (#{result.mail.partition('@')[2]})",
+      'value' => result.name,
+      'type' => result.class,
+      }
+    }.to_json
+%>

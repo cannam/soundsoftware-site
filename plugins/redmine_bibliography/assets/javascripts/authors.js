@@ -17,7 +17,10 @@ function remove_fields(link) {
 $(".author_search").live('keyup.autocomplete', function(){
      $(this).autocomplete({
         source: '/publications/autocomplete_for_author',
-        minLength: 2
+        minLength: 2,
+        select: function(event, ui){
+            alert("gOtChA " + ui.item.id + " " + ui.item.type);
+        }
     });
 });
 
