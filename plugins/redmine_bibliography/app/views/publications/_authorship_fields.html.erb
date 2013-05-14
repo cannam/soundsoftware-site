@@ -27,6 +27,8 @@
       <p><%= f.text_field :email, {:class => ("readonly" unless params[:action] == "new") }  %></p>
       <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_email") %></p>
     </p>
+        <%= hidden_field_tag(:object_class, '', :name => form_tag_name(f.object_name,:object_class ), :id => form_tag_id( f.object_name, :object_class )) -%>
+
   </div>
 
 

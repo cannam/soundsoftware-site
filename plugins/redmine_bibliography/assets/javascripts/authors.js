@@ -24,6 +24,7 @@ $(".author_search").live('keyup.autocomplete', function(){
             $this.closest('div').next().find("input[id$='name_on_paper']").val(ui.item.value);
             $this.closest('div').next().find("input[id$='institution']").val(ui.item.institution);
             $this.closest('div').next().find("input[id$='email']").val(ui.item.email);
+            $this.closest('div').next().find("input[id$='object_class']").val(ui.item.object_class);
         }
     });
 });
