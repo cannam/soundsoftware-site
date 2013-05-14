@@ -9,7 +9,7 @@ class Authorship < ActiveRecord::Base
 
   validates_presence_of :name_on_paper
 
-  attr_accessor :is_user, :author_user_id, :search_name, :identify_author, :search_results
+  attr_accessor :search_author_class, :search_author_id, :search_name, :search_results, :identify_author
   before_save :associate_author_user
 
   # todo: review usage of scope --lf.20130108
@@ -43,15 +43,15 @@ class Authorship < ActiveRecord::Base
 
   protected
   def associate_author_user
-    case self.identify_author
-      when "no"
+    case self.search_author_class
+      when "User"
         author = Author.new
         author.save
         self.author_id = author.id
       else
         selected = self.search_results
-        selected_classname = Kernel.const_get(selected.split('_')[0])
-        selected_id = selected.split('_')[1]
+        selected_classname = Kernel.const_get(self.search_author_class)
+        selected_id = self.search_author_id
         object = selected_classname.find(selected_id)
 
         if object.respond_to? :name_on_paper

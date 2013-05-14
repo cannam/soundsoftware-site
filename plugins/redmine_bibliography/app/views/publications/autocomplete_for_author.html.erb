@@ -1,8 +1,8 @@
 <%= raw @results.map {|result| {
-      'id' => result.id,
       'label' => "#{result.name} (#{result.mail.partition('@')[2]})",
       'value' => result.name,
-      'object_class' => result.class.name,
+      'search_author_class' => result.class.name,
+      'search_author_id' => result.id,
       'institution' => result.institution,
       'email' => result.mail,
       }

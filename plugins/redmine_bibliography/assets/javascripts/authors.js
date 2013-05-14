@@ -24,7 +24,8 @@ $(".author_search").live('keyup.autocomplete', function(){
             $this.closest('div').next().find("input[id$='name_on_paper']").val(ui.item.value);
             $this.closest('div').next().find("input[id$='institution']").val(ui.item.institution);
             $this.closest('div').next().find("input[id$='email']").val(ui.item.email);
-            $this.closest('div').next().find("input[id$='object_class']").val(ui.item.object_class);
+            $this.closest('div').next().find("input[id$='search_author_class']").val(ui.item.search_author_class);
+            $this.closest('div').next().find("input[id$='search_author_id']").val(ui.item.search_author_id);
         }
     });
 });
@@ -66,10 +67,10 @@ function toggle_input_field(field){
 function toggle_edit_save_button(object_id){
     $button = $('publication_authorships_attributes_' + object_id + '_edit_save_button');
     if ($button.value == "Edit author"){
-	$button.value = "Save author";
+        $button.value = "Save author";
     } else {
-	$button.value = "Edit author";
-    };
+        $button.value = "Edit author";
+    }
 }
 
 function toggle_save_author(form_object_id, $this){
