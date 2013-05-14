@@ -2,7 +2,9 @@
       'id' => result.id,
       'label' => "#{result.name} (#{result.mail.partition('@')[2]})",
       'value' => result.name,
-      'type' => result.class,
+      'type' => result.class.name,
+      'institution' => result.institution,
+      'email' => result.mail,
       }
     }.to_json
 %>

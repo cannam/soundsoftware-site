@@ -15,39 +15,51 @@ function remove_fields(link) {
 }
 
 $(".author_search").live('keyup.autocomplete', function(){
-     $(this).autocomplete({
+     $this = $(this);
+
+     $this.autocomplete({
         source: '/publications/autocomplete_for_author',
         minLength: 2,
         select: function(event, ui){
-            alert("gOtChA " + ui.item.id + " " + ui.item.type);
+            $this.closest('div').next().find("input[id$='name_on_paper']").val(ui.item.value);
+            $this.closest('div').next().find("input[id$='institution']").val(ui.item.institution);
+            $this.closest('div').next().find("input[id$='email']").val(ui.item.email);
         }
     });
 });
 
+
+
+
 function identify_author_status(status, object_id) {
     $('publication_authorships_attributes_' + object_id + '_edit_author_info').select('input').each(function(s) {
-	if(status == "no"){
-	    s.value = "";
-	    s.readOnly = false;
-	};
 
-	if(status == "correct"){s.readOnly = false;};
-	if(status == "yes"){s.readOnly = true;};
+        if(status == "no"){
+            s.value = "";
+            s.readOnly = false;
+        }
+
+        if(status == "correct"){
+            s.readOnly = false;
+        }
+        if(status == "yes"){
+            s.readOnly = true;
+        }
     });
 }
 
 function toggle_div(div_id){
-    Effect.toggle(div_id, "appear", {duration:0.3});
+    $("#" + div_id).toggle(0.3);
 }
 
 function toggle_input_field(field){
-    if (field.classNames().inspect().include("readonly") == false){
+    if (field.classNames().inspect().include("readonly") === false){
 			field.readOnly = true;
 			field.addClassName('readonly');
     } else {
 			field.readOnly = false;
 			field.removeClassName('readonly');
-    };
+    }
 }
 
 function toggle_edit_save_button(object_id){
