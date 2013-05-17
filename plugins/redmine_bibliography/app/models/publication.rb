@@ -10,6 +10,7 @@ class Publication < ActiveRecord::Base
 
   validates_presence_of :title
   validates_length_of :authorships, :minimum => 1, :message => l("error_no_authors")
+  validates_associated :bibtex_entry, :authorships
 
   accepts_nested_attributes_for :authorships
   accepts_nested_attributes_for :authors, :allow_destroy => true
@@ -41,7 +42,7 @@ class Publication < ActiveRecord::Base
   # Ensure error message uses proper text instead of
   # bibtex_entry.entry_type (#268).  There has to be a better way to
   # do this!
-  def self.human_attribute_name(k)
+  def self.human_attribute_name(k, *args)
     if k == 'bibtex_entry.entry_type'
       l(:field_entry_type)
     else
