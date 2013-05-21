@@ -45,6 +45,12 @@ $(".author_search").live('keyup.autocomplete', function(){
             };
         });
 
+
+$("input[id$='identify_author_yes']").live("click", function() {
+    console.log("aaaa");
+});
+
+
 function toggle_div(div_id){
     $("#" + div_id).toggle(0.3);
 }
