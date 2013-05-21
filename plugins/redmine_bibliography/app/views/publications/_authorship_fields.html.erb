@@ -9,6 +9,7 @@
     </p>
 
     <p style="margin-bottom: -2.5em; padding-bottom; 0"><label><%= l(:identify_author_question) %></label></p>
+
     <p class="author_identify">
       <label class='inline'><%= radio_button_tag(:identify_author, "yes", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_yes ), :onchange => "identify_author_status($(this).value, #{form_object_id(f.object_name) });") %> <%= l(:identify_author_yes) %> </label><br />
 
