@@ -50,6 +50,12 @@ $("input[id$='identify_author_yes']").live("click", function() {
     console.log("aaaa");
 });
 
+$("input[id$='identify_author_no']").live("click", function() {
+    $this.closest('div').next().find("input[id$='name_on_paper']").val('');
+    $this.closest('div').next().find("input[id$='institution']").val('');
+    $this.closest('div').next().find("input[id$='email']").val('');
+    $this.closest('div').next().find("input[id$='search_author_class']").val('');
+});
 
 function toggle_div(div_id){
     $("#" + div_id).toggle(0.3);
