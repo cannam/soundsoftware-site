@@ -29,10 +29,7 @@ tmp/thumbnails/*
 vendor/cache
 vendor/rails
 *.rbc
-
-.svn/
 .git/
-
 .bundle
 Gemfile.lock
 Gemfile.local

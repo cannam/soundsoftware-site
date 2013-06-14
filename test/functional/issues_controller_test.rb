@@ -2356,6 +2356,9 @@ class IssuesControllerTest < ActionController::TestCase
     assert_tag 'select', :attributes => {:name => 'issue[project_id]'},
       :child => {:tag => 'option', :attributes => {:value => '2', :selected => nil}, :content => 'OnlineStore'}
     assert_tag 'input', :attributes => {:name => 'copy_from', :value => '1'}
+
+    # "New issue" menu item should not link to copy
+    assert_select '#main-menu a.new-issue[href=/projects/ecookbook/issues/new]'
   end
 
   def test_new_as_copy_with_attachments_should_show_copy_attachments_checkbox
@@ -2909,6 +2912,20 @@ class IssuesControllerTest < ActionController::TestCase
     assert_not_nil t
     assert_equal 2.5, t.hours
     assert_equal spent_hours_before + 2.5, issue.spent_hours
+  end
+
+  def test_put_update_should_preserve_parent_issue_even_if_not_visible
+    parent = Issue.generate!(:project_id => 1, :is_private => true)
+    issue = Issue.generate!(:parent_issue_id => parent.id)
+    assert !parent.visible?(User.find(3))
+    @request.session[:user_id] = 3
+
+    get :edit, :id => issue.id
+    assert_select 'input[name=?][value=?]', 'issue[parent_issue_id]', parent.id.to_s
+
+    put :update, :id => issue.id, :issue => {:subject => 'New subject', :parent_issue_id => parent.id.to_s}
+    assert_response 302
+    assert_equal parent, issue.parent
   end
 
   def test_put_update_with_attachment_only

@@ -4,6 +4,58 @@ Redmine - project management software
 Copyright (C) 2006-2012  Jean-Philippe Lang
 http://www.redmine.org/
 
+== 2013-03-19 v2.2.4
+
+* Upgrade to Rails 3.2.13
+* Defect #12243: Ordering forum replies by last reply date is broken
+* Defect #13127: h1 multiple lined titles breaks into main menu
+* Defect #13138: Generating PDF of issue causes UndefinedConversionError with htmlentities gem
+* Defect #13165: rdm-mailhandler.rb: initialize_http_header override basic auth
+* Defect #13232: Link to topic in nonexistent forum causes error 500
+* Patch #13181: Bulgarian translation of jstoolbar-bg.js
+* Patch #13207: Portuguese translation for 2.2-stable
+* Patch #13310: pt-BR label_last_n_weeks translation
+* Patch #13325: pt-BR translation for 2.2-stable
+* Patch #13343: Vietnamese translation for 2.2-stable
+* Patch #13398: Czech translation for 2.2-stable
+
+== 2013-02-12 v2.2.3
+
+* Upgrade to Rails 3.2.12
+* Defect #11987: pdf: Broken new line in table
+* Defect #12930: 404 Error when referencing different project source files in the wiki syntax
+* Defect #12979: Wiki link syntax commit:repo_a:abcd doesn't work
+* Defect #13075: Can't clear custom field value through context menu in the issue list
+* Defect #13097: Project copy fails when wiki module is disabled
+* Defect #13126: Issue view: estimated time vs. spent time
+* Patch #12922: Update Spanish translation
+* Patch #12928: Bulgarian translation for 2.2-stable
+* Patch #12987: Russian translation for 2.2-stable
+
+== 2013-01-20 v2.2.2
+
+* Defect #7510: Link to attachment should return latest attachment
+* Defect #9842: {{toc}} is not replaced by table of content when exporting wiki page to pdf
+* Defect #12749: Plugins cannot route wiki page sub-path
+* Defect #12799: Cannot edit a wiki section which title starts with a tab
+* Defect #12801: Viewing the history of a wiki page with attachments raises an error
+* Defect #12833: Input fields restricted on length should have maxlength parameter set
+* Defect #12838: Blank page when clicking Add with no block selected on my page layout
+* Defect #12851: "Parent task is invalid" while editing child issues by Role with restricted Issues Visibility
+* Patch #12800: Serbian Latin translation patch (sr-YU.yml)
+* Patch #12809: Swedish Translation for r11162
+* Patch #12818: Minor swedish translation fix
+
+== 2013-01-09 v2.2.1
+
+* Upgrade to Rails 3.2.11
+* Defect #12652: "Copy ticket" selects "new ticket"
+* Defect #12691: Textile Homepage Dead?
+* Defect #12711: incorrect fix of lib/SVG/Graph/TimeSeries.rb
+* Defect #12744: Unable to call a macro with a name that contains uppercase letters
+* Defect #12776: Security vulnerability in Rails 3.2.10 (CVE-2013-0156)
+* Patch #12630: Russian "x_hours" translation
+
 == 2012-12-18 v2.2.0
 
 * Defect #4787: Gannt to PNG - CJK (Chinese, Japanese and Korean) characters appear as ?

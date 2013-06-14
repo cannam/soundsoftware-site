@@ -347,6 +347,15 @@ RAW
     to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text), "#{text} failed" }
   end
 
+  def test_redmine_links_with_a_different_project_before_current_project
+    vp1 = Version.generate!(:project_id => 1, :name => '1.4.4')
+    vp3 = Version.generate!(:project_id => 3, :name => '1.4.4')
+
+    @project = Project.find(3)
+    assert_equal %(<p><a href="/versions/#{vp1.id}" class="version">1.4.4</a> <a href="/versions/#{vp3.id}" class="version">1.4.4</a></p>),
+      textilizable("ecookbook:version:1.4.4 version:1.4.4")
+  end
+
   def test_escaped_redmine_links_should_not_be_parsed
     to_test = [
       '#3.',
@@ -394,14 +403,14 @@ RAW
   end
 
   def test_multiple_repositories_redmine_links
-    svn = Repository::Subversion.create!(:project_id => 1, :identifier => 'svn1', :url => 'file:///foo/hg')
+    svn = Repository::Subversion.create!(:project_id => 1, :identifier => 'svn_repo-1', :url => 'file:///foo/hg')
     Changeset.create!(:repository => svn, :committed_on => Time.now, :revision => '123')
     hg = Repository::Mercurial.create!(:project_id => 1, :identifier => 'hg1', :url => '/foo/hg')
     Changeset.create!(:repository => hg, :committed_on => Time.now, :revision => '123', :scmid => 'abcd')
 
     changeset_link = link_to('r2', {:controller => 'repositories', :action => 'revision', :id => 'ecookbook', :rev => 2},
                                     :class => 'changeset', :title => 'This commit fixes #1, #2 and references #1 & #3')
-    svn_changeset_link = link_to('svn1|r123', {:controller => 'repositories', :action => 'revision', :id => 'ecookbook', :repository_id => 'svn1', :rev => 123},
+    svn_changeset_link = link_to('svn_repo-1|r123', {:controller => 'repositories', :action => 'revision', :id => 'ecookbook', :repository_id => 'svn_repo-1', :rev => 123},
                                     :class => 'changeset', :title => '')
     hg_changeset_link = link_to('hg1|abcd', {:controller => 'repositories', :action => 'revision', :id => 'ecookbook', :repository_id => 'hg1', :rev => 'abcd'},
                                     :class => 'changeset', :title => '')
@@ -411,7 +420,7 @@ RAW
 
     to_test = {
       'r2'                          => changeset_link,
-      'svn1|r123'                   => svn_changeset_link,
+      'svn_repo-1|r123'             => svn_changeset_link,
       'invalid|r123'                => 'invalid|r123',
       'commit:hg1|abcd'             => hg_changeset_link,
       'commit:invalid|abcd'         => 'commit:invalid|abcd',
@@ -549,6 +558,15 @@ RAW
       'attachment:error281.txt'      => attachment_link
     }
     to_test.each { |text, result| assert_equal "<p>#{result}</p>", textilizable(text, :attachments => Issue.find(3).attachments), "#{text} failed" }
+  end
+
+  def test_attachment_link_should_link_to_latest_attachment
+    set_tmp_attachments_directory
+    a1 = Attachment.generate!(:filename => "test.txt", :created_on => 1.hour.ago)
+    a2 = Attachment.generate!(:filename => "test.txt")
+
+    assert_equal %(<p><a href="/attachments/download/#{a2.id}" class="attachment">test.txt</a></p>),
+      textilizable('attachment:test.txt', :attachments => [a1, a2])
   end
 
   def test_wiki_links
