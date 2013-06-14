@@ -53,8 +53,8 @@ sr-YU:
         one:   "približno jedan sat"
         other: "približno %{count} sati"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 sat"
+        other: "%{count} sati"
       x_days:
         one:   "jedan dan"
         other: "%{count} dana"
@@ -209,8 +209,6 @@ sr-YU:
   mail_subject_wiki_content_updated: "Wiki stranica '%{id}' je ažurirana"
   mail_body_wiki_content_updated: "%{author} je ažurirao wiki stranicu '%{id}'."
 
-  gui_validation_error: jedna greška
-  gui_validation_error_plural: "%{count} grešaka"
 
   field_name: Naziv
   field_description: Opis
@@ -290,7 +288,7 @@ sr-YU:
   field_delay: Kašnjenje
   field_assignable: Problem može biti dodeljen ovoj ulozi
   field_redirect_existing_links: Preusmeri postojeće veze
-  field_estimated_hours: Proteklo vreme
+  field_estimated_hours: Procenjeno vreme 
   field_column_names: Kolone
   field_time_zone: Vremenska zona
   field_searchable: Može da se pretražuje
@@ -387,7 +385,6 @@ sr-YU:
   permission_edit_own_time_entries: Izmena sopstvenog utrošenog vremena
   permission_manage_news: Upravljanje vestima
   permission_comment_news: Komentarisanje vesti
-  permission_manage_documents: Upravljanje dokumentima
   permission_view_documents: Pregledanje dokumenata
   permission_manage_files: Upravljanje datotekama
   permission_view_files: Pregledanje datoteka
@@ -511,8 +508,6 @@ sr-YU:
   label_text: Dugi tekst
   label_attribute: Osobina
   label_attribute_plural: Osobine
-  label_download: "%{count} preuzimanje"
-  label_download_plural: "%{count} preuzimanja"
   label_no_data: Nema podataka za prikazivanje
   label_change_status: Promena statusa
   label_history: Istorija
@@ -615,8 +610,6 @@ sr-YU:
   label_repository: Spremište
   label_repository_plural: Spremišta
   label_browse: Pregledanje
-  label_modification: "%{count} promena"
-  label_modification_plural: "%{count} promena"
   label_branch: Grana
   label_tag: Oznaka
   label_revision: Revizija
@@ -976,8 +969,6 @@ sr-YU:
   text_scm_command: Command
   text_scm_command_version: Version
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1084,3 +1075,18 @@ sr-YU:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Ukupno
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.

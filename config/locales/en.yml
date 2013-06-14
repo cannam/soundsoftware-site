@@ -221,9 +221,6 @@ en:
   mail_subject_wiki_content_updated: "'%{id}' wiki page has been updated"
   mail_body_wiki_content_updated: "The '%{id}' wiki page has been updated by %{author}."
 
-  gui_validation_error: 1 error
-  gui_validation_error_plural: "%{count} errors"
-
   field_ssamr_user_detail:
     description: User Description  
     institution: Institution
@@ -243,6 +240,7 @@ en:
   field_author: Author
   field_created_on: Created
   field_updated_on: Updated
+  field_closed_on: Closed
   field_field_format: Format
   field_is_for_all: For all projects
   field_possible_values: Possible values
@@ -345,6 +343,7 @@ en:
   field_board_parent: Parent forum
   field_private_notes: Private notes
   field_public_or_private: "Public or Private?"
+  field_inherit_members: Inherit members
 
   setting_external_repository: "Select this if the project's main repository is hosted somewhere else"
   setting_external_repository_url: "The URL of the existing external repository. Must be publicly accessible without a password"
@@ -378,8 +377,8 @@ en:
   setting_cross_project_subtasks: Allow cross-project subtasks
   setting_issue_list_default_columns: Default columns displayed on the issue list
   setting_repositories_encodings: Attachments and repositories encodings
-  setting_emails_header: Emails header
-  setting_emails_footer: Emails footer
+  setting_emails_header: Email header
+  setting_emails_footer: Email footer
   setting_protocol: Protocol
   setting_per_page_options: Objects per page options
   setting_user_format: Users display format
@@ -421,6 +420,8 @@ en:
   setting_thumbnails_enabled: Display attachment thumbnails
   setting_thumbnails_size: Thumbnails size (in pixels)
   setting_non_working_week_days: Non-working days
+  setting_jsonp_enabled: Enable JSONP support
+  setting_default_projects_tracker_ids: Default trackers for new projects
 
   permission_add_project: Create project
   permission_add_subprojects: Create subprojects
@@ -457,10 +458,12 @@ en:
   permission_edit_own_time_entries: Edit own time logs
   permission_manage_news: Manage news
   permission_comment_news: Comment news
-  permission_manage_documents: Manage documents
   permission_view_documents: View documents
   permission_manage_files: Manage downloads
   permission_view_files: View downloads
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
   permission_manage_wiki: Manage wiki
   permission_rename_wiki_pages: Rename wiki pages
   permission_delete_wiki_pages: Delete wiki pages
@@ -613,8 +616,6 @@ en:
   label_text: Long text
   label_attribute: Attribute
   label_attribute_plural: Attributes
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloads"
   label_no_data: No data to display
   label_change_status: Change status
   label_history: History
@@ -665,6 +666,7 @@ en:
     one:   1 issue
     other: "%{count} issues"
   label_total: Total
+  label_total_time: Total time
   label_permissions: Permissions
   label_current_status: Current status
   label_new_statuses_allowed: New statuses allowed
@@ -735,8 +737,6 @@ en:
   label_is_external_repository: Track an external repository
   label_repository_plural: Repositories
   label_explore_projects: Explore projects
-  label_modification: "%{count} change"
-  label_modification_plural: "%{count} changes"
   label_branch: Branch
   label_tag: Tag
   label_revision: Revision
@@ -939,13 +939,16 @@ en:
   label_readonly: Read-only
   label_required: Required
   label_attribute_of_project: "Project's %{name}"
+  label_attribute_of_issue: "Issue's %{name}"
   label_attribute_of_author: "Author's %{name}"
   label_attribute_of_assigned_to: "Assignee's %{name}"
+  label_attribute_of_user: "User's %{name}"
   label_attribute_of_fixed_version: "Target version's %{name}"
   label_cross_project_descendants: With subprojects
   label_cross_project_tree: With project tree
   label_cross_project_hierarchy: With project hierarchy
   label_cross_project_system: With all projects
+  label_gantt_progress_line: Progress line
 
   button_login: Login
   button_submit: Submit
@@ -1094,14 +1097,15 @@ en:
   text_mercurial_repository_note: Local repository (e.g. /hgrepo, c:\hgrepo)
   text_scm_command: Command
   text_scm_command_version: Version
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
   text_issue_conflict_resolution_overwrite: "Apply my changes anyway (previous notes will be kept but some changes may be overwritten)"
   text_issue_conflict_resolution_add_notes: "Add my notes and discard my other changes"
   text_issue_conflict_resolution_cancel: "Discard all my changes and redisplay %{link}"
   text_account_destroy_confirmation: "Are you sure you want to proceed?\nYour account will be permanently deleted, with no way to reactivate it."
   text_session_expiration_settings: "Warning: changing these settings may expire the current sessions including yours."
   text_project_closed: This project is closed and read-only.
+  text_turning_multiple_off: "If you disable multiple values, multiple values will be removed in order to preserve only one value per item."
   text_settings_repo_explanation: <b>External repositories</b><p>Normally your project's primary repository will be the Mercurial repository hosted at this site.<p>However, if you already have your project hosted somewhere else, you can specify your existing external repository's URL here &ndash; then this site will track that repository in a read-only &ldquo;mirror&rdquo; copy.  External Mercurial, git and Subversion repositories can be tracked. Note that you cannot switch to an external repository if you have already made any commits to the repository hosted here.
   text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
   text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.

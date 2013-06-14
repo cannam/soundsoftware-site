@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -24,6 +24,7 @@ module ApplicationHelper
   include Redmine::WikiFormatting::Macros::Definitions
   include Redmine::I18n
   include GravatarHelper::PublicMethods
+  include Redmine::Pagination::Helper
 
   extend Forwardable
   def_delegators :wiki_helper, :wikitoolbar_for, :heads_for_wiki_formatter
@@ -90,14 +91,10 @@ module ApplicationHelper
   # * :download - Force download (default: false)
   def link_to_attachment(attachment, options={})
     text = options.delete(:text) || attachment.filename
-    action = options.delete(:download) ? 'download' : 'show'
-    opt_only_path = {}
-    opt_only_path[:only_path] = (options[:only_path] == false ? false : true)
-    options.delete(:only_path)
-    link_to(h(text),
-           {:controller => 'attachments', :action => action,
-            :id => attachment, :filename => attachment.filename}.merge(opt_only_path),
-           options)
+    route_method = options.delete(:download) ? :download_named_attachment_path : :named_attachment_path
+    html_options = options.slice!(:only_path)
+    url = send(route_method, attachment, attachment.filename, options)
+    link_to text, url, html_options
   end
 
   # Generates a link to a SCM revision
@@ -119,13 +116,11 @@ module ApplicationHelper
   # Generates a link to a message
   def link_to_message(message, options={}, html_options = nil)
     link_to(
-      h(truncate(message.subject, :length => 60)),
-      { :controller => 'messages', :action => 'show',
-        :board_id => message.board_id,
-        :id => (message.parent_id || message.id),
+      truncate(message.subject, :length => 60),
+      board_message_path(message.board_id, message.parent_id || message.id, {
         :r => (message.parent_id && message.id),
         :anchor => (message.parent_id ? "message-#{message.id}" : nil)
-      }.merge(options),
+      }.merge(options)),
       html_options
     )
   end
@@ -134,16 +129,29 @@ module ApplicationHelper
   # Examples:
   #
   #   link_to_project(project)                          # => link to the specified project overview
-  #   link_to_project(project, :action=>'settings')     # => link to project settings
   #   link_to_project(project, {:only_path => false}, :class => "project") # => 3rd arg adds html options
   #   link_to_project(project, {}, :class => "project") # => html options with default url (project overview)
   #
   def link_to_project(project, options={}, html_options = nil)
     if project.archived?
-      h(project)
-    else
+      h(project.name)
+    elsif options.key?(:action)
+      ActiveSupport::Deprecation.warn "#link_to_project with :action option is deprecated and will be removed in Redmine 3.0."
       url = {:controller => 'projects', :action => 'show', :id => project}.merge(options)
-      link_to(h(project), url, html_options)
+      link_to project.name, url, html_options
+    else
+      link_to project.name, project_path(project, options), html_options
+    end
+  end
+
+  # Generates a link to a project settings if active
+  def link_to_project_settings(project, options={}, html_options=nil)
+    if project.active?
+      link_to project.name, settings_project_path(project, options), html_options
+    elsif project.archived?
+      h(project.name)
+    else
+      link_to project.name, project_path(project, options), html_options
     end
   end
 
@@ -152,8 +160,8 @@ module ApplicationHelper
   end
 
   def thumbnail_tag(attachment)
-    link_to image_tag(url_for(:controller => 'attachments', :action => 'thumbnail', :id => attachment)),
-      {:controller => 'attachments', :action => 'show', :id => attachment, :filename => attachment.filename},
+    link_to image_tag(thumbnail_path(attachment)),
+      named_attachment_path(attachment, attachment.filename),
       :title => attachment.filename
   end
 
@@ -187,7 +195,7 @@ module ApplicationHelper
 
   def format_version_name(version)
     if version.project == @project
-    	h(version)
+      h(version)
     else
       h("#{version.project} - #{version}")
     end
@@ -341,7 +349,7 @@ module ApplicationHelper
   def options_for_membership_project_select(principal, projects)
     options = content_tag('option', "--- #{l(:actionview_instancetag_blank_option)} ---")
     options << project_tree_options_for_select(projects) do |p|
-      {:disabled => principal.projects.include?(p)}
+      {:disabled => principal.projects.to_a.include?(p)}
     end
     options
   end
@@ -395,59 +403,6 @@ module ApplicationHelper
   def to_path_param(path)
     str = path.to_s.split(%r{[/\\]}).select{|p| !p.blank?}.join("/")
     str.blank? ? nil : str
-  end
-
-  def pagination_links_full(paginator, count=nil, options={})
-    page_param = options.delete(:page_param) || :page
-    per_page_links = options.delete(:per_page_links)
-    url_param = params.dup
-
-    html = ''
-    if paginator.current.previous
-      # \xc2\xab(utf-8) = &#171;
-      html << link_to_content_update(
-                   "\xc2\xab " + l(:label_previous),
-                   url_param.merge(page_param => paginator.current.previous)) + ' '
-    end
-
-    html << (pagination_links_each(paginator, options) do |n|
-      link_to_content_update(n.to_s, url_param.merge(page_param => n))
-    end || '')
-
-    if paginator.current.next
-      # \xc2\xbb(utf-8) = &#187;
-      html << ' ' + link_to_content_update(
-                      (l(:label_next) + " \xc2\xbb"),
-                      url_param.merge(page_param => paginator.current.next))
-    end
-
-    unless count.nil?
-      html << " (#{paginator.current.first_item}-#{paginator.current.last_item}/#{count})"
-      if per_page_links != false && links = per_page_links(paginator.items_per_page, count)
-	      html << " | #{links}"
-      end
-    end
-
-    html.html_safe
-  end
-
-  def per_page_links(selected=nil, item_count=nil)
-    values = Setting.per_page_options_array
-    if item_count && values.any?
-      if item_count > values.first
-        max = values.detect {|value| value >= item_count} || item_count
-      else
-        max = item_count
-      end
-      values = values.select {|value| value <= max || value == selected}
-    end
-    if values.empty? || (values.size == 1 && values.first == selected)
-      return nil
-    end
-    links = values.collect do |n|
-      n == selected ? n : link_to_content_update(n, params.merge(:per_page => n))
-    end
-    l(:label_display_per_page, links.join(', '))
   end
 
   def reorder_links(name, url, method = :post)
@@ -529,7 +484,11 @@ module ApplicationHelper
   end
 
   def accesskey(s)
-    Redmine::AccessKeys.key_for s
+    @used_accesskeys ||= []
+    key = Redmine::AccessKeys.key_for(s)
+    return nil if @used_accesskeys.include?(key)
+    @used_accesskeys << key
+    key
   end
 
   # Formats text according to system settings.
@@ -617,8 +576,7 @@ module ApplicationHelper
         filename, ext, alt, alttext = $1.downcase, $2, $3, $4
         # search for the picture in attachments
         if found = Attachment.latest_attach(attachments, filename)
-          image_url = url_for :only_path => only_path, :controller => 'attachments',
-                              :action => 'download', :id => found
+          image_url = download_named_attachment_path(found, found.filename, :only_path => only_path)
           desc = found.description.to_s.gsub('"', '')
           if !desc.blank? && alttext.blank?
             alt = " title=\"#{desc}\" alt=\"#{desc}\""
@@ -647,9 +605,9 @@ module ApplicationHelper
       esc, all, page, title = $1, $2, $3, $5
       if esc.nil?
         if page =~ /^([^\:]+)\:(.*)$/
-          link_project = Project.find_by_identifier($1) || Project.find_by_name($1)
-          page = $2
-          title ||= $1 if page.blank?
+          identifier, page = $1, $2
+          link_project = Project.find_by_identifier(identifier) || Project.find_by_name(identifier)
+          title ||= identifier if page.blank?
         end
 
         if link_project && link_project.wiki
@@ -814,14 +772,14 @@ module ApplicationHelper
                 repository = project.repository
               end
               if prefix == 'commit'
-                if repository && (changeset = Changeset.visible.find(:first, :conditions => ["repository_id = ? AND scmid LIKE ?", repository.id, "#{name}%"]))
+                if repository && (changeset = Changeset.visible.where("repository_id = ? AND scmid LIKE ?", repository.id, "#{name}%").first)
                   link = link_to h("#{project_prefix}#{repo_prefix}#{name}"), {:only_path => only_path, :controller => 'repositories', :action => 'revision', :id => project, :repository_id => repository.identifier_param, :rev => changeset.identifier},
                                                :class => 'changeset',
-                                               :title => truncate_single_line(h(changeset.comments), :length => 100)
+                                               :title => truncate_single_line(changeset.comments, :length => 100)
                 end
               else
                 if repository && User.current.allowed_to?(:browse_repository, project)
-                  name =~ %r{^[/\\]*(.*?)(@([0-9a-f]+))?(#(L\d+))?$}
+                  name =~ %r{^[/\\]*(.*?)(@([^/\\@]+?))?(#(L\d+))?$}
                   path, rev, anchor = $1, $3, $5
                   link = link_to h("#{project_prefix}#{prefix}:#{repo_prefix}#{name}"), {:controller => 'repositories', :action => (prefix == 'export' ? 'raw' : 'entry'), :id => project, :repository_id => repository.identifier_param,
                                                           :path => to_path_param(path),
@@ -835,11 +793,10 @@ module ApplicationHelper
           when 'attachment'
             attachments = options[:attachments] || (obj && obj.respond_to?(:attachments) ? obj.attachments : nil)
             if attachments && attachment = Attachment.latest_attach(attachments, name)
-              link = link_to h(attachment.filename), {:only_path => only_path, :controller => 'attachments', :action => 'download', :id => attachment},
-                                                     :class => 'attachment'
+              link = link_to_attachment(attachment, :only_path => only_path, :download => true, :class => 'attachment')
             end
           when 'project'
-            if p = Project.visible.find(:first, :conditions => ["identifier = :s OR LOWER(name) = :s", {:s => name.downcase}])
+            if p = Project.visible.where("identifier = :s OR LOWER(name) = :s", :s => name.downcase).first
               link = link_to_project(p, {:only_path => only_path}, :class => 'project')
             end
           end
@@ -1092,7 +1049,7 @@ module ApplicationHelper
         (pcts[1] > 0 ? content_tag('td', '', :style => "width: #{pcts[1]}%;", :class => 'done') : ''.html_safe) +
         (pcts[2] > 0 ? content_tag('td', '', :style => "width: #{pcts[2]}%;", :class => 'todo') : ''.html_safe)
       ), :class => 'progress', :style => "width: #{width};").html_safe +
-      content_tag('p', legend, :class => 'pourcent').html_safe
+      content_tag('p', legend, :class => 'percent').html_safe
   end
 
   def checked_image(checked=true)
@@ -1136,7 +1093,7 @@ module ApplicationHelper
                    "var datepickerOptions={dateFormat: 'yy-mm-dd', firstDay: #{start_of_week}, " +
                      "showOn: 'button', buttonImageOnly: true, buttonImage: '" +
                      path_to_image('/images/calendar.png') +
-                     "', showButtonPanel: true};")
+                     "', showButtonPanel: true, showWeek: true, showOtherMonths: true, selectOtherMonths: true};")
         jquery_locale = l('jquery.locale', :default => current_language.to_s)
         unless jquery_locale == 'en'
           tags << javascript_include_tag("i18n/jquery.ui.datepicker-#{jquery_locale}.js")
@@ -1240,7 +1197,7 @@ module ApplicationHelper
 
   def sanitize_anchor_name(anchor)
     if ''.respond_to?(:encoding) || RUBY_PLATFORM == 'java'
-      anchor.gsub(%r{[^\p{Word}\s\-]}, '').gsub(%r{\s+(\-+\s*)?}, '-')
+      anchor.gsub(%r{[^\s\-\p{Word}]}, '').gsub(%r{\s+(\-+\s*)?}, '-')
     else
       # TODO: remove when ruby1.8 is no longer supported
       anchor.gsub(%r{[^\w\s\-]}, '').gsub(%r{\s+(\-+\s*)?}, '-')
@@ -1249,7 +1206,7 @@ module ApplicationHelper
 
   # Returns the javascript tags that are included in the html layout head
   def javascript_heads
-    tags = javascript_include_tag('jquery-1.7.2-ui-1.8.21-ujs-2.0.3', 'application')
+    tags = javascript_include_tag('jquery-1.8.3-ui-1.9.2-ujs-2.0.3', 'application')
     unless User.current.pref.warn_on_leaving_unsaved == '0'
       tags << "\n".html_safe + javascript_tag("$(window).load(function(){ warnLeavingUnsaved('#{escape_javascript l(:text_warn_on_leaving_unsaved)}'); });")
     end

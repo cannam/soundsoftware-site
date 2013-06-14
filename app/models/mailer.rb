@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -280,7 +280,7 @@ class Mailer < ActionMailer::Base
   #   Mailer.account_activation_request(user).deliver => sends an email to all active administrators
   def account_activation_request(user)
     # Send the email to all active administrators
-    recipients = User.active.find(:all, :conditions => {:admin => true}).collect { |u| u.mail }.compact
+    recipients = User.active.where(:admin => true).all.collect { |u| u.mail }.compact
     @user = user
     @url = url_for(:controller => 'users', :action => 'index',
                          :status => User::STATUS_REGISTERED,

@@ -52,8 +52,8 @@ el:
         one:   "περίπου 1 ώρα"
         other: "περίπου %{count} ώρες"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 ώρα"
+        other: "%{count} ώρες"
       x_days:
         one:   "1 ημέρα"
         other: "%{count} ημέρες"
@@ -194,8 +194,6 @@ el:
   mail_subject_wiki_content_updated: "'ενημερώθηκε η σελίδα wiki %{id}' "
   mail_body_wiki_content_updated: "Η σελίδα wiki  '%{id}' ενημερώθηκε από τον %{author}."
 
-  gui_validation_error: 1 σφάλμα
-  gui_validation_error_plural: "%{count} σφάλματα"
 
   field_name: Όνομα
   field_description: Περιγραφή
@@ -356,7 +354,6 @@ el:
   permission_edit_own_time_entries: Επεξεργασία δικού μου ιστορικού χρόνου
   permission_manage_news: Διαχείριση νέων
   permission_comment_news: Σχολιασμός νέων
-  permission_manage_documents: Διαχείριση εγγράφων
   permission_view_documents: Προβολή εγγράφων
   permission_manage_files: Διαχείριση αρχείων
   permission_view_files: Προβολή αρχείων
@@ -475,8 +472,6 @@ el:
   label_text: Μακροσκελές κείμενο
   label_attribute: Ιδιότητα
   label_attribute_plural: Ιδιότητες
-  label_download: "%{count} Μεταφόρτωση"
-  label_download_plural: "%{count} Μεταφορτώσεις"
   label_no_data: Δεν υπάρχουν δεδομένα
   label_change_status: Αλλαγή κατάστασης
   label_history: Ιστορικό
@@ -578,8 +573,6 @@ el:
   label_repository: Αποθετήριο
   label_repository_plural: Αποθετήρια
   label_browse: Πλοήγηση
-  label_modification: "%{count} τροποποίηση"
-  label_modification_plural: "%{count} τροποποιήσεις"
   label_branch: Branch
   label_tag: Tag
   label_revision: Αναθεώρηση
@@ -933,7 +926,6 @@ el:
   label_principal_search: "Search for user or group:"
   label_user_search: "Search for user:"
   field_visible: Visible
-  setting_emails_header: Emails header
   setting_commit_logtime_activity_id: Activity for logged time
   text_time_logged_by_changeset: Applied in changeset %{value}.
   setting_commit_logtime_enabled: Enable time logging
@@ -974,8 +966,6 @@ el:
   text_scm_command: Command
   text_scm_command_version: Version
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1082,3 +1072,19 @@ el:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Σύνολο
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
+  setting_emails_header: Email header

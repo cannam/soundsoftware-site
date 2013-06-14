@@ -49,8 +49,8 @@ bs:
         one:   "oko 1 sahat"
         other: "oko %{count} sahata"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 sahat"
+        other: "%{count} sahata"
       x_days:
         one:   "1 dan"
         other: "%{count} dana"
@@ -198,8 +198,6 @@ bs:
   mail_subject_reminder: "%{count} aktivnost(i) u kašnjenju u narednim %{days} danima"
   mail_body_reminder: "%{count} aktivnost(i) koje su dodjeljenje vama u narednim %{days} danima:"
 
-  gui_validation_error: 1 greška
-  gui_validation_error_plural: "%{count} grešaka"
 
   field_name: Ime
   field_description: Opis
@@ -357,7 +355,6 @@ bs:
   permission_edit_own_time_entries: Ispravka svog utroška vremena
   permission_manage_news: Upravljaj novostima
   permission_comment_news: Komentiraj novosti
-  permission_manage_documents: Upravljaj dokumentima
   permission_view_documents: Pregled dokumenata
   permission_manage_files: Upravljaj fajlovima
   permission_view_files: Pregled fajlova
@@ -477,8 +474,6 @@ bs:
   label_text: Dugi tekst
   label_attribute: Atribut
   label_attribute_plural: Atributi
-  label_download: "%{count} download"
-  label_download_plural: "%{count} download-i"
   label_no_data: Nema podataka za prikaz
   label_change_status: Promjeni status
   label_history: Istorija
@@ -578,8 +573,6 @@ bs:
   label_repository: Repozitorij
   label_repository_plural: Repozitoriji
   label_browse: Listaj
-  label_modification: "%{count} promjena"
-  label_modification_plural: "%{count} promjene"
   label_revision: Revizija
   label_revision_plural: Revizije
   label_associated_revisions: Doddjeljene revizije
@@ -946,7 +939,6 @@ bs:
   label_principal_search: "Search for user or group:"
   label_user_search: "Search for user:"
   field_visible: Visible
-  setting_emails_header: Emails header
   setting_commit_logtime_activity_id: Activity for logged time
   text_time_logged_by_changeset: Applied in changeset %{value}.
   setting_commit_logtime_enabled: Enable time logging
@@ -987,8 +979,6 @@ bs:
   text_scm_command: Command
   text_scm_command_version: Version
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1095,3 +1085,19 @@ bs:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Ukupno
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
+  setting_emails_header: Email header

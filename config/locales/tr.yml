@@ -56,8 +56,8 @@ tr:
         one: 'yaklaşık 1 saat'
         other: 'yaklaşık %{count} saat'
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 saat"
+        other: "%{count} saat"
       x_days:
         one: '1 gün'
         other: '%{count} gün'
@@ -204,8 +204,6 @@ tr:
   mail_subject_account_activation_request: "%{value} hesabı etkinleştirme isteği"
   mail_body_account_activation_request: "Yeni bir kullanıcı (%{value}) kaydedildi. Hesap onaylanmayı bekliyor:"
 
-  gui_validation_error: 1 hata
-  gui_validation_error_plural: "%{count} hata"
 
   field_name: İsim
   field_description: Yorum
@@ -414,8 +412,6 @@ tr:
   label_text: Uzun Metin
   label_attribute: Nitelik
   label_attribute_plural: Nitelikler
-  label_download: "%{count} indirme"
-  label_download_plural: "%{count} indirme"
   label_no_data: Gösterilecek veri yok
   label_change_status: Değişim Durumu
   label_history: Geçmiş
@@ -515,8 +511,6 @@ tr:
   label_repository: Depo
   label_repository_plural: Depolar
   label_browse: Gözat
-  label_modification: "%{count} değişim"
-  label_modification_plural: "%{count} değişim"
   label_revision: Değişiklik
   label_revision_plural: Değişiklikler
   label_associated_revisions: Birleştirilmiş değişiklikler
@@ -779,7 +773,6 @@ tr:
   permission_comment_news: Haberlere yorum yapma
   permission_delete_messages: Mesaj silme
   permission_select_project_modules: Proje modüllerini seçme
-  permission_manage_documents: Belgeleri yönetme
   permission_edit_wiki_pages: Wiki sayfalarını düzenleme
   permission_add_issue_watchers: Takipçi ekleme
   permission_view_gantt: İş-Zaman çizelgesi görme
@@ -993,8 +986,6 @@ tr:
   text_scm_command: Komut
   text_scm_command_version: Sürüm
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1101,3 +1092,18 @@ tr:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Toplam
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.

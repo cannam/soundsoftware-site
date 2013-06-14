@@ -44,8 +44,8 @@
         one: "rundt 1 time"
         other: "rundt %{count} timer"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 time"
+        other: "%{count} timer"
       x_days:
         one: "1 dag"
         other: "%{count} dager"
@@ -174,8 +174,6 @@
   mail_subject_reminder: "%{count} sak(er) har frist de kommende %{days} dagene"
   mail_body_reminder: "%{count} sak(er) som er tildelt deg har frist de kommende %{days} dager:"
 
-  gui_validation_error: 1 feil
-  gui_validation_error_plural: "%{count} feil"
 
   field_name: Navn
   field_description: Beskrivelse
@@ -386,8 +384,6 @@
   label_text: Lang tekst
   label_attribute: Attributt
   label_attribute_plural: Attributter
-  label_download: "%{count} Nedlasting"
-  label_download_plural: "%{count} Nedlastinger"
   label_no_data: Ingen data å vise
   label_change_status: Endre status
   label_history: Historikk
@@ -487,8 +483,6 @@
   label_repository: Depot
   label_repository_plural: Depoter
   label_browse: Utforsk
-  label_modification: "%{count} endring"
-  label_modification_plural: "%{count} endringer"
   label_revision: Revisjon
   label_revision_plural: Revisjoner
   label_associated_revisions: Assosierte revisjoner
@@ -745,7 +739,6 @@
   permission_comment_news: Kommentere nyheter
   permission_delete_messages: Slette meldinger
   permission_select_project_modules: Velge prosjektmoduler
-  permission_manage_documents: Administrere dokumenter
   permission_edit_wiki_pages: Redigere wiki-sider
   permission_add_issue_watchers: Legge til overvåkere
   permission_view_gantt: Vise gantt-diagram
@@ -1072,3 +1065,16 @@
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Totalt

@@ -117,8 +117,10 @@ ru:
         many:  "около %{count} часов"
         other: "около %{count} часа"
       x_hours:
-        one:   "1 час"
-        other: "%{count} часов"
+        one:   "%{count} час"
+        few:   "%{count} часа"
+        many:  "%{count} часов"
+        other: "%{count} часа"
       x_days:
         one:   "%{count} день"
         few:   "%{count} дня"
@@ -145,7 +147,7 @@ ru:
         many:  "больше %{count} лет"
         other: "больше %{count} лет"
       almost_x_years:
-        one:   "почти 1 год"
+        one:   "почти %{count} год"
         few:   "почти %{count} года"
         many:  "почти %{count} лет"
         other: "почти %{count} года"
@@ -399,11 +401,6 @@ ru:
   general_text_yes: 'да'
   general_text_Yes: 'Да'
 
-  gui_validation_error: 1 ошибка
-  gui_validation_error_plural: "%{count} ошибок"
-  gui_validation_error_plural2: "%{count} ошибки"
-  gui_validation_error_plural5: "%{count} ошибок"
-
   label_activity: Действия
   label_add_another_file: Добавить ещё один файл
   label_added_time_by: "Добавил(а) %{author} %{age} назад"
@@ -490,10 +487,6 @@ ru:
   label_document_added: Добавлен документ
   label_document_new: Новый документ
   label_document_plural: Документы
-  label_download: "%{count} загрузка"
-  label_download_plural: "%{count} скачиваний"
-  label_download_plural2: "%{count} загрузки"
-  label_download_plural5: "%{count} загрузок"
   label_downloads_abbr: Скачиваний
   label_duplicated_by: дублируется
   label_duplicates: дублирует
@@ -576,10 +569,6 @@ ru:
   label_message_posted: Добавлено сообщение
   label_me: мне
   label_min_max_length: Минимальная - максимальная длина
-  label_modification: "%{count} изменение"
-  label_modification_plural: "%{count} изменений"
-  label_modification_plural2: "%{count} изменения"
-  label_modification_plural5: "%{count} изменений"
   label_modified: изменено
   label_module_plural: Модули
   label_months_from: месяцев(ца) с
@@ -825,7 +814,6 @@ ru:
   permission_manage_project_activities: Управление типами действий для проекта
   permission_manage_boards: Управление форумами
   permission_manage_categories: Управление категориями задач
-  permission_manage_documents: Управление документами
   permission_manage_files: Управление файлами
   permission_manage_issue_relations: Управление связыванием задач
   permission_manage_members: Управление участниками
@@ -1123,11 +1111,10 @@ ru:
   error_attachment_too_big: Этот файл нельзя загрузить из-за превышения максимального размера файла (%{max_size})
   notice_failed_to_save_time_entries: "Невозможно сохранить %{count} затраченное время для %{total} выбранных: %{ids}."
   label_x_issues:
-    zero:  0 Задач
-    one:   1 Задача
-    few:   "%{count} Задач"
-    many:  "%{count} Задач"
-    other: "%{count} Задач"
+    one:   "%{count} задача"
+    few:   "%{count} задачи"
+    many:  "%{count} задач"
+    other: "%{count} Задачи"
   label_repository_new: Новое хранилище
   field_repository_is_default: Хранилище по умолчанию
   label_copy_attachments: Копировать вложения
@@ -1185,13 +1172,29 @@ ru:
   permission_set_notes_private: Размещение приватных комментариев
   label_no_issues_in_project: нет задач в проекте
   label_any: все
-  label_last_n_weeks: последние %{count} недель
+  label_last_n_weeks:
+    one:   "последняя %{count} неделя"
+    few:   "последние %{count} недели"
+    many:  "последние %{count} недель"
+    other: "последние %{count} недели"
   setting_cross_project_subtasks: Разрешить подзадачи в между проектами
   label_cross_project_descendants: С подпроектами
   label_cross_project_tree: С деревом проектов
   label_cross_project_hierarchy: С иерархией проектов
   label_cross_project_system: Со всеми проектами
   button_hide: Скрыть
-  setting_non_working_week_days: Не рабочие дни
+  setting_non_working_week_days: Нерабочие дни
   label_in_the_next_days: в средующие дни
   label_in_the_past_days: в прошлые дни
+  label_attribute_of_user: Пользователь %{name}
+  text_turning_multiple_off: Если отключить множественные значения, лишние значения из списка будут удалены, чтобы осталось только по одному значению.
+  label_attribute_of_issue: Задача %{name}
+  permission_add_documents: Добавить документы
+  permission_edit_documents: Редактировать документы
+  permission_delete_documents: Удалить документы
+  label_gantt_progress_line: Линия прогресса
+  setting_jsonp_enabled: Поддержка JSONP
+  field_inherit_members: Наследовать участников
+  field_closed_on: Закрыта
+  setting_default_projects_tracker_ids: Трекеры по умолчанию для новых проектов
+  label_total_time: Общее время

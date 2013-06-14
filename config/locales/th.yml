@@ -180,8 +180,6 @@ th:
   mail_subject_account_activation_request: "กรุณาเปิดบัญชี %{value}"
   mail_body_account_activation_request: "ผู้ใช้ใหม่ (%{value}) ได้ลงทะเบียน. บัญชีของเขากำลังรออนุมัติ:"
 
-  gui_validation_error: 1 ข้อผิดพลาด
-  gui_validation_error_plural: "%{count} ข้อผิดพลาด"
 
   field_name: ชื่อ
   field_description: รายละเอียด
@@ -392,8 +390,6 @@ th:
   label_text: ข้อความขนาดยาว
   label_attribute: คุณลักษณะ
   label_attribute_plural: คุณลักษณะ
-  label_download: "%{count} ดาวน์โหลด"
-  label_download_plural: "%{count} ดาวน์โหลด"
   label_no_data: จำนวนข้อมูลที่แสดง
   label_change_status: เปลี่ยนสถานะ
   label_history: ประวัติ
@@ -493,8 +489,6 @@ th:
   label_repository: ที่เก็บต้นฉบับ
   label_repository_plural: ที่เก็บต้นฉบับ
   label_browse: เปิดหา
-  label_modification: "%{count} เปลี่ยนแปลง"
-  label_modification_plural: "%{count} เปลี่ยนแปลง"
   label_revision: การแก้ไข
   label_revision_plural: การแก้ไข
   label_associated_revisions: การแก้ไขที่เกี่ยวข้อง
@@ -755,7 +749,6 @@ th:
   permission_comment_news: Comment news
   permission_delete_messages: Delete messages
   permission_select_project_modules: Select project modules
-  permission_manage_documents: Manage documents
   permission_edit_wiki_pages: Edit wiki pages
   permission_add_issue_watchers: Add watchers
   permission_view_gantt: View gantt chart
@@ -930,7 +923,6 @@ th:
   label_principal_search: "Search for user or group:"
   label_user_search: "Search for user:"
   field_visible: Visible
-  setting_emails_header: Emails header
   setting_commit_logtime_activity_id: Activity for logged time
   text_time_logged_by_changeset: Applied in changeset %{value}.
   setting_commit_logtime_enabled: Enable time logging
@@ -971,8 +963,6 @@ th:
   text_scm_command: Command
   text_scm_command_version: Version
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1079,3 +1069,19 @@ th:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: จำนวนรวม
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
+  setting_emails_header: Email header

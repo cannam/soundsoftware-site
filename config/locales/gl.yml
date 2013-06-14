@@ -91,8 +91,8 @@ gl:
         one: 'aproximadamente unha hora'
         other: '%{count} horas'
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 hora"
+        other: "%{count} horas"
       x_days:
         one: '1 día'
         other: '%{count} días'
@@ -320,8 +320,6 @@ gl:
   general_text_Yes: 'Si'
   general_text_no: 'non'
   general_text_yes: 'si'
-  gui_validation_error: 1 erro
-  gui_validation_error_plural: "%{count} erros"
   label_activity: Actividade
   label_add_another_file: Engadir outro arquivo
   label_add_note: Engadir unha nota
@@ -414,8 +412,6 @@ gl:
   label_document_added: Documento engadido
   label_document_new: Novo documento
   label_document_plural: Documentos
-  label_download: "%{count} Descarga"
-  label_download_plural: "%{count} Descargas"
   label_downloads_abbr: D/L
   label_duplicated_by: duplicada por
   label_duplicates: duplicada de
@@ -495,8 +491,6 @@ gl:
   label_message_plural: Mensaxes
   label_message_posted: Mensaxe engadida
   label_min_max_length: Lonxitude mín - máx
-  label_modification: "%{count} modificación"
-  label_modification_plural: "%{count} modificacións"
   label_modified: modificado
   label_module_plural: Módulos
   label_month: Mes
@@ -695,7 +689,6 @@ gl:
   permission_log_time: Anotar tempo dedicado
   permission_manage_boards: Administrar foros
   permission_manage_categories: Administrar categorías de peticións
-  permission_manage_documents: Administrar documentos
   permission_manage_files: Administrar arquivos
   permission_manage_issue_relations: Administrar relación con outras peticións
   permission_manage_members: Administrar membros
@@ -944,7 +937,6 @@ gl:
   label_principal_search: "Search for user or group:"
   label_user_search: "Search for user:"
   field_visible: Visible
-  setting_emails_header: Emails header
   setting_commit_logtime_activity_id: Activity for logged time
   text_time_logged_by_changeset: Applied in changeset %{value}.
   setting_commit_logtime_enabled: Enable time logging
@@ -985,8 +977,6 @@ gl:
   text_scm_command: Command
   text_scm_command_version: Version
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1093,3 +1083,19 @@ gl:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Total
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
+  setting_emails_header: Email header

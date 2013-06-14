@@ -176,7 +176,7 @@ ja:
   notice_account_invalid_creditentials: ユーザー名もしくはパスワードが無効です
   notice_account_password_updated: パスワードが更新されました。
   notice_account_wrong_password: パスワードが違います
-  notice_account_register_done: アカウントが作成されました。
+  notice_account_register_done: アカウントが作成されました。有効にするには送信したメールにあるリンクをクリックしてください。
   notice_account_unknown_email: ユーザーが存在しません。
   notice_can_t_change_password: このアカウントでは外部認証を使っています。パスワードは変更できません。
   notice_account_lost_email_sent: 新しいパスワードのメールを送信しました。
@@ -238,8 +238,6 @@ ja:
   mail_subject_wiki_content_updated: "Wikiページ %{id} が更新されました"
   mail_body_wiki_content_updated: "%{author} によってWikiページ %{id} が更新されました。"
 
-  gui_validation_error: 1件のエラー
-  gui_validation_error_plural: "%{count}件のエラー"
 
   field_name: 名称
   field_description: 説明
@@ -403,6 +401,7 @@ ja:
   setting_commit_logtime_enabled: コミット時に作業時間を記録する
   setting_commit_logtime_activity_id: 作業時間の作業分類
   setting_gantt_items_limit: ガントチャート最大表示項目数
+  setting_default_projects_tracker_ids: 新規プロジェクトにおいてデフォルトで有効になるトラッカー
 
   permission_add_project: プロジェクトの追加
   permission_add_subprojects: サブプロジェクトの追加
@@ -434,7 +433,6 @@ ja:
   permission_manage_project_activities: 作業分類 (時間トラッキング) の管理
   permission_manage_news: ニュースの管理
   permission_comment_news: ニュースへのコメント
-  permission_manage_documents: 文書の管理
   permission_view_documents: 文書の閲覧
   permission_manage_files: ファイルの管理
   permission_view_files: ファイルの閲覧
@@ -450,7 +448,7 @@ ja:
   permission_manage_repository: リポジトリの管理
   permission_browse_repository: リポジトリの閲覧
   permission_view_changesets: 更新履歴の閲覧
-  permission_commit_access: コミットの閲覧
+  permission_commit_access: コミット権限
   permission_manage_boards: フォーラムの管理
   permission_view_messages: メッセージの閲覧
   permission_add_messages: メッセージの追加
@@ -561,8 +559,6 @@ ja:
   label_text: 長いテキスト
   label_attribute: 属性
   label_attribute_plural: 属性
-  label_download: "%{count}ダウンロード"
-  label_download_plural: "%{count}ダウンロード"
   label_no_data: 表示するデータがありません
   label_change_status: ステータスの変更
   label_history: 履歴
@@ -667,8 +663,6 @@ ja:
   label_repository: リポジトリ
   label_repository_plural: リポジトリ
   label_browse: ブラウズ
-  label_modification: "%{count}点の変更"
-  label_modification_plural: "%{count}点の変更"
   label_branch: ブランチ
   label_tag: タグ
   label_revision: リビジョン
@@ -841,6 +835,7 @@ ja:
   label_git_report_last_commit: ファイルとディレクトリの最新コミットを表示する
   label_parent_revision: 親
   label_child_revision: 子
+  label_gantt_progress_line: イナズマ線
 
   button_login: ログイン
   button_submit: 送信
@@ -863,7 +858,7 @@ ja:
   button_unlock: アンロック
   button_download: ダウンロード
   button_list: 一覧
-  button_view: 見る
+  button_view: 表示
   button_move: 移動
   button_move_and_follow: 移動後表示
   button_back: 戻る
@@ -911,9 +906,9 @@ ja:
   text_journal_set_to: "%{label} を %{value} にセット"
   text_journal_deleted: "%{label} を削除 (%{old})"
   text_journal_added: "%{label} %{value} を追加"
-  text_tip_issue_begin_day: この日に開始するタスク
-  text_tip_issue_end_day: この日に終了するタスク
-  text_tip_issue_begin_end_day: この日のうちに開始して終了するタスク
+  text_tip_issue_begin_day: この日に開始するチケット
+  text_tip_issue_end_day: この日に終了するチケット
+  text_tip_issue_begin_end_day: この日に開始・終了するチケット
   text_caracters_maximum: "最大%{count}文字です。"
   text_caracters_minimum: "最低%{count}文字の長さが必要です"
   text_length_between: "長さは%{min}から%{max}文字までです。"
@@ -1048,7 +1043,7 @@ ja:
   label_copy_attachments: 添付ファイルをコピー
   label_item_position: "%{position}/%{count}"
   label_completed_versions: 完了したバージョン
-  text_project_identifier_info: アルファベット小文字(a-z)・数字・ハイフン・アンダースコアが使えます。<br />識別子は後で変更することはできません。
+  text_project_identifier_info: アルファベット小文字(a-z)・数字・ハイフン・アンダースコアが使えます。最初の文字はアルファベットの小文字にしてください。<br />識別子は後で変更することはできません。
   field_multiple: 複数選択可
   setting_commit_cross_project_ref: 異なるプロジェクトのチケットの参照/修正を許可
   text_issue_conflict_resolution_add_notes: 自分の編集内容を破棄し注記のみ追加
@@ -1112,3 +1107,13 @@ ja:
   setting_non_working_week_days: 休業日
   label_in_the_next_days: 今後○日
   label_in_the_past_days: 過去○日
+  label_attribute_of_user: ユーザーの %{name}
+  text_turning_multiple_off: この設定を無効にすると、複数選択されている値のうち1個だけが保持され残りは選択解除されます。
+  label_attribute_of_issue: チケットの %{name}
+  permission_add_documents: 文書の追加
+  permission_edit_documents: 文書の編集
+  permission_delete_documents: 文書の削除
+  setting_jsonp_enabled: JSONPを有効にする
+  field_inherit_members: メンバーを継承
+  field_closed_on: 終了日
+  label_total_time: 合計

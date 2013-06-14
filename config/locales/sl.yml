@@ -50,8 +50,8 @@ sl:
         one:   "okrog 1. ure"
         other: "okrog %{count} ur"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 ura"
+        other: "%{count} ur"
       x_days:
         one:   "1 dan"
         other: "%{count} dni"
@@ -184,8 +184,6 @@ sl:
   mail_subject_reminder: "%{count} zahtevek(zahtevki) zapadejo v naslednjih %{days} dneh"
   mail_body_reminder: "%{count} zahtevek(zahtevki), ki so vam dodeljeni bodo zapadli v naslednjih %{days} dneh:"
 
-  gui_validation_error: 1 napaka
-  gui_validation_error_plural: "%{count} napak"
 
   field_name: Ime
   field_description: Opis
@@ -335,7 +333,6 @@ sl:
   permission_edit_own_time_entries: Uredi beležko lastnega časa
   permission_manage_news: Uredi novice
   permission_comment_news: Komentiraj novice
-  permission_manage_documents: Uredi dokumente
   permission_view_documents: Poglej dokumente
   permission_manage_files: Uredi datoteke
   permission_view_files: Poglej datoteke
@@ -453,8 +450,6 @@ sl:
   label_text: Dolgo besedilo
   label_attribute: Lastnost
   label_attribute_plural: Lastnosti
-  label_download: "%{count} Prenos"
-  label_download_plural: "%{count} Prenosi"
   label_no_data: Ni podatkov za prikaz
   label_change_status: Spremeni stanje
   label_history: Zgodovina
@@ -554,8 +549,6 @@ sl:
   label_repository: Shramba
   label_repository_plural: Shrambe
   label_browse: Prebrskaj
-  label_modification: "%{count} sprememba"
-  label_modification_plural: "%{count} spremembe"
   label_revision: Revizija
   label_revision_plural: Revizije
   label_associated_revisions: Povezane revizije
@@ -1082,3 +1075,16 @@ sl:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Skupaj

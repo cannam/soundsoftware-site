@@ -122,8 +122,8 @@ pt-BR:
     errors:
       template:
         header:
-          one: "model não pode ser salvo: 1 erro"
-          other: "model não pode ser salvo: %{count} erros."
+          one: "modelo não pode ser salvo: 1 erro"
+          other: "modelo não pode ser salvo: %{count} erros."
         body: "Por favor, verifique os seguintes campos:"
       messages:
         inclusion: "não está incluso na lista"
@@ -134,7 +134,7 @@ pt-BR:
         empty: "não pode ficar vazio"
         blank: "não pode ficar vazio"
         too_long: "é muito longo (máximo: %{count} caracteres)"
-        too_short: "é muito curto (mínimon: %{count} caracteres)"
+        too_short: "é muito curto (mínimo: %{count} caracteres)"
         wrong_length: "deve ter %{count} caracteres"
         taken: "não está disponível"
         not_a_number: "não é um número"
@@ -206,8 +206,6 @@ pt-BR:
   mail_subject_reminder: "%{count} tarefa(s) com data prevista para os próximos %{days} dias"
   mail_body_reminder: "%{count} tarefa(s) para você com data prevista para os próximos %{days} dias:"
 
-  gui_validation_error: 1 erro
-  gui_validation_error_plural: "%{count} erros"
 
   field_name: Nome
   field_description: Descrição
@@ -425,8 +423,6 @@ pt-BR:
   label_text: Texto longo
   label_attribute: Atributo
   label_attribute_plural: Atributos
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloads"
   label_no_data: Nenhuma informação disponível
   label_change_status: Alterar situação
   label_history: Histórico
@@ -526,8 +522,6 @@ pt-BR:
   label_repository: Repositório
   label_repository_plural: Repositórios
   label_browse: Procurar
-  label_modification: "%{count} alteração"
-  label_modification_plural: "%{count} alterações"
   label_revision: Revisão
   label_revision_plural: Revisões
   label_associated_revisions: Revisões associadas
@@ -780,7 +774,6 @@ pt-BR:
   permission_comment_news: Comentar notícias
   permission_delete_messages: Excluir mensagens
   permission_select_project_modules: Selecionar módulos de projeto
-  permission_manage_documents: Gerenciar documentos
   permission_edit_wiki_pages: Editar páginas wiki
   permission_add_issue_watchers: Adicionar observadores
   permission_view_gantt: Ver gráfico gantt
@@ -887,12 +880,12 @@ pt-BR:
   label_copy_source: Origem
   setting_issue_done_ratio: Calcular o percentual de conclusão da tarefa
   setting_issue_done_ratio_issue_status: Usar a situação da tarefa
-  error_issue_done_ratios_not_updated: O pecentual de conclusão das tarefas não foi atualizado.
+  error_issue_done_ratios_not_updated: O percentual de conclusão das tarefas não foi atualizado.
   error_workflow_copy_target: Por favor, selecione os tipos de tarefa e os papéis alvo
   setting_issue_done_ratio_issue_field: Use o campo da tarefa
   label_copy_same_as_target: Mesmo alvo
   label_copy_target: Alvo
-  notice_issue_done_ratios_updated: Percentual de conslusão atualizados.
+  notice_issue_done_ratios_updated: Percentual de conclusão atualizados.
   error_workflow_copy_source: Por favor, selecione um tipo de tarefa e papel de origem
   label_update_issue_done_ratios: Atualizar percentual de conclusão das tarefas
   setting_start_of_week: Início da semana
@@ -905,7 +898,7 @@ pt-BR:
   label_api_access_key_created_on: Chave de acesso a API criado a %{value} atrás
   label_feeds_access_key: Chave de acesso ao RSS
   notice_api_access_key_reseted: Sua chave de acesso a API foi redefinida.
-  setting_rest_api_enabled: Habilitar REST web service
+  setting_rest_api_enabled: Habilitar a api REST
   label_missing_api_access_key: Chave de acesso a API faltando
   label_missing_feeds_access_key: Chave de acesso ao RSS faltando
   text_line_separated: Múltiplos valores permitidos (uma linha para cada valor).
@@ -923,7 +916,7 @@ pt-BR:
   permission_manage_project_activities: Gerenciar atividades do projeto
   error_unable_delete_issue_status: Não foi possível excluir situação da tarefa
   label_profile: Perfil
-  permission_manage_subtasks: Gerenciar subtarefas
+  permission_manage_subtasks: Gerenciar sub-tarefas
   field_parent_issue: Tarefa pai
   label_subtask_plural: Subtarefas
   label_project_copy_notifications: Enviar notificações por e-mail ao copiar projeto
@@ -1071,7 +1064,7 @@ pt-BR:
   notice_user_successful_create: Usuário %{id} criado.
   field_core_fields: campos padrão
   field_timeout: Tempo de espera (em segundos)
-  setting_thumbnails_enabled: exibir miniaturas de anexos
+  setting_thumbnails_enabled: Exibir miniaturas de anexos
   setting_thumbnails_size: Tamanho das miniaturas (em pixels)
   label_status_transitions: Estados das transições
   label_fields_permissions: Permissões de campos
@@ -1090,16 +1083,28 @@ pt-BR:
   label_any_issues_not_in_project: todas as questões que não estão em projeto
   field_private_notes: notas privadas
   permission_view_private_notes: Ver notas privadas
-  permission_set_notes_private: Defina notas como privada
+  permission_set_notes_private: Permitir alterar notas para privada
   label_no_issues_in_project: sem problemas em projeto
   label_any: todos
   label_last_n_weeks: "últimas %{count} semanas"
-  setting_cross_project_subtasks: Permitir cruzamento de sub-tarefas entre projetos 
-  label_cross_project_descendants: Com sub-projetos
-  label_cross_project_tree: Com a árvore do projeto
-  label_cross_project_hierarchy: Com a hierarquia do projeto
-  label_cross_project_system: Com todos os projetos
+  setting_cross_project_subtasks: Permitir cruzamento de sub-tarefas entre projetos
+  label_cross_project_descendants: com sub-Projetos
+  label_cross_project_tree: Com uma Árvore fazer o Projeto
+  label_cross_project_hierarchy: Com uma hierarquia fazer o Projeto
+  label_cross_project_system: Com de Todos os Projetos
   button_hide: Esconder
   setting_non_working_week_days: dias não úteis
   label_in_the_next_days: na próxima
   label_in_the_past_days: no passado
+  label_attribute_of_user: Usuário %{name}
+  text_turning_multiple_off: Se você desativar vários valores, vários valores serão removidas, a fim de preservar a somente um valor por item.
+  label_attribute_of_issue: Emissão de %{name}
+  permission_add_documents: Adicionar documentos
+  permission_edit_documents: Editar documentos
+  permission_delete_documents: excluir documentos
+  label_gantt_progress_line: Linha de progresso
+  setting_jsonp_enabled: Ativar suporte JSONP
+  field_inherit_members: Herdar membros
+  field_closed_on: Fechado
+  setting_default_projects_tracker_ids: Tipos padrões para novos projeto
+  label_total_time: Total

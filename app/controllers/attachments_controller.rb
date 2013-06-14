@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -91,15 +91,17 @@ class AttachmentsController < ApplicationController
     @attachment = Attachment.new(:file => request.raw_post)
     @attachment.author = User.current
     @attachment.filename = params[:filename].presence || Redmine::Utils.random_hex(16)
+    saved = @attachment.save
 
-    if @attachment.save
-      respond_to do |format|
-        format.api { render :action => 'upload', :status => :created }
-      end
-    else
-      respond_to do |format|
-        format.api { render_validation_errors(@attachment) }
-      end
+    respond_to do |format|
+      format.js
+      format.api {
+        if saved
+          render :action => 'upload', :status => :created
+        else
+          render_validation_errors(@attachment)
+        end
+      }
     end
   end
 
@@ -107,9 +109,17 @@ class AttachmentsController < ApplicationController
     if @attachment.container.respond_to?(:init_journal)
       @attachment.container.init_journal(User.current)
     end
-    # Make sure association callbacks are called
-    @attachment.container.attachments.delete(@attachment)
-    redirect_to_referer_or project_path(@project)
+    if @attachment.container
+      # Make sure association callbacks are called
+      @attachment.container.attachments.delete(@attachment)
+    else
+      @attachment.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to_referer_or project_path(@project) }
+      format.js
+    end
   end
 
   def toggle_active
@@ -132,7 +142,12 @@ private
 
   # Checks that the file exists and is readable
   def file_readable
-    @attachment.readable? ? true : render_404
+    if @attachment.readable?
+      true
+    else
+      logger.error "Cannot send attachment, #{@attachment.diskfile} does not exist or is unreadable."
+      render_404
+    end
   end
 
   def read_authorize

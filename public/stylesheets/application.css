@@ -213,7 +213,7 @@ table.permissions td.role {color:#999;font-size:90%;font-weight:normal !importan
 tr.wiki-page-version td.updated_on, tr.wiki-page-version td.author {text-align:center;}
 
 tr.time-entry { text-align: center; white-space: nowrap; }
-tr.time-entry td.subject, tr.time-entry td.comments { text-align: left; white-space: normal; }
+tr.time-entry td.issue, tr.time-entry td.comments { text-align: left; white-space: normal; }
 td.hours { text-align: right; font-weight: bold; padding-right: 0.5em; }
 td.hours .hours-dec { font-size: 0.9em; }
 
@@ -275,7 +275,7 @@ div.institutions h3 { background: url(../images/group.png) no-repeat 0% 50%; pad
 #watchers ul {margin: 0;  padding: 0;}
 #watchers li {list-style-type:none;margin: 0px 2px 0px 0px; padding: 0px 0px 0px 0px;}
 #watchers select {width: 95%; display: block;}
-#watchers a.delete {opacity: 0.4;}
+#watchers a.delete {opacity: 0.4; vertical-align: middle;}
 #watchers a.delete:hover {opacity: 1;}
 #watchers img.gravatar {margin: 0 4px 2px 0;}
 
@@ -347,8 +347,8 @@ div.issue table.attributes td {width:28%;}
 #relations td.buttons {padding:0;}
 
 fieldset.collapsible { border-width: 1px 0 0 0; font-size: 0.9em; }
-fieldset.collapsible legend { padding-left: 16px; background: url(../images/arrow_expanded.png) no-repeat 0% 40%; cursor:pointer; }
-fieldset.collapsible.collapsed legend { background-image: url(../images/arrow_collapsed.png); }
+fieldset.collapsible>legend { padding-left: 16px; background: url(../images/arrow_expanded.png) no-repeat 0% 40%; cursor:pointer; }
+fieldset.collapsible.collapsed>legend { background-image: url(../images/arrow_collapsed.png); }
 
 fieldset#date-range p { margin: 2px 0 2px 0; }
 fieldset#filters table { border-collapse: collapse; }
@@ -383,6 +383,8 @@ div#activity dt .time, div#news dt .time, .projects .latest .time, .projects .bu
 div#activity dd .description, #search-results dd .description { font-style: italic; }
 div#activity span.project:after, div#news span.project:after, #search-results span.project:after { content: " -"; }
 div#activity dd span.description, #search-results dd span.description { display:block; color: #808080; }
+div#activity dt.grouped {margin-left:5em;}
+div#activity dd.grouped {margin-left:9em;}
 
 div#members dl { margin-left: 2em; }
 div#members dd { margin-bottom: 1em; padding-left: 18px; font-size: 0.9em; }
@@ -496,10 +498,11 @@ table.fields_permissions td.readonly {background:#ddd;}
 table.fields_permissions td.required {background:#d88;}
 
 textarea#custom_field_possible_values {width: 99%}
+textarea#custom_field_default_value {width: 99%}
+
 input#content_comments {width: 99%}
 
-.pagination {font-size: 90%}
-p.pagination {margin-top:8px;}
+p.pagination {margin-top:8px; font-size: 90%}
 
 /***** Tabular forms ******/
 .tabular p{
@@ -581,11 +584,18 @@ fieldset#notified_events .parent { padding-left: 20px; }
 span.required {color: #bb0000;}
 .summary {font-style: italic;}
 
-#attachments_fields input.description {margin-left: 8px; width:340px;}
+#attachments_fields input.description {margin-left:4px; width:340px;}
 #attachments_fields span {display:block; white-space:nowrap;}
 #attachments_fields input[type=text] {margin-left: 8px; }
 
-#attachments_fields img {vertical-align: middle;}
+#attachments_fields input.filename {border:0; height:1.8em; width:250px; color:#555; background-color:inherit; background:url(../images/attachment.png) no-repeat 1px 50%; padding-left:18px;}
+#attachments_fields .ajax-waiting input.filename {background:url(../images/hourglass.png) no-repeat 0px 50%;}
+#attachments_fields .ajax-loading input.filename {background:url(../images/loading.gif) no-repeat 0px 50%;}
+#attachments_fields div.ui-progressbar { width: 100px; height:14px; margin: 2px 0 -5px 8px; display: inline-block; }
+a.remove-upload {background: url(../images/delete.png) no-repeat 1px 50%; width:1px; display:inline-block; padding-left:16px;}
+a.remove-upload:hover {text-decoration:none !important;}
+
+div.fileover { background-color: lavender; }
 
 div.attachments { margin-top: 12px; }
 div.attachments p { margin:4px 0 2px 0; }
@@ -607,29 +617,29 @@ em.info.error {padding-left:20px; background:url(../images/exclamation.png) no-r
 
 textarea.text_cf {width:90%;}
 
-/* Project members tab */
-div#tab-content-members .splitcontentleft, div#tab-content-memberships .splitcontentleft, div#tab-content-users .splitcontentleft { width: 64% }
-div#tab-content-members .splitcontentright, div#tab-content-memberships .splitcontentright, div#tab-content-users .splitcontentright { width: 34% }
-div#tab-content-members fieldset, div#tab-content-memberships fieldset, div#tab-content-users fieldset { padding:1em; margin-bottom: 1em; }
-div#tab-content-members fieldset legend, div#tab-content-memberships fieldset legend, div#tab-content-users fieldset legend { font-weight: bold; }
-div#tab-content-members fieldset label, div#tab-content-memberships fieldset label, div#tab-content-users fieldset label { display: block; }
-div#tab-content-members fieldset div, div#tab-content-users fieldset div { max-height: 400px; overflow:auto; }
+#tab-content-modules fieldset p {margin:3px 0 4px 0;}
+
+#tab-content-members .splitcontentleft, #tab-content-memberships .splitcontentleft, #tab-content-users .splitcontentleft {width: 64%;}
+#tab-content-members .splitcontentright, #tab-content-memberships .splitcontentright, #tab-content-users .splitcontentright {width: 34%;}
+#tab-content-members fieldset, #tab-content-memberships fieldset, #tab-content-users fieldset {padding:1em; margin-bottom: 1em;}
+#tab-content-members fieldset legend, #tab-content-memberships fieldset legend, #tab-content-users fieldset legend {font-weight: bold;}
+#tab-content-members fieldset label, #tab-content-memberships fieldset label, #tab-content-users fieldset label {display: block;}
+#tab-content-members #principals, #tab-content-users #principals {max-height: 400px; overflow: auto;}
 
 #users_for_watcher {height: 200px; overflow:auto;}
 #users_for_watcher label {display: block;}
 
 table.members td.group { padding-left: 20px; background: url(../images/group.png) no-repeat 0% 50%; }
 
-input#principal_search, input#user_search {width:100%}
-input#principal_search, input#user_search {
-  background: url(../images/magnifier.png) no-repeat 2px 50%; padding-left:20px;
-  border:1px solid #9EB1C2; border-radius:3px; height:1.5em; width:95%;
+input#principal_search, input#user_search {width:90%}
+
+input.autocomplete {
+  background: #fff url(../images/magnifier.png) no-repeat 2px 50%; padding-left:20px;
+  border:1px solid #9EB1C2; border-radius:2px; height:1.5em;
 }
-input#principal_search.ajax-loading, input#user_search.ajax-loading {
+input.autocomplete.ajax-loading {
   background-image: url(../images/loading.gif);
 }
-
-* html div#tab-content-members fieldset div { height: 450px; }
 
 /***** Flash & error messages ****/
 #errorExplanation, div.flash, .nodata, .warning, .conflict {
@@ -752,7 +762,7 @@ table.progress td { height: 1em; }
 table.progress td.closed { background: #BAE0BA none repeat scroll 0%; }
 table.progress td.done { background: #D3EDD3 none repeat scroll 0%; }
 table.progress td.todo { background: #eee none repeat scroll 0%; }
-p.pourcent {font-size: 80%;}
+p.percent {font-size: 80%;}
 p.progress-info {clear: left; font-size: 80%; margin-top:-4px; color:#777;}
 
 #roadmap table.progress td { height: 1.2em; }
@@ -1183,13 +1193,13 @@ h2 img { vertical-align:middle; }
 .syntaxhl .type { color:#339; font-weight:bold }
 .syntaxhl .value { color: #088; }
 .syntaxhl .variable  { color:#037 }
- 
+
 .syntaxhl .insert { background: hsla(120,100%,50%,0.12) }
 .syntaxhl .delete { background: hsla(0,100%,50%,0.12) }
 .syntaxhl .change { color: #bbf; background: #007; }
 .syntaxhl .head { color: #f8f; background: #505 }
 .syntaxhl .head .filename { color: white; }
- 
+
 .syntaxhl .delete .eyecatcher { background-color: hsla(0,100%,50%,0.2); border: 1px solid hsla(0,100%,45%,0.5); margin: -1px; border-bottom: none; border-top-left-radius: 5px; border-top-right-radius: 5px; }
 .syntaxhl .insert .eyecatcher { background-color: hsla(120,100%,50%,0.2); border: 1px solid hsla(120,100%,25%,0.5); margin: -1px; border-top: none; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; }
 

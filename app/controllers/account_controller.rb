@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -25,7 +25,9 @@ class AccountController < ApplicationController
   # Login request and validation
   def login
     if request.get?
-      logout_user
+      if User.current.logged?
+        redirect_to home_url
+      end
     else
       authenticate_user
     end
@@ -36,15 +38,20 @@ class AccountController < ApplicationController
 
   # Log out current user and redirect to welcome page
   def logout
-    logout_user
-    redirect_to home_url
+    if User.current.anonymous?
+      redirect_to home_url
+    elsif request.post?
+      logout_user
+      redirect_to home_url
+    end
+    # display the logout form
   end
 
   # Lets user choose a new password
   def lost_password
-    redirect_to(home_url) && return unless Setting.lost_password?
+    (redirect_to(home_url); return) unless Setting.lost_password?
     if params[:token]
-      @token = Token.find_by_action_and_value("recovery", params[:token].to_s)
+      @token = Token.find_token("recovery", params[:token].to_s)
       if @token.nil? || @token.expired?
         redirect_to home_url
         return
@@ -92,11 +99,11 @@ class AccountController < ApplicationController
 
   # User self-registration
   def register
-    redirect_to(home_url) && return unless Setting.self_registration? || session[:auth_source_registration]
+    (redirect_to(home_url); return) unless Setting.self_registration? || session[:auth_source_registration]
 
     if request.get?
       session[:auth_source_registration] = nil
-      @user = User.new(:language => Setting.default_language)
+      @user = User.new(:language => current_language.to_s)
 
       @ssamr_user_details = SsamrUserDetail.new
 
@@ -116,7 +123,7 @@ class AccountController < ApplicationController
           session[:auth_source_registration] = nil
           self.logged_user = @user
           flash[:notice] = l(:notice_account_activated)
-          redirect_to :controller => 'my', :action => 'account'
+          redirect_to my_account_path
         end
       else
         @user.login = params[:user][:login]
@@ -145,11 +152,11 @@ class AccountController < ApplicationController
 
   # Token based account activation
   def activate
-    redirect_to(home_url) && return unless Setting.self_registration? && params[:token]
-    token = Token.find_by_action_and_value('register', params[:token])
-    redirect_to(home_url) && return unless token and !token.expired?
+    (redirect_to(home_url); return) unless Setting.self_registration? && params[:token].present?
+    token = Token.find_token('register', params[:token].to_s)
+    (redirect_to(home_url); return) unless token and !token.expired?
     user = token.user
-    redirect_to(home_url) && return unless user.registered?
+    (redirect_to(home_url); return) unless user.registered?
     user.activate
     if user.save
       token.destroy
@@ -182,12 +189,14 @@ class AccountController < ApplicationController
   end
 
   def open_id_authenticate(openid_url)
-    authenticate_with_open_id(openid_url, :required => [:nickname, :fullname, :email], :return_to => signin_url, :method => :post) do |result, identity_url, registration|
+    back_url = signin_url(:autologin => params[:autologin])
+
+    authenticate_with_open_id(openid_url, :required => [:nickname, :fullname, :email], :return_to => back_url, :method => :post) do |result, identity_url, registration|
       if result.successful?
         user = User.find_or_initialize_by_identity_url(identity_url)
         if user.new_record?
           # Self-registration off
-          redirect_to(home_url) && return unless Setting.self_registration?
+          (redirect_to(home_url); return) unless Setting.self_registration?
 
           # Create on the fly
           user.login = registration['nickname'] unless registration['nickname'].nil?
@@ -231,12 +240,11 @@ class AccountController < ApplicationController
       set_autologin_cookie(user)
     end
     call_hook(:controller_account_success_authentication_after, {:user => user })
-    redirect_back_or_default :controller => 'my', :action => 'page'
+    redirect_back_or_default my_page_path
   end
 
   def set_autologin_cookie(user)
     token = Token.create(:user => user, :action => 'autologin')
-    cookie_name = Redmine::Configuration['autologin_cookie_name'] || 'autologin'
     cookie_options = {
       :value => token.value,
       :expires => 1.year.from_now,
@@ -244,7 +252,7 @@ class AccountController < ApplicationController
       :secure => (Redmine::Configuration['autologin_cookie_secure'] ? true : false),
       :httponly => true
     }
-    cookies[cookie_name] = cookie_options
+    cookies[autologin_cookie_name] = cookie_options
   end
 
   # Onthefly creation failed, display the registration form to fill/fix attributes
@@ -283,7 +291,7 @@ class AccountController < ApplicationController
     if user.save
       self.logged_user = user
       flash[:notice] = l(:notice_account_activated)
-      redirect_to :controller => 'my', :action => 'account'
+      redirect_to my_account_path
     else
       yield if block_given?
     end

@@ -52,8 +52,8 @@ da:
         one:  "cirka en time"
         other: "cirka %{count} timer"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 time"
+        other: "%{count} timer"
       x_days:
         one:  "en dag"
         other: "%{count} dage"
@@ -197,8 +197,6 @@ da:
   mail_subject_account_activation_request: "%{value} kontoaktivering"
   mail_body_account_activation_request: "En ny bruger (%{value}) er registreret. Godkend venligst kontoen:"
 
-  gui_validation_error: 1 fejl
-  gui_validation_error_plural: "%{count} fejl"
 
   field_name: Navn
   field_description: Beskrivelse
@@ -401,8 +399,6 @@ da:
   label_text: Lang tekst
   label_attribute: Attribut
   label_attribute_plural: Attributter
-  label_download: "%{count} Download"
-  label_download_plural: "%{count} Downloads"
   label_no_data: Ingen data at vise
   label_change_status: Ændringsstatus
   label_history: Historik
@@ -502,8 +498,6 @@ da:
   label_repository: Repository
   label_repository_plural: Repositories
   label_browse: Gennemse
-  label_modification: "%{count} ændring"
-  label_modification_plural: "%{count} ændringer"
   label_revision: Revision
   label_revision_plural: Revisioner
   label_associated_revisions: Tilknyttede revisioner
@@ -760,7 +754,6 @@ da:
   field_parent_title: Siden over
   text_email_delivery_not_configured: "Email-afsendelse er ikke indstillet og notifikationer er defor slået fra.\nKonfigurér din SMTP server i config/configuration.yml og genstart applikationen for at aktivere email-afsendelse."
   permission_protect_wiki_pages: Beskyt wiki sider
-  permission_manage_documents: Administrér dokumenter
   permission_add_issue_watchers: Tilføj overvågere
   warning_attachments_not_saved: "der var %{count} fil(er), som ikke kunne gemmes."
   permission_comment_news: Kommentér nyheder
@@ -949,7 +942,6 @@ da:
   label_principal_search: "Søg efter bruger eller gruppe:"
   label_user_search: "Søg efter bruger:"
   field_visible: Synlig
-  setting_emails_header: Emails header
   setting_commit_logtime_activity_id: Aktivitet for registreret tid
   text_time_logged_by_changeset: Anvendt i changeset %{value}.
   setting_commit_logtime_enabled: Aktiver tidsregistrering
@@ -991,8 +983,6 @@ da:
   text_scm_command: Command
   text_scm_command_version: Version
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1099,3 +1089,19 @@ da:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Total
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
+  setting_emails_header: Email header

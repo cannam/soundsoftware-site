@@ -51,8 +51,8 @@ mn:
         one:   "1 цаг орчим"
         other: "ойролцоогоор %{count} цаг"
       x_hours:
-        one:   "1 hour"
-        other: "%{count} hours"
+        one:   "1 цаг"
+        other: "%{count} цаг"
       x_days:
         one:   "1 өдөр"
         other: "%{count} өдөр"
@@ -200,8 +200,6 @@ mn:
   mail_subject_wiki_content_updated: "'%{id}' wiki page has been updated"
   mail_body_wiki_content_updated: "The '%{id}' wiki page has been updated by %{author}."
 
-  gui_validation_error: 1 алдаа
-  gui_validation_error_plural: "%{count} алдаа"
 
   field_name: Нэр
   field_description: Тайлбар
@@ -376,7 +374,6 @@ mn:
   permission_edit_own_time_entries: Өөрийн хугацааны логуудыг засварлах
   permission_manage_news: Мэдээ мэдээллүүд
   permission_comment_news: Мэдээнд тайлбар үлдээх
-  permission_manage_documents: Бичиг баримтууд
   permission_view_documents: Бичиг баримтуудыг харах
   permission_manage_files: Файлууд
   permission_view_files: Файлуудыг харах
@@ -498,8 +495,6 @@ mn:
   label_text: Урт текст
   label_attribute: Аттрибут
   label_attribute_plural: Аттрибутууд
-  label_download: "%{count} Татаж авсан зүйл"
-  label_download_plural: "%{count} Татаж авсан зүйлс"
   label_no_data: Үзүүлэх өгөгдөл байхгүй байна
   label_change_status: Төлвийг өөрчлөх
   label_history: Түүх
@@ -602,8 +597,6 @@ mn:
   label_repository: Репозитори
   label_repository_plural: Репозиторууд
   label_browse: Үзэх
-  label_modification: "%{count} өөрчлөлт"
-  label_modification_plural: "%{count} өөрчлөлтүүд"
   label_branch: Салбар
   label_tag: Шошго
   label_revision: Хувилбар
@@ -934,7 +927,6 @@ mn:
   label_principal_search: "Search for user or group:"
   label_user_search: "Search for user:"
   field_visible: Visible
-  setting_emails_header: Emails header
   setting_commit_logtime_activity_id: Activity for logged time
   text_time_logged_by_changeset: Applied in changeset %{value}.
   setting_commit_logtime_enabled: Enable time logging
@@ -975,8 +967,6 @@ mn:
   text_scm_command: Command
   text_scm_command_version: Version
   label_git_report_last_commit: Report last commit for files and directories
-  text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
-  text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
   notice_issue_successful_create: Issue %{id} created.
   label_between: between
   setting_issue_group_assignment: Allow issue assignment to groups
@@ -1083,3 +1073,19 @@ mn:
   setting_non_working_week_days: Non-working days
   label_in_the_next_days: in the next
   label_in_the_past_days: in the past
+  label_attribute_of_user: User's %{name}
+  text_turning_multiple_off: If you disable multiple values, multiple values will be
+    removed in order to preserve only one value per item.
+  label_attribute_of_issue: Issue's %{name}
+  permission_add_documents: Add documents
+  permission_edit_documents: Edit documents
+  permission_delete_documents: Delete documents
+  label_gantt_progress_line: Progress line
+  setting_jsonp_enabled: Enable JSONP support
+  field_inherit_members: Inherit members
+  field_closed_on: Closed
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Нийт
+  text_scm_config: You can configure your SCM commands in config/configuration.yml. Please restart the application after editing it.
+  text_scm_command_not_available: SCM command is not available. Please check settings on the administration panel.
+  setting_emails_header: Email header

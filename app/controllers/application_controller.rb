@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2013  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -22,6 +22,9 @@ class Unauthorized < Exception; end
 
 class ApplicationController < ActionController::Base
   include Redmine::I18n
+  include Redmine::Pagination
+  include RoutesHelper
+  helper :routes
 
   class_attribute :accept_api_auth_actions
   class_attribute :accept_rss_auth_actions
@@ -32,7 +35,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   def handle_unverified_request
     super
-    cookies.delete(:autologin)
+    cookies.delete(autologin_cookie_name)
   end
 
   before_filter :session_expiration, :user_setup, :check_if_login_required, :set_localization
@@ -124,10 +127,14 @@ class ApplicationController < ActionController::Base
     user
   end
 
+  def autologin_cookie_name
+    Redmine::Configuration['autologin_cookie_name'].presence || 'autologin'
+  end
+
   def try_to_autologin
-    if cookies[:autologin] && Setting.autologin?
+    if cookies[autologin_cookie_name] && Setting.autologin?
       # auto-login feature starts a new session
-      user = User.try_to_autologin(cookies[:autologin])
+      user = User.try_to_autologin(cookies[autologin_cookie_name])
       if user
         reset_session
         start_user_session(user)
@@ -150,7 +157,7 @@ class ApplicationController < ActionController::Base
   # Logs out current user
   def logout_user
     if User.current.logged?
-      cookies.delete :autologin
+      cookies.delete(autologin_cookie_name)
       Token.delete_all(["user_id = ? AND action = ?", User.current.id, 'autologin'])
       self.logged_user = nil
     end
@@ -298,6 +305,16 @@ class ApplicationController < ActionController::Base
     @project = @projects.first if @projects.size == 1
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def find_attachments
+    if (attachments = params[:attachments]).present?
+      att = attachments.values.collect do |attachment|
+        Attachment.find_by_token( attachment[:token] ) if attachment[:token].present?
+      end
+      att.compact!
+    end
+    @attachments = att || []
   end
 
   # make sure that the user is a member of the project (or admin) if project is private
