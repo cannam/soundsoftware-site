@@ -610,8 +610,9 @@ module ApplicationHelper
 
   def parse_inline_attachments(text, project, obj, attr, only_path, options)
     # when using an image link, try to use an attachment, if possible
-    if options[:attachments] || (obj && obj.respond_to?(:attachments))
-      attachments = options[:attachments] || obj.attachments
+    attachments = options[:attachments] || []
+    attachments += obj.attachments if obj.respond_to?(:attachments)
+    if attachments.present?
       text.gsub!(/src="([^\/"]+\.(bmp|gif|jpg|jpe|jpeg|png))"(\s+alt="([^"]*)")?/i) do |m|
         filename, ext, alt, alttext = $1.downcase, $2, $3, $4
         # search for the picture in attachments
@@ -716,10 +717,11 @@ module ApplicationHelper
   #     identifier:document:"Some document"
   #     identifier:version:1.0.0
   #     identifier:source:some/file
-  def parse_redmine_links(text, project, obj, attr, only_path, options)
-    text.gsub!(%r{([\s\(,\-\[\>]|^)(!)?(([a-z0-9\-_]+):)?(attachment|document|version|forum|news|message|project|commit|source|export)?(((#)|((([a-z0-9\-]+)\|)?(r)))((\d+)((#note)?-(\d+))?)|(:)([^"\s<>][^\s<>]*?|"[^"]+?"))(?=(?=[[:punct:]][^A-Za-z0-9_/])|,|\s|\]|<|$)}) do |m|
+  def parse_redmine_links(text, default_project, obj, attr, only_path, options)
+    text.gsub!(%r{([\s\(,\-\[\>]|^)(!)?(([a-z0-9\-_]+):)?(attachment|document|version|forum|news|message|project|commit|source|export)?(((#)|((([a-z0-9\-_]+)\|)?(r)))((\d+)((#note)?-(\d+))?)|(:)([^"\s<>][^\s<>]*?|"[^"]+?"))(?=(?=[[:punct:]][^A-Za-z0-9_/])|,|\s|\]|<|$)}) do |m|
       leading, esc, project_prefix, project_identifier, prefix, repo_prefix, repo_identifier, sep, identifier, comment_suffix, comment_id = $1, $2, $3, $4, $5, $10, $11, $8 || $12 || $18, $14 || $19, $15, $17
       link = nil
+      project = default_project
       if project_identifier
         project = Project.visible.find_by_identifier(project_identifier)
       end
@@ -805,7 +807,7 @@ module ApplicationHelper
           when 'commit', 'source', 'export'
             if project
               repository = nil
-              if name =~ %r{^(([a-z0-9\-]+)\|)(.+)$}
+              if name =~ %r{^(([a-z0-9\-_]+)\|)(.+)$}
                 repo_prefix, repo_identifier, name = $1, $2, $3
                 repository = project.repositories.detect {|repo| repo.identifier == repo_identifier}
               else
@@ -832,7 +834,7 @@ module ApplicationHelper
             end
           when 'attachment'
             attachments = options[:attachments] || (obj && obj.respond_to?(:attachments) ? obj.attachments : nil)
-            if attachments && attachment = attachments.detect {|a| a.filename == name }
+            if attachments && attachment = Attachment.latest_attach(attachments, name)
               link = link_to h(attachment.filename), {:only_path => only_path, :controller => 'attachments', :action => 'download', :id => attachment},
                                                      :class => 'attachment'
             end

@@ -29,12 +29,9 @@ tmp/thumbnails/*
 vendor/cache
 vendor/rails
 *.rbc
-
-.svn/
 .git/
 *~
 public/themes/soundsoftware/stylesheets/fonts/*
-
 .bundle
 Gemfile.lock
 Gemfile.local
