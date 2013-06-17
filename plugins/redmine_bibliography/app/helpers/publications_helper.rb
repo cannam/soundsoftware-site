@@ -93,7 +93,7 @@ module PublicationsHelper
       s << "<br /><em>#{authorship.institution}</em></p>"
     end
 
-    s
+    s.html_safe
   end
 
   def render_projects_list(publication, show_delete_icon)
@@ -118,7 +118,7 @@ module PublicationsHelper
       s << "<br />"
     end
 
-    s
+    s.html_safe
   end
 
   def print_ieee_format(publication)
