@@ -27,7 +27,13 @@ module Checkout
         })
       
         options = {:partial => "redmine_checkout_hooks/view_repositories_show_contextual"}
-        context[:controller].send(:render_to_string, {:locals => context}.merge(options))
+
+        # cc: cribbed from
+        # http://www.redmine.org/projects/redmine/repository/revisions/9785/diff/trunk/lib/redmine/hook.rb
+        # for http://www.redmine.org/issues/11105 (formerly used
+        # render_to_string on this controller, wasn't working for
+        # :header_tags)
+        context[:hook_caller].send(:render, {:locals => context}.merge(options))
       end
     end
   end
