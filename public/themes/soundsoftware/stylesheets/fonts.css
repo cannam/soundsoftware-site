@@ -30,3 +30,11 @@
     src: url('fonts/24BC35_0_0.eot');
     src: url('fonts/24BC35_0_0.eot?#iefix') format('embedded-opentype'), url('fonts/24BC35_0_0.woff') format('woff'), url('fonts/24BC35_0_0.ttf') format('truetype');
 }
+
+@font-face {
+    font-family: 'SourceCodePro-Regular';
+    font-weight: normal;
+    font-style: normal;
+    src: url('fonts/SourceCodePro-Regular-webfont.eot');
+    src: url('fonts/SourceCodePro-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/SourceCodePro-Regular-webfont.woff') format('woff'), url('fonts/SourceCodePro-Regular-webfont.ttf') format('truetype');
+}

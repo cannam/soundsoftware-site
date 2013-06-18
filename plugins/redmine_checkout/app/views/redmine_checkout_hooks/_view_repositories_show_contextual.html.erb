@@ -16,9 +16,9 @@
     <p>
     <% if User.current.logged? %>
       <% if repository.is_external? %>
-      <%=l :label_access_type_all, :type => l(:label_access_read_only) %>
+      <%= (l :label_access_type_all, :type => l(:label_access_read_only)).html_safe %>
       <% else %>
-      <% if default_protocol %><%=l :label_access_type, :type => l(default_protocol.access_label(User.current)) %><% end %>
+      <% if default_protocol %><%= (l :label_access_type, :type => l(default_protocol.access_label(User.current))).html_safe %><% end %>
       <% end %>
     <% else %>
       &nbsp;
@@ -35,7 +35,7 @@
   <% if repository.is_external? %>
     <div style="clear: left">
     </div>
-    <p class="topline" style="padding-top: 1em"><%= l(:text_repository_external, :location => repository.external_url) %></p>
+    <p class="topline" style="padding-top: 1em"><%= (l(:text_repository_external, :location => repository.external_url)).html_safe %></p>
   <% end %>
 </div>
 <div style="clear: left"></div>
