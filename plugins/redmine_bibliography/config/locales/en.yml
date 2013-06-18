@@ -148,5 +148,6 @@ en:
   mail_subject_publication_added: "You have been added as an author to a new publication"
   mail_body_publication_added: "A new publication (%{publication}) has been added to the project '%{project}.'"
 
-
+  bibtex_link: "[B<small>IB</small>T<sub>E</sub>X]"
+  more_details_link: "[More Details]"
 
