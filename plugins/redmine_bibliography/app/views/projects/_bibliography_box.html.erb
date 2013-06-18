@@ -15,9 +15,9 @@
           <%= print_ieee_format(publication) %>
        </dt>
        <dd>
-         <%= link_to("[More Details]", {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%>
+         <%= link_to(l("more_details_link"), {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%>
 
-         <%= link_to_function "[B<small>IB</small>T<sub>E</sub>X]", onclick="toggleBibtex(this)" -%>
+         <%= link_to l(:bibtex_link).html_safe, "javascript:void(0)", :class => "bibtex-link"-%>
        </dd>
        <dd class="bibtex-textarea collapsed" style="display: none;">
          <textarea readonly> <%= print_bibtex_format(publication) %> </textarea>
