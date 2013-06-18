@@ -16,8 +16,8 @@ en:
   label_protocol_plural: "Protocols"
   button_add_protocol: "Add Protocol"
 
-  label_access_type: 'You have <span id="checkout_access">{{type}}</span> access to this URL.'
-  label_access_type_all: 'All access to this URL is <span id="checkout_access">{{type}}</span>.'
+  label_access_type: 'You have <span id="checkout_access">%{type}</span> access to this URL.'
+  label_access_type_all: 'All access to this URL is <span id="checkout_access">%{type}</span>.'
   label_access_read_only: 'Read Only'
   label_access_read_write: "Read and Write"
   label_access_permission: "Depending on user's permissions"
@@ -36,8 +36,8 @@ en:
     supports back-references to braced expressions using the \1 notation.
   help_repository_checkout_protocols: |
     Leave the Checkout URL field empty to use the defined repository URL.
-  help_moved_settings: "The settings page has been moved to {{link}}."
+  help_moved_settings: "The settings page has been moved to %{link}."
   label_settings_location: "Administration -> Settings -> Checkout"
 
-  text_repository_external: "The primary repository for this project is hosted at <code>{{location}}</code> .<br>This repository is a read-only copy which is updated automatically every hour."
+  text_repository_external: "The primary repository for this project is hosted at <code>%{location}</code> .<br>This repository is a read-only copy which is updated automatically every hour."
 
