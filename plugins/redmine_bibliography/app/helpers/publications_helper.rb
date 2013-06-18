@@ -123,7 +123,7 @@ module PublicationsHelper
 
   def print_ieee_format(publication)
     Rails.cache.fetch("publication-#{publication.id}-ieee") do
-      publication.print_entry(:ieee)
+      publication.print_entry(:ieee).html_safe
     end
   end
 
