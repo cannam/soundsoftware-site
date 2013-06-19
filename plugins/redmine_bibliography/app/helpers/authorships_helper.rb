@@ -15,7 +15,7 @@ module AuthorshipsHelper
         s << link_to(authorship.name_on_paper, :controller => 'users', :action => 'show', :id => authorship.author.user)
       end
     end
-    s
+    s.html_safe
   end
 
 end
