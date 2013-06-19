@@ -27,7 +27,7 @@
 </ul>
 
 <%- if @publication.bibtex_entry != nil -%>
-  <%= show_bibtex_fields(@publication.bibtex_entry) %>
+  <%= show_bibtex_fields(@publication.bibtex_entry).html_safe -%>
 <%- end -%>
 
 <%- unless @publication.external_url.blank? -%>
