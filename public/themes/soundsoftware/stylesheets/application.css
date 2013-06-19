@@ -178,8 +178,14 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 
 #welcomepage {
     width: 80%;
-    margin-left: 71px;
+    margin-left: 10%;
     margin-top: 10px;
+}
+#welcomepage blockquote {
+    border: 0;
+    margin-top: 2em;
+    padding-left: 0;
+    margin-left: 0;
 }
 #welcomepage p, #welcomepage li {
     font-size: 1.2em;
