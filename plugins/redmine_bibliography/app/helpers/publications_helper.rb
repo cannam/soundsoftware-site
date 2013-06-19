@@ -18,7 +18,7 @@ module PublicationsHelper
       end
     end
 
-    s
+    s.html_safe
   end
 
 

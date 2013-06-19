@@ -7,6 +7,8 @@ RedmineApp::Application.routes.draw do
 
     match "publications/add_project/:id", :to => 'publications#add_project'
 
+    match "publications/autocomplete_for_project", :to => 'publications#autocomplete_for_project'
+
 
     resources :publications
 end
