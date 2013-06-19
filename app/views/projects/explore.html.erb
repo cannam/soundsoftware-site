@@ -4,6 +4,7 @@
 
 <div class="contextual">
     <%= link_to l(:label_project_all), { :controller => 'projects', :action => 'index' }%>
+    <%= ('| ' + link_to(l(:label_search_projects), { :controller => 'search', :action => 'index', :projects => 1 })).html_safe %>
     <%= ('| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add')).html_safe if User.current.allowed_to?(:add_project, nil, :global => true) %>
 </div>
 
@@ -19,12 +20,11 @@
 </div>
 
 <div class="threecolumnright">
-  <% cache(:action => 'explore', :action_suffix => 'mature_projects', :expires_in => 1.hour) do %>
   <div class="projects box">
-  <h3><%=l(:label_projects_mature)%></h3>
-    <%= render :partial => 'projects/mature' %>
+  <h3><%=l(:label_project_latest)%></h3>
+    <%= render :partial => 'projects/latest' %>
+    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
   </div>
-  <% end %>
 </div>
 
 <div class="threecolumnleft">
@@ -35,14 +35,6 @@
     <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
   </div>
   <% end %>
-</div>
-
-<div class="threecolumnright">
-  <div class="projects box">
-  <h3><%=l(:label_project_latest)%></h3>
-    <%= render :partial => 'projects/latest' %>
-    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
-  </div>
 </div>
 
 <div class="threecolumnmid">
