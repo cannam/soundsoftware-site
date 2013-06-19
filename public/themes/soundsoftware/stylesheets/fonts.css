@@ -6,7 +6,15 @@
     src: url('fonts/24BC0E_0_0.eot');
     src: url('fonts/24BC0E_0_0.eot?#iefix') format('embedded-opentype'), url('fonts/24BC0E_0_0.woff') format('woff'), url('fonts/24BC0E_0_0.ttf') format('truetype');
 }
- 
+
+@font-face {
+    font-family: 'Insider';
+    font-weight: normal;
+    font-style: italic;
+    src: url('fonts/276F6F_0_0.eot');
+    src: url('fonts/276F6F_0_0.eot?#iefix') format('embedded-opentype'), url('fonts/276F6F_0_0.woff') format('woff'), url('fonts/276F6F_0_0.ttf') format('truetype');
+}
+
 @font-face {
     font-family: 'Insider';
     font-weight: normal;
