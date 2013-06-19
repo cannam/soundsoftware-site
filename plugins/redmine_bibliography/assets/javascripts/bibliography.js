@@ -13,3 +13,6 @@ $("#publication_bibtex_entry_attributes_entry_type").live("change", function() {
 
     return false;
 });
+$(document).ready(function() {
+    $("#publication_bibtex_entry_attributes_entry_type").trigger('change');
+});
