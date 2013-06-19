@@ -5,6 +5,7 @@ RedmineApp::Application.routes.draw do
 
     match "authors/show/:id", :to => 'authors#show'
 
+    match "publications/add_project/:id", :to => 'publications#add_project'
 
 
     resources :publications
