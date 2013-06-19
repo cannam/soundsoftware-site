@@ -1166,3 +1166,5 @@ en:
   description_date_from: Enter start date
   description_date_to: Enter end date
   text_repository_identifier_info: 'Only lower case letters (a-z), numbers, dashes and underscores are allowed.<br />Once saved, the identifier cannot be changed.'
+
+  text_who_can_register: '<h3>Who can register here?</h3><p>You can register if you are a researcher in the audio and music field are you are:<ul><li>working in the UK,</li><li>working with UK researchers who are also using this site, <i>or</i></li><li>working on projects having an audience within the UK research community.</li></ul></p><p>Please ensure you provide enough information in the description below to establish which of these is the case.</p><p>(You do not need to register in order to download or use code from this site &mdash; only to host your own code here.)</p>'

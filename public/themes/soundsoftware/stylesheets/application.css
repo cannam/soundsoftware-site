@@ -176,6 +176,29 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 #top-menu a.administration { background-image: url(../images/wrench.png); }
 #top-menu a.help { background-image: url(../../../images/help.png); }
 
+#welcomepage {
+    width: 80%;
+    margin-left: 71px;
+    margin-top: 10px;
+}
+#welcomepage p, #welcomepage li {
+    font-size: 1.2em;
+    color: #3e442c;
+}
+#welcomepage p {
+    margin-left: 2em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+}
+
+div.flash.newsalert {
+  float: right;
+  width: 25%;
+  padding: 0px 10px 2px 24px;
+  margin: 1.2em 1em 1em 2em;
+  border-color: #dd0000;
+}
+
 /* for Javadoc in Embedded context: */
 
 .TableHeadingColor { background-color: #fdf7e4; color: #3e442c; border: 0px solid #fff; }

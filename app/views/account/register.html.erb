@@ -3,6 +3,8 @@
 
 <h2><%=l(:label_register)%> <%=link_to l(:label_login_with_open_id_option), signin_url if Setting.openid? %></h2>
 
+<%= l(:text_who_can_register).html_safe %>
+
 <%= labelled_form_for @user, :url => register_path do |f| %>
 <%= error_messages_for 'user' %>
 

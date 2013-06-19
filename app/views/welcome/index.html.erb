@@ -1,33 +1,16 @@
+
 <% if not Setting.notifications_text.empty? %>
-  <div class="notifications flash error">
-    <%= textilizable Setting.notifications_text %>
+  <div class="notifications flash newsalert">
+    <%= textilizable Setting.notifications_text %> 
   </div>
 <% end %>
 
-<h2><%= l(:label_home_heading) %></h2>
+<div id="welcomepage">
 
-<div class="splitcontentleft">
-  <%= textilizable Setting.welcome_text %>
+<%= textilizable Setting.welcome_text %>
+
+</div>
   
-  <%= call_hook(:view_welcome_index_left, :projects => @projects) %>
-</div>
-
-<div class="splitcontentright">
-  <% if @site_news.any? %>
-    <div class="news box">
-       <h3><%=l(:label_news_site_latest)%></h3>
-	<%= render :partial => 'news/news', :locals => { :project => @site_project }, :collection => @site_news %>
-	<%= link_to l(:label_news_more), { :controller => 'projects', :action => @site_project.identifier, :id => 'news' } %>
-  </div>
-  <% end %>
-  <div class="projects box">
-  <h3><%=l(:label_project_latest)%></h3>
-    <%= render :partial => 'projects/latest' %>
-    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
-  </div>
-    <%= call_hook(:view_welcome_index_right, :projects => @projects) %>
-</div>
-
 <% content_for :header_tags do %>
 <%= auto_discovery_link_tag(:atom, {:controller => 'news', :action => 'index', :key => User.current.rss_key, :format => 'atom'},
                                    :title => "#{Setting.app_title}: #{l(:label_news_latest)}") %>
