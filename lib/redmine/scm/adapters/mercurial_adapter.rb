@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require_dependency 'redmine/scm/adapters/abstract_adapter'
 require 'cgi'
 
 module Redmine
@@ -135,7 +135,7 @@ module Redmine
               output.force_encoding('UTF-8')
             end
             begin
-              @summary = ActiveSupport::XmlMini.parse(output)['rhsummary']
+              @summary = parse_xml(output)['rhsummary']
             rescue
             end
           end
@@ -151,7 +151,7 @@ module Redmine
               output.force_encoding('UTF-8')
             end
             begin
-              ActiveSupport::XmlMini.parse(output)['rhmanifest']['repository']['manifest']
+              parse_xml(output)['rhmanifest']['repository']['manifest']
             rescue
             end
           end
@@ -198,7 +198,7 @@ module Redmine
               output.force_encoding('UTF-8')
             end
             begin
-              ActiveSupport::XmlMini.parse("#{output}")['log']
+              parse_xml("#{output}")['log']
             rescue
             end
           end

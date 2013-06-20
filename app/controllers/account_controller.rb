@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -29,6 +29,9 @@ class AccountController < ApplicationController
     else
       authenticate_user
     end
+  rescue AuthSourceException => e
+    logger.error "An error occured when authenticating #{params[:username]}: #{e.message}"
+    render_error :message => e.message
   end
 
   # Log out current user and redirect to welcome page
@@ -37,19 +40,26 @@ class AccountController < ApplicationController
     redirect_to home_url
   end
 
-  # Enable user to choose a new password
+  # Lets user choose a new password
   def lost_password
     redirect_to(home_url) && return unless Setting.lost_password?
     if params[:token]
-      @token = Token.find_by_action_and_value("recovery", params[:token])
-      redirect_to(home_url) && return unless @token and !@token.expired?
+      @token = Token.find_by_action_and_value("recovery", params[:token].to_s)
+      if @token.nil? || @token.expired?
+        redirect_to home_url
+        return
+      end
       @user = @token.user
+      unless @user && @user.active?
+        redirect_to home_url
+        return
+      end
       if request.post?
         @user.password, @user.password_confirmation = params[:new_password], params[:new_password_confirmation]
         if @user.save
           @token.destroy
           flash[:notice] = l(:notice_account_password_updated)
-          redirect_to :action => 'login'
+          redirect_to signin_path
           return
         end
       end
@@ -57,17 +67,23 @@ class AccountController < ApplicationController
       return
     else
       if request.post?
-        user = User.find_by_mail(params[:mail])
-        # user not found in db
-        (flash.now[:error] = l(:notice_account_unknown_email); return) unless user
-        # user uses an external authentification
-        (flash.now[:error] = l(:notice_can_t_change_password); return) if user.auth_source_id
+        user = User.find_by_mail(params[:mail].to_s)
+        # user not found or not active
+        unless user && user.active?
+          flash.now[:error] = l(:notice_account_unknown_email)
+          return
+        end
+        # user cannot change its password
+        unless user.change_password_allowed?
+          flash.now[:error] = l(:notice_can_t_change_password)
+          return
+        end
         # create a new token for password recovery
         token = Token.new(:user => user, :action => "recovery")
         if token.save
-          Mailer.deliver_lost_password(token)
+          Mailer.lost_password(token).deliver
           flash[:notice] = l(:notice_account_lost_email_sent)
-          redirect_to :action => 'login'
+          redirect_to signin_path
           return
         end
       end
@@ -85,7 +101,9 @@ class AccountController < ApplicationController
       @ssamr_user_details = SsamrUserDetail.new
 
     else
-      @user = User.new(params[:user])
+      user_params = params[:user] || {}
+      @user = User.new
+      @user.safe_attributes = user_params
       @user.admin = false
                   
       @user.register
@@ -102,7 +120,9 @@ class AccountController < ApplicationController
         end
       else
         @user.login = params[:user][:login]
-        @user.password, @user.password_confirmation = params[:password], params[:password_confirmation]
+        unless user_params[:identity_url].present? && user_params[:password].blank? && user_params[:password_confirmation].blank?
+          @user.password, @user.password_confirmation = user_params[:password], user_params[:password_confirmation]
+        end
 
         @ssamr_user_details = SsamrUserDetail.new(params[:ssamr_user_details])
 
@@ -135,18 +155,10 @@ class AccountController < ApplicationController
       token.destroy
       flash[:notice] = l(:notice_account_activated)
     end
-    redirect_to :action => 'login'
+    redirect_to signin_path
   end
 
   private
-
-  def logout_user
-    if User.current.logged?
-      cookies.delete :autologin
-      Token.delete_all(["user_id = ? AND action = ?", User.current.id, 'autologin'])
-      self.logged_user = nil
-    end
-  end
 
   def authenticate_user
     if Setting.openid? && using_open_id?
@@ -170,7 +182,7 @@ class AccountController < ApplicationController
   end
 
   def open_id_authenticate(openid_url)
-    authenticate_with_open_id(openid_url, :required => [:nickname, :fullname, :email], :return_to => signin_url) do |result, identity_url, registration|
+    authenticate_with_open_id(openid_url, :required => [:nickname, :fullname, :email], :return_to => signin_url, :method => :post) do |result, identity_url, registration|
       if result.successful?
         user = User.find_or_initialize_by_identity_url(identity_url)
         if user.new_record?
@@ -211,6 +223,7 @@ class AccountController < ApplicationController
   end
 
   def successful_authentication(user)
+    logger.info "Successful authentication for '#{user.login}' from #{request.remote_ip} at #{Time.now.utc}"
     # Valid user
     self.logged_user = user
     # generate a key and set cookie if autologin
@@ -252,9 +265,9 @@ class AccountController < ApplicationController
   def register_by_email_activation(user, &block)
     token = Token.new(:user => user, :action => "register")
     if user.save and token.save
-      Mailer.deliver_register(token)
+      Mailer.register(token).deliver
       flash[:notice] = l(:notice_account_register_done)
-      redirect_to :action => 'login'
+      redirect_to signin_path
     else
       yield if block_given?
     end
@@ -285,7 +298,7 @@ class AccountController < ApplicationController
        @ssamr_user_details.save!
 
       # Sends an email to the administrators
-      Mailer.deliver_account_activation_request(user)
+      Mailer.account_activation_request(user).deliver
       account_pending
     else
       yield if block_given?
@@ -294,6 +307,6 @@ class AccountController < ApplicationController
 
   def account_pending
     flash[:notice] = l(:notice_account_pending)
-    redirect_to :action => 'login'
+    redirect_to signin_path
   end
 end

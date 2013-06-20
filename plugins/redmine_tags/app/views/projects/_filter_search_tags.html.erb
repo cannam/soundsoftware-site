@@ -1,0 +1,34 @@
+<div>
+  <p id="project_tags">
+    <%= label_tag 'tag_search', l(:tags_search).html_safe -%>
+    <%= text_field_tag 'tag_search', params[:tag_search] -%>
+    <br />
+  </p>
+
+  <div id="project_tag_candidates" class="autocomplete" style="margin-top: 0;"></div>
+
+  <%= stylesheet_link_tag 'jquery.tagit.css', :plugin => 'redmine_tags' %>
+  <%= stylesheet_link_tag 'redmine_tags', :plugin => 'redmine_tags' %>
+  <%= javascript_include_tag 'tag-it', :plugin => 'redmine_tags' %>
+
+  <%= javascript_tag "$('#tag_search').tagit({
+            tagSource: function(search, showChoices) {
+            var that = this;
+            $.ajax({
+              url: '#{url_for(:controller => 'auto_completes', :action => 'project_tags')}',
+              data: {q: search.term},
+              success: function(choices) {
+              showChoices(that._subtractArray(jQuery.parseJSON(choices), that.assignedTags()));
+            }
+          });
+        },
+    });
+" -%>
+
+</div>
+
+
+
+
+
+

@@ -1,5 +1,4 @@
 pt-BR:
-  # formatos de data e hora
   direction: ltr
   date:
     formats:
@@ -19,10 +18,10 @@ pt-BR:
 
   time:
     formats:
-      default: "%A, %d de %B de %Y, %H:%M hs"
-      time: "%H:%M hs"
-      short: "%d/%m, %H:%M hs"
-      long: "%A, %d de %B de %Y, %H:%M hs"
+      default: "%A, %d de %B de %Y, %H:%M h"
+      time: "%H:%M h"
+      short: "%d/%m, %H:%M h"
+      long: "%A, %d de %B de %Y, %H:%M h"
       only_second: "%S"
       datetime:
         formats:
@@ -53,6 +52,9 @@ pt-BR:
       about_x_hours:
         one: 'aproximadamente 1 hora'
         other: 'aproximadamente %{count} horas'
+      x_hours:
+        one:   "1 hora"
+        other: "%{count} horas"
 
       x_days:
         one: '1 dia'
@@ -74,8 +76,8 @@ pt-BR:
         one: 'mais de 1 ano'
         other: 'mais de %{count} anos'
       almost_x_years:
-        one:   "almost 1 year"
-        other: "almost %{count} years"
+        one:   "quase 1 ano"
+        other: "quase %{count} anos"
 
   # numeros
   number:
@@ -98,7 +100,7 @@ pt-BR:
         delimiter: '.'
     human:
       format:
-        precision: 1
+        precision: 3
         delimiter: '.'
       storage_units:
         format: "%n %u"
@@ -703,7 +705,6 @@ pt-BR:
   text_tip_issue_begin_day: tarefa inicia neste dia
   text_tip_issue_end_day: tarefa termina neste dia
   text_tip_issue_begin_end_day: tarefa inicia e termina neste dia
-  text_project_identifier_info: 'Letras minúsculas (a-z), números e hífens permitidos.<br />Uma vez salvo, o identificador não poderá ser alterado.'
   text_caracters_maximum: "máximo %{count} caracteres"
   text_caracters_minimum: "deve ter ao menos %{count} caracteres."
   text_length_between: "deve ter entre %{min} e %{max} caracteres."
@@ -888,7 +889,7 @@ pt-BR:
   setting_issue_done_ratio_issue_status: Usar a situação da tarefa
   error_issue_done_ratios_not_updated: O pecentual de conclusão das tarefas não foi atualizado.
   error_workflow_copy_target: Por favor, selecione os tipos de tarefa e os papéis alvo
-  setting_issue_done_ratio_issue_field: Use the issue field
+  setting_issue_done_ratio_issue_field: Use o campo da tarefa
   label_copy_same_as_target: Mesmo alvo
   label_copy_target: Alvo
   notice_issue_done_ratios_updated: Percentual de conslusão atualizados.
@@ -917,7 +918,6 @@ pt-BR:
   label_close_versions: Fechar versões concluídas
   label_board_sticky: Marcado
   label_board_locked: Travado
-  label_change_log: Registro de alterações
   permission_export_wiki_pages: Exportar páginas wiki
   setting_cache_formatted_text: Realizar cache de texto formatado
   permission_manage_project_activities: Gerenciar atividades do projeto
@@ -942,7 +942,6 @@ pt-BR:
   project_module_gantt: Gantt
   project_module_calendar: Calendário
   button_edit_associated_wikipage: "Editar página wiki relacionada: %{page_title}"
-  text_are_you_sure_with_children: Excluir a tarefa e suas subtarefas?
   field_text: Campo de texto
   label_user_mail_option_only_owner: Somente para as coisas que eu criei
   setting_default_notification_option: Opção padrão de notificação
@@ -996,13 +995,13 @@ pt-BR:
   label_git_report_last_commit: Relatar última alteração para arquivos e diretórios
   text_scm_config: Você pode configurar seus comandos de versionamento em config/configurations.yml. Por favor reinicie a aplicação após alterá-lo.
   text_scm_command_not_available: Comando de versionamento não disponível. Por favor verifique as configurações no painel de administração.
-  notice_issue_successful_create: Issue %{id} created.
-  label_between: between
-  setting_issue_group_assignment: Allow issue assignment to groups
+  notice_issue_successful_create: Tarefa %{id} criada.
+  label_between: entre
+  setting_issue_group_assignment: Permitir atribuições de tarefas a grupos
   label_diff: diff
-  text_git_repository_note: Repository is bare and local (e.g. /gitrepo, c:\gitrepo)
+  text_git_repository_note: "Repositório esta vazio e é local (ex: /gitrepo, c:\\gitrepo)"
 
-  description_query_sort_criteria_direction: Sort direction
+  description_query_sort_criteria_direction: Direção da ordenação
   description_project_scope: Escopo da pesquisa
   description_filter: Filtro
   description_user_mail_notification: Configuração de notificações por e-mail
@@ -1016,17 +1015,91 @@ pt-BR:
   description_date_range_list: Escolha um período a partira da lista
   description_choose_project: Projetos
   description_date_to: Digite a data final
-  description_query_sort_criteria_attribute: Sort attribute
+  description_query_sort_criteria_attribute: Atributo de ordenação
   description_wiki_subpages_reassign: Escolha uma nova página pai
   description_selected_columns: Colunas selecionadas
 
-  label_parent_revision: Parent
-  label_child_revision: Child
-  error_scm_annotate_big_text_file: The entry cannot be annotated, as it exceeds the maximum text file size.
+  label_parent_revision: Pais
+  label_child_revision: Filhos
+  error_scm_annotate_big_text_file: A entrada não pode ser anotada, pois excede o tamanho máximo do arquivo de texto.
   setting_default_issue_start_date_to_creation_date: Usar data corrente como data inicial para novas tarefas
-  button_edit_section: Edit this section
-  setting_repositories_encodings: Attachments and repositories encodings
-  description_all_columns: All Columns
-  button_export: Export
-  label_export_options: "%{export_format} export options"
-  error_attachment_too_big: This file cannot be uploaded because it exceeds the maximum allowed file size (%{max_size})
+  button_edit_section: Editar esta seção
+  setting_repositories_encodings: Encoding dos repositórios e anexos
+  description_all_columns: Todas as colunas
+  button_export: Exportar
+  label_export_options: "Opções de exportação %{export_format}"
+  error_attachment_too_big: Este arquivo não pode ser enviado porque excede o tamanho máximo permitido (%{max_size})
+  notice_failed_to_save_time_entries: "Falha ao salvar %{count} de %{total} horas trabalhadas: %{ids}."
+  label_x_issues:
+    zero:  0 tarefa
+    one:   1 tarefa
+    other: "%{count} tarefas"
+  label_repository_new: Novo repositório
+  field_repository_is_default: Repositório principal
+  label_copy_attachments: Copiar anexos
+  label_item_position: "%{position}/%{count}"
+  label_completed_versions: Versões completadas
+  text_project_identifier_info: Somente letras minúsculas (az), números, traços e sublinhados são permitidos. <br /> Uma vez salvo, o identificador não pode ser alterado.
+  field_multiple: Multiplos valores
+  setting_commit_cross_project_ref: Permitir que tarefas de todos os outros projetos sejam refenciadas e resolvidas
+  text_issue_conflict_resolution_add_notes: Adicione minhas anotações e descartar minhas outras mudanças
+  text_issue_conflict_resolution_overwrite: Aplicar as minhas alterações de qualquer maneira (notas anteriores serão mantidos, mas algumas mudanças podem ser substituídos)
+  notice_issue_update_conflict: A tarefa foi atualizada por um outro usuário, enquanto você estava editando.
+  text_issue_conflict_resolution_cancel: Descartar todas as minhas mudanças e re-exibir %{link}
+  permission_manage_related_issues: Gerenciar tarefas relacionadas
+  field_auth_source_ldap_filter: Filtro LDAP
+  label_search_for_watchers: Procurar por outros observadores para adiconar
+  notice_account_deleted: Sua conta foi excluída permanentemente.
+  setting_unsubscribe: Permitir aos usuários excluir sua conta própria
+  button_delete_my_account: Excluir minha conta
+  text_account_destroy_confirmation: |-
+    Tem certeza de que quer continuar?
+    Sua conta será excluída permanentemente, sem qualquer forma de reativá-lo.
+  error_session_expired: A sua sessão expirou. Por favor, faça login novamente.
+  text_session_expiration_settings: "Aviso: a alteração dessas configurações pode expirar as sessões atuais, incluindo a sua."
+  setting_session_lifetime: duração máxima da sessão
+  setting_session_timeout: tempo limite de inatividade da sessão
+  label_session_expiration: "Expiração da sessão"
+  permission_close_project: Fechar / reabrir o projeto
+  label_show_closed_projects: Visualização de projetos fechados
+  button_close: Fechar
+  button_reopen: Reabrir
+  project_status_active: ativo
+  project_status_closed: fechado
+  project_status_archived: arquivado
+  text_project_closed: Este projeto é fechado e somente leitura.
+  notice_user_successful_create: Usuário %{id} criado.
+  field_core_fields: campos padrão
+  field_timeout: Tempo de espera (em segundos)
+  setting_thumbnails_enabled: exibir miniaturas de anexos
+  setting_thumbnails_size: Tamanho das miniaturas (em pixels)
+  label_status_transitions: Estados das transições
+  label_fields_permissions: Permissões de campos
+  label_readonly: somente leitura
+  label_required: Obrigatório
+  text_repository_identifier_info: Somente letras minúsculas (az), números, traços e sublinhados são permitidos <br/> Uma vez salvo, o identificador não pode ser alterado.
+  field_board_parent: Fórum Pai
+  label_attribute_of_project: "Projeto %{name}"
+  label_attribute_of_author: "autor %{name}"
+  label_attribute_of_assigned_to: "atribuído %{name}"
+  label_attribute_of_fixed_version: "versão alvo %{name}"
+  label_copy_subtasks: Copiar sub-tarefas
+  label_copied_to: copiada
+  label_copied_from: copiado
+  label_any_issues_in_project: quaisquer problemas em projeto
+  label_any_issues_not_in_project: todas as questões que não estão em projeto
+  field_private_notes: notas privadas
+  permission_view_private_notes: Ver notas privadas
+  permission_set_notes_private: Defina notas como privada
+  label_no_issues_in_project: sem problemas em projeto
+  label_any: todos
+  label_last_n_weeks: "últimas %{count} semanas"
+  setting_cross_project_subtasks: Permitir cruzamento de sub-tarefas entre projetos 
+  label_cross_project_descendants: Com sub-projetos
+  label_cross_project_tree: Com a árvore do projeto
+  label_cross_project_hierarchy: Com a hierarquia do projeto
+  label_cross_project_system: Com todos os projetos
+  button_hide: Esconder
+  setting_non_working_week_days: dias não úteis
+  label_in_the_next_days: na próxima
+  label_in_the_past_days: no passado

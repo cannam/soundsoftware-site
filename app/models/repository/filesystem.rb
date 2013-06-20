@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # FileSystem adapter
 # File written by Paul Rivier, at Demotera.
@@ -18,18 +18,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/filesystem_adapter'
+require_dependency 'redmine/scm/adapters/filesystem_adapter'
 
 class Repository::Filesystem < Repository
   attr_protected :root_url
   validates_presence_of :url
 
-  def self.human_attribute_name(attribute_key_name)
-    attr_name = attribute_key_name
+  def self.human_attribute_name(attribute_key_name, *args)
+    attr_name = attribute_key_name.to_s
     if attr_name == "url"
       attr_name = "root_directory"
     end
-    super(attr_name)
+    super(attr_name, *args)
   end
 
   def self.scm_adapter_class
@@ -42,10 +42,6 @@ class Repository::Filesystem < Repository
 
   def supports_all_revisions?
     false
-  end
-
-  def entries(path=nil, identifier=nil)
-    scm.entries(path, identifier)
   end
 
   def fetch_changesets
