@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -55,10 +55,10 @@ class ActivitiesController < ApplicationController
       end
     end
 
-    if events.empty? || stale?(:etag => [@activity.scope, @date_to, @date_from, @with_subprojects, @author, @institution_name, events.first, User.current, current_language])
+    if events.empty? || stale?(:etag => [@activity.scope, @date_to, @date_from, @with_subprojects, @author, @institution_name, events.first, events.size, User.current, current_language])
       respond_to do |format|
         format.html {
-          @events_by_day = events.group_by(&:event_date)
+          @events_by_day = events.group_by {|event| User.current.time_to_date(event.event_datetime)}
           render :layout => false if request.xhr?
         }
         format.atom {

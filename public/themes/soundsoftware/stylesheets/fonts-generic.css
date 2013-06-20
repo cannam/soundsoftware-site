@@ -1,4 +1,4 @@
-@import url(fonts.css?2);
+@import url(fonts.css?3);
 
 h1, #project-ancestors-title, #top-menu a {
   font-family: Insider, 'Gill Sans', Tahoma, sans-serif;
@@ -21,4 +21,11 @@ h2,h3,h4,.wiki h1,.embedded h1 {
   font-weight: bold;
   line-height: 1.34;
 }
+
+code,pre,.code,.line-code,.embedded a.el {
+  font-family: 'SourceCodePro-Regular', monospace;
+  font-weight: normal;
+  font-size: 0.9em;
+}
+
 

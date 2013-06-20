@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mirrordir="/var/mirror"
-hg="/usr/local/bin/hg"
+hg="/usr/bin/hg"
 
 project="$1"
 local_repo="$2"

@@ -66,7 +66,7 @@
 
 
 require 'getoptlong'
-require 'rdoc/usage'
+#require 'rdoc/usage'
 require 'find'
 require 'etc'
 
@@ -115,6 +115,11 @@ def system_or_raise(command)
   raise "\"#{command}\" failed" unless system command
 end
 
+def usage
+  puts "See source code for supported options"
+  exit
+end
+
 module SCM
 
   module Subversion
@@ -158,7 +163,7 @@ begin
     when '--verbose';        $verbose += 1
     when '--test';           $test = true
     when '--version';        puts Version; exit
-    when '--help';           RDoc::usage
+    when '--help';           usage
     when '--quiet';          $quiet = true
     end
   end
@@ -182,7 +187,7 @@ end
 $svn_url += "/" if $svn_url and not $svn_url.match(/\/$/)
 
 if ($redmine_host.empty? or $repos_base.empty?)
-  RDoc::usage
+  usage
 end
 
 unless File.directory?($repos_base)
@@ -258,7 +263,7 @@ projects.each do |project|
   if project.identifier.empty?
     log("\tno identifier for project #{project.name}!")
     next
-  elsif not project.identifier.match(/^[a-z0-9\-]+$/)
+  elsif not project.identifier.match(/^[a-z0-9\-_]+$/)
     log("\tinvalid identifier for project #{project.name} : #{project.identifier}!");
     next;
   end

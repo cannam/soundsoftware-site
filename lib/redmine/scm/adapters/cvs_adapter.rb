@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require_dependency 'redmine/scm/adapters/abstract_adapter'
 
 module Redmine
   module Scm
@@ -222,8 +222,8 @@ module Redmine
                       :author  => author,
                       :message => commit_log.chomp,
                       :paths => [{
-                        :revision => revision,
-                        :branch   => revBranch,
+                        :revision => revision.dup,
+                        :branch   => revBranch.dup,
                         :path     => scm_iconv('UTF-8', @path_encoding, entry_path),
                         :name     => scm_iconv('UTF-8', @path_encoding, entry_name),
                         :kind     => 'file',

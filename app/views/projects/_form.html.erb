@@ -1,10 +1,10 @@
 <%= error_messages_for 'project' %>
 
-<div class="box">
+<div class="box tabular">
 <!--[form:project]-->
 <p><%= f.text_field :name, :required => true, :size => 60 %>
   <br />
-  <em> <%= l(:text_project_name_info) %></em>
+  <em class="info"> <%= l(:text_project_name_info).html_safe %></em>
 </p>
 
 <% unless @project.allowed_parents.compact.empty? %>
@@ -15,14 +15,14 @@
 <p><%= f.text_field :identifier, :required => true, :size => 60, :disabled => @project.identifier_frozen? %>
 <% unless @project.identifier_frozen? %>
   <br />
-  <em><%= l(:text_project_identifier_info) %></em>
+  <em class="info"><%= l(:text_length_between, :min => 1, :max => Project::IDENTIFIER_MAX_LENGTH) %> <%= l(:text_project_identifier_info).html_safe %></em>
 <% end %></p>
 <p><%= f.text_field :homepage, :size => 60 %>
 <br />
-  <em> <%= l(:text_project_homepage_info) %></em>
+  <em class="info"> <%= l(:text_project_homepage_info) %></em>
 </p>
 <p>
-<%= label(:project, :is_public_1, l(:field_public_or_private) + content_tag("span", " *", :class => "required")) %>
+<label for="project_is_public_1"><%= l(:field_public_or_private)%> <span class="required">*</span></label>
 <%
    # if the project hasn't been created fully yet, then we don't
    # want to set either public or private (make the user decide)
@@ -31,10 +31,10 @@
   <%= f.radio_button :is_public, 1, :checked => (initialised && @project.is_public?) %>
   <%= l(:text_project_public_info) %>
 <br />
-  <%= f.radio_button :is_public, 0, :checked => (initialised && !@project.is_public?) %> 
+  <%= f.radio_button :is_public, 0, :checked => (initialised && !@project.is_public?) %>
   <%= l(:text_project_private_info) %>
 <br>
-  <em><%= l(:text_project_visibility_info) %></em>
+  <em class="info"><%= l(:text_project_visibility_info) %></em>
 </p>
 <%= wikitoolbar_for 'project_description' %>
 
@@ -45,7 +45,7 @@
 </div>
 
 <% if @project.new_record? %>
-<fieldset class="box"><legend><%= l(:label_module_plural) %></legend>
+<fieldset class="box tabular"><legend><%= l(:label_module_plural) %></legend>
 <% Redmine::AccessControl.available_project_modules.each do |m| %>
     <label class="floating">
     <%= check_box_tag 'project[enabled_module_names][]', m, @project.module_enabled?(m), :id => "project_enabled_module_names_#{m}" %>
@@ -64,7 +64,7 @@
 <%= hidden_field_tag 'project[tracker_ids][]', '' %>
 <% elsif @project.module_enabled?('issue_tracking') %>
 <% unless @trackers.empty? %>
-<fieldset class="box" id="project_trackers"><legend><%=l(:label_tracker_plural)%></legend>
+<fieldset class="box tabular" id="project_trackers"><legend><%=l(:label_tracker_plural)%></legend>
 <% @trackers.each do |tracker| %>
     <label class="floating">
     <%= check_box_tag 'project[tracker_ids][]', tracker.id, @project.trackers.include?(tracker) %>
@@ -76,7 +76,7 @@
 <% end %>
 
 <% unless @issue_custom_fields.empty? %>
-<fieldset class="box" id="project_issue_custom_fields"><legend><%=l(:label_custom_field_plural)%></legend>
+<fieldset class="box tabular" id="project_issue_custom_fields"><legend><%=l(:label_custom_field_plural)%></legend>
 <% @issue_custom_fields.each do |custom_field| %>
     <label class="floating">
   <%= check_box_tag 'project[issue_custom_field_ids][]', custom_field.id, (@project.all_issue_custom_fields.include? custom_field), (custom_field.is_for_all? ? {:disabled => "disabled"} : {}) %>

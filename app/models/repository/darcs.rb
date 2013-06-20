@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -15,17 +15,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/darcs_adapter'
+require_dependency 'redmine/scm/adapters/darcs_adapter'
 
 class Repository::Darcs < Repository
   validates_presence_of :url, :log_encoding
 
-  def self.human_attribute_name(attribute_key_name)
-    attr_name = attribute_key_name
+  def self.human_attribute_name(attribute_key_name, *args)
+    attr_name = attribute_key_name.to_s
     if attr_name == "url"
       attr_name = "path_to_repository"
     end
-    super(attr_name)
+    super(attr_name, *args)
   end
 
   def self.scm_adapter_class
@@ -66,6 +66,7 @@ class Repository::Darcs < Repository
         end
       end
     end
+    load_entries_changesets(entries)
     entries
   end
 
@@ -79,7 +80,7 @@ class Repository::Darcs < Repository
     return nil if patch_from.nil?
     patch_to = changesets.find_by_revision(rev_to) if rev_to
     if path.blank?
-      path = patch_from.changes.collect{|change| change.path}.join(' ')
+      path = patch_from.filechanges.collect{|change| change.path}.join(' ')
     end
     patch_from ? scm.diff(path, patch_from.scmid, patch_to ? patch_to.scmid : nil) : nil
   end

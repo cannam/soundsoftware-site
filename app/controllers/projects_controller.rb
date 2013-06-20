@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
 
   after_filter :only => [:create, :edit, :update, :archive, :unarchive, :destroy] do |controller|
     if controller.request.post?
-      controller.send :expire_action, :controller => 'welcome', :action => 'robots.txt'
+      controller.send :expire_action, :controller => 'welcome', :action => 'robots'
     end
   end
 
@@ -57,8 +57,15 @@ class ProjectsController < ApplicationController
         @project_count = Project.visible_roots.count
         @project_pages = Paginator.new self, @project_count, @limit, params['page']
         @offset ||= @project_pages.current.offset
-        @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause) 
+        @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause)
         render :template => 'projects/index.html.erb', :layout => !request.xhr?
+
+## Redmine 2.2:
+#        scope = Project
+#        unless params[:closed]
+#          scope = scope.active
+#        end
+#        @projects = scope.visible.order('lft').all
       }
       format.api  {
         @offset, @limit = api_offset_and_limit
@@ -85,26 +92,16 @@ class ProjectsController < ApplicationController
 
   def new
     @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
-    @trackers = Tracker.all
+    @trackers = Tracker.sorted.all
     @project = Project.new
     @project.safe_attributes = params[:project]
   end
 
-  verify :method => :post, :only => :create, :render => {:nothing => true, :status => :method_not_allowed }
   def create
     @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
-    @trackers = Tracker.all
+    @trackers = Tracker.sorted.all
     @project = Project.new
     @project.safe_attributes = params[:project]
-
-
-    # todo: luisf: this should be removed from here...
-    if params && params[:project] && !params[:project][:tag_list].nil?
-      new_tags = params[:project][:tag_list].to_s.downcase
-
-      @project.tag_list = ActionController::Base.helpers.strip_tags(new_tags)
-    end
-    # end of code to be removed
 
     if validate_is_public_key && validate_parent_id && @project.save
       @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
@@ -135,18 +132,14 @@ class ProjectsController < ApplicationController
 
   def copy
     @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
-    @trackers = Tracker.all
+    @trackers = Tracker.sorted.all
     @root_projects = Project.find(:all,
                                   :conditions => "parent_id IS NULL AND status = #{Project::STATUS_ACTIVE}",
                                   :order => 'name')
     @source_project = Project.find(params[:id])
     if request.get?
       @project = Project.copy_from(@source_project)
-      if @project
-        @project.identifier = Project.next_identifier if Setting.sequential_project_identifiers?
-      else
-        redirect_to :controller => 'admin', :action => 'projects'
-      end
+      @project.identifier = Project.next_identifier if Setting.sequential_project_identifiers?
     else
       Mailer.with_deliveries(params[:notifications] == '1') do
         @project = Project.new
@@ -165,9 +158,10 @@ class ProjectsController < ApplicationController
       end
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to :controller => 'admin', :action => 'projects'
+    # source_project not found
+    render_404
   end
-	
+
   # Show @project
   def show
     if params[:jump]
@@ -182,12 +176,8 @@ class ProjectsController < ApplicationController
 
     cond = @project.project_condition(Setting.display_subprojects_issues?)
 
-    @open_issues_by_tracker = Issue.visible.count(:group => :tracker,
-                                            :include => [:project, :status, :tracker],
-                                            :conditions => ["(#{cond}) AND #{IssueStatus.table_name}.is_closed=?", false])
-    @total_issues_by_tracker = Issue.visible.count(:group => :tracker,
-                                            :include => [:project, :status, :tracker],
-                                            :conditions => cond)
+    @open_issues_by_tracker = Issue.visible.open.where(cond).count(:group => :tracker)
+    @total_issues_by_tracker = Issue.visible.where(cond).count(:group => :tracker)
 
     if User.current.allowed_to?(:view_time_entries, @project)
       @total_hours = TimeEntry.visible.sum(:hours, :include => :project, :conditions => cond).to_f
@@ -205,16 +195,13 @@ class ProjectsController < ApplicationController
     @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
     @issue_category ||= IssueCategory.new
     @member ||= @project.members.new
-    @trackers = Tracker.all
-    @repository ||= @project.repository
+    @trackers = Tracker.sorted.all
     @wiki ||= @project.wiki
   end
 
   def edit
   end
 
-  # TODO: convert to PUT only
-  verify :method => [:post, :put], :only => :update, :render => {:nothing => true, :status => :method_not_allowed }
   def update
     @project.safe_attributes = params[:project]
     if validate_parent_id && @project.save
@@ -224,7 +211,7 @@ class ProjectsController < ApplicationController
           flash[:notice] = l(:notice_successful_update)
           redirect_to :action => 'settings', :id => @project
         }
-        format.api  { head :ok }
+        format.api  { render_api_ok }
       end
     else
       respond_to do |format|
@@ -237,8 +224,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  verify :method => :post, :only => :modules, :render => {:nothing => true, :status => :method_not_allowed }
-  
   def overview
     @project.has_welcome_page = params[:has_welcome_page]
     if @project.save
@@ -267,32 +252,31 @@ class ProjectsController < ApplicationController
     redirect_to(url_for(:controller => 'admin', :action => 'projects', :status => params[:status]))
   end
 
+  def close
+    @project.close
+    redirect_to project_path(@project)
+  end
+
+  def reopen
+    @project.reopen
+    redirect_to project_path(@project)
+  end
+
   # Delete @project
   def destroy
     @project_to_destroy = @project
-    if request.get?
-      # display confirmation view
-    else
-      if api_request? || params[:confirm]
-        @project_to_destroy.destroy
-        respond_to do |format|
-          format.html { redirect_to :controller => 'admin', :action => 'projects' }
-          format.api  { head :ok }
-        end
+    if api_request? || params[:confirm]
+      @project_to_destroy.destroy
+      respond_to do |format|
+        format.html { redirect_to :controller => 'admin', :action => 'projects' }
+        format.api  { render_api_ok }
       end
     end
     # hide project in layout
     @project = nil
   end
 
-private
-  def find_optional_project
-    return true unless params[:id]
-    @project = Project.find(params[:id])
-    authorize
-  rescue ActiveRecord::RecordNotFound
-    render_404
-  end
+  private
 
   def validate_is_public_key
     # Although is_public isn't mandatory in the project model (it gets
