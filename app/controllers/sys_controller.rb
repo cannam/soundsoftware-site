@@ -100,11 +100,11 @@ class SysController < ActionController::Base
     project = Project.find(params[:id])
     mods = project.enabled_modules
     enable = (params[:enable] == "1")
-    if mods.detect {|m| m.name == "embedded"}
+    if mods.detect {|m| m.name == "redmine_embedded"}
       logger.info "Project #{project.name} currently has Embedded enabled"
       if !enable
         logger.info "Disabling Embedded"
-        modnames = mods.all(:select => :name).collect{|m| m.name}.reject{|n| n == "embedded"}
+        modnames = mods.all(:select => :name).collect{|m| m.name}.reject{|n| n == "redmine_embedded"}
         project.enabled_module_names = modnames
       end
     else
@@ -112,7 +112,7 @@ class SysController < ActionController::Base
       if enable
         logger.info "Enabling Embedded"
         modnames = mods.all(:select => :name).collect{|m| m.name}
-        modnames << "embedded"
+        modnames << "redmine_embedded"
         project.enabled_module_names = modnames
       end
     end
