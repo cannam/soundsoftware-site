@@ -112,7 +112,7 @@ module ActivitiesHelper
       finish = Time.now
       logger.info "render_active_colleagues: took #{finish-start}"
     
-      s
+      s.html_safe
     end
   end
 
