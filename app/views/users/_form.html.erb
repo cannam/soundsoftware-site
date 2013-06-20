@@ -1,5 +1,6 @@
-<%= javascript_include_tag "ssamr_institutions" %>
-
+<% content_for :header_tags do %>
+  <%= javascript_include_tag "ssamr_institutions" %>
+<% end %>
 
 <%= error_messages_for 'user' %>
 
@@ -27,9 +28,9 @@
 
 <div class="box tabular">
 	<h3><%=l(:label_ssamr_details)%></h3>
-          <%= labelled_fields_for :ssamr_user_details do |ssamr_user_detail| %>
+          <%= labelled_fields_for :ssamr_user_detail, @user.ssamr_user_detail do |ssamr_user_detail| %>
             <p>
-              <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit'  %>                            
+              <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit'  %>
             </p>
 
             <p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
