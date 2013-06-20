@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ module ProjectsHelper
             {:name => 'versions', :action => :manage_versions, :partial => 'projects/settings/versions', :label => :label_version_plural},
             {:name => 'categories', :action => :manage_categories, :partial => 'projects/settings/issue_categories', :label => :label_issue_category_plural},
             {:name => 'wiki', :action => :manage_wiki, :partial => 'projects/settings/wiki', :label => :label_wiki},
-            {:name => 'repository', :action => :manage_repository, :partial => 'projects/settings/repository', :label => :label_repository},
+            {:name => 'repositories', :action => :manage_repository, :partial => 'projects/settings/repositories', :label => :label_repository_plural},
             {:name => 'boards', :action => :manage_boards, :partial => 'projects/settings/boards', :label => :label_board_plural},
             {:name => 'activities', :action => :manage_project_activities, :partial => 'projects/settings/activities', :label => :enumeration_activities}
             ]
@@ -58,7 +58,7 @@ module ProjectsHelper
       s << textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
       s << "</div>"
     end
-    s
+    s.html_safe
   end
   
   # Renders a tree of projects as a nested set of unordered lists
@@ -89,8 +89,6 @@ module ProjectsHelper
         s << "</div>\n"
         ancestors << project
       end
-      s << ("</li></ul>\n" * ancestors.size)
-      @project = original_project
     end
     s.html_safe
   end
@@ -158,7 +156,7 @@ module ProjectsHelper
       s = a
     end
 
-    s
+    s.html_safe
     
   end
 
@@ -192,7 +190,7 @@ module ProjectsHelper
 
     @project = original_project
 
-    s
+    s.html_safe
   end
 
 
@@ -252,10 +250,6 @@ module ProjectsHelper
     grouped = Hash.new {|h,k| h[k] = []}
     versions.each do |version|
       grouped[version.project.name] << [version.name, version.id]
-    end
-    # Add in the selected
-    if selected && !versions.include?(selected)
-      grouped[selected.project.name] << [selected.name, selected.id]
     end
 
     if grouped.keys.size > 1

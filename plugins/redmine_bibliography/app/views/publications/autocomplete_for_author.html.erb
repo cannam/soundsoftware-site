@@ -1,0 +1,10 @@
+<%= raw @results.map {|result| {
+    'label' => "#{result.name} <em>#{result.mail.partition('@')[2]}</em>",
+    'value' => result.name,
+    'search_author_class' => result.class.name,
+    'search_author_id' => result.id,
+    'name' => result.name,
+    'institution' => result.institution,
+    'email' => result.mail,
+    }
+}.to_json %>

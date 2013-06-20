@@ -3,19 +3,31 @@
 <% end %>
 
 <div class="contextual">
-    <%= link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true) %>
+    <%= link_to l(:label_project_all), { :controller => 'projects', :action => 'index' }%>
+    <%= ('| ' + link_to(l(:label_search_projects), { :controller => 'search', :action => 'index', :projects => 1 })).html_safe %>
+    <%= ('| ' + link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add')).html_safe if User.current.allowed_to?(:add_project, nil, :global => true) %>
 </div>
 
 <h2><%= l(:label_explore_projects) %></h2>
 
+<div class="threecolumnleft">
 <% cache(:action => 'explore', :action_suffix => 'tags', :expires_in => 1.hour) do %>
   <div class="tags box">
   <h3><%=l(:label_project_tags_all)%></h3>
     <%= render :partial => 'projects/tagcloud' %>
   </div>
 <% end %>
+</div>
 
-<div class="splitcontentleft">
+<div class="threecolumnright">
+  <div class="projects box">
+  <h3><%=l(:label_project_latest)%></h3>
+    <%= render :partial => 'projects/latest' %>
+    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
+  </div>
+</div>
+
+<div class="threecolumnleft">
   <% cache(:action => 'explore', :action_suffix => 'busy_institutions', :expires_in => 1.hour) do %>
   <div class="institutions box">
   <h3><%=l(:label_institutions_busy)%></h3>
@@ -23,13 +35,9 @@
     <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
   </div>
   <% end %>
-  <div class="projects box">
-  <h3><%=l(:label_project_latest)%></h3>
-    <%= render :partial => 'projects/latest' %>
-    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
-  </div>
 </div>
-<div class="splitcontentright">
+
+<div class="threecolumnmid">
   <% cache(:action => 'explore', :action_suffix => 'busy_projects', :expires_in => 1.hour) do %>
   <div class="projects box">
   <h3><%=l(:label_projects_busy)%></h3>
@@ -37,10 +45,6 @@
     <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
   </div>
   <% end %>
-  <% cache(:action => 'explore', :action_suffix => 'mature_projects', :expires_in => 1.hour) do %>
-  <div class="projects box">
-  <h3><%=l(:label_projects_mature)%></h3>
-    <%= render :partial => 'projects/mature' %>
-  </div>
-  <% end %>
 </div>
+
+<% html_title(l(:label_explore_projects)) -%>

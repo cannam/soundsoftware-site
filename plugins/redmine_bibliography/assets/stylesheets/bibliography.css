@@ -1,0 +1,73 @@
+li .handle {
+    font-size: 12px;
+    cursor: move;
+    color: #777;
+}
+
+input.readonly {
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+}
+
+.tabular .author_identify label {
+    font-weight: normal;
+}
+
+.tabular .author_edit p {
+    padding-bottom: 0;
+}
+
+.tabular .author_edit .description {
+    padding-top: 0;
+    font-style: italic;
+}
+
+.publication_project {
+    margin-right: 18px;
+}
+
+#authors select {
+    min-width: 150px;
+}
+
+
+div#bibliography dd { margin-bottom: 1em; font-size: 0.9em; }
+
+div#bibliography dd .authors { font-style: italic; }
+div#bibliography dd span.authors { color: #808080; }
+div#bibliography dd span.year { padding-left: 0.6em; }
+
+div#bibliography .box dt {
+  background: url(../../../images/document.png) no-repeat 0% 4px;
+  padding-left: 20px;
+  margin-left: 0;
+}
+div#bibliography .box dd {
+  padding-left: 20px;
+  margin-left: 0;
+}
+
+div#bibliography h3 {
+  background: url(../../../images/table_multiple.png) no-repeat 0% 50%;
+  padding-left: 20px;
+}
+
+div#bibliography textarea {
+  width: 90%;
+  height: 200px;
+  font: normal 8px;
+  padding: 2px 10px;
+  border: solid 1px #ddd;
+}
+
+input.author_search {width:100%}
+input.author_search {
+  background: url(../../../images/magnifier.png) no-repeat 2px 50%; padding-left:20px;
+  border:1px solid #9EB1C2; border-radius:3px; height:1.5em; width:95%;
+}
+input.author_search.ajax-loading {
+  background-image: url(../../../images/loading.gif);
+}
+

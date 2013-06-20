@@ -34,7 +34,6 @@ h1 {
 
 h2,h3,h4,.wiki h1 {
   color: #3e442c;
-/*  font-weight: bold; */
 }
 
 .wiki h2,.wiki h3,.wiki h4 {
@@ -74,10 +73,17 @@ h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display
     border-left: 4px solid #a9b680;
 }
 
+.box h4 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
 .odd {background-color:#fdf7e4;}
 .even {background-color: #fdfaf0;}
 
 .box .more { margin-left: 40px; }
+
+.box .institution { font-size: 0.95em; }
 
 #content .tabs { margin-bottom: 0; }
 
@@ -169,6 +175,35 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 #top-menu a.projects { background-image: url(../../../images/projects.png); }
 #top-menu a.administration { background-image: url(../images/wrench.png); }
 #top-menu a.help { background-image: url(../../../images/help.png); }
+
+#welcomepage {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+#welcomepage blockquote {
+    border: 0;
+    margin-top: 2em;
+    padding-left: 0;
+    margin-left: 0;
+}
+#welcomepage p, #welcomepage li {
+    font-size: 1.2em;
+    color: #3e442c;
+}
+#welcomepage p {
+    margin-left: 2em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+}
+
+div.flash.newsalert {
+  float: right;
+  width: 25%;
+  padding: 0px 10px 2px 24px;
+  margin: 1.2em 1em 1em 2em;
+  border-color: #dd0000;
+}
 
 /* for Javadoc in Embedded context: */
 

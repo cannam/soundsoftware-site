@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -22,6 +22,7 @@ class MyController < ApplicationController
   helper :users
   helper :custom_fields
   helper :projects
+  helper :activities
 
   BLOCKS = { 'issuesassignedtome' => :label_assigned_to_me_issues,
              'issuesreportedbyme' => :label_reported_issues,
@@ -32,15 +33,13 @@ class MyController < ApplicationController
              'calendar' => :label_calendar,
              'documents' => :label_document_plural,
              'timelog' => :label_spent_time,
-             'myprojects' => :label_my_projects
+             'myprojects' => :label_my_projects,
+             'colleagues' => :label_my_colleagues
            }.merge(Redmine::Views::MyPage::Block.additional_blocks).freeze
 
   DEFAULT_LAYOUT = {  'left' => ['myprojects', 'activitymyprojects'], 
-                      'right' => ['tipoftheday', 'issueswatched'] 
+                      'right' => ['colleagues', 'tipoftheday', 'issueswatched'] 
                    }.freeze
-
-  verify :xhr => true,
-         :only => [:add_block, :remove_block, :order_blocks]
 
   def index
     page
@@ -101,6 +100,24 @@ class MyController < ApplicationController
     end
   end
 
+  # Destroys user's account
+  def destroy
+    @user = User.current
+    unless @user.own_account_deletable?
+      redirect_to :action => 'account'
+      return
+    end
+
+    if request.post? && params[:confirm]
+      @user.destroy
+      if @user.destroyed?
+        logout_user
+        flash[:notice] = l(:notice_account_deleted)
+      end
+      redirect_to home_path
+    end
+  end
+
   # Manage user's password
   def password
     @user = User.current
@@ -153,7 +170,11 @@ class MyController < ApplicationController
     @user = User.current
     @blocks = @user.pref[:my_page_layout] || DEFAULT_LAYOUT.dup
     @block_options = []
-    BLOCKS.each {|k, v| @block_options << [l("my.blocks.#{v}", :default => [v, v.to_s.humanize]), k.dasherize]}
+    BLOCKS.each do |k, v|
+      unless %w(top left right).detect {|f| (@blocks[f] ||= []).include?(k)}
+        @block_options << [l("my.blocks.#{v}", :default => [v, v.to_s.humanize]), k.dasherize]
+      end
+    end
   end
 
   # Add a block to user's page
@@ -161,16 +182,17 @@ class MyController < ApplicationController
   # params[:block] : id of the block to add
   def add_block
     block = params[:block].to_s.underscore
-    (render :nothing => true; return) unless block && (BLOCKS.keys.include? block)
-    @user = User.current
-    layout = @user.pref[:my_page_layout] || {}
-    # remove if already present in a group
-    %w(top left right).each {|f| (layout[f] ||= []).delete block }
-    # add it on top
-    layout['top'].unshift block
-    @user.pref[:my_page_layout] = layout
-    @user.pref.save
-    render :partial => "block", :locals => {:user => @user, :block_name => block}
+    if block.present? && BLOCKS.key?(block)
+      @user = User.current
+      layout = @user.pref[:my_page_layout] || {}
+      # remove if already present in a group
+      %w(top left right).each {|f| (layout[f] ||= []).delete block }
+      # add it on top
+      layout['top'].unshift block
+      @user.pref[:my_page_layout] = layout
+      @user.pref.save
+    end
+    redirect_to :action => 'page_layout'
   end
 
   # Remove a block to user's page
@@ -183,7 +205,7 @@ class MyController < ApplicationController
     %w(top left right).each {|f| (layout[f] ||= []).delete block }
     @user.pref[:my_page_layout] = layout
     @user.pref.save
-    render :nothing => true
+    redirect_to :action => 'page_layout'
   end
 
   # Change blocks order on user's page
@@ -193,7 +215,8 @@ class MyController < ApplicationController
     group = params[:group]
     @user = User.current
     if group.is_a?(String)
-      group_items = (params["list-#{group}"] || []).collect(&:underscore)
+      group_items = (params["blocks"] || []).collect(&:underscore)
+      group_items.each {|s| s.sub!(/^block_/, '')}
       if group_items and group_items.is_a? Array
         layout = @user.pref[:my_page_layout] || {}
         # remove group blocks if they are presents in other groups

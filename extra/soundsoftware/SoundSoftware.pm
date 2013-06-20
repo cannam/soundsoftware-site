@@ -72,7 +72,7 @@ use strict;
 use warnings FATAL => 'all', NONFATAL => 'redefine';
 
 use DBI;
-use Digest::SHA1;
+use Digest::SHA;
 use Authen::Simple::LDAP;
 use Apache2::Module;
 use Apache2::Access;
@@ -402,7 +402,7 @@ sub is_permitted {
     my $redmine_pass = shift;
     my $r = shift;
 
-    my $pass_digest = Digest::SHA1::sha1_hex($redmine_pass);
+    my $pass_digest = Digest::SHA::sha1_hex($redmine_pass);
 
     my $cfg = Apache2::Module::get_config
 	(__PACKAGE__, $r->server, $r->per_dir_config);
@@ -429,7 +429,7 @@ sub is_permitted {
 	    print STDERR "SoundSoftware.pm: User $redmine_user has required role, checking credentials\n";
 
 	    unless ($auth_source_id) {
-                my $salted_password = Digest::SHA1::sha1_hex($salt.$pass_digest);
+                my $salted_password = Digest::SHA::sha1_hex($salt.$pass_digest);
 		if ($hashed_password eq $salted_password) {
 		    print STDERR "SoundSoftware.pm: User $redmine_user authenticated via password\n";
 		    $ret = 1;
@@ -550,7 +550,9 @@ sub get_realm {
         $name = $repo;
     }
 
-    my $realm = '"Mercurial repository for ' . "'$name'" . '"';
+#    my $realm = '"Mercurial repository for ' . "'$name'" . '"';
+# see #577:
+    my $realm = '"Mercurial repository for ' . "$name" . '"';
 
     $realm;
 }

@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,4 +18,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module MyHelper
+
+  def all_colleagues_of(user)
+    # Return a list of all user ids who have worked with the given user
+    # (on projects that are visible to the current user)
+    user.projects.select { |p| p.visible? }.map { |p| p.members.map { |m| m.user_id } }.flatten.sort.uniq.reject { |i| user.id == i }
+  end
+
 end

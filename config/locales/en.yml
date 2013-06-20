@@ -48,6 +48,9 @@ en:
       about_x_hours:
         one:   "about 1 hour"
         other: "about %{count} hours"
+      x_hours:
+        one:   "1 hour"
+        other: "%{count} hours"
       x_days:
         one:   "1 day"
         other: "%{count} days"
@@ -80,14 +83,14 @@ en:
     human:
       format:
         delimiter: ""
-        precision: 1
+        precision: 3
       storage_units:
         format: "%n %u"
         units:
           byte:
             one: "Byte"
             other: "Bytes"
-          kb: "kB"
+          kb: "KB"
           mb: "MB"
           gb: "GB"
           tb: "TB"
@@ -167,6 +170,7 @@ en:
   notice_feeds_access_key_reseted: Your RSS access key was reset.
   notice_api_access_key_reseted: Your API access key was reset.
   notice_failed_to_save_issues: "Failed to save %{count} issue(s) on %{total} selected: %{ids}."
+  notice_failed_to_save_time_entries: "Failed to save %{count} time entrie(s) on %{total} selected: %{ids}."
   notice_failed_to_save_members: "Failed to save member(s): %{errors}."
   notice_no_issue_selected: "No issue is selected! Please, check the issues you want to edit."
   notice_account_pending: "Your account is now awaiting administrator approval. You will receive a notification email when your account has been activated."
@@ -176,6 +180,9 @@ en:
   notice_issue_done_ratios_updated: Issue done ratios updated.
   notice_gantt_chart_truncated: "The chart was truncated because it exceeds the maximum number of items that can be displayed (%{max})"
   notice_issue_successful_create: "Issue %{id} created."
+  notice_issue_update_conflict: "The issue has been updated by an other user while you were editing it."
+  notice_account_deleted: "Your account has been permanently deleted."
+  notice_user_successful_create: "User %{id} created."
 
   error_can_t_load_default_data: "Default configuration could not be loaded: %{value}"
   error_scm_not_found: "The entry or revision was not found in the repository."
@@ -196,6 +203,7 @@ en:
   error_unable_delete_issue_status: 'Unable to delete issue status'
   error_unable_to_connect: "Unable to connect (%{value})"
   error_attachment_too_big: "This file cannot be uploaded because it exceeds the maximum allowed file size (%{max_size})"
+  error_session_expired: "Your session has expired. Please login again."
   warning_attachments_not_saved: "%{count} file(s) could not be saved."
 
   mail_subject_lost_password: "Your %{value} password"
@@ -329,6 +337,13 @@ en:
   field_root_directory: Root directory
   field_cvsroot: CVSROOT
   field_cvs_module: Module
+  field_repository_is_default: Main repository
+  field_multiple: Multiple values
+  field_auth_source_ldap_filter: LDAP filter
+  field_core_fields: Standard fields
+  field_timeout: "Timeout (in seconds)"
+  field_board_parent: Parent forum
+  field_private_notes: Private notes
   field_public_or_private: "Public or Private?"
 
   setting_external_repository: "Select this if the project's main repository is hosted somewhere else"
@@ -360,6 +375,7 @@ en:
   setting_date_format: Date format
   setting_time_format: Time format
   setting_cross_project_issue_relations: Allow cross-project issue relations
+  setting_cross_project_subtasks: Allow cross-project subtasks
   setting_issue_list_default_columns: Default columns displayed on the issue list
   setting_repositories_encodings: Attachments and repositories encodings
   setting_emails_header: Emails header
@@ -398,10 +414,18 @@ en:
   setting_notifications_text: Notifications
   setting_issue_group_assignment: Allow issue assignment to groups
   setting_default_issue_start_date_to_creation_date: Use current date as start date for new issues
+  setting_commit_cross_project_ref: Allow issues of all the other projects to be referenced and fixed
+  setting_unsubscribe: Allow users to delete their own account
+  setting_session_lifetime: Session maximum lifetime
+  setting_session_timeout: Session inactivity timeout
+  setting_thumbnails_enabled: Display attachment thumbnails
+  setting_thumbnails_size: Thumbnails size (in pixels)
+  setting_non_working_week_days: Non-working days
 
   permission_add_project: Create project
   permission_add_subprojects: Create subprojects
   permission_edit_project: Edit project
+  permission_close_project: Close / reopen the project
   permission_select_project_modules: Select project modules
   permission_manage_members: Manage members
   permission_manage_project_activities: Manage project activities
@@ -416,6 +440,8 @@ en:
   permission_add_issue_notes: Add notes
   permission_edit_issue_notes: Edit notes
   permission_edit_own_issue_notes: Edit own notes
+  permission_view_private_notes: View private notes
+  permission_set_notes_private: Set notes as private
   permission_move_issues: Move issues
   permission_delete_issues: Delete issues
   permission_manage_public_queries: Manage public queries
@@ -456,6 +482,7 @@ en:
   permission_delete_own_messages: Delete own messages
   permission_export_wiki_pages: Export wiki pages
   permission_manage_subtasks: Manage subtasks
+  permission_manage_related_issues: Manage related issues
 
   project_module_issue_tracking: Issue tracking (bugs and feature requests)
   project_module_time_tracking: Time tracking
@@ -467,7 +494,7 @@ en:
   project_module_boards: Forums
   project_module_calendar: Calendar
   project_module_gantt: Gantt chart
-  project_module_embedded: Embedded documentation (Javadoc, Doxygen or MATLAB)
+  project_module_redmine_embedded: Embedded documentation (Javadoc, Doxygen or MATLAB)
   label_tipoftheday: Tip of the day
   label_notifications: Important Message
   label_ssamr_description: Research description
@@ -498,6 +525,7 @@ en:
   label_project_tags_all: Popular tags
   label_projects_busy: Busy projects
   label_projects_mature: Mature projects
+  label_search_projects: Search projects
   label_institutions_busy: Active institutions
   label_managers: Managed by
   label_issue: Issue
@@ -633,11 +661,16 @@ en:
     zero:  0 closed
     one:   1 closed
     other: "%{count} closed"
+  label_x_issues:
+    zero:  0 issues
+    one:   1 issue
+    other: "%{count} issues"
   label_total: Total
   label_permissions: Permissions
   label_current_status: Current status
   label_new_statuses_allowed: New statuses allowed
   label_all: all
+  label_any: any
   label_none: none
   label_nobody: nobody
   label_next: Next
@@ -672,6 +705,8 @@ en:
   label_not_equals: is not
   label_in_less_than: in less than
   label_in_more_than: in more than
+  label_in_the_next_days: in the next
+  label_in_the_past_days: in the past
   label_greater_or_equal: '>='
   label_less_or_equal: '<='
   label_between: between
@@ -681,6 +716,7 @@ en:
   label_yesterday: yesterday
   label_this_week: this week
   label_last_week: last week
+  label_last_n_weeks: "last %{count} weeks"
   label_last_n_days: "last %{count} days"
   label_this_month: this month
   label_last_month: last month
@@ -691,8 +727,12 @@ en:
   label_ago: days ago
   label_contains: contains
   label_not_contains: doesn't contain
+  label_any_issues_in_project: any issues in project
+  label_any_issues_not_in_project: any issues not in project
+  label_no_issues_in_project: no issues in project
   label_day_plural: days
   label_repository: Repository
+  label_repository_new: New repository
   label_is_external_repository: Track an external repository
   label_repository_plural: Repositories
   label_explore_projects: Explore projects
@@ -761,13 +801,15 @@ en:
   label_loading: Loading...
   label_relation_new: New relation
   label_relation_delete: Delete relation
-  label_relates_to: related to
-  label_duplicates: duplicates
-  label_duplicated_by: duplicated by
-  label_blocks: blocks
-  label_blocked_by: blocked by
-  label_precedes: precedes
-  label_follows: follows
+  label_relates_to: Related to
+  label_duplicates: Duplicates
+  label_duplicated_by: Duplicated by
+  label_blocks: Blocks
+  label_blocked_by: Blocked by
+  label_precedes: Precedes
+  label_follows: Follows
+  label_copied_to: Copied to
+  label_copied_from: Copied from
   label_end_to_start: end to start
   label_end_to_end: end to end
   label_start_to_start: start to start
@@ -803,7 +845,7 @@ en:
   label_added_time_by: "Added by %{author} %{age} ago"
   label_updated_time_by: "Updated by %{author} %{age} ago"
   label_updated_time: "Updated %{value} ago"
-  label_time_ago: "{{age}} ago"
+  label_time_ago: "%{age} ago"
   label_jump_to_a_project: Jump to a project...
   label_file_plural: Downloads
   label_changeset_plural: Changesets
@@ -882,7 +924,29 @@ en:
   label_git_report_last_commit: Report last commit for files and directories
   label_parent_revision: Parent
   label_child_revision: Child
-  label_export_options: %{export_format} export options
+  label_export_options: "%{export_format} export options"
+  label_my_colleagues: "Active projects for people I'm working with"
+  label_working_in: Working in 
+  label_no_active_colleagues: No recent activity
+  label_copy_attachments: Copy attachments
+  label_copy_subtasks: Copy subtasks
+  label_item_position: "%{position} of %{count}"
+  label_completed_versions: Completed versions
+  label_search_for_watchers: Search for watchers to add
+  label_session_expiration: Session expiration
+  label_show_closed_projects: View closed projects
+  label_status_transitions: Status transitions
+  label_fields_permissions: Fields permissions
+  label_readonly: Read-only
+  label_required: Required
+  label_attribute_of_project: "Project's %{name}"
+  label_attribute_of_author: "Author's %{name}"
+  label_attribute_of_assigned_to: "Assignee's %{name}"
+  label_attribute_of_fixed_version: "Target version's %{name}"
+  label_cross_project_descendants: With subprojects
+  label_cross_project_tree: With project tree
+  label_cross_project_hierarchy: With project hierarchy
+  label_cross_project_system: With all projects
 
   button_login: Login
   button_submit: Submit
@@ -930,14 +994,22 @@ en:
   button_quote: Quote
   button_duplicate: Duplicate
   button_show: Show
+  button_hide: Hide
   button_welcome_page_edit: Create or edit welcome page
   button_welcome_page_edit_this: Edit this page
   button_edit_section: Edit this section
   button_export: Export
+  button_delete_my_account: Delete my account
+  button_close: Close
+  button_reopen: Reopen
 
   status_active: active
   status_registered: registered
   status_locked: locked
+
+  project_status_active: active
+  project_status_closed: closed
+  project_status_archived: archived
 
   version_status_open: open
   version_status_locked: locked
@@ -953,16 +1025,15 @@ en:
   text_subprojects_destroy_warning: "Its subproject(s): %{value} will be also deleted."
   text_workflow_edit: Select a role and a tracker to edit the workflow
   text_are_you_sure: Are you sure?
-  text_are_you_sure_with_children: "Delete issue and all child issues?"
   text_journal_changed: "%{label} changed from %{old} to %{new}"
   text_journal_changed_no_detail: "%{label} updated"
   text_journal_set_to: "%{label} set to %{value}"
   text_journal_deleted: "%{label} deleted (%{old})"
   text_journal_added: "%{label} %{value} added"
-  text_tip_issue_begin_day: task beginning this day
-  text_tip_issue_end_day: task ending this day
-  text_tip_issue_begin_end_day: task beginning and ending this day
-  text_project_identifier_info: 'The system identifier that will form the unique part of the URL for your project.<br/>Only lower case letters (a-z), numbers and dashes are allowed.<br />Once saved, the identifier cannot be changed.'
+  text_tip_issue_begin_day: issue beginning this day
+  text_tip_issue_end_day: issue ending this day
+  text_tip_issue_begin_end_day: issue beginning and ending this day
+  text_project_identifier_info: 'The system identifier that will form the unique part of the URL for your project.<br/>Only lower case letters (a-z), numbers, dashes and underscores are allowed.<br />Once saved, the identifier cannot be changed.'
   text_project_homepage_info: 'Optional link to an external project page.'
   text_caracters_maximum: "%{count} characters maximum."
   text_caracters_minimum: "Must be at least %{count} characters long."
@@ -1026,12 +1097,18 @@ en:
   text_scm_command_version: Version
   text_scm_config: You can configure your scm commands in config/configuration.yml. Please restart the application after editing it.
   text_scm_command_not_available: Scm command is not available. Please check settings on the administration panel.
+  text_issue_conflict_resolution_overwrite: "Apply my changes anyway (previous notes will be kept but some changes may be overwritten)"
+  text_issue_conflict_resolution_add_notes: "Add my notes and discard my other changes"
+  text_issue_conflict_resolution_cancel: "Discard all my changes and redisplay %{link}"
+  text_account_destroy_confirmation: "Are you sure you want to proceed?\nYour account will be permanently deleted, with no way to reactivate it."
+  text_session_expiration_settings: "Warning: changing these settings may expire the current sessions including yours."
+  text_project_closed: This project is closed and read-only.
   text_settings_repo_explanation: <b>External repositories</b><p>Normally your project's primary repository will be the Mercurial repository hosted at this site.<p>However, if you already have your project hosted somewhere else, you can specify your existing external repository's URL here &ndash; then this site will track that repository in a read-only &ldquo;mirror&rdquo; copy.  External Mercurial, git and Subversion repositories can be tracked. Note that you cannot switch to an external repository if you have already made any commits to the repository hosted here.
   text_settings_repo_is_internal: Currently the repository hosted at this site is the primary repository for this project.
   text_settings_repo_is_external: Currently the repository hosted at this site is a read-only copy of an external repository.
   text_settings_repo_need_help: Please <a href="/projects/soundsoftware-site/wiki/Help">contact us</a> if you need help deciding how best to set this up.<br>We can also import complete revision history from other systems into a new primary repository for you if you wish.
-  text_has_welcome_page_info: <b>Welcome page</b><p>You can replace the standard {{overview_link}} page for this project with your own welcome page.<br>This page will be editable using the project Wiki.
-  text_has_welcome_page_wiki_disabled: <b>Note:</b> You must enable the Wiki module in the {{modules_link}} tab before you can create or edit this page.
+  text_has_welcome_page_info: <b>Welcome page</b><p>You can replace the standard %{overview_link} page for this project with your own welcome page.<br>This page will be editable using the project Wiki.
+  text_has_welcome_page_wiki_disabled: <b>Note:</b> You must enable the Wiki module in the %{modules_link} tab before you can create or edit this page.
   text_binary_data: Binary data
   text_data_too_large: Binary data, or file too large to display
 
@@ -1068,9 +1145,9 @@ en:
 
   label_set_role_plural: Choose roles for new member
 
-  notice_added_to_project: 'You have been added to the project "{{project_name}}".'
-  notice_project_homepage: "You can visit the project using the following link: {{project_url}}"
-  mail_subject_added_to_project: "You've been added to a project on {{value}}"
+  notice_added_to_project: 'You have been added to the project "%{project_name}".'
+  notice_project_homepage: "You can visit the project using the following link: %{project_url}"
+  mail_subject_added_to_project: "You've been added to a project on %{value}"
   description_filter: Filter
   description_search: Searchfield
   description_choose_project: Projects
@@ -1089,3 +1166,9 @@ en:
   description_date_range_interval: Choose range by selecting start and end date
   description_date_from: Enter start date
   description_date_to: Enter end date
+  text_repository_identifier_info: 'Only lower case letters (a-z), numbers, dashes and underscores are allowed.<br />Once saved, the identifier cannot be changed.'
+
+  text_who_can_register: '<h3>Who can register here?</h3><p>You can register if you are a researcher in the audio and music field are you are:<ul><li>working in the UK,</li><li>working with UK researchers who are also using this site, <i>or</i></li><li>working on projects having an audience within the UK research community.</li></ul></p><p>Please ensure you provide enough information in the description below to establish which of these is the case.</p><p>(You do not need to register in order to download or use code from this site &mdash; only to host your own code here.)</p>'
+
+  field_no_tags: No tags
+

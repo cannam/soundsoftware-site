@@ -1,6 +1,6 @@
 # Spanish translations for Rails
 # by Francisco Fernando García Nieto (ffgarcianieto@gmail.com)
-# Redmine spanish translation: 
+# Redmine spanish translation:
 # by J. Cayetano Delgado (Cayetano _dot_ Delgado _at_ ioko _dot_ com)
 
 es:
@@ -9,9 +9,9 @@ es:
     # These are also the defaults for 'currency', 'percentage', 'precision', and 'human'
     format:
       # Sets the separator between the units, for more precision (e.g. 1.0 / 2.0 == 0.5)
-      separator: "," 
+      separator: ","
       # Delimets thousands (e.g. 1,000,000 is a million) (always in groups of three)
-      delimiter: "." 
+      delimiter: "."
       # Number of decimals, behind the separator (1 with a precision of 2 gives: 1.00)
       precision: 3
 
@@ -19,36 +19,36 @@ es:
     currency:
       format:
         # Where is the currency sign? %u is the currency unit, %n the number (default: $5.00)
-        format: "%n %u" 
-        unit: "€" 
+        format: "%n %u"
+        unit: "€"
         # These three are to override number.format and are optional
-        separator: "," 
-        delimiter: "." 
+        separator: ","
+        delimiter: "."
         precision: 2
 
     # Used in number_to_percentage()
     percentage:
       format:
         # These three are to override number.format and are optional
-        # separator: 
-        delimiter: "" 
-        # precision: 
+        # separator:
+        delimiter: ""
+        # precision:
 
     # Used in number_to_precision()
     precision:
       format:
         # These three are to override number.format and are optional
         # separator:
-        delimiter: "" 
+        delimiter: ""
         # precision:
 
     # Used in number_to_human_size()
     human:
       format:
         # These three are to override number.format and are optional
-        # separator: 
-        delimiter: "" 
-        precision: 1
+        # separator:
+        delimiter: ""
+        precision: 3
       storage_units:
         format: "%n %u"
         units:
@@ -63,37 +63,40 @@ es:
   # Used in distance_of_time_in_words(), distance_of_time_in_words_to_now(), time_ago_in_words()
   datetime:
     distance_in_words:
-      half_a_minute: "medio minuto" 
+      half_a_minute: "medio minuto"
       less_than_x_seconds:
-        one:  "menos de 1 segundo" 
+        one:  "menos de 1 segundo"
         other: "menos de %{count} segundos"
       x_seconds:
-        one:  "1 segundo" 
-        other: "%{count} segundos" 
+        one:  "1 segundo"
+        other: "%{count} segundos"
       less_than_x_minutes:
-        one:  "menos de 1 minuto" 
-        other: "menos de %{count} minutos" 
+        one:  "menos de 1 minuto"
+        other: "menos de %{count} minutos"
       x_minutes:
-        one:  "1 minuto" 
-        other: "%{count} minutos" 
+        one:  "1 minuto"
+        other: "%{count} minutos"
       about_x_hours:
-        one:  "alrededor de 1 hora" 
-        other: "alrededor de %{count} horas" 
+        one:  "alrededor de 1 hora"
+        other: "alrededor de %{count} horas"
+      x_hours:
+        one:   "1 hour"
+        other: "%{count} hours"
       x_days:
-        one:  "1 día" 
-        other: "%{count} días" 
+        one:  "1 día"
+        other: "%{count} días"
       about_x_months:
-        one:  "alrededor de 1 mes" 
-        other: "alrededor de %{count} meses" 
+        one:  "alrededor de 1 mes"
+        other: "alrededor de %{count} meses"
       x_months:
-        one:  "1 mes" 
-        other: "%{count} meses" 
+        one:  "1 mes"
+        other: "%{count} meses"
       about_x_years:
-        one:  "alrededor de 1 año" 
-        other: "alrededor de %{count} años" 
+        one:  "alrededor de 1 año"
+        other: "alrededor de %{count} años"
       over_x_years:
-        one:  "más de 1 año" 
-        other: "más de %{count} años" 
+        one:  "más de 1 año"
+        other: "más de %{count} años"
       almost_x_years:
         one:   "casi 1 año"
         other: "casi %{count} años"
@@ -102,17 +105,17 @@ es:
     errors:
       template:
         header:
-          one:   "no se pudo guardar este %{model} porque se encontró 1 error" 
-          other:  "no se pudo guardar este %{model} porque se encontraron %{count} errores" 
+          one:   "no se pudo guardar este %{model} porque se encontró 1 error"
+          other:  "no se pudo guardar este %{model} porque se encontraron %{count} errores"
         # The variable :count is also available
-        body: "Se encontraron problemas con los siguientes campos:" 
+        body: "Se encontraron problemas con los siguientes campos:"
 
       # The values :model, :attribute and :value are always available for interpolation
       # The value :count is available when applicable. Can be used for pluralization.
       messages:
-        inclusion: "no está incluido en la lista" 
-        exclusion: "está reservado" 
-        invalid: "no es válido" 
+        inclusion: "no está incluido en la lista"
+        exclusion: "está reservado"
+        invalid: "no es válido"
         confirmation: "no coincide con la confirmación"
         accepted: "debe ser aceptado"
         empty: "no puede estar vacío"
@@ -148,16 +151,16 @@ es:
       # Use the strftime parameters for formats.
       # When no format has been given, it uses default.
       # You can provide other formats here if you like!
-      default: "%Y-%m-%d" 
-      short: "%d de %b" 
-      long: "%d de %B de %Y" 
+      default: "%Y-%m-%d"
+      short: "%d de %b"
+      long: "%d de %B de %Y"
 
     day_names: [Domingo, Lunes, Martes, Miércoles, Jueves, Viernes, Sábado]
     abbr_day_names: [Dom, Lun, Mar, Mie, Jue, Vie, Sab]
 
     # Don't forget the nil at the beginning; there's no such thing as a 0th month
-    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Setiembre, Octubre, Noviembre, Diciembre]
-    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Set, Oct, Nov, Dic]
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
+    abbr_month_names: [~, Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic]
     # Used in date_select and datime_select.
     order:
       - :year
@@ -168,10 +171,10 @@ es:
     formats:
       default: "%A, %d de %B de %Y %H:%M:%S %z"
       time: "%H:%M"
-      short: "%d de %b %H:%M" 
-      long: "%d de %B de %Y %H:%M" 
-    am: "am" 
-    pm: "pm" 
+      short: "%d de %b %H:%M"
+      long: "%d de %B de %Y %H:%M"
+    am: "am"
+    pm: "pm"
 
 # Used in array.to_sentence.
   support:
@@ -179,7 +182,7 @@ es:
       sentence_connector: "y"
 
   actionview_instancetag_blank_option: Por favor seleccione
-  
+
   button_activate: Activar
   button_add: Añadir
   button_annotate: Anotar
@@ -814,7 +817,6 @@ es:
   text_min_max_length_info: 0 para ninguna restricción
   text_no_configuration_data: "Todavía no se han configurado perfiles, ni tipos, estados y flujo de trabajo asociado a peticiones. Se recomiendo encarecidamente cargar la configuración por defecto. Una vez cargada, podrá modificarla."
   text_project_destroy_confirmation: ¿Estás seguro de querer eliminar el proyecto?
-  text_project_identifier_info: 'Letras minúsculas (a-z), números y signos de puntuación permitidos.<br />Una vez guardado, el identificador no puede modificarse.'
   text_reassign_time_entries: 'Reasignar las horas a esta petición:'
   text_regexp_info: ej. ^[A-Z0-9]+$
   text_repository_usernames_mapping: "Establezca la correspondencia entre los usuarios de Redmine y los presentes en el log del repositorio.\nLos usuarios con el mismo nombre o correo en Redmine y en el repositorio serán asociados automáticamente."
@@ -885,7 +887,7 @@ es:
   version_status_locked: bloqueado
   version_status_open: abierto
   error_can_not_reopen_issue_on_closed_version: No se puede reabrir una petición asignada a una versión cerrada
-  
+
   label_user_anonymous: Anónimo
   button_move_and_follow: Mover y seguir
   setting_default_projects_modules: Módulos activados por defecto en proyectos nuevos
@@ -956,7 +958,6 @@ es:
   project_module_gantt: Gantt
   project_module_calendar: Calendario
   button_edit_associated_wikipage: "Editar paginas Wiki asociadas: %{page_title}"
-  text_are_you_sure_with_children: ¿Borrar peticiones y todas sus peticiones hijas?
   field_text: Campo de texto
   label_user_mail_option_only_owner: Solo para objetos que soy propietario
   setting_default_notification_option: Opcion de notificacion por defecto
@@ -1037,10 +1038,84 @@ es:
   description_selected_columns: Columnas seleccionadas
   label_parent_revision: Padre
   label_child_revision: Hijo
-  setting_default_issue_start_date_to_creation_date: Use current date as start date for new issues
-  button_edit_section: Edit this section
-  setting_repositories_encodings: Attachments and repositories encodings
+  setting_default_issue_start_date_to_creation_date: Utilizar la fecha actual como fecha de inicio para nuevas peticiones
+  button_edit_section: Editar esta sección
+  setting_repositories_encodings: Codificación de adjuntos y repositorios
   description_all_columns: Todas las columnas
   button_export: Exportar
   label_export_options: "%{export_format} opciones de exportación"
   error_attachment_too_big: Este fichero no se puede adjuntar porque excede el tamaño máximo de fichero (%{max_size})
+  notice_failed_to_save_time_entries: "Error al guardar %{count} entradas de tiempo de las %{total} seleccionadas: %{ids}."
+  label_x_issues:
+    zero:  0 petición
+    one:   1 petición
+    other: "%{count} peticiones"
+  label_repository_new: Nuevo repositorio
+  field_repository_is_default: Repositorio principal
+  label_copy_attachments: Copiar adjuntos
+  label_item_position: "%{position}/%{count}"
+  label_completed_versions: Versiones completadas
+  text_project_identifier_info: Solo se permiten letras en minúscula (a-z), números, guiones y barras bajas.<br />Una vez guardado, el identificador no se puede cambiar.
+  field_multiple: Valores múltiples
+  setting_commit_cross_project_ref: Permitir referenciar y resolver peticiones de todos los demás proyectos
+  text_issue_conflict_resolution_add_notes: Añadir mis notas y descartar mis otros cambios
+  text_issue_conflict_resolution_overwrite: Aplicar mis campos de todas formas (las notas anteriores se mantendrán pero algunos cambios podrían ser sobreescritos)
+  notice_issue_update_conflict: La petición ha sido actualizada por otro usuario mientras la editaba.
+  text_issue_conflict_resolution_cancel: Descartar todos mis cambios y mostrar de nuevo %{link}
+  permission_manage_related_issues: Gestionar peticiones relacionadas
+  field_auth_source_ldap_filter: Filtro LDAP
+  label_search_for_watchers: Buscar seguidores para añadirlos
+  notice_account_deleted: Su cuenta ha sido eliminada
+  setting_unsubscribe: Permitir a los usuarios borrar sus propias cuentas
+  button_delete_my_account: Borrar mi cuenta
+  text_account_destroy_confirmation: |-
+    ¿Está seguro de querer proceder?
+    Su cuenta quedará borrada permanentemente, sin la posibilidad de reactivarla.
+  error_session_expired: Su sesión ha expirado. Por favor, vuelva a identificarse.
+  text_session_expiration_settings: "Advertencia: el cambio de estas opciones podría hacer expirar las sesiones activas, incluyendo la suya."
+  setting_session_lifetime: Tiempo de vida máximo de las sesiones
+  setting_session_timeout: Tiempo máximo de inactividad de las sesiones
+  label_session_expiration: Expiración de sesiones
+  permission_close_project: Cerrar / reabrir el proyecto
+  label_show_closed_projects: Ver proyectos cerrados
+  button_close: Cerrar
+  button_reopen: Reabrir
+  project_status_active: activo
+  project_status_closed: cerrado
+  project_status_archived: archivado
+  text_project_closed: Este proyecto está cerrado y es de sólo lectura
+  notice_user_successful_create: Usuario %{id} creado.
+  field_core_fields: Campos básicos
+  field_timeout: Tiempo de inactividad (en segundos)
+  setting_thumbnails_enabled: Mostrar miniaturas de los adjuntos
+  setting_thumbnails_size: Tamaño de las miniaturas (en píxeles)
+  label_status_transitions: Transiciones de estado
+  label_fields_permissions: Permisos sobre los campos
+  label_readonly: Sólo lectura
+  label_required: Requerido
+  text_repository_identifier_info: Solo se permiten letras en minúscula (a-z), números, guiones y barras bajas.<br />Una vez guardado, el identificador no se puede cambiar.
+  field_board_parent: Foro padre
+  label_attribute_of_project: "%{name} del proyecto"
+  label_attribute_of_author: "%{name} del autor"
+  label_attribute_of_assigned_to: "%{name} de la persona asignada"
+  label_attribute_of_fixed_version: "%{name} de la versión indicada"
+  label_copy_subtasks: Copiar subtareas
+  label_copied_to: copiada a
+  label_copied_from: copiada desde
+  label_any_issues_in_project: cualquier petición del proyecto
+  label_any_issues_not_in_project: cualquier petición que no sea del proyecto
+  field_private_notes: Notas privadas
+  permission_view_private_notes: Ver notas privadas
+  permission_set_notes_private: Poner notas como privadas
+  label_no_issues_in_project: no hay peticiones en el proyecto
+  label_any: todos
+  label_last_n_weeks: en las últimas %{count} semanas
+  setting_cross_project_subtasks: Permitir subtareas cruzadas entre proyectos
+  label_cross_project_descendants: Con proyectos hijo
+  label_cross_project_tree: Con el árbol del proyecto
+  label_cross_project_hierarchy: Con la jerarquía del proyecto
+  label_cross_project_system: Con todos los proyectos
+  button_hide: Ocultar
+  setting_non_working_week_days: Días no laborables
+  label_in_the_next_days: en los próximos
+  label_in_the_past_days: en los anteriores
