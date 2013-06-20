@@ -34,7 +34,6 @@
 
 
 require 'getoptlong'
-require 'rdoc/usage'
 require 'find'
 require 'etc'
 
@@ -86,7 +85,7 @@ begin
     when '--verbose';        $verbose += 1
     when '--test';           $test = true
     when '--version';        puts Version; exit
-    when '--help';           RDoc::usage
+    when '--help';           puts "Read source for documentation"; exit 
     when '--quiet';          $quiet = true
     end
   end
@@ -99,7 +98,7 @@ if $test
 end
 
 if ($redmine_host.empty? or $repos_base.empty? or $command.empty?)
-  RDoc::usage
+  puts "Read source for documentation"; exit
 end
 
 unless File.directory?($repos_base)
@@ -114,6 +113,7 @@ end
 
 class Project < ActiveResource::Base
   self.headers["User-agent"] = "SoundSoftware external repository converter/#{Version}"
+  self.format = :xml
 end
 
 log("querying Redmine for projects...", :level => 1);
@@ -128,6 +128,8 @@ Project.password = $http_pass;
 begin
   # Get all active projects that have the Repository module enabled
   projects = Project.find(:all, :params => {:key => $api_key})
+rescue ActiveResource::ForbiddenAccess
+  log("Request was denied by your Redmine server. Make sure that 'WS for repository management' is enabled in application settings and that you provided the correct API key.")
 rescue => e
   log("Unable to connect to #{Project.site}: #{e}", :exit => true)
 end

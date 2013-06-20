@@ -34,7 +34,6 @@ h1 {
 
 h2,h3,h4,.wiki h1 {
   color: #3e442c;
-/*  font-weight: bold; */
 }
 
 .wiki h2,.wiki h3,.wiki h4 {
@@ -74,8 +73,17 @@ h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display
     border-left: 4px solid #a9b680;
 }
 
+.box h4 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
 .odd {background-color:#fdf7e4;}
 .even {background-color: #fdfaf0;}
+
+.box .more { margin-left: 40px; }
+
+.box .institution { font-size: 0.95em; }
 
 #content .tabs { margin-bottom: 0; }
 
@@ -96,7 +104,7 @@ table.projects .child .firstcol { padding-left: 1em }
 table.projects .level2 .firstcol { padding-left: 2em; }
 table.projects .level3 .firstcol { padding-left: 3em; }
 
-ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.95em }
+ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.9em }
 
 table.files tr.active td { padding-top: 0.5em; padding-bottom: 0.5em; }
 table.files .file .active { font-weight: bold; }
@@ -108,6 +116,7 @@ table.files .file .description { font-weight: normal; color: #3e442c; }
 #header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #fdfbf5; border-bottom: 2px solid #a9b680; /* height:80px; */ padding: 20px 0 0.5em 0; margin-bottom: 0; }
 #header a { color: #be5700; }
 #header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
+#header h1#project-title.long-title { font-size: 2em; line-height: 0.95em }
 #header #project-title a, #header #project-title a:hover { color: #525a38; text-decoration: none; }
 .header-general h1 {
   background: url('soundsoftware-logo-code-title-only-transparent.png') no-repeat 0 0;
@@ -166,6 +175,35 @@ div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px sol
 #top-menu a.projects { background-image: url(../../../images/projects.png); }
 #top-menu a.administration { background-image: url(../images/wrench.png); }
 #top-menu a.help { background-image: url(../../../images/help.png); }
+
+#welcomepage {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10px;
+}
+#welcomepage blockquote {
+    border: 0;
+    margin-top: 2em;
+    padding-left: 0;
+    margin-left: 0;
+}
+#welcomepage p, #welcomepage li {
+    font-size: 1.2em;
+    color: #3e442c;
+}
+#welcomepage p {
+    margin-left: 2em;
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+}
+
+div.flash.newsalert {
+  float: right;
+  width: 25%;
+  padding: 0px 10px 2px 24px;
+  margin: 1.2em 1em 1em 2em;
+  border-color: #dd0000;
+}
 
 /* for Javadoc in Embedded context: */
 

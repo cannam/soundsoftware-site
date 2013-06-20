@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2011  Jean-Philippe Lang
+# Copyright (C) 2006-2012  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -30,7 +30,7 @@ module ProjectsHelper
             {:name => 'versions', :action => :manage_versions, :partial => 'projects/settings/versions', :label => :label_version_plural},
             {:name => 'categories', :action => :manage_categories, :partial => 'projects/settings/issue_categories', :label => :label_issue_category_plural},
             {:name => 'wiki', :action => :manage_wiki, :partial => 'projects/settings/wiki', :label => :label_wiki},
-            {:name => 'repository', :action => :manage_repository, :partial => 'projects/settings/repository', :label => :label_repository},
+            {:name => 'repositories', :action => :manage_repository, :partial => 'projects/settings/repositories', :label => :label_repository_plural},
             {:name => 'boards', :action => :manage_boards, :partial => 'projects/settings/boards', :label => :label_board_plural},
             {:name => 'activities', :action => :manage_project_activities, :partial => 'projects/settings/activities', :label => :enumeration_activities}
             ]
@@ -58,7 +58,7 @@ module ProjectsHelper
       s << textilizable(project.short_description, :project => project).gsub(/<[^>]+>/, '')
       s << "</div>"
     end
-    s
+    s.html_safe
   end
   
   # Renders a tree of projects as a nested set of unordered lists
@@ -89,8 +89,6 @@ module ProjectsHelper
         s << "</div>\n"
         ancestors << project
       end
-      s << ("</li></ul>\n" * ancestors.size)
-      @project = original_project
     end
     s.html_safe
   end
@@ -158,7 +156,7 @@ module ProjectsHelper
       s = a
     end
 
-    s
+    s.html_safe
     
   end
 
@@ -192,7 +190,7 @@ module ProjectsHelper
 
     @project = original_project
 
-    s
+    s.html_safe
   end
 
 
@@ -253,10 +251,6 @@ module ProjectsHelper
     versions.each do |version|
       grouped[version.project.name] << [version.name, version.id]
     end
-    # Add in the selected
-    if selected && !versions.include?(selected)
-      grouped[selected.project.name] << [selected.name, selected.id]
-    end
 
     if grouped.keys.size > 1
       grouped_options_for_select(grouped, selected && selected.id)
@@ -268,5 +262,39 @@ module ProjectsHelper
   def format_version_sharing(sharing)
     sharing = 'none' unless Version::VERSION_SHARINGS.include?(sharing)
     l("label_version_sharing_#{sharing}")
+  end
+
+  def score_maturity(project)
+    nr_changes = (project.repository.nil? ? 0 : project.repository.changesets.count)
+    downloadables = [project.attachments,
+                     project.versions.collect { |v| v.attachments },
+                     project.documents.collect { |d| d.attachments }].flatten
+    nr_downloadables = downloadables.count
+    nr_downloads = downloadables.map do |d| d.downloads end.sum
+    nr_members = project.members.count
+    nr_publications = if project.respond_to? :publications
+                      then project.publications.count else 0 end
+    Math.log(1 + nr_changes) +
+      Math.log(1 + nr_downloadables) +
+      Math.log(1 + nr_downloads) +
+      Math.sqrt(nr_members > 1 ? (nr_members - 1) : 0) +
+      Math.sqrt(nr_publications)
+  end
+
+  def all_maturity_scores()
+    phash = Hash.new
+    pp = Project.visible(User.anonymous)
+    pp.each do |p| 
+      phash[p] = score_maturity p
+    end
+    phash
+  end
+
+  def mature_projects(count)
+    phash = all_maturity_scores
+    scores = phash.values.sort
+    threshold = scores[scores.length / 2]
+    if threshold == 0 then threshold = 1 end
+    phash.keys.select { |k| phash[k] > threshold }.sample(count)
   end
 end

@@ -1,0 +1,153 @@
+# English strings go here for Rails i18n
+en:
+  project_module_redmine_bibliography: "Publications (references to papers related to the project)"
+
+  title: "Title"
+  authors: "Authors"
+  author: "Author"
+  name: "Name"
+  year: "Year"
+  associated_projects: "Associated Projects"
+  publications_box: "My Publications"
+  label_my_publications_box: "My Publications"
+  view_all_publications: "View All Project's Publications"
+  publications: Publications
+
+  identify_author_question: Is the right person selected above?
+  identify_author_yes: "Yes"
+  identify_author_correct: "Yes, but I need to correct some details below"
+  identify_author_no: "No, the author was not found in the search"
+
+  error_no_authors: "Please add at least one author to this publication."
+
+  label_all_publications: All Publications
+  label_all_publications_for_project: Publications associated with %{project}
+  label_authors_show: "Authorships associated with this author"
+  label_authors_index: "List of authors"
+
+  field_authorship_publication_title: "Publication"
+  field_authorship_name: "Name on Paper"
+  field_authorship_email: "Email"
+  field_authorship_institution: "Institution"
+
+  field_external_url: "External URL"
+  field_doi: "DOI"
+  field_publication_title: Title
+  field_publication_authors: Authors
+  field_publication_projects: "Associated projects"
+  field_author_name: Author
+  field_author_user: User Name
+  field_author_username: "Associated user"
+  field_author_publications: "Publications by this Author"
+  field_identify_author_yes: "Yes"
+  field_identify_author_correct: "Corrections"
+  field_identify_author_no: "No"
+
+  label_author_is_me: "(I am this author)"
+  label_add_me_as_author: "Add me as an author"
+  label_add_an_author: "Add an author"
+  label_add_another_author: "Add another author"
+  field_search_name: "Search by name"
+  field_search_results: ""
+  label_save_author: "Save author"
+  label_edit_author: "Edit author"
+  label_author_information: "Author Information"
+
+  remove_author: "Remove this author"
+
+  label_publication_plural: "Publications"
+  label_related_publication_plural: "Related publications"
+  label_publication_new: "Create New Publication"
+  label_publication_index: "List of Publication"
+  label_add_publication_to_project: "Add publication to this project"
+  label_publication_edit: "Edit Publication"
+  label_publication_show: "Publication Details"
+  label_add_project_to_publication: "Add this publication to a project"
+  label_project_search: "Find project by name: "
+  label_publication_project_index: "Projects associated with this publication"
+  label_publication_index: "View all publications"
+  label_publication_other_details: "Details"
+
+  text_external_url: "Link to the publication or to an external page about it."
+  text_doi: "DOI (Digital Object Identifier)."
+  text_author_name_on_paper: "Author's name as it appears on the paper."
+  text_author_institution: "Author's institution as on the paper."
+  text_author_email: "Author's email address as on the paper."
+
+  text_author_search: "Search existing authors"
+
+  # authorships model
+  field_institution: "Institution"
+  field_name_on_paper: "Name"
+  field_email: "Email Address"
+
+  # bibtex_entries model
+  field_entry_type: "Publication Type"
+  field_id: "id"
+  field_publication_id: "Publication_id"
+  field_address: "Address"
+  field_annote: "Annote"
+  field_booktitle: "Title of Book or Proceedings"
+  field_chapter: "Chapter"
+  field_crossref: "Cross Reference"
+  field_edition: "Edition"
+  field_editor: "Editor"
+  field_eprint: "eprint"
+  field_howpublished: "How was it Published"
+  field_journal: "Journal"
+  field_key: "Key"
+  field_month: "Month"
+  field_note: "Note"
+  field_number: "Number"
+  field_organization: "Organization"
+  field_pages: "Pages"
+  field_publisher: "Publisher"
+  field_school: "School"
+  field_series: "Series"
+  field_type: "Type"
+  field_url: "URL"
+  field_volume: "Volume"
+  field_year: "Year"
+
+  field_bibtex_article: Journal article
+  field_bibtex_book: Book
+  field_bibtex_booklet: Booklet
+  field_bibtex_conference: Article in conference proceedings
+  field_bibtex_inbook: Book chapter or part
+  field_bibtex_incollection: Part of a collection
+  field_bibtex_inproceedings: Article in conference proceedings
+  field_bibtex_manual: Technical manual
+  field_bibtex_masterthesis: "Master's thesis"
+  field_bibtex_misc: Other
+  field_bibtex_phdthesis: "PhD thesis"
+  field_bibtex_proceedings: Conference proceedings
+  field_bibtex_techreport: Technical report
+  field_bibtex_unpublished: Unpublished
+
+  label_author_1: First author
+  label_author_2: Second author
+  label_author_3: Third author
+  label_author_4: Fourth author
+  label_author_5: Fifth author
+  label_author_6: Sixth author
+  label_author_7: Seventh author
+  label_author_8: Eighth author
+  label_author_9: Ninth author
+  label_author_10: Tenth author
+  label_author_11: Eleventh author
+  label_author_12: Twelfth author
+  label_author_13: Thirteenth author
+  label_author_14: Fourteenth author
+  label_author_15: Fifteenth author
+  label_author_16: Sixteenth author
+  label_author_17: Seventeenth author
+  label_author_18: Eighteenth author
+  label_author_19: Nineteenth author
+  label_author_20: Twentieth author
+
+  mail_subject_publication_added: "You have been added as an author to a new publication"
+  mail_body_publication_added: "A new publication (%{publication}) has been added to the project '%{project}.'"
+
+  bibtex_link: "[B<small>IB</small>T<sub>E</sub>X]"
+  more_details_link: "[More Details]"
+

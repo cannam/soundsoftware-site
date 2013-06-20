@@ -1,7 +1,8 @@
 <% events = @events_by_day %>
 <% if (events.nil?) 
      activity = Redmine::Activity::Fetcher.new(User.anonymous)
-     events = activity.events(Date.today - 14, Date.today + 1)
+     days = Setting.activity_days_default.to_i
+     events = activity.events(Date.today - days, Date.today + 1)
    end
 %>
 
@@ -31,11 +32,11 @@
      <%
 	u = project.users_by_role
 	if ! u.empty? %>
-     (<%=
+        <%=
 	   mgmt_roles = u.keys.select{ |r| r.allowed_to?(:edit_project) }
 	   managers = mgmt_roles.map{ |r| u[r] }.flatten.sort.uniq
 	   managers.map{ |m| m.name }.join(', ')
-	 %>)<%
+	 %><%
 	end
 	%>
 	</span>
@@ -45,4 +46,5 @@
 
     <% end %>
   </ul>
+
 <% end %>
