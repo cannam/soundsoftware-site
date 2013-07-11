@@ -24,7 +24,7 @@ class WelcomeController < ApplicationController
   def index
     @site_project = Project.find_by_identifier "soundsoftware-site"
     @site_news = []
-    @site_news = News.latest_for @site_project if @site_project
+    @site_news = News.latest_for(@site_project, 3) if @site_project
     
     # tests if user is logged in to generate the tips of the day list
     if User.current.logged?
