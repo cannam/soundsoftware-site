@@ -5,10 +5,18 @@
   </div>
 <% end %>
 
+<div id="welcomepagenews">
+  <% if @site_news.any? %>
+    <div class="news box">
+       <h3><%=l(:label_news_site_latest)%></h3>
+	<%= render :partial => 'news/news', :locals => { :project => @site_project }, :collection => @site_news %>
+	<%= link_to l(:label_news_more), { :controller => 'news', :project_id => @site_project.identifier, :action => 'index' } %>
+    </div>
+  <% end %>
+</div>
+
 <div id="welcomepage">
-
 <%= textilizable Setting.welcome_text %>
-
 </div>
   
 <% content_for :header_tags do %>
