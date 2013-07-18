@@ -60,6 +60,21 @@ class RepositoriesController < ApplicationController
   end
 
   def edit
+    @repository = @project.repository
+    params[:repository_scm]='Mercurial'
+    if !@repository
+      @repository = Repository.factory(params[:repository_scm])
+      @repository.project = @project if @repository
+    end
+    if request.post? && @repository
+      attrs = pickup_extra_info
+      @repository.safe_attributes = attrs[:attrs]
+      if attrs[:attrs_extra].keys.any?
+        @repository.merge_extra_info(attrs[:attrs_extra])
+      end
+      @repository.project = @project
+      redirect_to settings_project_path(@project, :tab => 'repositories')
+    end
   end
 
   def update
