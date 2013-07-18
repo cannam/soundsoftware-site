@@ -1,18 +1,19 @@
 
 <%= javascript_include_tag 'repository' %>
 
+<% if @repository %>
+
 <%= form_for @repository,
        :as => :repository,
-       :url => { :controller => 'repositories', :action => 'edit', :id => @project },
        :remote => true,
-       :method => 'post' do |f| %>
+       :url => { :controller => 'repositories', :action => 'update', :id => @repository },
+       :method => 'put' do |f| %>
 
 <%= error_messages_for 'repository' %>
 
 <div class="box tabular">
 
 <p>
-<% if @repository %>
    <%= l(:text_settings_repo_explanation).html_safe %></ br>
    <% if @repository.is_external %>
      <p><%= l(:text_settings_repo_is_external).html_safe %></ br>
@@ -44,7 +45,7 @@
                 {
                 :controller => 'repositories',
                 :action     => 'committers',
-                :id         => @project
+                :id         => @repository
                 },
              :class => 'icon icon-user') %>
 <% end %>
@@ -52,8 +53,9 @@
 
 <%= submit_tag(l(:button_save)) %>
 
+<% end %>
+
 <% else %>
    <%= l(:text_settings_repo_creation).html_safe %></ br>
 <% end %>
 
-<% end %>
