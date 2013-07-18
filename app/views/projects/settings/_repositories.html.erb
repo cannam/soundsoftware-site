@@ -1,41 +1,61 @@
-<% if @project.repositories.any? %>
-<table class="list">
-  <thead>
-    <tr>
-      <th><%= l(:field_identifier) %></th>
-      <th><%= l(:field_repository_is_default) %></th>
-      <th><%= l(:label_scm) %></th>
-      <th><%= l(:label_repository) %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @project.repositories.sort.each do |repository| %>
-    <tr class="<%= cycle 'odd', 'even' %>">
-      <td>
-      <%= link_to repository.identifier, 
-            {:controller => 'repositories', :action => 'show',:id => @project, :repository_id => repository.identifier_param} if repository.identifier.present? %>
-      </td>
-      <td align="center"><%= checked_image repository.is_default? %></td>
-      <td><%=h repository.scm_name %></td>
-      <td><%=h repository.url %></td>
-      <td class="buttons">
-      <% if User.current.allowed_to?(:manage_repository, @project) %>
-        <%= link_to(l(:label_user_plural), committers_repository_path(repository),
+
+<%= javascript_include_tag 'repository' %>
+
+<% if @repository %>
+
+<%= form_for @repository,
+       :as => :repository,
+       :remote => true,
+       :url => { :controller => 'repositories', :action => 'update', :id => @repository },
+       :method => 'put' do |f| %>
+
+<%= error_messages_for 'repository' %>
+
+<div class="box tabular">
+
+<p>
+   <%= l(:text_settings_repo_explanation).html_safe %></ br>
+   <% if @repository.is_external %>
+     <p><%= l(:text_settings_repo_is_external).html_safe %></ br>
+   <% else %>
+     <p><%= l(:text_settings_repo_is_internal).html_safe %></ br>
+   <% end %>
+</p>
+
+
+<p>
+	<%= label_tag('repository_is_external', l(:label_is_external_repository)) %>
+	<%= check_box :repository, :is_external, :onclick => "toggle_ext_url()" %> 
+	<br/><em><%= l(:setting_external_repository).html_safe %></em>
+</p>
+
+<p>
+	<%= label_tag('repository_external_url', l(:label_repository_external_url)) %>
+	<%= text_field :repository, :external_url, :disabled => !(@repository and @repository.is_external) %> 
+	<br/><em><%= l(:setting_external_repository_url).html_safe %></em>
+</p>
+
+<p><%= l(:text_settings_repo_need_help).html_safe %></p>
+
+</div>
+
+<div class="contextual">
+<% if @repository && !@repository.new_record? %>
+<%= link_to(l(:label_user_plural),
+                {
+                :controller => 'repositories',
+                :action     => 'committers',
+                :id         => @repository
+                },
              :class => 'icon icon-user') %>
-        <%= link_to(l(:button_edit), edit_repository_path(repository),
-             :class => 'icon icon-edit') %>
-        <%= delete_link repository_path(repository) %>
-      <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<% else %>
-<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+</div>
+
+<%= submit_tag(l(:button_save)) %>
+
 <% end %>
 
-<% if User.current.allowed_to?(:manage_repository, @project) %>
-  <p><%= link_to l(:label_repository_new), new_project_repository_path(@project), :class => 'icon icon-add' %></p>
+<% else %>
+   <%= l(:text_settings_repo_creation).html_safe %></ br>
 <% end %>
+
