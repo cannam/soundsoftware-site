@@ -51,6 +51,8 @@ class Repository < ActiveRecord::Base
     'password',
     'path_encoding',
     'log_encoding',
+    'is_external',
+    'external_url',
     'is_default'
 
   safe_attributes 'url',

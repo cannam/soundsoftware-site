@@ -18,6 +18,12 @@
          <%= link_to(l("more_details_link"), {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%>
 
          <%= link_to l(:bibtex_link).html_safe, "javascript:void(0)", :class => "bibtex-link"-%>
+
+        <%- unless publication.external_url.blank? -%>
+            <%= link_to l(:external_url_link), publication.external_url, {:target => "_blank"} -%>
+        <%- end -%>
+
+
        </dd>
        <dd class="bibtex-textarea collapsed" style="display: none;">
          <textarea readonly> <%= print_bibtex_format(publication) -%> </textarea>

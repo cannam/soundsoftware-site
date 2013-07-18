@@ -196,6 +196,7 @@ class ProjectsController < ApplicationController
     @issue_category ||= IssueCategory.new
     @member ||= @project.members.new
     @trackers = Tracker.sorted.all
+    @repository ||= @project.repository
     @wiki ||= @project.wiki
   end
 
