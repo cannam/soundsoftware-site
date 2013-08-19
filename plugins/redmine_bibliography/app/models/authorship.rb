@@ -12,6 +12,7 @@ class Authorship < ActiveRecord::Base
   attr_accessor :search_author_class, :search_author_id, :search_name, :search_results, :identify_author
 
   before_create :associate_author_user
+  before_update :delete_publication_cache
 
   # tod: review scope of ordering
   acts_as_list :column => 'auth_order'
@@ -46,10 +47,14 @@ class Authorship < ActiveRecord::Base
   end
 
   protected
+
+  def delete_publication_cache
+    publication = Publication.find(self.publication_id)
+    Rails.cache.delete "publication-#{publication.id}-ieee"
+    Rails.cache.delete "publication-#{publication.id}-bibtex"
+  end
+
   def associate_author_user
-
-    logger.error { "search_author_class '#{self.search_author_class}'" }
-
     case self.search_author_class
     when ""
       logger.debug { "Unknown Author to be added..." }
