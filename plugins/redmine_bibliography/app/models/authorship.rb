@@ -12,7 +12,8 @@ class Authorship < ActiveRecord::Base
   attr_accessor :search_author_class, :search_author_id, :search_name, :search_results, :identify_author
   before_save :associate_author_user
 
-  acts_as_list
+  # tod: review scope of ordering
+  acts_as_list :column => 'auth_order'
 
   # todo: review usage of scope --lf.20130108
   scope :like_unique, lambda {|q|
