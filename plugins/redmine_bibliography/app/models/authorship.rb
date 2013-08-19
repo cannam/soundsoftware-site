@@ -47,31 +47,37 @@ class Authorship < ActiveRecord::Base
 
   protected
   def associate_author_user
-    case self.search_author_class
-      when "User"
-        author = Author.new
-        author.save
-        self.author_id = author.id
-      else
-        selected = self.search_results
-        selected_classname = Kernel.const_get(self.search_author_class)
-        selected_id = self.search_author_id
-        object = selected_classname.find(selected_id)
 
-        if object.respond_to? :name_on_paper
-          # Authorship
+    logger.error { "search_author_class '#{self.search_author_class}'" }
+
+    case self.search_author_class
+    when ""
+      logger.debug { "Unknown Author to be added..." }
+    when "User"
+      author = Author.new
+      author.save
+      self.author_id = author.id
+
+    when "Author"
+      selected = self.search_results
+      selected_classname = Kernel.const_get(self.search_author_class)
+      selected_id = self.search_author_id
+      object = selected_classname.find(selected_id)
+
+      if object.respond_to? :name_on_paper
+        # Authorship
+        self.author_id = object.author.id
+      else
+        # User
+        unless object.author.nil?
           self.author_id = object.author.id
         else
-          # User
-          unless object.author.nil?
-            self.author_id = object.author.id
-          else
-            author = Author.new
-            object.author = author
-            object.save
-            self.author_id = object.author.id
-          end
+          author = Author.new
+          object.author = author
+          object.save
+          self.author_id = object.author.id
         end
+      end
     end
   end
 end
