@@ -10,7 +10,8 @@ class Authorship < ActiveRecord::Base
   validates_presence_of :name_on_paper
 
   attr_accessor :search_author_class, :search_author_id, :search_name, :search_results, :identify_author
-  before_save :associate_author_user
+
+  before_create :associate_author_user
 
   # tod: review scope of ordering
   acts_as_list :column => 'auth_order'
