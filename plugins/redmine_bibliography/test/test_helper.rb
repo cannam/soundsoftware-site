@@ -14,6 +14,8 @@ class BibliographyControllerTest < ActionController::TestCase
   end
 
   def test_publication
+    pub = Publication.first
+
     assert 1 == 0
   end
 

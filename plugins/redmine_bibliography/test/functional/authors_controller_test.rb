@@ -1,8 +1,11 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 
 class AuthorsControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  self.fixture_path = File.dirname(__FILE__) + "/../fixtures/"
+  fixtures :users, :authors
+
+  def test_users_authors_relationship
+    assert Author.first.user.name == "redMine Admin"
   end
+
 end

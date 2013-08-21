@@ -5,7 +5,7 @@ one:
   publication_id: 1
   name_on_paper: Yih-Farn R. Chen
   order: 1
-  institution: 
+  institution:
   email: MyString
 two:
   id: 2
@@ -13,7 +13,7 @@ two:
   publication_id: 1
   name_on_paper: Glenn S. Fowler
   order: 2
-  institution: 
+  institution:
   email: MyString
 three:
   id: 3
@@ -21,7 +21,7 @@ three:
   publication_id: 1
   name_on_paper: Yih-Farn R. Chen
   order: 1
-  institution: 
+  institution:
   email: MyString
 four:
   id: 4
@@ -29,5 +29,5 @@ four:
   publication_id: 1
   name_on_paper: Glenn S. Fowler
   order: 2
-  institution: 
+  institution:
   email: MyString

@@ -1,17 +1,17 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-  user_id: 
-  name: MyString
+  user_id: 1
+  name: Luis
 two:
   id: 2
-  user_id: 
-  name: MyString
-one:
+  user_id:
+  name: Manel
+three:
   id: 3
-  user_id: 
-  name: MyString
-two:
+  user_id:
+  name: MyString1
+four:
   id: 4
-  user_id: 
-  name: MyString
+  user_id:
+  name: MyString2
