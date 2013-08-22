@@ -1,33 +1,34 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# authorships.yml
+---
 one:
   id: 1
   author_id: 1
   publication_id: 1
   name_on_paper: Yih-Farn R. Chen
-  order: 1
-  institution:
+  auth_order: 1
+  institution: Imperial College London
   email: MyString
 two:
   id: 2
   author_id: 2
   publication_id: 1
   name_on_paper: Glenn S. Fowler
-  order: 2
+  auth_order: 2
   institution:
   email: MyString
 three:
   id: 3
-  author_id: 1
+  author_id: 3
   publication_id: 1
   name_on_paper: Yih-Farn R. Chen
-  order: 1
+  auth_order: 1
   institution:
   email: MyString
 four:
   id: 4
-  author_id: 2
+  author_id: 4
   publication_id: 1
   name_on_paper: Glenn S. Fowler
-  order: 2
+  auth_order: 2
   institution:
   email: MyString

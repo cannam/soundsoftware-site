@@ -1,17 +1,18 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# authors.yml
+---
 one:
   id: 1
   user_id: 1
-  name: Luis
+  name:
 two:
   id: 2
   user_id:
-  name: Manel
+  name:
 three:
   id: 3
   user_id:
-  name: MyString1
+  name:
 four:
   id: 4
   user_id:
-  name: MyString2
+  name:
