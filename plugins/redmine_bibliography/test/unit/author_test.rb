@@ -8,7 +8,10 @@ class AuthorTest < ActiveSupport::TestCase
 
     def test_relationships
         author = Author.find(1)
-        assert author.authorships.first.name_on_paper == "Yih-Farn R. Chen"
+
+        assert_equal(author.authorships.first.name_on_paper, "Yih-Farn R. Chen")
+        assert_equal(author.authorships.count, 2)
+
     end
 
 end
