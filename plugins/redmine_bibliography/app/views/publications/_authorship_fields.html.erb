@@ -1,5 +1,7 @@
 <%- content_for :header_tags do -%>
   <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
+  <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
+  <%= javascript_tag "$('.author_save_btn').live('click', toggle_fields);" -%>
 <%- end -%>
 
 <div id="authors" class="fields">
@@ -35,7 +37,7 @@
 
   <div>
     <p>
-      <%= button_to_function l(:label_save_author), '', :id => form_tag_id( f.object_name, :edit_save_button ) -%>
+      <%= button_to_function l(:label_save_author), '', :id => form_tag_id(f.object_name, :edit_save_button), :class => 'author_save_btn' -%>
       <%= link_to_remove_fields l("remove_author"), f %>
     </p>
   </div>

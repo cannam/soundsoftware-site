@@ -2,7 +2,6 @@
     <%= javascript_tag "
         $('#publication_bibtex_entry_attributes_entry_type').live('change', function() {
             $this = $(this);
-
             $.ajax({
                 type: 'get',
                 url: '#{url_for(:controller => :publications, :action => :show_bibtex_fields)}',
@@ -11,7 +10,6 @@
                 },
                 dataType: 'script'
             });
-
             return false;
         });"
     -%>
