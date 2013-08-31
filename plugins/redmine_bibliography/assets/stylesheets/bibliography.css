@@ -4,7 +4,7 @@ li .handle {
     color: #777;
 }
 
-input.readonly {
+.readonly {
     border: none;
     padding: 0;
     margin: 0;
@@ -69,5 +69,9 @@ input.author_search {
 }
 input.author_search.ajax-loading {
   background-image: url(../../../images/loading.gif);
+}
+
+.author_edit_btn {
+  display:none;
 }
 

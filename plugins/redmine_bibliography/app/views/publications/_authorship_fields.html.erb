@@ -1,7 +1,8 @@
 <%- content_for :header_tags do -%>
   <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
   <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
-  <%= javascript_tag "$('.author_save_btn').live('click', toggle_fields);" -%>
+  <%= javascript_tag "$('.author_save_btn').live('click', disable_fields);" -%>
+  <%= javascript_tag "$('.author_edit_btn').live('click', enable_fields);" -%>
 <%- end -%>
 
 <div id="authors" class="fields">
@@ -29,7 +30,7 @@
     <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_institution") %></p>
     <p><%= f.text_field :email, {:class => ("readonly" unless params[:action] == "new") }  %></p>
     <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_email") %></p>
-    
+
     <%= hidden_field_tag(:search_author_class, '', :name => form_tag_name(f.object_name,:search_author_class ), :id => form_tag_id( f.object_name, :search_author_class )) -%>
 
     <%= hidden_field_tag(:search_author_id, '', :name => form_tag_name(f.object_name,:search_author_id ), :id => form_tag_id( f.object_name, :search_author_id )) -%>
@@ -38,6 +39,9 @@
   <div>
     <p>
       <%= button_to_function l(:label_save_author), '', :id => form_tag_id(f.object_name, :edit_save_button), :class => 'author_save_btn' -%>
+
+      <%= button_to_function l(:label_edit_author), '', :id => form_tag_id(f.object_name, :edit_button), :class => 'author_edit_btn' -%>
+
       <%= link_to_remove_fields l("remove_author"), f %>
     </p>
   </div>
