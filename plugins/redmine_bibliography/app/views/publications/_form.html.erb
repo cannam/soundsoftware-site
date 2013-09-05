@@ -1,4 +1,18 @@
 <%= error_messages_for 'publication' %>
+    <%= javascript_tag "
+        $('#publication_bibtex_entry_attributes_entry_type').live('change', function() {
+            $this = $(this);
+            $.ajax({
+                type: 'get',
+                url: '#{url_for(:controller => :publications, :action => :show_bibtex_fields)}',
+                data: {
+                    value: $this.val()
+                },
+                dataType: 'script'
+            });
+            return false;
+        });"
+    -%>
 
 <h3><%= f.text_field :title, :required => true, :size => 70 %></h3>
 

@@ -1,7 +1,7 @@
 <% content_for :header_tags do %>
     <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
-    <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' %>
     <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+    <%= javascript_tag "$(document).ready(function() { $('#publication_bibtex_entry_attributes_entry_type').trigger('change'); });" %>
 <% end %>
 
 <h2><%=l(:label_publication_show)%></h2>
@@ -16,3 +16,4 @@
   <%= link_to l(:label_publication_show), { :controller => "publications", :action => "show", :id => @publication, :project_id => @project_id } %> |
   <%= link_to l(:label_publication_index), { :controller => "publications", :action => "index", :project_id => @project } %>
 </p>
+
