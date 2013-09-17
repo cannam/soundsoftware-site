@@ -1,18 +1,27 @@
+// bibliography.js
 
-$("#publication_bibtex_entry_attributes_entry_type").live("change", function() {
-    $this = $(this);
+function disable_fields(){
+	$this = $(this);
+	$author_info = $this.closest('div').prev();
+	$author_info.children('.description').toggle();
+	$author_info.find('p :input').attr("readonly", true);
+    $author_info.find('p :input').addClass('readonly');
 
-    $.ajax({
-        type: "get",
-        url: "/publications/show_bibtex_fields",
-        data: {
-            value: $this.val()
-        },
-        dataType: "script"
-    });
+    $this.siblings('.author_edit_btn').show();
+    $this.hide();
 
     return false;
-});
-$(document).ready(function() {
-    $("#publication_bibtex_entry_attributes_entry_type").trigger('change');
-});
+}
+
+function enable_fields(){
+    $this = $(this);
+    $author_info = $this.closest('div').prev();
+    $author_info.children('.description').toggle();
+    $author_info.find('p :input').attr("readonly", false);
+    $author_info.find('p :input').removeClass('readonly');
+
+    $this.siblings('.author_save_btn').show();
+    $this.hide();
+
+    return false;
+}
