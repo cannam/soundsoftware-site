@@ -1,10 +1,3 @@
-<%- content_for :header_tags do -%>
-  <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
-  <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
-  <%= javascript_tag "$('.author_save_btn').live('click', disable_fields);" -%>
-  <%= javascript_tag "$('.author_edit_btn').live('click', enable_fields);" -%>
-<%- end -%>
-
 <div id="authors" class="fields">
   <div id="<%= form_tag_id( f.object_name, :search_author ) %>" >
     <p>
