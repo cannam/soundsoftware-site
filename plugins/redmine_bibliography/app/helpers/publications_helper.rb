@@ -21,9 +21,6 @@ module PublicationsHelper
     s.html_safe
   end
 
-
-
-
   def link_to_remove_fields(name, f)
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", :class => 'icon icon-del')
   end
@@ -31,8 +28,10 @@ module PublicationsHelper
   def link_to_add_author_fields(name, f, association, action)
     new_object = f.object.class.reflect_on_association(association).klass.new
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
+      # renders _authorship_fields.html.erb
       render(association.to_s.singularize + "_fields", :f => builder)
     end
+
     link_to_function(name, "add_author_fields(this, '#{association}', '#{escape_javascript(fields)}', '#{action}')", { :class => 'icon icon-add', :id => "add_another_author" })
   end
 
@@ -58,32 +57,6 @@ module PublicationsHelper
     str = object_name.split("\[").last().gsub("\]","")
     str.to_sym
   end
-
-  #######
-  ### DELETE ME
-
-  def choose_author_link(object_name, items)
-    # called by autocomplete_for_author (publications' action/view)
-    # creates the select list based on the results array
-    # results is an array with both Users and Authorships objects
-
-    @author_options = []
-    @results.each do |result|
-      email_bit = result.mail.partition('@')[2]
-      if email_bit != ""
-          email_bit = "(@#{email_bit})"
-      end
-      @author_options << ["#{result.name} #{email_bit}", "#{result.class.to_s}_#{result.id.to_s}"]
-    end
-
-   if @results.size > 0
-     s = select_tag( form_tag_name(object_name, :author_search_results), options_for_select(@author_options), { :id => form_tag_id(object_name, :author_search_results), :size => 3} )
-   else
-     s = "<em>No Authors found that match your search… sorry!</em>"
-   end
-  end
-
-
 
   def render_authorships_list(publication)
     s = '<p>'
