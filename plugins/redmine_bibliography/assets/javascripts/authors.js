@@ -3,10 +3,6 @@ function add_author_fields(link, association, content, action) {
     var regexp = new RegExp("new_" + association, "g");
 
     $(link).before(content.replace(regexp, new_id));
-
-    if(action != "new"){
-        toggle_save_author(new_id, $(link));
-    }
 }
 
 function remove_fields(link) {
@@ -57,17 +53,3 @@ $("input[id$='identify_author_no']").live("click", function() {
     $this.closest('div').next().find("input[id$='search_author_class']").val('');
 });
 
-function toggle_div(div_id){
-    $("#" + div_id).toggle(0.3);
-}
-
-function toggle_save_author(form_object_id, $this){
-    $('publication_authorships_attributes_' + form_object_id + '_edit_author_info').select('input').each(function(s) {
-	toggle_input_field(s, $this);
-    });
-    $('publication_authorships_attributes_' + form_object_id + '_edit_author_info').select('p.description').each(function(s) {
-	s.toggle();
-    });
-    toggle_edit_save_button(form_object_id);
-    toggle_div("publication_authorships_attributes_" + form_object_id +"_search_author");
-}
