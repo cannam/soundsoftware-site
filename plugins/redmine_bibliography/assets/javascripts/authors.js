@@ -17,12 +17,7 @@ $(".author_search").live('keyup.autocomplete', function(){
         source: '/publications/autocomplete_for_author',
         minLength: 2,
         focus: function(event, ui) {
-            $this.closest('div').next().find("input[id$='name_on_paper']").val(ui.item.name);
-            $this.closest('div').next().find("input[id$='institution']").val(ui.item.institution);
-            $this.closest('div').next().find("input[id$='email']").val(ui.item.email);
-            $this.closest('div').next().find("input[id$='search_author_class']").val(ui.item.search_author_class);
-            $this.closest('div').next().find("input[id$='search_author_id']").val(ui.item.search_author_id);
-
+            $this.val(ui.item.label);
             return false;
         },
         select: function(event, ui){
@@ -34,10 +29,10 @@ $(".author_search").live('keyup.autocomplete', function(){
         }
         })
         .data( "autocomplete" )._renderItem = function( ul, item ) {
-            return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a>" + item.label + "</a>" )
-                .appendTo( ul );
+            return $( "<li>" )
+                .data("item.autocomplete", item )
+                .append( "<a>" + item.label + "<br><em>" + item.email + "</em><br>" + item.intitution + "</a>" )
+                .appendTo(ul);
             };
         });
 

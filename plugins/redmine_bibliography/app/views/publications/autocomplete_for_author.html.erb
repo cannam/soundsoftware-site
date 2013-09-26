@@ -1,5 +1,5 @@
 <%= raw @results.map {|result| {
-    'label' => "#{result.name} <em>#{result.mail.partition('@')[2]}</em>",
+    'label' => result.name,
     'value' => result.name,
     'search_author_class' => result.class.name,
     'search_author_id' => result.id,
