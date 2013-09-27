@@ -9,9 +9,13 @@ class Authorship < ActiveRecord::Base
 
   validates_presence_of :name_on_paper
 
-  attr_accessor :search_author_class, :search_author_id, :search_name, :search_results, :identify_author
+  attr_writer :search_author_id, :search_author_class
+  attr_writer :search_author_tie
 
-  before_create :associate_author_user
+  ### attr_accessor :search_results, :identify_author
+  ## attr_writer :search_author_class
+
+  before_create :set_author
   before_update :delete_publication_cache
 
   # tod: review scope of ordering
@@ -34,6 +38,35 @@ class Authorship < ActiveRecord::Base
     }
   }
 
+  def search_author_class
+    # Authorship must always have an Author
+    # unless it hasn't been saved yet
+    # using default setter (attr_writer)
+
+    if self.author.nil?
+      return ""
+    else
+      return "Author"
+    end
+  end
+
+  def search_author_id
+    if self.author.nil?
+      return ""
+    else
+      return self.author_id
+    end
+  end
+
+  def search_author_tie
+    if self.author.nil?
+      return false
+    else
+      return true
+    end
+
+  end
+
   def name
     return self.name_on_paper
   end
@@ -54,35 +87,46 @@ class Authorship < ActiveRecord::Base
     Rails.cache.delete "publication-#{publication.id}-bibtex"
   end
 
-  def associate_author_user
+  def set_author
+    # if an author, simply associates with it
+    # if an user, checks if it has already an author associated with it
+    # if so, assicoates with that author
+    # otherwise, creates a new author
+
+    logger.error { "%%%%%%%%%%%%%%% Associate Author User %%%%%%%%%%%%%%" }
+
+    logger.error { "EU #{self.to_yaml}" }
+    logger.error { "Class: #{search_author_class}" }
+    logger.error { "ID #{search_author_id}" }
+
     case self.search_author_class
     when ""
-      logger.debug { "Unknown Author to be added..." }
-    when "User"
+      logger.debug { "Adding new author to the database." }
       author = Author.new
       author.save
-      self.author_id = author.id
+
+    when "User"
+      # get user id
+      user = User.find(self.search_author_id)
+      logger.error { "Found user with this ID: #{user.id}" }
+
+      if user.author.nil?
+        logger.error { "The user has no author... creating one!" }
+
+        # User w/o author:
+        # create new author and update user
+        author = Author.new
+        author.save
+        user << author
+      else
+        logger.error { "found an author!" }
+        author = user.author
+      end
 
     when "Author"
-      selected = self.search_results
-      selected_classname = Kernel.const_get(self.search_author_class)
-      selected_id = self.search_author_id
-      object = selected_classname.find(selected_id)
-
-      if object.respond_to? :name_on_paper
-        # Authorship
-        self.author_id = object.author.id
-      else
-        # User
-        unless object.author.nil?
-          self.author_id = object.author.id
-        else
-          author = Author.new
-          object.author = author
-          object.save
-          self.author_id = object.author.id
-        end
-      end
+      author = Author.find(self.search_author_id)
     end
+
+    self.author = author
   end
 end

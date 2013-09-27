@@ -2,8 +2,9 @@
 
 function disable_fields(){
 	$this = $(this);
+
 	$author_info = $this.closest('div').prev();
-	$author_info.children('.description').toggle();
+//    $author_info.children('.description').toggle();
 	$author_info.find('p :input').attr("readonly", true);
     $author_info.find('p :input').addClass('readonly');
 
@@ -15,8 +16,9 @@ function disable_fields(){
 
 function enable_fields(){
     $this = $(this);
+
     $author_info = $this.closest('div').prev();
-    $author_info.children('.description').toggle();
+//    $author_info.children('.description').toggle();
     $author_info.find('p :input').attr("readonly", false);
     $author_info.find('p :input').removeClass('readonly');
 
@@ -25,3 +27,4 @@ function enable_fields(){
 
     return false;
 }
+

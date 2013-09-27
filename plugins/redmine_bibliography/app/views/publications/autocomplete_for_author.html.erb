@@ -1,10 +1,11 @@
-<%= raw @results.map {|result| {
+<%= raw @results.map { |result|
+    {
     'label' => result.name,
     'value' => result.name,
     'search_author_class' => result.class.name,
     'search_author_id' => result.id,
     'name' => result.name,
     'institution' => result.institution,
-    'email' => result.mail,
+    'email' => result.mail
     }
 }.to_json %>

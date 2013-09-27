@@ -106,7 +106,6 @@ module PublicationsHelper
     end
   end
 
-
   def show_bibtex_fields(bibtex_entry)
     s = ""
     bibtex_entry.attributes.keys.sort.each do |key|
@@ -124,4 +123,3 @@ module PublicationsHelper
     s
   end
 end
-

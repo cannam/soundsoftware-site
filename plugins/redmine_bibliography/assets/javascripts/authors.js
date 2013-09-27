@@ -10,7 +10,7 @@ function remove_fields(link) {
   $(link).closest(".fields").hide();
 }
 
-$(".author_search").live('keyup.autocomplete', function(){
+$(".author_name_on_paper").live('keyup.autocomplete', function(){
      $this = $(this);
 
      $this.autocomplete({
@@ -21,11 +21,17 @@ $(".author_search").live('keyup.autocomplete', function(){
             return false;
         },
         select: function(event, ui){
-            $this.closest('div').next().find("input[id$='name_on_paper']").val(ui.item.name);
-            $this.closest('div').next().find("input[id$='institution']").val(ui.item.institution);
-            $this.closest('div').next().find("input[id$='email']").val(ui.item.email);
-            $this.closest('div').next().find("input[id$='search_author_class']").val(ui.item.search_author_class);
-            $this.closest('div').next().find("input[id$='search_author_id']").val(ui.item.search_author_id);
+            $this.closest('div').find("input[id$='institution']").val(ui.item.institution);
+            $this.closest('div').find("input[id$='email']").val(ui.item.email);
+
+            $this.closest('div').find("input[id$='search_author_class']").val(ui.item.search_author_class);
+            $this.closest('div').find("input[id$='search_author_id']").val(ui.item.search_author_id);
+            $this.closest('div').find("input[id$='search_author_tie']").attr('checked', 'checked');
+
+
+
+            // triggers the save button
+            $this.closest('div').next('div').find('.author_save_btn').click();
         }
         })
         .data( "autocomplete" )._renderItem = function( ul, item ) {
@@ -35,16 +41,4 @@ $(".author_search").live('keyup.autocomplete', function(){
                 .appendTo(ul);
             };
         });
-
-
-$("input[id$='identify_author_yes']").live("click", function() {
-    console.log("aaaa");
-});
-
-$("input[id$='identify_author_no']").live("click", function() {
-    $this.closest('div').next().find("input[id$='name_on_paper']").val('');
-    $this.closest('div').next().find("input[id$='institution']").val('');
-    $this.closest('div').next().find("input[id$='email']").val('');
-    $this.closest('div').next().find("input[id$='search_author_class']").val('');
-});
 

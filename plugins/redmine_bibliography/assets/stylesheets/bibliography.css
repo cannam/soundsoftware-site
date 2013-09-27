@@ -20,18 +20,13 @@ li .handle {
 }
 
 .tabular .author_edit .description {
-    padding-top: 0;
     font-style: italic;
+    font-size: small;
 }
 
 .publication_project {
     margin-right: 18px;
 }
-
-#authors select {
-    min-width: 150px;
-}
-
 
 div#bibliography dd { margin-bottom: 1em; font-size: 0.9em; }
 
@@ -74,4 +69,3 @@ input.author_search.ajax-loading {
 .author_edit_btn {
   display:none;
 }
-
