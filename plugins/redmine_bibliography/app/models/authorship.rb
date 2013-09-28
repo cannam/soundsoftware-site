@@ -44,12 +44,12 @@ class Authorship < ActiveRecord::Base
     # using default setter (attr_writer)
 
     if self.author.nil?
-      @search_author_class = ""
+      aclass = ""
     else
-      @search_author_class = "Author"
+      aclass = "Author"
     end
 
-    @search_author_class
+    @search_author_class || aclass
   end
 
   # def search_author_class=(search_author_class)
@@ -58,19 +58,22 @@ class Authorship < ActiveRecord::Base
 
   def search_author_id
     if self.author.nil?
-      "xxx"
+      authid = "xxx"
     else
-      author_id
+      authid = author_id
     end
+
+    @search_author_id || authid
   end
 
   def search_author_tie
     if self.author.nil?
-      return false
+      auth_tie = false
     else
-      return true
+      auth_tie = true
     end
 
+    @search_author_tie || auth_tie
   end
 
   def name
