@@ -58,7 +58,7 @@ class Authorship < ActiveRecord::Base
 
   def search_author_id
     if self.author.nil?
-      authid = "xxx"
+      authid = ""
     else
       authid = author_id
     end
