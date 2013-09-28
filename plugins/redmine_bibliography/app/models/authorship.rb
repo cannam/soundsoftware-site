@@ -9,13 +9,13 @@ class Authorship < ActiveRecord::Base
 
   validates_presence_of :name_on_paper
 
-  attr_writer :search_author_id, :search_author_class
+  attr_writer :search_author_id , :search_author_class
   attr_writer :search_author_tie
 
   ### attr_accessor :search_results, :identify_author
   ## attr_writer :search_author_class
 
-  before_create :set_author
+  before_save :set_author
   before_update :delete_publication_cache
 
   # tod: review scope of ordering
@@ -44,17 +44,23 @@ class Authorship < ActiveRecord::Base
     # using default setter (attr_writer)
 
     if self.author.nil?
-      return ""
+      @search_author_class = ""
     else
-      return "Author"
+      @search_author_class = "Author"
     end
+
+    @search_author_class
   end
+
+  # def search_author_class=(search_author_class)
+  #  @search_author_class = search_author_class
+  # end
 
   def search_author_id
     if self.author.nil?
-      return ""
+      "xxx"
     else
-      return self.author_id
+      author_id
     end
   end
 
@@ -87,6 +93,8 @@ class Authorship < ActiveRecord::Base
     Rails.cache.delete "publication-#{publication.id}-bibtex"
   end
 
+  private
+
   def set_author
     # if an author, simply associates with it
     # if an user, checks if it has already an author associated with it
@@ -95,11 +103,11 @@ class Authorship < ActiveRecord::Base
 
     logger.error { "%%%%%%%%%%%%%%% Associate Author User %%%%%%%%%%%%%%" }
 
-    logger.error { "EU #{self.to_yaml}" }
-    logger.error { "Class: #{search_author_class}" }
-    logger.error { "ID #{search_author_id}" }
+    logger.error { "Me #{self.to_yaml}" }
+    logger.error { "Class: #{@search_author_class}" }
+    logger.error { "ID #{@search_author_id}" }
 
-    case self.search_author_class
+    case @search_author_class
     when ""
       logger.debug { "Adding new author to the database." }
       author = Author.new
@@ -107,7 +115,7 @@ class Authorship < ActiveRecord::Base
 
     when "User"
       # get user id
-      user = User.find(self.search_author_id)
+      user = User.find(@search_author_id)
       logger.error { "Found user with this ID: #{user.id}" }
 
       if user.author.nil?
@@ -124,7 +132,7 @@ class Authorship < ActiveRecord::Base
       end
 
     when "Author"
-      author = Author.find(self.search_author_id)
+      author = Author.find(@search_author_id)
     end
 
     self.author = author
