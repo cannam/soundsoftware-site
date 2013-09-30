@@ -128,7 +128,8 @@ class Authorship < ActiveRecord::Base
         # create new author and update user
         author = Author.new
         author.save
-        user << author
+        user.author = author
+        user.save
       else
         logger.error { "found an author!" }
         author = user.author
