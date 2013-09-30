@@ -199,17 +199,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # parses the bibtex file
-  def parse_bibtex_file
-
-  end
-
-  def import
-    @publication = Publication.new
-
-
-  end
-
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
 
@@ -295,6 +284,7 @@ class PublicationsController < ApplicationController
 
   def destroy
     find_project_by_project_id
+
 
     @publication.destroy
 
