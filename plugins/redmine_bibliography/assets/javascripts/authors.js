@@ -28,8 +28,6 @@ $(".author_name_on_paper").live('keyup.autocomplete', function(){
             $this.closest('div').find("input[id$='search_author_id']").val(ui.item.search_author_id);
             $this.closest('div').find("input[id$='search_author_tie']").attr('checked', 'checked');
 
-
-
             // triggers the save button
             $this.closest('div').next('div').find('.author_save_btn').click();
         }
@@ -37,7 +35,7 @@ $(".author_name_on_paper").live('keyup.autocomplete', function(){
         .data( "autocomplete" )._renderItem = function( ul, item ) {
             return $( "<li>" )
                 .data("item.autocomplete", item )
-                .append( "<a>" + item.label + "<br><em>" + item.email + "</em><br>" + item.intitution + "</a>" )
+                .append( "<a>" + item.label + "<br><em>" + item.email + "</em><br>" + item.institution + "</a>" )
                 .appendTo(ul);
             };
         });

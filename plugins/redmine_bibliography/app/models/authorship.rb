@@ -52,10 +52,6 @@ class Authorship < ActiveRecord::Base
     @search_author_class || aclass
   end
 
-  # def search_author_class=(search_author_class)
-  #  @search_author_class = search_author_class
-  # end
-
   def search_author_id
     if self.author.nil?
       authid = ""
@@ -99,44 +95,42 @@ class Authorship < ActiveRecord::Base
   private
 
   def set_author
-    # if an author, simply associates with it
-    # if an user, checks if it has already an author associated with it
-    # if so, assicoates with that author
-    # otherwise, creates a new author
+    # do we want to associate the authorship
+    #  with an existing author/user?
+    if @search_author_tie
+      # if an author, simply associates with it
+      # if an user, checks if it has already an author associated with it
+      #   if so, associates with that author
+      #   otherwise, creates a new author
 
-    logger.error { "%%%%%%%%%%%%%%% Associate Author User %%%%%%%%%%%%%%" }
-
-    logger.error { "Me #{self.to_yaml}" }
-    logger.error { "Class: #{@search_author_class}" }
-    logger.error { "ID #{@search_author_id}" }
-
-    case @search_author_class
-    when ""
-      logger.debug { "Adding new author to the database." }
-      author = Author.new
-      author.save
-
-    when "User"
-      # get user id
-      user = User.find(@search_author_id)
-      logger.error { "Found user with this ID: #{user.id}" }
-
-      if user.author.nil?
-        logger.error { "The user has no author... creating one!" }
-
-        # User w/o author:
-        # create new author and update user
+      case @search_author_class
+      when ""
         author = Author.new
         author.save
-        user.author = author
-        user.save
-      else
-        logger.error { "found an author!" }
-        author = user.author
+
+      when "User"
+        user = User.find(@search_author_id)
+
+        if user.author.nil?
+          # User w/o author:
+          # create new author and update user
+          author = Author.new
+          author.save
+          user.author = author
+          user.save
+        else
+          author = user.author
+        end
+
+      when "Author"
+        author = Author.find(@search_author_id)
       end
 
-    when "Author"
-      author = Author.find(@search_author_id)
+    # if we don't want to associate with an existing author/user
+    else
+      # todo: should we delete any previously existing relationship?
+      author = Author.new
+      author.save
     end
 
     self.author = author

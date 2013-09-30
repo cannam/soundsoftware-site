@@ -66,6 +66,7 @@ input.author_search.ajax-loading {
   background-image: url(../../../images/loading.gif);
 }
 
-.author_edit_btn {
-  display:none;
+.authorship_tie {
+  display: none;
+  float: left;
 }
