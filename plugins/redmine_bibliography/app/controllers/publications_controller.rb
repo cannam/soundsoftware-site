@@ -283,8 +283,8 @@ class PublicationsController < ApplicationController
   end
 
   def destroy
-    find_project_by_project_id
-
+    find_project_by_project_id unless params[:project_id].nil?
+    @publication = Publication.find(params[:id])
 
     @publication.destroy
 
