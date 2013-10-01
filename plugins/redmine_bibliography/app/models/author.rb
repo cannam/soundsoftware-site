@@ -18,4 +18,7 @@ class Author < ActiveRecord::Base
     }
   }
 
+  def institution
+    self.authorship.first.institution
+  end
 end
