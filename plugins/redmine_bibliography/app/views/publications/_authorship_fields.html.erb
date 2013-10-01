@@ -18,7 +18,7 @@
     <p>
       <%= button_to_function l(:label_save_author), '', :id => form_tag_id(f.object_name, :edit_save_button), :class => 'author_save_btn' -%>
 
-      <%= button_to_function l(:label_edit_author), '', :id => form_tag_id(f.object_name, :edit_button), :class => 'author_edit_btn' -%>
+      <%= button_to_function l(:label_edit_author), '', :id => form_tag_id(f.object_name, :edit_button), :class => 'author_edit_btn', :style => "display:none;" -%>
 
       <%= link_to_remove_fields l("remove_author"), f %>
     </p>

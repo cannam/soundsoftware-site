@@ -70,3 +70,7 @@ input.author_search.ajax-loading {
   display: none;
   float: left;
 }
+
+.author_edit_btn {
+  display: none;
+}
