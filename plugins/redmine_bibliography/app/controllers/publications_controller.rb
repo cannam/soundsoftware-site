@@ -15,15 +15,10 @@ class PublicationsController < ApplicationController
     # we'll always want a new publication to have its bibtex entry
     @publication.build_bibtex_entry
 
-    # and at least one author
-    # @publication.authorships.build.build_author
-    @author_options = [["#{User.current.name} (@#{User.current.mail.partition('@')[2]})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
   end
 
   def create
     @project = Project.find(params[:project_id])
-
-    @author_options = []
 
     @publication = Publication.new(params[:publication])
     @publication.projects << @project unless @project.nil?
@@ -91,14 +86,11 @@ class PublicationsController < ApplicationController
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
 
-    @author_options = []
-
     @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)
   end
 
   def update
     @publication = Publication.find(params[:id])
-    @author_options = []
 
     if @publication.update_attributes(params[:publication])
       flash[:notice] = "Successfully updated Publication."
