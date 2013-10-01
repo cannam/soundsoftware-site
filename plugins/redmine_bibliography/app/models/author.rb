@@ -34,13 +34,12 @@ class Author < ActiveRecord::Base
     end
   end
 
+  # todo: need to fix the name getter
   def name
-    if self.name.nil?
-      if self.authorships.first.nil?
-        ""
-      else
-        self.authorships.first.name
-      end
+    if self.authorships.first.nil?
+      ""
+    else
+      self.authorships.first.name
     end
   end
 
