@@ -26,7 +26,9 @@ $(".author_name_on_paper").live('keyup.autocomplete', function(){
 
             $this.closest('div').find("input[id$='search_author_class']").val(ui.item.search_author_class);
             $this.closest('div').find("input[id$='search_author_id']").val(ui.item.search_author_id);
+
             $this.closest('div').find("input[id$='search_author_tie']").attr('checked', 'checked');
+            $this.closest('div').find("input[id$='search_author_tie']").next('span').replaceWith(ui.item.authorship_link);
 
             // triggers the save button
             $this.closest('div').next('div').find('.author_save_btn').click();

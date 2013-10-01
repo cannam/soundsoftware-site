@@ -6,8 +6,8 @@
     <p><%= f.text_field :email -%></p>
 
     <p class="author_associated search_author_tie">
-      <%= f.check_box :search_author_tie -%>
-      <span class="author_associated_name"></span>
+      <%= f.check_box :search_author_tie, :label => '' -%>
+      <span>Not associated with any SoundSoftware site user.</span>
     </p>
 
     <%= f.hidden_field :search_author_class -%>

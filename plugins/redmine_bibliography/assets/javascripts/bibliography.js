@@ -8,6 +8,9 @@ function disable_fields(){
 	$author_info.find('p :input').attr("readonly", true);
     $author_info.find('p :input').addClass('readonly');
 
+    // Always hides on save
+    $this.closest('div').prev().find('p.search_author_tie').hide();
+
     $this.siblings('.author_edit_btn').show();
     $this.hide();
 
@@ -21,6 +24,9 @@ function enable_fields(){
 //    $author_info.children('.description').toggle();
     $author_info.find('p :input').attr("readonly", false);
     $author_info.find('p :input').removeClass('readonly');
+
+    // Always shows on edit
+    $this.closest('div').prev().find('p.search_author_tie').show();
 
     $this.siblings('.author_save_btn').show();
     $this.hide();

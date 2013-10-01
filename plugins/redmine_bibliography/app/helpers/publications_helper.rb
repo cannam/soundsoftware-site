@@ -123,3 +123,26 @@ module PublicationsHelper
     s
   end
 end
+
+
+def render_authorship_link(link_class, link_id)
+
+  # Renders a link for an author used when adding authors for a publication
+  # link_class can be either User or Author
+  # link_id will be the id of the Author/User we wish to link
+
+  s= ""
+
+  if link_class == "Author"
+    s << link_to_author(Author.find(link_id), {}, :class => 'author_link')
+  else
+    s << link_to_user(User.find(link_id), :class => 'publication_project')
+  end
+
+  confirm_msg = "Are you sure you want to remove the link between this publication's author and this code.soundsoftware.ac.uk site user?"
+
+  ## s << link_to(l(:button_delete), { :url => { :controller => 'publications', :action => 'remove_project', :id => publication, :remove_project_id => proj,  :project_id => @project }, :method => :post, :confirm => confirm_msg }, :class => 'icon icon-del', :remote => :true)
+
+  s.html_safe
+end
+
