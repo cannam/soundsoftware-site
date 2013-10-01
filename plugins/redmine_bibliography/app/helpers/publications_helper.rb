@@ -134,9 +134,9 @@ def render_authorship_link(link_class, link_id)
   s= ""
 
   if link_class == "Author"
-    s << link_to_author(Author.find(link_id), {}, :class => 'author_link')
+    s << link_to_author(Author.find(link_id.to_i))
   else
-    s << link_to_user(User.find(link_id), :class => 'publication_project')
+    s << link_to_user(User.find(link_id.to_i))
   end
 
   s.html_safe
