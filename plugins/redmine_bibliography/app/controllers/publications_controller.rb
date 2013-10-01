@@ -214,26 +214,21 @@ class PublicationsController < ApplicationController
     @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
 
     # cc 20110909 -- revert to like instead of like_unique -- see #289
-    authorships_list = Authorship.like(params[:term]).find(:all, :limit => 100)
+    authorships_list = Authorship.like(params[:term]).group('author_id').find(:all, :limit => 100)
+
+    authors_list = authorships_list.collect do |x| x.author end
+
     users_list = User.active.like(params[:term]).find(:all, :limit => 100)
 
-    logger.debug "Query for \"#{params[:term]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
+    logger.debug "Query for \"#{params[:term]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\" users"
 
-    @results = users_list
+    # will check if any of the members of the users list
+    #  doesn't belong to the authors list
 
-    # TODO: can be optimized…
-    authorships_list.each do |authorship|
-      flag = true
+    @results = authors_list
 
-      users_list.each do |user|
-        if authorship.name == user.name && authorship.email == user.mail && authorship.institution == user.institution
-          Rails.logger.debug { "Rejecting Authorship #{authorship.id}" }
-          flag = false
-          break
-        end
-      end
-
-      @results << authorship if flag
+    users_list.each do |user|
+      @results << user unless authors_list.include?(user.author)
     end
 
     render :layout => false
