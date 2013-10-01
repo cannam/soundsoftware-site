@@ -16,6 +16,8 @@
                             dataType: 'script'
                         }); return false; });" -%>
 
+  <%= javascript_tag "authorship_autocomplete('#{url_for :controller => :publications, :action => :autocomplete_for_author}');" -%>
+
 <% end %>
 
 <%= error_messages_for 'publication' %>
