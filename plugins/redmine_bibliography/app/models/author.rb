@@ -34,4 +34,12 @@ class Author < ActiveRecord::Base
     end
   end
 
+  def name
+    if self.authorships.first.nil?
+      ""
+    else
+      self.authorships.first.name
+    end
+  end
+
 end

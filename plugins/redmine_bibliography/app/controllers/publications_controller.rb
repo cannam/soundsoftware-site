@@ -231,6 +231,8 @@ class PublicationsController < ApplicationController
       @results << user unless authors_list.include?(user.author)
     end
 
+    logger.debug { "Autocomplete_for_author results --> #{@results}" }
+
     render :layout => false
   end
 
