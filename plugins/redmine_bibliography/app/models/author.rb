@@ -19,6 +19,10 @@ class Author < ActiveRecord::Base
   }
 
   def institution
-    self.authorship.first.institution
+    if self.authorships.first.nil?
+      ""
+    else
+      self.authorships.first.institution
+    end
   end
 end
