@@ -168,9 +168,6 @@ class PublicationsController < ApplicationController
     @publication.bibtex_entry = @bentry
     @publication.save
 
-    # what is this for???
-    # @created_publications << @publication.id
-
     # need to save all authors
     #   and establish the author-publication association
     #   via the authorships table
