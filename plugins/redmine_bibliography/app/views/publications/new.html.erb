@@ -26,7 +26,7 @@
 
 <h2><%=l(:label_publication_new)%></h2>
 
-<%= labelled_form_for @publication, :url => { :project_id  => @project, :action => :create } do |f| -%>
+<%= form_for @publication, :url => { :project_id  => @project, :action => :create } do |f| -%>
 
     <%= render :partial => 'form', :locals => { :f => f }  %>
 
