@@ -1,49 +1,26 @@
-<%- content_for :header_tags do -%>
-  <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
-  <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
-  <%= javascript_tag "$('.author_save_btn').live('click', disable_fields);" -%>
-  <%= javascript_tag "$('.author_edit_btn').live('click', enable_fields);" -%>
-<%- end -%>
-
 <div id="authors" class="fields">
-  <div id="<%= form_tag_id( f.object_name, :search_author ) %>" style=<%= "display:none;" unless params[:action] == "new" %> >
-    <p>
-      <%= f.text_field :search_name, :size => 25, :class => "author_search" %>
+  <div class="author_edit" id="<%= form_tag_id( f.object_name, :edit_author_info ) %>">
+
+    <p><%= f.label :name_on_paper %><%= f.text_field :name_on_paper, :class => "author_name_on_paper" -%></p>
+    <p><%= f.label :institution %><%= f.text_field :institution -%></p>
+    <p><%= f.label :email %><%= f.text_field :email -%></p>
+
+    <p class="author_associated search_author_tie">
+      <%= f.check_box :search_author_tie, :label => '' -%>
+      <span>Not associated with any SoundSoftware site user.</span>
     </p>
 
-    <p style="margin-bottom: -2.5em; padding-bottom; 0"><label><%= l(:identify_author_question) %></label></p>
-
-    <p class="author_identify">
-      <label class='inline'><%= radio_button_tag(:identify_author, "yes", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_yes )) %> <%= l(:identify_author_yes) %> </label><br />
-
-    <label class='inline'><%= radio_button_tag(:identify_author, "correct", false, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_corrections )) %> <%= l(:identify_author_correct) %> </label><br />
-
-    <label class='inline'><%= radio_button_tag(:identify_author, "no", true, :name => form_tag_name(f.object_name,:identify_author ), :id => form_tag_id( f.object_name, :identify_author_no )) %> <%= l(:identify_author_no) %> </label><br />
-    </p>
-    </div>
-
-  <div class='author_edit' id="<%= form_tag_id( f.object_name, :edit_author_info ) %>">
-    <p><%= f.text_field :name_on_paper, {:class => ("readonly" unless params[:action] == "new") } %></p>
-    <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_name_on_paper") %></p>
-
-    <p><%= f.text_field :institution, {:class => ("readonly" unless params[:action] == "new") }  %></p>
-    <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_institution") %></p>
-    <p><%= f.text_field :email, {:class => ("readonly" unless params[:action] == "new") }  %></p>
-    <p class='description' style=<%= "display:none;" unless params[:action] == "new" %>><%= h l("text_author_email") %></p>
-
-    <%= hidden_field_tag(:search_author_class, '', :name => form_tag_name(f.object_name,:search_author_class ), :id => form_tag_id( f.object_name, :search_author_class )) -%>
-
-    <%= hidden_field_tag(:search_author_id, '', :name => form_tag_name(f.object_name,:search_author_id ), :id => form_tag_id( f.object_name, :search_author_id )) -%>
+    <%= f.hidden_field :search_author_class -%>
+    <%= f.hidden_field :search_author_id -%>
   </div>
 
   <div>
     <p>
       <%= button_to_function l(:label_save_author), '', :id => form_tag_id(f.object_name, :edit_save_button), :class => 'author_save_btn' -%>
 
-      <%= button_to_function l(:label_edit_author), '', :id => form_tag_id(f.object_name, :edit_button), :class => 'author_edit_btn' -%>
+      <%= button_to_function l(:label_edit_author), '', :id => form_tag_id(f.object_name, :edit_button), :class => 'author_edit_btn', :style => "display:none;" -%>
 
       <%= link_to_remove_fields l("remove_author"), f %>
     </p>
   </div>
 </div>
-

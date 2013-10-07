@@ -15,15 +15,10 @@ class PublicationsController < ApplicationController
     # we'll always want a new publication to have its bibtex entry
     @publication.build_bibtex_entry
 
-    # and at least one author
-    # @publication.authorships.build.build_author
-    @author_options = [["#{User.current.name} (@#{User.current.mail.partition('@')[2]})", "#{User.current.class.to_s}_#{User.current.id.to_s}"]]
   end
 
   def create
     @project = Project.find(params[:project_id])
-
-    @author_options = []
 
     @publication = Publication.new(params[:publication])
     @publication.projects << @project unless @project.nil?
@@ -91,14 +86,11 @@ class PublicationsController < ApplicationController
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
 
-    @author_options = []
-
     @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)
   end
 
   def update
     @publication = Publication.find(params[:id])
-    @author_options = []
 
     if @publication.update_attributes(params[:publication])
       flash[:notice] = "Successfully updated Publication."
@@ -176,9 +168,6 @@ class PublicationsController < ApplicationController
     @publication.bibtex_entry = @bentry
     @publication.save
 
-    # what is this for???
-    # @created_publications << @publication.id
-
     # need to save all authors
     #   and establish the author-publication association
     #   via the authorships table
@@ -199,17 +188,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-  # parses the bibtex file
-  def parse_bibtex_file
-
-  end
-
-  def import
-    @publication = Publication.new
-
-
-  end
-
   def autocomplete_for_project
     @publication = Publication.find(params[:id])
 
@@ -225,58 +203,26 @@ class PublicationsController < ApplicationController
     @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
 
     # cc 20110909 -- revert to like instead of like_unique -- see #289
-    authorships_list = Authorship.like(params[:term]).find(:all, :limit => 100)
+    authorships_list = Authorship.like(params[:term]).group('author_id').find(:all, :limit => 100)
+
+    authors_list = authorships_list.collect do |x| x.author end
+
     users_list = User.active.like(params[:term]).find(:all, :limit => 100)
 
-    logger.debug "Query for \"#{params[:term]}\" returned \"#{authorships_list.size}\" authorships and \"#{users_list.size}\" users"
+    logger.debug "Query for \"#{params[:term]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\" users"
 
-    @results = users_list
+    # will check if any of the members of the users list
+    #  doesn't belong to the authors list
 
-    # TODO: can be optimized…
-    authorships_list.each do |authorship|
-      flag = true
+    @results = authors_list
 
-      users_list.each do |user|
-        if authorship.name == user.name && authorship.email == user.mail && authorship.institution == user.institution
-          Rails.logger.debug { "Rejecting Authorship #{authorship.id}" }
-          flag = false
-          break
-        end
-      end
-
-      @results << authorship if flag
+    users_list.each do |user|
+      @results << user unless authors_list.include?(user.author)
     end
+
+    logger.debug { "Autocomplete_for_author results --> #{@results}" }
 
     render :layout => false
-  end
-
-  def get_user_info
-    object_id = params[:object_id]
-    value = params[:value]
-    classname = Kernel.const_get(value.split('_')[0])
-
-    item = classname.find(value.split('_')[1])
-
-    name_field = "publication_authorships_attributes_#{object_id}_name_on_paper".to_sym
-    email_field = "publication_authorships_attributes_#{object_id}_email".to_sym
-    institution_field = "publication_authorships_attributes_#{object_id}_institution".to_sym
-
-    yes_radio = "publication_authorships_attributes_#{object_id}_identify_author_yes".to_sym
-
-    respond_to do |format|
-      format.js {
-        render(:update) {|page|
-          page[name_field].value = item.name
-          page[email_field].value = item.mail
-          page[institution_field].value = item.institution
-
-          page[yes_radio].checked = true
-          page[name_field].readOnly = true
-          page[email_field].readOnly = true
-          page[institution_field].readOnly = true
-        }
-      }
-    end
   end
 
   def sort_author_order
@@ -303,7 +249,6 @@ class PublicationsController < ApplicationController
     end
   end
 
-
   def remove_project
     @project = Project.find(params[:project_id])
     proj = Project.find(params[:remove_project_id])
@@ -324,7 +269,8 @@ class PublicationsController < ApplicationController
   end
 
   def destroy
-    find_project_by_project_id
+    find_project_by_project_id unless params[:project_id].nil?
+    @publication = Publication.find(params[:id])
 
     @publication.destroy
 

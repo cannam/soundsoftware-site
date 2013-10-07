@@ -4,7 +4,7 @@ module Bibliography
   module MailerPatch
       def self.included(base) # :nodoc:
 
-        # Builds a tmail object used to email the specified user that a publication was created and the user is 
+        # Builds a tmail object used to email the specified user that a publication was created and the user is
         # an author of that publication
         #
         # Example:
@@ -16,16 +16,15 @@ module Bibliography
           @project = project
 
           set_language_if_valid user.language
-          recipients user.mail
-          subject l(:mail_subject_publication_added, Setting.app_title)
-          body :publication_url => url_for( :controller => 'publications', :action => 'show', :id => publication.id ),
-              :publication_title => publication.title
 
-          render_multipart('publication_added', body)
+          mail :to => user.mail,
+          :subject => l(:mail_subject_register, Setting.app_title)
 
+          @publication_url = url_for( :controller => 'publications', :action => 'show', :id => publication.id )
+          @publication_title = publication.title
         end
-        
-        
+
+
     end
   end
 end
