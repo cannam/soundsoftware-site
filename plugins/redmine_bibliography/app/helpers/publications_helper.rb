@@ -106,7 +106,6 @@ module PublicationsHelper
     end
   end
 
-
   def show_bibtex_fields(bibtex_entry)
     s = ""
     bibtex_entry.attributes.keys.sort.each do |key|
@@ -123,5 +122,25 @@ module PublicationsHelper
     end
     s
   end
+end
+
+
+def render_authorship_link(link_class, link_id)
+
+  # Renders a link for an author used when adding authors for a publication
+  # link_class can be either User or Author
+  # link_id will be the id of the Author/User we wish to link
+
+  s= ""
+
+  if link_class == "Author"
+    url = {:controller => 'authors', :action => 'show', :id => link_id}
+    s << link_to(h(Author.find(link_id).name), url)
+  else
+    url = {:controller => 'users', :action => 'show', :id => link_id}
+    s << link_to(h(User.find(link_id).name), url)
+  end
+
+  s.html_safe
 end
 

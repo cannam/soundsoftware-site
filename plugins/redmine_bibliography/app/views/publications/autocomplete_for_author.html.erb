@@ -1,4 +1,5 @@
-<%= raw @results.map {|result| {
+<%= raw @results.map { |result|
+    {
     'label' => result.name,
     'value' => result.name,
     'search_author_class' => result.class.name,
@@ -6,5 +7,6 @@
     'name' => result.name,
     'institution' => result.institution,
     'email' => result.mail,
+    'authorship_link' => " Keep associated with #{render_authorship_link(result.class.name, result.id)}"
     }
 }.to_json %>

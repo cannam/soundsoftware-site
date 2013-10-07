@@ -18,4 +18,29 @@ class Author < ActiveRecord::Base
     }
   }
 
+  def institution
+    if self.authorships.first.nil?
+      ""
+    else
+      self.authorships.first.institution
+    end
+  end
+
+  def mail
+    if self.authorships.first.nil?
+      ""
+    else
+      self.authorships.first.mail
+    end
+  end
+
+  # todo: need to fix the name getter
+  def name
+    if self.authorships.first.nil?
+      ""
+    else
+      self.authorships.first.name
+    end
+  end
+
 end

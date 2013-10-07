@@ -10,41 +10,36 @@ function remove_fields(link) {
   $(link).closest(".fields").hide();
 }
 
-$(".author_search").live('keyup.autocomplete', function(){
-     $this = $(this);
+function authorship_autocomplete(url){
+    $(".author_name_on_paper").live('keyup.autocomplete', function(){
+         $this = $(this);
 
-     $this.autocomplete({
-        source: '/publications/autocomplete_for_author',
-        minLength: 2,
-        focus: function(event, ui) {
-            $this.val(ui.item.label);
-            return false;
-        },
-        select: function(event, ui){
-            $this.closest('div').next().find("input[id$='name_on_paper']").val(ui.item.name);
-            $this.closest('div').next().find("input[id$='institution']").val(ui.item.institution);
-            $this.closest('div').next().find("input[id$='email']").val(ui.item.email);
-            $this.closest('div').next().find("input[id$='search_author_class']").val(ui.item.search_author_class);
-            $this.closest('div').next().find("input[id$='search_author_id']").val(ui.item.search_author_id);
-        }
-        })
-        .data( "autocomplete" )._renderItem = function( ul, item ) {
-            return $( "<li>" )
-                .data("item.autocomplete", item )
-                .append( "<a>" + item.label + "<br><em>" + item.email + "</em><br>" + item.intitution + "</a>" )
-                .appendTo(ul);
-            };
-        });
+         $this.autocomplete({
+            source: url,
+            minLength: 2,
+            focus: function(event, ui) {
+                $this.val(ui.item.label);
+                return false;
+            },
+            select: function(event, ui){
+                $this.closest('div').find("input[id$='institution']").val(ui.item.institution);
+                $this.closest('div').find("input[id$='email']").val(ui.item.email);
 
+                $this.closest('div').find("input[id$='search_author_class']").val(ui.item.  search_author_class);
+                $this.closest('div').find("input[id$='search_author_id']").val(ui.item. search_author_id);
 
-$("input[id$='identify_author_yes']").live("click", function() {
-    console.log("aaaa");
-});
+                $this.closest('div').find("input[id$='search_author_tie']").attr('checked', '   checked');
+                $this.closest('div').find("input[id$='search_author_tie']").next('span').   replaceWith(ui.item.authorship_link);
 
-$("input[id$='identify_author_no']").live("click", function() {
-    $this.closest('div').next().find("input[id$='name_on_paper']").val('');
-    $this.closest('div').next().find("input[id$='institution']").val('');
-    $this.closest('div').next().find("input[id$='email']").val('');
-    $this.closest('div').next().find("input[id$='search_author_class']").val('');
-});
-
+                // triggers the save button
+                $this.closest('div').next('div').find('.author_save_btn').click();
+            }
+            })
+            .data( "autocomplete" )._renderItem = function( ul, item ) {
+                return $( "<li>" )
+                    .data("item.autocomplete", item )
+                    .append( "<a>" + item.label + "<br><em>" + item.email + "</em><br>" + item. institution + "</a>" )
+                    .appendTo(ul);
+                };
+            });
+}
