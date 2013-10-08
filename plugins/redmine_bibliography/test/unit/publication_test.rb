@@ -16,7 +16,7 @@ class PublicationTest < ActiveSupport::TestCase
         # test authorships - publication relationship
         publication = Publication.find(1)
 
-        assert 4, publication.authorships.count
+        assert_equal 4, publication.authorships.count, "Error: was expecting 4 authorships"
     end
 
     def test_new_publication_validations
