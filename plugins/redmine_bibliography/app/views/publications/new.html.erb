@@ -1,13 +1,35 @@
 <% content_for :header_tags do %>
     <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' %>
-    <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' %>
     <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+    <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
+    <%= javascript_include_tag 'new_publication', :plugin => 'redmine_bibliography' -%>
+
+    <%= javascript_tag "
+      $('#publication_bibtex_entry_attributes_entry_type').live('change', function() {
+          $this = $(this);
+          $.ajax({
+              type: 'get',
+              url: '#{url_for(:controller => :publications, :action => :show_bibtex_fields)}',
+              data: {
+                  value: $this.val()
+              },
+              dataType: 'script'
+          });
+          return false;
+      });"-%>
+
+  <%= javascript_tag "authorship_autocomplete('#{url_for :controller => :publications, :action => :autocomplete_for_author}');" -%>
+
 <% end %>
+
+<%= error_messages_for 'publication' %>
 
 <h2><%=l(:label_publication_new)%></h2>
 
-<%= labelled_form_for @publication, :url => { :project_id  => @project, :action => :create } do |f| -%>
+<%= form_for @publication, :url => { :project_id  => @project, :action => :create } do |f| -%>
+
     <%= render :partial => 'form', :locals => { :f => f }  %>
+
     <div style="clear:both"></div>
     <%= f.submit %>
 <% end %>

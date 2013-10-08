@@ -6,7 +6,7 @@
       l(:label_institution_activity, h(@institution_name))
     end
   else
-    l(:label_user_activity, link_to_user(@author))
+    l(:label_user_activity, link_to_user(@author)).html_safe
   end
   %></h2>
 <p class="subtitle"><%= l(:label_date_from_to, :start => format_date(@date_to - @days), :end => format_date(@date_to-1)) %></p>
