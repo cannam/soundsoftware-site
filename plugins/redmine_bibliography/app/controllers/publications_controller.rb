@@ -82,10 +82,8 @@ class PublicationsController < ApplicationController
   def edit
     find_project_by_project_id unless params[:project_id].nil?
 
-    @edit_view = true;
     @publication = Publication.find(params[:id])
     @selected_bibtex_entry_type_id = @publication.bibtex_entry.entry_type
-
     @bibtype_fields = BibtexEntryType.fields(@selected_bibtex_entry_type_id)
   end
 
