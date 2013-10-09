@@ -29,7 +29,7 @@ function authorship_autocomplete(url){
                 $this.closest('div').find("input[id$='search_author_id']").val(ui.item. search_author_id);
 
                 $this.closest('div').find("input[id$='search_author_tie']").attr('checked', '   checked');
-                $this.closest('div').find("input[id$='search_author_tie']").next('span').   replaceWith(ui.item.authorship_link);
+                $this.closest('div').find("input[id$='search_author_tie']").next('span').replaceWith("<span>" + ui.item.authorship_link + "</span>");
 
                 // triggers the save button
                 $this.closest('div').next('div').find('.author_save_btn').click();
