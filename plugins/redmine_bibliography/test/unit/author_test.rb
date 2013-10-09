@@ -1,10 +1,17 @@
-require File.dirname(__FILE__) + '/../test_helper'
+# author_test.rb
+
+require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 
 class AuthorTest < ActiveSupport::TestCase
-  fixtures :authors
+    self.fixture_path = File.dirname(__FILE__) + "/../fixtures/"
+    fixtures :users, :authors, :authorships
 
-  # Replace this with your real tests.
-  def test_truth
-    assert true
-  end
+    def test_relationships
+        author = Author.find(1)
+
+        assert_equal(author.authorships.first.name_on_paper, "Yih-Farn R. Chen")
+        assert_equal(author.authorships.count, 2)
+
+    end
+
 end

@@ -1,33 +1,42 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+# authorships.yml
+---
 one:
   id: 1
   author_id: 1
   publication_id: 1
   name_on_paper: Yih-Farn R. Chen
-  order: 1
-  institution: 
-  email: MyString
+  auth_order: 1
+  institution: Imperial College London
+  email: chen@imperial.ac.uk
 two:
   id: 2
   author_id: 2
   publication_id: 1
   name_on_paper: Glenn S. Fowler
-  order: 2
-  institution: 
+  auth_order: 2
+  institution:
   email: MyString
 three:
   id: 3
-  author_id: 1
+  author_id: 3
   publication_id: 1
-  name_on_paper: Yih-Farn R. Chen
-  order: 1
-  institution: 
-  email: MyString
+  name_on_paper: Jackie Brown
+  auth_order: 1
+  institution:
+  email: j.brown@m.com
 four:
   id: 4
-  author_id: 2
+  author_id: 4
   publication_id: 1
-  name_on_paper: Glenn S. Fowler
-  order: 2
-  institution: 
-  email: MyString
+  name_on_paper: Captain Boomtime
+  auth_order: 2
+  institution:
+  email: cpt.boom@time.co.uk
+five:
+  id: 5
+  author_id: 1
+  publication_id: 2
+  name_on_paper: Yih-Farn Chen
+  auth_order: 1
+  institution: "Imperial College, London"
+  email: yfc@gmail.com

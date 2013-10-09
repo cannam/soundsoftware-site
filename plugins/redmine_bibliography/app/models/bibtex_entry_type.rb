@@ -1,7 +1,7 @@
 class BibtexEntryType < ActiveRecord::Base
   unloadable
 
-  @@fields = Hash['article', ['journal', 'year', 'volume', 'number', 'pages', 'month', 'note' ], 
+  @@fields = Hash['article', ['journal', 'year', 'volume', 'number', 'pages', 'month', 'note' ],
                   'book' , [ 'editor', 'publisher', 'volume', 'series', 'address', 'edition', 'month', 'year', 'note' ],
                   'booklet' , [ 'howpublished', 'address', 'year', 'month', 'note', 'key' ],
                   'conference', [ 'booktitle', 'year', 'editor', 'pages', 'organization', 'publisher', 'address', 'month', 'note' ],
@@ -25,6 +25,6 @@ class BibtexEntryType < ActiveRecord::Base
   end
 
   def self.fields (type)
-    @@fields[ self.find(type).name ]    
+    @@fields[ self.find(type).name ]
   end
 end

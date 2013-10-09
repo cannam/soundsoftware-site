@@ -53,14 +53,14 @@ class Publication < ActiveRecord::Base
   def notify_authors_publication_added(project)
     self.authors.each do |author|
       Rails.logger.debug { "Sending mail to \"#{self.title}\" publication authors." }
-      Mailer.deliver_publication_added(author.user, self, project) unless author.user.nil?
+      Mailer.publication_added(author.user, self, project).deliver unless author.user.nil?
     end
   end
 
   def notify_authors_publication_updated(project)
     self.authors.each do |author|
       Rails.logger.debug { "Sending mail to \"#{self.title}\" publication authors." }
-      Mailer.deliver_publication_updated(author.user, self, project) unless author.user.nil?
+      Mailer.publication_updated(author.user, self, project).deliver unless author.user.nil?
     end
   end
 

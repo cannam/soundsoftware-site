@@ -1,9 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
-  id: 1
-  title: Test Fixture Title No1
-  bibtex_entry_id: 1
+    id: 1
+    title: Publication Number 1
+    reviewed: true
+    external_url:
+    doi:
 two:
-  id: 2
-  title: MyString
-  bibtex_entry_id: MyString
+    id: 2
+    title: Publication Number 2
+    reviewed: false
+    external_url:
+    doi:
