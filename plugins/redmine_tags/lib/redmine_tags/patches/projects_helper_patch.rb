@@ -116,8 +116,6 @@ module RedmineTags
           s = []
           if projects.any?
             tokens = RedmineProjectFiltering.calculate_tokens(question, custom_fields)
-            debugger
-
 
             ancestors = []
             original_project = @project
