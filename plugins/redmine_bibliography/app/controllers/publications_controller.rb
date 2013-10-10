@@ -200,10 +200,8 @@ class PublicationsController < ApplicationController
     object_id = params[:object_id]
     @object_name = "publications[authorships_attributes][#{object_id}][search_results]"
 
-    # cc 20110909 -- revert to like instead of like_unique -- see #289
-    authorships_list = Authorship.like(params[:term]).group('author_id').find(:all, :limit => 100)
-
-    authors_list = authorships_list.collect do |x| x.author end
+    # todo: make sure query works with both pgres and mysql ~lf.20131010
+    authors_list = Author.joins(:authorships).where("LOWER(authorships.name_on_paper) LIKE LOWER(?)", "%#{params[:term]}%").uniq
 
     users_list = User.active.like(params[:term]).find(:all, :limit => 100)
 
