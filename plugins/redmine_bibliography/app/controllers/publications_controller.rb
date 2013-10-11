@@ -203,7 +203,8 @@ class PublicationsController < ApplicationController
     # todo: make sure query works with both pgres and mysql ~lf.20131010
     authors_list = Author.joins(:authorships).where("LOWER(authorships.name_on_paper) LIKE LOWER(?)", "%#{params[:term]}%").uniq
 
-    users_list = User.active.like(params[:term]).find(:all, :limit => 100)
+    # name_like scope, defined in lib/user_author patch
+    users_list = User.active.name_like(params[:term]).find(:all, :limit => 100)
 
     logger.debug "Query for \"#{params[:term]}\" returned \"#{authors_list.size}\" authors and \"#{users_list.size}\" users"
 
