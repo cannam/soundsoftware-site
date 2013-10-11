@@ -7,7 +7,11 @@
 
     <p class="author_associated search_author_tie">
       <%= f.check_box :search_author_tie, :label => '' -%>
-      <span>Not associated with any SoundSoftware site user.</span>
+      <% unless f.object.search_author_tie %>
+        <span>Not associated with any SoundSoftware site user.</span>
+      <% else %>
+        <span>Associated with <%= render_authorship_link(f.object.search_author_class, f.object.search_author_id) -%>.</span>
+      <% end %>
     </p>
 
     <%= f.hidden_field :search_author_class -%>
