@@ -263,7 +263,7 @@ projects.each do |project|
   if project.identifier.empty?
     log("\tno identifier for project #{project.name}!")
     next
-  elsif not project.identifier.match(/^[a-z0-9\-_]+$/)
+  elsif not project.identifier.match(/^[a-z0-9_\-]+$/)
     log("\tinvalid identifier for project #{project.name} : #{project.identifier}!");
     next;
   end
