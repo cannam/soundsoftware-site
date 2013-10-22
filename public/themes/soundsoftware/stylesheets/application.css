@@ -158,6 +158,9 @@ h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 { border-bottom: 0px; }
 
 .wiki p, .wiki li { margin-left: 30px; margin-right: 3em; }
 
+.overviewfields h4 { margin-left: 30px; margin-bottom: 0; }
+.overviewfields ul { margin-top: 0; }
+
 .repository-info .wiki p { margin-left: 0 }
 
 div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px solid #a9b680; }
