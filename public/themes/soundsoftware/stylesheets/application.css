@@ -238,6 +238,9 @@ div.flash.newsalert {
 .controller-redmine_embedded h3 { margin-top: 0.5em; }
 .controller-redmine_embedded hr { color: #a9b680; background-color: #a9b680 }
 .controller-redmine_embedded center { text-align: left; } /* haha */
+.controller-redmine_embedded th { font-weight: normal; text-align: left; }
+.controller-redmine_embedded caption { text-align: left; font-weight: bold; font-size: 14px; margin-top: 1em; }
+.controller-redmine_embedded li.blockList { list-style-type: none; }
 
 .controller-redmine_embedded .summary { font-style: normal; margin-bottom: 1.5em; }
 
@@ -246,6 +249,10 @@ div.flash.newsalert {
 .controller-redmine_embedded .NavBarCell2 a[target=_top] { width: 0px; visibility: hidden; }
 .controller-redmine_embedded .NavBarCell2 + .NavBarCell2 { text-align: right; }
 .controller-redmine_embedded .NavBarCell3 + .NavBarCell3 { text-align: right; }
+
+.topNav, .bottomNav { position: relative; overflow: hidden; }
+.topNav ul li, .bottomNav ul li { float: left; list-style-type: none; margin-right: 14px; position: relative; font-weight: bold; }
+.controller-redmine_embedded .subNav .navList { display: none; }
 
 /* For Doxygen in Embedded context (though note some of the Javadoc
    rules will also apply to Doxygen): */
@@ -256,7 +263,6 @@ div.flash.newsalert {
 .memTemplItemLeft,
 .memTemplItemRight,
 .indexkey,
-.indexvalue,
 .memproto,
 .memproto td,
 .memdoc a { font-family: 'SourceCodePro-Regular', monospace; font-size: 0.9em; font-weight: normal; }
