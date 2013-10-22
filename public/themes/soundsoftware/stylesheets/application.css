@@ -234,16 +234,18 @@ div.flash.newsalert {
 .TableRowColor td { background-color: #fdfbf5; color: #000000; border: 0; }
 .NavBarCell1 { background-color: #ffe69b; color:#000000 }
 
-.embedded table { border: 0px solid #fff; }
-.embedded h3 { margin-top: 0.5em; }
-.embedded hr { color: #a9b680; background-color: #a9b680 }
-.embedded center { text-align: left; } /* haha */
+.controller-redmine_embedded table { border: 0px solid #fff; }
+.controller-redmine_embedded h3 { margin-top: 0.5em; }
+.controller-redmine_embedded hr { color: #a9b680; background-color: #a9b680 }
+.controller-redmine_embedded center { text-align: left; } /* haha */
+
+.controller-redmine_embedded .summary { font-style: normal; margin-bottom: 1.5em; }
 
 /* Special hack to hide the FRAMES | NO FRAMES links -- they don't
    work in this context -- and right-align the All Classes and Detail links */
-.embedded .NavBarCell2 a[target=_top] { width: 0px; visibility: hidden; }
-.embedded .NavBarCell2 + .NavBarCell2 { text-align: right; }
-.embedded .NavBarCell3 + .NavBarCell3 { text-align: right; }
+.controller-redmine_embedded .NavBarCell2 a[target=_top] { width: 0px; visibility: hidden; }
+.controller-redmine_embedded .NavBarCell2 + .NavBarCell2 { text-align: right; }
+.controller-redmine_embedded .NavBarCell3 + .NavBarCell3 { text-align: right; }
 
 /* For Doxygen in Embedded context (though note some of the Javadoc
    rules will also apply to Doxygen): */
@@ -257,34 +259,31 @@ div.flash.newsalert {
 .indexvalue,
 .memproto,
 .memproto td,
-.memdoc a,
-.embedded li .el,
-.embedded a.el { font-family: monospace; }
+.memdoc a { font-family: 'SourceCodePro-Regular', monospace; font-size: 0.9em; font-weight: normal; }
 
-.embedded .memTemplParams { font-style: italic; }
+.controller-redmine_embedded .memTemplParams { font-style: italic; }
 
-.embedded .memItemRight a:first-child,
-.embedded .memTemplItemRight a:first-child,
-.embedded .indexkey a:first-child,
-.embedded a.el,
-.embedded .memdoc a { font-weight: bold; } /* function names, etc */
+.controller-redmine_embedded #projectname,
+.controller-redmine_embedded .title { font-weight: bold; font-size: 14px; }
 
-.embedded .memitem { border-bottom: 1px solid #a9b680; padding-top: 0.5em; } 
-.embedded .memitem:last-child { border-bottom: 0px; } 
+.controller-redmine_embedded h2 { font-size: 16px; } 
 
-.embedded .contents { margin-top: 0.5em; }
-.embedded .contents td { padding: 0px; }
+.controller-redmine_embedded .memitem { border-bottom: 1px solid #a9b680; padding-top: 0.5em; } 
+.controller-redmine_embedded .memitem:last-child { border-bottom: 0px; } 
 
-.embedded .contents h1,
-.embedded .contents h2,
-.embedded .navigation h1,
-.embedded .navigation h2 { padding-top: 0.5em; padding-bottom: 0.25em; }
+.controller-redmine_embedded .contents { margin-top: 0.5em; }
+.controller-redmine_embedded .contents td { padding: 0px; }
 
-.embedded .contents .center { text-align: center; } /* undo javadoc hack above */
+.controller-redmine_embedded .contents h1,
+.controller-redmine_embedded .contents h2,
+.controller-redmine_embedded .navigation h1,
+.controller-redmine_embedded .navigation h2 { padding-top: 1em; padding-bottom: 0; }
+
+.controller-redmine_embedded .contents .center { text-align: center; } /* undo javadoc hack above */
 
 /* For MATLAB documentation */
 
-.embedded #matlabdoc th { text-align: left; }
+.controller-redmine_embedded #matlabdoc th { text-align: left; }
 
 /* autocomplete positioning fix */
 div.autocomplete {
