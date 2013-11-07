@@ -762,9 +762,9 @@ p.progress-info {clear: left; font-size: 80%; margin-top:-4px; color:#777;}
 
 #roadmap table.progress td { height: 1.2em; }
 /***** Tabs *****/
-#content .tabs {height: 2.6em; margin-bottom:1.2em; position:relative; overflow:hidden;}
-#content .tabs ul {margin:0; position:absolute; bottom:0; padding-left:0.5em; width: 2000px; border-bottom: 1px solid #bbbbbb;}
-#content .tabs ul li {
+#content .tabs, #content .tabs2 {height: 2.6em; margin-bottom:1.2em; position:relative; overflow:hidden;}
+#content .tabs ul, #content .tabs2 ul {margin:0; position:absolute; bottom:0; padding-left:0.5em; width: 2000px; border-bottom: 1px solid #bbbbbb;}
+#content .tabs ul li, #content .tabs2 ul li {
   float:left;
   list-style-type:none;
   white-space:nowrap;
@@ -773,7 +773,7 @@ p.progress-info {clear: left; font-size: 80%; margin-top:-4px; color:#777;}
   position:relative;
   margin-bottom:-1px;
 }
-#content .tabs ul li a{
+#content .tabs ul li a, #content .tabs2 ul li a {
   display:block;
   font-size: 0.9em;
   text-decoration:none;
@@ -788,19 +788,19 @@ p.progress-info {clear: left; font-size: 80%; margin-top:-4px; color:#777;}
   border-top-right-radius:3px;
 }
 
-#content .tabs ul li a:hover {
+#content .tabs ul li a:hover, #content .tabs2 ul li a:hover {
   background-color: #ffffdd;
   text-decoration:none;
 }
 
-#content .tabs ul li a.selected {
+#content .tabs ul li a.selected, #content .tabs2 ul li a.selected {
   background-color: #fff;
   border: 1px solid #bbbbbb;
   border-bottom: 1px solid #fff;
   color:#444;
 }
 
-#content .tabs ul li a.selected:hover {background-color: #fff;}
+#content .tabs ul li a.selected:hover, #content .tabs2 ul li a.selected:hover {background-color: #fff;}
 
 div.tabs-buttons { position:absolute; right: 0; width: 48px; height: 24px; background: white; bottom: 0; border-bottom: 1px solid #bbbbbb; }
 

@@ -58,19 +58,20 @@
 		<%= textilizable @project.description %>
 	</div>	
   <% end %>
-	<ul>
-	<% unless @project.homepage.blank? %><li><%=l(:field_homepage)%>: <%= link_to h(@project.homepage), @project.homepage %></li><% end %>
+  <div class="overviewfields">
+	<% unless @project.homepage.blank? %><h4><%=l(:field_homepage)%>:</h4><ul><li><%= link_to h(@project.homepage), @project.homepage %></li></ul><% end %>
   <% if @subprojects.any? %>
- 	<li><%=l(:label_subproject_plural)%>:
-	    <%= @subprojects.collect{|p| link_to(h(p), :action => 'show', :id => p)}.join(", ").html_safe %></li>
+ 	<h4><%=l(:label_subproject_plural)%>:</h4>
+          <ul>
+	    <li><%= @subprojects.collect{|p| link_to(h(p), :action => 'show', :id => p)}.join("</li><li>").html_safe %></li>
+          </ul>
   <% end %>
 	<% @project.visible_custom_field_values.each do |custom_value| %>
 	<% if !custom_value.value.blank? %>
-	   <li><%= custom_value.custom_field.name%>: <%=h show_value(custom_value) %></li>
+	   <h4><%= custom_value.custom_field.name%>:</h4><ul><li><%=h show_value(custom_value) %></li></ul>
 	<% end %>
 	<% end %>
-	</ul>	
-
+  </div>
   <% if User.current.allowed_to?(:view_issues, @project) and @open_issues_by_tracker.values.any? %>
   <div class="issues box">    
     <h3><%=l(:label_issue_tracking)%></h3>
