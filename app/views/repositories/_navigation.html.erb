@@ -6,6 +6,8 @@
             {:action => 'stats', :id => @project, :repository_id => @repository.identifier_param},
             :class => 'icon icon-stats' if @repository.supports_all_revisions? %>
 
+<%= link_to_revision_archive(@repository, @rev, @project, { :text => l(:label_download_revision), :class => 'icon icon-package' }) %>
+
 <%= form_tag({:action => controller.action_name,
              :id => @project,
              :repository_id => @repository.identifier_param,
@@ -32,3 +34,5 @@
     <%= text_field_tag 'rev', @rev, :size => 8 %>
   <% end %>
 <% end -%>
+
+

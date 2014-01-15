@@ -1,2 +1,11 @@
 <%= l(:mail_body_account_activation_request, @user.login) %>
 <%= @url %>
+
+*<%= l(:label_ssamr_details) %>*
+<%=l(:field_name)%>: <%= h @user.name %>
+<%=l(:field_mail)%>: <%= h @user.mail %>
+
+*<%= l(:label_ssamr_description ) %>*
+<%= h @user.ssamr_user_detail['description'] %>
+
+

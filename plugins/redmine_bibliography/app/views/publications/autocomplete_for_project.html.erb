@@ -1,0 +1,3 @@
+<% if params[:q] && params[:q].length > 1 %>
+	<%= projects_check_box_tags 'publication[project_ids][]', @projects %>
+<% end %>

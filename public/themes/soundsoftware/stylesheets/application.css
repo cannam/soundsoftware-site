@@ -1,0 +1,306 @@
+@import url(../../../stylesheets/application.css);
+
+/* Colours:
+
+   #be5700 link (orange)
+
+   #3e442c text (dark green)
+   (OK for headings, but small text is easier to read in black)
+
+   #ffa801 logo (yellow)
+
+   #525a38 logotype (olive)
+
+   #fdfaf0 background (cream)
+
+   #fdfbf5 alternate background (lighter cream)
+
+   #ffe69b highlight (light yellow)
+
+   #a9b680 detail (light green)
+*/
+
+body {
+  background: #fdfbf5;
+  color: #000;
+  margin: 0;
+  margin-bottom: 40px;
+  min-width: 620px;
+}
+
+h1 {
+  color: #3e442c;
+}
+
+h2,h3,h4,.wiki h1 {
+  color: #3e442c;
+}
+
+.wiki h2,.wiki h3,.wiki h4 {
+  color: #000;
+}
+
+h2,.wiki h1 {
+  font-size: 1.8em;
+}
+
+.wiki h2 {
+  margin-top: 1em;
+}
+
+.splitcontentleft p:first-child {
+  margin-top: 0;
+}
+
+div.attachments {
+  margin-top: 2em;
+}
+#wiki_add_attachment {
+  margin-top: 1.5em;
+}
+
+/* Hide these (the paragraph markers that show anchors) -- they confuse more than they help */
+a.wiki-anchor:hover { display: none; }
+h1:hover a.wiki-anchor, h2:hover a.wiki-anchor, h3:hover a.wiki-anchor { display: none; }
+
+.box {
+    padding: 6px;
+    margin-bottom: 10px;
+    background-color: #fdfaf0;
+    color: #3e442c;
+    line-height: 1.5em;
+    border: 1px solid #a9b680;
+    border-left: 4px solid #a9b680;
+}
+
+.box h4 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.odd {background-color:#fdf7e4;}
+.even {background-color: #fdfaf0;}
+
+.box .more { margin-left: 40px; }
+
+.box .institution { font-size: 0.95em; }
+
+#content .tabs { margin-bottom: 0; }
+
+table.list th {  background-color: #fdfaf0; border-bottom: 1px solid #a9b680; }
+table.list { border: 1px solid #a9b680; /* border-left: 4px solid #a9b680; */ }
+tr.entry { border-left: 1px solid #a9b680; border-right: 1px solid #a9b680; }
+tr.entry:last-child { border-bottom: 1px solid #a9b680; }
+
+table.projects th { text-align: left; }
+table.projects th.managers { color: #3e442c; }
+table.projects .root .name { font-size: 1.2em; padding-top: 0.3em; }
+table.projects .description { padding-bottom: 0.5em; }
+table.projects .no_description { padding-bottom: 0.5em; }
+table.projects .hosted_here { font-weight: bold; }
+table.projects .child .name { font-weight: normal; }
+table.projects .child .description { font-size: 0.95em; }
+table.projects .child .firstcol { padding-left: 1em }
+table.projects .level2 .firstcol { padding-left: 2em; }
+table.projects .level3 .firstcol { padding-left: 3em; }
+
+ul.projects .public, ul.projects .private { padding-left: 0.5em; color: #3e442c; font-size: 0.9em }
+
+table.files tr.active td { padding-top: 0.5em; padding-bottom: 0.5em; }
+table.files .file .active { font-weight: bold; }
+table.files .file .description { font-weight: normal; color: #3e442c; }
+
+#top-menu { position: absolute; top: 0; z-index: 1; left: 0px; width: 100%; font-size: 90%; /* height: 2em; */ margin: 0; padding: 0; padding-top: 0.5em; background-color: #3e442c; }
+#top-menu ul { margin-left: 10px; }
+#top-menu a { font-weight: bold; }
+#header {  position: absolute; z-index: 0; top: 0; width: 100%; background: #fdfbf5; border-bottom: 2px solid #a9b680; /* height:80px; */ padding: 20px 0 0.5em 0; margin-bottom: 0; }
+#header a { color: #be5700; }
+#header h1 { color: #525a38; margin-top: 25px; font-size: 3em; font-weight: normal; margin-left: 10px; }
+#header h1#project-title.long-title { font-size: 2em; line-height: 0.95em }
+#header #project-title a, #header #project-title a:hover { color: #525a38; text-decoration: none; }
+.header-general h1 {
+  background: url('soundsoftware-logo-code-title-only-transparent.png') no-repeat 0 0;
+  text-indent: -9999px;
+  width: 537px;
+  height: 34px;
+ }
+
+#quick-search { margin-right: 6px; margin-top: 1em; color: #000; }
+#project-jump-box { float: right;  margin-right: 6px; margin-top: 5px; color: #000; }
+#project-ancestors-title {
+    margin-bottom: -6px;
+    margin-left: 12px;
+    margin-top: 6px;
+}
+
+#main-menu { position: absolute; top: 100px; /* background-color: #be5700; */ left: 2px; border-top: 0; width: 100%;/* height: 1.82em; */ padding: 0; margin: 0; border: 0; }
+#main-menu li { margin: 0; padding: 0; }
+#main-menu li a { background-color: #fdfbf5; color: #be5700; border-right: 1px solid #a9b680; font-size: 97%; padding: 0em 8px 0em 10px; font-weight: normal; }
+#main-menu li:last-child a { border-right: 0; }
+#main-menu li a:hover { background-color: #fdfbf5; color: #be5700; text-decoration: underline; }
+#main-menu li a.selected, #main-menu li a.selected:hover { background-color: #fdfbf5; color: #3e442c; }
+
+#footer { background-color: #fdfbf5; border: 0; border-top: 2px solid #a9b680; color: #3e442c; text-align: right; }
+#footer a { color: #be5700; font-weight: bold; }
+
+p.statistics { text-align: right; font-size:0.9em; color: #666; }
+
+#main { margin-top: 135px; font:95%; background: #fdfaf0; }
+#main a { font-weight: medium; color: #be5700;}
+#main a:hover { color: #be5700; text-decoration: underline; }
+#content { background: #fdfbf5; }
+/*#content .tabs ul { bottom:-1px; }
+*/
+h2, h3, h4, .wiki h1, .wiki h2, .wiki h3 { border-bottom: 0px; }
+/*h2, .wiki h1 { letter-spacing:-1px; }
+*/
+/* h4 { border-bottom: dotted 1px #c0c0c0; } */
+
+.wiki p, .wiki li { margin-left: 30px; margin-right: 3em; }
+
+.overviewfields h4 { margin-left: 30px; margin-bottom: 0; }
+.overviewfields ul { margin-top: 0; }
+
+.repository-info .wiki p { margin-left: 0 }
+
+div.issue { background: #fdfaf0; border: 1px solid #a9b680; border-left: 4px solid #a9b680; }
+
+#top-menu a.home, #top-menu a.my-page, #top-menu a.projects, #top-menu a.administration, #top-menu a.help { 
+    background-position: 0% 40%;
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+}
+
+#top-menu a.home { background-image: url(../images/home.png); }
+#top-menu a.my-page { background-image: url(../../../images/user.png); }
+#top-menu a.projects { background-image: url(../../../images/projects.png); }
+#top-menu a.administration { background-image: url(../images/wrench.png); }
+#top-menu a.help { background-image: url(../../../images/help.png); }
+
+#welcomepage {
+    width: 80%;
+    margin-left: 71px;
+    margin-top: 10px;
+}
+#welcomepage blockquote {
+    border: 0;
+    margin-top: 2em;
+    padding-left: 0;
+    margin-left: 0;
+}
+#welcomepage h2 {
+    font-size: 2em;
+    margin-bottom: 0.8em;
+}
+#welcomepage p, #welcomepage li {
+    font-size: 1.25em;
+    color: #3e442c;
+}
+#welcomepage p {
+    margin-left: 2em;
+    margin-top: 1em;
+    margin-bottom: 0.7em;
+}
+#welcomepage a {
+    white-space: nowrap;
+}
+#welcomepagenews {
+    float: right;
+    width: 27%;
+    margin-right: 3%;
+    margin-top: 1em;
+    margin-left: 2em;
+    margin-bottom: 2em;
+}
+
+div.flash.newsalert {
+  float: right;
+  width: 25%;
+  padding: 0px 10px 2px 24px;
+  margin: 1.2em 1em 1em 2em;
+  border-color: #dd0000;
+}
+
+/* for Javadoc in Embedded context: */
+
+.TableHeadingColor { background-color: #fdf7e4; color: #3e442c; border: 0px solid #fff; }
+.TableHeadingColor th { background-color: #fdf7e4; color: #3e442c; border: 1px solid #a9b680; }
+.TableHeadingColor th font { font-size: 1.4em; color: #3e442c; }
+.TableSubHeadingColor { background-color: #fdfaf0; color: #3e442c; border: 0px solid #fff; }
+.TableSubHeadingColor th { background-color: #fdfaf0; color: #3e442c; border: 1px solid #a9b680; }
+.TableRowColor { background-color: #fdfbf5; color: #000000; border: 0; }
+.TableRowColor td { background-color: #fdfbf5; color: #000000; border: 0; }
+.NavBarCell1 { background-color: #ffe69b; color:#000000 }
+
+.controller-redmine_embedded table { border: 0px solid #fff; }
+.controller-redmine_embedded h3 { margin-top: 0.5em; }
+.controller-redmine_embedded hr { color: #a9b680; background-color: #a9b680 }
+.controller-redmine_embedded center { text-align: left; } /* haha */
+.controller-redmine_embedded th { font-weight: normal; text-align: left; }
+.controller-redmine_embedded caption { text-align: left; font-weight: bold; font-size: 14px; margin-top: 1em; }
+.controller-redmine_embedded li.blockList { list-style-type: none; }
+
+.controller-redmine_embedded .summary { font-style: normal; margin-bottom: 1.5em; }
+
+/* Special hack to hide the FRAMES | NO FRAMES links -- they don't
+   work in this context -- and right-align the All Classes and Detail links */
+.controller-redmine_embedded .NavBarCell2 a[target=_top] { width: 0px; visibility: hidden; }
+.controller-redmine_embedded .NavBarCell2 + .NavBarCell2 { text-align: right; }
+.controller-redmine_embedded .NavBarCell3 + .NavBarCell3 { text-align: right; }
+
+.topNav, .bottomNav { position: relative; overflow: hidden; }
+.topNav ul li, .bottomNav ul li { float: left; list-style-type: none; margin-right: 14px; position: relative; font-weight: bold; }
+.controller-redmine_embedded .subNav .navList { display: none; }
+
+/* For Doxygen in Embedded context (though note some of the Javadoc
+   rules will also apply to Doxygen): */
+
+.memItemLeft,
+.memItemRight,
+.memTemplParams,
+.memTemplItemLeft,
+.memTemplItemRight,
+.indexkey,
+.memproto,
+.memproto td,
+.memdoc a { font-family: 'SourceCodePro-Regular', monospace; font-size: 0.9em; font-weight: normal; }
+
+.controller-redmine_embedded .memTemplParams { font-style: italic; }
+
+.controller-redmine_embedded #projectname,
+.controller-redmine_embedded .title { font-weight: bold; font-size: 14px; }
+
+.controller-redmine_embedded h2 { font-size: 16px; } 
+
+.controller-redmine_embedded .memitem { border-bottom: 1px solid #a9b680; padding-top: 0.5em; } 
+.controller-redmine_embedded .memitem:last-child { border-bottom: 0px; } 
+
+.controller-redmine_embedded .contents { margin-top: 0.5em; }
+.controller-redmine_embedded .contents td { padding: 0px; }
+
+.controller-redmine_embedded .contents h1,
+.controller-redmine_embedded .contents h2,
+.controller-redmine_embedded .navigation h1,
+.controller-redmine_embedded .navigation h2 { padding-top: 1em; padding-bottom: 0; }
+
+.controller-redmine_embedded .contents .center { text-align: center; } /* undo javadoc hack above */
+
+/* For MATLAB documentation */
+
+.controller-redmine_embedded #matlabdoc th { text-align: left; }
+
+/* autocomplete positioning fix */
+div.autocomplete {
+	margin-top:136px;
+}
+
+#my_projects_fieldset.collapsible {
+	font-size: 1.0em;
+	font-color: green;
+}
+
+
+
+

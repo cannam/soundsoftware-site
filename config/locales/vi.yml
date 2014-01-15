@@ -419,6 +419,7 @@ vi:
   label_register: Đăng ký
   label_password_lost: Phục hồi mật mã
   label_home: Trang chính
+  label_home_heading: Trang chính
   label_my_page: Trang riêng
   label_my_account: Cá nhân
   label_my_projects: Dự án của bạn

@@ -32,7 +32,10 @@ vendor/cache
 vendor/rails
 *.rbc
 .git/
+*~
+public/themes/soundsoftware/stylesheets/fonts/*
 .bundle
 Gemfile.lock
 Gemfile.local
 
+re:^config\.ru$

@@ -1,11 +1,15 @@
 <div class="contextual">
+
+  <%= link_to_revision_archive(@repository, @changeset, @project, { :text => l(:label_download_revision), :class => 'icon icon-package' }) %>
+  &nbsp;&nbsp;
+
   &#171;
   <% unless @changeset.previous.nil? -%>
     <%= link_to_revision(@changeset.previous, @repository, :text => l(:label_previous)) %>
   <% else -%>
     <%= l(:label_previous) %>
   <% end -%>
-|
+
   <% unless @changeset.next.nil? -%>
     <%= link_to_revision(@changeset.next, @repository, :text => l(:label_next)) %>
   <% else -%>
@@ -22,6 +26,7 @@
     <%= text_field_tag 'rev', @rev, :size => 8 %>
     <%= submit_tag 'OK', :name => nil %>
   <% end %>
+
 </div>
 
 <h2><%= avatar(@changeset.user, :size => "24") %><%= l(:label_revision) %> <%= format_revision(@changeset) %></h2>

@@ -591,3 +591,4 @@ function blockEventPropagation(event) {
 $(document).ready(setupAjaxIndicator);
 $(document).ready(hideOnLoad);
 $(document).ready(addFormObserversForDoubleSubmit);
+

@@ -90,6 +90,7 @@ class Project < ActiveRecord::Base
   scope :status, lambda {|arg| where(arg.blank? ? nil : {:status => arg.to_i}) }
   scope :all_public, lambda { where(:is_public => true) }
   scope :visible, lambda {|*args| where(Project.visible_condition(args.shift || User.current, *args)) }
+  scope :visible_roots, lambda {|*args| where(Project.root_visible_by(args.shift || User.current, *args)) }
   scope :allowed_to, lambda {|*args|
     user = User.current
     permission = nil
@@ -162,6 +163,10 @@ class Project < ActiveRecord::Base
     allowed_to_condition(user, :view_project, options)
   end
 
+  def self.root_visible_by(user=nil)
+    return "#{Project.table_name}.parent_id IS NULL AND " + visible_condition(user)
+  end
+  
   # Returns a SQL conditions string used to find all projects for which +user+ has the given +permission+
   #
   # Valid options:
@@ -542,8 +547,22 @@ class Project < ActiveRecord::Base
   end
 
   # Returns a short description of the projects (first lines)
-  def short_description(length = 255)
-    description.gsub(/^(.{#{length}}[^\n\r]*).*$/m, '\1...').strip if description
+  def short_description(length = 200)
+
+    ## The short description is used in lists, e.g. Latest projects,
+    ## My projects etc.  It should be no more than a line or two with
+    ## no text formatting.
+
+    ## Original Redmine code: this truncates to the CR that is more
+    ## than "length" characters from the start.
+    # description.gsub(/^(.{#{length}}[^\n\r]*).*$/m, '\1...').strip if description
+
+    ## That can leave too much text for us, and also we want to omit
+    ## images and the like.  Truncate instead to the first CR that
+    ## follows _any_ non-blank text, and to the next word break beyond
+    ## "length" characters if the result is still longer than that.
+    ##
+    description.gsub(/![^\s]+!/, '').gsub(/^(\s*[^\n\r]*).*$/m, '\1').gsub(/^(.{#{length}}[^\.;:,-]*).*$/m, '\1 ...').strip if description
   end
 
   def css_classes
@@ -669,7 +688,8 @@ class Project < ActiveRecord::Base
     'custom_field_values',
     'custom_fields',
     'tracker_ids',
-    'issue_custom_field_ids'
+    'issue_custom_field_ids',
+    'has_welcome_page'
 
   safe_attributes 'enabled_module_names',
     :if => lambda {|project, user| project.new_record? || user.allowed_to?(:select_project_modules, project) }

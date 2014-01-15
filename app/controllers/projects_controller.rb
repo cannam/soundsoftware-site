@@ -20,8 +20,8 @@ class ProjectsController < ApplicationController
   menu_item :roadmap, :only => :roadmap
   menu_item :settings, :only => :settings
 
-  before_filter :find_project, :except => [ :index, :list, :new, :create, :copy ]
-  before_filter :authorize, :except => [ :index, :list, :new, :create, :copy, :archive, :unarchive, :destroy]
+  before_filter :find_project, :except => [ :index, :list, :explore, :new, :create, :copy ]
+  before_filter :authorize, :except => [ :index, :list, :explore, :new, :create, :copy, :archive, :unarchive, :destroy]
   before_filter :authorize_global, :only => [:new, :create]
   before_filter :require_admin, :only => [ :copy, :archive, :unarchive, :destroy ]
   accept_rss_auth :index
@@ -44,16 +44,29 @@ class ProjectsController < ApplicationController
   include RepositoriesHelper
   include ProjectsHelper
   helper :members
+  include ActivitiesHelper
+  helper :activities
 
-  # Lists visible projects
+  # Lists visible projects. Paginator is for top-level projects only
+  # (subprojects belong to them)
   def index
     respond_to do |format|
       format.html {
-        scope = Project
-        unless params[:closed]
-          scope = scope.active
-        end
-        @projects = scope.visible.order('lft').all
+        sort_init 'name'
+        sort_update %w(name lft created_on updated_on)
+        @limit = per_page_option
+        @project_count = Project.visible_roots.count
+        @project_pages = Paginator.new self, @project_count, @limit, params['page']
+        @offset ||= @project_pages.current.offset
+        @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause)
+        render :template => 'projects/index.html.erb', :layout => !request.xhr?
+
+## Redmine 2.2:
+#        scope = Project
+#        unless params[:closed]
+#          scope = scope.active
+#        end
+#        @projects = scope.visible.order('lft').all
       }
       format.api  {
         @offset, @limit = api_offset_and_limit
@@ -63,6 +76,16 @@ class ProjectsController < ApplicationController
       format.atom {
         projects = Project.visible.order('created_on DESC').limit(Setting.feeds_limit.to_i).all
         render_feed(projects, :title => "#{Setting.app_title}: #{l(:label_project_latest)}")
+      }
+    end
+  end
+
+  # A different view of projects using explore boxes
+  def explore
+    respond_to do |format|
+      format.html {
+        @projects = Project.visible
+        render :template => 'projects/explore.html.erb', :layout => !request.xhr?
       }
     end
   end
@@ -80,7 +103,7 @@ class ProjectsController < ApplicationController
     @project = Project.new
     @project.safe_attributes = params[:project]
 
-    if validate_parent_id && @project.save
+    if validate_is_public_key && validate_parent_id && @project.save
       @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
       # Add current user as a project member if current user is not admin
       unless User.current.admin?
@@ -171,6 +194,7 @@ class ProjectsController < ApplicationController
     @issue_category ||= IssueCategory.new
     @member ||= @project.members.new
     @trackers = Tracker.sorted.all
+    @repository ||= @project.repository
     @wiki ||= @project.wiki
   end
 
@@ -197,6 +221,14 @@ class ProjectsController < ApplicationController
         format.api  { render_validation_errors(@project) }
       end
     end
+  end
+
+  def overview
+    @project.has_welcome_page = params[:has_welcome_page]
+    if @project.save
+      flash[:notice] = l(:notice_successful_update)
+    end
+    redirect_to :action => 'settings', :id => @project, :tab => 'overview'
   end
 
   def modules
@@ -244,6 +276,19 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def validate_is_public_key
+    # Although is_public isn't mandatory in the project model (it gets
+    # defaulted), it must be present in params -- it can be true or
+    # false, but it must be there. This permits us to make forms in
+    # which the user _has_ to select public or private (rather than
+    # defaulting it) if we want to
+    if params.nil? || params[:project].nil? || !params[:project].has_key?(:is_public)
+      @project.errors.add :is_public, :public_or_private
+      return false
+    end
+    true
+  end
 
   # Validates parent_id param according to user's permissions
   # TODO: move it to Project model in a validation that depends on User.current

@@ -25,6 +25,10 @@ app_subtitle:
   default: Project management
 welcome_text:
   default:
+tipoftheday_text:
+    default:    
+notifications_text:
+    default:
 login_required:
   default: 0
 self_registration:

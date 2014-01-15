@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/mercurial_adapter'
+require_dependency 'redmine/scm/adapters/mercurial_adapter'
 
 class Repository::Mercurial < Repository
   # sort changesets by revision number
@@ -24,7 +24,7 @@ class Repository::Mercurial < Repository
            :foreign_key => 'repository_id'
 
   attr_protected        :root_url
-  validates_presence_of :url
+  # validates_presence_of :url
 
   # number of changesets to fetch at once
   FETCH_AT_ONCE = 100

@@ -1,0 +1,6 @@
+
+<div id="tags">
+<%= render_tags_list(Project.available_tags.select { |t| Project.tagged_with(t).count > 1 }, :style => :cloud) %>
+</div>
+
+

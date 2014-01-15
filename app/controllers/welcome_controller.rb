@@ -18,9 +18,21 @@
 class WelcomeController < ApplicationController
   caches_action :robots
 
+  include ProjectsHelper
+  helper :projects
+
   def index
-    @news = News.latest User.current
-    @projects = Project.latest User.current
+    @site_project = Project.find_by_identifier "soundsoftware-site"
+    @site_news = []
+    @site_news = News.latest_for(@site_project, 3) if @site_project
+    
+    # tests if user is logged in to generate the tips of the day list
+    if User.current.logged?
+      @tipsoftheday = Setting.tipoftheday_text
+    else
+      @tipsoftheday = ''
+    end
+    
   end
 
   def robots

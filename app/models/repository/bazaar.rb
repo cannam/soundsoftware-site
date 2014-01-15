@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/bazaar_adapter'
+require_dependency 'redmine/scm/adapters/bazaar_adapter'
 
 class Repository::Bazaar < Repository
   attr_protected :root_url

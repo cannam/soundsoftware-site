@@ -382,6 +382,7 @@ tr:
   label_register: Kayıt
   label_password_lost: Parolamı unuttum
   label_home: Anasayfa
+  label_home_heading: Anasayfa
   label_my_page: Kişisel Sayfam
   label_my_account: Hesabım
   label_my_projects: Projelerim

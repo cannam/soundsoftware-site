@@ -1,0 +1,16 @@
+<%  @user_projects = User.current.projects.all(:order => :name) %>
+
+<% if @user_projects.empty? %>
+<h3><%=l(:label_my_projects)%></h3>
+<div class="box">
+  <div class="tip"><%= l(:label_have_no_projects)%> <%= link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}) if User.current.allowed_to?(:add_project, nil, :global => true) %></div>
+</div>
+<% else %>
+<h3><%=l(:label_my_projects)%> (<%= @user_projects.count %>)</h3>
+<div class="box">
+<%=
+   render :partial => 'projects/my', :locals => { :user => User.current }
+ %>
+</div>
+<% end %>
+

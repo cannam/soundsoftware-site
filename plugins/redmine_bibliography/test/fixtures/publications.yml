@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+    id: 1
+    title: Publication Number 1
+    reviewed: true
+    external_url:
+    doi:
+two:
+    id: 2
+    title: Publication Number 2
+    reviewed: false
+    external_url:
+    doi:

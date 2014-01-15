@@ -89,6 +89,9 @@ RedmineApp::Application.routes.draw do
   post 'issues/:object_id/watchers', :to => 'watchers#create', :object_type => 'issue'
   delete 'issues/:object_id/watchers/:user_id' => 'watchers#destroy', :object_type => 'issue'
 
+  match 'projects/:id/settings/:tab', :to => "projects#settings"
+  match 'projects/:id/overview', :to => "projects#overview"
+
   resources :projects do
     member do
       get 'settings(/:tab)', :action => 'settings', :as => 'settings'
@@ -102,6 +105,14 @@ RedmineApp::Application.routes.draw do
 
     shallow do
       resources :memberships, :controller => 'members', :only => [:index, :show, :new, :create, :update, :destroy] do
+        collection do
+          get 'autocomplete'
+        end
+      end
+    end
+
+    shallow do
+      resources :members, :controller => 'members', :only => [:index, :show, :new, :create, :update, :destroy] do
         collection do
           get 'autocomplete'
         end
@@ -189,6 +200,9 @@ RedmineApp::Application.routes.draw do
   end
   match '/issues', :controller => 'issues', :action => 'destroy', :via => :delete
 
+  # changed this route to ensure compatibility with Rails 3 --lf.20130109
+  match 'explore' => 'projects#explore'
+
   resources :queries, :except => [:show]
 
   resources :news, :only => [:index, :show, :edit, :update, :destroy]
@@ -272,6 +286,7 @@ RedmineApp::Application.routes.draw do
   get 'attachments/:id/:filename', :to => 'attachments#show', :id => /\d+/, :filename => /.*/, :as => 'named_attachment'
   get 'attachments/download/:id/:filename', :to => 'attachments#download', :id => /\d+/, :filename => /.*/, :as => 'download_named_attachment'
   get 'attachments/download/:id', :to => 'attachments#download', :id => /\d+/
+  get 'attachments/toggle_active/:id', :to => 'attachments#toggle_active', :id => /\d+/
   get 'attachments/thumbnail/:id(/:size)', :to => 'attachments#thumbnail', :id => /\d+/, :size => /\d+/, :as => 'thumbnail'
   resources :attachments, :only => [:show, :destroy]
 
@@ -336,6 +351,8 @@ RedmineApp::Application.routes.draw do
 
   match 'sys/projects', :to => 'sys#projects', :via => :get
   match 'sys/projects/:id/repository', :to => 'sys#create_project_repository', :via => :post
+  match 'sys/projects/:id/repository_cache.:format', :controller => 'sys', :action => 'clear_repository_cache', :conditions => { :method => :post }
+  match 'sys/projects/:id/embedded.:format', :controller => 'sys', :action => 'set_embedded_active', :conditions => { :method => :post }
   match 'sys/fetch_changesets', :to => 'sys#fetch_changesets', :via => :get
 
   match 'uploads', :to => 'attachments#upload', :via => :post

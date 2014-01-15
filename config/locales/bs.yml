@@ -440,6 +440,7 @@ bs:
   label_login_with_open_id_option: ili prijava sa OpenID-om
   label_password_lost: Izgubljena lozinka
   label_home: Početna stranica
+  label_home_heading: Početna stranica
   label_my_page: Moja stranica
   label_my_account: Moj korisnički račun
   label_my_projects: Moji projekti

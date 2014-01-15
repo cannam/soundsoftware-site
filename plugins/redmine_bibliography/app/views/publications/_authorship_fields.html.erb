@@ -1,0 +1,30 @@
+<div id="authors" class="fields">
+  <div class="author_edit" id="<%= form_tag_id( f.object_name, :edit_author_info ) %>">
+
+    <p><%= f.label :name_on_paper %><%= f.text_field :name_on_paper, :class => "author_name_on_paper" -%></p>
+    <p><%= f.label :institution %><%= f.text_field :institution -%></p>
+    <p><%= f.label :email %><%= f.text_field :email -%></p>
+
+    <p class="author_associated search_author_tie">
+      <%= f.check_box :search_author_tie, :label => '' -%>
+      <% unless f.object.search_author_tie %>
+        <span>Not associated with any SoundSoftware site user.</span>
+      <% else %>
+        <span>Associated with <%= render_authorship_link(f.object.search_author_class, f.object.search_author_id) -%>.</span>
+      <% end %>
+    </p>
+
+    <%= f.hidden_field :search_author_class -%>
+    <%= f.hidden_field :search_author_id -%>
+  </div>
+
+  <div>
+    <p>
+      <%= button_to_function l(:label_save_author), '', :id => form_tag_id(f.object_name, :edit_save_button), :class => 'author_save_btn' -%>
+
+      <%= button_to_function l(:label_edit_author), '', :id => form_tag_id(f.object_name, :edit_button), :class => 'author_edit_btn', :style => "display:none;" -%>
+
+      <%= link_to_remove_fields l("remove_author"), f %>
+    </p>
+  </div>
+</div>

@@ -23,7 +23,7 @@ class SysController < ActionController::Base
     # extra_info attribute from repository breaks activeresource client
     render :xml => p.to_xml(
                        :only => [:id, :identifier, :name, :is_public, :status],
-                       :include => {:repository => {:only => [:id, :url]}}
+                       :include => {:repository => {:only => [:id, :url, :is_external, :external_url]}}
                      )
   end
 
@@ -61,6 +61,55 @@ class SysController < ActionController::Base
     projects.each do |project|
       project.repositories.each do |repository|
         repository.fetch_changesets
+      end
+    end
+    render :nothing => true, :status => 200
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
+  end
+
+  def get_external_repo_url
+    project = Project.find(params[:id])
+    if project.repository
+      repo = project.repository
+      if repo.is_external?
+        render :text => repo.external_url, :status => 200
+      else
+        render :nothing => true, :status => 200
+      end
+    end
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
+  end
+
+  def clear_repository_cache
+    project = Project.find(params[:id])
+    if project.repository
+      project.repository.clear_cache
+    end
+    render :nothing => true, :status => 200
+  rescue ActiveRecord::RecordNotFound
+    render :nothing => true, :status => 404
+  end
+  
+  def set_embedded_active
+    project = Project.find(params[:id])
+    mods = project.enabled_modules
+    enable = (params[:enable] == "1")
+    if mods.detect {|m| m.name == "redmine_embedded"}
+      logger.info "Project #{project.name} currently has Embedded enabled"
+      if !enable
+        logger.info "Disabling Embedded"
+        modnames = mods.all(:select => :name).collect{|m| m.name}.reject{|n| n == "redmine_embedded"}
+        project.enabled_module_names = modnames
+      end
+    else
+      logger.info "Project #{project.name} currently has Embedded disabled"
+      if enable
+        logger.info "Enabling Embedded"
+        modnames = mods.all(:select => :name).collect{|m| m.name}
+        modnames << "redmine_embedded"
+        project.enabled_module_names = modnames
       end
     end
     render :nothing => true, :status => 200

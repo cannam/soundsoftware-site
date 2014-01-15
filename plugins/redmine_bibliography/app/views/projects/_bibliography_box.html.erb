@@ -1,0 +1,35 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+    <%= javascript_include_tag 'bibtex', :plugin => 'redmine_bibliography' -%>
+<% end %>
+
+<% if @project.publications.any? %>
+<%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' %>
+  <div id="bibliography">
+    <div class="box">
+    <h3><%=l(:label_related_publication_plural)%></h3>
+
+     <dl>
+     <% @project.publications.each do |publication| %>
+       <dt>
+          <%= print_ieee_format(publication) %>
+       </dt>
+       <dd>
+         <%= link_to(l("more_details_link"), {:controller => :publications, :action => :show, :id => publication.id, :project_id => @project.id}) -%>
+
+         <%= link_to l(:bibtex_link).html_safe, "javascript:void(0)", :class => "bibtex-link"-%>
+
+        <%- unless publication.external_url.blank? -%>
+            <%= link_to l(:external_url_link), publication.external_url, {:target => "_blank"} -%>
+        <%- end -%>
+
+
+       </dd>
+       <dd class="bibtex-textarea collapsed" style="display: none;">
+         <textarea readonly> <%= print_bibtex_format(publication) -%> </textarea>
+       </dd>
+   <% end -%>
+     </dl>
+  </div>
+</div>
+<% end -%>

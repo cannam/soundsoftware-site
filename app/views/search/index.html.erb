@@ -22,12 +22,22 @@
 <% end %>
 </div>
 
+<% if @project_matches and !@project_matches.empty? and !@pagination_previous_date %>
+   <h3><%= l(:label_matching_project_plural) %> (<%= @project_matches.count %>)</h3>
+    <dl id="search-results">
+      <% @project_matches.each do |e| %>
+        <dt class="<%= e.event_type %>"><%= content_tag('span', h(e.project), :class => 'project') unless @project == e.project %> <%= link_to highlight_tokens(truncate(e.event_title, :length => 255), @tokens), e.event_url %></dt>
+        <dd><span class="description"><%= e.short_description %></span>
+      <% end %>
+    </dl>
+<% end %>
+
 <% if @results %>
+    
+    <h3><%= l(:label_result_plural) %> (<%= @results_by_type.values.sum %>)</h3>
     <div id="search-results-counts">
     <%= render_results_by_type(@results_by_type) unless @scope.size == 1 %>
     </div>
-
-    <h3><%= l(:label_result_plural) %> (<%= @results_by_type.values.sum %>)</h3>
     <dl id="search-results">
       <% @results.each do |e| %>
         <dt class="<%= e.event_type %>"><%= content_tag('span', h(e.project), :class => 'project') unless @project == e.project %> <%= link_to highlight_tokens(truncate(e.event_title, :length => 255), @tokens), e.event_url %></dt>

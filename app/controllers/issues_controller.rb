@@ -144,7 +144,16 @@ class IssuesController < ApplicationController
     call_hook(:controller_issues_new_before_save, { :params => params, :issue => @issue })
     @issue.save_attachments(params[:attachments] || (params[:issue] && params[:issue][:uploads]))
     if @issue.save
+      
       call_hook(:controller_issues_new_after_save, { :params => params, :issue => @issue})
+
+      # Also adds the assignee to the watcher's list
+      if params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?
+       unless @issue.watcher_ids.include?(params[:issue][:assigned_to_id])
+         @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
+       end
+      end
+
       respond_to do |format|
         format.html {
           render_attachment_warning_if_needed(@issue)
@@ -387,10 +396,22 @@ class IssuesController < ApplicationController
         return false
       end
     end
+
+    # tests if the the user assigned_to_id
+    # is in this issues watcher's list
+    # if not, adds it.
+
+    if params[:issue] && params[:issue][:assigned_to_id] && !params[:issue][:assigned_to_id].empty?
+     unless @issue.watched_by?(User.find(params[:issue][:assigned_to_id]))
+       @issue.add_watcher(User.find(params[:issue][:assigned_to_id]))
+     end
+    end
+
     @issue.safe_attributes = issue_attributes
     @priorities = IssuePriority.active
     @allowed_statuses = @issue.new_statuses_allowed_to(User.current)
     true
+
   end
 
   # TODO: Refactor, lots of extra code in here
