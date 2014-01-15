@@ -27,7 +27,7 @@ module RedmineTags
 
           # Project.visible_roots.find(@projects).count
 
-          @project_pages = ActionController::Pagination::Paginator.new self, @project_count, @limit, params['page']
+          @project_pages = Redmine::Pagination::Paginator.new @project_count, @limit, params['page']
           @offset ||= @project_pages.current.offset
         end
 
