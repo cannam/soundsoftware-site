@@ -75,6 +75,4 @@ module MyHelper
       order("#{TimeEntry.table_name}.spent_on DESC, #{Project.table_name}.name ASC, #{Tracker.table_name}.position ASC, #{Issue.table_name}.id ASC").
       all
   end
-=======
->>>>>>> other
 end

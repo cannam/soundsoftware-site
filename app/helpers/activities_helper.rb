@@ -178,5 +178,4 @@ module ActivitiesHelper
     insthash.keys.select { |k| insthash[k] >= threshold }.sample(count)
   end
 
->>>>>>> other
 end
