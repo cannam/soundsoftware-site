@@ -312,15 +312,21 @@ module ProjectsHelper
     scores = phash.values.sort
     threshold = scores[scores.length / 2]
     if threshold == 0 then threshold = 1 end
-    uhash = Hash.new
+    mhash = Hash.new
     phash.keys.select do |k|
       if phash[k] < threshold or k.description == "" then
         false
       else
-        uu = k.users
-        novel = (uhash.keys & uu).empty?
-        uu.each { |u| uhash[u] = 1 }
-        novel
+        u = k.users_by_role
+        mgrs = []
+        u.keys.each do |r|
+          if r.allowed_to?(:edit_project)
+            mgrs << u[r]
+          end
+        end
+        novel = (mhash.keys & mgrs).empty?
+        mgrs.each { |m| mhash[m] = 1 }
+        novel and not mgrs.empty?
       end
     end.sample(count)
   end
