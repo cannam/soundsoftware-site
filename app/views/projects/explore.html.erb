@@ -38,6 +38,16 @@
 </div>
 
 <div class="threecolumnmid">
+  <% cache(:action => 'explore', :action_suffix => 'mature_projects') do %>
+  <div class="projects box">
+  <h3><%=l(:label_projects_mature)%></h3>
+    <%= render :partial => 'projects/mature' %>
+    <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
+  </div>
+  <% end %>
+</div>
+
+<div class="threecolumnright">
   <% cache(:action => 'explore', :action_suffix => 'busy_projects') do %>
   <div class="projects box">
   <h3><%=l(:label_projects_busy)%></h3>

@@ -89,7 +89,7 @@ class Project < ActiveRecord::Base
   scope :status, lambda {|arg| arg.blank? ? {} : {:conditions => {:status => arg.to_i}} }
   scope :all_public, { :conditions => { :is_public => true } }
   scope :visible, lambda {|*args| {:conditions => Project.visible_condition(args.shift || User.current, *args) }}
-  scope :visible_roots, lambda { { :conditions => Project.root_visible_by(User.current) } }
+  scope :visible_roots, lambda {|*args| { :conditions => Project.root_visible_by(args.shift || User.current, *args) } }
   scope :allowed_to, lambda {|*args| 
     user = User.current
     permission = nil
@@ -157,8 +157,8 @@ class Project < ActiveRecord::Base
     allowed_to_condition(user, :view_project, options)
   end
 
-  def self.root_visible_by(user=nil)
-    return "#{Project.table_name}.parent_id IS NULL AND " + visible_condition(user)
+  def self.root_visible_by(user, options={})
+    return "#{Project.table_name}.parent_id IS NULL AND " + visible_condition(user, options)
   end
   
   # Returns a SQL conditions string used to find all projects for which +user+ has the given +permission+
