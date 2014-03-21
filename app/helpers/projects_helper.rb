@@ -292,7 +292,7 @@ module ProjectsHelper
 
   def top_level_maturity_scores()
     phash = Hash.new
-    pp = Project.root_visible_by(User.anonymous)
+    pp = Project.visible_roots(User.anonymous)
     pp.each do |p| 
       phash[p] = score_maturity p
     end
