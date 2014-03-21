@@ -58,7 +58,7 @@ class ProjectsController < ApplicationController
         @project_pages = Paginator.new self, @project_count, @limit, params['page']
         @offset ||= @project_pages.current.offset
         @projects = Project.visible_roots.all(:offset => @offset, :limit => @limit, :order => sort_clause)
-        render :template => 'projects/index.html.erb', :layout => !request.xhr?
+        render :template => 'projects/index', :layout => !request.xhr?
 
 ## Redmine 2.2:
 #        scope = Project
@@ -85,7 +85,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html {
         @projects = Project.visible
-        render :template => 'projects/explore.html.erb', :layout => !request.xhr?
+        render :template => 'projects/explore', :layout => !request.xhr?
       }
     end
   end
