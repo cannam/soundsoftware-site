@@ -138,7 +138,7 @@ module ActivitiesHelper
       e.event_author unless !e.respond_to?(:event_author) 
     end.compact
     institutions = authors.map do |a|
-      if a.respond_to?(:ssamr_user_detail) and !a.ssamr_user_detail.nil?
+      if a.respond_to?(:ssamr_user_detail) and !a.ssamr_user_detail.nil? and a.ssamr_user_detail.institution_name != "none"
         a.ssamr_user_detail.institution_name
       end
     end

@@ -7,6 +7,10 @@ gem "coderay", "~> 1.0.6"
 gem "fastercsv", "~> 1.5.0", :platforms => [:mri_18, :mingw_18, :jruby]
 gem "builder", "3.0.0"
 
+#cc -- CiteProc v1.0.0 broke our citations (CiteProc.process returns nil).
+# Until I've managed to work out what's up and fix that...
+gem "citeproc", "0.0.6"
+
 # Optional gem for LDAP authentication
 group :ldap do
   gem "net-ldap", "~> 0.3.1"
