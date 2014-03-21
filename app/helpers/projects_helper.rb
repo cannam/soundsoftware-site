@@ -313,7 +313,7 @@ module ProjectsHelper
     threshold = scores[scores.length / 2]
     if threshold == 0 then threshold = 1 end
     mhash = Hash.new
-    phash.keys.select do |k|
+    phash.keys.shuffle.select do |k|
       if phash[k] < threshold or k.description == "" then
         false
       else
@@ -321,7 +321,7 @@ module ProjectsHelper
         mgrs = []
         u.keys.each do |r|
           if r.allowed_to?(:edit_project)
-            mgrs << u[r]
+            u[r].each { |m| mgrs << m }
           end
         end
         novel = (mhash.keys & mgrs).empty?
