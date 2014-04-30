@@ -18,7 +18,7 @@ module Bibliography
           set_language_if_valid user.language
 
           mail :to => user.mail,
-          :subject => l(:mail_subject_register, Setting.app_title)
+          :subject => l(:mail_subject_publication_added, Setting.app_title)
 
           @publication_url = url_for( :controller => 'publications', :action => 'show', :id => publication.id )
           @publication_title = publication.title
