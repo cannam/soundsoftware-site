@@ -25,18 +25,21 @@ class MembersController < ApplicationController
   accept_api_auth :index, :show, :create, :update, :destroy
 
   def index
-    @offset, @limit = api_offset_and_limit
-    @member_count = @project.member_principals.count
-    @member_pages = Paginator.new @member_count, @limit, params['page']
-    @offset ||= @member_pages.offset
-    @members =  @project.member_principals.
-                    order("#{Member.table_name}.id").
-                    limit(@limit).
-                    offset(@offset).
-                    all
     respond_to do |format|
-      format.html { head 406 }
-      format.api
+      format.html {
+        render :layout => false if request.xhr?
+      }
+      format.api {
+        @offset, @limit = api_offset_and_limit
+        @member_count = @project.member_principals.count
+        @member_pages = Paginator.new @member_count, @limit, params['page']
+        @offset ||= @member_pages.offset
+        @members =  @project.member_principals.
+                        order("#{Member.table_name}.id").
+                        limit(@limit).
+                        offset(@offset).
+                        all
+      }
     end
   end
 
