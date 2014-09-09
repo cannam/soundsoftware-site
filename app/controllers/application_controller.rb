@@ -377,6 +377,10 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default, options={})
     back_url = params[:back_url].to_s
     if back_url.present? && valid_back_url?(back_url)
+      begin
+        uri = URI.parse(back_url)
+        # do not redirect user to another host or to the login or register page
+        if (uri.relative? || (uri.host == request.host)) && !uri.path.match(%r{/(login|account/register)})
           # soundsoftware: if back_url is the home page,
           # change it to My Page (#125)
           if (uri.path == home_path)
@@ -392,8 +396,13 @@ class ApplicationController < ActionController::Base
             uri.scheme = "https"
           end
           back_url = uri.to_s
-      redirect_to(back_url)
-      return
+          redirect_to(back_url)
+          return
+        end
+      rescue URI::InvalidURIError
+        logger.warn("Could not redirect to invalid URL #{back_url}")
+        # redirect to default
+      end
     elsif options[:referer]
       redirect_to_referer_or default
       return
