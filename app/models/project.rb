@@ -163,8 +163,8 @@ class Project < ActiveRecord::Base
     allowed_to_condition(user, :view_project, options)
   end
 
-  def self.root_visible_by(user=nil)
-    return "#{Project.table_name}.parent_id IS NULL AND " + visible_condition(user)
+  def self.root_visible_by(user, options={})
+    return "#{Project.table_name}.parent_id IS NULL AND " + visible_condition(user, options)
   end
   
   # Returns a SQL conditions string used to find all projects for which +user+ has the given +permission+

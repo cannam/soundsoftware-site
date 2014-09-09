@@ -47,7 +47,7 @@ module RedmineTags
               # todo: check ordering ~luisf.14/Jan/2013
               @projects = @projects[@offset, @limit]
 
-              render :template => 'projects/index.html.erb', :layout => !request.xhr?
+              render :template => 'projects/index', :layout => !request.xhr?
             }
             format.api {
               @offset, @limit = api_offset_and_limit

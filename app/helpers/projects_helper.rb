@@ -279,12 +279,21 @@ module ProjectsHelper
       Math.log(1 + nr_downloadables) +
       Math.log(1 + nr_downloads) +
       Math.sqrt(nr_members > 1 ? (nr_members - 1) : 0) +
-      Math.sqrt(nr_publications)
+      Math.sqrt(nr_publications * 2)
   end
 
   def all_maturity_scores()
     phash = Hash.new
     pp = Project.visible(User.anonymous)
+    pp.each do |p| 
+      phash[p] = score_maturity p
+    end
+    phash
+  end
+
+  def top_level_maturity_scores()
+    phash = Hash.new
+    pp = Project.visible_roots(User.anonymous)
     pp.each do |p| 
       phash[p] = score_maturity p
     end
@@ -298,4 +307,29 @@ module ProjectsHelper
     if threshold == 0 then threshold = 1 end
     phash.keys.select { |k| phash[k] > threshold }.sample(count)
   end
+
+  def varied_mature_projects(count)
+    phash = top_level_maturity_scores
+    scores = phash.values.sort
+    threshold = scores[scores.length / 2]
+    if threshold == 0 then threshold = 1 end
+    mhash = Hash.new
+    phash.keys.shuffle.select do |k|
+      if phash[k] < threshold or k.description == "" then
+        false
+      else
+        u = k.users_by_role
+        mgrs = []
+        u.keys.each do |r|
+          if r.allowed_to?(:edit_project)
+            u[r].each { |m| mgrs << m }
+          end
+        end
+        novel = (mhash.keys & mgrs).empty?
+        mgrs.each { |m| mhash[m] = 1 }
+        novel and not mgrs.empty?
+      end
+    end.sample(count)
+  end
+
 end
