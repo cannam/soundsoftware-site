@@ -27,6 +27,30 @@ class Mailer < ActionMailer::Base
     { :host => Setting.host_name, :protocol => Setting.protocol }
   end
 
+  # Builds a mail for notifying the specified member that they were
+  # added to a project
+  def member_added_to_project(member, project)
+
+    principal = Principal.find(member.user_id)
+
+    users = []
+    if principal.type == "User"
+      users = [User.find(member.user_id)]
+    else
+      users = Principal.find(member.user_id).users      
+    end
+
+    users.map do |user|
+
+      set_language_if_valid user.language
+      @project_url = url_for(:controller => 'projects', :action => 'show', :id => project.id)
+      @project_name = project.name
+      mail :to => user.mail,
+        :subject => l(:mail_subject_added_to_project, Setting.app_title)
+
+    end
+  end
+  
   # Builds a mail for notifying to_users and cc_users about a new issue
   def issue_add(issue, to_users, cc_users)
     redmine_headers 'Project' => issue.project.identifier,
@@ -493,3 +517,17 @@ class Mailer < ActionMailer::Base
     Rails.logger
   end
 end
+
+# Patch TMail so that message_id is not overwritten
+
+### NB: Redmine 2.2 no longer uses TMail I think? This function has
+### been removed there
+
+module TMail
+  class Mail
+    def add_message_id( fqdn = nil )
+      self.message_id ||= ::TMail::new_message_id(fqdn)
+    end
+  end
+end
+

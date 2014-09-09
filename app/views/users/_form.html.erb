@@ -1,3 +1,7 @@
+<% content_for :header_tags do %>
+  <%= javascript_include_tag "ssamr_institutions" %>
+<% end %>
+
 <%= error_messages_for 'user' %>
 
 <div id="user_form">
@@ -23,6 +27,33 @@
   <p><%= f.check_box :admin, :disabled => (@user == User.current) %></p>
   <%= call_hook(:view_users_form, :user => @user, :form => f) %>
 </fieldset>
+
+<div class="box tabular">
+	<h3><%=l(:label_ssamr_details)%></h3>
+          <%= labelled_fields_for :ssamr_user_detail, @user.ssamr_user_detail do |ssamr_user_detail| %>
+            <p>
+              <%= ssamr_user_detail.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit'  %>
+            </p>
+
+            <p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
+			 <nobr>
+              <%= ssamr_user_detail.radio_button :institution_type, true %>
+              <%= ssamr_user_detail.collection_select(:institution_id, Institution.find(:all, :order => "institutions.order"), :id, :name, {:selected => @selected_institution_id, :prompt => true} ).gsub('&amp;', '&').html_safe  %>
+             </nobr>
+			</p>
+
+
+
+            <p>
+				<nobr>
+               <%= ssamr_user_detail.radio_button :institution_type, false %> Other:
+               <%= ssamr_user_detail.text_field :other_institution %>
+				</nobr>
+            </p>
+          <% end %>
+</div>
+
+
 
 <fieldset class="box tabular">
   <legend><%=l(:label_authentication)%></legend>

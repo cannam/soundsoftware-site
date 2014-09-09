@@ -9,6 +9,10 @@ gem "builder", "3.0.0"
 gem "mime-types"
 gem "awesome_nested_set", "2.1.6"
 
+#cc -- CiteProc v1.0.0 broke our citations (CiteProc.process returns nil).
+# Until I've managed to work out what's up and fix that...
+gem "citeproc", "0.0.6"
+
 # Optional gem for LDAP authentication
 group :ldap do
   gem "net-ldap", "~> 0.3.1"

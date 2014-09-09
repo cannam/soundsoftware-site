@@ -275,14 +275,14 @@ class ApplicationController < ActionController::Base
   def find_project
     @project = Project.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find project of id params[:project_id]
   def find_project_by_project_id
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
-    render_404
+    User.current.logged? ? render_404 : require_login
   end
 
   # Find a project based on params[:project_id]
@@ -377,6 +377,21 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default, options={})
     back_url = params[:back_url].to_s
     if back_url.present? && valid_back_url?(back_url)
+          # soundsoftware: if back_url is the home page,
+          # change it to My Page (#125)
+          if (uri.path == home_path)
+            if (uri.path =~ /\/$/)
+              uri.path = uri.path + "my"
+            else
+              uri.path = uri.path + "/my"
+            end
+          end
+          # soundsoftware: if login page is https but back_url http,
+          # switch back_url to https to ensure cookie validity (#83)
+          if (uri.scheme == "http") && (URI.parse(request.url).scheme == "https")
+            uri.scheme = "https"
+          end
+          back_url = uri.to_s
       redirect_to(back_url)
       return
     elsif options[:referer]

@@ -1,4 +1,9 @@
+<%= javascript_include_tag "ssamr_institutions" %>
+<%= javascript_include_tag "ssamr_registration" %>
+
 <h2><%=l(:label_register)%> <%=link_to l(:label_login_with_open_id_option), signin_url if Setting.openid? %></h2>
+
+<%= l(:text_who_can_register).html_safe %>
 
 <%= labelled_form_for @user, :url => register_path do |f| %>
 <%= error_messages_for 'user' %>
@@ -17,9 +22,29 @@
 <p><%= f.text_field :lastname, :required => true %></p>
 <p><%= f.text_field :mail, :required => true %></p>
 
-<% unless @user.force_default_language? %>
+<!-- We only support English in this site
 <p><%= f.select :language, lang_options_for_select %></p>
+-->
+
+<%= labelled_fields_for :ssamr_user_details, @ssamr_user_details do |fields| %>
+<h3><%=l(:label_ssamr_details)%></h3>
+
+<p>
+  <%= fields.text_area :description, :rows => 3, :cols => 40, :required => true, :class => 'wiki-edit' %>
+  <em> <%=l(:text_user_ssamr_description_info).html_safe%></em>
+</p>
+
+<p><label for="institution"><%=l("field_ssamr_user_detail.institution")%> <span class="required">*</span></label>
+  <%= fields.radio_button :institution_type, true, :checked => true %>
+  <%= fields.collection_select(:institution_id, Institution.find(:all, :order => "institutions.order"), :id, :name,  {:selected => @selected_institution_id, :prompt => true}).gsub('&amp;', '&').html_safe  %>
+</p>
+
+<p>
+  <%= fields.radio_button :institution_type, false %> Other:
+  <%= fields.text_field(:other_institution) %>
+</p>
 <% end %>
+
 
 <% if Setting.openid? %>
   <p><%= f.text_field :identity_url  %></p>
@@ -30,5 +55,10 @@
 <% end %>
 </div>
 
+<%= check_box :user, :terms_and_conditions %> <%= l(:accept_terms_and_conditions) %> <%= link_to("Terms and Conditions", "https://code.soundsoftware.ac.uk/projects/soundsoftware-site/wiki/TandCs", {:target => "_blank"}) %>.
+<br />
+<br />
+
 <%= submit_tag l(:button_submit) %>
 <% end %>
+

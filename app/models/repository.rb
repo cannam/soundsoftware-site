@@ -51,6 +51,8 @@ class Repository < ActiveRecord::Base
     'password',
     'path_encoding',
     'log_encoding',
+    'is_external',
+    'external_url',
     'is_default'
 
   safe_attributes 'url',
@@ -367,6 +369,10 @@ class Repository < ActiveRecord::Base
     nil
   end
 
+  def clear_cache
+    clear_changesets
+  end
+    
   def self.scm_adapter_class
     nil
   end

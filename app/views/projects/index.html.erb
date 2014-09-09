@@ -6,17 +6,14 @@
     <%= render_project_action_links %>
 </div>
 
-<h2><%= l(:label_project_plural) %></h2>
+<h2>
+<%= l("label_project_all") %>
+</h2>
 
-<div id="projects-index">
-<%= render_project_hierarchy(@projects) %>
-</div>
+<%= render_project_table(@projects) %>
 
-<% if User.current.logged? %>
-<p style="text-align:right;">
-<span class="my-project"><%= l(:label_my_projects) %></span>
-</p>
-<% end %>
+<p class="pagination"><%= pagination_links_full @project_pages, @project_count %></p>
+
 
 <% other_formats_links do |f| %>
   <%= f.link_to 'Atom', :url => {:key => User.current.rss_key} %>

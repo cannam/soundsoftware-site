@@ -828,6 +828,172 @@ de:
     one:   1 Projekt
     other: "%{count} Projekte"
   label_year: Jahr
+  label_project_all: Alle Projekte
+  label_project_latest: Neueste Projekte
+  label_issue: Ticket
+  label_issue_new: Neues Ticket
+  label_issue_plural: Tickets
+  label_issue_view_all: Alle Tickets anzeigen
+  label_issues_by: "Tickets von %{value}"
+  label_issue_added: Ticket hinzugefügt
+  label_issue_updated: Ticket aktualisiert
+  label_document: Dokument
+  label_document_new: Neues Dokument
+  label_document_plural: Dokumente
+  label_document_added: Dokument hinzugefügt
+  label_role: Rolle
+  label_role_plural: Rollen
+  label_role_new: Neue Rolle
+  label_role_and_permissions: Rollen und Rechte
+  label_member: Mitglied
+  label_member_new: Neues Mitglied
+  label_member_plural: Mitglieder
+  label_tracker: Tracker
+  label_tracker_plural: Tracker
+  label_tracker_new: Neuer Tracker
+  label_workflow: Workflow
+  label_issue_status: Ticket-Status
+  label_issue_status_plural: Ticket-Status
+  label_issue_status_new: Neuer Status
+  label_issue_category: Ticket-Kategorie
+  label_issue_category_plural: Ticket-Kategorien
+  label_issue_category_new: Neue Kategorie
+  label_custom_field: Benutzerdefiniertes Feld
+  label_custom_field_plural: Benutzerdefinierte Felder
+  label_custom_field_new: Neues Feld
+  label_enumerations: Aufzählungen
+  label_enumeration_new: Neuer Wert
+  label_information: Information
+  label_information_plural: Informationen
+  label_please_login: Anmelden
+  label_register: Registrieren
+  label_login_with_open_id_option: oder mit OpenID anmelden
+  label_password_lost: Kennwort vergessen
+  label_home: Hauptseite
+  label_home_heading: Hauptseite
+  label_my_page: Meine Seite
+  label_my_account: Mein Konto
+  label_my_projects: Meine Projekte
+  label_my_page_block: Bereich "Meine Seite"
+  label_administration: Administration
+  label_login: Anmelden
+  label_logout: Abmelden
+  label_help: Hilfe
+  label_reported_issues: Gemeldete Tickets
+  label_assigned_to_me_issues: Mir zugewiesen
+  label_last_login: Letzte Anmeldung
+  label_registered_on: Angemeldet am
+  label_activity: Aktivität
+  label_overall_activity: Aktivitäten aller Projekte anzeigen
+  label_user_activity: "Aktivität von %{value}"
+  label_new: Neu
+  label_logged_as: Angemeldet als
+  label_environment: Umgebung
+  label_authentication: Authentifizierung
+  label_auth_source: Authentifizierungs-Modus
+  label_auth_source_new: Neuer Authentifizierungs-Modus
+  label_auth_source_plural: Authentifizierungs-Arten
+  label_subproject_plural: Unterprojekte
+  label_subproject_new: Neues Unterprojekt
+  label_and_its_subprojects: "%{value} und dessen Unterprojekte"
+  label_min_max_length: Länge (Min. - Max.)
+  label_list: Liste
+  label_date: Datum
+  label_integer: Zahl
+  label_float: Fließkommazahl
+  label_boolean: Boolean
+  label_string: Text
+  label_text: Langer Text
+  label_attribute: Attribut
+  label_attribute_plural: Attribute
+  label_download: "%{count} Download"
+  label_download_plural: "%{count} Downloads"
+  label_no_data: Nichts anzuzeigen
+  label_change_status: Statuswechsel
+  label_history: Historie
+  label_attachment: Datei
+  label_attachment_new: Neue Datei
+  label_attachment_delete: Anhang löschen
+  label_attachment_plural: Dateien
+  label_file_added: Datei hinzugefügt
+  label_report: Bericht
+  label_report_plural: Berichte
+  label_news: News
+  label_news_new: News hinzufügen
+  label_news_plural: News
+  label_news_latest: Letzte News
+  label_news_view_all: Alle News anzeigen
+  label_news_added: News hinzugefügt
+  label_settings: Konfiguration
+  label_overview: Übersicht
+  label_version: Version
+  label_version_new: Neue Version
+  label_version_plural: Versionen
+  label_close_versions: Vollständige Versionen schließen
+  label_confirmation: Bestätigung
+  label_export_to: "Auch abrufbar als:"
+  label_read: Lesen...
+  label_public_projects: Öffentliche Projekte
+  label_open_issues: offen
+  label_open_issues_plural: offen
+  label_closed_issues: geschlossen
+  label_closed_issues_plural: geschlossen
+  label_x_open_issues_abbr_on_total:
+    zero:  0 offen / %{total}
+    one:   1 offen / %{total}
+    other: "%{count} offen / %{total}"
+  label_x_open_issues_abbr:
+    zero:  0 offen
+    one:   1 offen
+    other: "%{count} offen"
+  label_x_closed_issues_abbr:
+    zero:  0 geschlossen
+    one:   1 geschlossen
+    other: "%{count} geschlossen"
+  label_total: Gesamtzahl
+  label_permissions: Berechtigungen
+  label_current_status: Gegenwärtiger Status
+  label_new_statuses_allowed: Neue Berechtigungen
+  label_all: alle
+  label_none: kein
+  label_nobody: Niemand
+  label_next: Weiter
+  label_previous: Zurück
+  label_used_by: Benutzt von
+  label_details: Details
+  label_add_note: Kommentar hinzufügen
+  label_per_page: Pro Seite
+  label_calendar: Kalender
+  label_months_from: Monate ab
+  label_gantt: Gantt-Diagramm
+  label_internal: Intern
+  label_last_changes: "%{count} letzte Änderungen"
+  label_change_view_all: Alle Änderungen anzeigen
+  label_personalize_page: Diese Seite anpassen
+  label_comment: Kommentar
+  label_comment_plural: Kommentare
+  label_x_comments:
+    zero: keine Kommentare
+    one: 1 Kommentar
+    other: "%{count} Kommentare"
+  label_comment_add: Kommentar hinzufügen
+  label_comment_added: Kommentar hinzugefügt
+  label_comment_delete: Kommentar löschen
+  label_query: Benutzerdefinierte Abfrage
+  label_query_plural: Benutzerdefinierte Berichte
+  label_query_new: Neuer Bericht
+  label_filter_add: Filter hinzufügen
+  label_filter_plural: Filter
+  label_equals: ist
+  label_not_equals: ist nicht
+  label_in_less_than: in weniger als
+  label_in_more_than: in mehr als
+  label_greater_or_equal: ">="
+  label_less_or_equal: "<="
+  label_in: an
+  label_today: heute
+  label_all_time: gesamter Zeitraum
+>>>>>>> other
   label_yesterday: gestern
 
   mail_body_account_activation_request: "Ein neuer Benutzer (%{value}) hat sich registriert. Sein Konto wartet auf Ihre Genehmigung:"

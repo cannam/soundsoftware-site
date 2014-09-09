@@ -294,4 +294,24 @@ module RepositoriesHelper
     end
     max_space
   end
+
+  # Generates a link to a downloadable archive for a revision
+  # Options:
+  # * :text - Link text (default to the formatted revision)
+  def link_to_revision_archive(repository, revision, project, options={})
+    method = repository.class.name.demodulize.underscore + "_link_to_revision_archive"
+    if repository.is_a?(Repository) &&
+        respond_to?(method) && method != 'link_to_revision_archive'
+      send(method, repository, revision, project, options)
+    end
+  end
+
+  def mercurial_link_to_revision_archive(repository, revision, project, options={})
+    text = options.delete(:text) || format_revision(revision)
+    rev = revision.respond_to?(:identifier) ? revision.identifier : revision
+    if rev.blank? then rev = 'tip' end
+    content_tag('a', h(text),
+        { :href => "/hg/#{project.identifier}/archive/#{rev}.zip" }.merge(options));
+  end
+
 end

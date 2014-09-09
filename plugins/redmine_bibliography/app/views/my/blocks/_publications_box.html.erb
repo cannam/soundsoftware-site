@@ -1,0 +1,30 @@
+<% get_my_publications %>
+
+<h3><%=l(:label_my_publications_box) %> <%= "(" + @my_publications.count.to_s + ")" %> </h3>
+
+<table class="list publications">		
+	<thead><tr>
+	<th><%=l(:field_publication_title)%></th>
+	<th><%=l(:field_publication_authors)%></th>
+	<th><%=l(:field_publication_projects)%></th>
+	</tr></thead>
+	<tbody>
+	  	
+  <% @my_publications.each do |publication|%>    
+	<tr id="publication-<%= publication.id %>" class="<%= cycle('odd', 'even') %>">
+		<td class="title">
+			<%= link_to publication.title, publication %>
+		</td>
+    <td class="authors">
+      <%= render_publications_authors(publication) %>
+    </td>
+    <td class="project">             
+      <%= render_publications_projects(publication) %>	
+    </td>
+	</tr>
+	<% end %>
+	</tbody>
+</table>
+
+
+

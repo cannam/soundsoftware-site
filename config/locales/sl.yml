@@ -417,6 +417,7 @@ sl:
   label_register: Registracija
   label_password_lost: Spremeni geslo
   label_home: Domov
+  label_home_heading: Domov
   label_my_page: Moja stran
   label_my_account: Moj račun
   label_my_projects: Moji projekti

@@ -1,0 +1,30 @@
+@import url(fonts.css?3);
+
+h1, #project-ancestors-title, #top-menu a {
+  font-family: Insider, "Lucida Grande", sans-serif;
+  font-weight: bold;
+}    
+
+#top-menu div, #top-menu li {
+  font-size: 12px;
+}
+
+body,p,li,table { 
+  font-family: Insider, "Lucida Grande", sans-serif;
+  font-size: 14px;
+  line-height: 1.34;
+  font-weight: normal;
+}
+
+h2,h3,h4,.wiki h1,.embedded h1 { 
+  font-family: Insider, "Lucida Grande", sans-serif;
+  font-weight: bold;
+  line-height: 1.34;
+}
+
+code,pre,.code,.line-code,.embedded a.el {
+  font-family: 'SourceCodePro-Regular', monospace;
+  font-weight: normal;
+  font-size: 0.9em;
+}
+

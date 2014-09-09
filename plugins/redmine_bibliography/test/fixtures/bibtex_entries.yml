@@ -1,0 +1,7 @@
+# bibtex_entries.yml
+---
+one:
+  id: 1
+  entry_type: InProceedings
+  booktitle: International Conference on Software Maintenance
+  year: 1995

@@ -18,12 +18,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module MyHelper
+
   def calendar_items(startdt, enddt)
     Issue.visible.
       where(:project_id => User.current.projects.map(&:id)).
       where("(start_date>=? and start_date<=?) or (due_date>=? and due_date<=?)", startdt, enddt, startdt, enddt).
       includes(:project, :tracker, :priority, :assigned_to).
       all
+  end
+
+  def all_colleagues_of(user)
+    # Return a list of all user ids who have worked with the given user
+    # (on projects that are visible to the current user)
+    user.projects.select { |p| p.visible? }.map { |p| p.members.map { |m| m.user_id } }.flatten.sort.uniq.reject { |i| user.id == i }
   end
 
   def documents_items

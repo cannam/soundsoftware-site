@@ -580,6 +580,7 @@ sv:
   label_login_with_open_id_option: eller logga in med OpenID
   label_password_lost: Glömt lösenord
   label_home: Hem
+  label_home_heading: Hem
   label_my_page: Min sida
   label_my_account: Mitt konto
   label_my_projects: Mina projekt

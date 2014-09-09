@@ -1,0 +1,13 @@
+
+<h2><%=l(:label_member_plural)%></h2> 
+
+<% editable = authorize_for('members', 'update') %>
+
+<div id="memberlist">
+<% if editable %>
+<%= render :partial => 'editlist' %>
+<% else %>
+<%= render :partial => 'list' %>
+<% end %>
+</div>
+

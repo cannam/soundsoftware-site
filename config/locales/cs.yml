@@ -489,6 +489,7 @@ cs:
   label_login_with_open_id_option: nebo se přihlašte s OpenID
   label_password_lost: Zapomenuté heslo
   label_home: Úvodní
+  label_home_heading: Úvodní
   label_my_page: Moje stránka
   label_my_account: Můj účet
   label_my_projects: Moje projekty

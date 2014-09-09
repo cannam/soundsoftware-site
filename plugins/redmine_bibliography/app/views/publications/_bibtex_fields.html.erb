@@ -1,0 +1,78 @@
+<p>
+  <label for="publication_bibtex_entry_attributes_entry_type"><%=l("field_entry_type")%> <span class="required">*</span></label>
+	<%= f.collection_select :entry_type,
+	        BibtexEntryType.find(:all).reject { |x| x.redundant? },
+	        :id,
+	        :label,
+	        { :selected => @selected_bibtex_entry_type_id, :prompt => true } %>
+</p>
+
+<p class="bibtex hol">
+  <%= f.label :year %><%= f.text_field :year, :size => 5 -%>
+</p>
+<p class="bibtex hol">
+  <%= f.label :month %><%= f.text_field :month, :size => 5 -%>
+</p>
+<p class="bibtex hol">
+  <%= f.label :chapter %><%= f.text_field :chapter, :size => 5 -%>
+</p>
+<p class="bibtex hol">
+  <%= f.label :editor %><%= f.text_field :editor -%>
+</p>
+<p class="bibtex hol">
+  <%= f.label :booktitle %><%= f.text_field :booktitle -%>
+</p>
+<p class="bibtex hol">
+  <%= f.label :publisher %><%= f.text_field :publisher -%>
+</p>
+<p class="bibtex hol">
+  <%= f.label :pages %><%= f.text_field :pages, :size => 5 -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :address %><%= f.text_field :address -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :annote %><%= f.text_field :annote -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :crossref %><%= f.text_field :crossref -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :edition %><%= f.text_field :edition -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :eprint %><%= f.text_field :eprint -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :howpublished %><%= f.text_field :howpublished -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :journal %><%= f.text_field :journal -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :key %><%= f.text_field :key -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :note %><%= f.text_field :note -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :number %><%= f.text_field :number, :size => 5 -%>
+</p>
+<p class="bibtex hol">
+ <%= f.label :organization %><%= f.text_field :organization %>
+</p>
+<p class="bibtex hol">
+ <%= f.label :school %><%= f.text_field :school %>
+</p>
+<p class="bibtex hol">
+ <%= f.label :series %><%= f.text_field :series %>
+</p>
+<p class="bibtex hol">
+ <%= f.label :type %><%= f.text_field :type %>
+</p>
+<p class="bibtex hol">
+ <%= f.label :url %><%= f.text_field :url %>
+</p>
+<p class="bibtex hol">
+ <%= f.label :volume %><%= f.text_field :volume %>
+</p>

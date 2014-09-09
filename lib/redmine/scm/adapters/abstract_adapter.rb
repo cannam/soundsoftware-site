@@ -287,7 +287,12 @@ module Redmine
 
         def scm_iconv(to, from, str)
           return nil if str.nil?
-          return str if to == from
+          # bug 446: non-utf8 paths in repositories blow up repo viewer and reposman
+          # -- Remove this short-circuit: we want the conversion to
+          #    happen always, so we can trap the error here if the
+          #    source text happens not to be in the advertised
+          #    encoding (instead of having the database blow up later)
+#          return str if to == from
           if str.respond_to?(:force_encoding)
             str.force_encoding(from)
             begin

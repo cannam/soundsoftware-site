@@ -1,0 +1,39 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
+  <%= javascript_include_tag 'bibliography', :plugin => 'redmine_bibliography' -%>
+  <%= javascript_include_tag 'authors', :plugin => 'redmine_bibliography' -%>
+
+  <%= javascript_include_tag 'edit_publication', :plugin => 'redmine_bibliography' -%>
+
+  <%= javascript_tag "$('#publication_bibtex_entry_attributes_entry_type').live('change', function() {
+                        $this = $(this);
+                        $.ajax({
+                            type: 'get',
+                            url: '#{url_for(:controller => :publications, :action => :show_bibtex_fields)}',
+                            data: {
+                                value: $this.val()
+                            },
+                            dataType: 'script'
+                        }); return false; });" -%>
+
+  <%= javascript_tag "authorship_autocomplete('#{url_for :controller => :publications, :action => :autocomplete_for_author}');" -%>
+
+<% end %>
+
+<%= error_messages_for 'publication' %>
+
+<h2><%=l(:label_publication_show)%></h2>
+
+<%= form_for @publication, :url => { :project_id  => @project, :action => :update } do |f| -%>
+
+    <%= render :partial => 'form', :locals => { :f => f }  %>
+
+    <div style="clear:both"></div>
+    <%= f.submit %>
+<% end %>
+
+<p>
+    <%= link_to l(:label_publication_show), { :controller => "publications", :action => "show", :id => @publication, :project_id => @project_id } %> |
+    <%= link_to l(:label_publication_index), { :controller => "publications", :action => "index", :project_id => @project } %>
+</p>
+

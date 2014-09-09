@@ -524,6 +524,7 @@ ja:
   label_login_with_open_id_option: またはOpenIDでログインする
   label_password_lost: パスワードの再発行
   label_home: ホーム
+  label_home_heading: ホーム
   label_my_page: マイページ
   label_my_account: 個人設定
   label_my_projects: マイプロジェクト

@@ -15,7 +15,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-require 'redmine/scm/adapters/abstract_adapter'
+require_dependency 'redmine/scm/adapters/abstract_adapter'
 require 'cgi'
 
 module Redmine
@@ -198,8 +198,7 @@ module Redmine
               output.force_encoding('UTF-8')
             end
             begin
-              # Mercurial < 1.5 does not support footer template for '</log>'
-              parse_xml("#{output}</log>")['log']
+              parse_xml("#{output}")['log']
             rescue
             end
           end
