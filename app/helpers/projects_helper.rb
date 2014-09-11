@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2014  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -46,9 +46,18 @@ module ProjectsHelper
     end
 
     options = ''
-    options << "<option value=''></option>" if project.allowed_parents.include?(nil)
+    options << "<option value=''>&nbsp;</option>" if project.allowed_parents.include?(nil)
     options << project_tree_options_for_select(project.allowed_parents.compact, :selected => selected)
     content_tag('select', options.html_safe, :name => 'project[parent_id]', :id => 'project_parent_id')
+  end
+
+  def render_project_action_links
+    links = []
+    links << link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true)
+    links << link_to(l(:label_issue_view_all), issues_path) if User.current.allowed_to?(:view_issues, nil, :global => true)
+    links << link_to(l(:label_overall_spent_time), time_entries_path) if User.current.allowed_to?(:view_time_entries, nil, :global => true)
+    links << link_to(l(:label_overall_activity), { :controller => 'activities', :action => 'index', :id => nil })
+    links.join(" | ").html_safe
   end
 
   def render_project_short_description(project)
@@ -252,10 +261,11 @@ module ProjectsHelper
       grouped[version.project.name] << [version.name, version.id]
     end
 
+    selected = selected.is_a?(Version) ? selected.id : selected
     if grouped.keys.size > 1
-      grouped_options_for_select(grouped, selected && selected.id)
+      grouped_options_for_select(grouped, selected)
     else
-      options_for_select((grouped.values.first || []), selected && selected.id)
+      options_for_select((grouped.values.first || []), selected)
     end
   end
 
@@ -278,12 +288,21 @@ module ProjectsHelper
       Math.log(1 + nr_downloadables) +
       Math.log(1 + nr_downloads) +
       Math.sqrt(nr_members > 1 ? (nr_members - 1) : 0) +
-      Math.sqrt(nr_publications)
+      Math.sqrt(nr_publications * 2)
   end
 
   def all_maturity_scores()
     phash = Hash.new
     pp = Project.visible(User.anonymous)
+    pp.each do |p| 
+      phash[p] = score_maturity p
+    end
+    phash
+  end
+
+  def top_level_maturity_scores()
+    phash = Hash.new
+    pp = Project.visible_roots(User.anonymous)
     pp.each do |p| 
       phash[p] = score_maturity p
     end
@@ -297,4 +316,29 @@ module ProjectsHelper
     if threshold == 0 then threshold = 1 end
     phash.keys.select { |k| phash[k] > threshold }.sample(count)
   end
+
+  def varied_mature_projects(count)
+    phash = top_level_maturity_scores
+    scores = phash.values.sort
+    threshold = scores[scores.length / 2]
+    if threshold == 0 then threshold = 1 end
+    mhash = Hash.new
+    phash.keys.shuffle.select do |k|
+      if phash[k] < threshold or k.description == "" then
+        false
+      else
+        u = k.users_by_role
+        mgrs = []
+        u.keys.each do |r|
+          if r.allowed_to?(:edit_project)
+            u[r].each { |m| mgrs << m }
+          end
+        end
+        novel = (mhash.keys & mgrs).empty?
+        mgrs.each { |m| mhash[m] = 1 }
+        novel and not mgrs.empty?
+      end
+    end.sample(count)
+  end
+
 end

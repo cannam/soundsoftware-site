@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2014  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -45,12 +45,9 @@ class UsersController < ApplicationController
     scope = scope.in_group(params[:group_id]) if params[:group_id].present?
 
     @user_count = scope.count
-    @user_pages = Paginator.new self, @user_count, @limit, params['page']
-    @offset ||= @user_pages.current.offset
-    @users =  scope.find :all,
-                        :order => sort_clause,
-                        :limit  =>  @limit,
-                        :offset =>  @offset
+    @user_pages = Paginator.new @user_count, @limit, params['page']
+    @offset ||= @user_pages.offset
+    @users =  scope.order(sort_clause).limit(@limit).offset(@offset).all
 
     respond_to do |format|
       format.html {
@@ -58,7 +55,7 @@ class UsersController < ApplicationController
         render :layout => !request.xhr?
       }
       format.api
-    end	
+    end
   end
 
   def show
@@ -69,7 +66,7 @@ class UsersController < ApplicationController
     end
     
     # show projects based on current user visibility
-    @memberships = @user.memberships.all(:conditions => Project.visible_condition(User.current))
+    @memberships = @user.memberships.where(Project.visible_condition(User.current)).all
 
     events = Redmine::Activity::Fetcher.new(User.current, :author => @user).events(nil, nil, :limit => 10)
     @events_by_day = events.group_by(&:event_date)
@@ -89,8 +86,8 @@ class UsersController < ApplicationController
 
   def new      
     @user = User.new(:language => Setting.default_language, :mail_notification => Setting.default_notification_option)
-    @auth_sources = AuthSource.find(:all)
-
+    @user.safe_attributes = params[:user]
+    @auth_sources = AuthSource.all
     @ssamr_user_details = SsamrUserDetail.new
   end
 
@@ -101,7 +98,6 @@ class UsersController < ApplicationController
     @user.admin = params[:user][:admin] || false
     @user.login = params[:user][:login]
     @user.password, @user.password_confirmation = params[:user][:password], params[:user][:password_confirmation] unless @user.auth_source_id
-
     # TODO: Similar to My#account
     @user.pref.attributes = params[:pref]
     @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
@@ -111,28 +107,27 @@ class UsersController < ApplicationController
     # associates the 2 objects
     @user.ssamr_user_detail = @ssamr_user_details
 
-    if @user.save
-      @user.pref.attributes = params[:pref]
-      @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
-      @user.pref.save
-                 
-      @ssamr_user_details.save!
-          
 
-      Mailer.account_information(@user, params[:user][:password]).deliver if params[:send_information]
+    if @user.save
+      @user.pref.save
+      @ssamr_user_details.save!
+
+      Mailer.account_information(@user, @user.password).deliver if params[:send_information]
 
       respond_to do |format|
         format.html {
           flash[:notice] = l(:notice_user_successful_create, :id => view_context.link_to(@user.login, user_path(@user)))
-          redirect_to(params[:continue] ?
-            {:controller => 'users', :action => 'new'} :
-            {:controller => 'users', :action => 'edit', :id => @user}
-          )
+          if params[:continue]
+            attrs = params[:user].slice(:generate_password)
+            redirect_to new_user_path(:user => attrs)
+          else
+            redirect_to edit_user_path(@user)
+          end
         }
         format.api  { render :action => 'show', :status => :created, :location => user_url(@user) }
       end
     else
-      @auth_sources = AuthSource.find(:all)
+      @auth_sources = AuthSource.all
       # Clear password input
       @user.password = @user.password_confirmation = nil
 
@@ -144,6 +139,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @auth_sources = AuthSource.all
     
     @ssamr_user_details = @user.ssamr_user_detail
     
@@ -153,7 +149,6 @@ class UsersController < ApplicationController
       @selected_institution_id = @user.ssamr_user_detail.institution_id.to_i    
     end
     
-    @auth_sources = AuthSource.find(:all)
     @membership ||= Member.new
   end
 
@@ -168,7 +163,6 @@ class UsersController < ApplicationController
     was_activated = (@user.status_change == [User::STATUS_REGISTERED, User::STATUS_ACTIVE])
     # TODO: Similar to My#account
     @user.pref.attributes = params[:pref]
-    @user.pref[:no_self_notified] = (params[:no_self_notified] == '1')
 
     if @user.ssamr_user_detail == nil
       @ssamr_user_details = SsamrUserDetail.new()
@@ -192,12 +186,11 @@ class UsersController < ApplicationController
 
     if @user.save
       @user.pref.save
-      @user.notified_project_ids = (@user.mail_notification == 'selected' ? params[:notified_project_ids] : [])
 
       if was_activated
         Mailer.account_activated(@user).deliver
-      elsif @user.active? && params[:send_information] && !params[:user][:password].blank? && @user.auth_source_id.nil?
-        Mailer.account_information(@user, params[:user][:password]).deliver
+      elsif @user.active? && params[:send_information] && @user.password.present? && @user.auth_source_id.nil?
+        Mailer.account_information(@user, @user.password).deliver
       end
 
       respond_to do |format|
@@ -208,7 +201,7 @@ class UsersController < ApplicationController
         format.api  { render_api_ok }
       end
     else
-      @auth_sources = AuthSource.find(:all)
+      @auth_sources = AuthSource.all
       @membership ||= Member.new
       # Clear password input
       @user.password = @user.password_confirmation = nil
@@ -223,7 +216,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_back_or_default(users_url) }
+      format.html { redirect_back_or_default(users_path) }
       format.api  { render_api_ok }
     end
   end
@@ -232,7 +225,7 @@ class UsersController < ApplicationController
     @membership = Member.edit_membership(params[:membership_id], params[:membership], @user)
     @membership.save
     respond_to do |format|
-      format.html { redirect_to :controller => 'users', :action => 'edit', :id => @user, :tab => 'memberships' }
+      format.html { redirect_to edit_user_path(@user, :tab => 'memberships') }
       format.js
     end
   end
@@ -243,7 +236,7 @@ class UsersController < ApplicationController
       @membership.destroy
     end
     respond_to do |format|
-      format.html { redirect_to :controller => 'users', :action => 'edit', :id => @user, :tab => 'memberships' }
+      format.html { redirect_to edit_user_path(@user, :tab => 'memberships') }
       format.js
     end
   end
