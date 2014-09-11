@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2014  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -40,9 +40,9 @@ class Repository < ActiveRecord::Base
   validates_length_of :identifier, :maximum => IDENTIFIER_MAX_LENGTH, :allow_blank => true
   validates_presence_of :identifier, :unless => Proc.new { |r| r.is_default? || r.set_as_default? }
   validates_uniqueness_of :identifier, :scope => :project_id, :allow_blank => true
-  validates_exclusion_of :identifier, :in => %w(show entry raw changes annotate diff show stats graph)
+  validates_exclusion_of :identifier, :in => %w(browse show entry raw changes annotate diff statistics graph revisions revision)
   # donwcase letters, digits, dashes, underscores but not digits only
-  validates_format_of :identifier, :with => /^(?!\d+$)[a-z0-9\-_]*$/, :allow_blank => true
+  validates_format_of :identifier, :with => /\A(?!\d+$)[a-z0-9\-_]*\z/, :allow_blank => true
   # Checks if the SCM is enabled when creating a repository
   validate :repo_create_validation, :on => :create
 
@@ -155,6 +155,12 @@ class Repository < ActiveRecord::Base
     end
   end
 
+  # TODO: should return an empty hash instead of nil to avoid many ||{}
+  def extra_info
+    h = read_attribute(:extra_info)
+    h.is_a?(Hash) ? h : nil
+  end
+
   def merge_extra_info(arg)
     h = extra_info || {}
     return h if arg.nil?
@@ -190,8 +196,13 @@ class Repository < ActiveRecord::Base
     scm.entry(path, identifier)
   end
 
+  def scm_entries(path=nil, identifier=nil)
+    scm.entries(path, identifier)
+  end
+  protected :scm_entries
+
   def entries(path=nil, identifier=nil)
-    entries = scm.entries(path, identifier)
+    entries = scm_entries(path, identifier)
     load_entries_changesets(entries)
     entries
   end
@@ -236,31 +247,33 @@ class Repository < ActiveRecord::Base
   def find_changeset_by_name(name)
     return nil if name.blank?
     s = name.to_s
-    changesets.find(:first, :conditions => (s.match(/^\d*$/) ?
-          ["revision = ?", s] : ["revision LIKE ?", s + '%']))
+    if s.match(/^\d*$/)
+      changesets.where("revision = ?", s).first
+    else
+      changesets.where("revision LIKE ?", s + '%').first
+    end
   end
 
   def latest_changeset
-    @latest_changeset ||= changesets.find(:first)
+    @latest_changeset ||= changesets.first
   end
 
   # Returns the latest changesets for +path+
   # Default behaviour is to search in cached changesets
   def latest_changesets(path, rev, limit=10)
     if path.blank?
-      changesets.find(
-         :all,
-         :include => :user,
-         :order => "#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC",
-         :limit => limit)
+      changesets.
+        reorder("#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC").
+        limit(limit).
+        preload(:user).
+        all
     else
-      filechanges.find(
-         :all,
-         :include => {:changeset => :user},
-         :conditions => ["path = ?", path.with_leading_slash],
-         :order => "#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC",
-         :limit => limit
-       ).collect(&:changeset)
+      filechanges.
+        where("path = ?", path.with_leading_slash).
+        reorder("#{Changeset.table_name}.committed_on DESC, #{Changeset.table_name}.id DESC").
+        limit(limit).
+        preload(:changeset => :user).
+        collect(&:changeset)
     end
   end
 
@@ -281,9 +294,8 @@ class Repository < ActiveRecord::Base
         new_user_id = h[committer]
         if new_user_id && (new_user_id.to_i != user_id.to_i)
           new_user_id = (new_user_id.to_i > 0 ? new_user_id.to_i : nil)
-          Changeset.update_all(
-               "user_id = #{ new_user_id.nil? ? 'NULL' : new_user_id }",
-               ["repository_id = ? AND committer = ?", id, committer])
+          Changeset.where(["repository_id = ? AND committer = ?", id, committer]).
+            update_all("user_id = #{new_user_id.nil? ? 'NULL' : new_user_id}")
         end
       end
       @committers            = nil
@@ -303,7 +315,7 @@ class Repository < ActiveRecord::Base
       return @found_committer_users[committer] if @found_committer_users.has_key?(committer)
 
       user = nil
-      c = changesets.find(:first, :conditions => {:committer => committer}, :include => :user)
+      c = changesets.where(:committer => committer).includes(:user).first
       if c && c.user
         user = c.user
       elsif committer.strip =~ /^([^<]+)(<(.*)>)?$/
@@ -339,7 +351,7 @@ class Repository < ActiveRecord::Base
 
   # scan changeset comments to find related and fixed issues for all repositories
   def self.scan_changesets_for_issue_ids
-    find(:all).each(&:scan_changesets_for_issue_ids)
+    all.each(&:scan_changesets_for_issue_ids)
   end
 
   def self.scm_name
@@ -396,7 +408,7 @@ class Repository < ActiveRecord::Base
   end
 
   def set_as_default?
-    new_record? && project && !Repository.first(:conditions => {:project_id => project.id})
+    new_record? && project && Repository.where(:project_id => project.id).empty?
   end
 
   protected
@@ -406,7 +418,7 @@ class Repository < ActiveRecord::Base
       self.is_default = true
     end
     if is_default? && is_default_changed?
-      Repository.update_all(["is_default = ?", false], ["project_id = ?", project_id])
+      Repository.where(["project_id = ?", project_id]).update_all(["is_default = ?", false])
     end
   end
 

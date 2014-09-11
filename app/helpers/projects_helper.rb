@@ -1,7 +1,7 @@
 # encoding: utf-8
 #
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2014  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -46,9 +46,18 @@ module ProjectsHelper
     end
 
     options = ''
-    options << "<option value=''></option>" if project.allowed_parents.include?(nil)
+    options << "<option value=''>&nbsp;</option>" if project.allowed_parents.include?(nil)
     options << project_tree_options_for_select(project.allowed_parents.compact, :selected => selected)
     content_tag('select', options.html_safe, :name => 'project[parent_id]', :id => 'project_parent_id')
+  end
+
+  def render_project_action_links
+    links = []
+    links << link_to(l(:label_project_new), {:controller => 'projects', :action => 'new'}, :class => 'icon icon-add') if User.current.allowed_to?(:add_project, nil, :global => true)
+    links << link_to(l(:label_issue_view_all), issues_path) if User.current.allowed_to?(:view_issues, nil, :global => true)
+    links << link_to(l(:label_overall_spent_time), time_entries_path) if User.current.allowed_to?(:view_time_entries, nil, :global => true)
+    links << link_to(l(:label_overall_activity), { :controller => 'activities', :action => 'index', :id => nil })
+    links.join(" | ").html_safe
   end
 
   def render_project_short_description(project)
@@ -252,10 +261,11 @@ module ProjectsHelper
       grouped[version.project.name] << [version.name, version.id]
     end
 
+    selected = selected.is_a?(Version) ? selected.id : selected
     if grouped.keys.size > 1
-      grouped_options_for_select(grouped, selected && selected.id)
+      grouped_options_for_select(grouped, selected)
     else
-      options_for_select((grouped.values.first || []), selected && selected.id)
+      options_for_select((grouped.values.first || []), selected)
     end
   end
 

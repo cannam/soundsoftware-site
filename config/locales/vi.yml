@@ -144,6 +144,7 @@ vi:
         not_same_project: "không thuộc cùng dự án"
         circular_dependency: "quan hệ có thể gây ra lặp vô tận"
         cant_link_an_issue_with_a_descendant: "Một vấn đề không thể liên kết tới một trong số những tác vụ con của nó"
+        earlier_than_minimum_start_date: "cannot be earlier than %{date} because of preceding issues"
 
   direction: ltr
   date:
@@ -214,7 +215,7 @@ vi:
   notice_not_authorized: Bạn không có quyền xem trang này.
   notice_email_sent: "Email đã được gửi tới %{value}"
   notice_email_error: "Lỗi xảy ra khi gửi email (%{value})"
-  notice_feeds_access_key_reseted: Mã số chứng thực RSS đã được tạo lại.
+  notice_feeds_access_key_reseted: Mã số chứng thực Atom đã được tạo lại.
   notice_failed_to_save_issues: "Thất bại khi lưu %{count} vấn đề trong %{total} lựa chọn: %{ids}."
   notice_no_issue_selected: "Không có vấn đề được chọn! Vui lòng kiểm tra các vấn đề bạn cần chỉnh sửa."
   notice_account_pending: "Thông tin tài khoản đã được tạo ra và đang chờ chứng thực từ ban quản trị."
@@ -236,16 +237,13 @@ vi:
   mail_subject_account_activation_request: "%{value}: Yêu cầu chứng thực tài khoản"
   mail_body_account_activation_request: "Người dùng (%{value}) mới đăng ký và cần bạn xác nhận:"
   mail_subject_reminder: "%{count} vấn đề hết hạn trong các %{days} ngày tới"
-  mail_body_reminder: "%{count} vấn đề gán cho bạn sẽ hết hạn trong %{days} ngày tới:"
+  mail_body_reminder: "%{count} công việc bạn được phân công sẽ hết hạn trong %{days} ngày tới:"
 
-  gui_validation_error: 1 lỗi
-  gui_validation_error_plural: "%{count} lỗi"
-
-  field_name: Tên
+  field_name: Tên dự án
   field_description: Mô tả
   field_summary: Tóm tắt
   field_is_required: Bắt buộc
-  field_firstname: Tên lót + Tên
+  field_firstname: Tên đệm và Tên
   field_lastname: Họ
   field_mail: Email
   field_filename: Tập tin
@@ -269,11 +267,11 @@ vi:
   field_notes: Ghi chú
   field_is_closed: Vấn đề đóng
   field_is_default: Giá trị mặc định
-  field_tracker: Dòng vấn đề
+  field_tracker: Kiểu vấn đề
   field_subject: Chủ đề
   field_due_date: Hết hạn
-  field_assigned_to: Gán cho
-  field_priority: Ưu tiên
+  field_assigned_to: Phân công cho
+  field_priority: Mức ưu tiên
   field_fixed_version: Phiên bản
   field_user: Người dùng
   field_role: Quyền
@@ -287,9 +285,9 @@ vi:
   field_last_login_on: Kết nối cuối
   field_language: Ngôn ngữ
   field_effective_date: Ngày
-  field_password: Mật mã
-  field_new_password: Mật mã mới
-  field_password_confirmation: Khẳng định lại
+  field_password: Mật khẩu
+  field_new_password: Mật khẩu mới
+  field_password_confirmation: Nhập lại mật khẩu
   field_version: Phiên bản
   field_type: Kiểu
   field_host: Host
@@ -304,7 +302,7 @@ vi:
   field_start_date: Bắt đầu
   field_done_ratio: Tiến độ
   field_auth_source: Chế độ xác thực
-  field_hide_mail: Không làm lộ email của bạn
+  field_hide_mail: Không hiện email của tôi
   field_comments: Bình luận
   field_url: URL
   field_start_page: Trang bắt đầu
@@ -313,12 +311,12 @@ vi:
   field_activity: Hoạt động
   field_spent_on: Ngày
   field_identifier: Mã nhận dạng
-  field_is_filter: Dùng như một lọc
-  field_issue_to: Vấn đền liên quan
+  field_is_filter: Dùng như bộ lọc
+  field_issue_to: Vấn đề liên quan
   field_delay: Độ trễ
   field_assignable: Vấn đề có thể gán cho vai trò này
   field_redirect_existing_links: Chuyển hướng trang đã có
-  field_estimated_hours: Thời gian ước đoán
+  field_estimated_hours: Thời gian ước lượng
   field_column_names: Cột
   field_time_zone: Múi giờ
   field_searchable: Tìm kiếm được
@@ -340,7 +338,7 @@ vi:
   setting_text_formatting: Định dạng bài viết
   setting_wiki_compression: Nén lịch sử Wiki
   setting_feeds_limit: Giới hạn nội dung của feed
-  setting_default_projects_public: Dự án mặc định là công cộng
+  setting_default_projects_public: Dự án mặc định là public
   setting_autofetch_changesets: Tự động tìm nạp commits
   setting_sys_api_enabled: Cho phép WS quản lý kho chứa
   setting_commit_ref_keywords: Từ khóa tham khảo
@@ -400,9 +398,9 @@ vi:
   label_member: Thành viên
   label_member_new: Thành viên mới
   label_member_plural: Thành viên
-  label_tracker: Dòng vấn đề
-  label_tracker_plural: Dòng vấn đề
-  label_tracker_new: Tạo dòng vấn đề mới
+  label_tracker: Kiểu vấn đề
+  label_tracker_plural: Kiểu vấn đề
+  label_tracker_new: Tạo kiểu vấn đề mới
   label_workflow: Quy trình làm việc
   label_issue_status: Trạng thái vấn đề
   label_issue_status_plural: Trạng thái vấn đề
@@ -429,8 +427,8 @@ vi:
   label_login: Đăng nhập
   label_logout: Thoát
   label_help: Giúp đỡ
-  label_reported_issues: Vấn đề đã báo cáo
-  label_assigned_to_me_issues: Vấn đề gán cho bạn
+  label_reported_issues: Công việc bạn phân công
+  label_assigned_to_me_issues: Công việc được phân công
   label_last_login: Kết nối cuối
   label_registered_on: Ngày tham gia
   label_activity: Hoạt động
@@ -454,8 +452,6 @@ vi:
   label_text: Văn bản dài
   label_attribute: Thuộc tính
   label_attribute_plural: Các thuộc tính
-  label_download: "%{count} lần tải"
-  label_download_plural: "%{count} lần tải"
   label_no_data: Chưa có thông tin gì
   label_change_status: Đổi trạng thái
   label_history: Lược sử
@@ -501,7 +497,7 @@ vi:
   label_permissions: Quyền
   label_current_status: Trạng thái hiện tại
   label_new_statuses_allowed: Trạng thái mới được phép
-  label_all: tất cả
+  label_all: Tất cả
   label_none: không
   label_nobody: Chẳng ai
   label_next: Sau
@@ -555,8 +551,6 @@ vi:
   label_repository: Kho lưu trữ
   label_repository_plural: Kho lưu trữ
   label_browse: Duyệt
-  label_modification: "%{count} thay đổi"
-  label_modification_plural: "%{count} thay đổi"
   label_revision: Bản điều chỉnh
   label_revision_plural: Bản điều chỉnh
   label_associated_revisions: Các bản điều chỉnh được ghép
@@ -624,8 +618,8 @@ vi:
   label_start_to_start: đầu tớ đầu
   label_start_to_end: đầu tới cuối
   label_stay_logged_in: Lưu thông tin đăng nhập
-  label_disabled: bị vô hiệu
-  label_show_completed_versions: Xem phiên bản đã xong
+  label_disabled: Bị vô hiệu
+  label_show_completed_versions: Xem phiên bản đã hoàn thành
   label_me: tôi
   label_board: Diễn đàn
   label_board_new: Tạo diễn đàn mới
@@ -645,9 +639,9 @@ vi:
   label_language_based: Theo ngôn ngữ người dùng
   label_sort_by: "Sắp xếp theo %{value}"
   label_send_test_email: Gửi một email kiểm tra
-  label_feeds_access_key_created_on: "Mã chứng thực RSS được tạo ra cách đây %{value}"
-  label_module_plural: Mô-đun
-  label_added_time_by: "thêm bởi %{author} cách đây %{age}"
+  label_feeds_access_key_created_on: "Mã chứng thực Atom được tạo ra cách đây %{value}"
+  label_module_plural: Module
+  label_added_time_by: "Thêm bởi %{author} cách đây %{age}"
   label_updated_time: "Cập nhật cách đây %{value}"
   label_jump_to_a_project: Nhảy đến dự án...
   label_file_plural: Tập tin
@@ -658,9 +652,9 @@ vi:
   label_theme: Giao diện
   label_default: Mặc định
   label_search_titles_only: Chỉ tìm trong tựa đề
-  label_user_mail_option_all: "Mọi sự kiện trên mọi dự án của bạn"
+  label_user_mail_option_all: "Mọi sự kiện trên mọi dự án của tôi"
   label_user_mail_option_selected: "Mọi sự kiện trên các dự án được chọn..."
-  label_user_mail_no_self_notified: "Đừng gửi email về các thay đổi do chính bạn thực hiện"
+  label_user_mail_no_self_notified: "Đừng gửi email về các thay đổi do chính tôi thực hiện"
   label_registration_activation_by_email: kích hoạt tài khoản qua email
   label_registration_manual_activation: kích hoạt tài khoản thủ công
   label_registration_automatic_activation: kích hoạt tài khoản tự động
@@ -670,9 +664,9 @@ vi:
   label_general: Tổng quan
   label_more: Chi tiết
   label_scm: SCM
-  label_plugins: Mô-đun
+  label_plugins: Module
   label_ldap_authentication: Chứng thực LDAP
-  label_downloads_abbr: Tải về
+  label_downloads_abbr: Số lượng Download
   label_optional_description: Mô tả bổ sung
   label_add_another_file: Thêm tập tin khác
   label_preferences: Cấu hình
@@ -716,17 +710,17 @@ vi:
   button_reset: Tạo lại
   button_rename: Đổi tên
   button_change_password: Đổi mật mã
-  button_copy: Chép
+  button_copy: Sao chép
   button_annotate: Chú giải
   button_update: Cập nhật
   button_configure: Cấu hình
   button_quote: Trích dẫn
 
-  status_active: hoạt động
-  status_registered: đăng ký
-  status_locked: khóa
+  status_active: Đang hoạt động
+  status_registered: Mới đăng ký
+  status_locked: Đã khóa
 
-  text_select_mail_notifications: Chọn hành động đối với mỗi email thông báo sẽ gửi.
+  text_select_mail_notifications: Chọn hành động đối với mỗi email sẽ gửi.
   text_regexp_info: eg. ^[A-Z0-9]+$
   text_min_max_length_info: 0 để chỉ không hạn chế
   text_project_destroy_confirmation: Bạn có chắc chắn muốn xóa dự án này và các dữ liệu liên quan ?
@@ -754,7 +748,7 @@ vi:
   text_load_default_configuration: Nạp lại cấu hình mặc định
   text_status_changed_by_changeset: "Áp dụng trong changeset : %{value}."
   text_issues_destroy_confirmation: 'Bạn có chắc chắn muốn xóa các vấn đề đã chọn ?'
-  text_select_project_modules: 'Chọn các mô-đun cho dự án:'
+  text_select_project_modules: 'Chọn các module cho dự án:'
   text_default_administrator_account_changed: Thay đổi tài khoản quản trị mặc định
   text_file_repository_writable: Cho phép ghi thư mục đính kèm
   text_rmagick_available: Trạng thái RMagick
@@ -767,17 +761,17 @@ vi:
   text_enumeration_category_reassign_to: 'Gán lại giá trị này:'
   text_email_delivery_not_configured: "Cấu hình gửi Email chưa được đặt, và chức năng thông báo bị loại bỏ.\nCấu hình máy chủ SMTP của bạn ở file config/configuration.yml và khởi động lại để kích hoạt chúng."
 
-  default_role_manager: Điều hành
-  default_role_developer: Phát triển
+  default_role_manager: 'Điều hành '
+  default_role_developer: 'Phát triển '
   default_role_reporter: Báo cáo
   default_tracker_bug: Lỗi
   default_tracker_feature: Tính năng
   default_tracker_support: Hỗ trợ
   default_issue_status_new: Mới
   default_issue_status_in_progress: Đang tiến hành
-  default_issue_status_resolved: Quyết tâm
+  default_issue_status_resolved: Đã được giải quyết
   default_issue_status_feedback: Phản hồi
-  default_issue_status_closed: Đóng
+  default_issue_status_closed: Đã đóng
   default_issue_status_rejected: Từ chối
   default_doc_category_user: Tài liệu người dùng
   default_doc_category_tech: Tài liệu kỹ thuật
@@ -790,13 +784,13 @@ vi:
   default_activity_development: Phát triển
 
   enumeration_issue_priorities: Mức độ ưu tiên vấn đề
-  enumeration_doc_categories: Chủ đề tài liệu
-  enumeration_activities: Hoạt động (theo dõi thời gian)
+  enumeration_doc_categories: Danh mục tài liệu
+  enumeration_activities: Hoạt động
 
-  setting_plain_text_mail: mail dạng text đơn giản (không dùng HTML)
+  setting_plain_text_mail: Mail dạng text đơn giản (không dùng HTML)
   setting_gravatar_enabled: Dùng biểu tượng Gravatar
   permission_edit_project: Chỉnh dự án
-  permission_select_project_modules: Chọn mô-đun
+  permission_select_project_modules: Chọn Module
   permission_manage_members: Quản lý thành viên
   permission_manage_versions: Quản lý phiên bản
   permission_manage_categories: Quản lý chủ đề
@@ -808,19 +802,18 @@ vi:
   permission_edit_own_issue_notes: Sửa chú thích cá nhân
   permission_move_issues: Chuyển vấn đề
   permission_delete_issues: Xóa vấn đề
-  permission_manage_public_queries: Quản lý truy cấn công cộng
+  permission_manage_public_queries: Quản lý truy vấn công cộng
   permission_save_queries: Lưu truy vấn
   permission_view_gantt: Xem biểu đồ sự kiện
   permission_view_calendar: Xem lịch
-  permission_view_issue_watchers: Xem các người theo dõi
+  permission_view_issue_watchers: Xem những người theo dõi
   permission_add_issue_watchers: Thêm người theo dõi
-  permission_log_time: Lưu thời gian đã tốn
-  permission_view_time_entries: Xem thời gian đã tốn
+  permission_log_time: Lưu thời gian đã qua
+  permission_view_time_entries: Xem thời gian đã qua
   permission_edit_time_entries: Xem nhật ký thời gian
   permission_edit_own_time_entries: Sửa thời gian đã lưu
   permission_manage_news: Quản lý tin mới
   permission_comment_news: Chú thích vào tin mới
-  permission_manage_documents: Quản lý tài liệu
   permission_view_documents: Xem tài liệu
   permission_manage_files: Quản lý tập tin
   permission_view_files: Xem tập tin
@@ -844,7 +837,7 @@ vi:
   permission_delete_messages: Xóa bài viết
   permission_delete_own_messages: Xóa bài viết cá nhân
   label_example: Ví dụ
-  text_repository_usernames_mapping: "Chọn hoặc cập nhật ánh xạ người dùng hệ thống với người dùng trong kho lưu trữ.\nNhững trường hợp trùng hợp về tên và email sẽ được tự động ánh xạ."
+  text_repository_usernames_mapping: "Lựa chọn hoặc cập nhật ánh xạ người dùng hệ thống với người dùng trong kho lưu trữ.\nKhi người dùng trùng hợp về tên và email sẽ được tự động ánh xạ."
   permission_delete_own_messages: Xóa thông điệp
   label_user_activity: "%{value} hoạt động"
   label_updated_time_by: "Cập nhật bởi %{author} cách đây %{age}"
@@ -933,11 +926,11 @@ vi:
   label_revision_id: "Bản điều chỉnh %{value}"
   label_api_access_key: Khoá truy cập API
   label_api_access_key_created_on: "Khoá truy cập API đựơc tạo cách đây %{value}. Khóa này được dùng cho eDesignLab Client."
-  label_feeds_access_key: Khoá truy cập RSS
+  label_feeds_access_key: Khoá truy cập Atom
   notice_api_access_key_reseted: Khoá truy cập API của bạn đã được đặt lại.
   setting_rest_api_enabled: Cho phép dịch vụ web REST
   label_missing_api_access_key: Mất Khoá truy cập API
-  label_missing_feeds_access_key: Mất Khoá truy cập RSS
+  label_missing_feeds_access_key: Mất Khoá truy cập Atom
   button_show: Hiện
   text_line_separated: Nhiều giá trị được phép(mỗi dòng một giá trị).
   setting_mail_handler_body_delimiters: "Cắt bớt email sau những dòng :"
@@ -1137,3 +1130,43 @@ vi:
   setting_non_working_week_days: Các ngày không làm việc
   label_in_the_next_days: Trong tương lai
   label_in_the_past_days: Trong quá khứ
+  label_attribute_of_user: "Của người dùng %{name}"
+  text_turning_multiple_off: Nếu bạn vô hiệu hóa nhiều giá trị, chúng sẽ bị loại bỏ để duy trì chỉ có một giá trị cho mỗi mục.
+  label_attribute_of_issue: "Vấn đề của %{name}"
+  permission_add_documents: Thêm tài liệu
+  permission_edit_documents: Soạn thảo tài liệu
+  permission_delete_documents: Xóa tài liệu
+  label_gantt_progress_line: Tiến độ
+  setting_jsonp_enabled: Cho phép trợ giúp JSONP
+  field_inherit_members: Các thành viên kế thừa
+  field_closed_on: Đã đóng
+  field_generate_password: Generate password
+  setting_default_projects_tracker_ids: Default trackers for new projects
+  label_total_time: Tổng cộng
+  notice_account_not_activated_yet: You haven't activated your account yet. If you want
+    to receive a new activation email, please <a href="%{url}">click this link</a>.
+  notice_account_locked: Your account is locked.
+  label_hidden: Hidden
+  label_visibility_private: to me only
+  label_visibility_roles: to these roles only
+  label_visibility_public: to any users
+  field_must_change_passwd: Must change password at next logon
+  notice_new_password_must_be_different: The new password must be different from the
+    current password
+  setting_mail_handler_excluded_filenames: Exclude attachments by name
+  text_convert_available: ImageMagick convert available (optional)
+  label_link: Link
+  label_only: only
+  label_drop_down_list: drop-down list
+  label_checkboxes: checkboxes
+  label_link_values_to: Link values to URL
+  setting_force_default_language_for_anonymous: Force default language for anonymous
+    users
+  setting_force_default_language_for_loggedin: Force default language for logged-in
+    users
+  label_custom_field_select_type: Select the type of object to which the custom field
+    is to be attached
+  label_check_for_updates: Check for updates
+  label_latest_compatible_version: Latest compatible version
+  label_unknown_plugin: Unknown plugin
+  label_radio_buttons: radio buttons

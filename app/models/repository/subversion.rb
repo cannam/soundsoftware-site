@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2014  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -20,7 +20,7 @@ require_dependency 'redmine/scm/adapters/subversion_adapter'
 class Repository::Subversion < Repository
   attr_protected :root_url
   validates_presence_of :url
-  validates_format_of :url, :with => /^(http|https|svn(\+[^\s:\/\\]+)?|file):\/\/.+/i
+  validates_format_of :url, :with => %r{\A(http|https|svn(\+[^\s:\/\\]+)?|file):\/\/.+}i
 
   def self.scm_adapter_class
     Redmine::Scm::Adapters::SubversionAdapter
@@ -90,12 +90,13 @@ class Repository::Subversion < Repository
 
   def load_entries_changesets(entries)
     return unless entries
-
-    entries_with_identifier = entries.select {|entry| entry.lastrev && entry.lastrev.identifier.present?}
+    entries_with_identifier =
+      entries.select {|entry| entry.lastrev && entry.lastrev.identifier.present?}
     identifiers = entries_with_identifier.map {|entry| entry.lastrev.identifier}.compact.uniq
-
     if identifiers.any?
-      changesets_by_identifier = changesets.where(:revision => identifiers).includes(:user, :repository).all.group_by(&:revision)
+      changesets_by_identifier =
+        changesets.where(:revision => identifiers).
+          includes(:user, :repository).group_by(&:revision)
       entries_with_identifier.each do |entry|
         if m = changesets_by_identifier[entry.lastrev.identifier]
           entry.changeset = m.first
