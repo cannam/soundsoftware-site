@@ -54,12 +54,9 @@
     <h3><%=l(:label_member_new)%></h3>
     
 		<p><%= label_tag "principal_search", l(:label_principal_search) %><%= text_field_tag 'principal_search', nil %></p>
-		<%= javascript_tag "observeSearchfield('principal_search', 'principals', '#{ escape_javascript autocomplete_project_memberships_path(@project) }')" %>
+		<%= javascript_tag "observeSearchfield('principal_search', null, '#{ escape_javascript autocomplete_project_memberships_path(@project) }')" %>
 
-		<div id="principals">
-		<% if params[:q] && params[:q].length > 1 %>
-  		  <%= principals_check_box_tags 'membership[user_ids][]', @principals %>
-		<% end %>
+		<div id="principals_for_new_member">
 		</div>
 		
     <p><%= l(:label_set_role_plural) %>:</p>

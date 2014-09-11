@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2014  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -32,13 +32,13 @@ class MembersController < ApplicationController
       format.api {
         @offset, @limit = api_offset_and_limit
         @member_count = @project.member_principals.count
-        @member_pages = Paginator.new self, @member_count, @limit, params['page']
-        @offset ||= @member_pages.current.offset
-        @members =  @project.member_principals.all(
-          :order => "#{Member.table_name}.id",
-          :limit  =>  @limit,
-          :offset =>  @offset
-        )
+        @member_pages = Paginator.new @member_count, @limit, params['page']
+        @offset ||= @member_pages.offset
+        @members =  @project.member_principals.
+                        order("#{Member.table_name}.id").
+                        limit(@limit).
+                        offset(@offset).
+                        all
       }
     end
   end
@@ -76,7 +76,7 @@ class MembersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to :action => 'index', :project_id => @project }
+      format.html { redirect_to_settings_in_projects }
       format.js { @members = members }
       format.api {
         @member = members.first
@@ -95,7 +95,7 @@ class MembersController < ApplicationController
     end
     saved = @member.save
     respond_to do |format|
-      format.html { redirect_to :action => 'index', :project_id => @project }
+      format.html { redirect_to_settings_in_projects }
       format.js
       format.api {
         if saved
@@ -112,7 +112,7 @@ class MembersController < ApplicationController
       @member.destroy
     end
     respond_to do |format|
-      format.html { redirect_to :action => 'index', :project_id => @project }
+      format.html { redirect_to_settings_in_projects }
       format.js
       format.api {
         if @member.destroyed?
@@ -128,5 +128,11 @@ class MembersController < ApplicationController
     @principals = Principal.active.not_member_of(@project).like(params[:q]).all(:limit => 100)
     logger.debug "Query for #{params[:q]} returned #{@principals.size} results"
     render :layout => false
+  end
+
+  private
+
+  def redirect_to_settings_in_projects
+    redirect_to settings_project_path(@project, :tab => 'members')
   end
 end

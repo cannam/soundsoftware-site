@@ -27,39 +27,9 @@ module RedmineTags
 
           # Project.visible_roots.find(@projects).count
 
-          @project_pages = ActionController::Pagination::Paginator.new self, @project_count, @limit, params['page']
+          @project_pages = Redmine::Pagination::Paginator.new @project_count, @limit, params['page']
           @offset ||= @project_pages.current.offset
         end
-
-        # def set_fieldset_status
-#
-        #   # luisf. test for missing parameters………
-        #   field = params[:field_id]
-        #   status = params[:status]
-#
-        #   session[(field + "_status").to_sym] = status
-        #   render :nothing => true
-        # end
-
-        # gets the status of the collabsible fieldsets
-        # def get_fieldset_statuses
-        #   if session[:my_projects_fieldset_status].nil?
-        #     @myproj_status = "true"
-        #   else
-        #     @myproj_status = session[:my_projects_fieldset_status]
-        #   end
-#
-        #   if session[:filters_fieldset_status].nil?
-        #     @filter_status = "false"
-        #   else
-        #     @filter_status = session[:filters_fieldset_status]
-        #   end
-#
-        #   if params && params[:project] && !params[:project][:tag_list].# nil?
-        #     @filter_status = "true"
-        #   end
-#
-        # end
 
         # Lists visible projects. Paginator is for top-level projects only
         # (subprojects belong to them)

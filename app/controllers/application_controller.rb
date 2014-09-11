@@ -1,5 +1,5 @@
 # Redmine - project management software
-# Copyright (C) 2006-2012  Jean-Philippe Lang
+# Copyright (C) 2006-2014  Jean-Philippe Lang
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -22,6 +22,9 @@ class Unauthorized < Exception; end
 
 class ApplicationController < ActionController::Base
   include Redmine::I18n
+  include Redmine::Pagination
+  include RoutesHelper
+  helper :routes
 
   class_attribute :accept_api_auth_actions
   class_attribute :accept_rss_auth_actions
@@ -30,14 +33,24 @@ class ApplicationController < ActionController::Base
   layout 'base'
 
   protect_from_forgery
-  def handle_unverified_request
-    super
-    cookies.delete(:autologin)
+
+  def verify_authenticity_token
+    unless api_request?
+      super
+    end
   end
 
-  before_filter :session_expiration, :user_setup, :check_if_login_required, :set_localization
+  def handle_unverified_request
+    unless api_request?
+      super
+      cookies.delete(autologin_cookie_name)
+      self.logged_user = nil
+      render_error :status => 422, :message => "Invalid form authenticity token."
+    end
+  end
 
-  rescue_from ActionController::InvalidAuthenticityToken, :with => :invalid_authenticity_token
+  before_filter :session_expiration, :user_setup, :check_if_login_required, :check_password_change, :set_localization
+
   rescue_from ::Unauthorized, :with => :deny_access
   rescue_from ::ActionView::MissingTemplate, :with => :missing_template
 
@@ -75,6 +88,9 @@ class ApplicationController < ActionController::Base
     session[:user_id] = user.id
     session[:ctime] = Time.now.utc.to_i
     session[:atime] = Time.now.utc.to_i
+    if user.must_change_password?
+      session[:pwd] = '1'
+    end
   end
 
   def user_setup
@@ -104,10 +120,14 @@ class ApplicationController < ActionController::Base
       if (key = api_key_from_request)
         # Use API key
         user = User.find_by_api_key(key)
-      else
+      elsif request.authorization.to_s =~ /\ABasic /i
         # HTTP Basic, either username/password or API key/random
         authenticate_with_http_basic do |username, password|
           user = User.try_to_login(username, password) || User.find_by_api_key(username)
+        end
+        if user && user.must_change_password?
+          render_error :message => 'You must change your password', :status => 403
+          return
         end
       end
       # Switch user if requested by an admin user
@@ -124,10 +144,14 @@ class ApplicationController < ActionController::Base
     user
   end
 
+  def autologin_cookie_name
+    Redmine::Configuration['autologin_cookie_name'].presence || 'autologin'
+  end
+
   def try_to_autologin
-    if cookies[:autologin] && Setting.autologin?
+    if cookies[autologin_cookie_name] && Setting.autologin?
       # auto-login feature starts a new session
-      user = User.try_to_autologin(cookies[:autologin])
+      user = User.try_to_autologin(cookies[autologin_cookie_name])
       if user
         reset_session
         start_user_session(user)
@@ -150,7 +174,7 @@ class ApplicationController < ActionController::Base
   # Logs out current user
   def logout_user
     if User.current.logged?
-      cookies.delete :autologin
+      cookies.delete(autologin_cookie_name)
       Token.delete_all(["user_id = ? AND action = ?", User.current.id, 'autologin'])
       self.logged_user = nil
     end
@@ -163,12 +187,22 @@ class ApplicationController < ActionController::Base
     require_login if Setting.login_required?
   end
 
+  def check_password_change
+    if session[:pwd]
+      if User.current.must_change_password?
+        redirect_to my_password_path
+      else
+        session.delete(:pwd)
+      end
+    end
+  end
+
   def set_localization
     lang = nil
     if User.current.logged?
       lang = find_language(User.current.language)
     end
-    if lang.nil? && request.env['HTTP_ACCEPT_LANGUAGE']
+    if lang.nil? && !Setting.force_default_language_for_anonymous? && request.env['HTTP_ACCEPT_LANGUAGE']
       accept_lang = parse_qvalues(request.env['HTTP_ACCEPT_LANGUAGE']).first
       if !accept_lang.blank?
         accept_lang = accept_lang.downcase
@@ -188,7 +222,13 @@ class ApplicationController < ActionController::Base
         url = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id], :project_id => params[:project_id])
       end
       respond_to do |format|
-        format.html { redirect_to :controller => "account", :action => "login", :back_url => url }
+        format.html {
+          if request.xhr?
+            head :unauthorized
+          else
+            redirect_to :controller => "account", :action => "login", :back_url => url
+          end
+        }
         format.atom { redirect_to :controller => "account", :action => "login", :back_url => url }
         format.xml  { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Redmine API"' }
         format.js   { head :unauthorized, 'WWW-Authenticate' => 'Basic realm="Redmine API"' }
@@ -291,13 +331,23 @@ class ApplicationController < ActionController::Base
   # Find issues with a single :id param or :ids array param
   # Raises a Unauthorized exception if one of the issues is not visible
   def find_issues
-    @issues = Issue.find_all_by_id(params[:id] || params[:ids])
+    @issues = Issue.where(:id => (params[:id] || params[:ids])).preload(:project, :status, :tracker, :priority, :author, :assigned_to, :relations_to).to_a
     raise ActiveRecord::RecordNotFound if @issues.empty?
     raise Unauthorized unless @issues.all?(&:visible?)
     @projects = @issues.collect(&:project).compact.uniq
     @project = @projects.first if @projects.size == 1
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def find_attachments
+    if (attachments = params[:attachments]).present?
+      att = attachments.values.collect do |attachment|
+        Attachment.find_by_token( attachment[:token] ) if attachment[:token].present?
+      end
+      att.compact!
+    end
+    @attachments = att || []
   end
 
   # make sure that the user is a member of the project (or admin) if project is private
@@ -324,9 +374,9 @@ class ApplicationController < ActionController::Base
     url
   end
 
-  def redirect_back_or_default(default)
+  def redirect_back_or_default(default, options={})
     back_url = params[:back_url].to_s
-    if back_url.present?
+    if back_url.present? && valid_back_url?(back_url)
       begin
         uri = URI.parse(back_url)
         # do not redirect user to another host or to the login or register page
@@ -353,10 +403,41 @@ class ApplicationController < ActionController::Base
         logger.warn("Could not redirect to invalid URL #{back_url}")
         # redirect to default
       end
+    elsif options[:referer]
+      redirect_to_referer_or default
+      return
     end
     redirect_to default
     false
   end
+
+  # Returns true if back_url is a valid url for redirection, otherwise false
+  def valid_back_url?(back_url)
+    if CGI.unescape(back_url).include?('..')
+      return false
+    end
+
+    begin
+      uri = URI.parse(back_url)
+    rescue URI::InvalidURIError
+      return false
+    end
+
+    if uri.host.present? && uri.host != request.host
+      return false
+    end
+
+    if uri.path.match(%r{/(login|account/register)})
+      return false
+    end
+
+    if relative_url_root.present? && !uri.path.starts_with?(relative_url_root)
+      return false
+    end
+
+    return true
+  end
+  private :valid_back_url?
 
   # Redirects to the request referer if present, redirects to args or call block otherwise.
   def redirect_to_referer_or(*args, &block)
@@ -423,13 +504,6 @@ class ApplicationController < ActionController::Base
   # @return [boolean, string] name of the layout to use or false for no layout
   def use_layout
     request.xhr? ? false : 'base'
-  end
-
-  def invalid_authenticity_token
-    if api_request?
-      logger.error "Form authenticity token is missing or is invalid. API calls must include a proper Content-type header (text/xml or text/json)."
-    end
-    render_error "Invalid form authenticity token.  Perhaps your session has timed out; try reloading the form and entering your details again."
   end
 
   def render_feed(items, options={})
@@ -527,7 +601,7 @@ class ApplicationController < ActionController::Base
 
   # Returns a string that can be used as filename value in Content-Disposition header
   def filename_for_content_disposition(name)
-    request.env['HTTP_USER_AGENT'] =~ %r{MSIE} ? ERB::Util.url_encode(name) : name
+    request.env['HTTP_USER_AGENT'] =~ %r{(MSIE|Trident)} ? ERB::Util.url_encode(name) : name
   end
 
   def api_request?
@@ -551,21 +625,6 @@ class ApplicationController < ActionController::Base
   # Renders a warning flash if obj has unsaved attachments
   def render_attachment_warning_if_needed(obj)
     flash[:warning] = l(:warning_attachments_not_saved, obj.unsaved_attachments.size) if obj.unsaved_attachments.present?
-  end
-
-  # Sets the `flash` notice or error based the number of issues that did not save
-  #
-  # @param [Array, Issue] issues all of the saved and unsaved Issues
-  # @param [Array, Integer] unsaved_issue_ids the issue ids that were not saved
-  def set_flash_from_bulk_issue_save(issues, unsaved_issue_ids)
-    if unsaved_issue_ids.empty?
-      flash[:notice] = l(:notice_successful_update) unless issues.empty?
-    else
-      flash[:error] = l(:notice_failed_to_save_issues,
-                        :count => unsaved_issue_ids.size,
-                        :total => issues.size,
-                        :ids => '#' + unsaved_issue_ids.join(', #'))
-    end
   end
 
   # Rescues an invalid query statement. Just in case...
