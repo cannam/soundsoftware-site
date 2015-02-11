@@ -316,19 +316,21 @@ class Repository < ActiveRecord::Base
 
       user = nil
       c = changesets.where(:committer => committer).includes(:user).first
-      logger.info "seeking user for committer #{committer}"
       if c && c.user
         user = c.user
       elsif committer.strip =~ /^([^<]+)(<(.*)>)?$/
         username, email = $1.strip, $3
-        logger.info "username = #{username}, email = #{email}"
         u = User.find_by_login(username)
         if u.nil?
           if email.blank?
             if username.strip =~ /^([^ ]+) ([^ ]+)$/
               first, last = $1, $2
-              logger.info "first = #{username}, last = #{email}"
-              u = User.where(:firstname => first, :lastname => last)
+              uu = User.where(:firstname => first, :lastname => last)
+              if uu.length == 1
+                u = uu.first
+              else
+                logger.warn "find_committer_user: found more than one (#{uu.length}) results for user named #{username}, ignoring"
+              end
             end
           else
             u = User.find_by_mail(email)
