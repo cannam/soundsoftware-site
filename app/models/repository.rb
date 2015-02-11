@@ -321,7 +321,21 @@ class Repository < ActiveRecord::Base
       elsif committer.strip =~ /^([^<]+)(<(.*)>)?$/
         username, email = $1.strip, $3
         u = User.find_by_login(username)
-        u ||= User.find_by_mail(email) unless email.blank?
+        if u.nil?
+          if email.blank?
+            if username.strip =~ /^([^ ]+) ([^ ]+)$/
+              first, last = $1, $2
+              uu = User.where(:firstname => first, :lastname => last)
+              if uu.length == 1
+                u = uu.first
+              else
+                logger.warn "find_committer_user: found more than one (#{uu.length}) results for user named #{username}, ignoring"
+              end
+            end
+          else
+            u = User.find_by_mail(email)
+          end
+        end
         user = u
       end
       @found_committer_users[committer] = user
