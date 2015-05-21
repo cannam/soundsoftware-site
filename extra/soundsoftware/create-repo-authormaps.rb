@@ -73,6 +73,7 @@ projects.each do |proj|
   next unless proj.respond_to?(:repository)
 
   repo = proj.repository
+  next if repo.nil? or repo.url.empty?
 
   repo_url = repo.url
   repo_url = repo_url.gsub(/^file:\/*/, "/");
@@ -88,11 +89,11 @@ projects.each do |proj|
   committers.each do |c|
     if not c =~ /[^<]+<.*@.*>/ then
       user = repo.find_committer_user c
-      authormap << "#{c}=#{u.name} <#{u.mail}>\n" unless u.nil?
+      authormap << "#{c}=#{user.name} <#{user.mail}>\n" unless user.nil?
     end
   end
 
-  File.open (File.join($out_base, "authormap_#{proj.identifier}"), "w") do |f|
+  File.open(File.join($out_base, "authormap_#{proj.identifier}"), "w") do |f|
     f.puts(authormap)
   end
 
