@@ -326,7 +326,9 @@ class Repository < ActiveRecord::Base
             if username.strip =~ /^([^ ]+) ([^ ]+)$/
               first, last = $1, $2
               uu = User.where(:firstname => first, :lastname => last)
-              if uu.length == 1
+              if uu.empty? 
+                logger.warn "find_committer_user: found no user with name matching #{username}, ignoring"
+              elsif uu.length == 1
                 u = uu.first
               else
                 logger.warn "find_committer_user: found more than one (#{uu.length}) results for user named #{username}, ignoring"
