@@ -18,7 +18,7 @@
 # This script does that, if given the two directory names as arguments
 # to the -s and -o options. In the above example:
 #
-# create-repo-authormaps.rb -s /var/hg -o /var/repo-export/authormap
+# script/rails runner create-repo-authormaps.rb -s /var/hg -o /var/repo-export/authormap
 #
 # Note that this script will overwrite any existing authormap
 # files. (That's why the output files are given an authormap_ prefix,
@@ -56,17 +56,20 @@ if ($repos_base.empty? or $out_base.empty?)
 end
 
 unless File.directory?($repos_base)
-  log("input directory '#{$repos_base}' doesn't exist", :exit => true)
+  puts "input directory '#{$repos_base}' doesn't exist"
+  exit 1
 end
 
 unless File.directory?($out_base)
-  log("output directory '#{$out_base}' doesn't exist", :exit => true)
+  puts "output directory '#{$out_base}' doesn't exist"
+  exit 1
 end
 
 projects = Project.find(:all)
 
 if projects.nil?
-  log('No projects found', :exit => true)
+  puts 'No projects found'
+  exit 1
 end
 
 projects.each do |proj|
@@ -78,7 +81,7 @@ projects.each do |proj|
   repo_url = repo.url
   repo_url = repo_url.gsub(/^file:\/*/, "/");
   if repo_url != File.join($repos_base, proj.identifier)
-    log('Project #{proj.identifier} has repo in unsupported location #{repo_url}, skipping')
+    puts 'Project #{proj.identifier} has repo in unsupported location #{repo_url}, skipping'
     next
   end
 
