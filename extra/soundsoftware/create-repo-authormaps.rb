@@ -29,7 +29,8 @@ require 'getoptlong'
 
 opts = GetoptLong.new(
                       ['--scm-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
-                      ['--out-dir',      '-o', GetoptLong::REQUIRED_ARGUMENT]
+                      ['--out-dir',      '-o', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--environment',  '-e', GetoptLong::REQUIRED_ARGUMENT]
 )
 
 $repos_base   = ''
@@ -81,17 +82,16 @@ projects.each do |proj|
   repo_url = repo.url
   repo_url = repo_url.gsub(/^file:\/*/, "/");
   if repo_url != File.join($repos_base, proj.identifier)
-    puts 'Project #{proj.identifier} has repo in unsupported location #{repo_url}, skipping'
+    puts "Project #{proj.identifier} has repo in unsupported location #{repo_url}, skipping"
     next
   end
 
-  csets = repo.changesets
-  committers = csets.map do |c| c.committer end.sort.uniq
+  committers = repo.committers
 
   authormap = ""
-  committers.each do |c|
+  committers.each do |c, uid|
     if not c =~ /[^<]+<.*@.*>/ then
-      user = repo.find_committer_user c
+      user = User.find_by_id uid
       authormap << "#{c}=#{user.name} <#{user.mail}>\n" unless user.nil?
     end
   end
