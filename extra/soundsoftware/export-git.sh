@@ -48,11 +48,18 @@ fi
 
 set -u
 
-authordir="$gitdir/AUTHORMAPS"
-
+authordir="$gitdir/__AUTHORMAPS"
 mkdir -p "$authordir"
 
+wastedir="$gitdir/__WASTE"
+mkdir -p "$wastedir"
+
 echo "Extracting author maps..."
+
+# Delete any existing authormap files, because we want to ensure we
+# don't have an authormap for any project that was exportable but has
+# become non-exportable (e.g. has gone private)
+rm "$authordir/*"
 
 "$rails" runner -e "$environment" "$progdir/create-repo-authormaps.rb" \
 	 -s "$hgdir" -o "$authordir"
@@ -70,6 +77,16 @@ for hgrepo in "$hgdir"/*; do
 
     if [ ! -f "$authormap" ]; then
 	echo "No authormap file was created for repo $reponame, skipping"
+
+	# If there is no authormap file, then we should not have a git
+	# mirror -- this is a form of access control, not just an
+	# optimisation (authormap files are expected to exist for all
+	# exportable projects, even if empty). So if a git mirror
+	# exists, we move it away
+	if [ -d "$gitrepo" ]; then
+	    mv "$gitrepo" "$wastedir/$(date +%s).$reponame"
+	fi
+	    
 	continue
     fi
     
