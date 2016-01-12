@@ -52,7 +52,7 @@ authordir="$gitdir/AUTHORMAPS"
 
 mkdir -p "$authordir"
 
-echo "About to extract author maps..."
+echo "Extracting author maps..."
 
 "$rails" runner -e "$environment" "$progdir/create-repo-authormaps.rb" \
 	 -s "$hgdir" -o "$authordir"
@@ -69,7 +69,7 @@ for hgrepo in "$hgdir"/*; do
     gitrepo="$gitdir/$reponame"
 
     if [ ! -f "$authormap" ]; then
-	echo "Authormap file $authormap not found for repo $hgrepo, skipping: the create-repo-authormaps script already run by this script should have created an authormap file (even if empty) for every repo with a corresponding project"
+	echo "No authormap file was created for repo $reponame, skipping"
 	continue
     fi
     
@@ -77,11 +77,12 @@ for hgrepo in "$hgdir"/*; do
 	git init "$gitrepo"
     fi
 
+    echo
     echo "About to run fast export for repo $reponame..."
     
     (
 	cd "$gitrepo"
-	"$fastexport" -r "$hgrepo" -A "$authormap"
+	"$fastexport" --quiet -r "$hgrepo" -A "$authormap" --hg-hash
     )
 
     echo "Fast export done"
