@@ -18,7 +18,7 @@
 # This script does that, if given the two directory names as arguments
 # to the -s and -o options. In the above example:
 #
-# script/rails runner create-repo-authormaps.rb -s /var/hg -o /var/repo-export/authormap
+# ./script/rails runner -e production extra/soundsoftware/create-repo-authormaps.rb -s /var/hg -o /var/repo-export/authormap
 #
 # Note that this script will overwrite any existing authormap
 # files. (That's why the output files are given an authormap_ prefix,
@@ -28,9 +28,9 @@
 require 'getoptlong'
 
 opts = GetoptLong.new(
-                      ['--scm-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
-                      ['--out-dir',      '-o', GetoptLong::REQUIRED_ARGUMENT],
-                      ['--environment',  '-e', GetoptLong::REQUIRED_ARGUMENT]
+                      ['--scm-dir', '-s', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--out-dir', '-o', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--environment', '-e', GetoptLong::OPTIONAL_ARGUMENT]
 )
 
 $repos_base   = ''
