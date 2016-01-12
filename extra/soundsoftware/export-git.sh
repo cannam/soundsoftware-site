@@ -82,7 +82,14 @@ for hgrepo in "$hgdir"/*; do
     
     (
 	cd "$gitrepo"
-	"$fastexport" --quiet -r "$hgrepo" -A "$authormap" --hg-hash
+
+        # Force is necessary because git-fast-import (or git) can't handle
+        # branches having more than one head ("Error: repository has at
+        # least one unnamed head"), which happens from time to time in
+        # valid Hg repos. With --force apparently it will just pick one
+        # of the two heads arbitrarily, which is also alarming but is
+        # more likely to be useful 
+	"$fastexport" --quiet -r "$hgrepo" -A "$authormap" --hg-hash --force
     )
 
     echo "Fast export done"
