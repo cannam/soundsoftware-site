@@ -74,6 +74,9 @@ if projects.nil?
 end
 
 projects.each do |proj|
+
+  next unless proj.is_public
+
   next unless proj.respond_to?(:repository)
 
   repo = proj.repository
