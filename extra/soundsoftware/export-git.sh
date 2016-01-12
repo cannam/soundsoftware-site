@@ -59,7 +59,7 @@ echo "Extracting author maps..."
 # Delete any existing authormap files, because we want to ensure we
 # don't have an authormap for any project that was exportable but has
 # become non-exportable (e.g. has gone private)
-rm "$authordir/*"
+rm -f "$authordir/*"
 
 "$rails" runner -e "$environment" "$progdir/create-repo-authormaps.rb" \
 	 -s "$hgdir" -o "$authordir"
