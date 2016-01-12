@@ -22,14 +22,17 @@ if [ ! -x "$fastexport" ]; then
     exit 2
 fi
 
-hgdir="$1"
-gitdir="$2"
+environment="$1"
+hgdir="$2"
+gitdir="$3"
 
 if [ -z "$hgdir" ] || [ -z "$gitdir" ]; then
-    echo "Usage: $0 <hgdir> <gitdir>"
-    echo "where hgdir is the directory containing project Mercurial repositories,"
-    echo "and gitdir is the directory in which output git repositories are"
-    echo "to be created or updated"
+    echo "Usage: $0 <environment> <hgdir> <gitdir>"
+    echo "  where"
+    echo "  - environment is the Rails environment (development or production)"
+    echo "  - hgdir is the directory containing project Mercurial repositories"
+    echo "  - gitdir is the directory in which output git repositories are to be"
+    echo "    created or updated"
     exit 2
 fi
 
@@ -49,7 +52,9 @@ authordir="$gitdir/AUTHORMAPS"
 
 mkdir -p "$authordir"
 
-"$rails" runner -e production "$progdir/create-repo-authormaps.rb" \
+echo "About to extract author maps..."
+
+"$rails" runner -e "$environment" "$progdir/create-repo-authormaps.rb" \
 	 -s "$hgdir" -o "$authordir"
 
 for hgrepo in "$hgdir"/*; do
@@ -72,7 +77,7 @@ for hgrepo in "$hgdir"/*; do
 	git init "$gitrepo"
     fi
 
-    echo "About to run fast export..."
+    echo "About to run fast export for repo $reponame..."
     
     (
 	cd "$gitrepo"
