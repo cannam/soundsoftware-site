@@ -105,11 +105,11 @@ projects.each do |proj|
     #
     if c =~ /<.*</ then
       # So this is a completely pathological case
-      c = c.sub(/\s*<.*$/, "")
       user = User.find_by_id uid
       if user.nil? then
         # because the given committer is bogus, we must write something in the map
-        authormap << "#{c}=#{user.name} <unknown@example.com>\n"
+        name = c.sub(/\s*<.*$/, "")
+        authormap << "#{c}=#{name} <unknown@example.com>\n"
       else
         authormap << "#{c}=#{user.name} <#{user.mail}>\n"
       end
