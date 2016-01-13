@@ -93,6 +93,19 @@ projects.each do |proj|
 
   authormap = ""
   committers.each do |c, uid|
+
+    # Some of our repos have broken email addresses in them: e.g. one
+    # changeset has a committer name of the form
+    #
+    # NAME <name <NAME <name@example.com">
+    #
+    # I don't know how it got like that... If the committer has more
+    # than one '<' in it, truncate it just before the first one, and
+    # then we look up the author name again.
+    if c =~ /<.*</ then
+      c = c.sub(/\s*<.*$/, "")
+    end
+    
     if not c =~ /[^<]+<.*@.*>/ then
       user = User.find_by_id uid
       authormap << "#{c}=#{user.name} <#{user.mail}>\n" unless user.nil?
