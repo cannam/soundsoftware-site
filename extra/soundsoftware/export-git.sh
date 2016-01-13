@@ -107,6 +107,8 @@ for hgrepo in "$hgdir"/*; do
         # of the two heads arbitrarily, which is also alarming but is
         # more likely to be useful 
 	"$fastexport" --quiet -r "$hgrepo" -A "$authormap" --hg-hash --force
+
+        git update-server-info
     )
 
     echo "Fast export done"
