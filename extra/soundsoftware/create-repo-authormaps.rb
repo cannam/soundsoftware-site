@@ -101,12 +101,21 @@ projects.each do |proj|
     #
     # I don't know how it got like that... If the committer has more
     # than one '<' in it, truncate it just before the first one, and
-    # then we look up the author name again.
+    # then look up the author name again.
+    #
     if c =~ /<.*</ then
+      # So this is a completely pathological case
       c = c.sub(/\s*<.*$/, "")
-    end
-    
-    if not c =~ /[^<]+<.*@.*>/ then
+      user = User.find_by_id uid
+      if user.nil? then
+        # because the given committer is bogus, we must write something in the map
+        authormap << "#{c}=#{user.name} <unknown@example.com>\n"
+      else
+        authormap << "#{c}=#{user.name} <#{user.mail}>\n"
+      end
+    elsif not c =~ /[^<]+<.*@.*>/ then
+      # This is the "normal" case that needs work, where a user has
+      # their name in the commit but no email address
       user = User.find_by_id uid
       authormap << "#{c}=#{user.name} <#{user.mail}>\n" unless user.nil?
     end
