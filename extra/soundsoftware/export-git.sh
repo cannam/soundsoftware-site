@@ -109,7 +109,7 @@ for hgrepo in "$hgdir"/*; do
         # valid Hg repos. With --force apparently it will just pick one
         # of the two heads arbitrarily, which is also alarming but is
         # more likely to be useful 
-	"$fastexport" --quiet -r "$hgrepo" -A "$authormap" --force
+	"$fastexport" --quiet -r "$hgrepo" --hgtags -A "$authormap" --force
 
         git update-server-info
     )
