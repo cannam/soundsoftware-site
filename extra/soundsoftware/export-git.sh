@@ -88,8 +88,8 @@ for hgrepo in "$hgdir"/*; do
 	# optimisation (authormap files are expected to exist for all
 	# exportable projects, even if empty). So if a git mirror
 	# exists, we move it away
-	if [ -d "$gitrepo" ]; then
-	    mv "$gitrepo" "$wastedir/$(date +%s).$reponame"
+	if [ -d "$git_repodir" ]; then
+	    mv "$git_repodir" "$wastedir/$(date +%s).$reponame"
 	fi
 	    
 	continue
