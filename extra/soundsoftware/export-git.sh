@@ -54,6 +54,9 @@ mkdir -p "$authordir"
 wastedir="$gitdir/__WASTE"
 mkdir -p "$wastedir"
 
+echo
+echo "$0 starting at $(date)"
+
 echo "Extracting author maps..."
 
 # Delete any existing authormap files, because we want to ensure we
@@ -115,5 +118,5 @@ for hgrepo in "$hgdir"/*; do
     
 done
 
-echo "All done"
+echo "$0 finishing at $(date)"
 
