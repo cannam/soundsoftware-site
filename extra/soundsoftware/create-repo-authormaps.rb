@@ -18,7 +18,7 @@
 # This script does that, if given the two directory names as arguments
 # to the -s and -o options. In the above example:
 #
-# script/rails runner create-repo-authormaps.rb -s /var/hg -o /var/repo-export/authormap
+# ./script/rails runner -e production extra/soundsoftware/create-repo-authormaps.rb -s /var/hg -o /var/repo-export/authormap
 #
 # Note that this script will overwrite any existing authormap
 # files. (That's why the output files are given an authormap_ prefix,
@@ -28,9 +28,9 @@
 require 'getoptlong'
 
 opts = GetoptLong.new(
-                      ['--scm-dir',      '-s', GetoptLong::REQUIRED_ARGUMENT],
-                      ['--out-dir',      '-o', GetoptLong::REQUIRED_ARGUMENT],
-                      ['--environment',  '-e', GetoptLong::REQUIRED_ARGUMENT]
+                      ['--scm-dir', '-s', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--out-dir', '-o', GetoptLong::REQUIRED_ARGUMENT],
+                      ['--environment', '-e', GetoptLong::OPTIONAL_ARGUMENT]
 )
 
 $repos_base   = ''
@@ -74,6 +74,9 @@ if projects.nil?
 end
 
 projects.each do |proj|
+
+  next unless proj.is_public
+
   next unless proj.respond_to?(:repository)
 
   repo = proj.repository
@@ -90,7 +93,29 @@ projects.each do |proj|
 
   authormap = ""
   committers.each do |c, uid|
-    if not c =~ /[^<]+<.*@.*>/ then
+
+    # Some of our repos have broken email addresses in them: e.g. one
+    # changeset has a committer name of the form
+    #
+    # NAME <name <NAME <name@example.com">
+    #
+    # I don't know how it got like that... If the committer has more
+    # than one '<' in it, truncate it just before the first one, and
+    # then look up the author name again.
+    #
+    if c =~ /<.*</ then
+      # So this is a completely pathological case
+      user = User.find_by_id uid
+      if user.nil? then
+        # because the given committer is bogus, we must write something in the map
+        name = c.sub(/\s*<.*$/, "")
+        authormap << "#{c}=#{name} <unknown@example.com>\n"
+      else
+        authormap << "#{c}=#{user.name} <#{user.mail}>\n"
+      end
+    elsif not c =~ /[^<]+<.*@.*>/ then
+      # This is the "normal" case that needs work, where a user has
+      # their name in the commit but no email address
       user = User.find_by_id uid
       authormap << "#{c}=#{user.name} <#{user.mail}>\n" unless user.nil?
     end
