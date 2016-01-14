@@ -76,7 +76,9 @@ for hgrepo in "$hgdir"/*; do
 
     reponame=$(basename "$hgrepo")
     authormap="$authordir/authormap_$reponame"
-    gitrepo="$gitdir/$reponame"
+
+    git_repodir="$gitdir/$reponame"
+    git_workdir="$gitdir/$reponame.workdir"
 
     if [ ! -f "$authormap" ]; then
 	echo "No authormap file was created for repo $reponame, skipping"
@@ -93,15 +95,15 @@ for hgrepo in "$hgdir"/*; do
 	continue
     fi
     
-    if [ ! -d "$gitrepo" ]; then
-	git init "$gitrepo"
+    if [ ! -d "$git_repodir" ]; then
+	git init --separate-git-dir="$git_repodir" "$git_workdir"
     fi
 
     echo
     echo "About to run fast export for repo $reponame..."
     
     (
-	cd "$gitrepo"
+	cd "$git_workdir"
 
         # Force is necessary because git-fast-import (or git) can't handle
         # branches having more than one head ("Error: repository has at
