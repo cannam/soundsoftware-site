@@ -145,14 +145,23 @@ def export_file_contents(ctx,manifest,files,hgtags,encoding=''):
   if max>cfg_export_boundary:
     sys.stderr.write('Exported %d/%d files\n' % (count,max))
 
-def sanitize_name(name,what="branch"):
+def sanitize_name(name,what="branch", mapping={}):
   """Sanitize input roughly according to git-check-ref-format(1)"""
+
+  # NOTE: Do not update this transform to work around
+  # incompatibilities on your platform. If you change it and it starts
+  # modifying names which previously were not touched it will break
+  # preexisting setups which are doing incremental imports.
+  #
+  # Use the -B and -T options to mangle branch and tag names
+  # instead. If you have a source repository where this is too much
+  # work to do manually, write a tool that does it for you.
 
   def dot(name):
     if name[0] == '.': return '_'+name[1:]
     return name
 
-  n=name
+  n=mapping.get(name,name)
   p=re.compile('([[ ~^:?\\\\*]|\.\.)')
   n=p.sub('_', n)
   if n[-1] in ('/', '.'): n=n[:-1]+'_'
@@ -170,11 +179,11 @@ def strip_leading_slash(filename):
   return filename
 
 def export_commit(ui,repo,revision,old_marks,max,count,authors,
-                  branchesmap,sob,brmap,hgtags,notes,encoding='',fn_encoding=''):
+                  branchesmap,sob,brmap,hgtags,encoding='',fn_encoding=''):
   def get_branchname(name):
     if brmap.has_key(name):
       return brmap[name]
-    n=sanitize_name(branchesmap.get(name,name))
+    n=sanitize_name(name, "branch", branchesmap)
     brmap[name]=n
     return n
 
@@ -235,28 +244,34 @@ def export_commit(ui,repo,revision,old_marks,max,count,authors,
   export_file_contents(ctx,man,changed,hgtags,fn_encoding)
   wr()
 
-  count=checkpoint(count)
-  count=generate_note(user,time,timezone,revision,ctx,count,notes)
-  return count
+  return checkpoint(count)
 
-def generate_note(user,time,timezone,revision,ctx,count,notes):
-  if not notes:
-    return count
+def export_note(ui,repo,revision,count,authors,encoding,is_first):
+  (revnode,_,user,(time,timezone),_,_,_,_)=get_changeset(ui,repo,revision,authors,encoding)
+
+  parents = [p for p in repo.changelog.parentrevs(revision) if p >= 0]
+
   wr('commit refs/notes/hg')
   wr('committer %s %d %s' % (user,time,timezone))
   wr('data 0')
+  if is_first:
+    wr('from refs/notes/hg^0')
   wr('N inline :%d' % (revision+1))
-  hg_hash=ctx.hex()
+  hg_hash=repo.changectx(str(revision)).hex()
   wr('data %d' % (len(hg_hash)))
   wr_no_nl(hg_hash)
   wr()
   return checkpoint(count)
-  
+
+  wr('data %d' % (len(desc)+1)) # wtf?
+  wr(desc)
+  wr()
+
 def export_tags(ui,repo,old_marks,mapping_cache,count,authors,tagsmap):
   l=repo.tagslist()
   for tag,node in l:
     # Remap the branch name
-    tag=sanitize_name(tagsmap.get(tag,tag),"tag")
+    tag=sanitize_name(tag,"tag",tagsmap)
     # ignore latest revision
     if tag=='tip': continue
     # ignore tags to nodes that are missing (ie, 'in the future')
@@ -281,6 +296,7 @@ def export_tags(ui,repo,old_marks,mapping_cache,count,authors,tagsmap):
 def load_mapping(name, filename):
   cache={}
   if not os.path.exists(filename):
+    sys.stderr.write('Could not open mapping file [%s]\n' % (filename))
     return cache
   f=open(filename,'r')
   l=0
@@ -311,7 +327,7 @@ def branchtip(repo, heads):
       break
   return tip
 
-def verify_heads(ui,repo,cache,force):
+def verify_heads(ui,repo,cache,force,branchesmap):
   branches={}
   for bn, heads in repo.branchmap().iteritems():
     branches[bn] = branchtip(repo, heads)
@@ -321,8 +337,9 @@ def verify_heads(ui,repo,cache,force):
   # get list of hg's branches to verify, don't take all git has
   for _,_,b in l:
     b=get_branch(b)
-    sha1=get_git_sha1(b)
-    c=cache.get(b)
+    sanitized_name=sanitize_name(b,"branch",branchesmap)
+    sha1=get_git_sha1(sanitized_name)
+    c=cache.get(sanitized_name)
     if sha1!=c:
       sys.stderr.write('Error: Branch [%s] modified outside hg-fast-export:'
         '\n%s (repo) != %s (cache)\n' % (b,sha1,c))
@@ -343,6 +360,10 @@ def verify_heads(ui,repo,cache,force):
 def hg2git(repourl,m,marksfile,mappingfile,headsfile,tipfile,
            authors={},branchesmap={},tagsmap={},
            sob=False,force=False,hgtags=False,notes=False,encoding='',fn_encoding=''):
+  def check_cache(filename, contents):
+    if len(contents) == 0:
+      sys.stderr.write('Warning: %s does not contain any data, this will probably make an incremental import fail\n' % filename)
+
   _max=int(m)
 
   old_marks=load_cache(marksfile,lambda s: int(s)-1)
@@ -350,9 +371,15 @@ def hg2git(repourl,m,marksfile,mappingfile,headsfile,tipfile,
   heads_cache=load_cache(headsfile)
   state_cache=load_cache(tipfile)
 
+  if len(state_cache) != 0:
+    for (name, data) in [(marksfile, old_marks),
+                         (mappingfile, mapping_cache),
+                         (headsfile, state_cache)]:
+      check_cache(name, data)
+
   ui,repo=setup_repo(repourl)
 
-  if not verify_heads(ui,repo,heads_cache,force):
+  if not verify_heads(ui,repo,heads_cache,force,branchesmap):
     return 1
 
   try:
@@ -374,7 +401,10 @@ def hg2git(repourl,m,marksfile,mappingfile,headsfile,tipfile,
   brmap={}
   for rev in range(min,max):
     c=export_commit(ui,repo,rev,old_marks,max,c,authors,branchesmap,
-                    sob,brmap,hgtags,notes,encoding,fn_encoding)
+                    sob,brmap,hgtags,encoding,fn_encoding)
+  if notes:
+    for rev in range(min,max):
+      c=export_note(ui,repo,rev,c,authors, encoding, rev == min and min != 0)
 
   state_cache['tip']=max
   state_cache['repo']=repourl
