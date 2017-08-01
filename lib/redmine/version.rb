@@ -14,17 +14,18 @@ module Redmine
 
     # Retrieves the revision from the working copy
     def self.revision
-      if File.directory?(File.join(Rails.root, '.svn'))
-        begin
-          path = Redmine::Scm::Adapters::AbstractAdapter.shell_quote(Rails.root.to_s)
-          if `svn info --xml #{path}` =~ /revision="(\d+)"/
-            return $1.to_i
-          end
-        rescue
+      return 0
+   #   if File.directory?(File.join(Rails.root, '.svn'))
+   #     begin
+   #       path = Redmine::Scm::Adapters::AbstractAdapter.shell_quote(Rails.root.to_s)
+   #       if `svn info --xml #{path}` =~ /revision="(\d+)"/
+   #         return $1.to_i
+   #       end
+   #     rescue
           # Could not find the current revision
-        end
-      end
-      nil
+   #     end
+   #   end
+   #   nil
     end
 
     REVISION = self.revision
