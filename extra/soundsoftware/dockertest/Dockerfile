@@ -37,8 +37,9 @@ RUN apt-get update && \
     rsync \
     ruby \
     ruby-dev \
-    sudo \
-    supervisor
+    sudo
+
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 # Passenger gets installed through gem, not apt
@@ -62,9 +63,10 @@ RUN find /var/www/code -type d -exec chmod g+s \{\} \;
 WORKDIR /var/www/code
 
 
-# Set up database config (todo: insert variables)
+# Set up database config etc (todo: insert variables)
 
 RUN cp extra/soundsoftware/dockertest/database.yml config/database.yml
+RUN bundle exec rake generate_secret_token
 
 
 # Install Rails dependencies (database.yml must be populated before this)
@@ -102,10 +104,16 @@ RUN ln -s ../mods-available/rewrite.load    /etc/apache2/mods-enabled/
 RUN cp extra/soundsoftware/dockertest/code.conf /etc/apache2/sites-available/
 RUN ln -s ../sites-available/code.conf /etc/apache2/sites-enabled/10-code.conf
 
-
-# Start Apache
-
 RUN apache2ctl configtest
+
+
+# Start Postgres and foregrounded Apache
+
+RUN echo "#!/bin/bash"                      > container-run.sh
+RUN echo "/etc/init.d/postgresql start"    >> container-run.sh
+RUN echo "apache2ctl -D FOREGROUND"        >> container-run.sh
+RUN chmod +x container-run.sh
+
 EXPOSE 80
-CMD apache2ctl -D FOREGROUND
+CMD ./container-run.sh
 
