@@ -67,9 +67,9 @@ RUN find /var/www/code -type d -exec chmod g+s \{\} \;
 WORKDIR /var/www/code
 
 
-# Set up database config etc (todo: insert variables)
+# Set up database config etc
 
-RUN cp extra/soundsoftware/dockertest/database.yml config/database.yml
+RUN cp extra/soundsoftware/dockertest/database.yml.interpolated config/database.yml
 
 
 # Install Rails and dependencies (database.yml must be populated before this)
@@ -109,7 +109,7 @@ RUN ln -s ../mods-available/perl.conf       /etc/apache2/mods-enabled/
 RUN ln -s ../mods-available/expires.load    /etc/apache2/mods-enabled/
 RUN ln -s ../mods-available/rewrite.load    /etc/apache2/mods-enabled/
 
-RUN cp extra/soundsoftware/dockertest/code.conf /etc/apache2/sites-available/
+RUN cp extra/soundsoftware/dockertest/code.conf.interpolated /etc/apache2/sites-available/code.conf
 RUN ln -s ../sites-available/code.conf /etc/apache2/sites-enabled/10-code.conf
 
 RUN apache2ctl configtest

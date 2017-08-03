@@ -37,5 +37,5 @@ public/themes/soundsoftware/stylesheets/fonts/*
 .bundle
 Gemfile.lock
 Gemfile.local
-
+*.interpolated
 re:^config\.ru$
