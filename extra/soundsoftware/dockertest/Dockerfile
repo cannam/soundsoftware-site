@@ -1,8 +1,8 @@
 
 # For documentation and experimental purposes only. As a
 # reconstruction of the machine image that runs this application,
-# there are lots of things missing here; meanwhile as a good Docker
-# configuration, it fails in mixing together rather a lot of concerns.
+# there are lots of things missing here; but as a good Docker
+# configuration, it fails by mixing together rather a lot of concerns.
 
 FROM ubuntu:16.04
 MAINTAINER Chris Cannam <cannam@all-day-breakfast.com>
@@ -32,12 +32,16 @@ RUN apt-get update && \
     libio-socket-ssl-perl \
     logrotate \
     mercurial \
-    openjdk-9-jdk-headless \
     postgresql \
     rsync \
     ruby \
     ruby-dev \
     sudo
+
+# Also used on the live site, for javadoc extraction, but this is
+# would be by far the biggest package here: let's omit it while we're
+# not making use of it
+#   openjdk-9-jdk-headless
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -66,13 +70,17 @@ WORKDIR /var/www/code
 # Set up database config etc (todo: insert variables)
 
 RUN cp extra/soundsoftware/dockertest/database.yml config/database.yml
-RUN bundle exec rake generate_secret_token
 
 
-# Install Rails dependencies (database.yml must be populated before this)
+# Install Rails and dependencies (database.yml must be populated before this)
 
 RUN gem install bundler
 RUN bundle install
+
+
+# Initialise Redmine token (bundler must be installed before this)
+
+RUN bundle exec rake generate_secret_token
 
 
 # Import Postgres database from postgres-dumpall file
