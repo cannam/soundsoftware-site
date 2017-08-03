@@ -11,4 +11,5 @@ fi
 dockertag="cannam/soundsoftware-site"
 
 sudo docker build -t "$dockertag" -f "$dockerdir/Dockerfile" .
+sudo docker run -p 8080:80 -d "$dockertag"
 

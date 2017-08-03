@@ -1,0 +1,3 @@
+LoadModule passenger_module /var/lib/gems/2.3.0/gems/passenger-4.0.60/buildout/apache2/mod_passenger.so
+PassengerRoot /var/lib/gems/2.3.0/gems/passenger-4.0.60
+PassengerDefaultRuby /usr/bin/ruby2.3

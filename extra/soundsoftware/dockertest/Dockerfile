@@ -62,9 +62,8 @@ RUN find /var/www/code -type d -exec chmod g+s \{\} \;
 WORKDIR /var/www/code
 
 
-# Set up Apache config and webapp database config (todo: insert variables)
+# Set up database config (todo: insert variables)
 
-RUN cp extra/soundsoftware/dockertest/code.conf /etc/apache2/sites-available/
 RUN cp extra/soundsoftware/dockertest/database.yml config/database.yml
 
 
@@ -77,8 +76,7 @@ RUN bundle install
 # Import Postgres database from postgres-dumpall file
 
 RUN chown postgres postgres-dumpall
-RUN /etc/init.d/postgresql start && \
-  sudo -u postgres psql -f postgres-dumpall postgres
+RUN /etc/init.d/postgresql start && sudo -u postgres psql -f postgres-dumpall postgres
 
 
 # Install Perl auth module for Hg access
@@ -87,7 +85,27 @@ RUN mkdir -p /usr/local/lib/site_perl/Apache/Authn/
 RUN cp extra/soundsoftware/SoundSoftware.pm /usr/local/lib/site_perl/Apache/Authn/
 
 
-# Enable site for Apache
+# Set up Apache config (todo: insert variables)
 
+RUN rm -f /etc/apache2/sites-enabled/000-default.conf
+
+RUN cp extra/soundsoftware/dockertest/passenger.conf /etc/apache2/mods-available/
+RUN cp extra/soundsoftware/dockertest/passenger.load /etc/apache2/mods-available/
+RUN cp extra/soundsoftware/dockertest/perl.conf      /etc/apache2/mods-available/
+
+RUN ln -s ../mods-available/passenger.conf  /etc/apache2/mods-enabled/
+RUN ln -s ../mods-available/passenger.load  /etc/apache2/mods-enabled/
+RUN ln -s ../mods-available/perl.conf       /etc/apache2/mods-enabled/
+RUN ln -s ../mods-available/expires.load    /etc/apache2/mods-enabled/
+RUN ln -s ../mods-available/rewrite.load    /etc/apache2/mods-enabled/
+
+RUN cp extra/soundsoftware/dockertest/code.conf /etc/apache2/sites-available/
 RUN ln -s ../sites-available/code.conf /etc/apache2/sites-enabled/10-code.conf
+
+
+# Start Apache
+
 RUN apache2ctl configtest
+EXPOSE 80
+CMD apache2ctl -D FOREGROUND
+
