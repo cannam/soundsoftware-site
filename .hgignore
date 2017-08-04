@@ -39,3 +39,4 @@ Gemfile.lock
 Gemfile.local
 *.interpolated
 re:^config\.ru$
+.vagrant
