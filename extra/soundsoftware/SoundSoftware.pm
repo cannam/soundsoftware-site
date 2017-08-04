@@ -32,7 +32,8 @@ section for the repository and so will be approved by hgwebdir?)
 Debian/ubuntu:
 
   apt-get install libapache-dbi-perl libapache2-mod-perl2 \
-    libdbd-mysql-perl libauthen-simple-ldap-perl libio-socket-ssl-perl
+    libdbd-mysql-perl libdbd-pg-perl libio-socket-ssl-perl \
+    libauthen-simple-ldap-perl
 
 Note that LDAP support is hardcoded "on" in this script (it is
 optional in the original Redmine.pm).
@@ -174,6 +175,11 @@ sub access_handler {
     unless ($r->some_auth_required) {
 	$r->log_reason("No authentication has been configured");
 	return FORBIDDEN;
+    }
+
+    if (!defined $r->user or $r->user eq '') {
+        $r->user('*anon*'); # Apache 2.4+ requires auth module to set
+                            # user even if no auth was needed
     }
 
     my $method = $r->method;
