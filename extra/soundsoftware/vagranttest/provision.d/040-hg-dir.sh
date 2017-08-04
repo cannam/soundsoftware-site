@@ -11,3 +11,9 @@ if [ ! -f /var/hg/index.cgi ]; then
     chmod +x /var/hg/index.cgi
 fi
 
+if [ ! -d /var/hg/vamp-plugin-sdk ]; then
+    # This project can be used for testing
+    cd /var/hg
+    hg clone https://code.soundsoftware.ac.uk/hg/vamp-plugin-sdk
+    chown -R code.www-data vamp-plugin-sdk
+fi

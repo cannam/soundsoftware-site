@@ -20,6 +20,7 @@ if [ ! -f /etc/apache2/sites-enabled/10-code.conf ]; then
     ln -s ../mods-available/perl.conf       /etc/apache2/mods-enabled/
     ln -s ../mods-available/expires.load    /etc/apache2/mods-enabled/
     ln -s ../mods-available/rewrite.load    /etc/apache2/mods-enabled/
+    ln -s ../mods-available/cgi.load        /etc/apache2/mods-enabled/
 
     cp extra/soundsoftware/dockertest/code.conf.interpolated /etc/apache2/sites-available/code.conf
     ln -s ../sites-available/code.conf /etc/apache2/sites-enabled/10-code.conf
