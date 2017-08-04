@@ -62,6 +62,16 @@ RUN chown -R code.www-data /var/www/code
 RUN find /var/www/code -type d -exec chmod g+s \{\} \;
 
 
+# Initialise /var/hg (in reality this would be mounted from somewhere)
+
+RUN mkdir -p /var/hg
+RUN chown code.www-data /var/hg
+RUN chmod g+s /var/hg
+COPY extra/soundsoftware/dockertest/index.cgi /var/hg/
+COPY extra/soundsoftware/dockertest/hgweb.config /var/hg/
+RUN chmod +x /var/hg/index.cgi
+
+
 # We're based in the code webapp directory from here on
 
 WORKDIR /var/www/code
