@@ -4,6 +4,7 @@ set -e
 
 apt-get update && \
     apt-get install -y \
+    ack-grep \
     apache2 \
     apache2-dev \
     apt-utils \

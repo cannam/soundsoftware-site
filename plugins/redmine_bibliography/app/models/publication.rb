@@ -101,7 +101,17 @@ class Publication < ActiveRecord::Base
     end
 
     if style == :ieee
-      CiteProc.process(bib.to_citeproc, :style => :ieee, :format => :html)
+      citeproc = bib.to_citeproc
+      cite_id = citeproc["id"]
+      #!!! These warns should go once I've figured out why it's not rendering!
+      logger.warn { "rendering citation #{citeproc} with id #{ cite_id }" }
+      cp = CiteProc::Processor.new style: 'ieee', format: 'html'
+      cp.import citeproc
+      cp.render :bibliography, id: cite_id
+      logger.warn { "rendered" }
+      result
+
+#      CiteProc.process(bib.to_citeproc, :style => :ieee, :format => :html)
     else
       bibtex = bib.to_s :include => :meta_content
       bibtex.strip!
