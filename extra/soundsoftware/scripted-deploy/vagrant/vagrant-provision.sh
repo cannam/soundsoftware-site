@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #!!! still not covered:
-# * user-supplied db password
 # * cron jobs
 # * https
 # * web fonts

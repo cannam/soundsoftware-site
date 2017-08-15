@@ -1,5 +1,4 @@
 syntax: glob
-
 .project
 .loadpath
 .powrc
@@ -40,3 +39,7 @@ Gemfile.local
 *.interpolated
 re:^config\.ru$
 .vagrant
+*.orig
+*.pyc
+*-console.log
+postgres-dumpall

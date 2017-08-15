@@ -2,3 +2,4 @@
 .hg
 extra/soundsoftware/dockertest/Dockerfile
 extra/soundsoftware/dockertest/start.sh
+*.log

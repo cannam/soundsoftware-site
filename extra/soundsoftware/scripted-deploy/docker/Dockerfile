@@ -67,8 +67,8 @@ RUN find /var/www/code -type d -exec chmod g+s \{\} \;
 RUN mkdir -p /var/hg
 RUN chown code.www-data /var/hg
 RUN chmod g+s /var/hg
-COPY extra/soundsoftware/dockertest/index.cgi /var/hg/
-COPY extra/soundsoftware/dockertest/hgweb.config /var/hg/
+COPY extra/soundsoftware/scripted-deploy/config/index.cgi /var/hg/
+COPY extra/soundsoftware/scripted-deploy/config/hgweb.config /var/hg/
 RUN chmod +x /var/hg/index.cgi
 
 
@@ -79,7 +79,7 @@ WORKDIR /var/www/code
 
 # Set up database config etc
 
-RUN cp extra/soundsoftware/dockertest/database.yml.interpolated config/database.yml
+RUN cp extra/soundsoftware/scripted-deploy/config/database.yml.interpolated config/database.yml
 
 
 # Install Rails and dependencies (database.yml must be populated before this)
@@ -97,6 +97,7 @@ RUN bundle exec rake generate_secret_token
 
 RUN chown postgres postgres-dumpall
 RUN /etc/init.d/postgresql start && sudo -u postgres psql -f postgres-dumpall postgres
+RUN rm postgres-dumpall
 
 
 # Install Perl auth module for Hg access
@@ -109,9 +110,9 @@ RUN cp extra/soundsoftware/SoundSoftware.pm /usr/local/lib/site_perl/Apache/Auth
 
 RUN rm -f /etc/apache2/sites-enabled/000-default.conf
 
-RUN cp extra/soundsoftware/dockertest/passenger.conf /etc/apache2/mods-available/
-RUN cp extra/soundsoftware/dockertest/passenger.load /etc/apache2/mods-available/
-RUN cp extra/soundsoftware/dockertest/perl.conf      /etc/apache2/mods-available/
+RUN cp extra/soundsoftware/scripted-deploy/config/passenger.conf /etc/apache2/mods-available/
+RUN cp extra/soundsoftware/scripted-deploy/config/passenger.load /etc/apache2/mods-available/
+RUN cp extra/soundsoftware/scripted-deploy/config/perl.conf      /etc/apache2/mods-available/
 
 RUN ln -s ../mods-available/passenger.conf  /etc/apache2/mods-enabled/
 RUN ln -s ../mods-available/passenger.load  /etc/apache2/mods-enabled/
@@ -120,7 +121,7 @@ RUN ln -s ../mods-available/expires.load    /etc/apache2/mods-enabled/
 RUN ln -s ../mods-available/rewrite.load    /etc/apache2/mods-enabled/
 RUN ln -s ../mods-available/cgi.load        /etc/apache2/mods-enabled/
 
-RUN cp extra/soundsoftware/dockertest/code.conf.interpolated /etc/apache2/sites-available/code.conf
+RUN cp extra/soundsoftware/scripted-deploy/config/code.conf.interpolated /etc/apache2/sites-available/code.conf
 RUN ln -s ../sites-available/code.conf /etc/apache2/sites-enabled/10-code.conf
 
 RUN apache2ctl configtest
