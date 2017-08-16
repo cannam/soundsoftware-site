@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo -u code sh -c "cd /var/www/code ; ./script/rails runner \"Repository.fetch_changesets\" -e production 2>&1 | grep -v 'Not trusting' | grep -v 'svn:' | grep -v 'working copy' | grep -v 'deprecated' | grep -v 'version_requirements'"
+exit 0

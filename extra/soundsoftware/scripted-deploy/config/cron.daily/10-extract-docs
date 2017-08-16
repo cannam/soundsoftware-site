@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /tmp
+/var/www/code/docgen/extract-docs.sh

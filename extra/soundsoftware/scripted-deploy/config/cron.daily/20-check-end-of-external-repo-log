@@ -1,0 +1,2 @@
+#!/bin/bash
+tail -2 /var/log/external-repos.log

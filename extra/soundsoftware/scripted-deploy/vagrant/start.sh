@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mydir=$(dirname "$0")
+
 dbpwd="$1"
 if [ -z "$dbpwd" ]; then
     echo "Usage: $0 <database-password>" 1>&2
@@ -8,9 +10,12 @@ fi
 
 set -eu
 
-deploydir=./extra/soundsoftware/scripted-deploy
+sswdir="$mydir/../.."
+rootdir="$sswdir/../.."
+
+deploydir="$sswdir"/scripted-deploy
 if [ ! -d "$deploydir" ]; then
-    echo "Run this script from the root of a working copy of soundsoftware-site"
+    echo "ERROR: Unexpected repository layout - expected directory at $deploydir"
     exit 2
 fi
 
@@ -26,8 +31,14 @@ if [ ! -d "$configdir" ]; then
     exit 2
 fi
 
-if [ ! -f "postgres-dumpall" ]; then
-    echo "ERROR: I expect to find a Postgres SQL multi-db dump file in ./postgres-dumpall"
+if [ ! -f "$rootdir/postgres-dumpall" ]; then
+    echo "ERROR: I expect to find a Postgres SQL multi-db dump file in $rootdir/postgres-dumpall"
+    exit 2
+fi
+
+fontdir="$rootdir"/public/themes/soundsoftware/stylesheets/fonts
+if [ ! -f "$fontdir/24BC0E_0_0.woff" ]; then
+    echo "ERROR: I expect to find necessary webfonts in $fontdir"
     exit 2
 fi
 

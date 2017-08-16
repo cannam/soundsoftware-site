@@ -4,6 +4,9 @@
 # * cron jobs
 # * https
 # * web fonts
+# * reposman scripts (and their API key setup, etc)
+# * docgen script install
+# * logrotate config (check against system one)
 
 set -e
 

@@ -1,0 +1,6 @@
+#!/bin/sh
+outfile="/var/files/backups/postgres-dumpall-`date +%Y%m%d%H%M`"
+oldmask=`umask`
+umask 0277
+su postgres -c /usr/bin/pg_dumpall > "$outfile" && bzip2 "$outfile"
+umask "$oldmask"
