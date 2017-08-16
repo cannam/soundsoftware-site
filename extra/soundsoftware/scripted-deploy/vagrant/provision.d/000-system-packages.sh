@@ -4,7 +4,12 @@ set -e
 
 if [ -x /usr/bin/yum ]; then
 
-    # assumption: CentOS 7
+    # Assumption: CentOS 7
+
+    # This doesn't work -- I got hung up on the problem of making a
+    # sufficiently recent Ruby act as the system /usr/bin/ruby without
+    # massively overcomplicating things, and decided not to persist
+    # with it
 
     yum install -y epel-release centos-release-scl && \
         yum update -y && \
@@ -36,7 +41,9 @@ EOF
     
 else
 
-    # assumption: Ubuntu 16.04
+    # Assumption: Ubuntu 16.04
+
+    # This is the working one!
 
     apt-get update && \
         apt-get dist-upgrade -y && \
