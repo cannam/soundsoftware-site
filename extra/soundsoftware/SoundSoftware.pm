@@ -185,7 +185,7 @@ sub access_handler {
     my $method = $r->method;
 
     print STDERR "SoundSoftware.pm:$$: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
-    print STDERR "SoundSoftware.pm:$$: Accept: " . $r->headers_in->{Accept} . "\n";
+#    print STDERR "SoundSoftware.pm:$$: Accept: " . $r->headers_in->{Accept} . "\n";
 
     my $dbh = connect_database($r);
     unless ($dbh) {
