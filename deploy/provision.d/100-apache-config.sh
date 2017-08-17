@@ -2,6 +2,8 @@
 
 set -e
 
+# Install Apache config files and module loaders
+
 cd /var/www/code
 
 codeconffile=/var/www/code/deploy/config/code.conf

@@ -2,6 +2,13 @@
 
 set -e
 
+# Install necessary system packages. This assumes we are deploying on
+# Ubuntu 16.04.
+
+# We aim to make all of these provisioning scripts non-destructive if
+# run more than once. In this case, running the script again will
+# install any outstanding updates.
+
 apt-get update && \
     apt-get dist-upgrade -y && \
     apt-get install -y \
@@ -29,6 +36,7 @@ apt-get update && \
             libio-socket-ssl-perl \
             logrotate \
             mercurial \
+            openjdk-9-jdk-headless \
             postgresql \
             rsync \
             ruby \
