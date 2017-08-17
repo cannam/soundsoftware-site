@@ -18,6 +18,20 @@ PerlLoadModule Apache::Authn::SoundSoftware
         RailsSpawnMethod smart
         ExpiresDefault "access plus 1 minute"
 
+#        <Location /sys>
+#		AuthType Basic
+#		AuthUserFile "/etc/apache2/auth/user.htpasswd"
+#		AuthName "code.soundsoftware.ac.uk"
+#		Require user user
+#	</Location>
+
+#	<Location /admin>
+#		AuthType Digest
+#		AuthUserFile "/etc/apache2/auth/admin.htdigest"
+#		AuthName "code.soundsoftware.ac.uk admin interface"
+#		Require user admin
+#	</Location>
+
         <DirectoryMatch "^/.*/\.svn/">
                 Order allow,deny
                 Deny from all

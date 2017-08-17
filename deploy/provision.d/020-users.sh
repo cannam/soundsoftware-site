@@ -2,11 +2,14 @@
 
 set -e
 
-# The "code" user (in group www-data) owns the site and repo
-# directories.
+# The webapp directory is owned and run by the code user, in group
+# www-data. The repos and other things served directly are the other
+# way around -- owned by the www-data user, in group code.
 
-if ! grep -q '^code:' /etc/passwd ; then
-    groupadd code
-    useradd -g code -G www-data code
-fi
+for user in code docgen ; do
+    if ! grep -q "^$user:" /etc/passwd ; then
+        groupadd "$user"
+        useradd -g "$user" -G www-data "$user"
+    fi
+done
 

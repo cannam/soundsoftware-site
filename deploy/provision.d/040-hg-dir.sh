@@ -15,6 +15,6 @@ cp /var/www/code/deploy/config/hgweb.config /var/hg/
 
 chmod +x /var/hg/index.cgi
 
-chown -R code.www-data /var/hg
+chown -R www-data.code /var/hg
 find /var/hg -type d -exec chmod g+s \{\} \;
 

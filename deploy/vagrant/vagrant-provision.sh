@@ -1,16 +1,13 @@
 #!/bin/bash
 
 #!!! still not covered:
-# * cron jobs
 # * https
-# * web fonts
-# * reposman scripts (and their API key setup, etc)
-# * docgen script install
-# * logrotate config (check against system one)
+# * http auth for API (/sys) and /admin interfaces
+# * API keys and http auth for reposman and docgen
 
 set -e
 
-for f in /code-to-deploy/deploy/provision.d/[0-9]* ; do
+for f in /code-to-deploy/deploy/provision.d/[0-9]*.sh ; do
     case "$f" in
         *~) ;;
         *) echo "Running provision script: $f"

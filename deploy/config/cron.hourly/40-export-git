@@ -1,3 +1,6 @@
 #!/bin/bash
+
 logfile="/var/www/code/log/export-git.log"
+
 sudo -u code sh -c "cd /tmp ; /var/www/code/extra/soundsoftware/export-git.sh production /var/hg /var/files/git-mirror >> $logfile 2>&1"
+

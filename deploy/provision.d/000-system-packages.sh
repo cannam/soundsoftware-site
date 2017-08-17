@@ -43,7 +43,6 @@ apt-get update && \
             ruby-dev \
             sudo
 
-apt-get clean && rm -rf /var/lib/apt/lists/*
 locale-gen en_US.UTF-8
 
 

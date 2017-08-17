@@ -10,5 +10,5 @@ if [ ! -d /var/hg/vamp-plugin-sdk ]; then
     echo "Cloning vamp-plugin-sdk repo for testing..."
     cd /var/hg
     hg clone https://code.soundsoftware.ac.uk/hg/vamp-plugin-sdk
-    chown -R code.www-data vamp-plugin-sdk
+    chown -R www-data.code vamp-plugin-sdk
 fi

@@ -1,0 +1,18 @@
+#!/bin/bash
+logfile=/var/log/external-repos.log
+( 
+flock -s 200 
+echo >> $logfile
+date >> $logfile
+/var/www/code/reposman/convert-external-repos.rb \
+	-s /var/hg \
+	-r https://code.soundsoftware.ac.uk/ \
+	-k INSERT_API_KEY_HERE \
+	-v \
+	--http-user=user \
+	--http-pass=password \
+        -c "/var/www/code/reposman/update-external-repo.sh" \
+	>> $logfile 2>&1
+date >> $logfile
+echo Done >> $logfile
+)200>>$logfile

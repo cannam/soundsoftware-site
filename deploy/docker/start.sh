@@ -48,7 +48,7 @@ for f in database.yml code.conf ; do
 done
 
 provisioning_commands=$(
-    for x in "$deploydir"/provision.d/[0-9]*; do
+    for x in "$deploydir"/provision.d/[0-9]*.sh; do
         echo "RUN /bin/bash /var/www/code/deploy/provision.d/$(basename $x)"
     done | sed 's/$/\\n/' | fmt -2000 | sed 's/ RUN/RUN/g' )
 

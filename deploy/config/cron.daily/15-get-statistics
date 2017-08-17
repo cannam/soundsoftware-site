@@ -1,2 +1,4 @@
 #!/bin/bash
+
 sudo -u code sh -c "cd /var/www/code ; ./script/rails runner -e production extra/soundsoftware/get-statistics.rb >> log/statistics.log"
+

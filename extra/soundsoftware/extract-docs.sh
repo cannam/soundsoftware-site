@@ -7,9 +7,9 @@
 
 hgdir="/var/hg"
 docdir="/var/doc"
-logfile="/var/www/test-cannam/log/extract-docs.log"
+logfile="/var/www/code/log/extract-docs.log"
 
-redgrp="redmine"
+redgrp="code"
 
 apikey=""
 apischeme="https"
