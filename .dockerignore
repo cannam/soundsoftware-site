@@ -1,5 +1,6 @@
 .dockerignore
 .hg
-extra/soundsoftware/dockertest/Dockerfile
-extra/soundsoftware/dockertest/start.sh
+.hgignore
+deploy/docker/Dockerfile
+deploy/docker/start.sh
 *.log
