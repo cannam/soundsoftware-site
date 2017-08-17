@@ -8,12 +8,11 @@ if [ -z "$dbpwd" ]; then
     exit 2
 fi
 
-set -eu
+set -eu -o pipefail
 
-sswdir="$mydir/../.."
-rootdir="$sswdir/../.."
+rootdir="$mydir/../.."
 
-deploydir="$sswdir"/scripted-deploy
+deploydir="$rootdir"/deploy
 if [ ! -d "$deploydir" ]; then
     echo "ERROR: Unexpected repository layout - expected directory at $deploydir"
     exit 2
@@ -43,9 +42,9 @@ if [ ! -f "$fontdir/24BC0E_0_0.woff" ]; then
 fi
 
 for f in database.yml code.conf ; do
-    cat "$configdir/$f" |
+    cat "$configdir/$f.in" |
         sed 's/INSERT_POSTGRES_PASSWORD_HERE/'"$dbpwd"'/g' > \
-            "$configdir/$f.interpolated"
+            "$configdir/$f"
 done
 
 cd "$managerdir"
