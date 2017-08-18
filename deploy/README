@@ -1,3 +1,13 @@
 
 Deploying the SoundSoftware site
 
+
+
+After deployment
+----------------
+
+There is a smoke test script at test/smoketest.sh which checks that
+the home page, a project page, a repo page etc can be retrieved. Some
+of the pages it tries to retrieve are dependent on their generating
+cron scripts having run at least once since the server was set up.
+

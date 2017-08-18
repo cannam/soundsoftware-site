@@ -21,9 +21,14 @@ fi
 
 set -eu
 
-# A project that is known to exist, be public, and have embedded
-# documentation
-project=vamp-plugin-sdk
+# A project known to exist, be public, and have a repository
+project_with_repo=vamp-plugin-sdk
+
+# A project known to exist, be public, and have embedded documentation
+project_with_docs=vamp-plugin-sdk
+
+# A project known to exist, be public, and have a bibliography
+project_with_biblio=sonic-visualiser
 
 tried=0
 succeeded=0
@@ -42,24 +47,21 @@ try() {
     echo
     if wget "$url" ; then
         echo "+++ Succeeded"
-        tried=$(($tried + 1))
         succeeded=$(($succeeded + 1))
-        cd "$origin"
-        return 0
     else
         echo "--- FAILED"
-        tried=$(($tried + 1))
-        cd "$origin"
-        return 1
     fi
+    tried=$(($tried + 1))
+    cd "$origin"
 }
 
 try "/" "Front page"
-try "/projects/$project" "Project page"
-try "/projects/$project/repository" "Repository page"
-try "/hg/$project" "Mercurial repo"
-try "/projects/$project/embedded" "Project documentation page (from docgen cron script)"
-try "/git/$project/info/refs" "Git repo mirror"
+try "/projects/$project_with_repo" "Project page"
+try "/projects/$project_with_biblio" "Project page with bibliography"
+try "/projects/$project_with_repo/repository" "Repository page"
+try "/hg/$project_with_repo" "Mercurial repo"
+try "/projects/$project_with_docs/embedded" "Project documentation page (from docgen cron script)"
+try "/git/$project_with_repo/info/refs" "Git repo mirror"
 
 echo
 echo "Passed $succeeded of $tried"
