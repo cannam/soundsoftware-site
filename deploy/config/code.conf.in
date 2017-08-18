@@ -2,6 +2,9 @@
 # A test Apache config. Lacks SSL, lacks a desirable extra layer of
 # authentication for admin interface paths. Do not deploy this.
 
+# Note this has been updated for Apache 2.4, which introduced a number
+# of (welcome) changes to access control directives.
+
 PerlLoadModule Apache::Authn::SoundSoftware
 
 <VirtualHost *:80>
@@ -33,21 +36,15 @@ PerlLoadModule Apache::Authn::SoundSoftware
 #	</Location>
 
         <DirectoryMatch "^/.*/\.svn/">
-                Order allow,deny
-                Deny from all
-                Satisfy All
+                Require all denied
         </DirectoryMatch>
 
         <DirectoryMatch "^/.*/\.hg/">
-                Order allow,deny
-                Deny from all
-                Satisfy All
+                Require all denied
         </DirectoryMatch>
 
         <DirectoryMatch "^/.*/\.git/">
-                Order allow,deny
-                Deny from all
-                Satisfy All
+                Require all denied
         </DirectoryMatch>
 
         <Directory /var/www/code/public>
@@ -73,7 +70,7 @@ PerlLoadModule Apache::Authn::SoundSoftware
 		PerlSetVar HTTPS "on"
 		SoundSoftwareDSN "dbi:Pg:database=code;host=localhost"
     		SoundSoftwareDbUser "code"
-     		SoundSoftwareDbPass "INSERT_POSTGRES_PASSWORD_HERE"
+     		SoundSoftwareDbPass "INSERT_DATABASE_PASSWORD_HERE"
 		SoundSoftwareRepoPrefix "/var/hg/"
                 #!!! "on" in production please!:
                 SoundSoftwareSslRequired "off"
@@ -86,16 +83,13 @@ PerlLoadModule Apache::Authn::SoundSoftware
 
 	<Directory "/var/files/git-mirror">
 		Options -Indexes +FollowSymLinks
-                Order allow,deny
-                Allow from all
+                Require all granted
 	</Directory>
 	<Directory ~ "/var/files/git-mirror/.*\.workdir">
-		Order allow,deny
-		Deny from all
+                Require all denied
 	</Directory>
 	<Directory ~ "/var/files/git-mirror/__.*">
-                Order allow,deny
-                Deny from all
+                Require all denied
 	</Directory>
 
 	ErrorLog /var/log/apache2/code-error.log

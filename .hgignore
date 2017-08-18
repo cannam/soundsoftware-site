@@ -42,6 +42,4 @@ re:^config\.ru$
 *.pyc
 *-console.log
 postgres-dumpall
-deploy/config/code.conf
-deploy/config/database.yml
-deploy/docker/Dockerfile
+*.gen

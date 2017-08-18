@@ -6,10 +6,10 @@ set -e
 
 cd /var/www/code
 
-codeconffile=/var/www/code/deploy/config/code.conf
+codeconffile=/var/www/code/deploy/config/code.conf.gen
 
 if [ ! -f "$codeconffile" ]; then
-    echo "ERROR: Apache config file $codeconffile not found - has the database secret been interpolated from $codeconffile.in correctly?"
+    echo "ERROR: Apache config file $codeconffile not found - has the database secret been interpolated from its input file correctly?"
     exit 2
 fi
 

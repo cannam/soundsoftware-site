@@ -12,7 +12,6 @@ mkdir -p docgen
 
 for file in \
     doxysafe.pl \
-    extract-docs.sh \
     extract-doxygen.sh \
     extract-javadoc.sh \
     extract-matlabdocs.sh \
@@ -21,6 +20,13 @@ for file in \
     matlab-docs.pl ; do
     if [ ! -f docgen/"$file" ]; then
         cp extra/soundsoftware/"$file" docgen/
+    fi
+done
+
+for file in \
+    extract-docs.sh ; do
+    if [ ! -f docgen/"$file" ]; then
+        cp deploy/config/"$file".gen docgen/"$file"
     fi
 done
 

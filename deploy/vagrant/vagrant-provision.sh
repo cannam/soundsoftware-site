@@ -3,15 +3,16 @@
 #!!! still not covered:
 # * https
 # * http auth for API (/sys) and /admin interfaces
-# * API keys and http auth for reposman and docgen
+# * sending email
 
 set -e
 
 for f in /code-to-deploy/deploy/provision.d/[0-9]*.sh ; do
     case "$f" in
         *~) ;;
-        *) echo "Running provision script: $f"
+        *) echo "Running provisioning script: $f"
            /bin/bash "$f";;
     esac
 done
 
+echo "All provisioning scripts complete"

@@ -6,11 +6,11 @@ echo >> $logfile
 date >> $logfile
 /var/www/code/reposman/convert-external-repos.rb \
 	-s /var/hg \
-	-r https://code.soundsoftware.ac.uk/ \
+	-r INSERT_API_SCHEME_HERE://INSERT_API_HOST_HERE/ \
 	-k INSERT_API_KEY_HERE \
 	-v \
-	--http-user=user \
-	--http-pass=password \
+	--http-user=INSERT_API_USER_HERE \
+	--http-pass=INSERT_API_PASSWORD_HERE \
         -c "/var/www/code/reposman/update-external-repo.sh" \
 	>> $logfile 2>&1
 date >> $logfile

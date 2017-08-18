@@ -3,5 +3,5 @@ production:
   database: code
   host: localhost
   username: code
-  password: "INSERT_POSTGRES_PASSWORD_HERE"
+  password: "INSERT_DATABASE_PASSWORD_HERE"
 

@@ -26,8 +26,7 @@ for file in \
     run-external.sh \
     run-reposman.sh ; do
     if [ ! -f reposman/"$file" ]; then
-        ##!!! TODO: actually insert API key
-        cat deploy/config/"$file".in > reposman/"$file"
+        cp deploy/config/"$file".gen reposman/"$file"
     fi
 done
 
