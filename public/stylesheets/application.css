@@ -515,6 +515,8 @@ input#content_comments {width: 99%}
 
 p.pagination {margin-top:8px; font-size: 90%}
 
+#browser-autoscroll { clear: right }
+
 /***** Tabular forms ******/
 .tabular p{
   margin: 0;
