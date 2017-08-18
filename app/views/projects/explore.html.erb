@@ -11,11 +11,12 @@
 <h2><%= l(:label_explore_projects) %></h2>
 
 <div class="threecolumnleft">
-  <div class="tags box">
-  <h3><%=l(:label_project_tags_all)%></h3>
-    <% cache(:action => 'explore', :action_suffix => 'tags') do %>
-    <%= render :partial => 'projects/tagcloud' %>
+  <div class="projects box">
+  <h3><%=l(:label_projects_busy)%></h3>
+    <% cache(:action => 'explore', :action_suffix => 'busy_projects') do %>
+    <%= render :partial => 'activities/busy' %>
     <% end %>
+    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
   </div>
 </div>
 
@@ -24,26 +25,6 @@
   <h3><%=l(:label_project_latest)%></h3>
     <%= render :partial => 'projects/latest' %>
     <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
-  </div>
-</div>
-
-<div class="threecolumnleft">
-  <div class="institutions box">
-  <h3><%=l(:label_institutions_busy)%></h3>
-  <% cache(:action => 'explore', :action_suffix => 'busy_institutions') do %>
-    <%= render :partial => 'activities/busy_institution' %>
-  <% end %>
-  <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
-  </div>
-</div>
-
-<div class="threecolumnright">
-  <div class="projects box">
-  <h3><%=l(:label_projects_busy)%></h3>
-    <% cache(:action => 'explore', :action_suffix => 'busy_projects') do %>
-    <%= render :partial => 'activities/busy' %>
-    <% end %>
-    <%= link_to l(:label_overall_activity), { :controller => 'activities', :action => 'index' }, :class => 'more' %>
   </div>
 </div>
 
@@ -56,5 +37,13 @@
     <%= link_to l(:label_projects_more), { :controller => 'projects' }, :class => 'more' %>
   </div>
 </div>
+
+  <div class="tags box" style="clear:all">
+  <h3><%=l(:label_project_tags_all)%></h3>
+    <% cache(:action => 'explore', :action_suffix => 'tags') do %>
+    <%= render :partial => 'projects/tagcloud' %>
+    <% end %>
+  </div>
+
 
 <% html_title(l(:label_explore_projects)) -%>
