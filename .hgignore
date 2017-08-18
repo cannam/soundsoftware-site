@@ -43,3 +43,4 @@ re:^config\.ru$
 *-console.log
 postgres-dumpall
 *.gen
+deploy/test/output

@@ -2,11 +2,22 @@
 
 set -e
 
-# Copy reposman scripts to the place they actually live. Like docgen,
-# this is particularly badly managed, since the target location is
-# actually within the repo already. At least in this case some of the
-# scripts have to be edited to insert the server's API key, so there
-# is a bit of logic there
+# Copy reposman (repository manager) scripts, including the generated
+# scripts with interpolated API key etc, to the directory they will be
+# run from.
+
+# There are two sets of scripts here:
+#
+# 1. The reposman script that plods through all the projects that have
+# repositories defined, creates those repositories on disc, and
+# registers their locations with the projects. This happens often,
+# currently every minute.
+#
+# 2. The external repo management script that plods through all the
+# projects that have external repositories defined, clones or updates
+# those external repos to their local locations, and if necessary
+# registers them with the projects. This happens less often, currently
+# every hour.
 
 cd /var/www/code
 

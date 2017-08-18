@@ -2,9 +2,14 @@
 
 set -e
 
-# Copy docgen scripts to the place they actually live. This is
-# particularly badly managed, since the target location is actually
-# within the repo already
+# Copy docgen scripts, including the generated scripts with
+# interpolated API key etc, to the directory they will be run from.
+
+# These are run from cron jobs to do the (currently daily) update of
+# extracted documentation from Doxygen, Javadoc, and MATLAB, and to
+# enable displaying them with the redmine_embedded plugin. (The API
+# key is needed to automatically switch on the embedded module for a
+# project the first time its docs are extracted.)
 
 cd /var/www/code
 
