@@ -36,6 +36,7 @@ apt-get update && \
             libio-socket-ssl-perl \
             logrotate \
             mercurial \
+            mercurial-git \
             openjdk-9-jdk-headless \
             postgresql \
             rsync \
