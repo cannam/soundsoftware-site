@@ -2,20 +2,6 @@
 
 set -e
 
-# Initialise directories used as targets for cron activity (if they
-# don't already exist)
-
-for dir in \
-    /var/files/backups \
-    /var/doc \
-    /var/files/git-mirror ; do
-    if [ ! -d "$dir" ]; then
-        mkdir -p "$dir"
-        chown -R code.www-data "$dir"
-        chmod g+s "$dir"
-    fi
-done
-
 # Copy cron scripts to the appropriate destinations
 
 cd /var/www/code
