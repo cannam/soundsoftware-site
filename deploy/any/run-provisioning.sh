@@ -12,7 +12,9 @@ if [ "$mydir" != "/code-to-deploy/deploy/any" ]; then
     exit 2
 fi
 
-. "$mydir"/../prepare.sh
+set -e
+
+. "$mydir"/prepare.sh
 
 for f in "$mydir"/../provision.d/[0-9]*.sh ; do
     case "$f" in
