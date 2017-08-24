@@ -2,7 +2,9 @@
 
 set -e
 
-# Last action: start the webserver
+# Last action: check & start the webserver
+
+apache2ctl configtest
 
 apache2ctl restart
 

@@ -1,6 +1,6 @@
 
-# A test Apache config. Lacks SSL, lacks a desirable extra layer of
-# authentication for admin interface paths. Do not deploy this.
+# Apache config with SSL and admin auth stubbed in. You must provide
+# the key/cert and auth files.
 
 # Note this has been updated for Apache 2.4, which introduced a number
 # of (welcome) changes to access control directives.
@@ -16,24 +16,63 @@ PerlLoadModule Apache::Authn::SoundSoftware
         PassengerHighPerformance on
         PassengerMaxRequests 50000
         PassengerStatThrottleRate 5
-	PassengerStartTimeout 60
-	PassengerFriendlyErrorPages on
+	PassengerFriendlyErrorPages off
         RailsSpawnMethod smart
         ExpiresDefault "access plus 1 minute"
 
-#        <Location /sys>
-#		AuthType Basic
-#		AuthUserFile "/etc/apache2/auth/user.htpasswd"
-#		AuthName "code.soundsoftware.ac.uk"
-#		Require user user
-#	</Location>
+        # Redirect all activity to secure site
+        Redirect seeother / "https://code.soundsoftware.ac.uk/"
 
-#	<Location /admin>
-#		AuthType Digest
-#		AuthUserFile "/etc/apache2/auth/admin.htdigest"
-#		AuthName "code.soundsoftware.ac.uk admin interface"
-#		Require user admin
-#	</Location>
+        <DirectoryMatch "^/.*/\.svn/">
+                Require all denied
+        </DirectoryMatch>
+
+        <DirectoryMatch "^/.*/\.hg/">
+                Require all denied
+        </DirectoryMatch>
+
+        <DirectoryMatch "^/.*/\.git/">
+                Require all denied
+        </DirectoryMatch>
+
+        <Directory /var/www/code/public>
+                Options -MultiViews
+	</Directory>
+
+	ErrorLog /var/log/apache2/code-error.log
+	CustomLog /var/log/apache2/code-access.log vhost_combined
+
+        LogLevel warn
+        ServerSignature Off
+</VirtualHost>
+
+<VirtualHost *:80>
+        ServerName code.soundsoftware.ac.uk
+        ServerAdmin chris.cannam@soundsoftware.ac.uk
+
+        DocumentRoot /var/www/code/public
+        PassengerRestartDir restart_files
+        PassengerHighPerformance on
+        PassengerMaxRequests 50000
+        PassengerStatThrottleRate 5
+	PassengerStartTimeout 60
+	PassengerFriendlyErrorPages off
+        RailsSpawnMethod smart
+        ExpiresDefault "access plus 1 minute"
+
+        <Location /sys>
+		AuthType Basic
+		AuthUserFile "/etc/apache2/auth/user.htpasswd"
+		AuthName "code.soundsoftware.ac.uk"
+		Require user user
+	</Location>
+
+	<Location /admin>
+		AuthType Digest
+		AuthUserFile "/etc/apache2/auth/admin.htdigest"
+		AuthName "code.soundsoftware.ac.uk admin interface"
+		Require user admin
+	</Location>
 
         <DirectoryMatch "^/.*/\.svn/">
                 Require all denied
@@ -67,13 +106,12 @@ PerlLoadModule Apache::Authn::SoundSoftware
                 Require valid-user
 		PerlAccessHandler Apache::Authn::SoundSoftware::access_handler
       		PerlAuthenHandler Apache::Authn::SoundSoftware::authen_handler
-		PerlSetVar HTTPS "off"
+		PerlSetVar HTTPS "on"
 		SoundSoftwareDSN "dbi:Pg:database=code;host=localhost"
     		SoundSoftwareDbUser "code"
      		SoundSoftwareDbPass "INSERT_DATABASE_PASSWORD_HERE"
 		SoundSoftwareRepoPrefix "/var/hg/"
-                #!!! "on" in production please!:
-                SoundSoftwareSslRequired "off"
+                SoundSoftwareSslRequired "on"
 		Options +ExecCGI
 		AddHandler cgi-script .cgi
 		ExpiresDefault now
