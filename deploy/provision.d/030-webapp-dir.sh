@@ -24,6 +24,6 @@ if [ ! -d /var/www/code ]; then
 fi
 
 chown -R code.www-data /var/www/code
+chmod 755 /var/www/code
 find /var/www/code -type d -exec chmod g+s \{\} \;
-
 

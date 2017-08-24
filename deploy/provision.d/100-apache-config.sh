@@ -28,6 +28,7 @@ if [ ! -f /etc/apache2/sites-enabled/10-code.conf ]; then
     ln -s ../mods-available/expires.load    /etc/apache2/mods-enabled/
     ln -s ../mods-available/rewrite.load    /etc/apache2/mods-enabled/
     ln -s ../mods-available/cgi.load        /etc/apache2/mods-enabled/
+    ln -s ../mods-available/ssl.load        /etc/apache2/mods-enabled/
 
     cp "$codeconf" /etc/apache2/sites-available/code.conf
     cp "$codeconfssl" /etc/apache2/sites-available/code-ssl.conf

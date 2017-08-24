@@ -46,7 +46,7 @@ if [ ! -d "$configdir" ]; then
 fi
 
 if [ ! -f "$rootdir/postgres-dumpall" ]; then
-    echo "ERROR: I expect to find a Postgres SQL multi-db dump file in $rootdir/postgres-dumpall"
+    echo "ERROR: I expect to find a Postgres SQL multi-db dump file in $rootdir/postgres-dumpall. Create an empty file there if you don't want to load a database."
     exit 2
 fi
 

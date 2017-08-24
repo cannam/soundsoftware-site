@@ -20,7 +20,7 @@ for f in "$mydir"/../provision.d/[0-9]*.sh ; do
     case "$f" in
         *~) ;;
         *) echo "Running provisioning script: $f"
-           /bin/bash "$f";;
+           /bin/bash "$f" </dev/null ;; # close stdin to avoid interactivity
     esac
 done
 

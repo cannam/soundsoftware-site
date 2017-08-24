@@ -16,9 +16,10 @@ Required:
  * A database dump to load. This should be left in a file called
    postgres-dumpall in the soundsoftware-site root
 
- * The database password and /sys API key for the target site. (The
-   API key can be changed in the admin UI - "grep API config/*.in" to
-   see the files you'll need to update if you change it)
+ * The database password and /sys API key for the target site. (This
+   can be queried from the db: settings table, name "sys_api_key". You
+   can change it in the admin UI; grep API config/*.in to see the
+   files you'll need to update if you change it)
 
  * The (copyrighted) web font files used in our deployment. Leave
    these in /public/themes/soundsoftware/stylesheets/fonts/

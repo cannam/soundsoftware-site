@@ -46,9 +46,17 @@ PerlLoadModule Apache::Authn::SoundSoftware
         ServerSignature Off
 </VirtualHost>
 
-<VirtualHost *:80>
+<VirtualHost *:443>
         ServerName code.soundsoftware.ac.uk
         ServerAdmin chris.cannam@soundsoftware.ac.uk
+
+        SSLEngine on
+	SSLCertificateFile /etc/apache2/certs/code.soundsoftware.ac.uk.crt
+	SSLCertificateKeyFile /etc/apache2/certs/code.soundsoftware.ac.uk.key
+	SSLCertificateChainFile /etc/apache2/certs/code.soundsoftware.ac.uk.ca-bundle
+	SSLVerifyClient none
+	SSLProtocol all -SSLv2 -SSLv3
+	SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW	
 
         DocumentRoot /var/www/code/public
         PassengerRestartDir restart_files
