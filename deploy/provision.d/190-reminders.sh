@@ -13,6 +13,13 @@ cat <<EOF
     code-ssl.conf for an example HTTPS configuration (you will of
     course need to provide the key/cert files).
 
+*** CRON SCRIPTS
+
+    A number of cron scripts have been installed. It might be no bad
+    thing to prime and test them by running them all once now. Some of
+    the services tested by the smoke test script (below) may depend on
+    their having run. Use deploy/any/run-cron-scripts.sh for this.
+
 *** SMOKE TEST
 
     There is a smoke test script in the deploy/test directory. That

@@ -35,6 +35,7 @@ apt-get update && \
             libmagickwand-dev \
             libio-socket-ssl-perl \
             logrotate \
+            lynx \
             mercurial \
             mercurial-git \
             openjdk-9-jdk-headless \
