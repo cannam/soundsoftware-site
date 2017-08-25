@@ -8,6 +8,7 @@ cd /var/www/code
 
 codeconf=/var/www/code/deploy/config/code.conf.gen
 codeconfssl=/var/www/code/deploy/config/code-ssl.conf.gen
+staticconf=/var/www/code/deploy/config/soundsoftware-static.conf
 
 if [ ! -f "$codeconf" ]; then
     echo "ERROR: Apache config file $codeconf not found - has the database secret been interpolated from its input file correctly?"
@@ -32,6 +33,7 @@ if [ ! -f /etc/apache2/sites-enabled/10-code.conf ]; then
 
     cp "$codeconf" /etc/apache2/sites-available/code.conf
     cp "$codeconfssl" /etc/apache2/sites-available/code-ssl.conf
+    cp "$staticconf" /etc/apache2/sites-available/soundsoftware-static.conf
     ln -s ../sites-available/code.conf /etc/apache2/sites-enabled/10-code.conf
 
     apache2ctl configtest

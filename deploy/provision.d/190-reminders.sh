@@ -10,8 +10,15 @@ cat <<EOF
 *** APACHE SSL CONFIGURATION
 
     The provisioning scripts set up a simple HTTP site only. Refer to
-    deploy/config/code-ssl.conf.in for an example HTTPS configuration
-    (you will of course need to provide the key/cert files).
+    code-ssl.conf for an example HTTPS configuration (you will of
+    course need to provide the key/cert files).
+
+*** SMOKE TEST
+
+    There is a smoke test script in the deploy/test directory. That
+    is, a quick automated acceptance test that checks that basic
+    services are returning successful HTTP codes. Consider running it
+    against this server from another host, i.e. not just localhost.
 
 *** EMAIL
 
