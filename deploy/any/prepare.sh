@@ -56,11 +56,11 @@ if [ ! -f "$fontdir/24BC0E_0_0.woff" ]; then
     exit 2
 fi
 
-apischeme=http
-apihost=localhost
+#apischeme=http
+#apihost=localhost
 
-#apischeme=https
-#apihost=code.soundsoftware.ac.uk
+apischeme=https
+apihost=code.soundsoftware.ac.uk
 
 for f in "$configdir"/*.in "$rootdir"/extra/soundsoftware/extract-docs.sh ; do
     out="$configdir"/$(basename "$f" .in).gen
