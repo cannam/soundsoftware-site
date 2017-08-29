@@ -30,7 +30,9 @@ cat <<EOF
 *** EMAIL
 
     Outgoing email is required for notifications, but has not been
-    configured as part of this provisioning setup.
+    configured as part of this provisioning setup. You'll need to set
+    up the server's outgoing mail support and also edit the application
+    email settings in config/configuration.yml.
 
 *** STATIC FRONT PAGE
 

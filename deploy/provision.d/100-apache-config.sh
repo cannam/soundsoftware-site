@@ -23,13 +23,14 @@ if [ ! -f /etc/apache2/sites-enabled/10-code.conf ]; then
     cp deploy/config/passenger.load /etc/apache2/mods-available/
     cp deploy/config/perl.conf      /etc/apache2/mods-available/
 
-    ln -s ../mods-available/passenger.conf  /etc/apache2/mods-enabled/
-    ln -s ../mods-available/passenger.load  /etc/apache2/mods-enabled/
-    ln -s ../mods-available/perl.conf       /etc/apache2/mods-enabled/
-    ln -s ../mods-available/expires.load    /etc/apache2/mods-enabled/
-    ln -s ../mods-available/rewrite.load    /etc/apache2/mods-enabled/
-    ln -s ../mods-available/cgi.load        /etc/apache2/mods-enabled/
-    ln -s ../mods-available/ssl.load        /etc/apache2/mods-enabled/
+    ln -s ../mods-available/passenger.conf   /etc/apache2/mods-enabled/
+    ln -s ../mods-available/passenger.load   /etc/apache2/mods-enabled/
+    ln -s ../mods-available/perl.conf        /etc/apache2/mods-enabled/
+    ln -s ../mods-available/expires.load     /etc/apache2/mods-enabled/
+    ln -s ../mods-available/rewrite.load     /etc/apache2/mods-enabled/
+    ln -s ../mods-available/cgi.load         /etc/apache2/mods-enabled/
+    ln -s ../mods-available/ssl.load         /etc/apache2/mods-enabled/
+    ln -s ../mods-available/auth_digest.load /etc/apache2/mods-enabled/
 
     cp "$codeconf" /etc/apache2/sites-available/code.conf
     cp "$codeconfssl" /etc/apache2/sites-available/code-ssl.conf
