@@ -9,7 +9,7 @@ set -e
 
 /etc/init.d/postgresql start
 
-cd /var/www/code
+cd "$rootdir"
 
 if [ -f postgres-dumpall ]; then
     chmod ugo+r postgres-dumpall
