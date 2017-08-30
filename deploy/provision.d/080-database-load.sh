@@ -9,7 +9,12 @@ set -e
 
 /etc/init.d/postgresql start
 
-cd "$rootdir"
+dumpdir="/code-to-deploy"
+if [ ! -d "$dumpdir" ]; then
+    dumpdir=/var/www/code
+fi
+
+cd "$dumpdir"
 
 if [ -f postgres-dumpall ]; then
     chmod ugo+r postgres-dumpall
