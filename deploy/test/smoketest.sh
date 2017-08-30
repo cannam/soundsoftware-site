@@ -30,6 +30,9 @@ project_with_docs=vamp-plugin-sdk
 # A project known to exist, be public, and have a bibliography
 project_with_biblio=sonic-visualiser
 
+# A project known not to exist
+nonexistent_project=nonexistent-project
+
 tried=0
 succeeded=0
 
@@ -41,6 +44,7 @@ try() {
     cd "$mydir/output"
     path="$1"
     description="$2"
+    expected="$3"
     url="$uribase$path"
     echo
     echo "Trying \"$description\" [$url]..."
@@ -49,19 +53,37 @@ try() {
         echo "+++ Succeeded"
         succeeded=$(($succeeded + 1))
     else
-        echo "--- FAILED"
+        returned="$?"
+        if [ "$returned" = "$expected" ]; then
+            echo "+++ Succeeded [returned expected code $expected]"
+            succeeded=$(($succeeded + 1))
+        else
+            echo "--- FAILED with return code $returned"
+        fi
     fi
     tried=$(($tried + 1))
     cd "$origin"
 }
 
-try "/" "Front page"
-try "/projects/$project_with_repo" "Project page"
-try "/projects/$project_with_biblio" "Project page with bibliography"
-try "/projects/$project_with_repo/repository" "Repository page"
-try "/hg/$project_with_repo" "Mercurial repo"
-try "/projects/$project_with_docs/embedded" "Project documentation page (from docgen cron script)"
-try "/git/$project_with_repo/info/refs" "Git repo mirror"
+assert() {
+    try "$1" "$2" 0
+}
+
+fail() {
+    try "$1" "$2" "$3"
+}
+
+assert "/" "Front page"
+assert "/projects/$project_with_repo" "Project page"
+assert "/projects/$project_with_biblio" "Project page with bibliography"
+assert "/projects/$project_with_repo/repository" "Repository page"
+assert "/hg/$project_with_repo" "Mercurial repo"
+assert "/projects/$project_with_docs/embedded" "Project documentation page (from docgen cron script)"
+assert "/git/$project_with_repo/info/refs" "Git repo mirror"
+
+# we expect this to return an http auth requirement, not a 404 - the
+# value 6 is wget's return code for auth failure
+fail "/hg/$nonexistent_project" "Mercurial repo" 6
 
 echo
 echo "Passed $succeeded of $tried"

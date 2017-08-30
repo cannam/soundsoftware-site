@@ -177,11 +177,6 @@ sub access_handler {
 	return FORBIDDEN;
     }
 
-    if (!defined $r->user or $r->user eq '') {
-        $r->user('*anon*'); # Apache 2.4+ requires auth module to set
-                            # user even if no auth was needed
-    }
-
     my $method = $r->method;
 
     print STDERR "SoundSoftware.pm:$$: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
@@ -254,6 +249,16 @@ sub access_handler {
 	    # case we can decide for certain to accept in this function
 	    print STDERR "SoundSoftware.pm:$$: Method is read-only, no restriction here\n";
 	    $r->set_handlers(PerlAuthenHandler => [\&OK]);
+            if (!defined $r->user or $r->user eq '') {
+                # Apache 2.4+ requires auth module to set user if no
+                # auth was needed. Note that this actually tells
+                # apache that user has been identified, so authen
+                # handler will never be called (i.e. we must not do
+                # this unless we are actually approving the auth-free
+                # access). If we don't do this, we get a 500 error
+                # here after the set_handlers call above
+                $r->user('*anon*');
+            }
 	    return OK;
 	}
 
