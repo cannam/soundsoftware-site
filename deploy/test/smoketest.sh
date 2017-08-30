@@ -33,6 +33,9 @@ project_with_biblio=sonic-visualiser
 # A project known not to exist
 nonexistent_project=nonexistent-project
 
+# A file for download known to exist
+file_for_download=/attachments/download/2210/vamp-plugin-sdk-2.7.1-binaries-osx.tar.gz
+
 tried=0
 succeeded=0
 
@@ -80,6 +83,7 @@ assert "/projects/$project_with_repo/repository" "Repository page"
 assert "/hg/$project_with_repo" "Mercurial repo"
 assert "/projects/$project_with_docs/embedded" "Project documentation page (from docgen cron script)"
 assert "/git/$project_with_repo/info/refs" "Git repo mirror"
+assert "$file_for_download" "File for download"
 
 # we expect this to return an http auth requirement, not a 404 - the
 # value 6 is wget's return code for auth failure

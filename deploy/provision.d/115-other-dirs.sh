@@ -13,6 +13,7 @@ set -e
 for dir in \
     /var/files/backups \
     /var/doc \
+    /var/files/code \
     /var/files/git-mirror ; do
     if [ ! -d "$dir" ]; then
         mkdir -p "$dir"
@@ -29,3 +30,7 @@ for dir in \
         chmod g+s "$dir"
     fi
 done
+
+if [ ! -e /var/www/code/files ]; then
+    ln -s /var/files/code /var/www/code/files
+fi
