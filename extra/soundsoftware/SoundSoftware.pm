@@ -32,7 +32,8 @@ section for the repository and so will be approved by hgwebdir?)
 Debian/ubuntu:
 
   apt-get install libapache-dbi-perl libapache2-mod-perl2 \
-    libdbd-mysql-perl libauthen-simple-ldap-perl libio-socket-ssl-perl
+    libdbd-mysql-perl libdbd-pg-perl libio-socket-ssl-perl \
+    libauthen-simple-ldap-perl
 
 Note that LDAP support is hardcoded "on" in this script (it is
 optional in the original Redmine.pm).
@@ -179,7 +180,7 @@ sub access_handler {
     my $method = $r->method;
 
     print STDERR "SoundSoftware.pm:$$: Method: $method, uri " . $r->uri . ", location " . $r->location . "\n";
-    print STDERR "SoundSoftware.pm:$$: Accept: " . $r->headers_in->{Accept} . "\n";
+#    print STDERR "SoundSoftware.pm:$$: Accept: " . $r->headers_in->{Accept} . "\n";
 
     my $dbh = connect_database($r);
     unless ($dbh) {
@@ -248,6 +249,16 @@ sub access_handler {
 	    # case we can decide for certain to accept in this function
 	    print STDERR "SoundSoftware.pm:$$: Method is read-only, no restriction here\n";
 	    $r->set_handlers(PerlAuthenHandler => [\&OK]);
+            if (!defined $r->user or $r->user eq '') {
+                # Apache 2.4+ requires auth module to set user if no
+                # auth was needed. Note that this actually tells
+                # apache that user has been identified, so authen
+                # handler will never be called (i.e. we must not do
+                # this unless we are actually approving the auth-free
+                # access). If we don't do this, we get a 500 error
+                # here after the set_handlers call above
+                $r->user('*anon*');
+            }
 	    return OK;
 	}
 

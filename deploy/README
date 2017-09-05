@@ -1,0 +1,56 @@
+
+Deploying the SoundSoftware site
+================================
+
+These scripts can be used for test or staging deployments reproducing
+much of the configuration of the live site. Currently it's assumed
+that you are providing a database dump to load -- there is no
+provisioning step to initialise a new database.
+
+
+You will need
+-------------
+
+Required:
+
+ * A database dump to load. This should be left in a file called
+   postgres-dumpall in the soundsoftware-site root
+
+ * The database password and /sys API key for the target site. (This
+   can be queried from the db: settings table, name "sys_api_key". You
+   can change it in the admin UI; grep API config/*.in to see the
+   files you'll need to update if you change it)
+
+ * The (copyrighted) web font files used in our deployment. Leave
+   these in /public/themes/soundsoftware/stylesheets/fonts/
+
+Optional (or required for proper deployments):
+
+ * HTTPS key/cert files
+
+
+Three ways to deploy
+--------------------
+
+ 1. Using Vagrant to set up a development VM: Run ./vagrant/start.sh
+
+ 2. Using Docker to set up a development container: Run ./docker/start.sh
+
+ 3. On a "real" VM or server:
+
+    * Ensure the soundsoftware-site repo is checked out at /code-to-deploy
+    * Run /code-to-deploy/deploy/any/run-provisioning.sh as root
+
+    But be very careful with this! You could screw up a dev box -- or
+    an existing live server! -- if you accidentally provision the site
+    directly onto it when you should have used Vagrant or a container.
+
+
+After deployment
+----------------
+
+There is a smoke test script at test/smoketest.sh which checks that
+the home page, a project page, a repo page etc can be retrieved. Some
+of the pages it tries to retrieve are dependent on their generating
+cron scripts having run at least once since the server was set up.
+

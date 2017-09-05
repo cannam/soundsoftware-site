@@ -7,15 +7,17 @@
 
 hgdir="/var/hg"
 docdir="/var/doc"
-logfile="/var/www/test-cannam/log/extract-docs.log"
+logfile="/var/www/code/log/extract-docs.log"
 
-redgrp="redmine"
+redgrp="code"
 
-apikey=""
-apischeme="https"
-apihost=""
-apiuser=""
-apipass=""
+apikey="INSERT_API_KEY_HERE"
+apischeme="INSERT_API_SCHEME_HERE"
+apihost="INSERT_API_HOST_HERE"
+
+# HTTP auth username/password for /sys api calls
+apiuser="INSERT_API_USER_HERE"
+apipass="INSERT_API_PASSWORD_HERE"
 
 progdir=$(dirname $0)
 case "$progdir" in

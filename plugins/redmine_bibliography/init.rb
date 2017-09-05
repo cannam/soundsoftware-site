@@ -2,6 +2,8 @@ require 'redmine'
 
 require 'bibtex'
 require 'citeproc'
+require 'citeproc/ruby'
+require 'csl/styles'
 
 # Patches to the Redmine core.
 ActionDispatch::Callbacks.to_prepare do

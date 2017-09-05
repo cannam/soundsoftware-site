@@ -1,0 +1,6 @@
+#!/bin/bash
+
+## No longer used - this site is now static
+
+# /usr/bin/wget -O - -q -t 1 http://www.soundsoftware.ac.uk/cron.php
+

@@ -1,0 +1,20 @@
+
+FROM ubuntu:16.04
+MAINTAINER Chris Cannam <cannam@all-day-breakfast.com>
+
+COPY . /var/www/code
+
+WORKDIR /var/www/code
+
+INSERT_PROVISIONING_HERE
+
+# Start Postgres and foregrounded Apache
+
+RUN echo "#!/bin/bash"                      > container-run.sh
+RUN echo "/etc/init.d/postgresql start"    >> container-run.sh
+RUN echo "apache2ctl -D FOREGROUND"        >> container-run.sh
+RUN chmod +x container-run.sh
+
+EXPOSE 80
+CMD ./container-run.sh
+

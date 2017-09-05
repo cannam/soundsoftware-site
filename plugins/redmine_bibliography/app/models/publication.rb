@@ -101,7 +101,12 @@ class Publication < ActiveRecord::Base
     end
 
     if style == :ieee
-      CiteProc.process(bib.to_citeproc, :style => :ieee, :format => :html)
+      cite = bib.to_citeproc
+      cite_id = cite["id"]
+      cp = CiteProc::Processor.new style: 'ieee', format: 'html'
+      cp.import [cite]
+      texts = cp.render :bibliography, id: cite_id
+      texts[0]
     else
       bibtex = bib.to_s :include => :meta_content
       bibtex.strip!
