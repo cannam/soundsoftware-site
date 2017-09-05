@@ -9,6 +9,11 @@ for t in minutely hourly daily monthly; do
         name=$(basename $s)
         actual="/etc/cron.$t/$name"
         echo "Running cron script $actual..."
-        "$actual"
+        if "$actual"; then
+            echo "Cron script $actual ran successfully"
+        else
+            echo "Cron script $actual failed with error code $?"
+            exit 1
+        fi
     done
 done
