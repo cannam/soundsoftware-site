@@ -1,0 +1,148 @@
+
+# Apache config with SSL and admin auth stubbed in. You must provide
+# the key/cert and auth files.
+
+# Note this has been updated for Apache 2.4, which introduced a number
+# of (welcome) changes to access control directives.
+
+PerlLoadModule Apache::Authn::SoundSoftware
+
+<VirtualHost *:80>
+        ServerName code.soundsoftware.ac.uk
+        ServerAdmin chris.cannam@soundsoftware.ac.uk
+
+        DocumentRoot /var/www/code/public
+        PassengerRestartDir restart_files
+        PassengerHighPerformance on
+        PassengerMaxRequests 50000
+        PassengerStatThrottleRate 5
+	PassengerFriendlyErrorPages off
+        RailsSpawnMethod smart
+        ExpiresDefault "access plus 1 minute"
+
+        # Redirect all activity to secure site
+        Redirect seeother / "https://code.soundsoftware.ac.uk/"
+
+        <DirectoryMatch "^/.*/\.svn/">
+                Require all denied
+        </DirectoryMatch>
+
+        <DirectoryMatch "^/.*/\.hg/">
+                Require all denied
+        </DirectoryMatch>
+
+        <DirectoryMatch "^/.*/\.git/">
+                Require all denied
+        </DirectoryMatch>
+
+        <Directory /var/www/code/public>
+                Options -MultiViews
+	</Directory>
+
+	ErrorLog /var/log/apache2/code-error.log
+	CustomLog /var/log/apache2/code-access.log vhost_combined
+
+        LogLevel warn
+        ServerSignature Off
+</VirtualHost>
+
+<VirtualHost *:443>
+        ServerName code.soundsoftware.ac.uk
+        ServerAdmin chris.cannam@soundsoftware.ac.uk
+
+        SSLEngine on
+	SSLCertificateFile /etc/apache2/certs/code.soundsoftware.ac.uk.crt
+	SSLCertificateKeyFile /etc/apache2/certs/code.soundsoftware.ac.uk.key
+	SSLCertificateChainFile /etc/apache2/certs/code.soundsoftware.ac.uk.ca-bundle
+	SSLVerifyClient none
+	SSLProtocol all -SSLv2 -SSLv3
+	SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW	
+
+        DocumentRoot /var/www/code/public
+        PassengerRestartDir restart_files
+        PassengerHighPerformance on
+        PassengerMaxRequests 50000
+        PassengerStatThrottleRate 5
+	PassengerStartTimeout 60
+	PassengerFriendlyErrorPages off
+        RailsSpawnMethod smart
+        ExpiresDefault "access plus 1 minute"
+
+        <Location /sys>
+		AuthType Basic
+		AuthUserFile "/etc/apache2/auth/user.htpasswd"
+		AuthName "code.soundsoftware.ac.uk"
+		Require user user
+	</Location>
+
+	<Location /admin>
+		AuthType Digest
+		AuthUserFile "/etc/apache2/auth/admin.htdigest"
+		AuthName "code.soundsoftware.ac.uk admin interface"
+		Require user admin
+	</Location>
+
+        <DirectoryMatch "^/.*/\.svn/">
+                Require all denied
+        </DirectoryMatch>
+
+        <DirectoryMatch "^/.*/\.hg/">
+                Require all denied
+        </DirectoryMatch>
+
+        <DirectoryMatch "^/.*/\.git/">
+                Require all denied
+        </DirectoryMatch>
+
+        <Directory /var/www/code/public>
+                Options -MultiViews
+	</Directory>
+
+        <Directory /var/www/code/public/themes/soundsoftware/stylesheets/fonts>
+		# Avoid other sites embedding our fonts
+		RewriteEngine on
+		RewriteCond %{HTTP_REFERER} !^$
+		RewriteCond %{HTTP_REFERER} !^http(s)?://code.soundsoftware.ac.uk/.*$ [NC]
+		RewriteRule \.(ttf|woff|eot|otf|svg|zip|gz|html|txt)$ - [F]
+	</Directory>
+
+	ScriptAlias /hg "/var/hg/index.cgi"
+
+	<Location /hg>
+               	AuthName "Mercurial"
+                AuthType Basic
+                Require valid-user
+		PerlAccessHandler Apache::Authn::SoundSoftware::access_handler
+      		PerlAuthenHandler Apache::Authn::SoundSoftware::authen_handler
+		PerlSetVar HTTPS "on"
+		SoundSoftwareDSN "dbi:Pg:database=code;host=localhost"
+    		SoundSoftwareDbUser "code"
+     		SoundSoftwareDbPass "INSERT_DATABASE_PASSWORD_HERE"
+		SoundSoftwareRepoPrefix "/var/hg/"
+                SoundSoftwareSslRequired "on"
+		Options +ExecCGI
+		AddHandler cgi-script .cgi
+		ExpiresDefault now
+        </Location>
+
+	Alias /git "/var/files/git-mirror"	
+
+	<Directory "/var/files/git-mirror">
+		Options -Indexes +FollowSymLinks
+                Require all granted
+	</Directory>
+	<Directory ~ "/var/files/git-mirror/.*\.workdir">
+                Require all denied
+	</Directory>
+	<Directory ~ "/var/files/git-mirror/__.*">
+                Require all denied
+	</Directory>
+
+	ErrorLog /var/log/apache2/code-error.log
+	CustomLog /var/log/apache2/code-access.log vhost_combined
+
+        LogLevel warn
+        ServerSignature Off
+        
+</VirtualHost>
+

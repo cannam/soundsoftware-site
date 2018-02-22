@@ -1,5 +1,4 @@
 syntax: glob
-
 .project
 .loadpath
 .powrc
@@ -35,7 +34,13 @@ vendor/rails
 *~
 public/themes/soundsoftware/stylesheets/fonts/*
 .bundle
-Gemfile.lock
 Gemfile.local
-
+*.interpolated
 re:^config\.ru$
+.vagrant
+*.orig
+*.pyc
+*-console.log
+postgres-dumpall
+*.gen
+deploy/test/output

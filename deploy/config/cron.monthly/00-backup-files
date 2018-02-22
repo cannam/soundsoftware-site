@@ -1,0 +1,10 @@
+#!/bin/sh
+cd /
+for location in var/www etc/apache2 etc/cron.*; do
+	target="/var/files/backups/`echo $location | sed 's,/,_,g'`-`date +%Y%m%d%H%M`"
+	oldmask=`umask`
+	umask 0277
+	tar cjf "$target".tar.bz2 "$location"
+	umask "$oldmask"
+done
+

@@ -1,0 +1,6 @@
+.dockerignore
+.hg
+.hgignore
+deploy/docker/Dockerfile
+deploy/docker/start.sh
+*.log

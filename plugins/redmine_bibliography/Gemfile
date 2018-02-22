@@ -1,3 +1,6 @@
 gem 'bibtex-ruby'
 gem 'nokogiri'
+gem 'csl'
+gem 'csl-styles'
+gem 'citeproc'
 gem 'citeproc-ruby'

@@ -125,7 +125,7 @@ if [ -n "$success" ]; then
 	"$hg" init "$local_repo"
     fi
     if [ -d "$project_repo_mirror/.git" ]; then
-	( cd "$local_repo" && "$hg" --config extensions.hggit= pull "$project_repo_mirror" ) && echo "$remote_repo" > "$successfile"
+	( cd "$local_repo" && "$hg" --config extensions.git= pull "$project_repo_mirror" ) && echo "$remote_repo" > "$successfile"
     else 
 	( cd "$local_repo" && "$hg" pull "$project_repo_mirror" ) && echo "$remote_repo" > "$successfile"
     fi

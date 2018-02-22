@@ -9,10 +9,6 @@ gem "builder", "3.0.0"
 gem "mime-types"
 gem "awesome_nested_set", "2.1.6"
 
-#cc -- CiteProc v1.0.0 broke our citations (CiteProc.process returns nil).
-# Until I've managed to work out what's up and fix that...
-gem "citeproc", "0.0.6"
-
 # Optional gem for LDAP authentication
 group :ldap do
   gem "net-ldap", "~> 0.3.1"
@@ -64,7 +60,11 @@ if File.exist?(database_file)
         gem "mysql", "~> 2.8.1", :platforms => [:mri, :mingw]
         gem "activerecord-jdbcmysql-adapter", :platforms => :jruby
       when /postgresql/
-        gem "pg", ">= 0.11.0", :platforms => [:mri, :mingw]
+        #!!! Lock (temporarily?) to 0.20 to avoid being spammed by
+        # deprecation errors from one of the other users of the gem
+        # outside our control
+#        gem "pg", ">= 0.11.0", :platforms => [:mri, :mingw]
+        gem "pg", "= 0.20.0", :platforms => [:mri, :mingw]
         gem "activerecord-jdbcpostgresql-adapter", :platforms => :jruby
       when /sqlite3/
         gem "sqlite3", :platforms => [:mri, :mingw]

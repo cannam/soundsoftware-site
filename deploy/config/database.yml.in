@@ -1,0 +1,7 @@
+production:
+  adapter: postgresql
+  database: code
+  host: localhost
+  username: code
+  password: "INSERT_DATABASE_PASSWORD_HERE"
+

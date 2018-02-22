@@ -61,6 +61,8 @@ per_page_options:
   default: '25,50,100'
 mail_from:
   default: redmine@example.net
+mail_reply_to:
+  default: info@soundsoftware.ac.uk
 bcc_recipients:
   default: 1
 plain_text_mail:

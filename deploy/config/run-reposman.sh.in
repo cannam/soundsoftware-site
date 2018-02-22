@@ -1,0 +1,17 @@
+#!/bin/bash
+logfile=/var/log/reposman.log
+( 
+flock -s 200 
+echo >> $logfile
+/var/www/code/reposman/reposman-soundsoftware.rb \
+	-s /var/hg \
+	-r INSERT_API_SCHEME_HERE://INSERT_API_HOST_HERE/ \
+	-k INSERT_API_KEY_HERE \
+	--http-user=INSERT_API_USER_HERE \
+	--http-pass=INSERT_API_PASSWORD_HERE \
+	-o www-data \
+	-g code \
+	-c "/var/www/code/reposman/run-hginit.sh" \
+	--scm=Mercurial \
+	>> $logfile 2>&1
+)200>>$logfile
