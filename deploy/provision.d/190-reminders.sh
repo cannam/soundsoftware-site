@@ -34,6 +34,10 @@ cat <<EOF
     up the server's outgoing mail support and also edit the application
     email settings in config/configuration.yml.
 
+*** CRON EMAIL
+
+    Ensure the MAILTO value in /etc/crontab is set to something real.
+
 *** STATIC FRONT PAGE
 
     We have set up only the code/repository site -- if you want a
