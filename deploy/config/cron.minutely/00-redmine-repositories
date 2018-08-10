@@ -1,4 +1,4 @@
 #!/bin/bash
 
-sudo -u www-data /var/www/code/reposman/run-reposman.sh
+sudo -u www-data -g code /var/www/code/reposman/run-reposman.sh
 
