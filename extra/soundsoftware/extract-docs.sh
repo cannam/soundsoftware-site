@@ -84,7 +84,7 @@ for projectdir in "$hgdir"/* ; do
 
     if [ -d "$projectdir" ] && [ -d "$projectdir/.hg" ]; then
 
-	if ! sudo -u www-data hg -R "$projectdir" -q update; then
+	if ! sudo -u www-data hg -R "$projectdir" -q update --check; then
 	    echo "Failed to update Hg in $projectdir, skipping" 1>&2
 	    continue
 	fi
