@@ -48,7 +48,7 @@ module Redmine
         end
 
         def attachments_deletable?(user=User.current)
-          (respond_to?(:visible?) ? visible?(user) : true) &&
+          (respond_to?(:attachments_visible?) ? attachments_visible?(user) : true) &&
             user.allowed_to?(self.class.attachable_options[:delete_permission], self.project)
         end
 
