@@ -84,8 +84,8 @@ for projectdir in "$hgdir"/* ; do
 
     if [ -d "$projectdir" ] && [ -d "$projectdir/.hg" ]; then
 
-	if ! sudo -u www-data hg -R "$projectdir" -q update --check; then
-	    echo "Failed to update Hg in $projectdir, skipping" 1>&2
+	if ! sudo -u www-data hg -R "$projectdir" -q update --check >> "$logfile" 2>&1; then
+	    echo "Failed to update Hg in $projectdir, skipping" >> "$logfile"
 	    continue
 	fi
 
@@ -102,35 +102,35 @@ for projectdir in "$hgdir"/* ; do
 	mkdir -m 770 "$snapshotdir" || fail "Snapshot directory creation failed"
 	chown docgen.www-data "$snapshotdir" || fail "Snapshot directory ownership change failed"
 
-	hgparents=$(sudo -u www-data hg -R "$projectdir" parents)
+	hgparents=$(sudo -u www-data hg -R "$projectdir" parents 2>> "$logfile")
 	if [ -z "$hgparents" ]; then
-	    echo "Hg repo at $projectdir has no working copy (empty repo?), skipping"
+	    echo "Hg repo at $projectdir has no working copy (empty repo?), skipping" >> "$logfile"
 	    continue
 	else
-	    echo "Found non-empty Hg repo: $projectdir for project $project"
+	    echo "Found non-empty Hg repo: $projectdir for project $project" >> "$logfile"
 	fi
 
-	if ! sudo -u www-data hg -R "$projectdir" archive -r tip -t files "$snapshotdir"; then
-	    echo "Failed to pick archive from $projectdir, skipping" 1>&2
+	if ! sudo -u www-data hg -R "$projectdir" archive -r tip -t files "$snapshotdir" >> "$logfile" 2>&1; then
+	    echo "Failed to pack archive from $projectdir, skipping" >> "$logfile"
 	    continue
 	fi
 
 	targetdir="$docdir/$project"
 
-	echo "Temporary dir is $tmpdir, temporary doc dir is $tmptargetdir, snapshot dir is $snapshotdir, eventual target is $targetdir"
+	echo "Temporary dir is $tmpdir, temporary doc dir is $tmptargetdir, snapshot dir is $snapshotdir, eventual target is $targetdir" >> "$logfile"
 
 	for x in $types; do
 	    if sudo -u docgen "$progdir/extract-$x.sh" "$project" "$snapshotdir" "$tmptargetdir" >> "$logfile" 2>&1; then
 		break
 	    else
-		echo "Failed to extract via type $x"
+		echo "Failed to extract via type $x" >> "$logfile"
 	    fi
 	done
 
         if [ -f "$tmptargetdir/index.html" ]; then
-	    echo "Processing resulted in an index.html being created, looks good!"
+	    echo "Processing resulted in an index.html being created, looks good!" >> "$logfile"
 	    if [ ! -d "$targetdir" ] || [ ! -f "$targetdir/index.html" ]; then
-		echo "This project hasn't had doc extracted before: enabling Embedded"
+		echo "This project hasn't had doc extracted before: enabling Embedded" >> "$logfile"
 		enable_embedded "$project"
 	    fi
 
@@ -144,7 +144,7 @@ for projectdir in "$hgdir"/* ; do
 		chgrp -R "$redgrp" "$targetdir"
 	    fi
 	else
-	    echo "Processing did not result in an index.html being created"
+	    echo "Processing did not result in an index.html being created" >> "$logfile"
 	fi
     fi
 done
