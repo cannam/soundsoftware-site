@@ -7,6 +7,13 @@ much of the configuration of the live site. Currently it's assumed
 that you are providing a database dump to load -- there is no
 provisioning step to initialise a new database.
 
+The provisioning process consists mostly of running the scripts found
+in provisioning.d/ in numerical order (see those scripts themselves
+for details) and installing appropriately modified versions of the
+various config files found in config/. Please refer to these files for
+documentary purposes, but don't try to run or install them by hand -
+there are scripts to coordinate it. Read on for instructions.
+
 
 You will need
 -------------
@@ -14,7 +21,10 @@ You will need
 Required:
 
  * A database dump to load. This should be left in a file called
-   postgres-dumpall in the soundsoftware-site root
+   postgres-dumpall in the soundsoftware-site root. The actual live
+   site creates regular database dumps which it saves in
+   /var/files/backups/postgres-dumpall-<date>.bz2, so one of these or
+   a backup, if available, could be copied over to seed the new site
 
  * The database password and /sys API key for the target site. (This
    can be queried from the db: settings table, name "sys_api_key". You
